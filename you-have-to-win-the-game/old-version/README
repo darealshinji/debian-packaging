@@ -1,0 +1,5 @@
+This script downloads "You Have to Win the Game" for GNU/Linux and creates Debian packages.
+
+Simply run './build.sh'
+
+To install the build-dependencies run 'sudo apt-get install fakeroot debhelper libgl1-mesa-glx unzip'

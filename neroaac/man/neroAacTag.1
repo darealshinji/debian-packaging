@@ -1,0 +1,74 @@
+.TH NEROAACDEC 1 "MAY 2014" "1.5.1.0"
+.SH NAME
+neroAacTag \- Nero MPEG-4 Audio Tagger 
+.SH SYNOPSIS
+.B neroAacTag \fR<file.mp4> <command> \fB[\fR<command> \fB[\fR<command> ...\fB]]
+.br
+.B neroaactag
+
+.SH DESCRIPTION
+Package build date: Dec 17 2009
+.br
+Package version:    1.5.1.0
+
+.SH OPTIONS
+.TP
+.B \-list\-meta
+Lists existing metadata entries.
+.TP
+.B \-meta:\fR<name>\fB=\fR<value>
+Sets specified metadata field to specified value. Eg. -meta:artist="Pink Floyd"
+.TP
+.B \-meta\-user:\fR<name>\fB=\fR<value>
+Sets specified metadata field to specified value. Allows non-standard metadata fields to be added.
+.br
+WARNING: fields added using -meta-user are not guaranteed to be read back on all Nero Digital compliant software/hardware.
+.TP
+.B \-list\-standard\-meta
+Displays a list of field names usable with -meta command.
+.TP
+.B \-list\-standard\-itunes\-meta
+Displays a list of iTunes field names.
+.TP
+.B \-list\-standard\-memorystick\-meta
+The same as -list-standard-itunes-meta
+.TP
+.B \-list\-covers
+Lists cover art entries.
+.TP
+.B \-write\-nd\-covers
+Write cover art also to ND tags. Default is to write only to iTunes tags.
+.TP
+.B \-add\-cover:\fR<type>\fB:\fR<jpegfile>
+Creates a cover art entry from specified JPEG file. <type> specifies type of cover art entry and
+can be "front" or "back". If specified cover art entry already exists, its contents are overwritten.
+Eg. -add-cover:back:hello.jpg
+.TP
+.B \-dump\-cover:\fR<type>\fB:\fR<jpegfile>
+Dumps specified cover art entry contents to a JPEG file.
+.TP
+.B \-remove\-cover:\fR<type>
+Removes specified cover art entry.
+.TP
+.B \-remove\-cover:\fRall
+Removes all cover art entries.
+.TP
+.B \-list\-chapters
+Lists chapters present in the file.
+.TP
+.B \-chapter:\fR<number>
+Sets chapter index metadata edits apply to. Value of 0 (default state)
+applies edits to all present chapters. Also affects -list-meta output.
+.TP
+.B \-chapters\-to\-tracknumbers
+Generates track number metadata according to the chapter list.
+.TP
+.B \-help
+Show a list of available parameters.
+
+.SH SEE ALSO
+/usr/share/doc/neroaac/
+.br
+.I http://www.nero.com/eng/company/about-nero/nero-aac-codec.php
+.SH COPYRIGHT
+Copyright \(co 2006-2010 Nero AG. All Rights Reserved Worldwide.

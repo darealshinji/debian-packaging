@@ -1,0 +1,8 @@
+All files, unless they're covered by a different license header,
+are Copyright (c) 2014, djcj <djcj@gmx.de> and released under
+the MIT license, with the following exceptions:
+
+ All files that will be downloaded by the script are
+ Copyright (c) 2006-2010 Nero AG. All rights reserved.
+
+For more details see debian/copyright.

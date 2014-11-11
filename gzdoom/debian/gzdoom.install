@@ -1,0 +1,7 @@
+debian/scripts/gzdoom                  usr/games
+gzdoom/gzdoom                          usr/lib/games/gzdoom
+gzdoom/output_sdl/liboutput_sdl.so     usr/lib/games/gzdoom
+gzdoom/libfmodex-4.44.so               usr/lib/games/gzdoom
+gzdoom/*.pk3                           usr/share/games/gzdoom
+debian/gzdoom.desktop                  usr/share/applications
+debian/gzdoom.xpm                      usr/share/pixmaps

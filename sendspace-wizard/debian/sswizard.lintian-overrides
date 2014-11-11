@@ -1,0 +1,6 @@
+# closed source
+sswizard: embedded-library usr/bin/ssgui_app: curl
+sswizard: embedded-library usr/bin/ssgui_app: libxml2
+sswizard: hardening-no-relro usr/bin/ssgui_app
+sswizard: embedded-library usr/bin/sswizard: curl
+sswizard: hardening-no-relro usr/bin/sswizard

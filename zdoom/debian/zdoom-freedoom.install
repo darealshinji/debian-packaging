@@ -1,0 +1,2 @@
+debian/scripts/zdoom-freedoom      usr/games
+debian/zdoom-freedoom.desktop      usr/share/applications

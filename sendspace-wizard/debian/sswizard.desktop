@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Sendspace Upload Wizard
+GenericName=Sendspace Upload Wizard
+Comment=Upload files to Sendspace
+Exec=sswizard %U
+TryExec=sswizard
+Terminal=false
+Icon=applications-internet
+Categories=Network;
+StartupNotify=true

@@ -1,0 +1,36 @@
+Source: zdoom
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               cmake,
+               libbz2-dev,
+               libfluidsynth-dev,
+               libgtk2.0-dev,
+               libjpeg-dev,
+               libsdl1.2-dev,
+               zlib1g-dev
+Standards-Version: 3.9.5
+Vcs-Git: https://github.com/rheit/zdoom.git
+Vcs-Browser: https://github.com/rheit/zdoom
+Homepage: http://www.zdoom.org/
+
+Package: zdoom
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         zenity
+Description: Doom engine
+ An enhanced port of the official DOOM source code.
+
+Package: zdoom-freedoom
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends},
+         freedoom-iwads,
+         zdoom
+Pre-Depends: dpkg (>= 1.15.6~)
+Description: Play Freedoom on ZDoom
+ An enhanced port of the official DOOM source code.
+ .
+ This package will install a launcher to play Freedoo

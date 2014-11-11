@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Mr Red's adventure in The Missing Balls
+Exec=mrred
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=mrred

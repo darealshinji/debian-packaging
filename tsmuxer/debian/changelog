@@ -1,0 +1,11 @@
+tsmuxer (2.6.11-1) unstable; urgency=medium
+
+  * Close ITP bug
+ 
+ -- Marshall Banana <djcj@gmx.de>  Tue, 12 Aug 2014 14:56:26 +0200
+
+tsmuxer (2.6.11) unstable; urgency=medium
+
+  * Initial release
+ 
+ -- Marshall Banana <djcj@gmx.de>  Tue, 12 Aug 2014 13:21:20 +0200

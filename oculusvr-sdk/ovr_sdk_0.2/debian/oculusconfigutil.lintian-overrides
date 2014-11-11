@@ -1,0 +1,4 @@
+# closed source
+oculusconfigutil binary: embedded-library */oculusconfigutil: libpng
+oculusconfigutil binary: embedded-library */oculusconfigutil: zlib
+oculusconfigutil binary: embedded-library */oculusconfigutil: libjpeg

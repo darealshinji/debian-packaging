@@ -1,0 +1,11 @@
+neroaac (1.5.4.0-1) unstable; urgency=low
+
+  * See /usr/share/doc/neroaac/changelog.gz for more information
+ 
+ -- Marshall Banana <djcj@gmx.de>  Sat, 03 May 2014 12:00:00 +0100
+
+neroaac (1.5.4.0) unstable; urgency=medium
+
+  * Initial release
+ 
+ -- Marshall Banana <djcj@gmx.de>  Fri, 02 May 2014 12:00:00 +0100

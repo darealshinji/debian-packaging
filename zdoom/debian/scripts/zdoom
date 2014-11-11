@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cd /usr/lib/games/zdoom &&
+LD_LIBRARY_PATH="$PWD:$LD_LIBRARY_PATH" ./zdoom "$@"
+
+if [ $? != 0 ] ; then
+    zenity --warning --text \
+"Something went wrong!\nIf you haven't installed any Doom IWAD files yet or if ZDoom "\
+"is unable to locate them, put the files or symlinks to them in '$HOME/.config/zdoom' "\
+"or start the game with the command 'DOOMWADDIR=/path/to/iwadfiledir zdoom'."
+fi

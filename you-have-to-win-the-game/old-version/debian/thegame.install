@@ -1,0 +1,4 @@
+TheGame_2014-01-30/TheGame_NFML   usr/lib/thegame
+TheGame_2014-01-30/*.npk          usr/share/games/thegame
+files/thegame.desktop             usr/share/applications
+files/icons/*                     usr/share/icons/hicolor

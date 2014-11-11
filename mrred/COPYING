@@ -1,0 +1,9 @@
+All files, unless they're covered by a different license header,
+are Copyright (c) 2014, djcj <djcj@gmx.de> and released under
+the MIT license, with the following exceptions:
+
+ All files that will be downloaded by the script are
+ Copyright (c) 2013, Killmonday Games
+ All Rights Reserved.
+
+For more details see debian/copyright.

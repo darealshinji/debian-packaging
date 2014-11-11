@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+
+rm -f /usr/lib/thegame/mods/yhtwtg-ega/TheGame_NFML
+
+#DEBHELPER#

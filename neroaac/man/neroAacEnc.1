@@ -1,0 +1,71 @@
+.TH NEROAACDEC 1 "MAY 2014" "1.5.4.0"
+.SH NAME
+neroAacEnc \- Nero AAC Encoder
+.SH SYNOPSIS
+.B neroAacEnc \fR[options]\fB -if \fR<input-file>\fB -of \fR<output-file>
+.br
+.B neroaacenc
+
+.SH DESCRIPTION
+Package build date: Feb 18 2010
+.br
+Package version:    1.5.4.0
+
+.SH OPTIONS
+.TP
+<input-file>
+Path to source file to encode. The file must be in Microsoft WAV format and contain PCM data.
+Specify - to encode from stdin. Note that multiple input files can be specified, they will be
+encoded together into a single output file with chapter marks indicating source file divisions.
+.TP
+<output-file>
+Path to output file to encode to, in MP4 format.
+.TP
+.B \-help
+Show a list of available parameters.
+.PP
+
+.B Quality/bitrate control:
+.TP
+.B \-q \fR<number>
+Enables "target quality" mode. <number> is a floating-point number in 0...1 range.
+.TP
+.B \-br \fR<number>
+Specifies "target bitrate" mode. <number> is target bitrate in bits per second.
+.TP
+.B \-cbr \fR<number>
+Specifies "target bitrate (streaming)" mode. <number> is target bitrate in bits per second.
+When neither of above quality/bitrate options is used, the encoder defaults to equivalent of -q 0.5
+.PP
+
+.B Multipass encoding:
+.TP
+.B \-2pass
+Enables two-pass encoding mode. Note that two-pass more requires a physical file as input, rather than stdin.
+.TP
+.B \-2passperiod \fR<number>
+Overrides two-pass encoding bitrate averaging period, in milliseconds.
+Specify zero to use least restrictive value possible (default).
+.PP
+
+.B Advanced features / troubleshooting:
+.TP
+.B \-lc
+Forces use of LC AAC profile (HE features disabled).
+.TP
+.B \-he
+Forces use of HE AAC profile (HEv2 features disabled).
+.TP
+.B \-hev2
+Forces use of HEv2 AAC profile. Note that the above switches (-lc, -he, -hev2) should not be
+used; optimal AAC profile is automatically determined from quality/bitrate settings when no override is specified.
+.TP
+.B \-ignorelength
+Ignores length signaled by WAV headers of input file. Useful for certain frontends using stdin.
+
+.SH SEE ALSO
+/usr/share/doc/neroaac/
+.br
+.I http://www.nero.com/eng/company/about-nero/nero-aac-codec.php
+.SH COPYRIGHT
+Copyright \(co 2006-2010 Nero AG. All Rights Reserved Worldwide.

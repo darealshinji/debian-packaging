@@ -1,0 +1,5 @@
+google-earth (@VERSION@) unstable; urgency=low
+
+  * Release version @VERSION@
+
+ -- Marshall Banana <djcj@gmx.de>  @DATE@

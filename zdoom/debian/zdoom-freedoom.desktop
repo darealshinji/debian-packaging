@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Freedoom (ZDoom)
+GenericName=Play Freedoom on the ZDoom engine
+Exec=zdoom-freedoom
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=zdoom

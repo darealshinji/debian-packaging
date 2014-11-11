@@ -1,0 +1,96 @@
+#!/usr/bin/make -f
+
+SOVERSION = $(shell head -n1 debian/changelog | cut -d' ' -f1 | tail -c+7)
+VERSION = $(shell sed -e '1{;s|^fmodex$(SOVERSION) (\([0-9.]*\)-.*)\ .*|\1|;q;}' debian/changelog)
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+LIBDIR = usr/lib/$(DEB_HOST_MULTIARCH)
+LIBFMODEX = $(CURDIR)/debian/libfmodex$(SOVERSION)/$(LIBDIR)
+LIBFMODEVENT = $(CURDIR)/debian/libfmodevent$(SOVERSION)/$(LIBDIR)
+
+FMODEXLIBS = libfmodex libfmodexL
+FMODEVENTLIBS = libfmodevent libfmodeventL libfmodeventnet libfmodeventnetL
+
+PATCHELFBIN = $(CURDIR)/patchelfmod/src/patchelfmod
+MYSED = sed -e 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/; s/@VERSION@/$(VERSION)/; s/@SOVERSION@/$(SOVERSION)/g'
+
+ifeq ($(DEB_HOST_ARCH), amd64)
+LIB64 = 64
+endif
+
+
+%:
+	dh ${@}
+
+override_dh_auto_configure:
+	tar xzf fmodapi*linux.tar.gz
+	mv fmodapi*linux/* $(CURDIR)
+	rm -rf fmodapi*linux Makefile
+	cp debian/libfmodeventN-examples.examples debian/libfmodevent$(SOVERSION)-examples.examples
+	cp debian/libfmodexN-dev.examples debian/libfmodex$(SOVERSION)-dev.examples
+	$(MYSED) debian/control.in > debian/control
+	$(MYSED) debian/fmodevent.pc.in > debian/fmodevent.pc
+	$(MYSED) debian/fmodex.pc.in > debian/fmodex.pc
+
+override_dh_auto_build:
+	rm -rf patchelfmod-master
+	tar xvf patchelfmod.tar.gz
+	cd patchelfmod && autoreconf -ifv
+	cd patchelfmod && ./configure && $(MAKE) check
+
+override_dh_auto_install:
+	install -c -d -m755 $(LIBFMODEX)
+	install -c -d -m755 $(LIBFMODEVENT)
+	install -c -d -m755 $(LIBFMODEX)/libfmodex$(SOVERSION)-compat
+	install -c -d -m755 $(LIBFMODEVENT)/libfmodevent$(SOVERSION)-compat
+	install -c -d -m755 $(CURDIR)/debian/libfmodex$(SOVERSION)-dev/$(LIBDIR)/pkgconfig
+	install -c -d -m755 $(CURDIR)/debian/libfmodevent$(SOVERSION)-dev/$(LIBDIR)/pkgconfig
+	install -c -d -m755 $(CURDIR)/debian/libfmodex$(SOVERSION)-dev/usr/include/fmodex
+	install -c -d -m755 $(CURDIR)/debian/libfmodevent$(SOVERSION)-dev/usr/include
+	install -c -D -m644 api/inc/*.h* $(CURDIR)/debian/libfmodex$(SOVERSION)-dev/usr/include/fmodex
+	install -c -D -m644 fmoddesignerapi/api/inc/*.h* $(CURDIR)/debian/libfmodevent$(SOVERSION)-dev/usr/include
+	install -c -D -m644 debian/fmodex.pc $(CURDIR)/debian/libfmodex$(SOVERSION)-dev/$(LIBDIR)/pkgconfig
+	install -c -D -m644 debian/fmodevent.pc $(CURDIR)/debian/libfmodevent$(SOVERSION)-dev/$(LIBDIR)/pkgconfig
+	$(foreach LIB,$(FMODEXLIBS), \
+	install -c -D -m644 api/lib/$(LIB)$(LIB64)-$(VERSION).so $(LIBFMODEX)/$(LIB).so.$(VERSION) ; \
+	ln -s $(LIB).so.$(VERSION) $(LIBFMODEX)/$(LIB).so.$(SOVERSION) ; \
+	ln -s $(LIB).so.$(VERSION) $(CURDIR)/debian/libfmodex$(SOVERSION)-dev/$(LIBDIR)/$(LIB).so ; \
+	ln -s ../$(LIB).so.$(SOVERSION) $(LIBFMODEX)/libfmodex$(SOVERSION)-compat/$(LIB)$(LIB64).so ; \
+	ln -s ../$(LIB).so.$(SOVERSION) $(LIBFMODEX)/libfmodex$(SOVERSION)-compat/$(LIB)$(LIB64)-$(VERSION).so ; \
+	$(PATCHELFBIN) --soname $(LIB).so.$(SOVERSION) $(LIBFMODEX)/$(LIB).so.$(VERSION) ; \
+	)
+	$(foreach LIB,$(FMODEVENTLIBS), \
+	install -c -D -m644 fmoddesignerapi/api/lib/$(LIB)$(LIB64)-$(VERSION).so $(LIBFMODEVENT)/$(LIB).so.$(VERSION) ; \
+	ln -s $(LIB).so.$(VERSION) $(LIBFMODEVENT)/$(LIB).so.$(SOVERSION) ; \
+	ln -s $(LIB).so.$(VERSION) $(CURDIR)/debian/libfmodevent$(SOVERSION)-dev/$(LIBDIR)/$(LIB).so ; \
+	ln -s ../$(LIB).so.$(SOVERSION) $(LIBFMODEVENT)/libfmodevent$(SOVERSION)-compat/$(LIB)$(LIB64).so ; \
+	ln -s ../$(LIB).so.$(SOVERSION) $(LIBFMODEVENT)/libfmodevent$(SOVERSION)-compat/$(LIB)$(LIB64)-$(VERSION).so ; \
+	$(PATCHELFBIN) --soname $(LIB).so.$(SOVERSION) $(LIBFMODEVENT)/$(LIB).so.$(VERSION) ; \
+	)
+	$(PATCHELFBIN) -n libfmodex$(LIB64)-$(VERSION).so,libfmodex.so.$(SOVERSION) $(LIBFMODEVENT)/libfmodevent.so.$(VERSION)
+	$(PATCHELFBIN) -n libfmodexL$(LIB64)-$(VERSION).so,libfmodexL.so.$(SOVERSION) $(LIBFMODEVENT)/libfmodeventL.so.$(VERSION)
+	$(PATCHELFBIN) -n libfmodex$(LIB64)-$(VERSION).so,libfmodex.so.$(SOVERSION) $(LIBFMODEVENT)/libfmodeventnet.so.$(VERSION)
+	$(PATCHELFBIN) -n libfmodexL$(LIB64)-$(VERSION).so,libfmodexL.so.$(SOVERSION) $(LIBFMODEVENT)/libfmodeventnetL.so.$(VERSION)
+
+override_dh_installdocs:
+	dh_installdocs -A debian/README
+
+override_dh_installchangelogs:
+	dh_installchangelogs documentation/revision.txt
+
+override_dh_compress:
+	dh_compress -X.pdf -X.mp3 -X.ogg
+
+override_dh_clean:
+	dh_clean
+	rm -rf api documentation examples fmoddesignerapi tools patchelfmod \
+		debian/*.pc debian/libfmode*$(SOVERSION)*.examples
+
+override_dh_strip:
+
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

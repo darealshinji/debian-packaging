@@ -1,0 +1,16 @@
+Source: google-earth
+Section: non-free/science
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9), dh-autoreconf, chrpath
+Standards-Version: 3.9.5
+
+Package: google-earth
+Architecture: any
+Depends:
+  libgcc1 (>= 1:4.1.1), libc6 (>= 2.4), libfontconfig1 (>= 2.9.0), libfreetype6 (>= 2.2.1),
+  libgl1-mesa-glx | libgl1, libice6 (>= 1:1.0.0), libsm6, libstdc++6 (>= 4.1.1),
+  libx11-6, libxext6, libxrender1, zlib1g (>= 1:1.1.4)
+Provides: google-earth, googleearth
+Description: 3D map/planet viewer
+ Google Earth is a 3D map/planet viewer.

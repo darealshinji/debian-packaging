@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=thegame
+
+override_dh_installchangelogs:
+	dh_installchangelogs files/ChangeLog
+
+override_dh_strip:
+	dh_strip --dbg-package=thegame-dbg
+
+override_dh_gencontrol:
+	dh_gencontrol
+	# prevents Lintian warning virtual-package-depends-without-real-package-depends
+	sed -i 's/libgl1/libgl1-mesa-glx | libgl1/g' debian/thegame/DEBIAN/control
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
+clobber:
+	dh_clean
+	rm -rf icons icons-ega YHtWtG_EGA TheGame_2014-01-30
+

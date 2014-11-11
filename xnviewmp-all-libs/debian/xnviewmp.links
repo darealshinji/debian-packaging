@@ -1,0 +1,7 @@
+/usr/share/perl5/File              usr/lib/xnviewmp/AddOn/lib/File
+/usr/share/perl5/Image             usr/lib/xnviewmp/AddOn/lib/Image
+/usr/share/xnviewmp/AddOn/Masks    usr/lib/xnviewmp/AddOn/Masks
+/usr/share/xnviewmp/AddOn/Thumbs   usr/lib/xnviewmp/AddOn/Thumbs
+/usr/bin/exiftool                  usr/lib/xnviewmp/AddOn/exiftool
+/usr/share/xnviewmp/UI             usr/lib/xnviewmp/UI
+/usr/share/xnviewmp/language       usr/lib/xnviewmp/language

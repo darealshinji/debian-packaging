@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+# Yes, a hard link! A symbolic link doesn't work.
+ln /usr/lib/thegame/TheGame_NFML /usr/lib/thegame/mods/yhtwtg-ega/TheGame_NFML
+
+#DEBHELPER#

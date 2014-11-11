@@ -1,0 +1,3 @@
+version=3
+opts="dversionmangle=s/\.//g" \
+http://www.fmod.org/download/ fmodex/api/Linux/fmodapi(.+)linux\.tar\.(?:xz|bz2|gz)

@@ -1,0 +1,5 @@
+files/oculusconfigutil                            /usr/bin
+oculusconfigutil                                  /usr/lib/oculusconfigutil
+OculusSDK/Tools/OculusConfigUtil/Resources/*      /usr/share/oculusconfigutil
+files/icons                                       /usr/share
+files/oculusconfigutil.desktop                    /usr/share/applications

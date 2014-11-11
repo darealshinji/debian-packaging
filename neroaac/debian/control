@@ -1,0 +1,19 @@
+Source: neroaac
+Section: sound
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: http://www.nero.com/eng/company/about-nero/nero-aac-codec.php
+
+Package: neroaac
+Architecture: any
+Depends: libgcc1 (>= 1:4.1.1), libc6 (>= 2.4), libstdc++6 (>= 4.1.1)
+Suggests: aac-enc
+Provides: neroaac, neroaaccodec
+Description: Nero AAC reference quality MPEG-4 and 3GPP audio codec
+ The encoder requires .WAV files in PCM wave format as input
+ and provides .MP4 in MPEG-4/3GPP file format as output, as
+ well as quality and bitrate values as parameters. The decoder
+ requires input in MPEG-4/3GPP file format and provides
+ PCM wave files as output.

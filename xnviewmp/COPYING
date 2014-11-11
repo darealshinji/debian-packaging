@@ -1,0 +1,13 @@
+All files, unless they're covered by a different license header,
+are Copyright (c) 2014, djcj <djcj@gmx.de> and released under
+the MIT license, with the following exceptions:
+
+ All XnView files that will be downloaded by the script are
+ Copyright (c) 1997-2014, Pierre-e Gougelet. All rights reserved.
+
+ All files in patchelfmod/* are
+ Copyright (c) 2004-2014, Eelco Dolstra <eelco.dolstra@logicblox.com>
+ Copyright (c) 2014, djcj <djcj@gmx.de>
+ and licensed under GNU GPL v3+.
+
+For more details see debian/copyright.

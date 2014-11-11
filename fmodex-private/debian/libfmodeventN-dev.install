@@ -1,0 +1,2 @@
+fmoddesignerapi/api/inc/*   usr/include/fmodevent
+debian/fmodevent.pc         usr/lib/pkgconfig

@@ -1,0 +1,3 @@
+doom3-demo binary: embedded-library usr/lib/doom3-demo/doom.x86: libjpeg
+doom3-demo binary: hardening-no-relro usr/lib/doom3-demo/doom.x86
+doom3-demo binary: hardening-no-relro usr/lib/doom3-demo/gamex86.so

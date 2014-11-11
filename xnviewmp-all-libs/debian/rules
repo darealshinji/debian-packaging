@@ -1,0 +1,69 @@
+#!/usr/bin/make -f
+
+DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+ARCH = i386
+ifeq ($(DEB_HOST_ARCH), amd64)
+ARCH = amd64
+endif
+
+
+%:
+	dh ${@}
+
+override_dh_auto_build:
+	# make icon set
+	debian/make-icons.sh XnView/xnview.png
+	debian/make-icons.sh XnView/xnview_2.png
+
+	rm XnView/UI/style_sheet_win.qss XnView/UI/style_sheet_mac.qss
+
+	# remove RPATH
+	chrpath -d \
+	XnView/Plugins/IlmImf.so \
+	XnView/lib/codecs/libqcncodecs.so \
+	XnView/lib/codecs/libqjpcodecs.so \
+	XnView/lib/codecs/libqkrcodecs.so \
+	XnView/lib/codecs/libqtwcodecs.so \
+	XnView/lib/imageformats/libqgif.so \
+	XnView/lib/imageformats/libqico.so \
+	XnView/lib/imageformats/libqjpeg.so \
+	XnView/lib/imageformats/libqmng.so \
+	XnView/lib/imageformats/libqsvg.so \
+	XnView/lib/imageformats/libqtga.so \
+	XnView/lib/imageformats/libqtiff.so \
+	XnView/lib/libQtCore.so.4.8.5 \
+	XnView/lib/libQtDBus.so.4.8.5 \
+	XnView/lib/libQtGui.so.4.8.5 \
+	XnView/lib/libQtNetwork.so.4.8.5 \
+	XnView/lib/libQtSvg.so.4.8.5 \
+	XnView/lib/libQtWebKit.so.4.9.4 \
+	XnView/lib/libQtXml.so.4.8.5 \
+	XnView/lib/libphonon.so.4 \
+	XnView/lib/phonon_backend/libphonon_gstreamer.so \
+	XnView/XnView
+
+	# copy libqt4-opengl
+	cp -rf libqt4-opengl/$(ARCH)/* XnView/lib/
+
+override_dh_installchangelogs:
+	dh_installchangelogs XnView/WhatsNew.txt
+
+override_dh_gencontrol:
+	dh_gencontrol
+	# prevents Lintian warning virtual-package-depends-without-real-package-depends
+	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/xnviewmp/DEBIAN/control
+
+override_dh_makeshlibs:
+	# no true shared libraries
+
+override_dh_shlibdeps:
+	# don't need it
+
+override_dh_clean:
+	dh_clean
+	rm -rf converted_icons
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

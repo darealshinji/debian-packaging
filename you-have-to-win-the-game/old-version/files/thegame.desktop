@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=You Have to Win the Game
+GenericName=The Game
+Exec=thegame
+Icon=yhtwtg
+Type=Application
+StartupNotify=false
+Terminal=false
+Categories=Game;

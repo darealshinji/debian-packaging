@@ -1,0 +1,11 @@
+oculusvr-sdk (0.3.2-1) trusty; urgency=low
+
+  * Oculus Rift SDK debianized
+
+ -- Marshall Banana <djcj@gmx.de>  Sun, 29 Jun 2014 09:14:56 +0200
+
+oculusvr-sdk (0.3.2) trusty; urgency=low
+
+  * Initial release
+
+ -- Marshall Banana <djcj@gmx.de>  Sun, 29 Jun 2014 09:12:40 +0200

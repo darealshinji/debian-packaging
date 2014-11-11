@@ -1,0 +1,6 @@
+usr/games/thegame                               usr/games/yhtwtg
+usr/share/games/thegame/Engine.npk              usr/lib/thegame/Engine.npk
+usr/share/games/thegame/VolverHeavy.npk         usr/lib/thegame/VolverHeavy.npk
+usr/share/games/thegame/Volver.npk              usr/lib/thegame/Volver.npk
+usr/share/games/thegame/VolverVersion.npk       usr/lib/thegame/VolverVersion.npk
+usr/share/man/man6/thegame.6.gz                 usr/share/man/man6/yhtwtg.6.gz

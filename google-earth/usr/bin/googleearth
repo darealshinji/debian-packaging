@@ -1,0 +1,3 @@
+#!/bin/sh
+LIBDIR=/usr/lib/googleearth
+LD_LIBRARY_PATH="$LIBDIR:$LD_LIBRARY_PATH" "$LIBDIR/googleearth-bin" "$@"

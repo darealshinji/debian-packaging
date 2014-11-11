@@ -1,0 +1,2 @@
+api/inc/*            usr/include/fmodex
+debian/fmodevex.pc   usr/lib/pkgconfig

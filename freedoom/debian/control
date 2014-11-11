@@ -1,0 +1,96 @@
+Source: freedoom
+Section: games
+Priority: optional
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Uploaders:
+ Fabian Greffrath <fabian+debian@greffrath.com>,
+ Jon Dowland <jmtd@debian.org>,
+ Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               deutex,
+               gsfonts,
+               imagemagick,
+               python (>= 2.4)
+Standards-Version: 3.9.5
+Vcs-Git: https://github.com/freedoom/freedoom.git
+#Vcs-Git: git://anonscm.debian.org/pkg-games/freedoom
+Vcs-Browser: https://github.com/freedoom/freedoom
+#Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-games/freedoom.git
+Homepage: http://freedoom.github.io/
+
+Package: freedm
+Architecture: all
+Multi-Arch: foreign
+Depends: prboom-plus | boom-engine, ${misc:Depends}
+Pre-Depends: dpkg (>= 1.15.6~)
+Provides: boom-wad
+Breaks: prboom (<< 2:2.5.0+dfsg1-5)
+Description: multiplayer-oriented maps for Doom
+ Freedoom is a project to create a complete Doom II-compatible IWAD file
+ which is Free Software.
+ .
+ FreeDM is a sub-project to create a set of levels designed for deathmatch
+ play.
+ .
+ FreeDM does not require Freedoom to play and can be used in conjunction
+ with a boom-engine. Please note that this is designed for multiplayer and
+ will not be of much use for single player.
+
+Package: freedoom
+Architecture: all
+Multi-Arch: foreign
+Depends: prboom-plus | boom-engine, ${misc:Depends}
+Pre-Depends: dpkg (>= 1.15.6~)
+Provides: boom-wad
+Breaks: prboom (<< 2:2.5.0+dfsg1-5)
+Description: free game files for the 3D game DOOM
+ Freedoom is a project to create a complete Doom engine-based game which is
+ free software, in addition to maintaining compatibility with Doom
+ modifications (“mods”) that have been released by the continually-active
+ community since 1993.
+ .
+ Freedoom aims to create “IWAD” files for the engine, each of these
+ is an independent sub-project representing different aims towards game
+ design and compatibility with Doom mods:
+ .
+ Freedoom: Phase 1 - A four-chapter game, nine levels each,
+ totalling 36 levels. This project aims for compatibility
+ with The Ultimate Doom (also known as plain Doom or Doom 1).
+ .
+ Freedoom: Phase 2 - A 32-level chapter featuring extra monsters
+ and a double-barrelled shotgun. This project aims for
+ compatibility with Doom II.
+ .
+ Combined with any boom compatible Doom engine (such as prboom)
+ this will result in a complete Free Doom-based game.
+
+Package: freedoom-iwads
+Architecture: all
+Priority: extra
+Depends: ${misc:Depends}
+Description: all Freedoom IWAD files
+ Freedoom is a project to create a complete Doom engine-based game which is
+ free software, in addition to maintaining compatibility with Doom
+ modifications (“mods”) that have been released by the continually-active
+ community since 1993.
+ .
+ Freedoom aims to create three “IWAD” files for the engine, each of these
+ is an independent sub-project representing different aims towards game
+ design and compatibility with Doom mods:
+ .
+ Freedoom: Phase 1 - A four-chapter game, nine levels each,
+ totalling 36 levels. This project aims for compatibility
+ with The Ultimate Doom (also known as plain Doom or Doom 1).
+ .
+ Freedoom: Phase 2 - A 32-level chapter featuring extra monsters
+ and a double-barrelled shotgun. This project aims for
+ compatibility with Doom II.
+ .
+ FreeDM - 32 levels designed for competitive deathmatch play.
+ .
+ This package will install all three IWAD files in
+ /usr/share/games/freedoom-iwads. It is independent from other packages
+ and will install only the IWAD files. It has no other dependencies and
+ doesn't conflict with any other packages. Its intention is to use the
+ files in other Doom engines without installing Boom through the
+ dependencies.

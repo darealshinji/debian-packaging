@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Doom 3 Demo
+Exec=doom3-demo
+TryExec=/usr/lib/doom3-demo/doom.x86
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=doom3-demo

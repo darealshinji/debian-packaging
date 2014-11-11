@@ -1,0 +1,7 @@
+This script creates a Debian package of the Steam version of "You Have to Win the Game".
+This requires that you have the game installed on Steam ( http://store.steampowered.com/app/286100/ ).
+Once you have installed the Debian package you created, you don't need Steam anymore to play the game.
+
+To build the package run './build.sh'
+
+To install the build-dependencies run 'sudo apt-get install debhelper libgl1-mesa-glx'

@@ -1,0 +1,5 @@
+temp/bin/Linux/x86/doom.x86   /usr/lib/doom3-demo
+temp/gamex86.so               /usr/lib/doom3-demo
+temp/demo                     /usr/share/games/doom3-demo
+debian/doom3-demo.desktop     /usr/share/applications
+icons                         /usr/share

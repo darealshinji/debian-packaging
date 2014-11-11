@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+DEB_HOST_ARCH_BITS := $(shell dpkg-architecture -qDEB_HOST_ARCH_BITS)
+
+
+%:
+	dh ${@}
+
+override_dh_install:
+	mkdir -p debian/sswizard/usr/bin
+	install -m755 wizard/$(DEB_HOST_ARCH_BITS)bit/ssgui_app debian/sswizard/usr/bin
+	install -m755 wizard/$(DEB_HOST_ARCH_BITS)bit/sswizard debian/sswizard/usr/bin
+	dh_install
+
+override_dh_installchangelogs:
+	dh_installchangelogs wizard/Changelog.txt
+
+override_dh_strip:
+	dh_strip --dbg-package=sswizard-dbg
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

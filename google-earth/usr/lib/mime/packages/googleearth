@@ -1,0 +1,4 @@
+application/vnd.google-earth.kml+xml; /usr/bin/googleearth '%s'; edit=/usr/bin/googleearth '%s'; test=test "$DISPLAY" != "" ;description="Keyhole Markup Language data"; nametemplate=%s.kml
+application/vnd.google-earth.kmz; /usr/bin/googleearth '%s'; edit=/usr/bin/googleearth '%s'; test=test "$DISPLAY" != "" ;description="Keyhole Markup Language archive"; nametemplate=%s.kmz
+application/keyhole; /usr/bin/googleearth '%s'; edit=/usr/bin/googleearth '%s'; test=test "$DISPLAY" != "" ;description="Keyhole Markup Language data"
+application/earthviewer; /usr/bin/googleearth '%s'; edit=/usr/bin/googleearth '%s'; test=test "$DISPLAY" != "" ;description="Keyhole Markup Language data"

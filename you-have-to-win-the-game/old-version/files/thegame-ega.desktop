@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=You Have to Win the Game - EGA Mod
+GenericName=The Game EGA Mod
+Exec=thegame-ega
+Icon=yhtwtg-ega
+Type=Application
+StartupNotify=false
+Terminal=false
+Categories=Game;
