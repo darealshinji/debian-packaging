@@ -1,0 +1,21 @@
+Source: divx265
+Section: video
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Standards-Version: 3.9.5
+Homepage: http://labs.divx.com/divx265
+Build-Depends: debhelper (>= 9)
+
+Package: divx265
+Architecture: amd64 i386
+Depends:
+ ${misc:Depends},
+ libgcc1 (>= 1:4.1.1),
+ libc6 (>= 2.4),
+ libstdc++6 (>= 4.4.0)
+Suggests:
+ mkvtoolnix-gui
+Description: DivX HEVC Community Encoder
+ This tool will allow you to encode HEVC streams that are within
+ DivX HEVC profile.
+ After encoding, you can mux video using MKVToolnix.
