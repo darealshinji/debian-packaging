@@ -1,3 +1,3 @@
 #!/bin/sh
 dh_clean
-rm -rf neroaac
+rm -rf neroaac *.zip

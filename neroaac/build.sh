@@ -15,7 +15,7 @@ if [ $sha256_2 != $sha256_1 ] ; then
     exit 1
 fi
 
-./clean.sh
+rm -rf neroaac
 unzip $neroaac -d neroaac
 
 dpkg-buildpackage -b -us -uc 2>&1 | tee build.log

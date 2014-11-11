@@ -1,3 +1,3 @@
 #!/bin/sh
 dh_clean
-rm -rf wizard build.log
+rm -rf wizard build.log *.tgz

@@ -1,6 +1,10 @@
 #!/bin/sh -e
 
-pkgver=2.6.11
+LANG=C
+LANGUAGE=C
+LC_ALL=C
+
+pkgver=$(head -n1 debian/changelog | cut -d '(' -f2 | cut -d ')' -f1 | cut -d- -f1)
 archive=tsmuxer$pkgver.tar.gz
 sha256_1=815a383aebc67e59b6e541b927ce14480efed9d103fe99e74ced9ea381f61764
 
