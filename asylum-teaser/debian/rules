@@ -14,5 +14,10 @@ override_dh_auto_build:
 	find Asylum_Teaser -type f -exec chmod 0644 '{}' \;
 	debian/make-icons.sh asylum-teaser.png
 
+override_dh_install:
+	dh_install
+	cd debian/asylum-teaser/usr/share/games/asylum-teaser/resources/images && \
+	rm corridorb* infirmary* showers* end_screen.png
+
 override_dh_builddeb:
 	dh_builddeb -- -z1
