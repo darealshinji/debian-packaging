@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	cd Dagon && premake4 clean || true
+	rm -rf converted_icons
+
+override_dh_auto_configure:
+	cd Dagon && premake4 gmake
+
+override_dh_auto_build:
+	dh_auto_build -DDagon/build -- verbose=1
+	cp Dagon/xcode/Resources/Images.xcassets/AppIcon.appiconset/Dagon512x512.png \
+	Dagon/build/dagon.png
+	debian/make-icons.sh Dagon/build/dagon.png
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=dagon
+
+override_dh_strip:
+	dh_strip --dbg-package=dagon-dbg
+
+override_dh_gencontrol:
+	dh_gencontrol
+	# prevents Lintian warning virtual-package-depends-without-real-package-depends
+	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/dagon/DEBIAN/control
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

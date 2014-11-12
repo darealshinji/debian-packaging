@@ -4,8 +4,11 @@
 %:
 	dh ${@}
 
-override_dh_auto_build:
+override_dh_auto_clean:
+	dh_auto_clean
 	rm -rf Asylum_Teaser
+
+override_dh_auto_build:
 	unzip Asylum_Teaser_Unix.zip
 	mv "Asylum Teaser" Asylum_Teaser
 	find Asylum_Teaser -type f -exec chmod 0644 '{}' \;

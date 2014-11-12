@@ -1,0 +1,44 @@
+Source: dagon
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+  debhelper (>= 9),
+  imagemagick,
+  libfreetype6-dev,
+  libglew-dev,
+  liblua5.1-0-dev,
+  libogg-dev,
+  libopenal-dev,
+  libvorbis-dev,
+  libtheora-dev,
+  libsdl2-dev,
+  premake4
+Standards-Version: 3.9.5
+Homepage: http://www.senscape.net/dagon/
+Vcs-Git: https://github.com/Senscape/Dagon.git
+Vcs-Browser: https://github.com/Senscape/Dagon
+
+Package: dagon
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: Adventure Game Engine
+ Dagon is a game engine especially tailored for adventure games and based
+ on open technologies. Featuring a deceptively simple scripting language,
+ blazing fast performance and high portability supporting Windows, Linux,
+ Mac OS X and iOS devices, the project aims to become a reference of the genre.
+
+Package: dagon-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: ${misc:Depends},
+         dagon (= ${binary:Version})
+Description: Adventure Game Engine - debug symbols
+ Dagon is a game engine especially tailored for adventure games and based
+ on open technologies. Featuring a deceptively simple scripting language,
+ blazing fast performance and high portability supporting Windows, Linux,
+ Mac OS X and iOS devices, the project aims to become a reference of the genre.
+ .
+ This package contains the debug symbols for Dagon.
