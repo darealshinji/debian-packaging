@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_build:
+	rm -rf Asylum_Teaser
+	unzip Asylum_Teaser_Unix.zip
+	mv "Asylum Teaser" Asylum_Teaser
+	find Asylum_Teaser -type f -exec chmod 0644 '{}' \;
+	debian/make-icons.sh asylum-teaser.png
+
+override_dh_builddeb:
+	dh_builddeb -- -z1

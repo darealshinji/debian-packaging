@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Asylum
+GenericName=The Interactive Teaser
+Exec=asylum-teaser
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=asylum-teaser

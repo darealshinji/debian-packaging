@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+DIR="$HOME/.asylum-teaser"
+if [ ! -f "$DIR/config.lua" ] ; then
+    mkdir -p "$DIR"
+    cp /usr/share/games/asylum-teaser/config.lua "$DIR"
+fi
+cd "$DIR" && dagon "$@"
