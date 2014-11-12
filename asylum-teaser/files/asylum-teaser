@@ -1,8 +1,13 @@
 #!/bin/sh -e
 
-DIR="$HOME/.asylum-teaser"
-if [ ! -f "$DIR/config.lua" ] ; then
-    mkdir -p "$DIR"
-    cp /usr/share/games/asylum-teaser/config.lua "$DIR"
+GAMEDIR=/usr/share/games/asylum-teaser
+CONFDIR="$HOME/.asylum-teaser"
+
+if [ ! -d "$CONFDIR" ] ; then
+    mkdir -p "$CONFDIR"
+    cp $GAMEDIR/config.lua "$CONFDIR"
+    ln -s $GAMEDIR/resources "$CONFDIR/resources"
+    ln -s $GAMEDIR/scripts "$CONFDIR/scripts"
 fi
-cd "$DIR" && dagon "$@"
+
+cd "$CONFDIR" && dagon "$@"
