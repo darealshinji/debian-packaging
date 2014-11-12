@@ -1,0 +1,7 @@
+All files, unless they're covered by a different license header,
+are Copyright (c) 2014, djcj <djcj@gmx.de> and released under
+the MIT license, with the following exceptions:
+
+ DivX265 is Copyright (c) 2000-2014 DivX, LLC.
+
+For more details see debian/copyright.
