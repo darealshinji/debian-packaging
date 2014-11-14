@@ -6,18 +6,17 @@
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -rf Asylum_Teaser
+	./clean.sh
 
 override_dh_auto_build:
-	unzip Asylum_Teaser_Unix.zip
-	mv "Asylum Teaser" Asylum_Teaser
-	find Asylum_Teaser -type f -exec chmod 0644 '{}' \;
+	wget "https://github.com/Senscape/Asylum-Teaser/archive/master.tar.gz"
+	tar xvf master.tar.gz
+	rm master.tar.gz
+
+	wget -O asylum-teaser.png "http://s14.directupload.net/images/141112/cbqmarg3.png"
 	debian/make-icons.sh asylum-teaser.png
 
-override_dh_install:
-	dh_install
-	cd debian/asylum-teaser/usr/share/games/asylum-teaser/resources/images && \
-	rm corridorb* infirmary* showers* end_screen.png
+	cd Asylum-Teaser-master && ./download-game-content.sh
 
 override_dh_builddeb:
 	dh_builddeb -- -z1

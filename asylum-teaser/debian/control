@@ -5,7 +5,8 @@ Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
   debhelper (>= 9),
   imagemagick,
-  unzip
+  unzip,
+  wget
 Standards-Version: 3.9.5
 Homepage: http://www.senscape.net/asylum-teaser/
 Vcs-Git: https://github.com/Senscape/Asylum-Teaser.git
