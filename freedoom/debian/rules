@@ -9,8 +9,5 @@ override_dh_install:
 	unzip freedoom-0.9.zip
 	dh_install
 
-override_dh_installdocs:
-	dh_installdocs -A README.adoc
-
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

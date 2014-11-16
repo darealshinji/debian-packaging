@@ -26,6 +26,6 @@ This script downloads the current Git version and creates Debian packages.
 Simply run `./build.sh`
 
 To install the build-dependencies run:<br>
-`sudo apt-get install debhelper deutex gsfonts imagemagick`
+`sudo apt-get install debhelper asciidoc deutex gsfonts imagemagick`
 
 Freedoom code: https://github.com/freedoom/freedoom

@@ -7,10 +7,15 @@ PATH := /usr/games:$(PATH)
 %:
 	dh ${@} --parallel
 
+override_dh_auto_clean:
+	dh_auto_clean -Dfreedoom
+	rm -f freedoom/freedm.xpm freedoom/freedoom1.xpm freedoom/freedoom2.xpm
+
 override_dh_auto_build:
-	cd freedoom && $(MAKE) wads/freedm.wad
-	cd freedoom && $(MAKE) wads/freedoom1.wad
-	cd freedoom && $(MAKE) wads/freedoom2.wad
+	$(MAKE) -C freedoom wads/freedm.wad
+	$(MAKE) -C freedoom wads/freedoom1.wad
+	$(MAKE) -C freedoom wads/freedoom2.wad
+	$(MAKE) -C freedoom doc
 
 	# icon stuff
 	convert freedoom/sprites/cposa2a8.gif freedoom/freedoom1.xpm
@@ -20,11 +25,8 @@ override_dh_auto_build:
 	convert freedoom/sprites/sht2a0.gif freedoom/freedm.xpm
 	sed -i 's/cyan/None/' freedoom/freedm.xpm
 
-override_dh_clean:
-	dh_clean freedoom/freedm.xpm freedoom/freedoom1.xpm freedoom/freedoom2.xpm
-
 override_dh_installdocs:
-	dh_installdocs -A freedoom/CREDITS freedoom/README.adoc
+	dh_installdocs -A freedoom/CREDITS freedoom/README.html
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9
