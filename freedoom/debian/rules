@@ -1,35 +1,16 @@
 #!/usr/bin/make -f
 
-# upstream makefile invokes 'deutex' which lives in
-# /usr/games
-PATH := /usr/games:$(PATH)
 
 %:
-	dh ${@} --parallel
+	dh ${@}
 
-override_dh_auto_build:
-	cd freedoom && $(MAKE) wads/freedm.wad
-	cd freedoom && $(MAKE) wads/freedoom1.wad
-	cd freedoom && $(MAKE) wads/freedoom2.wad
-
-	# icon stuff
-	convert freedoom/sprites/cposa2a8.gif freedoom/freedoom1.xpm
-	sed -i 's/cyan/None/' freedoom/freedoom1.xpm
-	convert freedoom/sprites/heada1.gif freedoom/freedoom2.xpm
-	sed -i 's/cyan/None/' freedoom/freedoom2.xpm
-	convert freedoom/sprites/sht2a0.gif freedoom/freedm.xpm
-	sed -i 's/cyan/None/' freedoom/freedm.xpm
-
-override_dh_clean:
-	dh_clean freedoom/freedm.xpm freedoom/freedoom1.xpm freedoom/freedoom2.xpm
+override_dh_install:
+	unzip freedm-0.9.zip
+	unzip freedoom-0.9.zip
+	dh_install
 
 override_dh_installdocs:
-	dh_installdocs -A freedoom/CREDITS freedoom/README.adoc
-
-override_dh_gencontrol:
-	dh_gencontrol
-	# prevents Lintian warning virtual-package-depends-without-real-package-depends
-	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/freedoom/DEBIAN/control
+	dh_installdocs -A README.adoc
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

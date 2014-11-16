@@ -6,7 +6,11 @@ Uploaders:
  Fabian Greffrath <fabian+debian@greffrath.com>,
  Jon Dowland <jmtd@debian.org>,
  Marshall Banana <djcj@gmx.de>
-Build-Depends: debhelper (>= 9), unzip
+Build-Depends: debhelper (>= 9),
+               deutex,
+               gsfonts,
+               imagemagick,
+               python (>= 2.4)
 Standards-Version: 3.9.5
 Vcs-Git: https://github.com/freedoom/freedoom.git
 #Vcs-Git: git://anonscm.debian.org/pkg-games/freedoom

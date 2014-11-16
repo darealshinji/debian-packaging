@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Free DM
+GenericName=Multiplayer-only First Person Shooter Game
+Comment=Multiplayer-only Clone of the first person shooter Doom
+Keywords=multiplayer;clone;first;person;shooter;doom;
+Exec=/usr/games/freedm
+Icon=freedm
+Terminal=false
+Type=Application
+Categories=Game;ActionGame;

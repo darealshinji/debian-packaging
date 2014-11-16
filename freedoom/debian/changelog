@@ -1,0 +1,226 @@
+freedoom (0.9-1) unstable; urgency=low
+
+  * New release version
+
+ -- Marshall Banana <djcj@gmx.de>  Sun, 16 Nov 2014 11:50:54 +0100
+
+freedoom (0.8-1) unstable; urgency=low
+
+  [ Jon Dowland ]
+  * convert debian/copyright to DEP-5 format.
+  * remove deprecated dm-upload-allowed from control file.
+
+  [ Fabian Greffrath ]
+  * New upstream release.
+  * Fix desktop-entry-lacks-keywords-entry.
+  * Fix vcs-field-not-canonical.
+  * Prefer prboom-plus over other alternatives providing boom-engine.
+  * Add Multi-Arch: foreign fields.
+  * Display the Debian package version number in the TITLEPIC caption.
+  * Export the Debian package version number in debian/rules to correctly
+    fill the freedoom.lmp and freedm.lmp lumps.
+  * The project has moved from sourceforge to github: change the Homepage
+    field, and the debian/copyright and debian/watch files accordingly.
+  * Adapt to renamed upstream documentation files.
+  * Remove some more Python byte-code in the clean rule.
+
+ -- Fabian Greffrath <fabian+debian@greffrath.com>  Mon, 06 Jan 2014 10:19:11 +0100
+
+freedoom (0.8~beta1-1) unstable; urgency=low
+
+  [ Fabian Greffrath ]
+  * Add myself to Uploaders.
+  * Imported Upstream version 0.8~beta1. Closes: #691399.
+  * Do not install empty usr/share/games/{doom,freedoom} directories.
+  * Mangle the upstream version in debian/watch,
+    they use minus instead of tilde to indicate beta versions.
+  * Convert to "3.0 (quilt)" source format.
+  * Convert debian/rules to dh7 style, bump debhelper compat to 9,
+    simplify things a bit.
+  * Change versioned Conflicts to Breaks.
+  * Run "wrap-and-sort -asb".
+  * Compress binary packages with xz.
+
+  [ Jon Dowland ]
+  * Initial parallel build support (much more work needed)
+  * Bump standards version. Changes:
+    * fold Build-Depends-Indep into Build-Depends (not needed for
+      Architecture: all)
+
+ -- Jon Dowland <jmtd@debian.org>  Fri, 26 Oct 2012 08:08:25 +0100
+
+freedoom (0.7-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Jon Dowland <jmtd@debian.org>  Mon, 24 Jan 2011 22:19:58 +0000
+
+freedoom (0.6.4-5) unstable; urgency=low
+
+  * update VCS fields to reflect move to Git.
+  * Remove Moritz Muehlenhoff from uploaders, by request.
+    Thanks Moritz for your work!
+  * adjust an Imagemagick/composite argument so that
+    graphicsmagick works for builds (see #413954)
+  * bump standards version
+  * add misc:Depends for freedm (quiet, lintian!)
+
+ -- Jon Dowland <jmtd@debian.org>  Fri, 03 Sep 2010 15:49:20 +0100
+
+freedoom (0.6.4-4) unstable; urgency=low
+
+  * Stop providing doom2.wad alternative: we are not
+    vanilla compatible. Remove older alternatives in
+    postinst for upgrades.
+  * Adjust PATH in debian/rules to avoid needing to
+    patch Makefile: thus, remove quilt dependency and
+    patching boilerplate
+  * bump Debhelper and compat to 7
+  * changes for debhelper 7
+  * install "freedm" and "freedoom" invoke-scripts into
+    /usr/games and corresponding manpages. Reference
+    the scripts in the .desktop files.
+  * Remove lintian overrides. These were for calling
+    "boom" in the desktop files but not installing it
+    (fixed with invoke-scripts); creating a directory
+    with no files in it (which we installed alternatives
+    into).
+
+ -- Jon Dowland <jmtd@debian.org>  Sat, 11 Jul 2009 12:31:40 +0100
+
+freedoom (0.6.4-3) unstable; urgency=low
+
+  * Bump debhelper dependency to match compat level
+  * .desktop files reference "boom" not "doom"
+  * conflicts prboom that provides: boom-engine but does not
+    provide a /usr/games/boom alternative
+  * Update homepage
+
+ -- Jon Dowland <jmtd@debian.org>  Thu, 02 Jul 2009 18:29:42 +0100
+
+freedoom (0.6.4-2) experimental; urgency=low
+
+  * use python-minimal instead of python.
+  * require boom-engine instead of doom-engine.
+
+ -- Jon Dowland <jon@alcopop.org>  Wed, 17 Jun 2009 22:05:07 +0100
+
+freedoom (0.6.4-1) unstable; urgency=low
+
+  * Add Build-Depends-Indep: on python. Thanks Daniel Schepler
+    and Peter Green. Closes: #521922
+  * new upstream version, removing some non-free files.
+    Closes: #533135
+  * fixed watch file, thanks Marco Rodrigues. Closes: #531619
+  * bump standards version.
+
+ -- Jon Dowland <jon@alcopop.org>  Sun, 14 Jun 2009 18:05:07 +0100
+
+freedoom (0.6.3-3) unstable; urgency=low
+
+  * upload to unstable.
+
+ -- Jon Dowland <jon@alcopop.org>  Sun, 15 Mar 2009 19:07:48 +0000
+
+freedoom (0.6.3-2) experimental; urgency=low
+
+  * fix watch file. Closes: #453552.
+
+ -- Jon Dowland <jon@alcopop.org>  Sun, 18 Jan 2009 17:42:27 +0000
+
+freedoom (0.6.3-1) experimental; urgency=low
+
+  [ Ansgar Burchardt ]
+  * debian/control: Add Homepage field
+
+  [ Jon Dowland ]
+  * new upstream version
+  * remove version.patch: unnecessary with 0.6.3
+  * update standards version
+
+ -- Jon Dowland <jon@alcopop.org>  Fri, 02 Jan 2009 01:00:29 +0000
+
+freedoom (0.6.2-1) unstable; urgency=low
+
+  [ Jon Dowland ]
+  * implement a new binary-package "freedm"
+
+  [ Cyril Brulebois ]
+  * Added XS-Vcs-Svn and XS-Vcs-Browser fields in the control file.
+
+  [ Jon Dowland ]
+  * move to quilt for patch management
+
+  [ Ansgar Burchardt ]
+  * debian/control: Change XS-Vcs-* to Vcs-*
+
+  [ Jon Dowland ]
+  * new upstream version (three, actually!).
+  * Add a lintian override for empty-dir /usr/share/games/doom: we
+    install an alternative into the directory.
+  * bump standards version
+  * Add .desktop files for the games (which use /usr/games/doom) and Depends:
+    on doom-engine (packages which should provide an alternative for that
+    binary)
+  * Add icons generated at build-time
+  * adjust alternatives priority to be in-line with the doom packaging
+    guidelines
+
+ -- Jon Dowland <jon@alcopop.org>  Thu, 20 Mar 2008 22:30:32 +0000
+
+freedoom (0.5-1) unstable; urgency=low
+
+  [ Jon Dowland ]
+  * new upstream version
+  * build system reworked to call upstream Makefile
+  * Build-Depends needs gsfonts, imagemagick, deutex
+  * add myself to uploaders
+  * add VERSION file, missing upstream
+  * explicitly specify /usr/games/deutex in Makefile
+  * bump standards version
+
+ -- Jon Dowland <jon@alcopop.org>  Thu,  7 Sep 2006 12:55:18 +0100
+
+freedoom (0.4.1-1) unstable; urgency=low
+
+  [ Gonéri Le Bouder ]
+  * watch file
+ 
+ -- Moritz Muehlenhoff <jmm@debian.org>  Wed, 22 Mar 2006 22:24:30 +0100
+
+freedoom (0.4-1) unstable; urgency=low
+
+  * New upstream release (Closes: #348152)
+  * Changed dependency on prboom | doom-engine into a recommendation to
+    prevent circular dependencies with prboom
+
+ -- Moritz Muehlenhoff <jmm@debian.org>  Mon,  2 Jan 2006 13:30:42 +0100
+
+freedoom (0.3-2) unstable; urgency=low
+
+  * Add alternative to allow freedoom's WAD file to co-exist with the
+    WAD file packages generated by the upcoming doom-data installer.
+    (Closes: #327500)
+  * Bumped Standards-Version (no changed needed).
+
+ -- Moritz Muehlenhoff <jmm@inutil.org>  Tue, 13 Sep 2005 15:46:50 +0200
+
+freedoom (0.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Moritz Muehlenhoff <jmm@inutil.org>  Sun,  2 Jan 2005 16:27:20 +0100
+
+freedoom (0.2-2) unstable; urgency=low
+
+  * Depend on doom-engine, instead of only recommending it.
+    (Closes: #270037)
+
+ -- Moritz Muehlenhoff <jmm@inutil.org>  Wed, 22 Sep 2004 23:12:26 +0200
+
+freedoom (0.2-1) unstable; urgency=low
+
+  * Initial Release. (Closes: #206139)
+
+ -- Moritz Muehlenhoff <jmm@inutil.org>  Sun, 18 Jul 2004 14:29:43 +0200
+

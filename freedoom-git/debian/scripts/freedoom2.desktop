@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Freedoom - Phase 2
+GenericName=First Person Shooter Game
+Comment=Clone of the legendary first person shooter Doom
+Keywords=clone;first;person;shooter;doom;
+Exec=/usr/games/freedoom2
+Icon=freedoom2
+Terminal=false
+Type=Application
+Categories=Game;ActionGame;

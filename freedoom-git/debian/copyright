@@ -3,7 +3,7 @@ Upstream-Name: Freedoom
 Upstream-Contact: http://www.doomworld.com/vb/freedoom/
 Source: https://github.com/freedoom/freedoom
 
-Files: *, files/*.xpm
+Files: *
 Copyright: 2001-2014 Contributors to the Freedoom project (see CREDITS)
 License: freedoom-license
 
@@ -11,7 +11,7 @@ Files: debian/*
 Copyright: 2004-2006 Moritz Muehlenhoff <jmm@debian.org>
            2006-2012 Jon Dowland <jmtd@debian.org>
            2012      Fabian Greffrath <fabian+debian@greffrath.com>
-           2013-2014 Marshall Banana <djcj@gmx.de>
+           2013      Marshall Banana <djcj@gmx.de>
 License: freedoom-license
 
 License: freedoom-license

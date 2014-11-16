@@ -1,0 +1,5 @@
+#!/bin/sh
+set -u
+set -e
+
+/usr/games/boom -iwad /usr/share/games/doom/freedoom2.wad "$@"

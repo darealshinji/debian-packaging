@@ -1,0 +1,8 @@
+debian/scripts/freedoom1.desktop             usr/share/applications
+debian/scripts/freedoom2.desktop             usr/share/applications
+debian/scripts/freedoom1                     usr/games
+debian/scripts/freedoom2                     usr/games
+freedoom/freedoom1.xpm                       usr/share/pixmaps
+freedoom/freedoom2.xpm                       usr/share/pixmaps
+freedoom/wads/freedoom1.wad                  usr/share/games/doom
+freedoom/wads/freedoom2.wad                  usr/share/games/doom
