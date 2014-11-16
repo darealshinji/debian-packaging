@@ -6,7 +6,7 @@
 
 override_dh_auto_clean:
 	dh_auto_clean
-	./clean.sh
+	rm -rf Asylum-Teaser-master* asylum-teaser.png converted_icons
 
 override_dh_auto_build:
 	wget "https://github.com/Senscape/Asylum-Teaser/archive/master.tar.gz"
