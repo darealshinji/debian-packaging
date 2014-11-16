@@ -9,7 +9,6 @@ Build-Depends: debhelper (>= 9)
 Package: divx265
 Architecture: amd64 i386
 Depends:
- ${misc:Depends},
  libgcc1 (>= 1:4.1.1),
  libc6 (>= 2.4),
  libstdc++6 (>= 4.4.0)
