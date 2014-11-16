@@ -1,0 +1,29 @@
+Source: serena
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+  debhelper (>= 9),
+  imagemagick,
+  unzip,
+  wget
+Standards-Version: 3.9.5
+Homepage: http://store.steampowered.com/app/272060/
+
+Package: serena
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}, dagon
+Description: point-and-click adventure game
+ How long has it been? A man sits in a distant getaway cabin waiting
+ for his wife Serena. Where is she? Things in the cabin evoke memories,
+ and the husband comes to a disturbing realization...
+ .
+ This short point-and-click adventure is the result of a massive collaborative
+ effort between dozens of fans and designers of adventure games. Rallying to
+ support the venerable genre and its passionate community, these developers
+ have brought together a grim and highly detailed horror story in what is the
+ largest, possibly even the first, game project of its kind.
+ .
+ Talents include crew from renowned indie companies Senscape, CBE Software,
+ Infamous Quests, Digital Media Workshop, Guys from Andromeda, and many more.

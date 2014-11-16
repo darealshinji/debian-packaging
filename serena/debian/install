@@ -1,0 +1,6 @@
+files/serena              /usr/games
+files/serena.desktop      /usr/share/applications
+Serena/config.lua         /usr/share/games/serena
+Serena/resources          /usr/share/games/serena
+Serena/scripts            /usr/share/games/serena
+converted_icons/*         /usr/share

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Serena
+GenericName=A Point-and-Click Adventure Game
+Exec=serena
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=serena
