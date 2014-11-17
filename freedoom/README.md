@@ -23,9 +23,4 @@ this will result in a complete Free Doom-based game.
 
 This script downloads the prebuilt release version and creates Debian packages.
 
-Simply run `./build.sh`
-
-To install the build-dependencies run:<br>
-`sudo apt-get install debhelper unzip`
-
 Freedoom code: https://github.com/freedoom/freedoom

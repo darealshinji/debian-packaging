@@ -4,9 +4,7 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
   debhelper (>= 9),
-  imagemagick,
-  unzip,
-  wget
+  imagemagick
 Standards-Version: 3.9.5
 Homepage: http://store.steampowered.com/app/272060/
 

@@ -2,21 +2,36 @@
 
 DEB_HOST_ARCH_BITS := $(shell dpkg-architecture -qDEB_HOST_ARCH_BITS)
 
+PATCHELF = $(CURDIR)/patchelfmod-master/src/patchelfmod --remove-needed \
+libgio-2.0.so.0,libfreetype.so.6,libjpeg.so.8,libfontconfig.so.1,libgthread-2.0.so.0,libatk-1.0.so.0,libpng12.so.0,libpangoft2-1.0.so.0
+
 
 %:
 	dh ${@}
+
+override_dh_auto_clean:
+
+override_dh_auto_build:
+	rm -rf patchelfmod-master
+	tar xvf patchelfmod.tar.gz
+	cd patchelfmod-master && autoreconf -ifv
+	cd patchelfmod-master && ./configure && $(MAKE) check
 
 override_dh_install:
 	mkdir -p debian/sswizard/usr/bin
 	install -m755 wizard/$(DEB_HOST_ARCH_BITS)bit/ssgui_app debian/sswizard/usr/bin
 	install -m755 wizard/$(DEB_HOST_ARCH_BITS)bit/sswizard debian/sswizard/usr/bin
+	strip -s debian/sswizard/usr/bin/*
+	$(PATCHELF) debian/sswizard/usr/bin/ssgui_app
+	$(PATCHELF) debian/sswizard/usr/bin/sswizard
 	dh_install
 
 override_dh_installchangelogs:
 	dh_installchangelogs wizard/Changelog.txt
 
+override_dh_shlibdeps:
+
 override_dh_strip:
-	dh_strip --dbg-package=sswizard-dbg
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

@@ -8,14 +8,14 @@ PATH := /usr/games:$(PATH)
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	dh_auto_clean -Dfreedoom
+	dh_auto_clean -Dfreedoom || true
 	rm -f freedoom/freedm.xpm freedoom/freedoom1.xpm freedoom/freedoom2.xpm
 
 override_dh_auto_build:
 	$(MAKE) -C freedoom wads/freedm.wad
 	$(MAKE) -C freedoom wads/freedoom1.wad
 	$(MAKE) -C freedoom wads/freedoom2.wad
-	$(MAKE) -C freedoom doc
+	cd freedoom && asciidoc README.adoc
 
 	# icon stuff
 	convert freedoom/sprites/cposa2a8.gif freedoom/freedoom1.xpm

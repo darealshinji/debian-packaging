@@ -3,10 +3,13 @@
 %:
 	dh ${@}
 
+override_dh_auto_clean:
+
+override_dh_shlibdeps:
+
 override_dh_auto_build:
 	chmod 755 runner
-	# make icon set
-	debian/make-icons.sh mrred.png
+	../make-icons.sh mrred.png
 
 override_dh_gencontrol:
 	dh_gencontrol

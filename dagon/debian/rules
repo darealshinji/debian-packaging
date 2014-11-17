@@ -15,7 +15,7 @@ override_dh_auto_build:
 	dh_auto_build -DDagon/build -- verbose=1
 	cp Dagon/xcode/Resources/Images.xcassets/AppIcon.appiconset/Dagon512x512.png \
 	Dagon/build/dagon.png
-	debian/make-icons.sh Dagon/build/dagon.png
+	../make-icons.sh Dagon/build/dagon.png
 
 override_dh_installdocs:
 	dh_installdocs --link-doc=dagon

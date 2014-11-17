@@ -39,15 +39,16 @@ override_dh_auto_configure: $(DH_INSTALL_FILES)
 	# remove executable stack
 	execstack -c api/lowlevel/lib/*/*.so.*.*
 
+override_dh_auto_build:
+
+override_dh_auto_clean:
+	rm -rf api doc debian/*.pc debian/*.install debian/libfmod*$(SOVERSION)*.examples
+
 override_dh_installchangelogs:
 	dh_installchangelogs doc/revision.txt
 
 override_dh_compress:
 	dh_compress -X.pdf -X.mp3 -X.ogg
-
-override_dh_clean:
-	dh_clean -- debian/*.pc debian/*.install debian/libfmod*$(SOVERSION)*.examples
-	rm -rf api doc
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

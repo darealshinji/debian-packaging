@@ -5,13 +5,9 @@
 	dh ${@}
 
 override_dh_auto_clean:
-	dh_auto_clean
-	rm -rf Serena "MUST READ EULA(End-user license agreement).txt" serena.png converted_icons
 
 override_dh_auto_build:
-	unzip Serena.1.zip
-	wget -O serena.png "http://s14.directupload.net/images/141116/9yoas6gx.png"
-	debian/make-icons.sh serena.png
+	../make-icons.sh serena.png
 
 override_dh_builddeb:
 	dh_builddeb -- -z1

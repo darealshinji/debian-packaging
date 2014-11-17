@@ -21,11 +21,4 @@ compatibility with Doom II.
 Combined with any boom compatible Doom engine (such as prboom)
 this will result in a complete Free Doom-based game.
 
-This script downloads the current Git version and creates Debian packages.
-
-Simply run `./build.sh`
-
-To install the build-dependencies run:<br>
-`sudo apt-get install debhelper asciidoc deutex gsfonts imagemagick`
-
 Freedoom code: https://github.com/freedoom/freedoom

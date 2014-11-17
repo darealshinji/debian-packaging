@@ -10,7 +10,7 @@ Standards-Version: 3.9.5
 Homepage: http://www.xnview.com
 
 Package: xnviewmp
-Architecture: any
+Architecture: amd64 i386
 Depends:
  libc6 (>= 2.11),
  libgcc1 (>= 1:4.1.1),

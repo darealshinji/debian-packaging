@@ -5,18 +5,9 @@
 	dh ${@}
 
 override_dh_auto_clean:
-	dh_auto_clean
-	rm -rf Asylum-Teaser-master* asylum-teaser.png converted_icons
 
 override_dh_auto_build:
-	wget "https://github.com/Senscape/Asylum-Teaser/archive/master.tar.gz"
-	tar xvf master.tar.gz
-	rm master.tar.gz
-
-	wget -O asylum-teaser.png "http://s14.directupload.net/images/141112/cbqmarg3.png"
-	debian/make-icons.sh asylum-teaser.png
-
-	cd Asylum-Teaser-master && ./download-game-content.sh
+	../make-icons.sh asylum-teaser.png
 
 override_dh_builddeb:
 	dh_builddeb -- -z1

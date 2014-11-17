@@ -13,7 +13,7 @@ LIBFMODEVENT = $(CURDIR)/debian/libfmodevent$(SOVERSION)/$(LIBDIR)
 FMODEXLIBS = libfmodex libfmodexL
 FMODEVENTLIBS = libfmodevent libfmodeventL libfmodeventnet libfmodeventnetL
 
-PATCHELFBIN = $(CURDIR)/patchelfmod/src/patchelfmod
+PATCHELFBIN = $(CURDIR)/patchelfmod-master/src/patchelfmod
 MYSED = sed -e 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/; s/@VERSION@/$(VERSION)/; s/@SOVERSION@/$(SOVERSION)/g'
 
 ifeq ($(DEB_HOST_ARCH), amd64)
@@ -24,21 +24,28 @@ endif
 %:
 	dh ${@}
 
-override_dh_auto_configure:
+debian/control:
+	$(MYSED) $@.in > $@
+
+override_dh_auto_clean:
+	rm -rf api documentation examples fmoddesignerapi tools patchelfmod-master \
+		debian/*.pc debian/libfmode*$(SOVERSION)*.examples
+
+override_dh_auto_configure: debian/control
 	tar xzf fmodapi*linux.tar.gz
+	rm fmodapi*linux/Makefile
 	mv fmodapi*linux/* $(CURDIR)
-	rm -rf fmodapi*linux Makefile
+	rm -rf fmodapi*linux
 	cp debian/libfmodeventN-examples.examples debian/libfmodevent$(SOVERSION)-examples.examples
 	cp debian/libfmodexN-dev.examples debian/libfmodex$(SOVERSION)-dev.examples
-	$(MYSED) debian/control.in > debian/control
 	$(MYSED) debian/fmodevent.pc.in > debian/fmodevent.pc
 	$(MYSED) debian/fmodex.pc.in > debian/fmodex.pc
 
 override_dh_auto_build:
 	rm -rf patchelfmod-master
 	tar xvf patchelfmod.tar.gz
-	cd patchelfmod && autoreconf -ifv
-	cd patchelfmod && ./configure && $(MAKE) check
+	cd patchelfmod-master && autoreconf -ifv
+	cd patchelfmod-master && ./configure && $(MAKE) check
 
 override_dh_auto_install:
 	install -c -d -m755 $(LIBFMODEX)
@@ -83,13 +90,7 @@ override_dh_installchangelogs:
 override_dh_compress:
 	dh_compress -X.pdf -X.mp3 -X.ogg
 
-override_dh_clean:
-	dh_clean
-	rm -rf api documentation examples fmoddesignerapi tools patchelfmod \
-		debian/*.pc debian/libfmode*$(SOVERSION)*.examples
-
 override_dh_strip:
-
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

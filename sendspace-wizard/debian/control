@@ -2,29 +2,22 @@ Source: sswizard
 Section: web
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends:
-   debhelper (>= 9)
+Build-Depends: debhelper (>= 9), dh-autoreconf
 Standards-Version: 3.9.5
 Homepage: http://www.sendspace.com
 
 Package: sswizard
-Architecture: any
+Architecture: amd64 i386
 Depends:
-   ${shlibs:Depends},
-   ${misc:Depends}
+ libc6 (>= 2.17),
+ libgcc1 (>= 1:4.1.1),
+ libgdk-pixbuf2.0-0 (>= 2.22.0),
+ libglib2.0-0 (>= 2.24.0),
+ libgtk2.0-0 (>= 2.24.0),
+ libpango-1.0-0 (>= 1.14.0),
+ libstdc++6 (>= 4.3),
+ libx11-6,
+ zlib1g (>= 1:1.2.3.3)
 Description: Upload files to Sendspace
  SendSpace Wizard is a free desktop tool that lets
- you upload multiple files into your sendspace account!
-
-Package: sswizard-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Depends:
-   ${misc:Depends},
-   sswizard (= ${binary:Version})
-Description: Upload files to Sendspace - debug symbols
- SendSpace Wizard is a free desktop tool that lets
- you upload multiple files into your sendspace account!
- .
- This package will install the debug symbols.
+ you upload multiple files into your sendspace account.

@@ -1,0 +1,4 @@
+# closed source
+mrred: embedded-library usr/lib/mrred/runner: libjpeg
+mrred: embedded-library usr/lib/mrred/runner: libpng
+mrred: embedded-library usr/lib/mrred/runner: curl

@@ -1,6 +1,5 @@
 #!/usr/bin/make -f
 
-DATE = $(shell date -R)
 LIB = debian/google-earth/usr/lib/googleearth
 SIZES = 16 22 24 32 48 64 128 256
 
@@ -16,11 +15,6 @@ override_dh_auto_build:
 	dh_auto_build -Dpatchelfmod-master -- check
 
 override_dh_auto_install:
-	chmod a+x GoogleEarthLinux.bin
-	./GoogleEarthLinux.bin --target temp --noexec
-	version=$$(head -n2 temp/setup.data/setup.xml | tail -n-1 | cut -d '"' -f2 | cut -d- -f1) ; \
-	sed -e "s/@VERSION@/$$version/g; s/@DATE@/$(DATE)/g" debian/changelog.in > debian/changelog
-
 	mkdir -p $(LIB)
 	cd $(LIB) && tar xf $(CURDIR)/temp/googleearth-linux-x86.tar
 	cd $(LIB) && tar xf $(CURDIR)/temp/googleearth-data.tar
@@ -38,11 +32,11 @@ override_dh_auto_install:
 	$(foreach SIZE,$(SIZES),mkdir -p debian/google-earth/usr/share/icons/hicolor/$(SIZE)x$(SIZE)/apps ;\
 	mv $(LIB)/product_logo_$(SIZE).png debian/google-earth/usr/share/icons/hicolor/$(SIZE)x$(SIZE)/apps/googleearth.png ;)
 
+override_dh_auto_clean:
+
 override_dh_makeshlibs:
-	# don't need it
 
 override_dh_shlibdeps:
-	# don't need it
 
 override_dh_strip:
 	dh_strip

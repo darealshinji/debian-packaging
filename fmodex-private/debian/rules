@@ -16,19 +16,24 @@ endif
 %:
 	dh ${@}
 
-override_dh_auto_configure:
+debian/control:
+	$(MYSED) $@.in > $@
+
+override_dh_auto_configure: debian/control
 	tar xzf fmodapi*linux.tar.gz
+	rm -f fmodapi*linux/Makefile
 	mv fmodapi*linux/* $(CURDIR)
-	rm -rf fmodapi*linux Makefile
+	rm -rf fmodapi*linux
 	cp debian/libfmodexN-dev.install           debian/libfmodex$(SOVERSION)-dev.install
 	cp debian/libfmodeventN-dev.install        debian/libfmodevent$(SOVERSION)-dev.install
 	cp debian/libfmodeventN-examples.examples  debian/libfmodevent$(SOVERSION)-examples.examples
 	cp debian/libfmodexN-dev.examples          debian/libfmodex$(SOVERSION)-dev.examples
-	$(MYSED) debian/control.in               > debian/control
 	$(MYSED) debian/fmodevent.pc.in          > debian/fmodevent.pc
 	$(MYSED) debian/fmodex.pc.in             > debian/fmodex.pc
 	$(MYSED) debian/libfmodexN.install.in    > debian/libfmodex$(SOVERSION).install
 	$(MYSED) debian/libfmodeventN.install.in > debian/libfmodevent$(SOVERSION).install
+
+override_dh_auto_build:
 
 override_dh_installchangelogs:
 	dh_installchangelogs documentation/revision.txt
@@ -36,8 +41,7 @@ override_dh_installchangelogs:
 override_dh_compress:
 	dh_compress -X.pdf -X.mp3 -X.ogg
 
-override_dh_clean:
-	dh_clean
+override_dh_auto_clean:
 	rm -rf api documentation examples fmoddesignerapi tools \
 		debian/libfmode*$(SOVERSION)*.examples \
 		debian/libfmode*$(SOVERSION)*.install \

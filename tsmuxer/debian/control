@@ -7,7 +7,7 @@ Standards-Version: 3.9.5
 Homepage: http://forum.doom9.org/showthread.php?t=168539
 
 Package: tsmuxer
-Architecture: any
+Architecture: amd64 i386
 Depends:
    ${misc:Depends},
    libc6, libgcc1,
@@ -19,7 +19,7 @@ Description: mux video to TS/M2TS files or create BD disks
  or demuxing process.
 
 Package: tsmuxergui
-Architecture: any
+Architecture: amd64 i386
 Depends:
    ${misc:Depends},
    tsmuxer (>= 2),

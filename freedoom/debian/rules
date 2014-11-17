@@ -4,10 +4,9 @@
 %:
 	dh ${@}
 
-override_dh_install:
-	unzip freedm-0.9.zip
-	unzip freedoom-0.9.zip
-	dh_install
+override_dh_auto_build:
+
+override_dh_auto_clean:
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

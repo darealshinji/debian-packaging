@@ -8,7 +8,7 @@ Homepage: http://www.fmod.org/
 
 Package: libfmodex@SOVERSION@
 Section: libs
-Architecture: any
+Architecture: amd64 i386
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends},
          ${shlibs:Depends}
@@ -31,7 +31,7 @@ Description: FMOD is a cross platform audio library and toolset
 
 Package: libfmodex@SOVERSION@-dev
 Section: libdevel
-Architecture: any
+Architecture: amd64 i386
 Depends: libfmodex@SOVERSION@ (= ${binary:Version}),
          ${misc:Depends}
 Description: Development package for the FMOD Ex library.
@@ -56,7 +56,7 @@ Description: Development package for the FMOD Ex library.
 
 Package: libfmodevent@SOVERSION@
 Section: libs
-Architecture: any
+Architecture: amd64 i386
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends},
          ${shlibs:Depends}
@@ -79,7 +79,7 @@ Description: Designer API library for the FMOD Ex library
 
 Package: libfmodevent@SOVERSION@-dev
 Section: libdevel
-Architecture: any
+Architecture: amd64 i386
 Depends: libfmodevent@SOVERSION@ (= ${binary:Version}),
          ${misc:Depends}
 Description: Development package for the FMOD Ex Designer API

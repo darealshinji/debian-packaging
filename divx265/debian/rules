@@ -3,12 +3,11 @@
 %:
 	dh ${@}
 
-override_dh_install:
-	chmod 755 DivX265
-	dh_install
+override_dh_auto_clean:
+
+override_dh_auto_build:
 
 override_dh_shlibdeps:
-	# don't need it
 
 override_dh_gencontrol:
 	dh_gencontrol
