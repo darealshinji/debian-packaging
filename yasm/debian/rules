@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+SITE = http://www.tortall.net/projects/yasm/manual
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean -Dsource
+
+override_dh_auto_configure:
+	autoreconf -ivf source
+
+	sed -i 's@$(SITE)/html/objfmt-win64/calling-convention.png@images/calling-convention.png@; s@$(SITE)/html/objfmt-win64/stack-frame-detailed.png@images/stack-frame-detailed.png@; s@$(SITE)/html/arch-x86/x86-registers.png@images/x86-registers.png@;' manual.html
+
+	sed -i 's@$(SITE)/ru/html/objfmt-win64/calling-convention.png@images/calling-convention.png@; s@$(SITE)/ru/html/objfmt-win64/stack-frame-detailed.png@images/stack-frame-detailed.png@; s@$(SITE)/ru/html/arch-x86/x86-registers.png@images/x86-registers.png@;' manual-ru.html
+
+	CFLAGS='-Wall $(shell dpkg-buildflags --get CFLAGS)' \
+	CPPFLAGS='$(shell dpkg-buildflags --get CPPFLAGS)' \
+	LDFLAGS='$(shell dpkg-buildflags --get LDFLAGS) -Wl,-z,defs' \
+	dh_auto_configure -Dsource
+
+override_dh_auto_build:
+	dh_auto_build -Dsource
+
+override_dh_auto_install:
+	dh_auto_install -Dsource -- DESTDIR=$(CURDIR)/debian/tmp
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
