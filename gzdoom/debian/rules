@@ -13,6 +13,9 @@ fmodlib = libfmodex$(LIB64)-4.44.$(fmodrevision).so
 %:
 	dh ${@} --parallel
 
+override_dh_auto_clean:
+	dh_auto_clean -Dgzdoom
+
 override_dh_auto_configure:
 	tar xvf fmodapi*linux.tar.gz
 
