@@ -1,24 +1,19 @@
 #!/usr/bin/make -f
 
-DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
-
-ARCH = i386
-ifeq ($(DEB_HOST_ARCH), amd64)
-ARCH = amd64
-endif
+DEB_HOST_MULTIARCH := $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
 
 %:
 	dh ${@}
 
+override_dh_auto_clean:
+	rm -rf converted_icons
+
 override_dh_auto_build:
-	# make icon set
-	debian/make-icons.sh XnView/xnview.png
-	debian/make-icons.sh XnView/xnview_2.png
+	../make-icons.sh XnView/xnview.png
+	../make-icons.sh XnView/xnview_2.png
+	rm -f XnView/UI/style_sheet_win.qss XnView/UI/style_sheet_mac.qss
 
-	rm XnView/UI/style_sheet_win.qss XnView/UI/style_sheet_mac.qss
-
-	# remove RPATH
 	chrpath -d \
 	XnView/Plugins/IlmImf.so \
 	XnView/lib/codecs/libqcncodecs.so \
@@ -43,22 +38,15 @@ override_dh_auto_build:
 	XnView/lib/phonon_backend/libphonon_gstreamer.so \
 	XnView/XnView
 
-	# copy libqt4-opengl
-	cp -rf libqt4-opengl/$(ARCH)/* XnView/lib/
+	cp -rf usr/lib/$(DEB_HOST_MULTIARCH)/libQtOpenGL.so.* XnView/lib/
+	cp -rf usr/lib/$(DEB_HOST_MULTIARCH)/qt4/plugins/graphicssystems/ XnView/lib/
 
 override_dh_installchangelogs:
 	dh_installchangelogs XnView/WhatsNew.txt
 
-override_dh_gencontrol:
-	dh_gencontrol
-	# prevents Lintian warning virtual-package-depends-without-real-package-depends
-	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/xnviewmp/DEBIAN/control
-
 override_dh_makeshlibs:
-	# no true shared libraries
 
 override_dh_shlibdeps:
-	# don't need it
 
 override_dh_clean:
 	dh_clean

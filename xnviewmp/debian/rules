@@ -6,34 +6,27 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 %:
 	dh ${@}
 
+override_dh_auto_clean:
+	rm -rf converted_icons debian/xnviewmp.links
+
 override_dh_auto_build:
-	sed -e 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' debian/xnviewmp.links.in > debian/xnviewmp.links
+	sed -e 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' \
+	debian/xnviewmp.links.in > debian/xnviewmp.links
 
-	# make icon set
-	debian/make-icons.sh XnView/xnview.png
-	debian/make-icons.sh XnView/xnview_2.png
+	../make-icons.sh XnView/xnview.png
+	../make-icons.sh XnView/xnview_2.png
 
-	# prepare xnview
 	mv XnView/XnView XnView/xnviewmp
-	rm XnView/UI/style_sheet_win.qss XnView/UI/style_sheet_mac.qss
+	rm -f XnView/UI/style_sheet_win.qss XnView/UI/style_sheet_mac.qss
 
-	# remove RPATH
 	cd XnView && chrpath -d xnviewmp Plugins/IlmImf.so
 
 override_dh_installchangelogs:
 	dh_installchangelogs XnView/WhatsNew.txt
 
-override_dh_gencontrol:
-	dh_gencontrol
-	# prevents Lintian warning virtual-package-depends-without-real-package-depends
-	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/xnviewmp/DEBIAN/control
-
 override_dh_makeshlibs:
-	# no shared libraries
 
-override_dh_clean:
-	dh_clean -- debian/xnviewmp.links
-	rm -rf converted_icons
+override_dh_shlibdeps:
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

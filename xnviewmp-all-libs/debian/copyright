@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: http://www.xnview.com/
 
-Files: XnViewMP*.tgz XnView/*
+Files: XnViewMP
 Copyright: 1997-2014 Pierre-e Gougelet
 License: EULA
  Please read the following terms and conditions before using this
