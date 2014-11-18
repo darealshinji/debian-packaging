@@ -1,0 +1,40 @@
+--- a/OculusSDK/LibOVR/Makefile
++++ b/OculusSDK/LibOVR/Makefile
+@@ -44,7 +44,7 @@
+ 
+ ####### Detect debug or release
+ 
+-COMMONFLAGS   = -Wall -Wextra -pipe -fPIC -msse2
++COMMONFLAGS   = -Wall -Wextra -pipe -msse2
+ 
+ DEBUG         ?= 0
+ CXXFLAGS 			?=
+@@ -70,8 +70,8 @@
+ 
+ ####### Files
+ 
+-STATIC_TARGET = ./Lib/Linux/$(RELEASETYPE)/$(SYSARCH)/libovr.a
+-SHARED_TARGET	= ./Lib/Linux/$(RELEASETYPE)/$(SYSARCH)/libovr.so
++STATIC_TARGET = libovr.a
++SHARED_TARGET = libovr.so
+ SHARED_MAJOR = 0
+ SHARED_MINOR = 1
+ SHARED_RELEASE = 1
+@@ -149,13 +149,13 @@
+ 
+ $(STATIC_TARGET): $(OBJECTS)
+ 	@mkdir -p $(@D)
+-	ar rvs $(STATIC_TARGET) $(OBJECTS)
++	ar rvs ../../$(STATIC_TARGET) $(OBJECTS)
+ 
+ $(SHARED_TARGET): $(OBJECTS)
+ 	@mkdir -p $(@D)
+-	g++ -shared -Wl,-soname,$(SHARED_TARGET).$(SHARED_MAJOR) \
+-		-o $(SHARED_TARGET).$(SHARED_MAJOR).$(SHARED_MINOR).$(SHARED_RELEASE) \
+-		$(OBJECTS) -lc
++	g++ -shared $(LDFLAGS) -Wl,-soname,$(SHARED_TARGET).$(SHARED_MAJOR) \
++		-o ../../$(SHARED_TARGET).$(SHARED_MAJOR).$(SHARED_MINOR).$(SHARED_RELEASE) \
++		$(OBJECTS) -lrt -lXrandr -ludev -lpthread -lX11 -lGL
+ 
+ clean:
+ 	-$(DELETEFILE) $(OBJECTS)

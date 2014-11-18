@@ -1,0 +1,8 @@
+All files, unless they're covered by a different license header,
+are Copyright (c) 2014, djcj <djcj@gmx.de> and released under
+the MIT license, with the following exceptions:
+
+ All Oculus VR SDK files are Copyright (c) 2013-2014 Oculus VR, Inc
+ and licensed under the Oculus VR, Inc. Software Development Kit License Agreement.
+
+For more details see debian/copyright.

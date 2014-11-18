@@ -1,0 +1,6 @@
+OculusSDK/oculusd                        /usr/bin
+OculusSDK/ConfigUtil/RiftConfigUtil      /usr/lib/riftconfigutil
+OculusSDK/ConfigUtil/Resources/*         /usr/share/riftconfigutil
+converted_icons/*                        /usr/share
+files/riftconfigutil.desktop             /usr/share/applications
+files/riftconfigutil                     /usr/bin
