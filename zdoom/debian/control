@@ -33,4 +33,4 @@ Pre-Depends: dpkg (>= 1.15.6~)
 Description: Play Freedoom on ZDoom
  An enhanced port of the official DOOM source code.
  .
- This package will install a launcher to play Freedoo
+ This package will install a launcher to play Freedoom.

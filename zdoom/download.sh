@@ -28,7 +28,7 @@ git clone https://github.com/rheit/zdoom.git
 
 
 # create new Debian changelog entry
-latestcommit=$(git -C gzdoom/ log -1 --format=%ci | head -c10 | sed -e 's/-//g')
+latestcommit=$(git -C zdoom/ log -1 --format=%ci | head -c10 | sed -e 's/-//g')
 VERSION=2.7.1
 
 #echo "zdoom ($VERSION-1) unstable; urgency=low" > changelog.new
@@ -42,18 +42,3 @@ echo "" >> changelog.new
 cat changelog.new debian/changelog.in > debian/changelog
 rm changelog.new
 
-
-dpkg-buildpackage -b -us -uc 2>&1 | tee build.log
-
-for f in ../*.deb ; do
-  echo "$f:"
-  dpkg-deb -I $f
-  lintian $f
-  echo ""
-done 2>&1 | tee -a build.log
-
-for f in ../*.deb ; do
-  echo "$f:"
-  dpkg-deb -c $f
-  echo ""
-done 2>&1 | tee -a build.log

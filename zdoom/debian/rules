@@ -6,14 +6,15 @@ LIB64 = 64
 endif
 
 fmodrevision = $(shell ls fmodapi444*linux.tar.gz | sed -e 's/fmodapi444//; s/linux.tar.gz//;')
-fmodpointversion = 4.44.$(fmodrevision)
-fmodversion = 444$(fmodrevision)
-fmoddirname = $(CURDIR)/fmodapi$(fmodversion)linux
-fmodlib = libfmodex$(LIB64)-$(fmodpointversion).so
+fmoddirname = $(CURDIR)/fmodapi444$(fmodrevision)linux
+fmodlib = libfmodex$(LIB64)-4.44.$(fmodrevision).so
 
 
 %:
 	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean -Dzdoom
 
 override_dh_auto_configure:
 	tar xvf fmodapi*linux.tar.gz
@@ -24,6 +25,7 @@ override_dh_auto_configure:
 	cp $(fmoddirname)/api/lib/$(fmodlib) $(CURDIR)/zdoom/libfmodex-4.44.so
 
 	cd zdoom && cmake \
+	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_SKIP_RPATH=ON \
@@ -35,10 +37,7 @@ override_dh_auto_configure:
 	-DFMOD_INCLUDE_DIR=$(fmoddirname)/api/inc/ $(CURDIR)/zdoom
 
 override_dh_auto_build:
-	cd zdoom && $(MAKE)
-
-override_dh_auto_install:
-	# will be handled by dh_install
+	dh_auto_build -Dzdoom
 
 override_dh_shlibdeps:
 	dh_shlibdeps -l$(CURDIR)/debian/zdoom/usr/lib/games/zdoom
