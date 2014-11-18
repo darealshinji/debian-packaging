@@ -1,9 +1,7 @@
 tsMuxeR
 =======
 
+Simple program to mux video to TS/M2TS files or create BD disks.
+
 This script downloads tsMuxeR for GNU/Linux and creates a Debian package.
 
-Simply run `./build.sh`
-
-To install the build-dependencies run:<br>
-`sudo apt-get install fakeroot debhelper help2man`

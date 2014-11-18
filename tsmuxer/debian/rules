@@ -7,15 +7,18 @@ description = 'simple program to mux video to TS/M2TS files or create BD disks'
 %:
 	dh ${@}
 
+override_dh_auto_clean:
+
+override_dh_auto_build:
+
+override_dh_strip:
+
 override_dh_installchangelogs:
 	dh_installchangelogs release_notes.txt
 
 override_dh_installman:
 	help2man -N --version-string=$(version) -n $(description) --help-option=' ' ./tsMuxeR > tsMuxeR.1
 	dh_installman
-
-override_dh_strip:
-
 
 override_dh_gencontrol:
 	dh_gencontrol

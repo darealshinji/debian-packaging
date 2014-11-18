@@ -20,21 +20,6 @@ if [ $sha256_2 != $sha256_1 ] ; then
     exit 1
 fi
 
-./clean.sh
 wget -O tsMuxerGUI.png http://oi57.tinypic.com/250uh5t.jpg
 tar xvf $archive
 
-dpkg-buildpackage -b -us -uc 2>&1 | tee build.log
-
-for f in ../*.deb ; do
-  echo "$f:"
-  dpkg-deb -I $f
-  lintian $f
-  echo ""
-done 2>&1 | tee -a build.log
-
-for f in ../*.deb ; do
-  echo "$f:"
-  dpkg-deb -c $f
-  echo ""
-done 2>&1 | tee -a build.log
