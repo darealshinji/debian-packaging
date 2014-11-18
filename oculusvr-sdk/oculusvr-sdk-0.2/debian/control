@@ -32,7 +32,7 @@ Depends: ${misc:Depends}
 Description: Oculus Rift SDK - common files
  Common files for the Oculus Rift SDK.
 
-Package: libovr0.2
+Package: libovr-0.2-0
 Section: libs
 Architecture: any
 Pre-Depends: ${misc:Pre-Depends}
@@ -45,7 +45,7 @@ Description: Oculus Rift OVR shared library
 Package: libovr-dev
 Architecture: any
 Depends: ${misc:Depends},
-         libovr0.2 (= ${binary:Version}),
+         libovr-0.2-0 (= ${binary:Version}),
          freeglut3-dev,
          libudev-dev,
          libxext-dev,

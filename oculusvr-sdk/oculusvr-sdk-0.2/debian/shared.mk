@@ -3,9 +3,9 @@ ifeq ($(shell uname -m),x86_64)
 SYSARCH       = x86_64
 endif
 
-SOVERSION     = 0.2
-LINK          = g++ -shared $(LDFLAGS) -Wl,-soname,libovr.so.$(SOVERSION) -o
-LINKERLFAGS   = -lXinerama -ludev -lpthread -lX11
+LIBNAME       = libovr-0.2.so.0
+LINK          = g++ -shared $(LDFLAGS) -Wl,-soname,$(LIBNAME) -o
+LINKERLFAGS   = -lXrandr -ludev -lpthread -lX11 -lGL
 
 DEBUG         = 0
 ifeq ($(DEBUG), 1)
@@ -14,7 +14,7 @@ else
 	RELEASETYPE   = Release
 endif
 
-TARGET        = libovr.so.$(SOVERSION)
+TARGET        = $(LIBNAME)
 OBJPATH       = ./OculusSDK/LibOVR/Obj/Linux/$(RELEASETYPE)/$(SYSARCH)
 
 all:

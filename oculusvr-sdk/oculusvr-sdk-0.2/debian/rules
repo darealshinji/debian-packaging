@@ -12,7 +12,7 @@ endif
 
 CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) -Wno-reorder
 
-DH_INSTALL_FILES = debian/libovr0.2.install \
+DH_INSTALL_FILES = debian/libovr-0.2-0.install \
                    debian/libovr-dbg.install \
                    debian/libovr-dev.install \
                    debian/libovr-dev.links
@@ -77,7 +77,7 @@ override_dh_gencontrol:
 	dh_gencontrol
 	# prevents Lintian warning virtual-package-depends-without-real-package-depends
 	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/oculusconfigutil/DEBIAN/control
-	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/libovr0.2/DEBIAN/control
+	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/libovr-0.2-0/DEBIAN/control
 
 override_dh_builddeb:
 	dh_builddeb -Noculusvr-sdk-examples -- -Zxz -z9
