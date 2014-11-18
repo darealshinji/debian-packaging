@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+
+override_dh_auto_build:
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=thegame
+
+override_dh_installchangelogs:
+	dh_installchangelogs files/ChangeLog
+
+override_dh_strip:
+	dh_strip --dbg-package=thegame-dbg
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

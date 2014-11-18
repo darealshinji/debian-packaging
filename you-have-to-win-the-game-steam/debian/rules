@@ -4,6 +4,8 @@
 %:
 	dh ${@}
 
+override_dh_auto_clean:
+
 override_dh_auto_build:
 	iconv -f ISO-8859-1 -t UTF-8 tmp/License.txt > debian/copyright
 	chmod a-x tmp/*.so tmp/*.npk tmp/*.txt
@@ -16,13 +18,9 @@ override_dh_strip:
 	strip -s $(CURDIR)/debian/thegame/usr/lib/thegame/libsteam_api.so
 	dh_strip --dbg-package=thegame-dbg
 
-override_dh_shlibdeps:
-	dh_shlibdeps -l$(CURDIR)/debian/thegame/usr/lib/thegame/
+override_dh_makeshlibs:
 
-override_dh_gencontrol:
-	dh_gencontrol
-	# prevents Lintian warning virtual-package-depends-without-real-package-depends
-	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/thegame/DEBIAN/control
+override_dh_shlibdeps:
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9
