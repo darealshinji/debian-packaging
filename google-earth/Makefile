@@ -6,7 +6,11 @@ cleanfiles = GoogleEarthLinux.bin patchelfmod.tar.gz patchelfmod-master debian/c
 DATE = $(shell date -R)
 
 
-all: deps download
+all: deps download build
+
+nodeps: download build
+
+build:
 	chmod a+x GoogleEarthLinux.bin
 	./GoogleEarthLinux.bin --target temp --noexec
 	version=$$(head -n2 temp/setup.data/setup.xml | tail -n-1 | cut -d '"' -f2 | cut -d- -f1) ; \

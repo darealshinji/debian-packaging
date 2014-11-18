@@ -8,7 +8,11 @@ sha256_1 = b95032d3932939522fc00c55b08e1cbd3aa2fdf62d1f0362aaf9e0a29c36cfcf
 archive = SendSpace_Wizard_Debian-Linux-32-64bit.tgz
 
 
-all: deps download
+all: deps download build
+
+nodeps: download build
+
+build:
 	tar xzvf $(archive)
 	$(buildpackage)
 

@@ -7,7 +7,11 @@ sha256_1 = ae0164bfc842a409016518985f8e1f11e07d4730209eb891a36d04135e283049
 archive = mrred.tar.gz
 
 
-all: deps download
+all: deps download build
+
+nodeps: download build
+
+build:
 	tar xzvf $(archive)
 	$(buildpackage)
 

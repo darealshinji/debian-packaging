@@ -7,7 +7,11 @@ sha256_1 = e0496ad856e2803001a59985368d21b22f4fbdd55589c7f313d6040cefff648b
 zip = NeroAACCodec-1.5.1.zip
 
 
-all: deps download
+all: deps download build
+
+nodeps: download build
+
+build:
 	rm -rf neroaac
 	unzip $(zip) -d neroaac
 	$(buildpackage)

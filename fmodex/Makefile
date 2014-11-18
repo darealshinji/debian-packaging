@@ -3,7 +3,11 @@ include ../Makefile.inc
 deps = execstack wget
 cleanfiles = fmodapi*linux patchelfmod.tar.gz debian/control
 
-all: deps download
+all: deps download build
+
+nodeps: download build
+
+build:
 	debian/rules debian/control
 	$(buildpackage)
 

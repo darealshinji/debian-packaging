@@ -5,7 +5,11 @@ deps = git imagemagick libfreetype6-dev libglew-dev liblua5.1-0-dev \
 cleanfiles = Dagon converted_icons debian/changelog
 
 
-all: deps download
+all: deps download build
+
+nodeps: download build
+
+build:
 	# create new Debian changelog entry
 	latestcommit=$$(git -C Dagon/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\
 	VERSION_MAJOR=$$(grep '#define DAGON_VERSION_MAJOR' Dagon/src/Version.h | cut -d' ' -f3) ;\

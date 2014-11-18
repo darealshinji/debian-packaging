@@ -4,7 +4,11 @@ deps = git asciidoc deutex gsfonts imagemagick
 cleanfiles = freedoom debian/changelog
 
 
-all: deps download
+all: deps download build
+
+nodeps: download build
+
+build:
 	$(buildpackage)
 
 download: deps

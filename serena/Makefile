@@ -7,7 +7,11 @@ sha256_1 = b25bbabad910db78c9446e2d293eb161588a7b2098713e77a512f8c10345f530
 zip = Serena.1.zip
 
 
-all: deps download
+all: deps download build
+
+nodeps: download build
+
+build:
 	unzip $(zip)
 	$(buildpackage)
 

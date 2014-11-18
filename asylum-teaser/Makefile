@@ -4,7 +4,11 @@ deps = imagemagick unzip wget
 cleanfiles = Asylum-Teaser-master asylum-teaser.png converted_icons
 
 
-all: deps download
+all: deps download build
+
+nodeps: download build
+
+build:
 	$(buildpackage)
 
 download: deps
