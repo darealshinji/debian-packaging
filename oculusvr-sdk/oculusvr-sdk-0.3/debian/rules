@@ -1,0 +1,85 @@
+#!/usr/bin/make -f
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+VERSION = $(shell dpkg-parsechangelog | grep -e "Version:" | cut -d' ' -f2 | cut -d'-' -f1)
+
+ARCH = i386
+ifeq ($(DEB_HOST_ARCH),amd64)
+ARCH = x86_64
+endif
+
+
+CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) -Wno-reorder
+
+DH_INSTALL_FILES = debian/libovr0.3.install \
+                   debian/libovr-dbg.install \
+                   debian/libovr-dev.install \
+                   debian/libovr-dev.links
+
+%:
+	dh ${@} --parallel
+
+$(DH_INSTALL_FILES):
+	sed -e 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' $@.in > $@
+
+override_dh_auto_clean:
+	rm -rf converted_icons patchelfmod
+	rm -f *.a *.so* oculusconfigutil debian/ovr.pc $(DH_INSTALL_FILES)
+
+override_dh_auto_configure: $(DH_INSTALL_FILES)
+	iconv -f ISO-8859-1 -t UTF-8 < OculusSDK/LICENSE.txt > debian/copyright
+	sed -e 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g; s/@VERSION@/$(VERSION)/g' \
+		debian/ovr.pc.in > debian/ovr.pc
+
+override_dh_auto_build:
+	../../make-icons.sh oculusconfigutil.png
+
+	# shared library
+	CXXFLAGS='$(CXXFLAGS) -fPIC' \
+	dh_auto_build -DOculusSDK/LibOVR -- DEBUG=1
+	dh_auto_build -- -f debian/shared.mk DEBUG=1
+
+	cp OculusSDK/LibOVR/Makefile LibOVR_Makefile
+	rm -rf OculusSDK
+	tar xvfz ovr_sdk_linux_0.3.2.tar.gz
+	mv -f LibOVR_Makefile OculusSDK/LibOVR/Makefile
+
+	# static libraries
+	dh_auto_build -DOculusSDK/LibOVR
+	dh_auto_build -DOculusSDK/LibOVR -- DEBUG=1
+
+	cp OculusSDK/LibOVR/Lib/Linux/Release/$(ARCH)/libovr.a $(CURDIR)/libovr_static.a
+	cp OculusSDK/LibOVR/Lib/Linux/Debug/$(ARCH)/libovr.a $(CURDIR)/libovr_debug.a
+
+	sed -i 's@"../Src@<OVR@g; s@.h"@.h>@g' OculusSDK/LibOVR/Include/OVR.h
+	rm -f OculusSDK/LibOVR/Src/OVR_Win32_*
+	rm -f OculusSDK/LibOVR/Src/OVR_OSX_*
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+	cp OculusSDK/Tools/OculusConfigUtil/OculusConfigUtil_x86_64 $(CURDIR)/oculusconfigutil
+	strip oculusconfigutil
+ifeq ($(shell apt-cache depends libudev-dev | grep -e "libudev0"),)
+	git clone https://github.com/darealshinji/patchelfmod.git
+	cd patchelfmod && autoreconf -ifv
+	cd patchelfmod && ./configure && $(MAKE) check
+	$(CURDIR)/patchelfmod/src/patchelfmod --replace-needed libudev.so.0,libudev.so.1 oculusconfigutil
+endif
+endif
+
+override_dh_strip:
+	dh_strip -Xlibovr_debug.a -Xoculusconfigutil --dbg-package=libovr-dbg
+
+override_dh_compress:
+	dh_compress -X.pdf
+
+override_dh_gencontrol:
+	dh_gencontrol
+	# prevents Lintian warning virtual-package-depends-without-real-package-depends
+	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/oculusconfigutil/DEBIAN/control
+	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/libovr0.3/DEBIAN/control
+
+override_dh_builddeb:
+	dh_builddeb -Noculusvr-sdk-examples -- -Zxz -z9
+	dh_builddeb -poculusvr-sdk-examples
+

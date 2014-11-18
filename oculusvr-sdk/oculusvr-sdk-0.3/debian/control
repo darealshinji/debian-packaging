@@ -1,0 +1,91 @@
+Source: oculusvr-sdk
+Section: libdevel
+Priority: extra
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               automake,
+               freeglut3-dev,
+               imagemagick,
+               libudev-dev,
+               libxext-dev,
+               libxinerama-dev,
+               libxrandr-dev,
+               libxxf86vm-dev,
+               mesa-common-dev,
+               git
+Standards-Version: 3.9.5
+Homepage: https://developer.oculusvr.com/
+
+Package: oculusvr-sdk
+Section: metapackages
+Architecture: all
+Depends: ${misc:Depends},
+         oculusconfigutil,
+         oculusvr-sdk-doc,
+         oculusvr-sdk-examples,
+         libovr-dev
+Description: Oculus Rift SDK
+ Development and configuration tools for the Oculus Rift.
+
+Package: oculusvr-sdk-common
+Section: libs
+Architecture: all
+Depends: ${misc:Depends}
+Description: Oculus Rift SDK - common files
+ Common files for the Oculus Rift SDK.
+
+Package: libovr0.3
+Section: libs
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         oculusvr-sdk-common
+Description: Oculus Rift OVR shared library
+ This package contains the Oculus Rift OVR shared library.
+
+Package: libovr-dev
+Architecture: any
+Depends: ${misc:Depends},
+         libovr0.3 (= ${binary:Version}),
+         freeglut3-dev,
+         libudev-dev,
+         libxext-dev,
+         libxinerama-dev,
+         libxrandr-dev,
+         libxxf86vm-dev,
+         mesa-common-dev
+Description: Oculus Rift OVR static library
+ This package contains headers and library files
+ for the development of games supporting the Oculus Rift.
+
+Package: libovr-dbg
+Section: debug
+Architecture: any
+Depends: ${misc:Depends},
+         libovr-dev (= ${binary:Version})
+Description: Oculus Rift OVR shared library
+ This package contains the debug symbols and a debug static library
+ for the Oculus Rift OVR library.
+
+Package: oculusconfigutil
+Section: admin
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         oculusvr-sdk-common
+Description: Oculus Rift configuration tool
+ Configuration tool for the Oculus Rift.
+
+Package: oculusvr-sdk-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+Description: Oculus Rift SDK documentation
+ Documentation for the Oculus Rift SDK.
+
+Package: oculusvr-sdk-examples
+Architecture: all
+Depends: ${misc:Depends}
+Description: Oculus Rift SDK example files
+ Example files for development with the Oculus Rift SDK.
