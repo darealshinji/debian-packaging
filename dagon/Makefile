@@ -28,7 +28,7 @@ build:
 	rm changelog.new
 	$(buildpackage)
 
-download: deps clean
+download: clean
 	git clone https://github.com/Senscape/Dagon.git
 
 deps:

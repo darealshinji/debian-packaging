@@ -3,7 +3,7 @@ include ../Makefile.inc
 deps = wget dh-autoreconf
 cleanfiles = wizard SendSpace_Wizard_Debian-Linux-32-64bit.tgz patchelfmod.tar.gz patchelfmod-master
 
-VERSION = $(shell dpkg-parsechangelog -SVersion)
+VERSION = $(shell head -n1 debian/changelog | cut -d' ' -f2 | head -c-2 | tail -c+2)
 sha256_1 = b95032d3932939522fc00c55b08e1cbd3aa2fdf62d1f0362aaf9e0a29c36cfcf
 archive = SendSpace_Wizard_Debian-Linux-32-64bit.tgz
 
@@ -16,7 +16,7 @@ build:
 	tar xzvf $(archive)
 	$(buildpackage)
 
-download: deps
+download:
 	wget -O patchelfmod.tar.gz "https://github.com/darealshinji/patchelfmod/archive/master.tar.gz"
 	wget -O $(archive) "http://www.sendspace.com/pro/dl/bb0pg3"
 	@sha256_2=$$(sha256sum $(archive) | head -c64) ;\

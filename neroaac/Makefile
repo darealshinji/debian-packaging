@@ -16,7 +16,7 @@ build:
 	unzip $(zip) -d neroaac
 	$(buildpackage)
 
-download: deps
+download:
 	wget "ftp://ftp6.nero.com/tools/$(zip)"
 	@sha256_2=$$(sha256sum $(zip) | head -c64) ;\
 if [ $$sha256_2 != $(sha256_1) ] ; then \

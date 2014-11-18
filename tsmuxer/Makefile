@@ -16,7 +16,7 @@ build:
 	tar xvf $(archive)
 	$(buildpackage)
 
-download: clean
+download:
 	wget -O $(archive) 'https://docs.google.com/uc?authuser=0&id=0B0VmPcEZTp8NekJxLUVJRWMwejQ&export=download'
 	@sha256_2=$$(sha256sum $(archive) | head -c64) ;\
 if [ $$sha256_2 != $(sha256_1) ] ; then \

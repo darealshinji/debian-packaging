@@ -17,7 +17,7 @@ build:
 	sed -e "s/@VERSION@/$$version/g; s/@DATE@/$(DATE)/g" debian/changelog.in > debian/changelog
 	$(buildpackage)
 
-download: clean deps
+download: clean
 	wget "http://dl.google.com/earth/client/current/GoogleEarthLinux.bin"
 	wget -O patchelfmod.tar.gz "https://github.com/darealshinji/patchelfmod/archive/master.tar.gz"
 

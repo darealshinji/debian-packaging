@@ -15,7 +15,7 @@ build:
 	unzip $(zip)
 	$(buildpackage)
 
-download: deps
+download:
 	@if [ ! -f $(zip) ] ; then \
     echo 'To build Serena download the Windows zip archive,' ;\
     echo 'save it in this directory and run `make` again:' ;\

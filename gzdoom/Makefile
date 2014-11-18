@@ -12,7 +12,7 @@ nodeps: download build
 build:
 	$(buildpackage)
 
-download: deps clean
+download: clean
 	./download.sh
 
 deps:

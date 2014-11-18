@@ -11,7 +11,7 @@ nodeps: download build
 build:
 	$(buildpackage)
 
-download: deps
+download:
 	wget "https://github.com/Senscape/Asylum-Teaser/archive/master.tar.gz"
 	tar xvf master.tar.gz
 	rm master.tar.gz

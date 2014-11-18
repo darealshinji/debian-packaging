@@ -11,7 +11,7 @@ nodeps: download build
 build:
 	$(buildpackage)
 
-download: deps
+download:
 	rm -rf freedoom
 	git clone https://github.com/freedoom/freedoom.git
 

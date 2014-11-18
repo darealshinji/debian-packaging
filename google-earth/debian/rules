@@ -25,7 +25,7 @@ override_dh_auto_install:
 	mv temp/README.linux temp/README
 	rm -f $(LIB)/gpl.txt
 
-	cp -r usr/* debian/google-earth/usr
+	cp -r files/* debian/google-earth/usr
 	mkdir -p debian/google-earth/usr/share/googleearth debian/google-earth/usr/share/pixmaps
 	mv $(LIB)/product_logo_32.xpm debian/google-earth/usr/share/pixmaps/googleearth.xpm
 	mv $(LIB)/lang $(LIB)/resources $(LIB)/shaders debian/google-earth/usr/share/googleearth

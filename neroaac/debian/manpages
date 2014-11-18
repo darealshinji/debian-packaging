@@ -1,1 +1,3 @@
-man/*.1
+debian/neroAacDec.1
+debian/neroAacEnc.1
+debian/neroAacTag.1

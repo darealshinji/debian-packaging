@@ -11,7 +11,7 @@ build:
 	debian/rules debian/control
 	$(buildpackage)
 
-download: deps
+download:
 	./download.sh
 
 deps:

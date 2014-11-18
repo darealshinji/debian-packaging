@@ -15,7 +15,7 @@ build:
 	unzip freedoom-$(VERSION).zip
 	$(buildpackage)
 
-download: deps
+download:
 	wget "https://github.com/freedoom/freedoom/releases/download/v$(VERSION)/freedoom-$(VERSION).zip"
 	wget "https://github.com/freedoom/freedoom/releases/download/v$(VERSION)/freedm-$(VERSION).zip"
 	wget "https://raw.githubusercontent.com/freedoom/freedoom/master/README.adoc"

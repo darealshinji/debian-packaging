@@ -15,7 +15,7 @@ build:
 	tar xzvf $(archive)
 	$(buildpackage)
 
-download: deps
+download:
 	wget -O $(archive) "https://www.dropbox.com/s/z8b534gi6xxhgki/Mr%20Reds%20Adventure%20TMB.tar.gz?dl=1"
 	@sha256_2=$$(sha256sum $(archive) | head -c64) ;\
 if [ $$sha256_2 != $(sha256_1) ] ; then \
