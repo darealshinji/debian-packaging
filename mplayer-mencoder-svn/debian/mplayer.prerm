@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+DIR=/usr/lib/codecs
+if [ -d $DIR ] && [ "$(ls -A $DIR)" ]; then
+    /usr/share/mplayer/binary_codecs.sh uninstall
+fi
+
+#DEBHELPER#
+
+exit 0

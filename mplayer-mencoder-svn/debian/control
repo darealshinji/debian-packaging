@@ -1,0 +1,144 @@
+Source: mplayer
+Section: video
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+XSBC-Original-Maintainer: Debian multimedia packages maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Uploaders:
+ A Mennucc1 <mennucc1@debian.org>,
+ Reinhard Tartler <siretart@tauware.de>
+Standards-Version: 3.9.5
+Vcs-Git: git://git.debian.org/git/pkg-multimedia/mplayer.git
+Vcs-Browser: http://git.debian.org/?p=pkg-multimedia/mplayer.git;a=summary
+Homepage: http://www.mplayerhq.hu/
+Build-Depends:
+ debhelper (>= 9),
+ docbook-xml,
+ docbook-xsl,
+ ladspa-sdk,
+ libaa1-dev,
+ libasound2-dev [linux-any],
+ libass-dev,
+ libaudio-dev,
+ libbluray-dev,
+ libcaca-dev,
+ libcdparanoia-dev [!hurd-i386] | libcdparanoia0-dev [!hurd-i386],
+ libdirectfb-dev,
+ libdts-dev,
+ libdvdnav-dev,
+ libdvdread-dev,
+ libenca-dev,
+ libesd0-dev,
+ libfaad-dev,
+ libfontconfig1-dev,
+ libfreetype6-dev,
+ libfribidi-dev,
+ libgif-dev,
+ libgl1-mesa-dev,
+ libgtk2.0-dev,
+ libjack-dev,
+ libjpeg-dev,
+ liblircclient-dev,
+ liblivemedia-dev,
+ liblzo2-dev,
+ libmp3lame-dev,
+ libmpcdec-dev,
+ libmpeg2-4-dev,
+ libncurses5-dev,
+ libopenal-dev,
+ libpng12-dev | libpng-dev,
+ libpulse-dev,
+ libschroedinger-dev,
+ libsdl1.2-dev | libsdl1.1-dev,
+ libsmbclient-dev,
+ libspeex-dev,
+ libsvga1-dev [i386 amd64],
+ libtheora-dev (>= 1.0~beta1),
+ libvdpau-dev [i386 amd64],
+ libvorbis-dev,
+ libvorbisidec-dev,
+ libx11-dev,
+ libx264-dev,
+ libxext-dev,
+ libxinerama-dev,
+ libxv-dev,
+ libxvidcore-dev,
+ libxvmc-dev,
+ libxxf86dga-dev,
+ libxxf86vm-dev,
+ pkg-config,
+ vstream-client-dev,
+ x11proto-core-dev,
+ xsltproc,
+ yasm,
+ zlib1g-dev
+
+Package: mencoder
+Architecture: any
+Suggests:
+ bzip2,
+ fontconfig,
+ mplayer-doc,
+ ttf-freefont
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: MPlayer's Movie Encoder
+ MPlayer plays most MPEG, VOB, AVI, Ogg/OGM, VIVO,
+ ASF/WMA/WMV, QT/MOV/MP4, FLI, RM, NuppelVideo, yuv4mpeg, FILM, RoQ, PVA files,
+ supported by many native, XAnim, RealPlayer, and Win32 DLL codecs. It can
+ also play VideoCD, SVCD, DVD, 3ivx, RealMedia, and DivX movies.
+ .
+ This package contains mencoder, a simple movie encoder, designed to
+ encode MPlayer-playable movies
+ (AVI/ASF/OGG/DVD/VCD/VOB/MPG/MOV/VIV/FLI/RM/NUV/NET) to other
+ MPlayer-playable formats. It can encode with various codecs, like DivX4
+ (1 or 2 passes), libavcodec, PCM/MP3/VBRMP3 audio. Also has stream
+ copying and video resizing capabilities.
+
+Package: mplayer
+Architecture: any
+Suggests:
+ bzip2,
+ fontconfig,
+ mplayer-doc,
+ netselect | fping,
+ ttf-freefont
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ symlinks
+Replaces:
+ mencoder (<< 2:1.0~rc3+svn20090426-2),
+ mplayer-doc (<< 2:1.0~rc3+svn20090426-2),
+ mplayer-nogui (<< 2:1.0~rc3+svn20090426-2),
+ mplayer2
+Conflicts:
+ mplayer2
+Description: movie player for Unix-like systems
+ MPlayer plays most MPEG, VOB, AVI, Ogg/OGM, VIVO,
+ ASF/WMA/WMV, QT/MOV/MP4, FLI, RM, NuppelVideo, yuv4mpeg, FILM, RoQ, PVA files,
+ supported by many native, XAnim, RealPlayer, and Win32 DLL codecs. It can
+ also play VideoCD, SVCD, DVD, 3ivx, RealMedia, and DivX movies.
+ .
+ Another big feature of MPlayer is the wide range of supported output
+ drivers. It works with X11, Xv, DGA, OpenGL, SVGAlib, fbdev,
+ DirectFB, but also SDL.
+ .
+ Not all of the upstream code is distributed in the source tarball.
+ See the README.Debian and copyright files for details.
+
+Package: mplayer-doc
+Architecture: all
+Section: doc
+Recommends:
+ mplayer
+Depends:
+ ${misc:Depends}
+Replaces:
+ mplayer (<< 2:1.0~rc3+svn20090426-1)
+Description: documentation for MPlayer
+ This package contains the HTML documentation for MPlayer, a movie player for
+ Unix-like systems. It is available in several languages.
+ .
+ You only need this package if you want to read the MPlayer manual. The manpages
+ are included in the regular MPlayer package.

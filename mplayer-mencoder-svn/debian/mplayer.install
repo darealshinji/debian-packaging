@@ -1,0 +1,5 @@
+mplayer-export/TOOLS/binary_codecs.sh  /usr/share/mplayer/
+mplayer-export/TOOLS/midentify.sh      /usr/share/mplayer/
+mplayer-export/etc/input.conf          /etc/mplayer/
+mplayer-export/etc/menu.conf           /etc/mplayer/
+debian/prefs                           /var/lib/mplayer/

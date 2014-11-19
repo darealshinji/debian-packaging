@@ -1,0 +1,115 @@
+#!/usr/bin/make -f
+
+SVN_VERSION := $(shell sed -e 's/-snapshot//' mplayer-export/snapshot_version)
+
+DEB_HOST_ARCH    ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_ARCH_OS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+DEB_VENDOR       ?= $(shell dpkg-vendor --query Vendor)
+EXTRA_CFLAGS      = \
+	$(filter-out -g -O2 -Werror=format-security,$(shell dpkg-buildflags --get CFLAGS)) \
+	-Wno-unused-parameter \
+	-Wno-sign-compare
+
+# XXX enable-menu is frowned upon by upstream
+CONFIGURE_FLAGS = \
+	--prefix=/usr \
+	--confdir=/etc/mplayer \
+	--enable-menu \
+	--enable-radio --enable-radio-capture \
+	--disable-arts \
+	--language=all \
+	--disable-relocatable \
+	--extra-cflags='$(EXTRA_CFLAGS)' \
+	$(archconf)
+
+ifeq ($(DEB_HOST_ARCH),i386)
+#configure optimizes for the cpu detected at ./configure time
+#in order to build a generic binary, avoid non-standard opcodes through gcc
+  archconf += --target=i586-linux
+  CONFIGURE_FLAGS += --enable-runtime-cpudetection
+endif
+ifeq ($(DEB_HOST_ARCH),amd64)
+  CONFIGURE_FLAGS += --enable-runtime-cpudetection
+endif
+ifeq ($(DEB_HOST_ARCH),kfreebsd-i386)
+  CONFIGURE_FLAGS += --enable-runtime-cpudetection
+endif
+ifeq ($(DEB_HOST_ARCH),kfreebsd-amd64)
+  CONFIGURE_FLAGS += --enable-runtime-cpudetection
+endif
+ifeq ($(DEB_HOST_ARCH),powerpc)
+  CONFIGURE_FLAGS += --enable-runtime-cpudetection
+endif
+# when run on a sparc64 kernel, configure will normally select v9 asm.
+# this is hidden when running on buildds with 32bit kernel personality.
+# because of #644856, this will currently lead to a FTBFS
+# therefore, we force a 'generic' target.
+ifeq ($(DEB_HOST_ARCH),sparc)
+  archconf += --target=generic
+endif
+ifeq ($(DEB_HOST_ARCH),alpha)
+#Avoid high optimization through gcc.
+# see http://permalink.gmane.org/gmane.linux.debian.ports.alpha/7295
+  archconf += --target=alpha_ev5-linux
+endif
+
+# generate debugging symbols for mplayer-dbg for all archs but mipsen,
+# see bug #520113
+ifeq (,$(findstring mips,$(DEB_HOST_ARCH)))
+CONFIGURE_FLAGS += --enable-debug
+endif
+
+ifeq (linux,$(DEB_HOST_ARCH_OS))
+    CONFIGURE_FLAGS += --enable-joystick
+    sound_backend := alsa
+else
+    sound_backend := oss
+endif
+
+LANGS = fr ru cs hu it de es pl zh_CN
+
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean -Dmplayer-export || true
+
+override_dh_auto_configure:
+	test -f mplayer-export/VERSION || \
+	echo 'svn r$(SVN_VERSION) ($(DEB_VENDOR)), built with gcc' > mplayer-export/VERSION
+	cd mplayer-export && ./configure $(CONFIGURE_FLAGS) --disable-gui
+
+override_dh_auto_build:
+	dh_auto_build -Dmplayer-export -- mplayer mencoder V=1
+	cd mplayer-export && $(MAKE) html-chunked
+
+override_dh_auto_install:
+
+override_dh_install:
+	cd mplayer-export && $(MAKE) install-mplayer DESTDIR=$(CURDIR)/debian/mplayer
+	cd mplayer-export && $(MAKE) install-mplayer-man DESTDIR=$(CURDIR)/debian/mplayer
+	cd mplayer-export && $(MAKE) install-mencoder DESTDIR=$(CURDIR)/debian/mencoder
+	cd mplayer-export && $(MAKE) install-mplayer-man DESTDIR=$(CURDIR)/debian/mencoder
+
+	cd $(CURDIR)/debian/mencoder/usr/share/man/man1 && mv mplayer.1 mencoder.1
+	$(foreach LANG,$(LANGS),cd $(CURDIR)/debian/mencoder/usr/share/man/$(LANG)/man1 && \
+	  mv mplayer.1 mencoder.1 ;)
+
+	install -D -m 644 debian/mplayer.conf $(CURDIR)/debian/mplayer/etc/mplayer/mplayer.conf
+	sed -e 's/@SOUND_BACKEND@/$(sound_backend)/' \
+	  -i $(CURDIR)/debian/mplayer/etc/mplayer/mplayer.conf
+
+	find debian/mencoder/ -type d -empty -delete
+	dh_install
+
+override_dh_installchangelogs:
+	dh_installchangelogs mplayer-export/Changelog
+
+override_dh_clean:
+	dh_clean mplayer-export/VERSION
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
