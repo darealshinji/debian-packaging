@@ -1,0 +1,62 @@
+#!/usr/bin/make -f
+
+export V=1
+
+CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS   := $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS := $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
+LDFLAGS  := $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
+
+HELP2MAN = help2man -n "fast h264 encoder" -N -s1 -S "Videolan project" -h '--fullhelp'
+
+x264-configure = \
+	cd x264-source && \
+	PKG_CONFIG_PATH=$(CURDIR)/ffmpeg/usr/lib/pkgconfig \
+	./configure --disable-gpac \
+	--extra-cflags='-I../l-smash' \
+	--extra-ldflags='-L../l-smash -llsmash -lm'
+
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_clean:
+	rm -f debian/test.y4m test.mp4 x264_2pass.log*
+
+override_dh_auto_build:
+	cd l-smash && ./configure --extra-cflags='-O3 $(CPPFLAGS) $(CFLAGS)'
+	cd l-smash && $(MAKE) liblsmash.a
+
+	cd ffmpeg && ./configure \
+		--prefix=$(CURDIR)/ffmpeg/usr \
+		--disable-debug \
+		--disable-programs \
+		--disable-doc \
+		--disable-bzlib \
+		--disable-lzma \
+		--enable-gpl \
+		--enable-version3
+	$(MAKE) -C ffmpeg
+	$(MAKE) -C ffmpeg install
+
+	$(x264-configure) --bit-depth=10
+	$(MAKE) -C x264-source
+	mv x264-source/x264 x264-source/x264-10bit
+	$(HELP2MAN) x264-source/x264-10bit > x264-source/x264-10bit.1
+	$(MAKE) -C x264-source distclean
+
+	$(x264-configure)
+	$(MAKE) -C x264-source
+	$(HELP2MAN) x264-source/x264 > x264-source/x264.1
+
+override_dh_auto_test:
+	unxz -k debian/test.y4m.xz
+	x264-source/x264 --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
+	x264-source/x264 --pass 2 --bitrate 10 -o test.mp4 debian/test.y4m
+	rm -f test.mp4 x264_2pass.log*
+	x264-source/x264-10bit --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
+	x264-source/x264-10bit --pass 2 --bitrate 10 -o test.mp4 debian/test.y4m
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
