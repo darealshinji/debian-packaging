@@ -1,0 +1,6 @@
+ffmpeg/doc/ffserver.conf             /etc
+ffmpeg/tmp/usr/bin/*                 /usr/bin
+ffmpeg/tools/qt-faststart            /usr/bin
+ffmpeg/tmp/usr/share/doc/*           /usr/share/doc
+ffmpeg/tmp/usr/share/ffmpeg/*        /usr/share/ffmpeg
+ffmpeg/tmp/usr/share/man/man1/*      /usr/share/man/man1

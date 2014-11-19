@@ -1,0 +1,31 @@
+Source: ffmpeg
+Section: libs
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Standards-Version: 3.9.5
+Vcs-Git: git://source.ffmpeg.org/ffmpeg.git
+Vcs-Browser: http://git.videolan.org/?p=ffmpeg.git;a=tree
+Homepage: http://www.ffmpeg.org/
+Build-Depends:
+ debhelper (>= 9),
+ texi2html,
+ yasm,
+ zlib1g-dev
+
+Package: ffmpeg
+Section: video
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+@Suggests: frei0r-plugins
+Provides: libav-tools, ffmpeg-docs
+Replaces: libav-tools, ffmpeg-docs
+Description: Multimedia player, server, encoder and transcoder
+ FFmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package contains the ffplay multimedia player, the ffserver
+ streaming server, the ffmpeg audio and video encoder, and the ffprobe
+ stream analyzer.  They support most existing file formats (AVI, MPEG,
+ OGG, Matroska, ASF...) and encoding formats (MPEG, DivX, MPEG4, AC3,
+ DV...). Additionally, it contains the qt-faststart utility which
+ rearranges Quicktime files to facilitate network streaming.
