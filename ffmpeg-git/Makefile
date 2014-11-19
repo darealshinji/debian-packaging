@@ -7,12 +7,13 @@ all: deps download build
 
 nodeps: download build
 
-debian/control:
-	test -f /usr/include/frei0r.h && \
-	sed -e 's/@//g' $@.in > $@ || \
-	grep -v '@' $@.in > $@
+make-control = \
+test -f /usr/include/frei0r.h && \
+sed -e 's/@//g' debian/control.in > debian/control || \
+grep -v '@' debian/control.in > debian/control
 
-build: debian/control
+build:
+	$(make-control)
 	tar xvf ffmpeg-snapshot.tar.bz2
 
 	VER=$$(grep -v 'version <next>:' ffmpeg/Changelog | grep 'version ' | head -n1 | sed 's/version //; s/://;' -) ;\
@@ -33,7 +34,8 @@ download: clean
 deps:
 	@ ./dependencies.sh || true
 
-clean: debian/control
+clean:
+	$(make-control)
 	dh_clean || true
 	rm -rf build.log $(cleanfiles)
 

@@ -52,17 +52,18 @@ alldeps="\
 
 while true; do
     echo "Do you wish to install ALL build dependencies?"
-    read -p "This enables more codecs and is recommended. [y/n] " yn
+    echo "This enables more codecs and is recommended."
+    read -p "Answering 'no' will install the minimum dependencies. [y/n] " yn
     case $yn in
         [Yy]* )
           echo -e "\nInstalling the following dependencies:\n$alldeps\n";
-          sudo apt-get install $alldeps;
+          for d in $alldeps ; do (sudo apt-get -y install $d || true); done;
           break;;
         [Nn]* )
           echo -e "\nInstalling the following dependencies:\n$deps\n";
-          sudo apt-get install $deps;
+          sudo apt-get -y install $deps;
           break;;
-        * ) echo "Please answer yes or no.";;
+        * ) exit;;
     esac
 done
 
