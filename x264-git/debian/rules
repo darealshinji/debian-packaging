@@ -3,9 +3,9 @@
 export V=1
 
 CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
-CFLAGS   := $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
-CXXFLAGS := $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
-LDFLAGS  := $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
+CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
+LDFLAGS  := $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed -Wl,-z,noexecstack
 
 HELP2MAN = help2man -n "fast h264 encoder" -N -s1 -S "Videolan project" -h '--fullhelp'
 
@@ -24,7 +24,7 @@ override_dh_auto_clean:
 	rm -f debian/test.y4m test.mp4 x264_2pass.log*
 
 override_dh_auto_build:
-	cd l-smash && ./configure --extra-cflags='-O3 $(CPPFLAGS) $(CFLAGS)'
+	cd l-smash && ./configure --extra-cflags='$(CPPFLAGS) $(CFLAGS)'
 	cd l-smash && $(MAKE) liblsmash.a
 
 	cd ffmpeg && ./configure \
