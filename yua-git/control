@@ -1,0 +1,23 @@
+Source: yua
+Section: video
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+   debhelper (>= 9),
+   libqt4-dev,
+   libqt4-opengl-dev,
+   zlib1g-dev
+Standards-Version: 3.9.5
+Homepage: https://forum.speeddemosarchive.com/post/yua3.html
+Vcs-Git: https://github.com/darealshinji/yua.git
+Vcs-Browser: https://github.com/darealshinji/yua
+
+Package: yua
+Architecture: any
+Depends:
+   ${misc:Depends},
+   ${shlibs:Depends}
+Description: Speedrun encoding tool
+ This graphical tool automates the conversion process of your
+ speedruns footage. The video material will be encoded to the
+ SpeedDemosArchive (SDA) quality standards.
