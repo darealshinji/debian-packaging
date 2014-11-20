@@ -11,6 +11,7 @@ nodeps: download build
 build:
 	mv patchelfmod/debian-upstream patchelfmod/debian
 	@ cd patchelfmod && $(buildpackage)
+	mv -f patchelfmod/build.log .
 	mv -f *.deb *.changes ../
 
 download: clean

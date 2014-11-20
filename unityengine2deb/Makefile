@@ -11,6 +11,7 @@ nodeps: download build
 build:
 	tar xvf master.tar.gz
 	@ cd UnityEngine2deb-master && $(buildpackage)
+	mv -f UnityEngine2deb-master/build.log .
 	mv -f *.deb *.changes ../
 
 download: clean

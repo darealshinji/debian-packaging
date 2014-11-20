@@ -29,6 +29,7 @@ build:
 	rm changelog.new
 
 	@cd notepadqq && $(buildpackage)
+	mv -f notepadqq/build.log .
 	mv -f *.deb *.changes ../
 
 download: clean
