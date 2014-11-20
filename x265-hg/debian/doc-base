@@ -1,0 +1,10 @@
+Document: x265
+Title: x265 Documentation
+Author: Steve Borho <steve@borho.org>
+Abstract: This is the official documentation x265,
+ a free H.265/HEVC video encoder.
+Section: Video
+
+Format: HTML
+Index: /usr/share/doc/x265/html/index.html
+Files: /usr/share/doc/x265/html/*.html

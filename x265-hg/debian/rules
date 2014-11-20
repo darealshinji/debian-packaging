@@ -1,0 +1,49 @@
+#!/usr/bin/make -f
+
+CFLAGS   := $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS := $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
+
+HELP2MAN = help2man --no-discard-stderr -n "H.265/HEVC video encoder" -N -s1
+
+confflags = \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_VERBOSE_MAKEFILE=ON \
+	-DENABLE_SHARED=OFF
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	rm -f debian/test.y4m source/x265 source/x265-10bit
+
+override_dh_auto_build:
+	cd source && cmake $(confflags) -DHIGH_BIT_DEPTH=ON source
+	dh_auto_build -Dsource
+	mv source/x265 source/x265-10bit
+
+	$(MAKE) -C source clean
+	cd source && cmake $(confflags) source
+	dh_auto_build -Dsource
+
+	$(MAKE) -C source/doc/reST pickle html
+	$(HELP2MAN) source/x265 > source/x265.1
+	$(HELP2MAN) source/x265-10bit > source/x265-10bit.1
+
+override_dh_auto_test:
+	unxz -fk debian/test.y4m.xz
+	source/x265 --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
+	source/x265 --pass 2 --bitrate 10 -o test.hevc debian/test.y4m
+	rm -f test.hevc
+	source/x265-10bit --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
+	source/x265-10bit --pass 2 --bitrate 10 -o test.hevc debian/test.y4m
+
+override_dh_installchangelogs:
+	dh_installchangelogs source/ChangeLog
+
+override_dh_installdocs:
+	dh_installdocs -X.buildinfo
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
