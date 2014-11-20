@@ -14,7 +14,7 @@ nodeps: download build
 
 build:
 	tar xvf $(archive)
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget -O $(archive) 'https://docs.google.com/uc?authuser=0&id=0B0VmPcEZTp8NekJxLUVJRWMwejQ&export=download'

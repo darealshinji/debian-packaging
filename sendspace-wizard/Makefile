@@ -14,7 +14,7 @@ nodeps: download build
 
 build:
 	tar xzvf $(archive)
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget -O patchelfmod.tar.gz "https://github.com/darealshinji/patchelfmod/archive/master.tar.gz"

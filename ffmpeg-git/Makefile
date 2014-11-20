@@ -26,7 +26,7 @@ build:
 	echo " -- Marshall Banana <djcj@gmx.de>  `date -R`" >> debian/changelog
 	echo "" >> debian/changelog
 
-	$(buildpackage)
+	@$(buildpackage)
 
 download: clean
 	wget "http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2"

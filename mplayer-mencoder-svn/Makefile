@@ -18,7 +18,7 @@ build:
 	echo " -- Marshall Banana <djcj@gmx.de>  `date -R`" >> debian/changelog
 	echo "" >> debian/changelog
 
-	$(buildpackage)
+	@$(buildpackage)
 
 download: clean
 	wget "http://mplayerhq.hu/MPlayer/releases/$(archive)"

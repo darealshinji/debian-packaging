@@ -26,7 +26,7 @@ build:
 	echo "" >> changelog.new
 	cat changelog.new debian/changelog.in > debian/changelog
 	rm changelog.new
-	$(buildpackage)
+	@$(buildpackage)
 
 download: clean
 	git clone https://github.com/Senscape/Dagon.git

@@ -16,7 +16,7 @@ nodeps: download build
 build:
 	tar xzvf $(game)
 	unzip $(ega) -d YHtWtG_EGA
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget "http://www.piratehearts.com/builds/$(game)"

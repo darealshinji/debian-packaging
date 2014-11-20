@@ -12,7 +12,7 @@ all: deps download build
 nodeps: download build
 
 build:
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	test -f $(bin) || wget "ftp://ftp.fu-berlin.de/pc/games/idgames/idstuff/doom3/linux/$(bin)"

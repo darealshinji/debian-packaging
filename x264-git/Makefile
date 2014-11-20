@@ -17,7 +17,7 @@ build:
 	#echo " -- `whoami` <`uname -n`>  `date -R`" >> debian/changelog
 	echo " -- Marshall Banana <djcj@gmx.de>  `date -R`" >> debian/changelog
 	echo "" >> debian/changelog
-	$(buildpackage)
+	@$(buildpackage)
 
 download: clean
 	git clone "git://git.videolan.org/x264.git" x264-source

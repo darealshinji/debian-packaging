@@ -9,13 +9,9 @@ all: deps download build
 nodeps: download build
 
 build:
-	cp -r patchelfmod/debian-upstream debian
-	sed -i 's/dh $$@/dh $$@ -Dpatchelfmod/; s/dh_installchangelogs ChangeLog/dh_installchangelogs patchelfmod\/ChangeLog/;' \
-	debian/rules
-	echo '' >> debian/rules
-	echo 'override_dh_autoreconf:' >> debian/rules
-	echo '	cd patchelfmod && ./autogen.sh' >> debian/rules
-	$(buildpackage)
+	mv patchelfmod/debian-upstream patchelfmod/debian
+	@ cd patchelfmod && $(buildpackage)
+	mv -f *.deb *.changes ../
 
 download: clean
 	git clone https://github.com/darealshinji/patchelfmod.git

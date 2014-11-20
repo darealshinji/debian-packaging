@@ -22,7 +22,7 @@ build:
 	tar xvf $(archive)
 	ar x $(deb) data.tar.xz
 	tar xvf data.tar.xz
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget "http://download.xnview.com/$(archive)"

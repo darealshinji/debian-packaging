@@ -21,11 +21,12 @@ build: checkarch clean
 fi
 	mkdir -p tmp
 	cp $(GAMEDIR)/* tmp/
-	$(buildpackage)
+	@$(buildpackage)
 
 checkarch:
 ifneq ($(shell uname -p), x86_64)
-	@echo "'You Have to Win the Game' is only available for x86_64 architectures." ;\
+	@echo "" ;\
+	echo "'You Have to Win the Game' is only available for x86_64 architectures." ;\
 	exit 1
 endif
 

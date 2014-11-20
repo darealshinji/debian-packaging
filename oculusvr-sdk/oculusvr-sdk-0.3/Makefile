@@ -15,7 +15,7 @@ nodeps: download build
 build:
 	rm -rf OculusSDK
 	tar xvfz $(archive)
-	$(buildpackage)
+	@$(buildpackage)
 
 download: clean
 	test -f $(archive) || wget "http://static.oculus.com/sdk-downloads/$(archive)"

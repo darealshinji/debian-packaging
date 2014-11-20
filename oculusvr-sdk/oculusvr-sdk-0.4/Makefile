@@ -16,7 +16,7 @@ build:
 	rm -rf ovr_sdk_linux_$(VERSION) OculusSDK
 	tar xvf $(archive)
 	mv ovr_sdk_linux_$(VERSION) OculusSDK
-	$(buildpackage)
+	@$(buildpackage)
 
 download: clean
 	test -f $(archive) || wget "http://static.oculus.com/sdk-downloads/$(archive)"

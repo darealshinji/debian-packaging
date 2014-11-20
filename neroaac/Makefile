@@ -14,7 +14,7 @@ nodeps: download build
 build:
 	rm -rf neroaac
 	unzip $(zip) -d neroaac
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget "ftp://ftp6.nero.com/tools/$(zip)"

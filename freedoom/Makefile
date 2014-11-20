@@ -13,7 +13,7 @@ nodeps: download build
 build:
 	unzip freedm-$(VERSION).zip
 	unzip freedoom-$(VERSION).zip
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget "https://github.com/freedoom/freedoom/releases/download/v$(VERSION)/freedoom-$(VERSION).zip"

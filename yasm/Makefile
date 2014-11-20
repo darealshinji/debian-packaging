@@ -16,7 +16,7 @@ build:
 	mv *.png images
 	tar xvfz yasm-$(VERSION).tar.gz
 	mv yasm-$(VERSION) source
-	$(buildpackage)
+	@$(buildpackage)
 
 download: clean
 	wget "$(SITE)/releases/yasm-$(VERSION).tar.gz"

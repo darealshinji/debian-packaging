@@ -13,7 +13,7 @@ nodeps: download build
 
 build:
 	unzip $(zip)
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	@if [ ! -f $(zip) ] ; then \

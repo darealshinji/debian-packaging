@@ -15,7 +15,7 @@ nodeps: download build
 build:
 	mv $(bin) DivX265
 	chmod 0755 DivX265
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget "http://download.divx.com/hevc/$(bin)"

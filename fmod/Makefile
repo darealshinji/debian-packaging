@@ -9,7 +9,7 @@ nodeps: download build
 
 build:
 	debian/rules debian/control
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	./download.sh

@@ -9,7 +9,7 @@ all: deps download build
 nodeps: download build
 
 build:
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	rm -rf freedoom

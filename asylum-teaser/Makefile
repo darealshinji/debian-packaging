@@ -9,7 +9,7 @@ all: deps download build
 nodeps: download build
 
 build:
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget "https://github.com/Senscape/Asylum-Teaser/archive/master.tar.gz"

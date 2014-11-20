@@ -13,7 +13,7 @@ nodeps: download build
 
 build:
 	tar xzvf $(archive)
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget -O $(archive) "https://www.dropbox.com/s/z8b534gi6xxhgki/Mr%20Reds%20Adventure%20TMB.tar.gz?dl=1"

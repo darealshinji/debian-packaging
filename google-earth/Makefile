@@ -15,7 +15,7 @@ build:
 	./GoogleEarthLinux.bin --target temp --noexec
 	version=$$(head -n2 temp/setup.data/setup.xml | tail -n-1 | cut -d '"' -f2 | cut -d- -f1) ; \
 	sed -e "s/@VERSION@/$$version/g; s/@DATE@/$(DATE)/g" debian/changelog.in > debian/changelog
-	$(buildpackage)
+	@$(buildpackage)
 
 download: clean
 	wget "http://dl.google.com/earth/client/current/GoogleEarthLinux.bin"

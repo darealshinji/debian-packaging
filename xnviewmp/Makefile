@@ -16,7 +16,7 @@ nodeps: download build
 build:
 	rm -rf XnView
 	tar xvf $(archive)
-	$(buildpackage)
+	@$(buildpackage)
 
 download:
 	wget "http://download.xnview.com/$(archive)"
