@@ -24,7 +24,7 @@ build:
 	tar xvf data.tar.xz
 	@$(buildpackage)
 
-download:
+download: clean
 	wget "http://download.xnview.com/$(archive)"
 	wget "http://archive.ubuntu.com/ubuntu/pool/main/q/qt4-x11/$(deb)"
 

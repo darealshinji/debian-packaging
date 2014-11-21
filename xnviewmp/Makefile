@@ -1,11 +1,14 @@
 include ../Makefile.inc
 
 deps = wget imagemagick chrpath
-cleanfiles = build.log converted_icons XnView *.tgz debian/xnviewmp.links
+cleanfiles = build.log converted_icons XnView *.tgz
 
+arch = i386
 ifeq ($(shell uname -p), x86_64)
 x64 = -x64
+arch = amd64
 endif
+
 archive = XnViewMP-linux$(x64).tgz
 
 
@@ -18,7 +21,7 @@ build:
 	tar xvf $(archive)
 	@$(buildpackage)
 
-download:
+download: clean
 	wget "http://download.xnview.com/$(archive)"
 
 deps:

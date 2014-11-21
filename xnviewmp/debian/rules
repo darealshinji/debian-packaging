@@ -1,25 +1,29 @@
 #!/usr/bin/make -f
 
-DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+DEB_HOST_MULTIARCH := $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
 
 %:
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf converted_icons debian/xnviewmp.links
+	rm -rf converted_icons
 
 override_dh_auto_build:
-	sed -e 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' \
-	debian/xnviewmp.links.in > debian/xnviewmp.links
-
 	../make-icons.sh XnView/xnview.png
 	../make-icons.sh XnView/xnview_2.png
-
-	mv XnView/XnView XnView/xnviewmp
 	rm -f XnView/UI/style_sheet_win.qss XnView/UI/style_sheet_mac.qss
 
-	cd XnView && chrpath -d xnviewmp Plugins/IlmImf.so
+	chrpath -d \
+	XnView/Plugins/IlmImf.so \
+	XnView/lib/libQtCore.so.4.8.5 \
+	XnView/lib/libQtDBus.so.4.8.5 \
+	XnView/lib/libQtGui.so.4.8.5 \
+	XnView/lib/libQtNetwork.so.4.8.5 \
+	XnView/lib/libQtWebKit.so.4.9.4 \
+	XnView/lib/libphonon.so.4 \
+	XnView/lib/phonon_backend/libphonon_gstreamer.so \
+	XnView/XnView
 
 override_dh_installchangelogs:
 	dh_installchangelogs XnView/WhatsNew.txt
@@ -27,6 +31,11 @@ override_dh_installchangelogs:
 override_dh_makeshlibs:
 
 override_dh_shlibdeps:
+	#dh_shlibdeps -l$(CURDIR)/debian/xnviewmp/usr/lib/xnviewmp/lib
+
+override_dh_clean:
+	dh_clean
+	rm -rf converted_icons
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

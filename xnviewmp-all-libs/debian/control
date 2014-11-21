@@ -12,6 +12,7 @@ Homepage: http://www.xnview.com
 Package: xnviewmp
 Architecture: amd64 i386
 Depends:
+ libimage-exiftool-perl,
  libc6 (>= 2.14),
  libfontconfig1 (>= 2.9.0),
  libfreetype6 (>= 2.3.5),
@@ -22,7 +23,6 @@ Depends:
  libgstreamer0.10-0 (>= 0.10.24),
  libice6 (>= 1:1.0.0),
  libilmbase6 (>= 1.0.1),
- libimage-exiftool-perl,
  libjpeg62 (>= 6b1),
  libpng12-0 (>= 1.2.13-4),
  libsm6,
