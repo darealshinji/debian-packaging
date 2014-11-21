@@ -10,4 +10,4 @@ if [ ! -d "$CONFDIR" ] ; then
     ln -s $GAMEDIR/scripts "$CONFDIR/scripts"
 fi
 
-cd "$CONFDIR" && dagon "$@" &
+cd "$CONFDIR" && dagon "$@"
