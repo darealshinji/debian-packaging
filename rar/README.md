@@ -1,10 +1,8 @@
-UnRAR
-=====
+RAR
+===
 
-Unrar can extract files from .rar archives. If you want to create .rar
-archives, install package rar.
-
-Compile the latest version of UnRAR from source.
+This is the RAR archiver from Eugene Roshal. It supports multiple volume
+archives and damage protection. It can also create SFX-archives.
 
 **Homepage:** https://www.rarlabs.com/
 
