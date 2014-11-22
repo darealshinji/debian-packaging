@@ -1,0 +1,7 @@
+.TH UNRAR 1 "November 2014" "@VERSION@" "RAR archiver"
+.SH NAME
+unrar \- extract files from rar archives
+
+.SH OPTIONS
+.nf
+\f[C]

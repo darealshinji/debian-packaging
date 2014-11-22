@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+
+VERSION = $(shell dpkg-parsechangelog -SVersion | sed -e 's/1://;')
+MINOR = $(shell echo $(VERSION) | cut -d. -f2)
+MICRO = $(shell echo $(VERSION) | cut -d. -f3)
+
+CXXFLAGS += -Wall -Wno-parentheses -Wno-switch -DRARVER_MINOR=$(MINOR)$(MICRO)
+
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_clean:
+	rm -rf unrar unrar-nonfree.1
+
+override_dh_auto_build:
+	tar xvf unrarsrc-$(VERSION).tar.gz
+
+	sed -i 's/FLAGS=/FLAGS+=/g' unrar/makefile
+	mv unrar/version.hpp unrar/version.hpp.old
+	grep -v unrar/version.hpp.old \
+	-e "$$(grep -e 'RARVER_MINOR' unrar/version.hpp.old)" > unrar/version.hpp
+
+	CXXFLAGS='$(CXXFLAGS)' LIBFLAGS='$(LIBFLAGS)' LDFLAGS='$(LDFLAGS)' $(MAKE) -C unrar
+
+	sed -e 's/@VERSION@/$(VERSION)/;' debian/unrar-nonfree.1.header > unrar-nonfree.1
+	unrar/unrar >> unrar-nonfree.1
+	echo .fi >> unrar-nonfree.1
+
+override_dh_install:
+	mkdir -p debian/unrar/usr/bin
+	install -m755 unrar/unrar $(CURDIR)/debian/unrar/usr/bin/unrar-nonfree
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
