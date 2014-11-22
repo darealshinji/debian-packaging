@@ -1,0 +1,7 @@
+.TH RAR 1 "November 2014" "@VERSION@" "RAR archiver"
+.SH NAME
+rar \- archive files with compression
+
+.SH OPTIONS
+.nf
+\f[C]

@@ -1,0 +1,3 @@
+version=3
+
+http://www.rarlab.com/download.htm /rar/rarlinux-(\d.*)\.tar\.gz	debian	uupdate

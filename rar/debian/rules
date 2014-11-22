@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+VERSION = $(shell dpkg-parsechangelog -SVersion | cut -d: -f2 | cut -d- -f1)
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf rar.1
+
+override_dh_auto_build:
+	sed -e 's/@VERSION@/$(VERSION)/;' debian/rar.1.header > rar.1
+	rar/rar >> rar.1
+	echo .fi >> rar.1
+
+override_dh_install:
+	mkdir -p debian/rar/usr/bin
+	mkdir -p debian/rar/usr/lib
+	mkdir -p debian/rar/etc
+	install -m755 rar/rar $(CURDIR)/debian/rar/usr/bin
+	install -m644 rar/default.sfx $(CURDIR)/debian/rar/usr/lib
+	install -m644 rar/rarfiles.lst $(CURDIR)/debian/rar/etc
+
+override_dh_installchangelogs:
+	dh_installchangelogs rar/whatsnew.txt
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9

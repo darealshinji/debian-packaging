@@ -1,0 +1,19 @@
+Source: rar
+Section: non-free/utils
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+XSBC-Original-Maintainer: Martin Meredith <mez@debian.org>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: http://www.rarlabs.com/
+
+Package: rar
+Architecture: i386 amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: unrar-nonfree
+Description: Archiver for .rar files
+ This is the RAR archiver from Eugene Roshal. It supports multiple volume
+ archives and damage protection. It can also create SFX-archives. There are
+ versions which run on DOS, Windows (3.1x,95,NT), FreeBSD, BSDI.
+ .
+ This program is shareware and you must register it after 40 days of use.
