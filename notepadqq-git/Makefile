@@ -1,7 +1,7 @@
 include ../Makefile.inc
 
 deps = git wget qtbase5-dev libqt5webkit5-dev libqt5svg5-dev
-cleanfiles = notepadqq-packaging notepadqq CodeMirror* debian
+cleanfiles = notepadqq-packaging notepadqq CodeMirror*
 
 
 all: deps download build
@@ -20,6 +20,8 @@ download: clean
 
 	tar xvf CodeMirror.tar.gz
 	mv notepadqq-packaging/Debian/debian notepadqq
+	[ -f notepadqq/src/editor/libs/codemirror/mode/makefile/makefile.js ] || \
+	  cp -r patches notepadqq/debian
 	mv CodeMirror-master/* notepadqq/src/editor/libs/codemirror
 
 	# create new Debian changelog entry
