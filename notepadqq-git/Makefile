@@ -9,12 +9,21 @@ all: deps download build
 nodeps: download build
 
 build:
+	@cd notepadqq && $(buildpackage)
+	mv -f notepadqq/build.log .
+	mv -f *.deb *.changes ../
+
+download: clean
+	git clone https://github.com/notepadqq/notepadqq-packaging.git
+	git clone https://github.com/notepadqq/notepadqq.git
+	wget -O CodeMirror.tar.gz "https://github.com/notepadqq/CodeMirror/archive/master.tar.gz"
+
 	tar xvf CodeMirror.tar.gz
 	mv notepadqq-packaging/Debian/debian notepadqq
 	mv CodeMirror-master/* notepadqq/src/editor/libs/codemirror
-	mv notepadqq/debian/changelog notepadqq/debian/changelog.in
 
 	# create new Debian changelog entry
+	mv notepadqq/debian/changelog notepadqq/debian/changelog.in
 	latestcommit=$$(git -C notepadqq/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\
 	VERSION=$$(git -C notepadqq/ describe --abbrev=0 --tags | sed -e 's/v//g') ;\
 	echo "notepadqq ($$VERSION+git$$latestcommit-1~trusty) trusty; urgency=low" > changelog.new
@@ -27,15 +36,6 @@ build:
 	echo "" >> changelog.new
 	cat changelog.new notepadqq/debian/changelog.in > notepadqq/debian/changelog
 	rm changelog.new
-
-	@cd notepadqq && $(buildpackage)
-	mv -f notepadqq/build.log .
-	mv -f *.deb *.changes ../
-
-download: clean
-	git clone https://github.com/notepadqq/notepadqq-packaging.git
-	git clone https://github.com/notepadqq/notepadqq.git
-	wget -O CodeMirror.tar.gz "https://github.com/notepadqq/CodeMirror/archive/master.tar.gz"
 
 deps:
 	sudo apt-get install debhelper $(deps)
