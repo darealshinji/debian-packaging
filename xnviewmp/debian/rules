@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
-
 
 %:
 	dh ${@}
@@ -13,33 +11,7 @@ override_dh_auto_build:
 	../make-icons.sh XnView/xnview.png
 	../make-icons.sh XnView/xnview_2.png
 	rm -f XnView/UI/style_sheet_win.qss XnView/UI/style_sheet_mac.qss
-
-	chrpath -d \
-	XnView/Plugins/IlmImf.so \
-	XnView/lib/codecs/libqcncodecs.so \
-	XnView/lib/codecs/libqjpcodecs.so \
-	XnView/lib/codecs/libqkrcodecs.so \
-	XnView/lib/codecs/libqtwcodecs.so \
-	XnView/lib/imageformats/libqgif.so \
-	XnView/lib/imageformats/libqico.so \
-	XnView/lib/imageformats/libqjpeg.so \
-	XnView/lib/imageformats/libqmng.so \
-	XnView/lib/imageformats/libqsvg.so \
-	XnView/lib/imageformats/libqtga.so \
-	XnView/lib/imageformats/libqtiff.so \
-	XnView/lib/libQtCore.so.4.8.5 \
-	XnView/lib/libQtDBus.so.4.8.5 \
-	XnView/lib/libQtGui.so.4.8.5 \
-	XnView/lib/libQtNetwork.so.4.8.5 \
-	XnView/lib/libQtSvg.so.4.8.5 \
-	XnView/lib/libQtWebKit.so.4.9.4 \
-	XnView/lib/libQtXml.so.4.8.5 \
-	XnView/lib/libphonon.so.4 \
-	XnView/lib/phonon_backend/libphonon_gstreamer.so \
-	XnView/XnView
-
-	cp -rf usr/lib/$(DEB_HOST_MULTIARCH)/libQtOpenGL.so.* XnView/lib/
-	cp -rf usr/lib/$(DEB_HOST_MULTIARCH)/qt4/plugins/graphicssystems/ XnView/lib/
+	chrpath -d XnView/XnView `find XnView/ -type f -name *.so*`
 
 override_dh_installchangelogs:
 	dh_installchangelogs XnView/WhatsNew.txt
@@ -47,11 +19,8 @@ override_dh_installchangelogs:
 override_dh_makeshlibs:
 
 override_dh_shlibdeps:
-
-override_dh_clean:
-	dh_clean
-	rm -rf converted_icons
+	#dh_shlibdeps -Lxnviewmp -l/usr/lib/xnviewmp/lib
 
 override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
+	dh_builddeb -- -Zxz
 

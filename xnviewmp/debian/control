@@ -12,7 +12,7 @@ Homepage: http://www.xnview.com
 Package: xnviewmp
 Architecture: amd64 i386
 Depends:
- libc6 (>= 2.14),
+ libc6 (>= 2.11),
  libfontconfig1 (>= 2.9.0),
  libfreetype6 (>= 2.3.5),
  libgcc1 (>= 1:4.1.1),
@@ -22,16 +22,17 @@ Depends:
  libgstreamer0.10-0 (>= 0.10.24),
  libice6 (>= 1:1.0.0),
  libilmbase6 (>= 1.0.1),
+ libimage-exiftool-perl,
  libjpeg62 (>= 6b1),
  libpng12-0 (>= 1.2.13-4),
+ libqt4-opengl (>= 4:4.5.3),
  libsm6,
  libstdc++6 (>= 4.4.0),
  libx11-6,
  libxext6,
  libxml2 (>= 2.6.27),
  libxrender1,
- zlib1g (>= 1:1.1.4),
- libimage-exiftool-perl
+ zlib1g (>= 1:1.1.4)
 Description: Graphic viewer, browser, converter.
  XnView MP is the enhanced version to XnView. It is a powerful
  cross-platform media browser, viewer and converter.

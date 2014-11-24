@@ -1,7 +1,6 @@
 xnviewmp (0.69) unstable; urgency=low
 
   * New upstream release
-  * Add qt4-opengl library to avoid any Qt4 dependency
 
  -- Marshall Banana <djcj@gmx.de>  Mon, 13 Oct 2014 15:26:06 +0200
 
