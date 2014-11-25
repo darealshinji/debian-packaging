@@ -1,0 +1,3 @@
+# They're private dynamic libraries
+nightingale binary: embedded-library */libnss3.so: nss
+nightingale binary: embedded-library */libsqlite3.so: sqlite

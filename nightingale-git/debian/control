@@ -1,0 +1,65 @@
+Source: nightingale
+Section: sound
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+    autoconf,
+    autotools-dev,
+    debhelper (>= 9),
+    libasound2,
+    libdbus-glib-1-dev,
+    libgnomevfs2-dev,
+    libgstreamer-plugins-base0.10-dev,
+    libgtk2.0-dev,
+    libidl0,
+    libjpeg-turbo8,
+    libsqlite0-dev,
+    libtag1-dev,
+    libnotify-dev,
+    libnspr4-dev,
+    libpng12-0,
+    libunity-dev,
+    libxext-dev,
+    libxt6,
+    unzip,
+    wget,
+    zip
+Standards-Version: 3.9.5
+Homepage: http://www.getnightingale.com
+Vcs-Browser: https://github.com/nightingale-media-player/nightingale-hacking
+Vcs-Git: https://github.com/nightingale-media-player/nightingale-hacking.git
+
+Package: nightingale
+Architecture: any
+Depends:
+    nightingale-common (= ${source:Version}),
+    ${shlibs:Depends},
+    ${misc:Depends},
+    gstreamer0.10-plugins-good,
+    gstreamer0.10-plugins-bad,
+    gstreamer0.10-plugins-ugly
+Suggests:
+    gstreamer0.10-ffmpeg,
+    gtk2-engines-pixbuf,
+    gnome-settings-daemon
+Provides: nightingale, nightingale-nounity
+Replaces: nightingale, nightingale-nounity
+Description: Play, manage and organize digital media
+ This desktop media player is a digital jukebox and Web browser mash-up.
+ It supports extensions and feathers (skins). Like Firefox/Iceweasel,
+ it is built from the Mozilla cross-platform and open source framework,
+ and based on Songbird.
+
+Package: ngale-unity-addon
+Architecture: any
+Depends:
+    ${shlibs:Depends},
+    ${misc:Depends},
+    nightingale (= ${binary:Version})
+Description: Unity integration plugin
+ This desktop media player is a digital jukebox and Web browser mash-up.
+ It supports extensions and feathers (skins). Like Firefox/Iceweasel,
+ it is built from the Mozilla cross-platform and open source framework,
+ and based on Songbird.
+ .
+ This package adds support for Unity's sound menu.

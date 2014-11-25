@@ -1,0 +1,74 @@
+#!/usr/bin/make -f
+
+CXXFLAGS = \
+	$(CPPFLAGS) \
+	$(filter-out -g,$(shell dpkg-buildflags --get CXXFLAGS)) \
+	-fomit-frame-pointer -pipe -fpermissive
+LDFLAGS += -Wl,--as-needed
+
+linux-base = linux-$(shell dpkg-architecture -qDEB_HOST_GNU_CPU)
+tarball = $(linux-base)-lintian-release.tar.lzma
+
+ac_add_options = \
+	--with-taglib-source=packaged \
+	--enable-libnotify \
+	--enable-unity-integration \
+	--enable-system-nspr \
+	--enable-jars=no \
+	--enable-official
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	cd dependencies && tar xvf $(CURDIR)/../usr/lib/nightingale-deps/$(tarball)
+
+	$(foreach OPTION,$(ac_add_options),\
+	  echo 'ac_add_options $(OPTION)' >> nightingale.config ;)
+	dh_auto_build
+
+override_dh_auto_test:
+
+override_dh_install:
+	rm -f debian/tmp/usr/lib/nightingale/extensions/unity-integration@lookingman.org/README
+	cd debian/tmp/usr/lib/nightingale/xulrunner && \
+	  rm -rf chrome ../chrome dictionaries libnspr4.so LICENSE README.txt res
+	cp -f debian/nightingale.links.in debian/nightingale.links
+
+	prefix=debian/tmp/usr ;\
+DIR=$$prefix/lib/nightingale/ ;\
+\
+files=$$(\
+find $$DIR -name \*.png -printf '%p '; \
+find $$DIR -name \*.gif -printf '%p '; \
+find $$DIR -name \*.jpg -printf '%p '; \
+find $$DIR -name \*.xpm -printf '%p '; \
+find $$DIR -name \*.jar -printf '%p ';) ;\
+\
+for f in $$files; do \
+in=$$(echo $$f | sed -e "s:$$prefix:/usr:") ;\
+out=$$(echo $$f | sed -e "s:$$prefix/lib:$$prefix/share:") ;\
+target=$$(echo $$out | sed -e "s:$$prefix:/usr:") ;\
+mkdir -v -p $$(dirname $$out) ;\
+mv -v $$f $$(dirname $$out) ;\
+echo $$target'      '$$in | tee -a debian/nightingale.links ;\
+done
+
+	dh_install --list-missing -pnightingale -Xunity-integration@lookingman.org
+	dh_install --list-missing -pngale-unity-addon
+
+override_dh_shlibdeps:
+	dh_shlibdeps -Lnightingale -l/usr/lib/nightingale/xulrunner
+
+override_dh_auto_clean:
+	dh_auto_clean -- clobber
+
+override_dh_clean:
+	dh_clean debian/nightingale.links nightingale.config config.log
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
