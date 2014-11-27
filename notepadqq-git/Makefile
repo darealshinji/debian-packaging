@@ -9,6 +9,7 @@ all: deps download build
 nodeps: download build
 
 build:
+	find notepadqq -type f -name *.js -exec chmod 0644 '{}' \;
 	@cd notepadqq && $(buildpackage)
 	mv -f notepadqq/build.log .
 	mv -f *.deb *.changes ../
@@ -25,19 +26,7 @@ download: clean
 	mv CodeMirror-master/* notepadqq/src/editor/libs/codemirror
 
 	# create new Debian changelog entry
-	mv notepadqq/debian/changelog notepadqq/debian/changelog.in
-	latestcommit=$$(git -C notepadqq/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\
-	VERSION=$$(git -C notepadqq/ describe --abbrev=0 --tags | sed -e 's/v//g') ;\
-	echo "notepadqq ($$VERSION+git$$latestcommit-1~trusty) trusty; urgency=low" > changelog.new
-	#echo "notepadqq ($$VERSION-1) unstable; urgency=low" > changelog.new
-	echo "" >> changelog.new
-	echo "  * Current git snapshot" >> changelog.new
-	echo "" >> changelog.new
-	#echo " -- `whoami` <`uname -n`>  `date -R`" >> changelog.new
-	echo " -- Marshall Banana <djcj@gmx.de>  `date -R`" >> changelog.new
-	echo "" >> changelog.new
-	cat changelog.new notepadqq/debian/changelog.in > notepadqq/debian/changelog
-	rm changelog.new
+	./changelog.sh
 
 deps:
 	sudo apt-get install debhelper $(deps)
