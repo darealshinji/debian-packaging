@@ -9,7 +9,6 @@ all: deps download build
 nodeps: download build
 
 build:
-	find notepadqq -type f -name *.js -exec chmod 0644 '{}' \;
 	@cd notepadqq && $(buildpackage)
 	mv -f notepadqq/build.log .
 	mv -f *.deb *.changes ../
