@@ -42,7 +42,11 @@ override_dh_auto_configure: $(DH_INSTALL_FILES)
 override_dh_auto_build:
 
 override_dh_auto_clean:
-	rm -rf api doc debian/*.pc debian/*.install debian/libfmod*$(SOVERSION)*.examples
+	rm -rf api doc debian/*.pc debian/*.install \
+	debian/libfmodstudio$(SOVERSION)-examples.examples \
+	debian/libfmod$(SOVERSION)-dev.examples \
+	debian/libfmod$(SOVERSION).install \
+	debian/libfmodstudio$(SOVERSION).install
 
 override_dh_installchangelogs:
 	dh_installchangelogs doc/revision.txt

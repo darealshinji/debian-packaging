@@ -1,14 +1,20 @@
 #!/bin/sh
 
+set -e
+set -v
+
 LANG=C
 LANGUAGE=C
 LC_ALL=C
 
 echo "get latest fmod version"
 changelog=studio_api_revision.txt
-wget http://www.fmod.org/files/$changelog
+wget "http://www.fmod.org/files/$changelog"
 
 pointversion=$(grep -e "Studio API" $changelog | head -n2 | tail -n-1 | cut -d' ' -f2)
+####### BUGFIX #######
+pointversion="1.05.07"
+######################
 version=$(echo $pointversion | sed -e 's/\.//g')
 rm -f $changelog
 
@@ -22,19 +28,10 @@ fi
 rm -rf "$dirname"
 tar xvf "$fname"
 
-echo "update Debian changelog"
 lib="fmodstudioapi${version}linux/api/lowlevel/lib/x86/libfmod.so"
 rev=$(readelf -d $lib |grep -e soname|sed -ne '/\[[^]]/s/^[^[]*\[\([^]]*\)].*$/\1/p'|cut -d. -f3)
-deb_version=$(head -n1 debian/changelog | cut -d' ' -f2 | cut -d'-' -f1 | sed -e 's/\.//g' -e 's/(//g')
 date=$(date -R)
-if [ $version -gt $deb_version ] ; then
-  rm -f debian/changelog.old
-  mv debian/changelog debian/changelog.old
-  echo "fmod${rev} ($pointversion-1) unstable; urgency=low" > debian/changelog
-  echo "" >> debian/changelog
-  echo "  * New upstream version" >> debian/changelog
-  echo "" >> debian/changelog
-  echo " -- Marshall Banana <djcj@gmx.de>  $date" >> debian/changelog
-  echo "" >> debian/changelog
-  cat debian/changelog.old >> debian/changelog
-fi
+
+sed -e "s/@REV@/$rev/; s/@VERSION@/$pointversion/; s/@DATE@/$(date -R)/;" \
+debian/changelog.in > debian/changelog
+
