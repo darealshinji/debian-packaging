@@ -1,0 +1,29 @@
+Source: libdvdcss
+Priority: extra
+Maintainer: Kubuntu Developers <kubuntu-devel@lists.ubuntu.com>
+XSBC-Original-Maintainer: Jonathan Riddell <jriddell@ubuntu.com>
+Build-Depends: debhelper (>= 9), dh-autoreconf, autotools-dev
+Standards-Version: 3.9.5
+Section: libs
+Homepage: http://www.videolan.org/developers/libdvdcss.html
+Vcs-Git: git://git.videolan.org/libdvdcss
+Vcs-Browser: http://git.videolan.org/?p=libdvdcss.git
+
+Package: libdvdcss2
+Section: libs
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: library designed for accessing DVDs
+ libdvdcss is a simple library designed for accessing DVDs like a
+ block device without having to bother about the decryption.
+
+Package: libdvdcss-dev
+Section: libdevel
+Architecture: any
+Depends: libdvdcss2 (= ${binary:Version}), ${misc:Depends}
+Description: library designed for accessing DVDs
+ libdvdcss is a simple library designed for accessing DVDs like a
+ block device without having to bother about the decryption.
+ .
+ This package provides the development files.

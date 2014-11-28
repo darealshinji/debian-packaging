@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+export V=1
+
+
+%:
+	dh $@ --with autoreconf,autotools-dev
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=libdvdcss2
+
+override_dh_installchangelogs:
+	dh_installchangelogs ChangeLog
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
