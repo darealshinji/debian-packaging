@@ -1,16 +1,16 @@
 include ../Makefile.inc
 
-deps = 
 cleanfiles = build.log tmp debian/copyright
-
 GAMEDIR = "$(shell echo $$HOME)/.steam/steam/SteamApps/common/You Have to Win the Game/"
 
+checkarch:
+ifneq ($(shell uname -p), x86_64)
+	@echo "" ;\
+	echo "'You Have to Win the Game' is only available for x86_64 architectures." ;\
+	exit 1
+endif
 
-all: deps download build
-
-nodeps: download build
-
-build: checkarch clean
+download: checkarch clean
 	@if [ ! -d $(GAMEDIR) ] ; then \
     echo "can't find "\"$(GAMEDIR)\" ;\
     echo "" ;\
@@ -21,21 +21,4 @@ build: checkarch clean
 fi
 	mkdir -p tmp
 	cp $(GAMEDIR)/* tmp/
-	@$(buildpackage)
-
-checkarch:
-ifneq ($(shell uname -p), x86_64)
-	@echo "" ;\
-	echo "'You Have to Win the Game' is only available for x86_64 architectures." ;\
-	exit 1
-endif
-
-download:
-
-deps:
-	sudo apt-get install debhelper $(deps)
-
-clean:
-	dh_clean || true
-	rm -rf build.log $(cleanfiles)
 

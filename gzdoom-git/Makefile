@@ -5,20 +5,6 @@ deps = git wget cmake libbz2-dev libfluidsynth-dev libglew-dev libgtk2.0-dev \
 cleanfiles = fmodapi*linux gzdoom debian/changelog *.tar.gz
 
 
-all: deps download build
-
-nodeps: download build
-
-build:
-	@$(buildpackage)
-
 download: clean
 	./download.sh
-
-deps:
-	sudo apt-get install debhelper $(deps)
-
-clean:
-	dh_clean || true
-	rm -rf build.log $(cleanfiles)
 

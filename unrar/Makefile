@@ -8,14 +8,6 @@ URL = $(shell wget -q -O - "$(MAINURL)/rar_add.htm" | \
 	grep -e '\/unrarsrc-' | cut -d '"' -f2)
 VER = $(shell echo $(URL) | sed -e 's@$(MAINURL)/rar/unrarsrc-@@; s/.tar.gz//;')
 
-
-all: deps download build
-
-nodeps: download build
-
-build:
-	@ $(buildpackage)
-
 download: clean
 	wget $(URL)
 	tar xvf unrarsrc-$(VER).tar.gz
@@ -38,12 +30,4 @@ download: clean
 	echo "" >> changelog.new
 	cat changelog.new debian/changelog.in > \
 	debian/changelog
-	rm changelog.new
-
-deps:
-	sudo apt-get install debhelper $(deps)
-
-clean:
-	dh_clean
-	rm -rf build.log $(cleanfiles)
 

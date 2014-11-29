@@ -1,10 +1,10 @@
-freedoom (0.8+git20140614-1~trusty) trusty; urgency=low
+freedoom (@VERSION@-1) unstable; urgency=low
 
   * Current git snapshot.
   * Build freedoom1.wad and freedoom2.wad.
   * Add an independend extra package which installs the IWAD files only.
 
- -- Marshall Banana <djcj@gmx.de>  Wed, 18 Jun 2014 13:39:21 +0200
+ -- Marshall Banana <djcj@gmx.de>  @DATE@
 
 freedoom (0.8-1) unstable; urgency=low
 

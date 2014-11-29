@@ -15,18 +15,18 @@ override_dh_auto_clean:
 
 override_dh_auto_build:
 	sed -i 's/FLAGS=/FLAGS+=/g' unrar/makefile
+
 	mv unrar/version.hpp unrar/version.hpp.old
 	grep -v unrar/version.hpp.old \
 	-e "$$(grep -e 'RARVER_MINOR' unrar/version.hpp.old)" > unrar/version.hpp
 
-	CXXFLAGS='$(CXXFLAGS)' LIBFLAGS='$(LIBFLAGS)' LDFLAGS='$(LDFLAGS)' $(MAKE) -C unrar
+	dh_auto_build -Dunrar
 
 	sed -e 's/@VERSION@/$(VERSION)/;' debian/unrar-nonfree.1.header > unrar-nonfree.1
 	unrar/unrar >> unrar-nonfree.1
 	echo .fi >> unrar-nonfree.1
 
 override_dh_install:
-	mkdir -p debian/unrar/usr/bin
 	install -m755 unrar/unrar $(CURDIR)/debian/unrar/usr/bin/unrar-nonfree
 
 override_dh_builddeb:

@@ -1,12 +1,8 @@
 include ../Makefile.inc
 
 deps = wget libqt4-dev
-cleanfiles = hybrid-debian-master hybrid-avisynth-extension-master *.tar.gz
-
-
-all: deps download build
-
-nodeps: download build
+cleanfiles = hybrid-debian-master hybrid-avisynth-extension-master\
+             *.deb *.changes *.tar.gz
 
 build:
 	tar xvf hybrid-debian.tar.gz
@@ -34,12 +30,8 @@ done 2>&1 | tee -a ../build.log
 	mv -f *.deb *.changes ../
 
 download: clean
-	wget -O hybrid-debian.tar.gz "https://github.com/darealshinji/hybrid-debian/archive/master.tar.gz"
-	wget -O hybrid-avisynth-extension.tar.gz "https://github.com/darealshinji/hybrid-avisynth-extension/archive/master.tar.gz"
-
-deps:
-	sudo apt-get install debhelper $(deps)
-
-clean:
-	rm -rf build.log $(cleanfiles)
+	wget -O hybrid-debian.tar.gz \
+	"https://github.com/darealshinji/hybrid-debian/archive/master.tar.gz"
+	wget -O hybrid-avisynth-extension.tar.gz \
+	"https://github.com/darealshinji/hybrid-avisynth-extension/archive/master.tar.gz"
 

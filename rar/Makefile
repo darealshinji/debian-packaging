@@ -12,14 +12,6 @@ URL = $(MAINURL)$(shell wget -q -O - "$(MAINURL)/download.htm" | \
 VER = $(shell echo $(URL) | sed -e 's@$(MAINURL)/rar/rarlinux-$(x64)@@; s/.tar.gz//; s/-//;')
 
 
-all: deps download build
-
-nodeps: download build
-
-build:
-	tar xvf rarlinux-$(x64)-$(VER).tar.gz
-	@ $(buildpackage)
-
 download: clean
 	wget $(URL)
 
@@ -32,14 +24,7 @@ download: clean
 	#echo " -- `whoami` <`uname -n`>  `date -R`" >> changelog.new
 	echo " -- Marshall Banana <djcj@gmx.de>  `date -R`" >> changelog.new
 	echo "" >> changelog.new
-	cat changelog.new debian/changelog.in > \
-	debian/changelog
-	rm changelog.new
+	cat changelog.new debian/changelog.in > debian/changelog
 
-deps:
-	sudo apt-get install debhelper $(deps)
-
-clean:
-	dh_clean
-	rm -rf build.log $(cleanfiles)
+	tar xvf rarlinux-$(x64)-$(VER).tar.gz
 

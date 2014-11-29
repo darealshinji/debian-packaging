@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-SVN_VERSION := $(shell sed -e 's/-snapshot//' mplayer-export/snapshot_version)
+SVN_VERSION := $(shell sed -e 's/-snapshot//' snapshot_version)
 
 DEB_HOST_ARCH    ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 DEB_HOST_ARCH_OS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
@@ -74,24 +74,24 @@ LANGS = fr ru cs hu it de es pl zh_CN
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	dh_auto_clean -Dmplayer-export || true
+	dh_auto_clean || true
 
 override_dh_auto_configure:
-	test -f mplayer-export/VERSION || \
-	echo 'svn r$(SVN_VERSION) ($(DEB_VENDOR)), built with gcc' > mplayer-export/VERSION
-	cd mplayer-export && ./configure $(CONFIGURE_FLAGS) --disable-gui
+	test -f VERSION || \
+	echo 'svn r$(SVN_VERSION) ($(DEB_VENDOR)), built with gcc' > VERSION
+	./configure $(CONFIGURE_FLAGS) --disable-gui
 
 override_dh_auto_build:
-	dh_auto_build -Dmplayer-export -- mplayer mencoder V=1
-	cd mplayer-export && $(MAKE) html-chunked
+	dh_auto_build -- mplayer mencoder V=1
+	$(MAKE) html-chunked
 
 override_dh_auto_install:
 
 override_dh_install:
-	cd mplayer-export && $(MAKE) install-mplayer DESTDIR=$(CURDIR)/debian/mplayer
-	cd mplayer-export && $(MAKE) install-mplayer-man DESTDIR=$(CURDIR)/debian/mplayer
-	cd mplayer-export && $(MAKE) install-mencoder DESTDIR=$(CURDIR)/debian/mencoder
-	cd mplayer-export && $(MAKE) install-mplayer-man DESTDIR=$(CURDIR)/debian/mencoder
+	$(MAKE) install-mplayer DESTDIR=$(CURDIR)/debian/mplayer
+	$(MAKE) install-mplayer-man DESTDIR=$(CURDIR)/debian/mplayer
+	$(MAKE) install-mencoder DESTDIR=$(CURDIR)/debian/mencoder
+	$(MAKE) install-mplayer-man DESTDIR=$(CURDIR)/debian/mencoder
 
 	cd $(CURDIR)/debian/mencoder/usr/share/man/man1 && mv mplayer.1 mencoder.1
 	$(foreach LANG,$(LANGS),cd $(CURDIR)/debian/mencoder/usr/share/man/$(LANG)/man1 && \
@@ -105,10 +105,10 @@ override_dh_install:
 	dh_install
 
 override_dh_installchangelogs:
-	dh_installchangelogs mplayer-export/Changelog
+	dh_installchangelogs Changelog
 
 override_dh_clean:
-	dh_clean mplayer-export/VERSION
+	dh_clean VERSION
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

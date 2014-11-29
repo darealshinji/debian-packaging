@@ -9,6 +9,7 @@ Homepage: http://www.piratehearts.com/blog/games/you-have-to-win-the-game/
 Package: thegame
 Architecture: amd64
 Depends:
+ ${misc:Depends},
  libc6 (>= 2.15),
  libgcc1 (>= 1:4.1.1),
  libgl1-mesa-glx | libgl1,
@@ -28,7 +29,7 @@ Package: thegame-dbg
 Architecture: amd64
 Section: debug
 Priority: extra
-Depends: thegame (= 1.01.0405)
+Depends: ${misc:Depends}, thegame (= ${source:Version})
 Provides: thegame-dbg, yhtwtg-dbg
 Description: debugging symbols for thegame
  You Have to Win the Game is a free exploration platformer with
@@ -45,7 +46,7 @@ Description: debugging symbols for thegame
 
 Package: thegame-ega
 Architecture: amd64
-Depends: thegame (= 1.01.0405)
+Depends: ${misc:Depends}, thegame (= ${source:Version})
 Provides: thegame-ega, yhtwtg-ega
 Description: EGA tileset for 'You Have to Win the Game'
  You Have to Win the Game is a free exploration platformer with

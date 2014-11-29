@@ -1,37 +1,28 @@
 include ../Makefile.inc
 
+builddir = yasm-$(VERSION)
 deps = wget dh-autoreconf autotools-dev bison gettext xmlto
-cleanfiles = *.tar.gz *.pdf *.html source images debian/autoreconf.after debian/autoreconf.before
+cleanfiles = *.tar.gz *.pdf *.html $(builddir) images
 
+VERSION = $(shell head -n1 debian-files/changelog | cut -d' ' -f2 | cut -d'-' -f1 | tail -c+2)
 SITE = http://www.tortall.net/projects/yasm
-VERSION = $(shell head -n1 debian/changelog | cut -d' ' -f2 | cut -d'-' -f1 | tail -c+2)
-
-
-all: deps download build
-
-nodeps: download build
-
-build:
-	mkdir -p images
-	mv *.png images
-	tar xvfz yasm-$(VERSION).tar.gz
-	mv yasm-$(VERSION) source
-	@$(buildpackage)
+HTML = $(SITE)/manual/html
+sha256_1 = 3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f
+bin = yasm-$(VERSION).tar.gz
 
 download: clean
-	wget "$(SITE)/releases/yasm-$(VERSION).tar.gz"
+	wget "$(SITE)/releases/$(bin)"
 	wget "$(SITE)/manual/manual.pdf"
 	wget -O manual-ru.pdf "$(SITE)/manual/ru/manual.pdf"
-	wget -k "$(SITE)/manual/html/manual.html"
+	wget -k "$(HTML)/manual.html"
 	wget -k -O manual-ru.html "$(SITE)/manual/ru/html/manual.html"
-	wget "$(SITE)/manual/html/objfmt-win64/calling-convention.png"
-	wget "$(SITE)/manual/html/objfmt-win64/stack-frame-detailed.png"
-	wget "$(SITE)/manual/html/arch-x86/x86-registers.png"
+	wget "$(HTML)/objfmt-win64/calling-convention.png"
+	wget "$(HTML)/objfmt-win64/stack-frame-detailed.png"
+	wget "$(HTML)/arch-x86/x86-registers.png"
 
-deps:
-	sudo apt-get install debhelper $(deps)
-
-clean:
-	dh_clean || true
-	rm -rf build.log $(cleanfiles)
+	@ $(verifysha256)
+	tar xvfz $(bin)
+	mkdir -p images && mv *.png images
+	mv *.html *.pdf images $(builddir)
+	cp -r debian-files $(builddir)/debian
 

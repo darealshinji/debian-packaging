@@ -10,6 +10,7 @@ Homepage: http://www.piratehearts.com/
 Package: thegame
 Architecture: amd64
 Depends:
+ ${misc:Depends},
  libc6 (>= 2.15),
  libgcc1 (>= 1:4.1.1),
  libgl1-mesa-glx | libgl1,
@@ -37,7 +38,7 @@ Package: thegame-dbg
 Architecture: amd64
 Section: debug
 Priority: extra
-Depends: thegame (= 1.01.0499)
+Depends: ${misc:Depends}, thegame (= ${source:Version})
 Description: You Have to Win the Game (Debug)
  Originally released in May 2012, You Have to Win the Game has
  now arrived on Steam with a more difficult remixed campaign

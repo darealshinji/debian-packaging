@@ -1,18 +1,5 @@
-gzdoom (1.8.5+git20140619-2~trusty) trusty; urgency=low
+gzdoom (@VERSION@) unstable; urgency=low
 
-  * Use internal libgme (it's newer)
+  * Current Git snapshot
 
- -- Marshall Banana <djcj@gmx.de>  Tue, 24 Jun 2014 09:17:44 +0200
-
-gzdoom (1.8.5+git20140619-1~trusty) trusty; urgency=low
-
-  * Git snapshot
-  * Update lzma code
-
- -- Marshall Banana <djcj@gmx.de>  Mon, 23 Jun 2014 14:49:28 +0200
-
-gzdoom (1.8.5) trusty; urgency=low
-
-  * Initial release
-
- -- Marshall Banana <djcj@gmx.de>  Sun, 22 Jun 2014 16:25:11 +0200
+ -- Marshall Banana <djcj@gmx.de>  @DATE@
