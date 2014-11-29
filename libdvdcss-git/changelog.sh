@@ -19,6 +19,6 @@ if [ $v -lt 0 ]; then
    git="~git${latestcommit}"
 fi
 
-sed -e "s/@VERSION@/${VERSION}/g; s/@DATE@/$(date -R)/g" \
+sed -e "s/@VERSION@/${VERSION}${git}/g; s/@DATE@/$(date -R)/g" \
 libdvdcss/debian/changelog.in > libdvdcss/debian/changelog
 
