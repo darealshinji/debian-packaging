@@ -14,9 +14,6 @@ changelog=revision_${rev}.txt
 wget http://www.fmod.org/files/$changelog
 
 pointversion=$(grep -e "Stable branch update" $changelog | cut -d' ' -f2 | head -n1)
-######## BUGFIX ########
-pointversion="${rev}.47"
-########################
 version=$(echo $pointversion | sed -e 's/\.//g')
 rm -f $changelog
 

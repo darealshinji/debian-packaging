@@ -12,9 +12,6 @@ changelog=studio_api_revision.txt
 wget "http://www.fmod.org/files/$changelog"
 
 pointversion=$(grep -e "Studio API" $changelog | head -n2 | tail -n-1 | cut -d' ' -f2)
-####### BUGFIX #######
-pointversion="1.05.07"
-######################
 version=$(echo $pointversion | sed -e 's/\.//g')
 rm -f $changelog
 
