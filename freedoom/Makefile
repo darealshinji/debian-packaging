@@ -1,9 +1,11 @@
 include ../Makefile.inc
 
 deps = unzip
-cleanfiles = README.adoc freedoom-* freedm-*
+cleanfiles = README.adoc freed*
 VERSION = $(shell dpkg-parsechangelog -SVersion | cut -d- -f1)
 gitadress = https://github.com/freedoom/freedoom/releases/download
+
+build: build-default
 
 download: clean
 	wget "$(gitadress)/v$(VERSION)/freedoom-$(VERSION).zip"

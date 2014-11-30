@@ -8,6 +8,8 @@ URL = 'https://docs.google.com/uc?authuser=0&id=0B0VmPcEZTp8NekJxLUVJRWMwejQ&exp
 sha256_1 = 815a383aebc67e59b6e541b927ce14480efed9d103fe99e74ced9ea381f61764
 bin = tsmuxer$(VERSION).tar.gz
 
+build: build-default
+
 download:
 	wget -O $(bin) $(URL)
 	@ $(verifysha256)

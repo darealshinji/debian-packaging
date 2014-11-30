@@ -5,6 +5,8 @@ cleanfiles = notepadqq-packaging $(builddir) CodeMirror*
 builddir = notepadqq
 repo = https://github.com/notepadqq
 
+build: build-default
+
 download: clean
 	git clone "$(repo)/notepadqq-packaging.git"
 	git clone "$(repo)/notepadqq.git"

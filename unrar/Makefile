@@ -1,12 +1,14 @@
 include ../Makefile.inc
 
 deps = wget
-cleanfiles = unrar unrar-nonfree.1 rar_add.htm *.tar.gz debian/changelog changelog.new
+cleanfiles = unrar* rar_add.htm *.tar.gz debian/changelog
 
 MAINURL = http://www.rarlab.com
 URL = $(shell wget -q -O - "$(MAINURL)/rar_add.htm" | \
 	grep -e '\/unrarsrc-' | cut -d '"' -f2)
 VER = $(shell echo $(URL) | sed -e 's@$(MAINURL)/rar/unrarsrc-@@; s/.tar.gz//;')
+
+build: build-default
 
 download: clean
 	wget $(URL)

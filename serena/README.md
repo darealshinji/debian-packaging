@@ -8,5 +8,4 @@ effort between dozens of fans and designers of adventure games.
 
 To play this game you need to build the Dagon engine too.
 
-To build Serena download the [Windows zip archive](http://www.indiedb.com/games/serena/downloads/serena),
-save it in this directory and run `make`
+Run `make` to build Serena.

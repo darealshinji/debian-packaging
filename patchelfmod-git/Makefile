@@ -2,7 +2,9 @@ include ../Makefile.inc
 
 builddir = patchelfmod
 deps = git dh-autoreconf libacl1-dev libattr1-dev
-cleanfiles = $(builddir) debian changelog.new
+cleanfiles = $(builddir)
+
+build: build-default
 
 download: clean
 	git clone "https://github.com/darealshinji/patchelfmod.git"
@@ -21,6 +23,5 @@ download: clean
 
 	cat changelog.new $(builddir)/debian-upstream/changelog.in > \
 	$(builddir)/debian-upstream/changelog
-	rm changelog.new
 	mv $(builddir)/debian-upstream $(builddir)/debian
 

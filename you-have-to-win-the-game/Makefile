@@ -1,13 +1,14 @@
 include ../Makefile.inc
 
 deps = wget unzip
-cleanfiles = *.tar.gz *.zip icons icons-ega YHtWtG_EGA TheGame_2014-01-30
+cleanfiles = $(game) $(ega) icons icons-ega YHtWtG_EGA TheGame_2014-01-30
 
 game = TheGame_2014-01-30.tar.gz
 sha256_game1 = 83ed5a02d222d280e439355f381e1115736c9d14c83171ac25e6b211c59e6751
 ega = YHtWtG_EGA.zip
 sha256_ega1 = 476a90500101d995ff5cb41b5d8e6548721daf44eb4ae65ecf58c3ba6ca165d9
 
+build: build-default
 
 download: clean
 	wget "http://www.piratehearts.com/builds/$(game)"

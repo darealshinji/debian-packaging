@@ -1,10 +1,12 @@
 include ../Makefile.inc
 
 deps = imagemagick unzip wget
-cleanfiles = Serena converted_icons *.txt *.png
+cleanfiles = Serena *.txt *.png
 sha256_1 = b25bbabad910db78c9446e2d293eb161588a7b2098713e77a512f8c10345f530
 mirror = http://ams4.dl.dbolical.com/2014/02/01
 bin = Serena.1.zip
+
+build: build-default
 
 download: clean
 	@if [ ! -f $(bin) ] ; then \

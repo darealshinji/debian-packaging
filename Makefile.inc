@@ -34,7 +34,7 @@ all: deps download build
 
 nodeps: download build
 
-build:
+build-default:
 	@ cd $(builddir) && $(buildpackage)
 	@ test "$(builddir)" = "." && true || \
 	(mv -f $(builddir)/build.log . ; mv -f *.deb *.changes ../)
@@ -46,5 +46,5 @@ deps:
 clean:
 	test -f debian/control && dh_clean || true
 	test -f debian/control && debian/rules override_dh_auto_clean || true
-	rm -rf build.log $(cleanfiles)
+	rm -rf .pc build.log changelog.new *.deb *.changes converted_icons tmp temp $(cleanfiles)
 

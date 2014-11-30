@@ -3,6 +3,8 @@ include ../Makefile.inc
 deps = mercurial cmake help2man python3-sphinx yasm
 cleanfiles = source test.hevc x265_2pass.log* debian/test.y4m debian/changelog
 
+build: build-default
+
 download: clean
 	hg clone "https://bitbucket.org/multicoreware/x265" source
 	cd source && hg log --style changelog > ChangeLog

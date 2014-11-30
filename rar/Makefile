@@ -1,7 +1,7 @@
 include ../Makefile.inc
 
 deps = wget
-cleanfiles = rar rar.1 *.tar.gz debian/changelog changelog.new
+cleanfiles = rar* debian/changelog
 
 ifeq ($(shell dpkg-architecture -qDEB_HOST_ARCH),amd64)
 x64 = x64
@@ -11,6 +11,7 @@ URL = $(MAINURL)$(shell wget -q -O - "$(MAINURL)/download.htm" | \
 	grep -e '\/rarlinux-$(x64)' | head -n1 | cut -d '"' -f2)
 VER = $(shell echo $(URL) | sed -e 's@$(MAINURL)/rar/rarlinux-$(x64)@@; s/.tar.gz//; s/-//;')
 
+build: build-default
 
 download: clean
 	wget $(URL)

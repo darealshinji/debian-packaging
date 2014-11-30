@@ -3,6 +3,8 @@ include ../Makefile.inc
 deps = execstack wget
 cleanfiles = fmodapi*linux debian/control debian/changelog
 
+build: build-default
+
 download:
 	./download.sh
 	debian/rules debian/control

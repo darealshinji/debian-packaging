@@ -1,12 +1,15 @@
 include ../Makefile.inc
 
+deps = wget
 builddir = ffmpeg
-cleanfiles = $(builddir) ffmpeg-snapshot.tar.bz2
+cleanfiles = $(builddir) *.tar.bz2
 
 make-control = \
 test -f /usr/include/frei0r.h && \
 sed -e 's/@//g' $(builddir)/debian/control.in > $(builddir)/debian/control || \
 grep -v '@' $(builddir)/debian/control.in > $(builddir)/debian/control
+
+build: build-default
 
 download: clean
 	wget "http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2"

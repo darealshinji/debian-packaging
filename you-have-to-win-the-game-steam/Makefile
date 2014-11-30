@@ -1,7 +1,9 @@
 include ../Makefile.inc
 
-cleanfiles = build.log tmp debian/copyright
+cleanfiles = debian/copyright
 GAMEDIR = "$(shell echo $$HOME)/.steam/steam/SteamApps/common/You Have to Win the Game/"
+
+build: build-default
 
 checkarch:
 ifneq ($(shell uname -p), x86_64)

@@ -1,7 +1,9 @@
 include ../Makefile.inc
 
 deps = imagemagick unzip wget
-cleanfiles = Asylum-Teaser-master asylum-teaser.png converted_icons
+cleanfiles = Asylum-Teaser-master asylum-teaser.png
+
+build: build-default
 
 download:
 	wget "https://github.com/Senscape/Asylum-Teaser/archive/master.tar.gz"

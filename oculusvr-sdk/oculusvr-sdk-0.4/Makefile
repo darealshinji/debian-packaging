@@ -2,11 +2,13 @@ include ../../Makefile.inc
 
 deps = wget git automake imagemagick
 builddir = OculusSDK
-cleanfiles = $(builddir) ovr_sdk_linux_$(VERSION) *.png .pc
+cleanfiles = $(builddir) ovr_sdk_linux_$(VERSION) *.png
 
 sha256_1 = a1924360c6264d9a6c602ece5c50ebfb1bce740a730e2ed64079e44fe6461017
-VERSION = 0.4.3
+VERSION = $(shell dpkg-parsechangelog -SVersion | cut -d- -f1)
 bin = ovr_sdk_linux_$(VERSION).tar.xz
+
+build: build-default
 
 download: clean
 	test -f $(bin) || wget "http://static.oculus.com/sdk-downloads/$(bin)"

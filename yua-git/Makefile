@@ -2,7 +2,9 @@ include ../Makefile.inc
 
 builddir = yua
 deps = git automake libqt4-dev libqt4-opengl-dev upx-ucl zlib1g-dev
-cleanfiles = yua debian changelog.new
+cleanfiles = yua debian
+
+build: build-default
 
 download: clean
 	git clone "https://github.com/darealshinji/yua.git"

@@ -10,6 +10,8 @@ HTML = $(SITE)/manual/html
 sha256_1 = 3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f
 bin = yasm-$(VERSION).tar.gz
 
+build: build-default
+
 download: clean
 	wget "$(SITE)/releases/$(bin)"
 	wget "$(SITE)/manual/manual.pdf"
