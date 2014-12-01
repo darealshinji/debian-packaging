@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-deps = git wget qtbase5-dev libqt5webkit5-dev libqt5svg5-dev
+deps = git qtbase5-dev libqt5webkit5-dev libqt5svg5-dev
 cleanfiles = notepadqq-packaging $(builddir) CodeMirror*
 builddir = notepadqq
 repo = https://github.com/notepadqq
@@ -8,15 +8,11 @@ repo = https://github.com/notepadqq
 build: build-default
 
 download: clean
-	git clone "$(repo)/notepadqq-packaging.git"
+	git clone --depth 1 "$(repo)/notepadqq-packaging.git"
 	git clone "$(repo)/notepadqq.git"
-	wget -O CodeMirror.tar.gz "$(repo)/CodeMirror/archive/master.tar.gz"
-
-	tar xvf CodeMirror.tar.gz
 	mv notepadqq-packaging/Debian/debian $(builddir)
-	[ -f $(builddir)/src/editor/libs/codemirror/mode/makefile/makefile.js ] || \
-	  cp -r patches $(builddir)/debian
-	mv CodeMirror-master/* $(builddir)/src/editor/libs/codemirror
+	git -C $(builddir) submodule init
+	git -C $(builddir) submodule update
 
 	# create new Debian changelog entry
 	./changelog.sh
