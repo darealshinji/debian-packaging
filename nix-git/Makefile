@@ -8,8 +8,7 @@ builddir = $(srcpkg)
 download:
 	git clone --depth 1500 "https://github.com/NixOS/nix.git"
 	./changelog.sh
-	rm -rf nix/.git
-	rm -f nix/config/*
+	rm -rf nix/.git nix/config/*
 	cp /usr/share/libtool/config/config.* \
 	   /usr/share/libtool/config/install-sh nix/config/
 	cp -rf nix/doc/manual/figures nix/doc/manual/packages
