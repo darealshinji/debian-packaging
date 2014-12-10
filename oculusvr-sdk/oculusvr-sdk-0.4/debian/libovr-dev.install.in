@@ -1,4 +1,0 @@
-libovr_static.a                 /usr/lib/@DEB_HOST_MULTIARCH@
-debian/ovr.pc                   /usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig
-OculusSDK/LibOVR/Include/*      /usr/include
-OculusSDK/LibOVR/Src/*          /usr/include/ovr

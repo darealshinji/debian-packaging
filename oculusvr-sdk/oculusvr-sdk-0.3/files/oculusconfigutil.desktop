@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Oculus Rift configuration util
-GenericName=Configure the Oculus Rift
-Exec=oculusconfigutil
-Type=Application
-Categories=System;
-StartupNotify=true
-Icon=oculusconfigutil

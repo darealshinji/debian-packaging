@@ -1,2 +1,0 @@
-OculusSDK/Firmware/*                  /usr/share/oculusvr-firmware
-OculusSDK/LibOVR/90-oculus.rules      /lib/udev/rules.d

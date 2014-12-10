@@ -1,3 +1,0 @@
-# closed-source
-riftconfigutil: hardening-no-relro usr/bin/oculusd
-riftconfigutil: hardening-no-relro usr/lib/riftconfigutil/RiftConfigUtil
