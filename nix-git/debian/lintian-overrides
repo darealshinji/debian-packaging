@@ -1,0 +1,2 @@
+# unstable API
+nix: shlib-without-versioned-soname usr/lib/*

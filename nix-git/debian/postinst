@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+	ldconfig
+fi
+
+for d in profiles gcroots;
+do
+  mkdir -p /nix/var/nix/$d/per-user
+  chmod 1777 /nix/var/nix/$d/per-user
+done
+
+mkdir -p /nix/store
+chmod 1775 /nix/store
+
+mkdir -p /nix/share/emacs/site-lisp
+cp /usr/share/emacs24/site-lisp/nix-mode.el /nix/share/emacs/site-lisp
+
+#DEBHELPER#
+
+exit 0

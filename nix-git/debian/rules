@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+libdir = $(CURDIR)/debian/nix/usr/lib/$(DEB_HOST_MULTIARCH)
+
+CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
+export GLOBAL_CFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)) $(CPPFLAGS)
+export GLOBAL_CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) $(CPPFLAGS)
+export GLOBAL_LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
+
+export SET_RPATH_TO_LIBS=0
+export V=1
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	[ ! -f Makefile.config ] || dh_auto_clean
+
+override_dh_auto_install:
+	dh_auto_install
+	mv $(CURDIR)/debian/nix/usr/lib/pkgconfig $(libdir)/pkgconfig
+	mv $(CURDIR)/debian/nix/usr/share/emacs $(CURDIR)/debian/nix/usr/share/emacs24
+	ln -fs /usr/bin/bsdiff $(libdir)/nix/bsdiff
+	ln -fs /usr/bin/bspatch $(libdir)/nix/bspatch
+	ln -s nix-daemon.8.gz $(CURDIR)/debian/nix/usr/share/man/man8/nix-worker.8.gz
+
+override_dh_installdocs:
+	$(MAKE) doc/manual/manual.pdf
+	dh_installdocs doc/manual/manual.pdf
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
