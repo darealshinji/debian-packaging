@@ -1,2 +1,4 @@
 # unstable API
 nix: shlib-without-versioned-soname usr/lib/*
+
+nix: package-name-doesnt-match-sonames libnixexpr libnixformat libnixmain libnixstore libnixutil
