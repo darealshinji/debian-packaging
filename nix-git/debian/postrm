@@ -2,11 +2,11 @@
 set -e
 
 if [ "$1" = "remove" ]; then
-	ldconfig
+    ldconfig
 fi
 
 if [ "$1" = "purge" ] && [ -d /nix ]; then
-  rm -r /nix
+    rm -r /nix
 fi
 
 #DEBHELPER#
