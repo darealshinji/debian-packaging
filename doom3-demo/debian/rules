@@ -10,7 +10,7 @@ override_dh_auto_build:
 	chmod a+x $(BIN)
 	./$(BIN) --target temp --noexec
 	chmod a-x temp/gamex86.so
-	../make-icons.sh doom3-demo.png
+	./make-icons.sh doom3-demo.png
 
 override_dh_auto_clean:
 	rm -rf temp
@@ -18,10 +18,6 @@ override_dh_auto_clean:
 override_dh_makeshlibs:
 
 override_dh_shlibdeps:
-
-override_dh_gencontrol:
-	dh_gencontrol
-	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/doom3-demo/DEBIAN/control
 
 override_dh_builddeb:
 	dh_builddeb -- -z1

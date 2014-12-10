@@ -14,7 +14,7 @@ fmodlib = libfmodex$(LIB64)-4.44.$(fmodrevision).so
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	dh_auto_clean -Dgzdoom
+	dh_auto_clean -Dgzdoom || true
 
 override_dh_auto_configure:
 	tar xvf fmodapi*linux.tar.gz
@@ -40,12 +40,7 @@ override_dh_auto_build:
 	dh_auto_build -Dgzdoom
 
 override_dh_shlibdeps:
-	dh_shlibdeps -l$(CURDIR)/debian/gzdoom/usr/lib/games/gzdoom
-
-override_dh_gencontrol:
-	dh_gencontrol
-	# prevents Lintian warning virtual-package-depends-without-real-package-depends
-	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/gzdoom/DEBIAN/control
+	dh_shlibdeps -l$(CURDIR)/debian/gzdoom/usr/lib/gzdoom
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

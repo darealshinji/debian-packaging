@@ -8,23 +8,17 @@ description = 'simple program to mux video to TS/M2TS files or create BD disks'
 	dh ${@}
 
 override_dh_auto_clean:
-
-override_dh_auto_build:
-
-override_dh_strip:
+	rm -f tsMuxeR.1
 
 override_dh_installchangelogs:
 	dh_installchangelogs release_notes.txt
 
 override_dh_installman:
-	help2man -N --version-string=$(version) -n $(description) --help-option=' ' ./tsMuxeR > tsMuxeR.1
+	help2man -N --version-string=$(version) -n $(description) \
+	--help-option=' ' ./tsMuxeR > tsMuxeR.1 || cp debian/tsMuxeR.1 .
 	dh_installman
 
-override_dh_gencontrol:
-	dh_gencontrol
-	# set correct package architecture
-	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/tsmuxer/DEBIAN/control
-	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/tsmuxergui/DEBIAN/control
+override_dh_strip:
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

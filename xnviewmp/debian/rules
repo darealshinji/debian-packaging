@@ -1,17 +1,29 @@
 #!/usr/bin/make -f
 
+ifeq ($(shell uname -p), x86_64)
+x64 = -x64
+endif
+
 
 %:
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf converted_icons
+	rm -rf converted_icons XnView
 
 override_dh_auto_build:
-	../make-icons.sh XnView/xnview.png
-	../make-icons.sh XnView/xnview_2.png
-	rm -f XnView/UI/style_sheet_win.qss XnView/UI/style_sheet_mac.qss
+	tar xvfz XnViewMP-linux$(x64).tgz
+	find XnView -type f -exec chmod 0644 '{}' \;
+	chmod 0755 XnView/XnView
+	dos2unix XnView/*.txt
+
+	./make-icons.sh XnView/xnview.png
+	./make-icons.sh XnView/xnview_2.png
+
 	chrpath -d XnView/XnView `find XnView/ -type f -name *.so*`
+
+override_dh_install:
+	dh_install -Xstyle_sheet_win.qss -Xstyle_sheet_mac.qss
 
 override_dh_installchangelogs:
 	dh_installchangelogs XnView/WhatsNew.txt

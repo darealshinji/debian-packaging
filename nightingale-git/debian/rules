@@ -24,7 +24,7 @@ ac_add_options = \
 override_dh_auto_configure:
 
 override_dh_auto_build:
-	cd dependencies && tar xvf $(CURDIR)/../usr/lib/nightingale-deps/$(tarball)
+	cd dependencies && tar xvf $(tarball)
 
 	$(foreach OPTION,$(ac_add_options),\
 	  echo 'ac_add_options $(OPTION)' >> nightingale.config ;)

@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 SOVERSION := $(shell head -n1 debian/changelog | cut -d' ' -f1 | tail -c+7)
-VERSION := $(shell sed -e '1{;s|^fmodex$(SOVERSION) (\([0-9.]*\)-.*)\ .*|\1|;q;}' debian/changelog)
+VERSION = $(shell head -n1 debian/changelog | cut -d' ' -f2 | sed -e 's/(//; s/)//;')
 
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
@@ -20,7 +20,7 @@ debian/control:
 	$(MYSED) $@.in > $@
 
 override_dh_auto_configure: debian/control
-	tar xzf fmodapi*linux.tar.gz
+	tar xzf fmodapi-linux.tgz
 	rm -f fmodapi*linux/Makefile
 	mv fmodapi*linux/* $(CURDIR)
 	rm -rf fmodapi*linux
@@ -32,8 +32,6 @@ override_dh_auto_configure: debian/control
 	$(MYSED) debian/fmodex.pc.in             > debian/fmodex.pc
 	$(MYSED) debian/libfmodexN.install.in    > debian/libfmodex$(SOVERSION).install
 	$(MYSED) debian/libfmodeventN.install.in > debian/libfmodevent$(SOVERSION).install
-
-override_dh_auto_build:
 
 override_dh_installchangelogs:
 	dh_installchangelogs documentation/revision.txt

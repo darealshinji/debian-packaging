@@ -1,7 +1,6 @@
 #!/bin/sh
 
 set -e
-set -v
 
 LANG=C
 LANGUAGE=C
@@ -18,9 +17,13 @@ rm -f $changelog
 dirname=fmodstudioapi${version}linux
 fname=${dirname}.tar.gz
 
-echo "download fmod"
-if [ ! -f $fname ] ; then
-    wget "http://www.fmod.org/download/fmodstudio/api/Linux/$fname"
+if [ -f fmodstudioapi-linux.tgz ] ; then
+    ln -s fmodstudioapi-linux.tgz $fname
+else
+    echo "download fmod"
+    if [ ! -f $fname ] ; then
+        wget "http://www.fmod.org/download/fmodstudio/api/Linux/$fname"
+    fi
 fi
 rm -rf "$dirname"
 tar xvf "$fname"

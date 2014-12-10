@@ -1,17 +1,18 @@
 include ../Makefile.inc
 
-deps = wget imagemagick chrpath
-cleanfiles = XnView *.tgz
-archive = XnViewMP-linux$(x64).tgz
+deps = wget
+srcfiles = $(bin)
+cleanfiles = XnView
+distcleanfiles = $(bin) $(srcfiles)
+srcpkg = xnviewmp
 
+bin = XnViewMP-linux$(x64).tgz
 ifeq ($(shell uname -p), x86_64)
 x64 = -x64
 endif
 
-build: build-default
-
-download: clean
-	wget "http://download.xnview.com/$(archive)"
-	rm -rf XnView
-	tar xvf $(archive)
-
+download:
+	test -f $(bin) || wget "http://download.xnview.com/$(bin)"
+	tar xvf $(bin)
+	VERSION=$$(head -n1 XnView/WhatsNew.txt | sed -e 's/Changelog //; s/://;' | tr -d '[:cntrl:]') ;\
+	$(changelog-entry)

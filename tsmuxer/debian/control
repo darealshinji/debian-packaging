@@ -2,7 +2,10 @@ Source: tsmuxer
 Section: video
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends: debhelper (>= 9), help2man
+Build-Depends:
+   debhelper (>= 9),
+   help2man,
+   libfreetype6 [i386]
 Standards-Version: 3.9.5
 Homepage: http://forum.doom9.org/showthread.php?t=168539
 
@@ -10,8 +13,12 @@ Package: tsmuxer
 Architecture: amd64 i386
 Depends:
    ${misc:Depends},
-   libc6, libgcc1,
-   libfreetype6
+   libc6 [i386],
+   libgcc1 [i386],
+   libfreetype6 [i386],
+   libc6-i386 [amd64],
+   lib32gcc1 [amd64],
+   libfreetype6:i386 [amd64]
 Description: mux video to TS/M2TS files or create BD disks
  tsMuxeR can be run in track detection mode or muxing mode. If run tsMuxeR with
  only one argument then tsMuxeR  display input track information required to
@@ -22,10 +29,15 @@ Package: tsmuxergui
 Architecture: amd64 i386
 Depends:
    ${misc:Depends},
-   tsmuxer (>= 2),
-   libc6, libgcc1,
-   libfreetype6,
-   libqt4-gui
+   tsmuxer (>= 2) [amd64 i386],
+   libc6 [i386],
+   libgcc1 [i386],
+   libfreetype6 [i386],
+   libqt4-gui [i386],
+   libc6-i386 [amd64],
+   lib32gcc1 [amd64],
+   libfreetype6:i386 [amd64],
+   libqt4-gui:i386 [amd64]
 Description: mux video to TS/M2TS files or create BD disks - GUI
  tsMuxeR can be run in track detection mode or muxing mode. If run tsMuxeR with
  only one argument then tsMuxeR  display input track information required to

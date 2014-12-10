@@ -1,4 +1,4 @@
-runner   usr/lib/mrred
-assets   usr/share/games/mrred
-converted_icons/*      usr/share
-debian/mrred.desktop   usr/share/applications
+runner                 /usr/lib/mrred
+assets                 /usr/share/games/mrred
+converted_icons/*      /usr/share
+debian/mrred.desktop   /usr/share/applications

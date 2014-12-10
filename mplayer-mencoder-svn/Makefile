@@ -1,19 +1,27 @@
 include ../Makefile.inc
 
+VERSION = 2:1.1.1
+
+deps = wget git
+bin = mplayer-export-snapshot.tar.bz2
+cleanfiles = debian/changelog
 builddir = mplayer-export
-archive = mplayer-export-snapshot.tar.bz2
-cleanfiles = $(builddir) $(archive)
+srcpkg = mplayer
+changelog-file = debian/changelog
+changelog-msg = Current svn snapshot
 
-build: build-default
+download:
+	wget "http://mplayerhq.hu/MPlayer/releases/$(bin)"
+	mkdir -p $(builddir)
+	cd $(builddir) && tar xvf ../$(bin)
+	mv $(builddir)/mplayer-export-*/* $(builddir)
 
-download: clean
-	wget "http://mplayerhq.hu/MPlayer/releases/$(archive)"
-	tar xvf $(archive) && rm -f $(archive)
-	mv mplayer-export-* $(builddir)
 	git clone -b master --depth 1 "git://source.ffmpeg.org/ffmpeg.git" $(builddir)/ffmpeg
-	rm -rf $(builddir)/debian
-	cp -r debian-files $(builddir)/debian
+
 	REV=$$(cat $(builddir)/snapshot_version | cut -d- -f1) ;\
-	sed -e "s/@REV@/$$REV/; s/@DATE@/$$(date -R)/;" \
-	$(builddir)/debian/changelog.in > $(builddir)/debian/changelog
+	VERSION=$(VERSION)+svn$${REV} ;\
+	$(changelog-entry)
+
+	cd $(builddir) && \
+	rm -rf debian ffmpeg/mp_auto_pull ffmpeg/.git mplayer-export-*
 

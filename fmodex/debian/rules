@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 SOVERSION = $(shell head -n1 debian/changelog | cut -d' ' -f1 | tail -c+7)
-VERSION = $(shell sed -e '1{;s|^fmodex$(SOVERSION) (\([0-9.]*\)-.*)\ .*|\1|;q;}' debian/changelog)
+VERSION = $(shell head -n1 debian/changelog | cut -d' ' -f2 | sed -e 's/(//; s/)//;')
 
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
@@ -32,7 +32,7 @@ override_dh_auto_clean:
 		debian/*.pc debian/libfmode*$(SOVERSION)*.examples
 
 override_dh_auto_configure: debian/control
-	tar xzf fmodapi*linux.tar.gz
+	tar xzf fmodapi-linux.tgz
 	rm fmodapi*linux/Makefile
 	mv fmodapi*linux/* $(CURDIR)
 	rm -rf fmodapi*linux

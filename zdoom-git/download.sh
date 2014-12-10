@@ -1,7 +1,6 @@
 #!/bin/sh
 
 set -e
-set -v
 
 LANG=C
 LANGUAGE=C
@@ -15,15 +14,17 @@ pointversion=$(grep -e "Stable branch update" $changelog | cut -d' ' -f2 | head 
 version=$(echo $pointversion | sed -e 's/\.//g')
 rm -f $changelog
 
-##### BUGFIX #####
-version=44447
-##################
 dirname=fmodapi${version}linux
 fname=${dirname}.tar.gz
 
-# download fmod ex
-if [ ! -f $fname ] ; then
-    wget "http://www.fmod.org/download/fmodex/api/Linux/$fname"
+# fmod ex
+if [ -f fmodapi-linux.tgz ] ; then
+    ln -s fmodapi-linux.tgz $fname
+else
+    echo "download fmod ex"
+    if [ ! -f $fname ] ; then
+        wget "http://www.fmod.org/download/fmodex/api/Linux/$fname"
+    fi
 fi
 
 # download ZDoom

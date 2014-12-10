@@ -3,7 +3,7 @@
 CFLAGS   := $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
 CXXFLAGS := $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
 
-HELP2MAN = help2man --no-discard-stderr -n "H.265/HEVC video encoder" -N -s1
+VERSION = $(shell dpkg-parsechangelog | grep -e 'Version: ' | cut -d' ' -f2 | cut -d- -f1)
 
 confflags = \
 	-DCMAKE_BUILD_TYPE=Release \
@@ -18,17 +18,18 @@ override_dh_auto_clean:
 	rm -f debian/test.y4m source/x265 source/x265-10bit
 
 override_dh_auto_build:
+	sed -i 's/X265_VERSION \"unknown\"/X265_VERSION $(VERSION)/;' \
+	source/source/cmake/version.cmake
+
 	cd source && cmake $(confflags) -DHIGH_BIT_DEPTH=ON source
 	dh_auto_build -Dsource
 	mv source/x265 source/x265-10bit
 
 	$(MAKE) -C source clean
-	cd source && cmake $(confflags) source
+	cd source && cmake $(confflags) -DHIGH_BIT_DEPTH=OFF source
 	dh_auto_build -Dsource
 
-	$(MAKE) -C source/doc/reST pickle html
-	$(HELP2MAN) source/x265 > source/x265.1
-	$(HELP2MAN) source/x265-10bit > source/x265-10bit.1
+	$(MAKE) -C source/doc/reST pickle html man
 
 override_dh_auto_test:
 	unxz -fk debian/test.y4m.xz

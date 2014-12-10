@@ -1,16 +1,18 @@
 include ../Makefile.inc
 
-deps = chrpath dh-autoreconf
-cleanfiles = GoogleEarthLinux.bin patchelfmod* debian/changelog
+deps = wget dh-autoreconf
+cleanfiles = $(bin) patchelfmod* debian/changelog
+bin = GoogleEarthLinux.bin
+srcfiles = patchelfmod.tar.gz files temp
+srcpkg = google-earth
+changelog-file = debian/changelog
+changelog-msg = New release version
 
-build: build-default
-
-download: clean
+download:
 	wget -O patchelfmod.tar.gz "https://github.com/darealshinji/patchelfmod/archive/master.tar.gz"
-	wget "http://dl.google.com/earth/client/current/GoogleEarthLinux.bin"
-	chmod a+x GoogleEarthLinux.bin
-	./GoogleEarthLinux.bin --target temp --noexec
-	version=$$(head -n2 temp/setup.data/setup.xml | tail -n-1 | cut -d '"' -f2 | cut -d- -f1) ; \
-	sed -e "s/@VERSION@/$$version/g; s/@DATE@/$(shell date -R)/g" \
-	debian/changelog.in > debian/changelog
+	wget "http://dl.google.com/earth/client/current/$(bin)"
+	chmod a+x $(bin)
+	./$(bin) --target temp --noexec
+	VERSION=$$(head -n2 temp/setup.data/setup.xml | tail -n-1 | cut -d '"' -f2 | cut -d- -f1) ;\
+	$(changelog-entry)
 

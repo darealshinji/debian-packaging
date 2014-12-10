@@ -2,22 +2,21 @@ Source: sswizard
 Section: web
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends: debhelper (>= 9), dh-autoreconf
+Build-Depends:
+ debhelper (>= 9),
+ dh-autoreconf,
+ libgdk-pixbuf2.0-0,
+ libglib2.0-0,
+ libgtk2.0-0,
+ libpango-1.0-0,
+ libx11-6,
+ zlib1g
 Standards-Version: 3.9.5
 Homepage: http://www.sendspace.com
 
 Package: sswizard
 Architecture: amd64 i386
-Depends:
- libc6 (>= 2.17),
- libgcc1 (>= 1:4.1.1),
- libgdk-pixbuf2.0-0 (>= 2.22.0),
- libglib2.0-0 (>= 2.24.0),
- libgtk2.0-0 (>= 2.24.0),
- libpango-1.0-0 (>= 1.14.0),
- libstdc++6 (>= 4.3),
- libx11-6,
- zlib1g (>= 1:1.2.3.3)
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Upload files to Sendspace
  SendSpace Wizard is a free desktop tool that lets
  you upload multiple files into your sendspace account.

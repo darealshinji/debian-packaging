@@ -1,14 +1,13 @@
 include ../Makefile.inc
 
-deps = execstack wget
+deps = wget
 cleanfiles = fmodapi*linux debian/control debian/changelog
-
-build: build-default
+tgz = fmodapi-linux.tgz
+distcleanfiles = $(tgz)
+srcfiles = $(tgz)
 
 download:
 	./download.sh
+	test -f $(tgz) && true || mv fmodapi*linux.tar.gz $(tgz)
 	debian/rules debian/control
-
-distclean: clean
-	rm -f fmodapi*linux.tar.gz
 

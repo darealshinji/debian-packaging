@@ -3,18 +3,11 @@
 %:
 	dh ${@}
 
-override_dh_auto_clean:
-
 override_dh_shlibdeps:
 
 override_dh_auto_build:
 	chmod 755 runner
-	../make-icons.sh mrred.png
-
-override_dh_gencontrol:
-	dh_gencontrol
-	# set correct package architecture
-	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/mrred/DEBIAN/control
+	./make-icons.sh mrred.png
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

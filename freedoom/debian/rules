@@ -4,9 +4,5 @@
 %:
 	dh ${@}
 
-override_dh_auto_build:
-
-override_dh_auto_clean:
-
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

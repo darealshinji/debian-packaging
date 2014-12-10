@@ -1,18 +1,10 @@
 include ../Makefile.inc
 
-cleanfiles = debian/copyright
+cleanfiles = game-data* debian/copyright
+srcfiles = files game-data.txz
 GAMEDIR = "$(shell echo $$HOME)/.steam/steam/SteamApps/common/You Have to Win the Game/"
 
-build: build-default
-
-checkarch:
-ifneq ($(shell uname -p), x86_64)
-	@echo "" ;\
-	echo "'You Have to Win the Game' is only available for x86_64 architectures." ;\
-	exit 1
-endif
-
-download: checkarch clean
+download:
 	@if [ ! -d $(GAMEDIR) ] ; then \
     echo "can't find "\"$(GAMEDIR)\" ;\
     echo "" ;\
@@ -21,6 +13,9 @@ download: checkarch clean
     echo "" ;\
     exit 1 ;\
 fi
-	mkdir -p tmp
-	cp $(GAMEDIR)/* tmp/
-
+	iconv -f ISO-8859-1 -t UTF-8 $(GAMEDIR)/License.txt > debian/copyright
+	mkdir -p game-data
+	cp $(GAMEDIR)/* game-data
+	chmod 0644 game-data/*
+	chmod 0755 game-data/TheGame_NFML
+	tar -cJf game-data.txz game-data

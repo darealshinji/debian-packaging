@@ -27,7 +27,7 @@ $(DH_INSTALL_FILES):
 	$(MYSED) $@.in > $@
 
 override_dh_auto_configure: $(DH_INSTALL_FILES)
-	tar xzf fmodstudioapi*linux.tar.gz
+	tar xzf fmodstudioapi-linux.tgz
 	mv fmodstudioapi*linux/* $(CURDIR)
 	rm -rf fmodstudioapi*linux api/studio/examples/plugins
 
@@ -38,8 +38,6 @@ override_dh_auto_configure: $(DH_INSTALL_FILES)
 
 	# remove executable stack
 	execstack -c api/lowlevel/lib/*/*.so.*.*
-
-override_dh_auto_build:
 
 override_dh_auto_clean:
 	rm -rf api doc debian/*.pc debian/*.install \

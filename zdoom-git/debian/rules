@@ -42,10 +42,5 @@ override_dh_auto_build:
 override_dh_shlibdeps:
 	dh_shlibdeps -l$(CURDIR)/debian/zdoom/usr/lib/games/zdoom
 
-override_dh_gencontrol:
-	dh_gencontrol
-	# prevents Lintian warning virtual-package-depends-without-real-package-depends
-	sed -i 's/, libgl1,/, libgl1-mesa-glx | libgl1,/g' debian/zdoom/DEBIAN/control
-
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

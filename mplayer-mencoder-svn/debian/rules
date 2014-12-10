@@ -79,7 +79,7 @@ override_dh_auto_clean:
 override_dh_auto_configure:
 	test -f VERSION || \
 	echo 'svn r$(SVN_VERSION) ($(DEB_VENDOR)), built with gcc' > VERSION
-	touch ffmpeg/mp_auto_pull
+	rm -f ffmpeg/mp_auto_pull
 	./configure $(CONFIGURE_FLAGS) --disable-gui
 
 override_dh_auto_build:

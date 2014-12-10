@@ -4,8 +4,11 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
    debhelper (>= 9),
+   dh-autoreconf,
    libqt4-dev,
    libqt4-opengl-dev,
+   libva-dev,
+   yasm (>= 1.2.0),
    zlib1g-dev
 Standards-Version: 3.9.5
 Homepage: https://forum.speeddemosarchive.com/post/yua3.html

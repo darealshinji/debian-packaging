@@ -1,14 +1,10 @@
 include ../Makefile.inc
 
-deps = git wget cmake libbz2-dev libfluidsynth-dev libglew-dev libgtk2.0-dev \
-	libjpeg-dev libsdl1.2-dev zlib1g-dev
+deps = wget git
 cleanfiles = fmodapi*linux gzdoom debian/changelog
+srcfiles = gzdoom fmodapi*linux.tar.gz
 
-build: build-default
-
-download: clean
+download:
 	./download.sh
-
-distclean: clean
-	rm -f fmodapi*linux*.tar.gz
+	rm -rf gzdoom/.git
 

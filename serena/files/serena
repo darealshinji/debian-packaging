@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 GAMEDIR=/usr/share/games/serena
-CONFDIR="$HOME/.serena"
+CONFDIR="$HOME/.config/serena"
 
 if [ ! -d "$CONFDIR" ] ; then
     mkdir -p "$CONFDIR"

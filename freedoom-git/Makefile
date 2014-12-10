@@ -1,11 +1,11 @@
 include ../Makefile.inc
 
-deps = git asciidoc deutex gsfonts imagemagick
+deps = git
 cleanfiles = freedoom debian/changelog
+srcfiles = freedoom files
 
-build: build-default
-
-download: clean
+download:
 	git clone "https://github.com/freedoom/freedoom.git"
 	./changelog.sh
+	rm -rf freedoom/.git
 

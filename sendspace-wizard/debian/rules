@@ -9,8 +9,6 @@ libgio-2.0.so.0,libfreetype.so.6,libjpeg.so.8,libfontconfig.so.1,libgthread-2.0.
 %:
 	dh ${@}
 
-override_dh_auto_clean:
-
 override_dh_auto_build:
 	rm -rf patchelfmod-master
 	tar xvf patchelfmod.tar.gz
@@ -28,8 +26,6 @@ override_dh_install:
 
 override_dh_installchangelogs:
 	dh_installchangelogs wizard/Changelog.txt
-
-override_dh_shlibdeps:
 
 override_dh_strip:
 

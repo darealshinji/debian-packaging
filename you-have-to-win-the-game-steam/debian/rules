@@ -5,22 +5,21 @@
 	dh ${@}
 
 override_dh_auto_clean:
+	rm -rf game-data
 
 override_dh_auto_build:
-	iconv -f ISO-8859-1 -t UTF-8 tmp/License.txt > debian/copyright
-	chmod a-x tmp/*.so tmp/*.npk tmp/*.txt
+	tar xvf game-data.txz
 
 override_dh_installchangelogs:
-	dh_installchangelogs tmp/PatchNotes.txt
+	dh_installchangelogs game-data/PatchNotes.txt
 
 override_dh_strip:
 	# libsteam_api.so is unstripped, but contains no debug information
 	strip -s $(CURDIR)/debian/thegame/usr/lib/thegame/libsteam_api.so
 	dh_strip --dbg-package=thegame-dbg
 
-override_dh_makeshlibs:
-
 override_dh_shlibdeps:
+	dh_shlibdeps -Lthegame -l$(CURDIR)/debian/thegame/usr/lib/thegame/
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

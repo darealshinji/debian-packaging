@@ -1,4 +1,4 @@
-freedoom (@VERSION@-1) unstable; urgency=low
+freedoom (@VERSION@) unstable; urgency=low
 
   * Current git snapshot.
   * Build freedoom1.wad and freedoom2.wad.

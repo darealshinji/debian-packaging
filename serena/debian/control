@@ -10,7 +10,6 @@ Homepage: http://store.steampowered.com/app/272060/
 
 Package: serena
 Architecture: all
-Multi-Arch: foreign
 Depends: ${misc:Depends}, dagon
 Description: point-and-click adventure game
  How long has it been? A man sits in a distant getaway cabin waiting

@@ -1,2 +1,2 @@
-source/x265.1
-source/x265-10bit.1
+source/doc/reST/build/man/*.1
+source/doc/reST/build/man/*.3

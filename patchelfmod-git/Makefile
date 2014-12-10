@@ -1,27 +1,21 @@
 include ../Makefile.inc
 
-builddir = patchelfmod
-deps = git dh-autoreconf libacl1-dev libattr1-dev
+deps = git dh-autoreconf
+srcpkg = patchelfmod
+builddir = $(srcpkg)
 cleanfiles = $(builddir)
+changelog-file = changelog.new
 
-build: build-default
-
-download: clean
+download:
 	git clone "https://github.com/darealshinji/patchelfmod.git"
 
-	# create new Debian changelog entry
-	mv $(builddir)/debian-upstream/changelog $(builddir)/debian-upstream/changelog.in
-	latestcommit=$$(git -C $(builddir)/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\
-	VERSION=$$(cat $(builddir)/version | tr -d "\n") ;\
-	echo "patchelfmod ($$VERSION+git$$latestcommit-1) unstable; urgency=low" > changelog.new
-	echo "" >> changelog.new
-	echo "  * Current git snapshot" >> changelog.new
-	echo "" >> changelog.new
-	#echo " -- `whoami` <`uname -n`>  `date -R`" >> changelog.new
-	echo " -- Marshall Banana <djcj@gmx.de>  `date -R`" >> changelog.new
-	echo "" >> changelog.new
-
-	cat changelog.new $(builddir)/debian-upstream/changelog.in > \
-	$(builddir)/debian-upstream/changelog
 	mv $(builddir)/debian-upstream $(builddir)/debian
+	mv $(builddir)/debian/changelog $(builddir)/debian/changelog.in
+	latestcommit=$$(git -C $(builddir)/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\
+	VERSION=$$(cat $(builddir)/version | tr -d "\n")+git$$latestcommit ;\
+	$(changelog-entry)
+
+	cat changelog.new $(builddir)/debian/changelog.in > \
+	$(builddir)/debian/changelog
+	rm -rf $(builddir)/.git
 

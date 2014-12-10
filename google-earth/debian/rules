@@ -32,8 +32,6 @@ override_dh_auto_install:
 	$(foreach SIZE,$(SIZES),mkdir -p debian/google-earth/usr/share/icons/hicolor/$(SIZE)x$(SIZE)/apps ;\
 	mv $(LIB)/product_logo_$(SIZE).png debian/google-earth/usr/share/icons/hicolor/$(SIZE)x$(SIZE)/apps/googleearth.png ;)
 
-override_dh_auto_clean:
-
 override_dh_makeshlibs:
 
 override_dh_shlibdeps:
@@ -42,10 +40,6 @@ override_dh_strip:
 	dh_strip
 	$(CURDIR)/patchelfmod-master/src/patchelfmod --set-interpreter /lib/ld-linux.so.2 $(LIB)/googleearth-bin
 	$(CURDIR)/patchelfmod-master/src/patchelfmod --add-needed libc.so.6 $(LIB)/libicudata.so.38
-
-override_dh_gencontrol:
-	dh_gencontrol
-	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/google-earth/DEBIAN/control
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

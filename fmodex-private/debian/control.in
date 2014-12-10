@@ -1,7 +1,7 @@
 Source: fmodex@SOVERSION@
 Priority: extra
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends: debhelper (>= 9), automake
+Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.5
 Section: libs
 Homepage: http://www.fmod.org/
@@ -62,7 +62,8 @@ Package: libfmodevent@SOVERSION@
 Section: libs
 Architecture: amd64 i386
 Depends: ${misc:Depends},
-         ${shlibs:Depends}
+         ${shlibs:Depends},
+         libfmodex@SOVERSION@ (= ${binary:Version})
 Description: Designer API library for the FMOD Ex library
  FMOD is a cross platform audio library and toolset to let you easily
  implement the latest audio technologies into your title.

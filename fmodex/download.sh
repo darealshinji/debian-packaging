@@ -1,7 +1,6 @@
 #!/bin/sh
 
 set -e
-set -v
 
 LANG=C
 LANGUAGE=C
@@ -20,9 +19,13 @@ rm -f $changelog
 dirname=fmodapi${version}linux
 fname=${dirname}.tar.gz
 
-echo "download fmod ex"
-if [ ! -f $fname ] ; then
-    wget "http://www.fmod.org/download/fmodex/api/Linux/$fname"
+if [ -f fmodapi-linux.tgz ] ; then
+    ln -s fmodapi-linux.tgz $fname
+else
+    echo "download fmod ex"
+    if [ ! -f $fname ] ; then
+        wget "http://www.fmod.org/download/fmodex/api/Linux/$fname"
+    fi
 fi
 rm -rf "$dirname"
 tar xvf "$fname"

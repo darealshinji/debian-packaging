@@ -2,13 +2,17 @@ Source: neroaac
 Section: sound
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends: debhelper (>= 9)
+Build-Depends:
+ debhelper (>= 9),
+ lib32gcc1 [amd64],
+ libc6-i386 [amd64],
+ lib32stdc++6 [amd64]
 Standards-Version: 3.9.5
 Homepage: http://www.nero.com/eng/company/about-nero/nero-aac-codec.php
 
 Package: neroaac
 Architecture: amd64 i386
-Depends: libgcc1 (>= 1:4.1.1), libc6 (>= 2.4), libstdc++6 (>= 4.1.1)
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Provides: neroaac, neroaaccodec
 Description: Nero AAC reference quality MPEG-4 and 3GPP audio codec
  The encoder requires .WAV files in PCM wave format as input

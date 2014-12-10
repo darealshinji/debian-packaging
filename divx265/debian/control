@@ -4,14 +4,16 @@ Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 Standards-Version: 3.9.5
 Homepage: http://labs.divx.com/divx265
-Build-Depends: debhelper (>= 9)
+Build-Depends:
+ debhelper (>= 9),
+ lib32gcc1 (>= 1:4.1.1) [amd64],
+ libc6-i386 (>= 2.4) [amd64],
+ lib32stdc++6 (>= 4.4.0) [amd64]
 
 Package: divx265
 Architecture: amd64 i386
 Depends:
- libgcc1 (>= 1:4.1.1),
- libc6 (>= 2.4),
- libstdc++6 (>= 4.4.0)
+ ${misc:Depends}, ${shlibs:Depends}
 Suggests:
  mkvtoolnix-gui
 Description: DivX HEVC Community Encoder

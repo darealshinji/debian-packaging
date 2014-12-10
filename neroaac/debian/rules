@@ -3,22 +3,11 @@
 %:
 	dh ${@}
 
-override_dh_auto_clean:
-
-override_dh_auto_build:
-
-override_dh_shlibdeps:
-
 override_dh_installchangelogs:
 	dh_installchangelogs neroaac/changelog.txt
 
 override_dh_compress:
 	dh_compress -X.pdf
-
-override_dh_gencontrol:
-	dh_gencontrol
-	# set correct package architecture
-	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/neroaac/DEBIAN/control
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

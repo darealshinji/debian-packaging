@@ -4,10 +4,8 @@
 %:
 	dh ${@}
 
-override_dh_auto_clean:
-
 override_dh_auto_build:
-	../make-icons.sh serena.png
+	./make-icons.sh serena.png
 
 override_dh_builddeb:
 	dh_builddeb -- -z1

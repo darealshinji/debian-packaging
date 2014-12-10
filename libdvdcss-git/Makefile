@@ -1,12 +1,11 @@
 include ../Makefile.inc
 
-deps = git wget dh-autoreconf autotools-dev
-cleanfiles = libdvdcss
+deps = git dh-autoreconf
+builddir = libdvdcss
+cleanfiles = debian/changelog
 
-build: build-default
-
-download: clean
+download:
 	git clone --depth 1 "git://git.videolan.org/libdvdcss"
-	cp -r debian libdvdcss
 	./changelog.sh
+	rm -rf libdvdcss/.git
 

@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-set -v
 
 . ../vercmp.inc
 
@@ -20,5 +19,5 @@ if [ $v -lt 0 ]; then
 fi
 
 sed -e "s/@VERSION@/${VERSION}${git}/g; s/@DATE@/$(date -R)/g" \
-libdvdcss/debian/changelog.in > libdvdcss/debian/changelog
+debian/changelog.in > debian/changelog
 

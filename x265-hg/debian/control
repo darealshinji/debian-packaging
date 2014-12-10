@@ -7,7 +7,6 @@ Standards-Version: 3.9.5
 Build-Depends:
  debhelper (>= 9),
  cmake (>= 2.8.8),
- help2man,
  python3-sphinx,
  yasm (>= 1.2.0)
 Vcs-Browser: https://bitbucket.org/multicoreware/x265/src

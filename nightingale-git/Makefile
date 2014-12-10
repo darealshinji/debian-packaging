@@ -1,27 +1,34 @@
 include ../Makefile.inc
 
+deps = wget git
 builddir = nightingale-hacking
-
-deps = autoconf autotools-dev libasound2 libdbus-glib-1-dev libgnomevfs2-dev \
-	libgstreamer-plugins-base0.10-dev libgtk2.0-dev libidl0 libjpeg-turbo8 \
-	libsqlite0-dev libtag1-dev libnotify-dev libnspr4-dev libpng12-0 libunity-dev \
-	libxext-dev libxt6 unzip wget zip
-cleanfiles = $(builddir) usr data.tar.xz
+srcpkg = nightingale
+changelog-file = changelog.new
+cleanfiles = usr data.tar.xz *.deb
 
 ARCH = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 XULVERSION = 20140722-3%7Etrusty2
 
-build: build-default
-
-download: clean
+download:
 	git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-hacking.git"
 	wget "https://launchpad.net/~djcj/+archive/ubuntu/nightingale/+files/nightingale-deps_$(XULVERSION)_$(ARCH).deb"
 
 	ar x nightingale-deps*.deb data.tar.xz
 	tar xfv data.tar.xz
 	rm -rf nightingale-deps*.deb $(builddir)/debian/*
-	cp -r debian-files/* $(builddir)/debian
+	mv usr/lib/nightingale-deps/* $(builddir)/dependencies && rm -rf usr
 
 	cd $(builddir)/debian && \
 	wget "https://raw.githubusercontent.com/nightingale-media-player/nightingale-hacking/sb-trunk-oldxul/debian/changelog"
-	./changelog.sh
+
+	mv $(builddir)/debian/changelog $(builddir)/debian/changelog.in
+	latestcommit=$$(git -C $(builddir)/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\
+	ngversion=$$(grep -e 'SB_MILESTONE=' $(builddir)/build/sbBuildInfo.mk.in | sed -e 's/SB_MILESTONE=//;') ;\
+	VERSION=$${ngversion}+git$${latestcommit}-1 ;\
+	$(changelog-entry)
+	cat changelog.new $(builddir)/debian/changelog.in > $(builddir)/debian/changelog
+
+	cd $(builddir) && rm -rf .git tools/win32 vcproj \
+	documentation/sharing installer/macosx
+	find $(builddir) -name *.mp3 -delete
+

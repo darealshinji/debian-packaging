@@ -45,8 +45,7 @@ confflags += --enable-avresample
 confflags += --enable-pthreads
 confflags += --enable-runtime-cpudetect
 confflags += --extra-version='$(DEB_VERSION)'
-confflags += --libdir=/usr/lib/$(DEB_HOST_MULTIARCH)
-confflags += --disable-stripping
+confflags += --libdir=/usr/lib/ffmpeg
 confflags += --prefix=/usr
 confflags += $(shell test -x /usr/bin/yasm || echo --disable-yasm )
 
@@ -120,6 +119,6 @@ static_build_confflags += --disable-ffserver
 static_build_confflags += --disable-debug
 
 # Configuration flags for the non-optimized shared libraries
-shared_build_confflags += $(confflags) --shlibdir=/usr/lib/$(DEB_HOST_MULTIARCH)
+shared_build_confflags += $(confflags) --shlibdir=/usr/lib/ffmpeg
 shared_build_confflags += --enable-shared
 shared_build_confflags += --disable-static

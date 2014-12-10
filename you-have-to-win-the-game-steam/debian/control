@@ -2,7 +2,9 @@ Source: thegame
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends: debhelper (>= 9)
+Build-Depends:
+ debhelper (>= 9),
+ libgl1-mesa-glx | libgl1
 Standards-Version: 3.9.5
 Homepage: http://www.piratehearts.com/
 #Homepage: http://store.steampowered.com/app/286100/
@@ -11,10 +13,7 @@ Package: thegame
 Architecture: amd64
 Depends:
  ${misc:Depends},
- libc6 (>= 2.15),
- libgcc1 (>= 1:4.1.1),
- libgl1-mesa-glx | libgl1,
- libstdc++6 (>= 4.6)
+ ${shlibs:Depends}
 Provides: thegame, yhtwtg
 Description: You Have to Win the Game
  Originally released in May 2012, You Have to Win the Game has
