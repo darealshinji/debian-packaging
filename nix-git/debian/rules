@@ -9,7 +9,6 @@ export GLOBAL_CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFL
 export GLOBAL_LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
 
 export SET_RPATH_TO_LIBS=0
-export OFFLINE_BUILD=1
 export V=1
 
 
