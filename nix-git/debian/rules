@@ -8,6 +8,7 @@ export GLOBAL_CFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)
 export GLOBAL_CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) $(CPPFLAGS)
 export GLOBAL_LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
 
+export Store_LDFLAGS = -lperl -pthread
 export SET_RPATH_TO_LIBS=0
 export V=1
 
@@ -17,6 +18,10 @@ export V=1
 
 override_dh_auto_clean:
 	[ ! -f Makefile.config ] || dh_auto_clean
+
+override_dh_auto_build:
+	cp version doc/manual/version.txt
+	dh_auto_build
 
 override_dh_auto_install:
 	dh_auto_install
