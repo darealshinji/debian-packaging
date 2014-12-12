@@ -2,14 +2,13 @@ include ../Makefile.inc
 
 deps = git libtool
 cleanfiles = debian/changelog
-srcpkg = nix
-builddir = $(srcpkg)
+builddir = nix
 
 download:
 	git clone --depth 1500 "https://github.com/NixOS/nix.git"
 	./changelog.sh
-	rm -rf nix/.git nix/config/*
+	rm -rf $(builddir)/.git $(builddir)/config/*
 	cp /usr/share/libtool/config/config.* \
-	   /usr/share/libtool/config/install-sh nix/config/
-	cp -rf nix/doc/manual/figures nix/doc/manual/packages
-	sed -i 's/docbookxsl =/docbookxsl ?=/; s/docbookrng =/docbookrng ?=/;' nix/doc/manual/local.mk
+	   /usr/share/libtool/config/install-sh $(builddir)/config/
+	cp -rf $(builddir)/doc/manual/figures $(builddir)/doc/manual/packages
+

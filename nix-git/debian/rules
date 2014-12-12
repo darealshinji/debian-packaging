@@ -8,8 +8,8 @@ export GLOBAL_CFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)
 export GLOBAL_CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) $(CPPFLAGS)
 export GLOBAL_LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
 
-export docbookrng=/usr/share/xml/docbook/schema/rng/5.0/docbook.rng
-export docbookxsl=/usr/share/xml/docbook/stylesheet/docbook-xsl
+docbookxsl=/usr/share/xml/docbook/stylesheet/docbook-xsl
+docbookrng=$(docbookxsl)/slides/schema/relaxng/docbook.rng
 export Store_LDFLAGS = -lperl -pthread
 export SET_RPATH_TO_LIBS=0
 export V=1
@@ -21,10 +21,12 @@ export V=1
 override_dh_auto_clean:
 	[ ! -f Makefile.config ] || dh_auto_clean
 
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-gc
+
 override_dh_auto_build:
-	cp version doc/manual/version.txt
-	touch doc/manual/manual.is-valid
-	dh_auto_build
+	dh_auto_build -- all doc/manual/manual.pdf \
+	docbookxsl=$(docbookxsl) docbookrng=$(docbookrng)
 
 override_dh_auto_install:
 	dh_auto_install
@@ -32,11 +34,7 @@ override_dh_auto_install:
 	mv $(CURDIR)/debian/nix/usr/share/emacs $(CURDIR)/debian/nix/usr/share/emacs24
 	ln -fs /usr/bin/bsdiff $(libdir)/nix/bsdiff
 	ln -fs /usr/bin/bspatch $(libdir)/nix/bspatch
-	ln -s nix-daemon.8.gz $(CURDIR)/debian/nix/usr/share/man/man8/nix-worker.8.gz
-
-override_dh_installdocs:
-	$(MAKE) doc/manual/manual.pdf
-	dh_installdocs doc/manual/manual.pdf
+	ln -fs nix-daemon.8.gz $(CURDIR)/debian/nix/usr/share/man/man8/nix-worker.8.gz
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

@@ -15,6 +15,7 @@ Build-Depends:
    libdbd-sqlite3-perl,
    libdbi-perl,
    libextutils-parsexs-perl,
+   libgc-dev,
    libperl-dev,
    libssl-dev,
    libsqlite3-dev,
