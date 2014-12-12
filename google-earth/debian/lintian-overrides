@@ -1,4 +1,0 @@
-# closed source or precompiled
-embedded-library
-hardening-no-relro
-shlib-with-non-pic-code usr/lib/googleearth/libQtGui.so.4
