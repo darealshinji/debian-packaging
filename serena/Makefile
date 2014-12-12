@@ -4,7 +4,6 @@ deps = wget unzip
 cleanfiles = Serena *.txt *.png
 distcleanfiles = $(bin)
 srcfiles = Serena files *.png
-sha256_1 = b25bbabad910db78c9446e2d293eb161588a7b2098713e77a512f8c10345f530
 mirror = http://ams4.dl.dbolical.com/2014/02/01
 bin = Serena.1.zip
 
@@ -18,6 +17,6 @@ download:
         exit 1 \
     ) ;\
 fi
-	@ $(verifysha256)
+	@$(call verifysha256, $(bin), b25bbabad910db78c9446e2d293eb161588a7b2098713e77a512f8c10345f530)
 	wget -O serena.png "http://s14.directupload.net/images/141116/9yoas6gx.png"
 	unzip $(bin)

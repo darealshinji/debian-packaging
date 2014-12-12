@@ -2,21 +2,23 @@ export LANG=C
 export LANGUAGE=C
 export LC_ALL=C
 
-MAINTAINER = Marshall Banana <djcj@gmx.de>
-
 builddir = pbuilder-source
 LOG = ../$(shell basename $$PWD)-build.log
 resultdir = /var/cache/pbuilder/result
 
-verifysha256 = \
-@sha256_2=$$(sha256sum $(bin) | head -c64) ;\
-if [ $$sha256_2 != $(sha256_1) ] ; then \
-    echo "$(bin):" ;\
-    echo "SHA256 checksum is $$sha256_2 but should be $(sha256_1)." ;\
-    echo "Delete '$(bin)' and try it again." ;\
-    exit 1 ;\
-fi
+define verifysha256
+    sha256_2=$$(sha256sum $(1) | head -c64) ;\
+    if [ $$sha256_2 != $(2) ] ; then \
+        echo "$(1):" ;\
+        echo "SHA256 checksum is $$sha256_2 but should be $(2)." ;\
+        echo "Delete '$(1)' and try it again." ;\
+        exit 1 ;\
+    else \
+        echo "$(1): checksum ok." ;\
+    fi
+endef
 
+MAINTAINER = Marshall Banana <djcj@gmx.de>
 changelog-msg = Current git snapshot
 changelog-file = $(builddir)/debian/changelog
 changelog-entry = \
