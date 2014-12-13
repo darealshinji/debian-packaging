@@ -8,7 +8,8 @@ VERSION = $(shell dpkg-parsechangelog | grep -e 'Version: ' | cut -d' ' -f2 | cu
 confflags = \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DENABLE_SHARED=OFF
+	-DENABLE_SHARED=OFF \
+	-DENABLE_PIC=OFF
 
 
 %:
