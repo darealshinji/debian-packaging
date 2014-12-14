@@ -10,5 +10,3 @@ download:
 	rm -rf $(builddir)/.git $(builddir)/config/*
 	cp /usr/share/libtool/config/config.* \
 	   /usr/share/libtool/config/install-sh $(builddir)/config/
-	cp -rf $(builddir)/doc/manual/figures $(builddir)/doc/manual/packages
-
