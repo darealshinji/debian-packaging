@@ -3,7 +3,7 @@ export LANGUAGE=C
 export LC_ALL=C
 
 builddir = pbuilder-source
-LOG = ../$(shell basename $$PWD)-build.log
+LOG = $(shell basename $$PWD)-build.log
 resultdir = /var/cache/pbuilder/result
 
 define verifysha256

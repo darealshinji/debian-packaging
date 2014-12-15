@@ -1,0 +1,16 @@
+Source: virtualbox-extensionpack
+Section: misc
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: https://www.virtualbox.org/
+
+Package: virtualbox-extensionpack
+Architecture: all
+Depends:
+ ${misc:Depends},
+ virtualbox-4.3 (>= 4.3.20-96996~) | virtualbox (>= 4.3.20-96996~),
+ virtualbox-4.3 (<< 4.3.20-96997~) | virtualbox (<< 4.3.20-96997~)
+Description: Oracle VM VirtualBox Extension Pack
+ Support for USB 2.0 devices, VirtualBox RDP and PXE boot for Intel cards.

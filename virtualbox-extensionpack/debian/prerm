@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+    /usr/lib/virtualbox/VBoxExtPackHelperApp uninstall \
+        --base-dir /usr/lib/virtualbox/ExtensionPacks \
+        --name 'Oracle VM VirtualBox Extension Pack'
+fi
+
+#DEBHELPER#
+
+exit 0
