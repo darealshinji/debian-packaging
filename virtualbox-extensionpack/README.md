@@ -6,5 +6,4 @@ VirtualBox RDP and PXE boot for Intel cards.
 
 https://www.virtualbox.org/
 
-Run `make` to build a package of the latest stable version.
-Enter `./build_specific_version.sh` you want to package a different version.
+Run `make` to build a package of the latest stable version or enter `./build_specific_version.sh` if you want to package a different (older) version.
