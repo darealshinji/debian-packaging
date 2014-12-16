@@ -10,7 +10,7 @@ Package: virtualbox-extensionpack
 Architecture: all
 Depends:
  ${misc:Depends},
- virtualbox-4.3 (>= 4.3.20-96996~) | virtualbox (>= 4.3.20-96996~),
- virtualbox-4.3 (<< 4.3.20-96997~) | virtualbox (<< 4.3.20-96997~)
+ virtualbox-@MAJ_MIN@ (>= @VERSION@~) | virtualbox (>= @VERSION@~),
+ virtualbox-@MAJ_MIN@ (<< @NEXT@~) | virtualbox (<< @NEXT@~)
 Description: Oracle VM VirtualBox Extension Pack
  Support for USB 2.0 devices, VirtualBox RDP and PXE boot for Intel cards.
