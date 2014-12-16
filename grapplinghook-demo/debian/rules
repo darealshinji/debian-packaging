@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+LIB64 = 64
+ifneq ($(DEB_HOST_ARCH), amd64)
+LIB64_DEL = 64
+LIB64 =
+endif
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf debian/links debian/install converted_icons GrapplingHook_Demo
+
+override_dh_auto_build:
+	tar xvf GrapplingHook_Demo.tar.gz
+	rm GrapplingHook_Demo/lib/libjinput-linux$(LIB64_DEL).so \
+	GrapplingHook_Demo/lib/liblwjgl$(LIB64_DEL).so
+
+	chmod a-x GrapplingHook_Demo/*/*
+	cp GrapplingHook_Demo/keys.cfg GrapplingHook_Demo/grapplinghook-demo
+
+	./make-icons.sh ghook-demo.png
+
+	sed -e 's/@LIB64@/$(LIB64)/g' debian/links.in > debian/links
+	sed -e 's/@LIB64@/$(LIB64)/g' debian/install.in > debian/install
+
+override_dh_installchangelogs:
+	dh_installchangelogs debian/upstream-changelog
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

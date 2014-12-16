@@ -1,0 +1,67 @@
+Version 1.07 - 14. November 2009:
+
+    Storyline extended with a lot more messages throughout all levels.
+    One more level in the storymode.
+    Improved the guiding in many levels.
+    Console-output will be saved in a log-file in the same folder as the savegames.
+    Fixed a small glitch with the record-messages.
+    Fixed a glitch, when a player switched to the menu at the end of a level.
+    Users can save/load their levels on every platform with "saveUserLevel" and "loadUserLevel" even without administrator rights.
+    The game will display levels that are inside the user-folder.
+    Ingame-news will be loaded only once at startup to improve menu-performance. 
+
+
+Version 1.06 - 26. October 2009:
+
+    Eight new levels! These levels are especially for players, who already played through the other 22 and are looking for new challenges. Some of the new levels are entirely non-linear, so you will be free to decide, what to do next. The new levels also feature puzzles, where you have to use the Grappling Hook in entirely new ways. Of course, there are also challenges for every new level.
+    The level editor is now fully functional and included in the full version of the game. It is now possible for everyone to include levels in the game, so they are selectable in the menu. A tutorial how to create new levels and how to add them to the game will be released within this week.
+    The developer-mode can be enable in the game options. There will be also a hint in the HUD, when it is enabled.
+    The values of the challenges for every level are now visible in the level selection screen.
+    The background-size of all on-screen-messages fits now to the amount of text.
+    You can switch now between hardware or software sound, when you experience any problems with one of them on your machine.
+    You can choose now, if you want to visit the games website, when quitting the demo.
+    Fixed a bug, that prevented the game running on 64 bit machines.
+    Fixed a bug with e-mail-addresses that contained a "+". 
+
+
+Version 1.05 - 11. October 2009:
+
+    Twitter-Integration: Grappling Hook can post your unlocked achievements to Twitter, using your account.
+    Hook Device and bolts will be correctly restored after loading.
+    Edges will not stop the character anymore, when he is sliding up walls.
+    Fixed memory leaks.
+    Tuned Virtual-Machine and Garbage Collector.
+    Improved the GUI of the Launcher.
+    Improved some tutorial messages.
+    Improved the performance in the menu a bit. 
+
+
+Version 1.03 - 7. October 2009:
+
+    The bloom-shader will disable itself automatically, when it is not supported. That caused some crashes on old graphics cards in the past.
+    The timer has a higher resolution, now.
+    You can restart a level by pressing "4".
+    All important keys can be configured in the keys.cfg.
+    After level-loading there is a 1 second pause.
+    More resolutions are supported in windowed-mode.
+    Fixed a crash-bug with "Disabled Sound" in Level 7.
+    There is an option, that not the last checkpoint will be loaded on death, but the level will be restarted.
+    Loading a checkpoint is only allowed, when the character is on ground.
+    Fixed a bug, when a mouse-keys was used for running. 
+
+
+Version 1.02:
+
+    You can switch the language of the game to German.
+    The controls can be configured with a config-file. ( keys.cfg )
+    Recreated the font and changed the font-renderer so it supports all ASCII-characters. 
+
+
+Version 1.01:
+
+    Added an option to the launcher to disable the bloom-shader. This will improve performance a lot on PCs with older graphics cards. A graphics-card with shader-support is still required.
+    Tweaked some sounds.
+    Extended the controls. Have a look at the ReadMe.txt for details.
+    Made some minor changes to the levels.
+    Cleaned up the font.
+    The game shows the right icon, now. 
