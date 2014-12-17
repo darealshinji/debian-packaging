@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Grappling Hook
+GenericName=innovative first-person action puzzle / platform game
+Exec=grapplinghook
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=ghook

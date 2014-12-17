@@ -1,0 +1,17 @@
+GrapplingHook/level                /usr/share/games/grapplinghook
+GrapplingHook/*.png                /usr/share/games/grapplinghook
+GrapplingHook/*.csv                /usr/share/games/grapplinghook
+GrapplingHook/*.sh                 /usr/share/games/grapplinghook
+converted_icons/*                  /usr/share
+debian/grapplinghook.desktop       /usr/share/applications
+GrapplingHook/grapplinghook        /etc
+debian/script/grapplinghook        /usr/games
+
+GrapplingHook/lib/bin.jar              /usr/share/games/grapplinghook/lib
+GrapplingHook/lib/lwjgl.jar            /usr/share/games/grapplinghook/lib
+GrapplingHook/lib/lwjgl_util.jar       /usr/share/games/grapplinghook/lib
+GrapplingHook/lib/jogg-0.0.7.jar       /usr/share/games/grapplinghook/lib
+GrapplingHook/lib/jorbis-0.0.15.jar    /usr/share/games/grapplinghook/lib
+
+native/liblwjgl@LIB64@.so              /usr/lib/grapplinghook
+

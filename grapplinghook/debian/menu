@@ -1,0 +1,5 @@
+?package(grapplinghook):needs="X11" \
+ section="Games/Action"\
+ title="Grappling Hook" \
+ icon="/usr/share/pixmaps/ghook.xpm" \
+ command="/usr/games/grapplinghook"

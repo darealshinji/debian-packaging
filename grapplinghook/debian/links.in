@@ -1,0 +1,2 @@
+/etc/grapplinghook                          /usr/share/games/grapplinghook/keys.cfg
+/usr/lib/grapplinghook/liblwjgl@LIB64@.so   /usr/share/games/grapplinghook/lib/liblwjgl@LIB64@.so

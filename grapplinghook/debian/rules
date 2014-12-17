@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+
+CFLAGS := $(filter-out -Werror=format-security -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+
+ARCH = i386
+ifeq ($(DEB_HOST_ARCH), amd64)
+LIB64 = 64
+ARCH = amd64
+endif
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean -D native
+	rm -rf debian/links debian/install converted_icons GrapplingHook
+
+override_dh_auto_build:
+	dh_auto_build -D native
+
+	tar xvf GrapplingHook.tar.gz
+	chmod a-x `find GrapplingHook -type f`
+	chmod a+x GrapplingHook/start.sh
+	cp GrapplingHook/keys.cfg GrapplingHook/grapplinghook
+
+	./make-icons.sh ghook.png
+
+	sed -e 's/@LIB64@/$(LIB64)/g' debian/links.in > debian/links
+	sed -e 's/@LIB64@/$(LIB64)/g' debian/install.in > debian/install
+
+override_dh_installchangelogs:
+	dh_installchangelogs debian/upstream-changelog
+
+override_dh_shlibdeps:
+	dh_shlibdeps -l/usr/lib/jvm/default-java/jre/lib/$(ARCH)
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
