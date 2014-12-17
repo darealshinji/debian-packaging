@@ -1,5 +1,5 @@
-Grappling Hook
-==============
+Grappling Hook (demo)
+=====================
 
 Grappling Hook is an innovative first-person action puzzle / platform game.
 You use the Grappling Hook as a mighty high-tech tool to overcome various challenging

@@ -4,11 +4,13 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
                imagemagick,
-               libx11-6,
-               libxext6,
-               libxcursor1,
-               libxrandr2,
-               libxxf86vm1
+               default-jdk,
+               libx11-dev,
+               libxext-dev,
+               libxcursor-dev,
+               libxrandr-dev,
+               libxt-dev,
+               libxxf86vm-dev
 Standards-Version: 3.9.5
 Homepage: http://ghook.speedrungames.com/
 

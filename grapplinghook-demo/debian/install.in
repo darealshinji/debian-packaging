@@ -12,5 +12,6 @@ GrapplingHook_Demo/lib/lwjgl.jar            /usr/share/games/grapplinghook-demo/
 GrapplingHook_Demo/lib/lwjgl_util.jar       /usr/share/games/grapplinghook-demo/lib
 GrapplingHook_Demo/lib/jogg-0.0.7.jar       /usr/share/games/grapplinghook-demo/lib
 GrapplingHook_Demo/lib/jorbis-0.0.15.jar    /usr/share/games/grapplinghook-demo/lib
-GrapplingHook_Demo/lib/liblwjgl@LIB64@.so   /usr/lib/grapplinghook-demo
+
+native/liblwjgl@LIB64@.so                   /usr/lib/grapplinghook-demo
 
