@@ -16,6 +16,7 @@ Homepage: http://ghook.speedrungames.com/
 Package: grapplinghook
 Architecture: amd64 i386
 Depends: default-jre-headless,
+         libopenal1,
          ${shlibs:Depends},
          ${misc:Depends}
 Description: innovative first-person action puzzle / platform game

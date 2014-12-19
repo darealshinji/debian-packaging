@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-CFLAGS := $(filter-out -Werror=format-security -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 VERSION = $(shell dpkg-parsechangelog -SVersion)
 ifeq ($(DEB_HOST_ARCH), amd64)
 LIB64 = 64
@@ -24,7 +24,7 @@ override_dh_auto_build:
 
 	./make-icons.sh ghook.png
 
-	sed -e 's/@LIB64@/$(LIB64)/g' debian/links.in > debian/links
+	sed -e 's/@LIB64@/$(LIB64)/g; s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' debian/links.in > debian/links
 	sed -e 's/@LIB64@/$(LIB64)/g' debian/install.in > debian/install
 	sed -e 's/@VERSION@/$(VERSION)/g' debian/script/grapplinghook.6.in > debian/script/grapplinghook.6
 	sed -e 's/@VERSION@/$(VERSION)/g' debian/script/grapplinghook.in > debian/script/grapplinghook

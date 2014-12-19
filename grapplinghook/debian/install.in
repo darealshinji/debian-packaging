@@ -12,6 +12,5 @@ GrapplingHook/lib/jogg-0.0.7.jar         /usr/share/games/grapplinghook/lib
 GrapplingHook/lib/jorbis-0.0.15.jar      /usr/share/games/grapplinghook/lib
 
 lwjgl-2.9.1/native/linux/liblwjgl@LIB64@.so       /usr/lib/grapplinghook
-lwjgl-2.9.1/native/linux/libopenal@LIB64@.so      /usr/lib/grapplinghook
 lwjgl-2.9.1/jar/lwjgl.jar                         /usr/share/games/grapplinghook/lib
 lwjgl-2.9.1/jar/lwjgl_util.jar                    /usr/share/games/grapplinghook/lib
