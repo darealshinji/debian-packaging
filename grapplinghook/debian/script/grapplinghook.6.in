@@ -1,0 +1,53 @@
+.TH GRAPPLINGHOOK "6" "December 2014" "@VERSION@"
+
+.SH NAME
+grapplinghook \- first-person action puzzle / platform game
+
+.SH SYNOPSIS
+.B grapplinghook \fR[<option>|\-\-<option>|\-<option>]
+.br
+.B grapplinghook \fR\-h|\-v
+
+.SH DESCRIPTION
+Grappling Hook is an innovative first-person action puzzle / platform game.
+You use the Grappling Hook as a mighty high-tech tool to overcome various
+challenging obstacles by performing incredible moves and fast combinations of daring tricks.
+The dynamic and surprising levels open opportunities to use the Grappling Hook
+in unique ways never seen before in a game. Making your way through the levels
+requires both skill and creativity, while the increasing difficulty pushes you
+to become a real master of the Grappling Hook.
+
+.SH OPTIONS
+.TP
+.B help\fR, \fB\-h
+Display available command line options.
+.TP
+.B version\fR, \fB\-v
+Print the game version and exit.
+.TP
+.B reset
+Delete your settings and game progress.
+This is done by deleting the directory \fB~/.GrapplingHook/\fR
+Before doing so you'll be asked and have to confirm.
+.TP
+.B backup
+Create a backup of your settings and game progress.
+It will be saved as a bzip2 compressed tar archive inside your home directory.
+
+.SH "SEE ALSO"
+.TP
+.B ~/.GrapplingHook/
+The place of your settings and where your game progress is saved.
+.TP
+.B /etc/grapplinghook
+This file contains global game settings like key bindings.
+
+.SH COPYRIGHT
+Copyright \(co 2009 Christian Teister.
+Grappling Hook is available under a proprietary license.
+It makes use of the Lightweight Java Game Library which is available under a BSD license.
+The startup script, this manpage and everything related to the Debian packaging is
+copyright \(co 2014 djcj <\fIdjcj@gmx.de\fR> and available under MIT license.
+.PP
+See \fB/usr/share/doc/grapplinghook/copyright\fR for more details.
+
