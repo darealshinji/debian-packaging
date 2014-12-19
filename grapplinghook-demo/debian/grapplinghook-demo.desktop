@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Grappling Hook (Demo)
-GenericName=innovative first-person action puzzle / platform game
-Exec=grapplinghook-demo
-Type=Application
-Categories=Game;
-StartupNotify=true
-Icon=ghook-demo
