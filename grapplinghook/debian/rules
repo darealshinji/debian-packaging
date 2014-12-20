@@ -8,27 +8,29 @@ endif
 
 
 %:
-	dh ${@} --parallel
+	dh ${@}
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -f debian/links debian/install debian/script/grapplinghook debian/script/grapplinghook.6
+	rm -f debian/links debian/install grapplinghook grapplinghook.6
 	rm -rf converted_icons GrapplingHook lwjgl-2.9.1
 
 override_dh_auto_build:
 	unzip lwjgl-2.9.1.zip
 	tar xvf GrapplingHook.tar.gz
+
 	chmod a-x `find GrapplingHook -type f`
 	chmod a+x GrapplingHook/start.sh
 	cp GrapplingHook/keys.cfg GrapplingHook/grapplinghook
+	mac2unix GrapplingHook/grapplinghook
 
 	./make-icons.sh ghook.png
 
 	sed -e 's/@LIB64@/$(LIB64)/g; s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' debian/links.in > debian/links
 	sed -e 's/@LIB64@/$(LIB64)/g' debian/install.in > debian/install
-	sed -e 's/@VERSION@/$(VERSION)/g' debian/script/grapplinghook.6.in > debian/script/grapplinghook.6
-	sed -e 's/@VERSION@/$(VERSION)/g' debian/script/grapplinghook.in > debian/script/grapplinghook
-	chmod a+x debian/script/grapplinghook
+	sed -e 's/@VERSION@/$(VERSION)/g' debian/grapplinghook.6.in > grapplinghook.6
+	sed -e 's/@VERSION@/$(VERSION)/g' debian/grapplinghook.in > grapplinghook
+	chmod a+x grapplinghook
 
 override_dh_installchangelogs:
 	dh_installchangelogs debian/upstream-changelog

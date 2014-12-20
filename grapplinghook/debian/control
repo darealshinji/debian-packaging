@@ -3,6 +3,7 @@ Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
+               dos2unix,
                imagemagick,
                libx11-6,
                libxext6,
