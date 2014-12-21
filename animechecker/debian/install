@@ -1,0 +1,5 @@
+acc                           /usr/bin
+debian/script/animechecker    /usr/bin
+animechecker                  /usr/lib/animechecker
+converted_icons/icons         /usr/share
+debian/animechecker.desktop   /usr/share/applications

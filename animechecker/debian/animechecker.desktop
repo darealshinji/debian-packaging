@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Anime Checker
+GenericName=Graphical CRC32 checksum calculator
+Comment=Generate and verify CRC32 checksums
+Exec=animechecker %U
+Terminal=false
+Type=Application
+StartupNotify=false
+Icon=animechecker
+Categories=GTK;Utility;

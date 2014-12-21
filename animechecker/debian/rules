@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -f *.txt acc animechecker
+	rm -rf patchelfmod-master converted_icons
+
+override_dh_auto_build:
+	rm -rf patchelfmod-master
+	tar xvf patchelfmod.tgz
+	cd patchelfmod-master && autoreconf -ifv
+	cd patchelfmod-master && ./configure && $(MAKE) check
+
+	tar jxf animechecker-0.9.6.1-linux-i386-bin.tar.bz2
+	dos2unix changelog.txt
+	upx-ucl -d acc animechecker
+	strip -s acc animechecker
+
+	$(CURDIR)/patchelfmod-master/src/patchelfmod --remove-needed \
+	libXinerama.so.1,libXdamage.so.1,libXcursor.so.1,libXcomposite.so.1,libXfixes.so.3,libXext.so.6,libXi.so.6,libXrandr.so.2,libgmodule-2.0.so.0 \
+	animechecker
+
+	./make-icons.sh debian/animechecker.svg
+
+override_dh_installchangelogs:
+	dh_installchangelogs changelog.txt
+
+override_dh_strip:
+
+override_dh_shlibdeps:
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

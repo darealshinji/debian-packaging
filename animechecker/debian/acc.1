@@ -1,0 +1,53 @@
+.TH ACC "1" "December 2014" "v0.9.6.1"
+.SH NAME
+acc \- CLI version of the Anime Checker tool
+.SH SYNOPSIS
+.B acc \fR{\-switch} files ...
+
+.SH DESCRIPTION
+\fBAnime Checker\fR is a tool that calculates the CRC32 of your files.
+The CRC is a 8 hexadecimal characters that most fansubbers include at the end
+of their releases filename (like my_video_[A3B6DF52].avi).
+To check the file integrity, Anime Checker will compute the CRC value of the
+file and compare it with the given CRC value.
+If it's the same, there are nothing wrong with the file.
+If it's not the same, the file is probably corrupted or incomplete.
+
+.SH OPTIONS
+.TP
+\fB\-?, \fB\-\-help\fR
+Print help
+.TP
+\fB\-bs\fR=\fIsize\fR
+Size of the buffer (1 = small, 2 = medium, 3 = large)
+.TP
+\fB\-c\fR
+Only files with a CRC
+.TP
+\fB\-e\fR filters
+Filenames exclude
+.TP
+\fB\-i\fR filters
+Filenames include
+.TP
+\fB\-r\fR
+Search subfolders
+.TP
+\fB\-s\fR
+Sort filenames
+.TP
+\fB\-v\fR
+Verbose
+
+.SH EXAMPLES
+.TP
+acc *.avi
+Verify all .avi in the current folder
+.TP
+acc \-r \-i *.avi;*.mkv c:\eanimes
+Verify all .avi and .mkv files in the
+folder c:\eanimes and subfolders
+.TP
+acc \-i *.* \-e *.sfv;*.md5 c:\eanimes
+Verify all files in the folder except
+\&.sfv and .md5 files
