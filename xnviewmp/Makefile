@@ -2,7 +2,6 @@ include ../Makefile.inc
 
 deps = wget
 srcfiles = $(bin)
-cleanfiles = XnView
 distcleanfiles = $(bin) $(srcfiles)
 srcpkg = xnviewmp
 
@@ -14,5 +13,5 @@ endif
 download:
 	test -f $(bin) || wget "http://download.xnview.com/$(bin)"
 	tar xvf $(bin)
-	VERSION=$$(head -n1 XnView/WhatsNew.txt | sed -e 's/Changelog //; s/://;' | tr -d '[:cntrl:]') ;\
-	$(changelog-entry)
+	./changelog.sh
+	rm -rf XnView
