@@ -3,22 +3,24 @@ Section: video
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
-   debhelper (>= 9),
-   help2man,
-   libfreetype6 [i386]
+ debhelper (>= 9),
+ upx-ucl
 Standards-Version: 3.9.5
 Homepage: http://forum.doom9.org/showthread.php?t=168539
 
 Package: tsmuxer
 Architecture: amd64 i386
 Depends:
-   ${misc:Depends},
-   libc6 [i386],
-   libgcc1 [i386],
-   libfreetype6 [i386],
-   libc6-i386 [amd64],
-   lib32gcc1 [amd64],
-   libfreetype6:i386 [amd64]
+ libc6 (>= 2.4) [i386],
+ libfreetype6 (>= 2.2.1) [i386],
+ libgcc1 (>= 1:4.1.1) [i386],
+ libstdc++6 (>= 4.2.1) [i386],
+ zlib1g (>= 1:1.1.4) [i386],
+ libc6-i386 (>= 2.4) [amd64],
+ lib32gcc1 (>= 1:4.1.1) [amd64],
+ lib32stdc++6 (>= 4.2.1) [amd64],
+ libfreetype6:i386 (>= 2.2.1) [amd64],
+ zlib1g:i386 (>= 1:1.1.4) [amd64]
 Description: mux video to TS/M2TS files or create BD disks
  tsMuxeR can be run in track detection mode or muxing mode. If run tsMuxeR with
  only one argument then tsMuxeR  display input track information required to
@@ -28,16 +30,17 @@ Description: mux video to TS/M2TS files or create BD disks
 Package: tsmuxergui
 Architecture: amd64 i386
 Depends:
-   ${misc:Depends},
-   tsmuxer (>= 2) [amd64 i386],
-   libc6 [i386],
-   libgcc1 [i386],
-   libfreetype6 [i386],
-   libqt4-gui [i386],
-   libc6-i386 [amd64],
-   lib32gcc1 [amd64],
-   libfreetype6:i386 [amd64],
-   libqt4-gui:i386 [amd64]
+ tsmuxer (>= 2) [amd64 i386],
+ libc6 (>= 2.1.3) [i386],
+ libgcc1 (>= 1:4.1.1) [i386],
+ libstdc++6 (>= 4.1.1) [i386],
+ libqtcore4 (>= 4:4.7.0~beta1) [i386],
+ libqtgui4 (>= 4:4.5.3) [i386],
+ libc6-i386 (>= 2.1.3) [amd64],
+ lib32gcc1 (>= 1:4.1.1) [amd64],
+ lib32stdc++6 (>= 4.1.1) [amd64],
+ libqtcore4:i386 (>= 4:4.7.0~beta1) [amd64],
+ libqtgui4:i386 (>= 4:4.5.3) [amd64]
 Description: mux video to TS/M2TS files or create BD disks - GUI
  tsMuxeR can be run in track detection mode or muxing mode. If run tsMuxeR with
  only one argument then tsMuxeR  display input track information required to
