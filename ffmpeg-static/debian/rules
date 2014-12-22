@@ -8,6 +8,7 @@ override_dh_auto_clean:
 
 override_dh_auto_build:
 	tar xvf ffmpeg-static.tar.xz
+
 	cd ffmpeg-git-*-static/ && \
 	rename 's/\.txt$$/.1/' manpages/*.txt && \
 	rename 's/ffmpeg/ffmpeg-static/' manpages/*.1 && \

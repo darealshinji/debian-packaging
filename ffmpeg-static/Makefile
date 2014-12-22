@@ -1,7 +1,6 @@
 include ../Makefile.inc
 
 deps = wget
-cleanfiles = *.tar.xz
 srcfiles = ffmpeg-static.tar.xz
 srcpkg = ffmpeg-static
 

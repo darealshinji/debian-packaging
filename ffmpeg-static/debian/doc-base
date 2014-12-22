@@ -1,0 +1,8 @@
+Document: ffmpeg-static-doc
+Title: ffmpeg PDFs
+Author: FFmpeg Developers
+Abstract: This is the main documentation for the FFmpeg API.
+Section: Programming
+
+Format: PDF
+Files: /usr/share/doc/ffmpeg-static/*.pdf
