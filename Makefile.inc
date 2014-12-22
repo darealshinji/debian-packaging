@@ -4,7 +4,8 @@ export LC_ALL=C
 
 builddir = pbuilder-source
 LOG = $(shell basename $$PWD)-build.log
-resultdir = /var/cache/pbuilder/result
+resultdir = "$$HOME/buildresult"
+basetgz = "/var/cache/pbuilder/debian-packages.tgz"
 
 define verifysha256
     sha256_2=$$(sha256sum $(1) | head -c64) ;\
@@ -32,7 +33,7 @@ echo ""                                             >> $(changelog-file)
 
 allcleanfiles = \
 .pc $(LOG) changelog.new converted_icons tmp temp *.dsc \
-*.tar.gz *.tar.bz2 *.tar.xz $(builddir) $(cleanfiles)
+*.tar.?z* $(builddir) $(cleanfiles)
 
 alldeps = debhelper pbuilder quilt $(deps)
 
@@ -62,7 +63,7 @@ predepends:
 source: download
 	mkdir -p $(builddir)
 	cp -r ../make-icons.sh $(srcfiles) $(builddir)
-	test -d debian && cp -fr debian $(builddir) || true
+	test -d debian && cp -rf debian $(builddir) || true
 
 pbuilder: source
 	rm -rf .pc
@@ -73,18 +74,26 @@ fi
 	echo '3.0 (native)' > $(builddir)/debian/source/format
 	dpkg-source -b $(builddir)
 
-	@ if [ ! -f "/var/cache/pbuilder/base.tgz" ] ; then \
+	@ if [ ! -f $(basetgz) ] ; then \
 	    echo "" ;\
 	    echo "sudo password required to create base.tgz:" ;\
 	    sudo pbuilder --create \
 	         --components "main restricted universe multiverse" \
-		 --debootstrapopts --variant=buildd ;\
+	         --debootstrapopts --variant=buildd \
+	         --basetgz $(basetgz) ;\
 	fi
 
+	mkdir -p $(resultdir)
+	@ echo ""
+	@ echo "pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc"
 	@ echo ""
 	@ echo "sudo password required to run pbuilder:"
-	@ sudo pbuilder --build *.dsc 2>&1 | tee $(LOG)
+	@ sudo pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc 2>&1 | tee $(LOG)
 
+	rm -f $(resultdir)/*.dsc
+	rm -f $(resultdir)/*.changes
+	rm -f $(resultdir)/*.tar.?z*
+	@ echo ""
 	@ for f in $(resultdir)/*.deb ; do \
   echo "$$f:" ;\
   dpkg-deb -I $$f ;\
@@ -97,4 +106,6 @@ for f in $(resultdir)/*.deb ; do \
   dpkg-deb -c $$f ;\
   echo "" ;\
 done 2>&1 | tee -a $(LOG)
+	@ echo ""
+	cp -f $(LOG) $(resultdir)
 
