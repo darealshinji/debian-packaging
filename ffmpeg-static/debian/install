@@ -1,0 +1,5 @@
+ffmpeg-git-*-static/ffmpeg-static            /usr/bin
+ffmpeg-git-*-static/ffmpeg-10bit-static      /usr/bin
+ffmpeg-git-*-static/ffprobe-static           /usr/bin
+ffmpeg-git-*-static/qt-faststart-static      /usr/bin
+ffmpeg-git-*-static/presets/*                /usr/share/ffmpeg-static

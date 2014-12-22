@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf ffmpeg-git-*-static
+
+override_dh_auto_build:
+	tar xvf ffmpeg-static.tar.xz
+	cd ffmpeg-git-*-static/ && \
+	rename 's/\.txt$$/.1/' manpages/*.txt && \
+	rename 's/ffmpeg/ffmpeg-static/' manpages/*.1 && \
+	mv manpages/ffprobe.1 manpages/ffprobe-static.1 && \
+	mv ffmpeg ffmpeg-static && \
+	mv ffmpeg-10bit ffmpeg-10bit-static && \
+	mv ffprobe ffprobe-static && \
+	mv qt-faststart qt-faststart-static
+
+override_dh_compress:
+	dh_compress -X.pdf
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

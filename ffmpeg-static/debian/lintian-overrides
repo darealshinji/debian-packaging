@@ -1,0 +1,2 @@
+# static binaries
+ffmpeg-static: embedded-library usr/bin/*: *

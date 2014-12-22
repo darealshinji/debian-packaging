@@ -4,7 +4,6 @@ deps = wget
 srcpkg = ffmpeg
 builddir = $(srcpkg)
 cleanfiles = $(builddir) *.tar.bz2 debian/changelog
-srcpkg = ffmpeg
 
 download:
 	wget "http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2"
