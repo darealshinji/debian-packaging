@@ -49,11 +49,9 @@ License: MIT
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-Files: debian/animechecker.svg
+Files: animechecker.svg
 Copyright: 2008-2011 Kasuga (https://ja.wikipedia.org/wiki/%E5%88%A9%E7%94%A8%E8%80%85:Kasuga)
 License: CC-BY-SA-3.0 or GFDL-1.2
- Source: https://commons.wikimedia.org/wiki/File:Wikipe-tan_without_body.svg
- .
  I, the copyright holder of this work, hereby publish it under the following
  licenses:
  .
