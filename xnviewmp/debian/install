@@ -1,4 +1,4 @@
-debian/wrapper/xnviewmp    usr/bin
+debian/script/xnviewmp     usr/bin
 XnView/lib                 usr/lib/xnviewmp
 XnView/Plugins             usr/lib/xnviewmp
 XnView/XnView              usr/lib/xnviewmp

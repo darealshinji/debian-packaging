@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+VERSION = $(shell dpkg-parsechangelog -SVersion)
+
 ifeq ($(shell uname -p), x86_64)
 x64 = -x64
 endif
@@ -9,13 +11,15 @@ endif
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf converted_icons XnView
+	rm -rf converted_icons XnView xnviewmp.1
 
 override_dh_auto_build:
 	tar xvfz XnViewMP-linux$(x64).tgz
 	find XnView -type f -exec chmod 0644 '{}' \;
 	chmod 0755 XnView/XnView
+
 	dos2unix XnView/*.txt
+	sed -e 's/@VERSION@/$(VERSION)/;' debian/xnviewmp.1.in > xnviewmp.1
 
 	./make-icons.sh XnView/xnview.png
 	./make-icons.sh XnView/xnview_2.png
