@@ -1,0 +1,2 @@
+?package(xnretro):needs="X11" section="Applications/Graphics"\
+ title="XnRetro" icon="/usr/share/pixmaps/xnretro.xpm" command="/usr/bin/xnretro"

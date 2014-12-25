@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=XnRetro
+GenericName=XnRetro
+Comment=create images with vintage or instant effects
+Exec=xnretro %U
+TryExec=/usr/lib/xnretro/XnRetro
+Terminal=false
+Icon=xnretro
+Categories=Graphics;
+StartupNotify=true

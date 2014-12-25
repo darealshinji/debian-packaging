@@ -1,0 +1,10 @@
+debian/script/xnretro   /usr/bin
+debian/xnretro.desktop  /usr/share/applications
+XnRetro/XnRetro         /usr/lib/xnretro
+XnRetro/qt.conf         /usr/lib/xnretro
+XnRetro/lib             /usr/lib/xnretro
+XnRetro/frame           /usr/share/xnretro
+XnRetro/images          /usr/share/xnretro
+XnRetro/light           /usr/share/xnretro
+XnRetro/vignette        /usr/share/xnretro
+converted_icons/*       /usr/share
