@@ -1,0 +1,11 @@
+.TH NCONVERT 1 "December 2014" "@VERSION@"
+.SH NAME
+NConvert \- Command Line Batch utility for images
+
+.SH DESCRIPTION
+NConvert is a powerful command line multi-platform batch image processor with more than 80 commands.
+Compatible with 500 image formats.
+
+.SH OPTIONS
+.nf
+\f[C]

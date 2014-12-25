@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+VERSION = $(shell dpkg-parsechangelog -SVersion)
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf NConvert nconvert.1
+
+override_dh_auto_build:
+	tar xvfz NConvert-linux*.tgz
+	chrpath -d NConvert/nconvert
+
+	sed -e 's/@VERSION@/$(VERSION)/;' debian/nconvert.1.header > nconvert.1
+	NConvert/nconvert -help >> nconvert.1 || true
+	echo .fi >> nconvert.1
+
+override_dh_installchangelogs:
+	dh_installchangelogs NConvert/WhatsNew.txt
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
