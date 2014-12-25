@@ -32,23 +32,29 @@ echo " -- $(MAINTAINER)  `date -R`"                 >> $(changelog-file) ;\
 echo ""                                             >> $(changelog-file)
 
 allcleanfiles = \
-.pc $(LOG) changelog.new converted_icons tmp temp *.dsc \
+.pc $(LOG) changelog.new converted_icons tmp temp *.changes *.deb *.dsc \
 *.tar.?z* $(builddir) $(cleanfiles)
 
-alldeps = debhelper pbuilder quilt $(deps)
+alldeps = debhelper quilt $(deps)
+ifneq ($(PBUILDER),0)
+alldeps += pbuilder
+endif
 
 
-all: clean predepends download source pbuilder
+all: predepends download source build
 
-nodeps: clean download source pbuilder
+nodeps: download source build
 
 clean:
 	rm -rf $(allcleanfiles)
 
-distclean:
-	rm -rf $(distcleanfiles) $(allcleanfiles)
+distclean: clean
+	rm -rf $(distcleanfiles)
 
 predepends:
+ifeq ($(DEPS),0)
+	@ echo "dependency checks skipped"
+else
 	@ echo ""
 	@ echo "checking dependencies:"
 	@ $(foreach DEP, $(alldeps), \
@@ -59,13 +65,14 @@ predepends:
 	    sudo apt-get install $(DEP) ;\
 	fi ;)
 	@ echo ""
+endif
 
 source: download
 	mkdir -p $(builddir)
 	cp -r ../make-icons.sh $(srcfiles) $(builddir)
 	test -d debian && cp -rf debian $(builddir) || true
 
-pbuilder: source
+build: source
 	rm -rf .pc
 	if [ -f $(builddir)/debian/patches/series ] ; then \
    cd $(builddir) && QUILT_PATCHES=debian/patches quilt push -a ;\
@@ -73,7 +80,13 @@ pbuilder: source
 fi
 	echo '3.0 (native)' > $(builddir)/debian/source/format
 	dpkg-source -b $(builddir)
+	mkdir -p $(resultdir)
 
+ifeq ($(PBUILDER),0)
+	cd $(builddir) && dpkg-buildpackage -b -us -uc 2>&1 | tee $(LOG)
+	rm -f *.changes
+	mv *.deb $(resultdir)
+else
 	@ if [ ! -f $(basetgz) ] ; then \
 	    echo "" ;\
 	    echo "sudo password required to create base.tgz:" ;\
@@ -83,12 +96,12 @@ fi
 	         --basetgz $(basetgz) ;\
 	fi
 
-	mkdir -p $(resultdir)
 	@ echo ""
 	@ echo "pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc"
 	@ echo ""
 	@ echo "sudo password required to run pbuilder:"
 	@ sudo pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc 2>&1 | tee $(LOG)
+endif
 
 	rm -f $(resultdir)/*.dsc
 	rm -f $(resultdir)/*.changes
@@ -108,4 +121,3 @@ for f in $(resultdir)/*.deb ; do \
 done 2>&1 | tee -a $(LOG)
 	@ echo ""
 	cp -f $(LOG) $(resultdir)
-
