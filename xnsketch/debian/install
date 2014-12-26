@@ -1,0 +1,6 @@
+debian/script/xnsketch    /usr/bin
+debian/xnsketch.desktop   /usr/share/applications
+XnSketch/XnSketch         /usr/lib/xnsketch
+XnSketch/qt.conf          /usr/lib/xnsketch
+XnSketch/lib              /usr/lib/xnsketch
+converted_icons/*         /usr/share

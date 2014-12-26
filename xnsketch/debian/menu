@@ -1,0 +1,2 @@
+?package(xnsketch):needs="X11" section="Applications/Graphics"\
+ title="XnSketch" icon="/usr/share/pixmaps/xnsketch.xpm" command="/usr/bin/xnsketch"

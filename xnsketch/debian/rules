@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf converted_icons XnSketch
+
+override_dh_auto_build:
+	tar xvfz XnSketch-linux.tgz
+
+	find XnSketch -type f -exec chmod 0644 '{}' \;
+	chmod 0755 XnSketch/XnSketch
+	chrpath -d XnSketch/XnSketch `find XnSketch/ -type f -name *.so*`
+
+	./make-icons.sh XnSketch/xnsketch.png
+
+override_dh_install:
+	dh_install -Xlibphonon.so.4
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+	#dh_shlibdeps -Lxnviewmp -l/usr/lib/xnsketch/lib
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz
+
