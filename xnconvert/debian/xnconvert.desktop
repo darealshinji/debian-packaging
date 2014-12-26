@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=XnConvert
+GenericName=XnConvert
+Comment=Batch image processor
+Exec=xnconvert %U
+TryExec=/usr/lib/xnconvert/XnConvert
+Terminal=false
+Icon=xnconvert
+Categories=Graphics;
+StartupNotify=true

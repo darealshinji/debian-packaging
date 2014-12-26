@@ -1,0 +1,7 @@
+debian/script/xnconvert     /usr/bin
+XnConvert/XnConvert         /usr/lib/xnconvert
+XnConvert/lib               /usr/lib/xnconvert
+XnConvert/Plugins           /usr/lib/xnconvert
+XnConvert/AddOn             /usr/share/xnconvert
+XnConvert/language          /usr/share/xnconvert
+converted_icons/*           /usr/share

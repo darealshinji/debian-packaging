@@ -1,0 +1,2 @@
+?package(xnconvert):needs="X11" section="Applications/Graphics"\
+ title="XnConvert" icon="/usr/share/pixmaps/xnconvert.xpm" command="/usr/bin/xnconvert"
