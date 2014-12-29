@@ -1,0 +1,26 @@
+include ../../Makefile.inc
+
+deps = wget
+srcpkg = rar
+builddir = rar-src
+srcfiles = rar
+cleanfiles = rar* debian/changelog
+changelog-file = changelog.new
+changelog-msg = New upstream release (beta version)
+
+ifeq ($(shell dpkg-architecture -qDEB_HOST_ARCH),amd64)
+x64 = x64
+endif
+MAINURL = http://www.rarlabs.com
+URL = $(MAINURL)$(shell wget -q -O - "$(MAINURL)/download.htm" | \
+	grep -e '\/rarlinux-$(x64)' | head -n1 | cut -d '"' -f2)
+VER = $(shell echo $(URL) | sed -e 's@$(MAINURL)/rar/rarlinux-$(x64)@@; s/.tar.gz//; s/-//;')
+
+download:
+	wget $(URL)
+	tar xvf rarlinux-$(x64)-$(VER).tar.gz
+
+	VERSION=2:$(shell echo $(VER) | sed -e 's/.b/.0~b/;') ;\
+	$(changelog-entry)
+	cat changelog.new debian/changelog.in > debian/changelog
+

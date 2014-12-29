@@ -69,7 +69,7 @@ endif
 
 source: download
 	mkdir -p $(builddir)
-	cp -r ../make-icons.sh $(srcfiles) $(builddir)
+	cp -r ../../make-icons.sh $(srcfiles) $(builddir)
 	test -d debian && cp -rf debian $(builddir) || true
 
 build: source
