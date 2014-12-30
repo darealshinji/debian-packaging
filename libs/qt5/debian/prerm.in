@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+VERSION=@VERSION@
+
+GCC=gcc
+if [ "$(uname -p)" = "x86_64" ] ; then
+GCC=gcc_64
+fi
+
+case "$1" in
+deconfigure|remove)
+
+    update-alternatives --remove libqt${VERSION} /usr/lib/Qt/${VERSION}/${GCC}/lib
+    update-alternatives --remove libqt${VERSION}-plugins /usr/lib/Qt/${VERSION}/${GCC}/plugins
+
+    cd /opt && rmdir -p --ignore-fail-on-non-empty Qt/${VERSION}/${GCC}
+
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

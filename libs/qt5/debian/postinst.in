@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+VERSION=@VERSION@
+
+GCC=gcc
+if [ "$(uname -p)" = "x86_64" ] ; then
+GCC=gcc_64
+fi
+
+case "$1" in
+configure)
+
+    mkdir -p /opt/Qt/${VERSION}/${GCC}
+
+    update-alternatives \
+    --install \
+        /opt/Qt/${VERSION}/${GCC}/lib libqt${VERSION} \
+        /usr/lib/Qt/${VERSION}/${GCC}/lib 100
+
+    update-alternatives \
+    --install \
+        /opt/Qt/${VERSION}/${GCC}/plugins libqt${VERSION}-plugins \
+        /usr/lib/Qt/${VERSION}/${GCC}/plugins 100
+
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
