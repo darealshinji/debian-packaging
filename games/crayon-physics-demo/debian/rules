@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf CrayonPhysicsDeluxeDemo crayon-physics-demo.png converted_icons
+
+override_dh_auto_build:
+	tar xvfz crayon_release_demo.tgz
+	chrpath -d CrayonPhysicsDeluxeDemo/launcher
+
+	chmod a-x `find CrayonPhysicsDeluxeDemo/* -type f`
+	chmod a+x CrayonPhysicsDeluxeDemo/launcher
+
+	cp CrayonPhysicsDeluxeDemo/icon.png crayon-physics-demo.png
+	./make-icons.sh crayon-physics-demo.png
+
+override_dh_install:
+	dh_install -Xlicense.txt
+
+override_dh_installchangelogs:
+	dh_installchangelogs CrayonPhysicsDeluxeDemo/changelog.txt
+
+override_dh_shlibdeps:
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

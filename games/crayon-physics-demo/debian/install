@@ -1,0 +1,9 @@
+CrayonPhysicsDeluxeDemo/launcher        /usr/lib/crayon-physics-demo
+CrayonPhysicsDeluxeDemo/updates         /usr/lib/crayon-physics-demo
+CrayonPhysicsDeluxeDemo/autoexec.txt    /usr/lib/crayon-physics-demo
+CrayonPhysicsDeluxeDemo/version.xml     /usr/lib/crayon-physics-demo
+CrayonPhysicsDeluxeDemo/cache           /usr/share/games/crayon-physics-demo
+CrayonPhysicsDeluxeDemo/data            /usr/share/games/crayon-physics-demo
+debian/launcher/crayon-physics-demo     /usr/games
+debian/crayon-physics-demo.desktop      /usr/share/applications
+converted_icons/*                       /usr/share

@@ -1,0 +1,42 @@
+Source: crayon-physics-demo
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ chrpath,
+ imagemagick
+Standards-Version: 3.9.5
+Homepage: https://www.crayonphysics.com/
+
+Package: crayon-physics-demo
+Architecture: amd64 i386
+Depends:
+ libgcc1 (>= 1:4.1.1) [i386],
+ libstdc++6 (>= 4.5) [i386],
+ libc6 (>= 2.11) [i386],
+ libgl1-mesa-glx [i386] | libgl1 [i386],
+ libglu1-mesa [i386] | libglu1 [i386],
+ libqtcore4 (>= 4:4.5.3) [i386],
+ libqtgui4 (>= 4:4.5.3) [i386],
+ libsdl-image1.2 (>= 1.2.10) [i386],
+ libsdl-mixer1.2 [i386],
+ libsdl1.2debian (>= 1.2.11) [i386],
+ libx11-6 [i386],
+ lib32gcc1 (>= 1:4.1.1) [amd64],
+ lib32stdc++6 (>= 4.5) [amd64],
+ libc6-i386 (>= 2.11) [amd64],
+ libgl1-mesa-glx:i386 [amd64] | libgl1:i386 [amd64],
+ libglu1-mesa:i386 [amd64] | libglu1:i386 [amd64],
+ libqtcore4:i386 (>= 4:4.5.3) [amd64],
+ libqtgui4:i386 (>= 4:4.5.3) [amd64],
+ libsdl-image1.2:i386 (>= 1.2.10) [amd64],
+ libsdl-mixer1.2:i386 [amd64],
+ libsdl1.2debian:i386 (>= 1.2.11) [amd64],
+ libx11-6:i386
+Description: 2D physics puzzle / sandbox game
+ Crayon Physics Deluxe Demo is a 2D physics puzzle / sandbox game, in which
+ you get to experience what it would be like if your drawings would be
+ magically transformed into real physical objects.
+ Solve puzzles with your artistic vision and creative use of physics. 
+

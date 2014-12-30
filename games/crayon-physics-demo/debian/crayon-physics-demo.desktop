@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Crayon Physics Deluxe
+Categories=Game
+TryExec=/usr/lib/crayon-physics-demo/launcher
+Exec=crayon-physics-demo %u
+Icon=crayon-physics-demo
+
