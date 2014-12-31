@@ -12,12 +12,12 @@ endif
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -f debian/links debian/install grapplinghook grapplinghook.6
+	rm -f debian/grapplinghook.links debian/grapplinghook.install grapplinghook grapplinghook.6
 	rm -rf converted_icons GrapplingHook lwjgl-2.9.1
 
 override_dh_auto_build:
 	unzip lwjgl-2.9.1.zip
-	tar xvf GrapplingHook.tar.gz
+	tar xvf GrapplingHook*.tar.gz
 
 	chmod a-x `find GrapplingHook -type f`
 	chmod a+x GrapplingHook/start.sh
@@ -26,11 +26,21 @@ override_dh_auto_build:
 
 	./make-icons.sh ghook.png
 
-	sed -e 's/@LIB64@/$(LIB64)/g; s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' debian/links.in > debian/links
-	sed -e 's/@LIB64@/$(LIB64)/g' debian/install.in > debian/install
+	sed -e 's/@LIB64@/$(LIB64)/g; s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' debian/grapplinghook.links.in > debian/grapplinghook.links
+	sed -e 's/@LIB64@/$(LIB64)/g' debian/grapplinghook.install.in > debian/grapplinghook.install
 	sed -e 's/@VERSION@/$(VERSION)/g' debian/grapplinghook.6.in > grapplinghook.6
 	sed -e 's/@VERSION@/$(VERSION)/g' debian/grapplinghook.in > grapplinghook
 	chmod a+x grapplinghook
+
+ifneq ($(wildcard common-package.stamp),)
+	rm -f debian/control
+	cp debian/control-common debian/control
+else
+	cat debian/grapplinghook-common.install >> debian/grapplinghook.install
+endif
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=grapplinghook
 
 override_dh_installchangelogs:
 	dh_installchangelogs debian/upstream-changelog
@@ -38,5 +48,8 @@ override_dh_installchangelogs:
 override_dh_makeshlibs:
 
 override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
+	dh_builddeb -pgrapplinghook -- -Zxz -z9
+ifneq ($(wildcard common-package.stamp),)
+	dh_builddeb -pgrapplinghook-common -- -Zxz -z9
+endif
 
