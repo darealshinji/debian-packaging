@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 deps = wget
 builddir = UnityEngine2deb-master

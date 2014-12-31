@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 deps = git
 cleanfiles = freedoom debian/changelog

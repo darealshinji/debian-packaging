@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 deps = wget
 cleanfiles = unrar* rar_add.htm debian/changelog

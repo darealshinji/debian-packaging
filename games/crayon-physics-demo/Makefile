@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 deps = wget
 bin = crayon_release_demo.tgz

@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 deps = wget dh-autoreconf autotools-dev
 builddir = yasm-$(VERSION)

@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 deps = wget unzip
 bin = NeroAACCodec-1.5.1.zip

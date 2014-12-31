@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 deps = wget git
 cleanfiles = fmodapi*linux gzdoom debian/changelog

@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 DEBARCH = i386
 LINUX = linux_x86

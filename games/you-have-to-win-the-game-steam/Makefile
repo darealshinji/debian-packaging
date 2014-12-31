@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 cleanfiles = game-data* debian/copyright
 srcfiles = files game-data.txz

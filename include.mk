@@ -59,10 +59,10 @@ else
 	@ echo "checking dependencies:"
 	@ $(foreach DEP, $(alldeps), \
 	echo $(DEP); \
-	if [ "$$(aptitude show $(DEP) | grep -e 'State:' | sed -e 's/State: //;')" = 'not installed' ] ;\
+	if [ $$(dpkg-query -W -f='$${Status}' $(DEP) 2>/dev/null | grep -c "ok installed") -eq 0 ] ;\
 	then \
 	    echo "You need to install the package '$(DEP)'" ;\
-	    sudo apt-get install $(DEP) ;\
+	    sudo -k apt-get install $(DEP) ;\
 	fi ;)
 	@ echo ""
 endif
@@ -90,7 +90,7 @@ else
 	@ if [ ! -f $(basetgz) ] ; then \
 	    echo "" ;\
 	    echo "sudo password required to create base.tgz:" ;\
-	    sudo pbuilder --create \
+	    sudo -k pbuilder --create \
 	         --components "main restricted universe multiverse" \
 	         --debootstrapopts --variant=buildd \
 	         --basetgz $(basetgz) ;\
@@ -100,7 +100,7 @@ else
 	@ echo "pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc"
 	@ echo ""
 	@ echo "sudo password required to run pbuilder:"
-	@ sudo pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc 2>&1 | tee $(LOG)
+	@ sudo -k pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc 2>&1 | tee $(LOG)
 endif
 
 	rm -f $(resultdir)/*.dsc

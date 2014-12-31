@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 deps = git libtool
 cleanfiles = debian/changelog

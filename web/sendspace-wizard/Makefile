@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../include.mk
 
 deps = wget
 bin = SendSpace_Wizard_Debian-Linux-32-64bit.tgz
