@@ -62,7 +62,7 @@ else
 	if [ $$(dpkg-query -W -f='$${Status}' $(DEP) 2>/dev/null | grep -c "ok installed") -eq 0 ] ;\
 	then \
 	    echo "You need to install the package '$(DEP)'" ;\
-	    sudo -k apt-get install $(DEP) ;\
+	    sudo -k apt-get -q install $(DEP) ;\
 	fi ;)
 	@ echo ""
 endif
