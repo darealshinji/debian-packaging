@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Sublime Text 2
+GenericName=text editor for code, markup and prose
+Comment=Edit source code files
+Exec=sublime-text-2 %U
+Terminal=false
+Type=Application
+StartupNotify=false
+MimeType=text/plain;text/html;text/x-php;text/x-c;text/x-shellscript;
+Icon=sublime-text-2
+Categories=Development;Utility;TextEditor;

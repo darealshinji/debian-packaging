@@ -1,0 +1,10 @@
+SublimeText2/lib                  /usr/lib/sublime-text-2
+SublimeText2/Pristine?Packages    /usr/lib/sublime-text-2
+SublimeText2/sublime_text         /usr/lib/sublime-text-2
+SublimeText2/*.py                 /usr/lib/sublime-text-2
+debian/*.desktop                  /usr/share/applications
+SublimeText2/Icon/16x16/*         /usr/share/icons/hicolor/16x16/apps
+SublimeText2/Icon/32x32/*         /usr/share/icons/hicolor/32x32/apps
+SublimeText2/Icon/48x48/*         /usr/share/icons/hicolor/48x48/apps
+SublimeText2/Icon/128x128/*       /usr/share/icons/hicolor/128x128/apps
+SublimeText2/Icon/256x256/*       /usr/share/icons/hicolor/256x256/apps
