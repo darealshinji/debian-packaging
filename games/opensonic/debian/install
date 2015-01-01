@@ -1,0 +1,5 @@
+debian/launcher/opensonic          /usr/games
+debian/opensonic.desktop           /usr/share/applications
+converted_icons/*                  /usr/share
+opensnc-linux-0.1.4/*              /usr/lib/opensonic
+opensnc-linux-0.1.4/images         /usr/share/opensonic

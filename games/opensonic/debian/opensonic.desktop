@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Open Sonic
+GenericName=Free "Sonic the Hedgehog" clone
+Exec=opensonic %U
+Type=Application
+Categories=Game;
+StartupNotify=false
+Icon=opensonic
