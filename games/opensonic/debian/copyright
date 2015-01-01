@@ -4,6 +4,9 @@ Source: http://opensnc.sourceforge.net/home/
 Files: *
        debian/opensonic.6
 Copyright: 2008-2010 Alexandre Martins
+                     Lainz, Naldrag, George, Pablo Arias,
+                     Ruben Caceres, SilverstepP, Christopher Martinus,
+                     KZR, Mateus Reis, Ssdw, TheSeventhEmerald
 License: GPL-2+
 
 Files: debian/*

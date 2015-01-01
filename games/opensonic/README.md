@@ -13,3 +13,5 @@ This is because of sound problems I had encountered.
 
 http://opensnc.sourceforge.net/home/
 
+Extra levels: https://launchpad.net/~szymonw/+archive/ubuntu/ppa/+files/opensonic-extra_0.1.4~1_all.deb
+

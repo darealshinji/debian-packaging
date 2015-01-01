@@ -18,10 +18,9 @@ override_dh_auto_install:
 
 override_dh_install:
 	dh_install -Xlicense.txt
-	rm -rf $(CURDIR)/debian/opensonic/usr/lib/opensonic/images
 	chmod 0644 `find $(CURDIR)/debian/opensonic/usr/lib -type f`
 	chmod 0644 `find $(CURDIR)/debian/opensonic/usr/share -type f`
-	chmod 0755 $(CURDIR)/debian/opensonic/usr/lib/opensonic/opensonic_bin
+	chmod 0755 $(CURDIR)/debian/opensonic/usr/lib/games/opensonic/opensonic_bin
 
 override_dh_makeshlibs:
 

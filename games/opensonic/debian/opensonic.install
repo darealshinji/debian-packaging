@@ -1,0 +1,16 @@
+debian/launcher/opensonic           /usr/games
+debian/opensonic.desktop            /usr/share/applications
+converted_icons/*                   /usr/share
+opensnc-linux-0.1.4/opensonic_bin   /usr/lib/games/opensonic
+opensnc-linux-0.1.4/*.so.*          /usr/lib/games/opensonic
+opensnc-linux-0.1.4/config          /usr/share/games/opensonic
+opensnc-linux-0.1.4/images          /usr/share/games/opensonic
+opensnc-linux-0.1.4/languages       /usr/share/games/opensonic
+opensnc-linux-0.1.4/levels          /usr/share/games/opensonic
+opensnc-linux-0.1.4/musics          /usr/share/games/opensonic
+opensnc-linux-0.1.4/objects         /usr/share/games/opensonic
+opensnc-linux-0.1.4/quests          /usr/share/games/opensonic
+opensnc-linux-0.1.4/samples         /usr/share/games/opensonic
+opensnc-linux-0.1.4/screenshots     /usr/share/games/opensonic
+opensnc-linux-0.1.4/sprites         /usr/share/games/opensonic
+opensnc-linux-0.1.4/themes          /usr/share/games/opensonic

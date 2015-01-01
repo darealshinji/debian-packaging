@@ -1,7 +1,7 @@
 #!/bin/sh
 
-export LD_LIBRARY_PATH=/usr/lib/opensonic/
+export LD_LIBRARY_PATH=/usr/lib/games/opensonic/
 
-cd /usr/lib/opensonic
+cd /usr/lib/games/opensonic
 aoss ./opensonic_bin "$@"
 
