@@ -1,7 +1,7 @@
 include ../../include.mk
 
 # Sublime Text 3 is currently in beta
-REVISION = $(shell dpkg-parsechangelog -SVersion | tail -c+3)
+REVISION = 3065
 
 deps = wget
 bin = sublime_text_3.tar.bz2
