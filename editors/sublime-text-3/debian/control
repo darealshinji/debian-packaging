@@ -1,0 +1,23 @@
+Source: sublime-text-3
+Section: editors
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+   debhelper (>= 9),
+   dh-python,
+   libglib2.0-0,
+   libx11-6,
+   python3 (>= 3.3)
+Standards-Version: 3.9.5
+Homepage: http://www.sublimetext.com/
+
+Package: sublime-text-3
+Architecture: amd64 i386
+Depends:
+   ${python3:Depends},
+   ${shlibs:Depends},
+   ${misc:Depends}
+Description: text editor for code, markup and prose
+ Sublime Text is a sophisticated text editor for code, markup and prose.
+ .
+ Sublime Text 3 is currently in beta.

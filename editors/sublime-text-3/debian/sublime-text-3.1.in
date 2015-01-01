@@ -1,0 +1,10 @@
+.TH SUBLIME-TEXT-3 1 "JANUARY 2015" "Build @REVISION@"
+.SH NAME
+sublime-text-3 \- sophisticated text editor for code, markup and prose
+.SH SYNOPSIS
+.B sublime-text-3 \fIfiles \fR[...]
+.SH DESCRIPTION
+Sublime Text 3 is currently in beta.
+.PP
+The documentation is available online:
+.I http://www.sublimetext.com/docs/3/

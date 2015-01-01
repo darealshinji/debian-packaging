@@ -1,0 +1,11 @@
+sublime_text_3/Packages             /usr/lib/sublime-text-3
+sublime_text_3/crash_reporter       /usr/lib/sublime-text-3
+sublime_text_3/plugin_host          /usr/lib/sublime-text-3
+sublime_text_3/sublime_text         /usr/lib/sublime-text-3
+sublime_text_3/*.py                 /usr/lib/sublime-text-3
+debian/*.desktop                    /usr/share/applications
+sublime_text_3/Icon/16x16/*         /usr/share/icons/hicolor/16x16/apps
+sublime_text_3/Icon/32x32/*         /usr/share/icons/hicolor/32x32/apps
+sublime_text_3/Icon/48x48/*         /usr/share/icons/hicolor/48x48/apps
+sublime_text_3/Icon/128x128/*       /usr/share/icons/hicolor/128x128/apps
+sublime_text_3/Icon/256x256/*       /usr/share/icons/hicolor/256x256/apps
