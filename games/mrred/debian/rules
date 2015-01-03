@@ -4,9 +4,10 @@
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf converted_icons
+	rm -rf converted_icons assets runner
 
 override_dh_auto_build:
+	tar xvf mrred.tar.gz
 	chmod 755 runner
 	./make-icons.sh mrred.png
 
