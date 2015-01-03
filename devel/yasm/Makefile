@@ -1,13 +1,12 @@
 include ../../include.mk
 
-deps = wget dh-autoreconf autotools-dev
-builddir = yasm-$(VERSION)
-cleanfiles = *.tar.gz *.pdf *.html images
+deps       = wget dh-autoreconf autotools-dev
+builddir   = yasm-$(VERSION)
+cleanfiles = *.pdf *.png *.html images
 
-VERSION = $(shell head -n1 debian/changelog | cut -d' ' -f2 | cut -d'-' -f1 | tail -c+2)
-SITE = http://www.tortall.net/projects/yasm
-sha256_1 = 3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f
-bin = yasm-$(VERSION).tar.gz
+VERSION    = $(shell head -n1 debian/changelog | cut -d' ' -f2 | cut -d'-' -f1 | tail -c+2)
+SITE       = http://www.tortall.net/projects/yasm
+bin        = yasm-$(VERSION).tar.gz
 
 download: clean
 	wget "$(SITE)/releases/$(bin)"
@@ -22,7 +21,7 @@ download: clean
 	sed -i 's@$(SITE)/manual/html/objfmt-win64/calling-convention.png@images/calling-convention.png@; s@$(SITE)/manual/html/objfmt-win64/stack-frame-detailed.png@images/stack-frame-detailed.png@; s@$(SITE)/manual/html/arch-x86/x86-registers.png@images/x86-registers.png@;' manual.html
 	sed -i 's@$(SITE)/manual/ru/html/objfmt-win64/calling-convention.png@images/calling-convention.png@; s@$(SITE)/manual/ru/html/objfmt-win64/stack-frame-detailed.png@images/stack-frame-detailed.png@; s@$(SITE)/manual/ru/html/arch-x86/x86-registers.png@images/x86-registers.png@;' manual-ru.html
 
-	@ $(verifysha256)
+	@ $(call verifysha256,$(bin),3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f)
 	tar xvfz $(bin)
 	mkdir -p images && mv *.png images
 	mv *.html *.pdf images $(builddir)

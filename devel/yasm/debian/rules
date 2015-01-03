@@ -9,6 +9,9 @@ export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,-z,defs
 override_dh_auto_install:
 	dh_auto_install -- DESTDIR=$(CURDIR)/debian/tmp
 
+override_dh_compress:
+	dh_compress -X.pdf
+
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9
 
