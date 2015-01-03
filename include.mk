@@ -32,6 +32,7 @@ endef
 MAINTAINER      = Marshall Banana <djcj@gmx.de>
 changelog-msg   = Current git snapshot
 changelog-file  = $(builddir)/debian/changelog
+srcpkg          = `grep 'Source: ' debian/control | cut -d' ' -f2`
 
 changelog-entry =                                                              \
     mkdir -p $(shell dirname $(changelog-file)) ;                              \

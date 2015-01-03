@@ -1,0 +1,23 @@
+#! /usr/bin/make -f
+
+
+%:
+	dh $@ --parallel --with autoreconf
+
+override_dh_auto_build:
+	dh_auto_build -- all doc
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	dh_auto_install -- INSTALLROOT=$(CURDIR)/debian/nasm install install_rdf
+
+override_dh_installchangelogs:
+	dh_installchangelogs CHANGES
+
+override_dh_compress:
+	dh_compress -X.pdf
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

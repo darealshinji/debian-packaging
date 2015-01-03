@@ -8,7 +8,7 @@ VERSION    = $(shell head -n1 debian/changelog | cut -d' ' -f2 | cut -d'-' -f1 |
 SITE       = http://www.tortall.net/projects/yasm
 bin        = yasm-$(VERSION).tar.gz
 
-download: clean
+download:
 	wget "$(SITE)/releases/$(bin)"
 	wget "$(SITE)/manual/manual.pdf"
 	wget -O manual-ru.pdf "$(SITE)/manual/ru/manual.pdf"

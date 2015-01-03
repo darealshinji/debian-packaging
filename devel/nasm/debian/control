@@ -1,0 +1,25 @@
+Source: nasm
+Section: devel
+Priority: optional
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Standards-Version: 3.9.5
+Build-Depends:
+ debhelper (>= 9),
+ dh-autoreconf,
+ texinfo,
+ ghostscript
+Homepage: http://nasm.sourceforge.net/
+
+Package: nasm
+Architecture: any
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ dpkg (>= 1.15.4) | install-info
+Description: General-purpose x86 assembler
+ Netwide Assembler.  NASM will currently output flat-form binary files,
+ a.out, COFF and ELF Unix object files, and Microsoft 16-bit DOS and
+ Win32 object files.
+ .
+ Also included is NDISASM, a prototype x86 binary-file disassembler
+ which uses the same instruction table as NASM.
