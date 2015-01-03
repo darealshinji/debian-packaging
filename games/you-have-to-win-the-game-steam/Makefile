@@ -1,5 +1,7 @@
 include ../../include.mk
 
+ARCH = amd64
+
 cleanfiles = game-data* debian/copyright
 srcfiles = files game-data.txz
 GAMEDIR = "$(shell echo $$HOME)/.steam/steam/SteamApps/common/You Have to Win the Game/"

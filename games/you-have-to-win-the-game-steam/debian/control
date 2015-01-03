@@ -37,7 +37,9 @@ Package: thegame-dbg
 Architecture: amd64
 Section: debug
 Priority: extra
-Depends: ${misc:Depends}, thegame (= ${source:Version})
+Depends:
+ ${misc:Depends},
+ thegame (= ${source:Version})
 Description: You Have to Win the Game (Debug)
  Originally released in May 2012, You Have to Win the Game has
  now arrived on Steam with a more difficult remixed campaign

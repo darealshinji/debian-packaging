@@ -2,33 +2,22 @@ Source: mrred
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends: debhelper (>= 9), imagemagick
+Build-Depends:
+ debhelper (>= 9),
+ imagemagick,
+ libgl1-mesa-glx | libgl1,
+ libopenal1,
+ libpulse0,
+ libssl1.0.0,
+ libx11-6,
+ libxxf86vm1,
+ zlib1g
 Standards-Version: 3.9.5
 Homepage: https://killmonday.wordpress.com/games-2/mr-reds-adventure-the-missing-balls/
 
 Package: mrred
-Architecture: amd64 i386
-Depends:
- libgcc1 (>= 1:4.1.1) [i386],
- libstdc++6 (>= 4.1.1) [i386],
- libc6 (>= 2.15) [i386],
- libgl1-mesa-glx [i386] | libgl1 [i386],
- libopenal1 (>= 1:1.13) [i386],
- libpulse0 [i386],
- libssl1.0.0 (>= 1.0.0) [i386],
- libx11-6 [i386],
- libxxf86vm1 [i386],
- zlib1g (>= 1:1.1.4) [i386],
- lib32gcc1 (>= 1:4.1.1) [amd64],
- lib32stdc++6 (>= 4.1.1) [amd64],
- libc6-i386 (>= 2.15) [amd64],
- libgl1-mesa-glx:i386 [amd64] | libgl1:i386 [amd64],
- libopenal1:i386 (>= 1:1.13) [amd64],
- libpulse0:i386 [amd64],
- libssl1.0.0:i386 (>= 1.0.0) [amd64],
- libx11-6:i386 [amd64],
- libxxf86vm1:i386 [amd64],
- zlib1g:i386 (>= 1:1.1.4) [amd64]
+Architecture: i386
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: 2D platformer
  Mr Red's adventure in The Missing Balls is a fun and hard platformer where
  you play as the red hand puppet Mr Red and try collecting the 24 lost balls

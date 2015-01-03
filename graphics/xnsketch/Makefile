@@ -1,5 +1,7 @@
 include ../../include.mk
 
+ARCH = i386
+
 deps = wget
 srcfiles = $(bin)
 distcleanfiles = $(bin)

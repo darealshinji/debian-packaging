@@ -5,7 +5,7 @@ srcfiles = ffmpeg-static.tar.xz
 srcpkg = ffmpeg-static
 
 BITS = 32
-ifeq ($(shell uname -p), x86_64)
+ifeq ($(ARCH), amd64)
 BITS = 64
 endif
 BIN = $(shell wget -q -O - http://johnvansickle.com/ffmpeg/ | grep -e 'ffmpeg-git-' | grep -e '$(BITS)bit' | cut -d '>' -f2 | cut -d '<' -f1)

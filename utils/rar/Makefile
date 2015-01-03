@@ -8,7 +8,7 @@ cleanfiles = rar* debian/changelog
 changelog-file = changelog.new
 changelog-msg = New upstream release (beta version)
 
-ifeq ($(shell dpkg-architecture -qDEB_HOST_ARCH),amd64)
+ifeq (ARCH, amd64)
 x64 = x64
 endif
 MAINURL = http://www.rarlabs.com

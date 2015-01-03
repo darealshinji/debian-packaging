@@ -3,7 +3,8 @@
 %:
 	dh ${@}
 
-override_dh_shlibdeps:
+override_dh_auto_clean:
+	rm -rf converted_icons
 
 override_dh_auto_build:
 	chmod 755 runner

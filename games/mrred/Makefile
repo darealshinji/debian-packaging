@@ -1,5 +1,7 @@
 include ../../include.mk
 
+ARCH = i386
+
 deps = wget
 bin = mrred.tar.gz
 cleanfiles = $(bin) mrred.png assets runner

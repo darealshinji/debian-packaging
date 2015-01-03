@@ -5,49 +5,28 @@ Maintainer: Pierre-e Gougelet <contact@xnview.com>
 Build-Depends:
  debhelper (>= 9),
  imagemagick,
- chrpath
+ chrpath,
+ libfontconfig1,
+ libfreetype6,
+ libglib2.0-0,
+ libgstreamer-plugins-base0.10-0,
+ libgstreamer0.10-0,
+ libice6,
+ libjpeg62,
+ libpng12-0,
+ libqt4-svg,
+ libsm6,
+ libx11-6,
+ libxext6,
+ libxml2,
+ libxrender1,
+ zlib1g
 Standards-Version: 3.9.5
 Homepage: http://www.xnview.com
 
 Package: xnretro
-Architecture: amd64 i386
-Depends:
- libgcc1 (>= 1:4.1.1) [i386],
- libstdc++6 (>= 4.1.1) [i386],
- libc6 (>= 2.11) [i386],
- libfontconfig1 (>= 2.9.0) [i386],
- libfreetype6 (>= 2.3.5) [i386],
- libglib2.0-0 (>= 2.22.0) [i386],
- libgstreamer-plugins-base0.10-0 (>= 0.10.25) [i386],
- libgstreamer0.10-0 (>= 0.10.24) [i386],
- libice6 (>= 1:1.0.0) [i386],
- libjpeg62 (>= 6b1) [i386],
- libpng12-0 (>= 1.2.13-4) [i386],
- libqt4-svg (>= 4:4.5.3) [i386],
- libsm6 [i386],
- libx11-6 [i386],
- libxext6 [i386],
- libxml2 (>= 2.6.27) [i386],
- libxrender1 [i386],
- zlib1g (>= 1:1.1.4) [i386],
- lib32gcc1 (>= 1:4.1.1) [amd64],
- lib32stdc++6 (>= 4.1.1) [amd64],
- libc6-i386 (>= 2.11) [amd64],
- libfontconfig1:i386 (>= 2.9.0) [amd64],
- libfreetype6:i386 (>= 2.3.5) [amd64],
- libglib2.0-0:i386 (>= 2.22.0) [amd64],
- libgstreamer-plugins-base0.10-0:i386 (>= 0.10.25) [amd64],
- libgstreamer0.10-0:i386 (>= 0.10.24) [amd64],
- libice6:i386 (>= 1:1.0.0) [amd64],
- libjpeg62:i386 (>= 6b1) [amd64],
- libpng12-0:i386 (>= 1.2.13-4) [amd64],
- libqt4-svg:i386 (>= 4:4.5.3) [amd64],
- libsm6:i386 [amd64],
- libx11-6:i386 [amd64],
- libxext6:i386 [amd64],
- libxml2:i386 (>= 2.6.27) [amd64],
- libxrender1:i386 [amd64],
- zlib1g:i386 (>= 1:1.1.4) [amd64]
+Architecture: i386
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: create images with vintage or instant effects
  XnRetro allows you to create stunning images with vintage
  or instant effect on your Desktop.

@@ -2,10 +2,11 @@ export LANG=C
 export LANGUAGE=C
 export LC_ALL=C
 
+ARCH = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 builddir = pbuilder-source
 LOG = $(shell basename $$PWD)-build.log
 resultdir = "$$HOME/buildresult"
-basetgz = "/var/cache/pbuilder/debian-packages.tgz"
+basetgz = "/var/cache/pbuilder/debian-packages-$(ARCH).tgz"
 
 define verifysha256
     sha256_2=$$(sha256sum $(1) | head -c64) ;\
@@ -92,6 +93,7 @@ else
 	    echo "sudo password required to create base.tgz:" ;\
 	    sudo -k pbuilder --create \
 	         --components "main restricted universe multiverse" \
+		 --debootstrapopts --arch --debootstrapopts $(ARCH) \
 	         --debootstrapopts --variant=buildd \
 	         --basetgz $(basetgz) ;\
 	fi

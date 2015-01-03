@@ -1,5 +1,7 @@
 include ../../include.mk
 
+ARCH = i386
+
 deps = wget
 cleanfiles = *.png
 bin = doom3-linux-1.1.1286-demo.x86.run

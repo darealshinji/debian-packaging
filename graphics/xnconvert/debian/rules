@@ -22,14 +22,14 @@ override_dh_auto_build:
 
 	chrpath -d XnConvert/XnConvert `find XnConvert/ -type f -name *.so*`
 ifeq ($(shell uname -p), x86_64)
-	# an i386 plugin shouldn't be in an amd64 package
+	# i386 plugins shouldn't be in an amd64 package
 	rm -f XnConvert/Plugins/rwz_sdk.so
 endif
 
 override_dh_makeshlibs:
 
 override_dh_shlibdeps:
-	#dh_shlibdeps -Lxnconvert -l/usr/lib/xnconvert/lib
+	dh_shlibdeps -Lxnconvert -l/usr/lib/xnconvert/lib
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz

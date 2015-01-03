@@ -6,7 +6,7 @@ cleanfiles = $(bin)
 srcpkg = nconvert
 
 bin = NConvert-linux$(x64).tgz
-ifeq ($(shell uname -p), x86_64)
+ifeq ($(ARCH), amd64)
 x64 = 64
 endif
 

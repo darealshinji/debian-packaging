@@ -5,35 +5,25 @@ Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
   debhelper (>= 9),
   chrpath,
-  imagemagick
+  imagemagick,
+  libice6,
+  libpng12-0,
+  libsm6,
+  libx11-6,
+  libxcursor1,
+  libxext6,
+  libxpm4,
+  libxxf86vm1,
+  zlib1g
 Standards-Version: 3.9.5
 Homepage: http://opensnc.sourceforge.net/home/
 
 Package: opensonic
-Architecture: amd64 i386
+Architecture: i386
 Depends:
-  alsa-oss:i386 [amd64],
-  libc6-i386 (>= 2.3.2) [amd64],
-  libice6:i386 (>= 1:1.0.0) [amd64],
-  libpng12-0:i386 (>= 1.2.13-4) [amd64],
-  libsm6:i386 [amd64],
-  libx11-6:i386 [amd64],
-  libxcursor1:i386 (>> 1.1.2) [amd64],
-  libxext6:i386 [amd64],
-  libxpm4:i386 [amd64],
-  libxxf86vm1:i386 [amd64],
-  zlib1g:i386 (>= 1:1.1.4) [amd64],
-  alsa-oss [i386],
-  libc6 (>= 2.3.2) [i386],
-  libice6 (>= 1:1.0.0) [i386],
-  libpng12-0 (>= 1.2.13-4) [i386],
-  libsm6 [i386],
-  libx11-6 [i386],
-  libxcursor1 (>> 1.1.2) [i386],
-  libxext6 [i386],
-  libxpm4 [i386],
-  libxxf86vm1 [i386],
-  zlib1g (>= 1:1.1.4) [i386]
+  alsa-oss,
+  ${shlibs:Depends},
+  ${misc:Depends}
 Description: Free "Sonic the Hedgehog" clone
  Open Sonic is a free open-source game based on the "Sonic the Hedgehog"
  universe. It introduces a different style of gameplay called cooperative

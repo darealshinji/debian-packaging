@@ -28,7 +28,9 @@ Package: thegame-dbg
 Architecture: amd64
 Section: debug
 Priority: extra
-Depends: ${misc:Depends}, thegame (= ${source:Version})
+Depends:
+ ${misc:Depends},
+ thegame (= ${source:Version})
 Provides: thegame-dbg, yhtwtg-dbg
 Description: debugging symbols for thegame
  You Have to Win the Game is a free exploration platformer with
@@ -45,7 +47,9 @@ Description: debugging symbols for thegame
 
 Package: thegame-ega
 Architecture: amd64
-Depends: ${misc:Depends}, thegame (= ${source:Version})
+Depends:
+ ${misc:Depends},
+ thegame (= ${source:Version})
 Provides: thegame-ega, yhtwtg-ega
 Description: EGA tileset for 'You Have to Win the Game'
  You Have to Win the Game is a free exploration platformer with

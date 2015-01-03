@@ -1,5 +1,7 @@
 include ../../include.mk
 
+ARCH = i386
+
 deps = wget
 bin = opensnc-linux-0.1.4.tar.gz
 srcfiles = $(bin)

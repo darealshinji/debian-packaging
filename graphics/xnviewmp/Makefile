@@ -6,7 +6,7 @@ distcleanfiles = $(bin)
 srcpkg = xnviewmp
 
 bin = XnViewMP-linux$(x64).tgz
-ifeq ($(shell uname -p), x86_64)
+ifeq ($(ARCH), amd64)
 x64 = -x64
 endif
 
