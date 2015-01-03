@@ -1,4 +1,5 @@
 /usr/bin/x265-10bit                              /usr/bin/x265-16bit
+/usr/share/man/man1/x265.1.gz                    /usr/share/man/man1/x265-10bit.1.gz
 /usr/share/man/man1/x265.1.gz                    /usr/share/man/man1/x265-16bit.1.gz
 /usr/share/javascript/jquery/jquery.js           /usr/share/doc/x265/html/_static/jquery.js
 /usr/share/javascript/underscore/underscore.js   /usr/share/doc/x265/html/_static/underscore.js
