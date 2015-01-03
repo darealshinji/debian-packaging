@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+
+PKGNAME=screenfetch
+
+%:
+	dh $@ 
+
+override_dh_clean:
+	dh_clean README.html
+
+override_dh_auto_build:
+	pandoc -s -o README.html README.mkdn
+
+override_dh_auto_install:
+	install -m 0755 $(CURDIR)/screenfetch-dev $(CURDIR)/debian/$(PKGNAME)/usr/bin/screenfetch
+
+override_dh_installchangelogs:
+	dh_installchangelogs CHANGELOG
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+
