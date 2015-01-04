@@ -1,0 +1,7 @@
+?package(opensonic): \
+  needs="x11" \
+  section="Games/Action" \
+  title="Open Sonic" \
+  longtitle="open-source game based on the Sonic the Hedgehog universe" \
+  command="/usr/games/opensonic" \
+  icon="/usr/share/pixmaps/opensonic.xpm"
