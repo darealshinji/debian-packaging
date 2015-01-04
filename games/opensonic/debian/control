@@ -4,26 +4,22 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
   debhelper (>= 9),
-  chrpath,
   imagemagick,
-  libice6,
-  libpng12-0,
-  libsm6,
-  libx11-6,
-  libxcursor1,
-  libxext6,
-  libxpm4,
-  libxxf86vm1,
-  zlib1g
+  cmake,
+  liballegro4-dev,
+  libjpgalleg4-dev,
+  libloadpng4-dev,
+  liblogg4-dev,
+  libpng12-dev
 Standards-Version: 3.9.5
 Homepage: http://opensnc.sourceforge.net/home/
 
 Package: opensonic
-Architecture: i386
+Architecture: any
 Depends:
-  alsa-oss,
+  ${misc:Depends},
   ${shlibs:Depends},
-  ${misc:Depends}
+  liballegro4.4-plugin-alsa
 Description: Free "Sonic the Hedgehog" clone
  Open Sonic is a free open-source game based on the "Sonic the Hedgehog"
  universe. It introduces a different style of gameplay called cooperative

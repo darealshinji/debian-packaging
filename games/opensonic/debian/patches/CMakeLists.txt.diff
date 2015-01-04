@@ -1,0 +1,52 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -30,8 +30,7 @@
+ 
+ # configuring...
+ SET(DEFS "")
+-SET(CFLAGS_EXTRA "-g")
+-SET(CFLAGS "${CFLAGS} ${CMAKE_C_FLAGS}")
++SET(CFLAGS "${CFLAGS}")
+ MESSAGE("Using CFLAGS='${CFLAGS}'")
+ 
+ IF(UNIX)
+@@ -54,9 +53,6 @@
+ ELSE(NOT LALLEG)
+   IF(UNIX)
+     SET(ALLEGRO_UNIX_VERSION "$ENV{_ALLEGRO_VERSION}")
+-    IF(NOT ALLEGRO_UNIX_VERSION STREQUAL ALLEGRO_RECOMMENDED_VERSION)
+-      MESSAGE("\nWARNING: your Allegro version is ${ALLEGRO_UNIX_VERSION}. The recommended version is ${ALLEGRO_RECOMMENDED_VERSION}.\n         ${GAME_NAME} may not compile properly!.\n")
+-    ENDIF(NOT ALLEGRO_UNIX_VERSION STREQUAL ALLEGRO_RECOMMENDED_VERSION)
+   ENDIF(UNIX)
+ ENDIF(NOT LALLEG)
+ 
+@@ -250,8 +246,8 @@
+   SET(GAME_SRCS ${GAME_SRCS} src/misc/iconlin.c)
+   ADD_EXECUTABLE(${GAME_UNIXNAME} ${GAME_SRCS})
+   SET_TARGET_PROPERTIES(${GAME_UNIXNAME} PROPERTIES LINK_FLAGS ${ALLEGRO_UNIX_LIBS})
+-  TARGET_LINK_LIBRARIES(${GAME_UNIXNAME} m logg vorbisfile vorbis ogg jpgalleg z png loadpng)
+-  SET_TARGET_PROPERTIES(${GAME_UNIXNAME} PROPERTIES COMPILE_FLAGS "-Wall -O2 ${CFLAGS} ${CFLAGS_EXTRA}")
++  TARGET_LINK_LIBRARIES(${GAME_UNIXNAME} m logg vorbisfile vorbis ogg jpgalleg z png loadpng alleg)
++  SET_TARGET_PROPERTIES(${GAME_UNIXNAME} PROPERTIES COMPILE_FLAGS "-Wall ${CFLAGS} ${CFLAGS_EXTRA}")
+ ENDIF(UNIX)
+ 
+ 
+@@ -410,16 +406,7 @@
+ 
+ # Installing on *nix
+ IF(UNIX)
+-  SET(GAME_INSTALL_DIR "/usr/share/${GAME_UNIXNAME}")
+-  SET(GAME_FINAL_DIR "/usr/bin")
+-
+-  INSTALL(CODE "MESSAGE(\"Installing ${GAME_NAME} ${GAME_VERSION}... Make sure you have root privileges.\")")
++  SET(GAME_INSTALL_DIR "/usr/share/games/${GAME_UNIXNAME}")
+   INSTALL(TARGETS ${GAME_UNIXNAME} RUNTIME DESTINATION ${GAME_INSTALL_DIR})
+-  INSTALL(FILES license.txt readme.html DESTINATION ${GAME_INSTALL_DIR})
+-  INSTALL(DIRECTORY objects sprites config images levels licenses musics quests samples screenshots themes languages DESTINATION ${GAME_INSTALL_DIR} PATTERN ".svn" EXCLUDE)
+-
+-  INSTALL(CODE "MESSAGE(\"Creating files at ${GAME_FINAL_DIR}...\")")
+-  INSTALL(CODE "EXECUTE_PROCESS(COMMAND \"cmake\" \"-E\" \"copy\" \"${GAME_INSTALL_DIR}/${GAME_UNIXNAME}\" \"${GAME_FINAL_DIR}/${GAME_UNIXNAME}\")")
+-
+-  INSTALL(CODE "MESSAGE(\"Done! Please run ${GAME_UNIXNAME} to start ${GAME_NAME}.\")")
++  INSTALL(DIRECTORY objects sprites config images levels musics quests samples themes languages DESTINATION ${GAME_INSTALL_DIR} PATTERN ".svn" EXCLUDE)
+ ENDIF(UNIX)

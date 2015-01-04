@@ -5,27 +5,23 @@
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	rm -rf opensnc-linux-0.1.4 converted_icons opensonic.png
+	dh_auto_clean
+	rm -rf CMakeFiles converted_icons
+	rm -f CMakeCache.txt cmake_install.cmake Makefile opensonic.png
+
+override_dh_auto_configure:
+	./configure -DCMAKE_VERBOSE_MAKEFILE=ON
 
 override_dh_auto_build:
-	tar xvf opensnc-linux-0.1.4.tar.gz
-	chrpath -d opensnc-linux-0.1.4/opensonic_bin opensnc-linux-0.1.4/liballeg.so.4.4
-	rm -f opensnc-linux-0.1.4/opensonic
-	cp opensnc-linux-0.1.4/icon.png opensonic.png
+	dh_auto_build
+	cp -f icon.png opensonic.png
 	./make-icons.sh opensonic.png
 
 override_dh_auto_install:
+	dh_auto_install -- DESTDIR=$(CURDIR)/debian/tmp
 
-override_dh_install:
-	dh_install -Xlicense.txt
-	chmod 0644 `find $(CURDIR)/debian/opensonic/usr/lib -type f`
-	chmod 0644 `find $(CURDIR)/debian/opensonic/usr/share -type f`
-	chmod 0755 $(CURDIR)/debian/opensonic/usr/lib/games/opensonic/opensonic_bin
-
-override_dh_makeshlibs:
-
-override_dh_shlibdeps:
-	dh_shlibdeps -Lopensonic -l/usr/lib/games/opensonic/
+override_dh_installchangelogs:
+	dh_installchangelogs changelog.txt
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

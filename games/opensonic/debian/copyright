@@ -1,4 +1,5 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Open Sonic
 Source: http://opensnc.sourceforge.net/home/
 
 Files: *
@@ -7,12 +8,6 @@ Copyright: 2008-2010 Alexandre Martins
                      Lainz, Naldrag, George, Pablo Arias,
                      Ruben Caceres, SilverstepP, Christopher Martinus,
                      KZR, Mateus Reis, Ssdw, TheSeventhEmerald
-License: GPL-2+
-
-Files: debian/*
-Copyright: 2014 djcj <djcj@gmx.de>
-License: MIT
-
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -30,6 +25,8 @@ License: GPL-2+
  On Debian systems, the complete text of the GNU General
  Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
 
+Files: debian/*
+Copyright: 2014 djcj <djcj@gmx.de>
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -48,3 +45,4 @@ License: MIT
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
+

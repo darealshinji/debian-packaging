@@ -1,13 +1,15 @@
 include ../../include.mk
 
-ARCH = i386
-
-deps = wget
-bin = opensnc-linux-0.1.4.tar.gz
-srcfiles = $(bin)
+deps       = wget
+VERSION    = 0.1.4
+builddir   = opensnc-src-$(VERSION)
+bin        = $(builddir).tar.gz
+srcfiles   = changelog.txt
+cleanfiles = $(srcfiles)
 
 download:
-	[ -f $(bin) ] || \
-	    wget -O $(bin) "http://downloads.sourceforge.net/project/opensnc/Open%20Sonic/0.1.4/$(bin)?ts=1420143879"
-	@$(call verifysha256,$(bin),edaaeb028839aeeee29a20a1806c53b5035972ae406bf248fc4966872084bbee)
+	wget -O $(bin) "http://downloads.sourceforge.net/project/opensnc/Open%20Sonic/$(VERSION)/$(bin)?ts=1420143879"
+	@$(call verifysha256,$(bin),3a4c3fa9538ee27c04b5ea848c9ad0a83f335471936d4617a18d3648c42588e9)
+	wget "http://opensnc.sourceforge.net/home/changelog.txt"
+	tar xvf $(bin)
 

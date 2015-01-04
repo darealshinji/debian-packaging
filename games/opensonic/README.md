@@ -8,9 +8,6 @@ Unlike most similar games, Open Sonic provides a greater level of interaction be
 the player and the levels. It's more than just a jump'n'run; the user must come
 up with some strategy in order to get through the levels.
 
-Note: Even if the source code is available a precompiled x86 version will be downloaded.
-This is because of sound problems I had encountered.
-
 http://opensnc.sourceforge.net/home/
 
 Extra levels: https://launchpad.net/~szymonw/+archive/ubuntu/ppa/+files/opensonic-extra_0.1.4~1_all.deb
