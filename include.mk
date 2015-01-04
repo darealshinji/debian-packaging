@@ -46,7 +46,8 @@ changelog-entry =                                                              \
 
 
 
-allcleanfiles = .pc                  \
+allcleanfiles = .builddeps           \
+                .pc                  \
                 $(LOG)               \
                 changelog.new        \
                 converted_icons      \
@@ -68,9 +69,6 @@ endif
 
 
 all: predepends download source build
-
-
-nodeps: download source build
 
 
 clean:
@@ -113,9 +111,22 @@ build: source
 	fi
 	echo '3.0 (native)' > $(builddir)/debian/source/format
 	dpkg-source -b $(builddir)
-	mkdir -p $(resultdir)
 
 ifeq ($(PBUILDER),0)
+ifneq ($(DEPS),0)
+	cd $(builddir) ;                                                                                        \
+	builddeps="`dpkg-checkbuilddeps 2>&1 | sed -e 's/dpkg-checkbuilddeps: Unmet build dependencies: //;'`"; \
+	if [ $$(printf $$builddeps | wc -m) -gt 0 ] ;                                                           \
+	then                                                                                                    \
+	    echo "" ;                                                                                           \
+	    echo "You need to install the following build dependencies:" ;                                      \
+	    echo "$$builddeps" ;                                                                                \
+	    echo "" ;                                                                                           \
+	    sudo -k apt-get install $$builddeps ;                                                               \
+	    echo "$$builddeps" > ../.builddeps ;                                                                \
+	fi
+endif
+	mkdir -p $(resultdir)
 	cd $(builddir) && dpkg-buildpackage -b -us -uc 2>&1 | tee $(LOG)
 	rm -f *.changes
 	mv *.deb $(resultdir)
@@ -133,6 +144,7 @@ else
 	         --extrapackages "debhelper fakeroot" ;                   \
 	fi
 
+	mkdir -p $(resultdir)
 	@ echo ""
 	@ echo "sudo password required to run pbuilder:"
 	sudo -k pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc 2>&1 | tee $(LOG)
@@ -163,4 +175,10 @@ endif
 
 	@ echo ""
 	cp -f $(LOG) $(resultdir)
+	@ [ ! -f .builddeps ] || (                                       \
+	echo "" ;                                                        \
+	echo "Additional build dependencies have been installed." ;      \
+	echo "Run the following command if you want to remove them:" ;   \
+	echo "sudo apt-get autoremove --purge `cat .builddeps`" ;        \
+	echo "" )
 
