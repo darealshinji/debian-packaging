@@ -1,0 +1,38 @@
+#!/usr/bin/make -f
+
+CFLAGS  += -I./alfont/include  $(CPPFLAGS)
+LDFLAGS += -L./alfont
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean
+	dh_auto_clean -Dalfont
+	rm -rf CMakeFiles converted_icons
+	rm -f CMakeCache.txt cmake_install.cmake Makefile
+	[ ! -f .CMakeLists.txt ] || (rm CMakeLists.txt && mv .CMakeLists.txt CMakeLists.txt)
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	cd alfont && $(MAKE) libalfont.a
+
+	[ -f .CMakeLists.txt ] || \
+	(mv CMakeLists.txt .CMakeLists.txt && \
+	sed -e 's/ alfont/ alfont freetype/g' .CMakeLists.txt > CMakeLists.txt)
+
+	cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_LIBRARY_PATH=$(CURDIR)/alfont $(CURDIR)
+	dh_auto_build
+
+	./make-icons.sh opensurge.png
+
+override_dh_auto_install:
+	dh_auto_install -- DESTDIR=$(CURDIR)/debian/tmp
+	mkdir -p debian/tmp/usr/share/games
+	mv debian/tmp/usr/share/opensurge debian/tmp/usr/share/games
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

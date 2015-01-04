@@ -1,0 +1,89 @@
+.TH OPENSURGE 6 2009 opensurge "Open Surge"
+.
+.SH NAME
+opensurge \- Open Surge, game based on the "Sonic the Hedgehog" universe
+.
+.SH SYNOPSIS
+.B opensurge
+[options ...]
+.
+.SH DESCRIPTION
+.
+Open Surge is an open-source game based on the "Sonic the Hedgehog" universe.
+.br
+It introduces a different style of gameplay called cooperative play, in which
+it's possible to control 3 characters simultaneously. Unlike most similar
+games, Open Surge provides a greater level of interaction between the player
+and the levels. It's more than just a jump'n'run; the user must come up with
+some strategy in order to get through the levels. Main features:
+.br
+* Sonic-style physics (360 movement engine)
+.br
+* Available in 9 languages: English, Portuguese, French, Polish, 
+German, Czech, Dutch, Indonesian, Italian
+.br
+* 2 levels + innovative items + extras
+(check opensurge-extra for more levels)
+.br
+* You can create your own levels using the level editor
+.br
+* You can make your own custom items, enemies and bosses 
+using our object scripting system
+.br
+* MODdable capabilities
+.br
+* Good performance even on old computers
+.br
+It's been some time since we're replacing all the "ripped" content by original
+user-made resources. Things are moving forward, but there is still some work 
+to do. We need more contributors. Check out our website for more information.
+.
+.SH OPTIONS
+.TP
+.B \-\-help 
+displays a summary of command line options
+.TP
+.B \-\-version
+shows the version of this program
+.TP
+.B \-\-fullscreen
+fullscreen mode
+.TP
+.B \-\-resolution X
+sets the window size, where X = TINY (320x240), NORMAL (640x480) or MAX (adapts to your desktop)
+.TP
+.B \-\-smooth
+improves the graphic quality \- this option may be used to improve the graphic quality using a special algorithm, you should NOT use this option on slow computers, since it may imply a severe performance hit
+.TP
+.B \-\-tiny 
+small game window (improves the speed - this option should be used on slow computers.). This is the same as --resolution TINY
+.TP
+.B \-\-show-fps
+shows the FPS (frames per second) counter
+.TP
+.B \-\-level FILEPATH
+runs the level located at FILEPATH
+.TP
+.B \-\-quest FILEPATH
+runs the quest located at FILEPATH
+.TP
+.B \-\-color-depth X
+sets the color depth to X bits/pixel, where X = 8, 16, 24 or 32 (use 8 bits/pixel [256 colors] to improve even more the performance on slow computers)
+.TP
+.B \-\-language FILEPATH
+sets the language file to FILEPATH (for example, languages/english.lng)
+.
+.SH AUTHOR
+Written by Alexandre Martins <alemartf@gmail.com>.
+.
+.SH COPYRIGHT
+This is Free Software; this software is licensed under the GPL version 2, as
+published by the Free Software Foundation.  There is NO warranty; not even
+for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+.
+.SH SEE ALSO
+Please read the docs for more information:
+.br
+/usr/share/doc/opensurge/readme.html
+.br
+Visit our homepage: http://opensnc.sourceforge.net/

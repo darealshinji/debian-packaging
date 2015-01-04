@@ -1,0 +1,7 @@
+?package(opensurge): \
+  needs="x11" \
+  section="Games/Action" \
+  title="Open Surge" \
+  longtitle="open-source game based on the Sonic the Hedgehog universe" \
+  command="/usr/games/opensurge" \
+  icon="/usr/share/pixmaps/opensurge.xpm"

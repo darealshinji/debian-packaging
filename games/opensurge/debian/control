@@ -1,0 +1,39 @@
+Source: opensurge
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+  debhelper (>= 9),
+  imagemagick,
+  cmake,
+  liballegro4-dev,
+  libalure-dev,
+  libfreetype6-dev,
+  libjpgalleg4-dev,
+  libloadpng4-dev,
+  liblogg4-dev,
+  libopenal-dev,
+  libpng12-dev
+Standards-Version: 3.9.5
+Homepage: http://opensnc.sourceforge.net/home/
+
+Package: opensurge
+Architecture: any
+Depends:
+  ${misc:Depends},
+  ${shlibs:Depends},
+  ttf-dejavu-core
+Suggests:
+  libdumb1,
+  libfluidsynth1,
+  libmpg123-0
+Description: free retro-style 2D sidescroller
+ Open Surge is a free open source retro-style 2D sidescroller inspired by
+ "Sonic the Hedgehog".
+ It introduces a different style of gameplay called cooperative play, in which
+ it's possible to control 3 characters simultaneously.
+ Unlike most similar games, Open Surge provides a greater level of interaction
+ between the player and the levels.
+ It's more than just a jump'n'run; the user must come up with some strategy in
+ order to get through the levels.
+ Join Surge, Neon and Charge and save the world from the evil Gimacian the Dark!

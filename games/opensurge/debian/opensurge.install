@@ -1,0 +1,17 @@
+debian/launcher/opensurge              /usr/games
+debian/opensurge.desktop               /usr/share/applications
+converted_icons/*                      /usr/share
+/usr/share/games/opensurge/opensurge   /usr/lib/games/opensurge
+/usr/share/games/opensurge/characters
+/usr/share/games/opensurge/config
+/usr/share/games/opensurge/fonts
+/usr/share/games/opensurge/images
+/usr/share/games/opensurge/languages
+/usr/share/games/opensurge/levels
+/usr/share/games/opensurge/musics
+/usr/share/games/opensurge/objects
+/usr/share/games/opensurge/quests
+/usr/share/games/opensurge/samples
+/usr/share/games/opensurge/sprites
+/usr/share/games/opensurge/themes
+/usr/share/games/opensurge/ttf
