@@ -46,8 +46,7 @@ changelog-entry =                                                              \
 
 
 
-allcleanfiles = .builddeps           \
-                .pc                  \
+allcleanfiles = .pc                  \
                 $(LOG)               \
                 changelog.new        \
                 converted_icons      \
@@ -98,13 +97,13 @@ endif
 
 source: download
 	mkdir -p $(builddir)
-	cp -r ../../make-icons.sh $(srcfiles) $(builddir)
+	cp -r ../../mk/make-icons.sh $(srcfiles) $(builddir)
 	test -d debian && cp -rf debian $(builddir) || true
 
 
 build: source
 	rm -rf .pc
-	if [ -f $(builddir)/debian/patches/series ] ;                     \
+	@ if [ -f $(builddir)/debian/patches/series ] ;                   \
 	then                                                              \
 	   cd $(builddir) && QUILT_PATCHES=debian/patches quilt push -a ; \
 	   rm -rf $(builddir)/.pc ;                                       \
@@ -114,7 +113,7 @@ build: source
 
 ifeq ($(PBUILDER),0)
 ifneq ($(DEPS),0)
-	cd $(builddir) ;                                                                                        \
+	@ cd $(builddir) ;                                                                                      \
 	builddeps="`dpkg-checkbuilddeps 2>&1 | sed -e 's/dpkg-checkbuilddeps: Unmet build dependencies: //;'`"; \
 	if [ $$(printf $$builddeps | wc -m) -gt 0 ] ;                                                           \
 	then                                                                                                    \
@@ -122,8 +121,7 @@ ifneq ($(DEPS),0)
 	    echo "You need to install the following build dependencies:" ;                                      \
 	    echo "$$builddeps" ;                                                                                \
 	    echo "" ;                                                                                           \
-	    sudo -k apt-get install $$builddeps ;                                                               \
-	    echo "$$builddeps" > ../.builddeps ;                                                                \
+	    sudo -k $(CURDIR)/../../mk/pbuilder-satisfydepends.sh ;                                             \
 	fi
 endif
 	mkdir -p $(resultdir)
@@ -131,7 +129,7 @@ endif
 	rm -f *.changes
 	mv *.deb $(resultdir)
 else
-	if [ ! -f $(basetgz) ] ;                                          \
+	@ if [ ! -f $(basetgz) ] ;                                        \
 	then                                                              \
 	    echo "" ;                                                     \
 	    echo "sudo password required to create $(basetgz):" ;         \
@@ -173,12 +171,16 @@ endif
 	    echo "" ;                        \
 	done 2>&1 | tee -a $(LOG)
 
+
 	@ echo ""
-	cp -f $(LOG) $(resultdir)
-	@ [ ! -f .builddeps ] || (                                       \
-	echo "" ;                                                        \
-	echo "Additional build dependencies have been installed." ;      \
-	echo "Run the following command if you want to remove them:" ;   \
-	echo "sudo apt-get autoremove --purge `cat .builddeps`" ;        \
-	echo "" )
+	@ if [ $$(dpkg-query -W -f='$${Status}' pbuilder-satisfydepends-dummy 2>/dev/null | grep -c "ok installed") -ne 0 ] ; \
+	then                                                                                                                  \
+	    echo "Additional build dependencies have been installed." ;                                                       \
+	    read -p "Do you want to remove them (recommended)? (Y/n) " REMOVE ;                                               \
+	    if [ x$$REMOVE = xy ] || [ x$$REMOVE = xY ] || [ x$$REMOVE = x ] ;                                                \
+	    then                                                                                                              \
+	         sudo -k apt-get autoremove --purge pbuilder-satisfydepends-dummy ;                                           \
+	    fi                                                                                                                \
+	fi
+
 
