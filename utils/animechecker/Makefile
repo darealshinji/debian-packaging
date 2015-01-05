@@ -1,13 +1,11 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-ARCH = i386
-
-deps = wget
-srcfiles = $(bin) animechecker.svg patchelfmod.tgz
+ARCH       = i386
+deps       = wget
+srcfiles   = $(bin) animechecker.svg patchelfmod.tgz
 cleanfiles = $(srcfiles)
-
-VERSION = $(shell head -n1 debian/changelog | cut -d' ' -f2 | head -c-2 | tail -c+2)
-bin = animechecker-$(VERSION)-linux-i386-bin.tar.bz2
+VERSION    = $(shell head -n1 debian/changelog | cut -d' ' -f2 | head -c-2 | tail -c+2)
+bin        = animechecker-$(VERSION)-linux-i386-bin.tar.bz2
 
 download:
 	wget -O $(bin) "http://downloads.sourceforge.net/project/animechecker/animechecker-linux/$(VERSION)/$(bin)?r=&ts=1419155524"

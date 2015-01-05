@@ -1,8 +1,7 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget
-srcpkg = ffmpeg
-builddir = $(srcpkg)
+deps       = wget
+builddir   = $(srcpkg)
 cleanfiles = $(builddir) *.tar.bz2 debian/changelog
 
 download:

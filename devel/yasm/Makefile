@@ -1,4 +1,4 @@
-include ../../include.mk
+include ../../mk/include.mk
 
 deps       = wget dh-autoreconf autotools-dev
 builddir   = yasm-$(VERSION)
@@ -18,8 +18,13 @@ download:
 	wget "$(SITE)/manual/html/objfmt-win64/stack-frame-detailed.png"
 	wget "$(SITE)/manual/html/arch-x86/x86-registers.png"
 
-	sed -i 's@$(SITE)/manual/html/objfmt-win64/calling-convention.png@images/calling-convention.png@; s@$(SITE)/manual/html/objfmt-win64/stack-frame-detailed.png@images/stack-frame-detailed.png@; s@$(SITE)/manual/html/arch-x86/x86-registers.png@images/x86-registers.png@;' manual.html
-	sed -i 's@$(SITE)/manual/ru/html/objfmt-win64/calling-convention.png@images/calling-convention.png@; s@$(SITE)/manual/ru/html/objfmt-win64/stack-frame-detailed.png@images/stack-frame-detailed.png@; s@$(SITE)/manual/ru/html/arch-x86/x86-registers.png@images/x86-registers.png@;' manual-ru.html
+	sed -i 's@$(SITE)/manual/html/objfmt-win64/calling-convention.png@images/calling-convention.png@;' manual.html
+	sed -i 's@$(SITE)/manual/html/objfmt-win64/stack-frame-detailed.png@images/stack-frame-detailed.png@;' manual.html
+	sed -i 's@$(SITE)/manual/html/arch-x86/x86-registers.png@images/x86-registers.png@;' manual.html
+
+	sed -i 's@$(SITE)/manual/ru/html/objfmt-win64/calling-convention.png@images/calling-convention.png@;' manual-ru.html
+	sed -i 's@$(SITE)/manual/ru/html/objfmt-win64/stack-frame-detailed.png@images/stack-frame-detailed.png@;' manual-ru.html
+	sed -i 's@$(SITE)/manual/ru/html/arch-x86/x86-registers.png@images/x86-registers.png@;' manual-ru.html
 
 	@ $(call verifysha256,$(bin),3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f)
 	tar xvfz $(bin)

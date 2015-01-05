@@ -1,7 +1,7 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = git
-builddir = notepadqq
+deps       = git
+builddir   = notepadqq
 cleanfiles = notepadqq* CodeMirror*
 
 download:
@@ -10,7 +10,6 @@ download:
 	mv notepadqq-packaging/Debian/debian notepadqq
 	git -C notepadqq submodule init
 	git -C notepadqq submodule update
-
 	./changelog.sh
 	rm -rf notepadqq/.git
 

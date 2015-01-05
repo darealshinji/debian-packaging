@@ -1,16 +1,15 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget
-cleanfiles = unrar* rar_add.htm debian/changelog
-srcfiles = unrar
-srcpkg = unrar-nonfree
+deps           = wget
+cleanfiles     = unrar* rar_add.htm debian/changelog
+srcfiles       = unrar
 changelog-file = changelog.new
-changelog-msg = New upstream release$$BETAVERSION
+changelog-msg  = New upstream release$$BETAVERSION
 
 MAINURL = http://www.rarlab.com
-URL = $(shell wget -q -O - "$(MAINURL)/rar_add.htm" | \
-	grep -e '\/unrarsrc-' | cut -d '"' -f2)
-VER = $(shell echo $(URL) | sed -e 's@$(MAINURL)/rar/unrarsrc-@@; s/.tar.gz//;')
+URL     = $(shell wget -q -O - "$(MAINURL)/rar_add.htm" | \
+		grep -e '\/unrarsrc-' | cut -d '"' -f2)
+VER     = $(shell echo $(URL) | sed -e 's@$(MAINURL)/rar/unrarsrc-@@; s/.tar.gz//;')
 
 download:
 	wget $(URL)

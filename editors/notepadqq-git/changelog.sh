@@ -3,7 +3,7 @@
 set -e
 set -v
 
-. ../../vercmp.inc
+. ../../mk/vercmp.inc
 
 
 SRC_VERSION=$(grep -e 'POINTVERSION' notepadqq/src/ui/include/notepadqq.h | \

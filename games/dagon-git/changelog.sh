@@ -2,7 +2,7 @@
 
 set -e
 
-. ../../vercmp.inc
+. ../../mk/vercmp.inc
 
 latestcommit=$(git -C Dagon/ log -1 --format=%ci | head -c10 | sed -e 's/-//g')
 VERSION_MAJOR=$(grep '#define DAGON_VERSION_MAJOR' Dagon/src/Version.h | cut -d' ' -f3)

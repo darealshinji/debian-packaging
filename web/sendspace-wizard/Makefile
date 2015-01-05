@@ -1,9 +1,9 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget
-bin = SendSpace_Wizard_Debian-Linux-32-64bit.tgz
+deps       = wget
+bin        = SendSpace_Wizard_Debian-Linux-32-64bit.tgz
 cleanfiles = $(bin) wizard patchelfmod*
-srcfiles = wizard patchelfmod.tar.gz
+srcfiles   = wizard patchelfmod.tar.gz
 
 download:
 	wget -O patchelfmod.tar.gz "https://github.com/darealshinji/patchelfmod/archive/master.tar.gz"

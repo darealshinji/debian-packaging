@@ -1,19 +1,19 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-VERSION = $(shell dpkg-parsechangelog -SVersion)
+VERSION   = $(shell dpkg-parsechangelog -SVersion)
 
-deps = wget
-bin = GrapplingHook.tar.gz
-bin_demo = GrapplingHook_Demo.tar.gz
-lwjgl = lwjgl-2.9.1.zip
+deps      = wget
+bin       = GrapplingHook.tar.gz
+bin_demo  = GrapplingHook_Demo.tar.gz
+lwjgl     = lwjgl-2.9.1.zip
 
-srcfiles = $(lwjgl) ghook.png
+srcfiles  = $(lwjgl) ghook.png
 ifeq ($(COMMON_PKG),1)
 srcfiles += common-package.stamp
 endif
 
-cleanfiles = $(lwjgl) ghook.png common-package.stamp
-allcleanfiles = $(LOG) *.dsc $(builddir) $(cleanfiles) grapplinghook_$(VERSION).tar.gz
+cleanfiles     = $(lwjgl) ghook.png common-package.stamp
+allcleanfiles  = $(LOG) *.dsc $(builddir) $(cleanfiles) grapplinghook_$(VERSION).tar.gz
 distcleanfiles = $(bin) $(bin_demo)
 
 

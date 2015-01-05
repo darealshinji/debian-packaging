@@ -1,6 +1,6 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget
+deps     = wget
 builddir = UnityEngine2deb-master
 
 download:

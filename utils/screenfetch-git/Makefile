@@ -1,7 +1,7 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = git
-builddir = screenFetch
+deps       = git
+builddir   = screenFetch
 cleanfiles = debian/changelog
 
 download:

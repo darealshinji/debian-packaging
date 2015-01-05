@@ -1,10 +1,10 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget
-cleanfiles = fmodapi*linux debian/control debian/changelog
-tgz = fmodapi-linux.tgz
+deps           = wget
+cleanfiles     = fmodapi*linux debian/control debian/changelog
+tgz            = fmodapi-linux.tgz
 distcleanfiles = $(tgz)
-srcfiles = $(tgz)
+srcfiles       = $(tgz)
 
 download:
 	./download.sh

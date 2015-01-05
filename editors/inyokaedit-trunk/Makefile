@@ -1,16 +1,15 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = bzr
-builddir = inyokaedit
-cleanfiles = $(builddir)
-
-srcpkg = inyokaedit
+deps           = bzr
+builddir       = inyokaedit
+cleanfiles     = $(builddir)
+srcpkg         = inyokaedit
 changelog-name = $(builddir)/debian/changelog
 changelog-file = $(changelog-name).new
-changelog-msg = Current trunk version
-MAINTAINER = Thorsten Roth <elthoro@gmx.de>
-VERSION = `cd $(builddir) && dpkg-parsechangelog -SVersion | cut -d- -f1`
-REV = `cd $(builddir) && bzr version-info | grep revno | cut -d' ' -f2`
+changelog-msg  = Current trunk version
+MAINTAINER     = Thorsten Roth <elthoro@gmx.de>
+VERSION        = `cd $(builddir) && dpkg-parsechangelog -SVersion | cut -d- -f1`
+REV            = `cd $(builddir) && bzr version-info | grep revno | cut -d' ' -f2`
 
 download:
 	bzr branch lp:inyokaedit

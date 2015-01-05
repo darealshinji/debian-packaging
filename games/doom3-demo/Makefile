@@ -1,12 +1,11 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-ARCH = i386
-
-deps = wget
-cleanfiles = *.png
-bin = doom3-linux-1.1.1286-demo.x86.run
+ARCH           = i386
+deps           = wget
+cleanfiles     = *.png
+bin            = doom3-linux-1.1.1286-demo.x86.run
 distcleanfiles = $(bin)
-srcfiles = doom3-demo.png $(bin)
+srcfiles       = $(bin) doom3-demo.png
 
 download:
 	test -f $(bin) || wget "ftp://ftp.fu-berlin.de/pc/games/idgames/idstuff/doom3/linux/$(bin)"

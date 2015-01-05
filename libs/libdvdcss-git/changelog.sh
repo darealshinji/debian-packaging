@@ -2,7 +2,7 @@
 
 set -e
 
-. ../../vercmp.inc
+. ../../mk/vercmp.inc
 
 Sources="http://download.videolan.org/pub/debian/unstable/Sources"
 STABLE_VERSION=$(wget -q -O - $Sources | grep -e '^Version: ' | sed -e 's/Version: //;' | cut -d- -f1)

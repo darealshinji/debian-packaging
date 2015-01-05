@@ -1,11 +1,10 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-ARCH = i386
-
-deps = wget
-bin = crayon_release_demo.tgz
+ARCH           = i386
+deps           = wget
+bin            = crayon_release_demo.tgz
 distcleanfiles = $(bin)
-srcfiles = $(bin)
+srcfiles       = $(bin)
 
 download:
 	[ -f $(bin) ] || wget -O $(bin) "http://crayonphysics.com/downloads/crayon_release55demo_hotfix.tar.gz"

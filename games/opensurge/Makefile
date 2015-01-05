@@ -1,4 +1,4 @@
-include ../../include.mk
+include ../../mk/include.mk
 
 deps       = wget
 URL        = http://www.ime.usp.br/~alemart/opensurge_nightly/

@@ -1,19 +1,17 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget
+deps       = wget
 cleanfiles = *.vbox-extpack debian/control debian/postinst
-srcfiles = $(bin)
+srcfiles   = $(bin)
 
-URL = http://download.virtualbox.org/virtualbox
-bin = Oracle_VM_VirtualBox_Extension_Pack-$(version).vbox-extpack
-sha256sum = $(shell wget -q -O - $(URL)/$(version)/SHA256SUMS | grep -e '$(bin)' | cut -d' ' -f1)
+URL        = http://download.virtualbox.org/virtualbox
+bin        = Oracle_VM_VirtualBox_Extension_Pack-$(version).vbox-extpack
+sha256sum  = $(shell wget -q -O - $(URL)/$(version)/SHA256SUMS | grep -e '$(bin)' | cut -d' ' -f1)
 
-srcpkg = virtualbox-extensionpack
 changelog-msg = Release version $(version)
-
-version = $(shell wget -q -O - $(URL)/LATEST.TXT)
-major_minor = $(shell echo $(version) | cut -d. -f1,2)
-next = $(major_minor).$(shell echo $$(( $$(echo $(version) | cut -d. -f3) + 1 )) )
+version       = $(shell wget -q -O - $(URL)/LATEST.TXT)
+major_minor   = $(shell echo $(version) | cut -d. -f1,2)
+next          = $(major_minor).$(shell echo $$(( $$(echo $(version) | cut -d. -f3) + 1 )) )
 
 download:
 	wget "$(URL)/$(version)/$(bin)"

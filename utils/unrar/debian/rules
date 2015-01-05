@@ -1,8 +1,8 @@
 #!/usr/bin/make -f
 
 VERSION = $(shell dpkg-parsechangelog -SVersion | sed -e 's/1://;')
-MINOR = $(shell echo $(VERSION) | cut -d~ -f1 | cut -d. -f2)
-MICRO = $(shell echo $(VERSION) | cut -d~ -f1 | cut -d. -f3)
+MINOR   = $(shell echo $(VERSION) | cut -d~ -f1 | cut -d. -f2)
+MICRO   = $(shell echo $(VERSION) | cut -d~ -f1 | cut -d. -f3)
 
 CXXFLAGS += -Wall -Wno-parentheses -Wno-switch -DRARVER_MINOR=$(MINOR)$(MICRO)
 
@@ -11,6 +11,7 @@ CXXFLAGS += -Wall -Wno-parentheses -Wno-switch -DRARVER_MINOR=$(MINOR)$(MICRO)
 	dh $@ --parallel
 
 override_dh_auto_clean:
+	dh_auto_clean -Dunrar
 	rm -f unrar-nonfree.1
 
 override_dh_auto_build:

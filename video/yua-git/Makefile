@@ -1,8 +1,7 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = git wget
-srcpkg = yua
-builddir = $(srcpkg)
+deps           = git wget
+builddir       = $(srcpkg)
 changelog-file = changelog.new
 
 download:
@@ -15,8 +14,7 @@ download:
 
 	latestcommit=$$(git -C $(builddir)/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\
 	yuaversion=$$(git -C $(builddir)/ describe --abbrev=0 --tags | cut -d- -f1 | sed -e 's/v//g') ;\
-	VERSION=$$yuaversion+git$$latestcommit ;\
-	$(changelog-entry)
+	@ VERSION=$$yuaversion+git$$latestcommit ; $(changelog-entry)
 	cat changelog.new $(builddir)/debian/changelog.in > $(builddir)/debian/changelog
 
 	rm -rf $(builddir)/.git $(builddir)/*.tar.bz2

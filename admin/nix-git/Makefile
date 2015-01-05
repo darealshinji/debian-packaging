@@ -1,8 +1,8 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = git libtool
+deps       = git libtool
 cleanfiles = debian/changelog
-builddir = nix
+builddir   = nix
 
 download:
 	git clone --depth 1500 "https://github.com/NixOS/nix.git"

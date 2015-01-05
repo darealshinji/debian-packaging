@@ -1,8 +1,8 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget git
+deps       = wget git
 cleanfiles = fmodapi*linux gzdoom debian/changelog
-srcfiles = gzdoom fmodapi*linux.tar.gz
+srcfiles   = gzdoom fmodapi*linux.tar.gz
 
 download:
 	./download.sh

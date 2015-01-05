@@ -1,14 +1,13 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-VERSION = 2:1.1.1
-
-deps = wget git
-bin = mplayer-export-snapshot.tar.bz2
-cleanfiles = debian/changelog
-builddir = mplayer-export
-srcpkg = mplayer
+VERSION        = 2:1.1.1
+deps           = wget git
+bin            = mplayer-export-snapshot.tar.bz2
+cleanfiles     = debian/changelog
+builddir       = mplayer-export
 changelog-file = debian/changelog
-changelog-msg = Current svn snapshot
+changelog-msg  = Current svn snapshot
+
 
 download:
 	wget "http://mplayerhq.hu/MPlayer/releases/$(bin)"
@@ -18,7 +17,7 @@ download:
 
 	git clone -b master --depth 1 "git://source.ffmpeg.org/ffmpeg.git" $(builddir)/ffmpeg
 
-	REV=$$(cat $(builddir)/snapshot_version | cut -d- -f1) ;\
+	@ REV=$$(cat $(builddir)/snapshot_version | cut -d- -f1) ;\
 	VERSION=$(VERSION)+svn$${REV} ;\
 	$(changelog-entry)
 

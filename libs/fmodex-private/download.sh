@@ -1,7 +1,6 @@
 #!/bin/sh
 
 set -e
-set -v
 
 LANG=C
 LANGUAGE=C

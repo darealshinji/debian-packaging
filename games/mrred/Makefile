@@ -1,4 +1,4 @@
-include ../../include.mk
+include ../../mk/include.mk
 
 ARCH       = i386
 deps       = wget

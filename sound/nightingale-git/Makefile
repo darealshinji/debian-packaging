@@ -1,17 +1,15 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget git
-builddir = nightingale-hacking
-srcpkg = nightingale
+deps           = wget git
+builddir       = nightingale-hacking
 changelog-file = changelog.new
-cleanfiles = usr data.tar.xz *.deb
-
-ARCH = $(shell dpkg-architecture -qDEB_HOST_ARCH)
-XULVERSION = 20140722-3%7Etrusty2
+cleanfiles     = usr *.deb
+DEBIAN_ARCH    = $(shell dpkg-architecture -qDEB_HOST_ARCH)
+XULVERSION     = 20140722-3%7Etrusty2
 
 download:
 	git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-hacking.git"
-	wget "https://launchpad.net/~djcj/+archive/ubuntu/nightingale/+files/nightingale-deps_$(XULVERSION)_$(ARCH).deb"
+	wget "https://launchpad.net/~djcj/+archive/ubuntu/nightingale/+files/nightingale-deps_$(XULVERSION)_$(DEBIAN_ARCH).deb"
 
 	ar x nightingale-deps*.deb data.tar.xz
 	tar xfv data.tar.xz

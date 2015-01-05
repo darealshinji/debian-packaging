@@ -1,13 +1,11 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-ARCH = i386
-
-deps = wget
+ARCH       = i386
+deps       = wget
 cleanfiles = $(bin)*
-srcfiles = $(bin)
-
-VERSION = $(shell head -n1 debian/changelog | cut -d' ' -f2 | head -c-2 | tail -c+2)
-bin = DivX265
+srcfiles   = $(bin)
+VERSION    = $(shell head -n1 debian/changelog | cut -d' ' -f2 | head -c-2 | tail -c+2)
+bin        = DivX265
 
 download:
 	wget -O $(bin) "http://download.divx.com/hevc/$(bin)_$(VERSION)"

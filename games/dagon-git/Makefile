@@ -1,8 +1,8 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = git
+deps       = git
 cleanfiles = Dagon debian/changelog
-srcfiles = Dagon
+srcfiles   = Dagon
 
 download:
 	git clone "https://github.com/Senscape/Dagon.git"

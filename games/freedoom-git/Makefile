@@ -1,8 +1,8 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = git
+deps       = git
 cleanfiles = freedoom debian/changelog
-srcfiles = freedoom files
+srcfiles   = freedoom files
 
 download:
 	git clone "https://github.com/freedoom/freedoom.git"

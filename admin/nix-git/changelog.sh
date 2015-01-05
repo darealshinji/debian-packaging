@@ -2,7 +2,7 @@
 
 set -e
 
-. ../../vercmp.inc
+. ../../mk/vercmp.inc
 
 latestcommit=$(git -C nix/ log -1 --format=%ci | head -c10 | sed -e 's/-//g')
 SRC_VERSION=$(cat nix/version)

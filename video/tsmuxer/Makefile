@@ -1,12 +1,11 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-ARCH = i386
-
-deps = wget
-srcfiles = *.png $(bin)
-bin = tsmuxer$(VERSION).tar.gz
+ARCH       = i386
+deps       = wget
+srcfiles   = *.png $(bin)
+bin        = tsmuxer$(VERSION).tar.gz
 cleanfiles = $(srcfiles) $(bin) *.1
-VERSION = $(shell head -n1 debian/changelog | cut -d' ' -f2 | head -c-2 | tail -c+2)
+VERSION    = $(shell head -n1 debian/changelog | cut -d' ' -f2 | head -c-2 | tail -c+2)
 
 download:
 	wget -O $(bin) 'https://docs.google.com/uc?authuser=0&id=0B0VmPcEZTp8NekJxLUVJRWMwejQ&export=download'

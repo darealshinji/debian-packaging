@@ -1,10 +1,9 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget
-srcfiles = ffmpeg l-smash x264-source
-cleanfiles = $(srcfiles) debian/changelog
+deps          = wget autotools-dev
+srcfiles      = ffmpeg l-smash x264-source
+cleanfiles    = $(srcfiles) debian/changelog
 changelog-msg = Update to new upstream snapshot
-srcpkg = x264
 
 download:
 	git clone --depth 1 "git://git.videolan.org/x264.git" x264-source
@@ -15,6 +14,5 @@ download:
 	cp -vf /usr/share/misc/config.guess x264-source
 	cp -vf /usr/share/misc/config.sub x264-source
 
-	VERSION=2:$$(./version.sh) ;\
-	$(changelog-entry)
+	@ VERSION=2:$$(./version.sh); $(changelog-entry)
 

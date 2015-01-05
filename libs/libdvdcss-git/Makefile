@@ -1,7 +1,7 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = git dh-autoreconf
-builddir = libdvdcss
+deps       = git dh-autoreconf
+builddir   = libdvdcss
 cleanfiles = debian/changelog
 
 download:

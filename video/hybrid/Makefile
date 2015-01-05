@@ -1,8 +1,8 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget
+deps       = wget
 cleanfiles = hybrid*
-LOG = hybrid-build.log
+LOG        = hybrid-build.log
 
 download:
 	wget -O hybrid-debian.tar.gz \
@@ -18,15 +18,15 @@ pbuilder:
 	sudo pbuilder build hybrid_*.dsc 2>&1 | tee ../$(LOG)
 	sudo pbuilder build hybrid-avisynth-extension_*.dsc 2>&1 | tee -a ../$(LOG)
 	@ for f in $(resultdir)/*.deb ; do \
-  echo "$$f:" ;\
-  dpkg-deb -I $$f ;\
-  lintian $$f ;\
-  echo "" ;\
-done 2>&1 | tee -a $(LOG) ;\
-\
-for f in $(resultdir)/*.deb ; do \
-  echo "$$f:" ;\
-  dpkg-deb -c $$f ;\
-  echo "" ;\
-done 2>&1 | tee -a $(LOG)
+	  echo "$$f:" ;\
+	  dpkg-deb -I $$f ;\
+	  lintian $$f ;\
+	  echo "" ;\
+	done 2>&1 | tee -a $(LOG) ;\
+	\
+	for f in $(resultdir)/*.deb ; do \
+	  echo "$$f:" ;\
+	  dpkg-deb -c $$f ;\
+	  echo "" ;\
+	done 2>&1 | tee -a $(LOG)
 

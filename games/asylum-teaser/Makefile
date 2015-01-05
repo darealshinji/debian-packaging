@@ -1,9 +1,9 @@
-include ../../include.mk
+include ../../mk/include.mk
 
-deps = wget unzip
-cleanfiles = *.png
+deps           = wget unzip
+cleanfiles     = *.png
 distcleanfiles = Asylum-Teaser-master
-srcfiles = Asylum-Teaser-master files *.png
+srcfiles       = Asylum-Teaser-master files *.png
 
 download:
 	test -d Asylum-Teaser-master && true || ( \
