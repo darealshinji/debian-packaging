@@ -23,7 +23,7 @@ Depends:
   ${misc:Depends},
   ${shlibs:Depends},
   ttf-dejavu-core
-Suggests:
+Recommends:
   libdumb1,
   libfluidsynth1,
   libmpg123-0

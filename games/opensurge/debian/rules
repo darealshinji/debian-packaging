@@ -30,6 +30,7 @@ override_dh_auto_build:
 
 override_dh_auto_install:
 	dh_auto_install -- DESTDIR=$(CURDIR)/debian/tmp
+	cp -f debian/deutsch.lng debian/tmp/usr/share/opensurge/languages
 	mkdir -p debian/tmp/usr/share/games
 	mv debian/tmp/usr/share/opensurge debian/tmp/usr/share/games
 

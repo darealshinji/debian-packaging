@@ -1,0 +1,369 @@
+// ---------------------------------------------------------------------------
+// Open Surge Engine
+// http://opensnc.sourceforge.net
+//
+// File:   languages/deutsch.lng
+// Desc:   Deutsche Uebersetzung
+// Author: Reimund Renner
+// ---------------------------------------------------------------------------
+
+// Meta data
+LANG_LANGUAGE               "Deutsch"
+LANG_AUTHOR                 "Reimund Renner"
+LANG_LASTUPDATE             "2010-09-05"
+LANG_COMPATIBILITY          "0.2.0"
+
+
+// Colors
+COLOR_SURGE                 "ff8000"
+COLOR_NEON                  "bf7a0d"
+COLOR_CHARGE                "aca5a5"
+COLOR_INPUT                 "e99f42"
+COLOR_MENUSELECTEDOPTION    "ffe13e"
+COLOR_MENUTITLE             "e99f42"
+COLOR_HIGHLIGHT             "e99f42"
+COLOR_SUBHIGHLIGHT          "ffe13e"
+COLOR_SUBSUBHIGHLIGHT       "cdc3b6"
+COLOR_DANGER                "ff7777"
+COLOR_HUD                   "ffff00"
+COLOR_HUDDANGER             "ff0000"
+
+// Game data
+GAME_NAME                   "Open Surge"
+GAME_VERSION                "0.2.0"
+GAME_WEBSITE                "$ENGINE_WEBSITE"
+GAME_YEAR                   "$ENGINE_YEAR"
+
+//=============MENUS================
+
+// Main menu
+MENU_1PGAME                 "1P SPIEL"
+MENU_TUTORIAL               "ANLEITUNG"
+MENU_CUSTOMQUESTS           "PARTIEN"
+MENU_OPTIONS                "OPTIONEN"
+MENU_EXIT                   "BEENDEN"
+
+// Languages (please do not translate these sentences!)
+LANGSELECT_TITLE1           "<color=$COLOR_MENUTITLE>SELECT YOUR</color>"
+LANGSELECT_TITLE2           "<color=$COLOR_MENUTITLE>LANGUAGE</color>"
+LANGSELECT_AUTHOR           "<color=$COLOR_MENUSELECTEDOPTION>Translation by:</color> $1"
+LANGSELECT_PAGE             "page $1/$2"
+
+// Options
+OPTIONS_TITLE               "OPTIONEN"
+OPTIONS_YES                 "JA"
+OPTIONS_NO                  "NEIN"
+OPTIONS_GRAPHICS            "GRAFIK"
+OPTIONS_FULLSCREEN          "Vollbild"
+OPTIONS_RESOLUTION          "Aufloesung"
+OPTIONS_RESOLUTION_OPT1     "KLEIN"
+OPTIONS_RESOLUTION_OPT2     "NORMAL"
+OPTIONS_RESOLUTION_OPT3     "GROSS"
+OPTIONS_RESOLUTION_OPT4     "MAX"
+OPTIONS_SMOOTHGFX           "Smooth GFX"
+OPTIONS_SMOOTHGFX_ERROR     "[nur 32 bpp]"
+OPTIONS_FPS                 "Zeige FPS"
+OPTIONS_GAME                "SPIEL"
+OPTIONS_GAMEPAD             "Controller benutzen"
+OPTIONS_LANGUAGE            "Sprache Aendern"
+OPTIONS_STAGESELECT         "Stage waehlen"
+OPTIONS_CREDITS             "Credits"
+OPTIONS_BACK                "ZURUECK"
+
+
+// Stage Select
+STAGESELECT_TITLE           "STAGE WAEHLEN"
+STAGESELECT_MSG             "Druecken Sie <color=ffff00>$INPUT_FIRE4</color> zum abbrechen"
+STAGESELECT_PAGE            "Seite %d/%d"
+STAGESELECT_ACT             "Akt"
+
+// quest select
+QUESTSELECT_TITLE           "<color=$COLOR_MENUTITLE>QUEST WAEHLEN</color>"
+QUESTSELECT_MSG             "<color=$COLOR_INPUT>$INPUT_FIRE4</color> druecken, um abzubrechen."
+QUESTSELECT_PAGE            "Seite $1/$2"
+QUESTSELECT_INFO            "<color=$COLOR_MENUSELECTEDOPTION>Version:</color> $1\n<color=$COLOR_MENUSELECTEDOPTION>Autor:</color> $2\n<color=$COLOR_MENUSELECTEDOPTION>Beschreibung:</color> $3"
+
+CQ_DEFAULT_NAME             "Standardquest"
+CQ_DEFAULT_DESC             "Das Standardlevel"
+CQ_EXTRA_NAME               "Extralevels"
+CQ_EXTRA_DESC               "Ein paar Extralevels"
+
+// Credits
+CREDITS_TITLE               "CREDITS"
+CREDITS_KEY                 "Druecken Sie $INPUT_FIRE4 zum zurueckkehren."
+CREDITS_HEADER              "<color=$COLOR_HIGHLIGHT>$GAME_NAME version $GAME_VERSION</color>\n<color=$COLOR_SUBHIGHLIGHT>powered by $ENGINE_NAME version $ENGINE_VERSION</color>\n<color=$COLOR_SUBSUBHIGHLIGHT>$ENGINE_WEBSITE</color>"
+CREDITS_ACTIVE              "Projektteam"
+CREDITS_CONTRIB             "Zusaetzliche Beitraege"
+CREDITS_RETIRED             "Fruehere Mitglieder"
+CREDITS_THANKS              "Dank an"
+
+CREDITS_RES_TITLE           "Credits für einzelne Bestandteile"
+CREDITS_RES_TEXT            "Sofern nicht explizit anders beschrieben, werden die unten aufgelisteten Dateien unter der Creative Commons Attribution-ShareAlike 3.0 (CC-BY-SA 3.0) lizensiert."
+CREDITS_RES_IMAGES          "Bilder"
+CREDITS_RES_MUSICS          "Musik"
+CREDITS_RES_SAMPLES         "Soundeffekte"
+CREDITS_RES_SCRIPTS         "Skriptdateien"
+CREDITS_RES_SCRIPTS_TEXT    "Die Autoren werden innerhalb der jeweiligen Skriptdatei genannt."
+
+CREDITS_ALEXANDRE           "Projektleiter, Programmierer"
+CREDITS_DI                  "Musiker"
+CREDITS_COLIN               "Geschichten-Designer, Forum-Moderator, Kuenstler, Musiker"
+CREDITS_MATEUSREIS          "Toneffekt-Designer"
+CREDITS_JOHAN               "Musician, Social media/forum moderator"
+CREDITS_CELDECEA            "Kuenstler"
+CREDITS_JOAO                "Kuenstler"
+CREDITS_RAMON               "Illustrationen"
+CREDITS_CHRISTOPHER         "Wikimanager, Indonesische Uebersetzung"
+CREDITS_RUBEN               "Leveldesigner"
+CREDITS_SSDW                "Niederlaendische Uebersetzung"
+CREDITS_ARTHURBLOT          "Franzoesische Uebersetzung"
+CREDITS_REIMUND             "Deutsche Uebersetzung"
+CREDITS_SZYMON              "Polnische Uebersetzung"
+CREDITS_TOMIRES             "Tschechische Uebersetzung"
+CREDITS_SANTIAGO            "Spanische Uebersetzung"
+CREDITS_RAXILLAN            "Russische Uebersetzung"
+
+// Second credits screen
+CREDITS2_TITLE              "<color=$COLOR_MENUTITLE>CREDITS</color>"
+CREDITS2_KEY                "Druecken Sie <color=$COLOR_INPUT>$INPUT_FIRE4</color> zum zurueckkehren."
+
+// "Please donate" screen
+DONATE_TITLE                "<color=$COLOR_MENUTITLE>BITTE SPENDEN SIE</color>"
+DONATE_TEXT                 "Helfen Sie uns, die nächste Open Surge Version zu entwickeln!\n\n$DONATE_COMMONTEXT"
+DONATE2_TEXT                "Hat Ihnen die Demo gefallen? <color=$COLOR_MENUSELECTEDOPTION>Wollen Sie weiterspielen?</color> Wir sammeln Geld für die naechste Version dieses Spiels.\n\n$DONATE_COMMONTEXT"
+DONATE_YES                  "Sicher!"
+DONATE_NO                   "Spaeter."
+DONATE_DONTASK              "Frag erst gar nicht..."
+DONATE_COMMONTEXT           "Open Surge ist ein freies und quelloffenes Spiel, welches fuer Sie kostenlos entwickelt wurde. Allderdings kostet uns die Entwicklung echtes Geld. <color=$COLOR_MENUSELECTEDOPTION>Bitte zeigen Sie Ihre unterstuetzung</color> indem Sie <color=$COLOR_MENUSELECTEDOPTION>einen beliebigen Betrag spenden</color>.\n\nIhre Spende ist für die Erweiterung des Projektes essentiell. Ihr Geld wird in Programmiercode, Grafik, Musik, etc. investiert.\n\nWuerden Sie jetzt gerne Spenden?"
+
+// ======================= INPUT DEVICES ====================
+
+// keyboard
+INPUT_KEYB_DIRECTIONAL  "die PFEILTASTEN"
+INPUT_KEYB_LEFT         "die LINKE PFEILTASTE"
+INPUT_KEYB_RIGHT        "die RECHTE PFEILTASTE"
+INPUT_KEYB_UP           "die OBERE PFEILTASTE"
+INPUT_KEYB_DOWN         "die UNTERE PFEILTASTE"
+INPUT_KEYB_FIRE1        "die LEERTASTE"
+INPUT_KEYB_FIRE2        "die LINKE STRG-TASTE"
+INPUT_KEYB_FIRE3        "ENTER"
+INPUT_KEYB_FIRE4        "ESC"
+INPUT_KEYB_FIRE5        "W"
+INPUT_KEYB_FIRE6        "A"
+INPUT_KEYB_FIRE7        "S"
+INPUT_KEYB_FIRE8        "D"
+
+// joystick
+INPUT_JOY_DIRECTIONAL   "das STEUERKREUZ"
+INPUT_JOY_LEFT          "die NACH-LINKS-TASTE"
+INPUT_JOY_RIGHT         "die NACH-RECHTS-TASTE"
+INPUT_JOY_UP            "die HOCH-TASTE"
+INPUT_JOY_DOWN          "die NACH-UNTEN-TASTE"
+INPUT_JOY_FIRE1         "KNOPF 1"
+INPUT_JOY_FIRE2         "KNOPF 2"
+INPUT_JOY_FIRE3         "KNOPF 3"
+INPUT_JOY_FIRE4         "KNOPF 4"
+INPUT_JOY_FIRE5         "KNOPF 5"
+INPUT_JOY_FIRE6         "KNOPF 6"
+INPUT_JOY_FIRE7         "KNOPF 7"
+INPUT_JOY_FIRE8         "KNOPF 8"
+
+
+// ========= NON-SPECIAL CHARACTERS ==============
+
+// ------- Note to translators: -------
+//
+// since the game sometimes uses bitmap fonts,
+// some parts of the translation can't handle
+// special characters.
+//
+// This section does not allow language-specific
+// special characters. All other areas do allow
+// them, though.
+//
+// If a translation is not possible, you may
+// leave the following sentences in English.
+
+// Title screen
+TITLE_MESSAGE               "PRESS $INPUT_FIRE3"
+TITLE_VERSION               "ver."
+
+// Main menu
+MENU_PLAY                   "PLAY"
+MENU_OPTIONS                "OPTIONS"
+MENU_DONATE                 "DONATE"
+MENU_EXIT                   "EXIT"
+
+// HUD (Heads-Up Display)
+HUD_SCORE                   "Punktzahl:" // === translation notes: ===
+HUD_TIME                    "Zeit: " // the same amount of characters as HUD_SCORE
+HUD_COLLECTIBLES            "Power:" // the same amount of characters as HUD_SCORE
+HUD_SPACES                  "      " // the same amount of characters as HUD_SCORE
+HUD_CLEARED_LINE1           "SIE HABEN"
+HUD_CLEARED_LINE2           "DURCHLAUFEN"
+HUD_CLEARED_LINE2_ACT       "ACT"
+HUD_CLEARED_COLLECTIBLES    "POWER BONUS"
+HUD_CLEARED_TIME            "ZEIT BONUS"
+HUD_CLEARED_SECRET          "SECRET BONUS"
+HUD_CLEARED_TOTAL           "GESAMT"
+
+// ============ GENERAL GAMEPLAY ============================
+
+// Quit game? confirm box
+CBOX_QUIT_QUESTION      "WOLLEN SIE DAS SPIEL WIRKLICH BEENDEN?"
+CBOX_QUIT_OPTION1       "JA"
+CBOX_QUIT_OPTION2       "NEIN"
+
+// Chilpoctli Temple Zone
+DESERT1_TITLE_0         "Willkommen" 
+DESERT1_MSG_0           "Dieses Minilevel zeigt Celdecea's erstes Open Surge brickset!"
+DESERT1_TITLE_1         "ZIEL" 
+DESERT1_MSG_1           "Was haben Sie geglaubt? Zum Ziel geht es einfach geradeaus!"
+DESERT1_TITLE_2         "Secret" 
+DESERT1_MSG_2           "Diese Stelle ist fuer die, die sehen koennen..."
+DESERT1_TITLE_3         "Reserviert"
+DESERT1_MSG_3           "Eines Tages wird hier ein Looping stehen."
+
+//======================================
+// Main menu -> Custom Quests
+MENU_CQ_SELECT              "<color=0077ff>Bitte eine Partie waehlen:</color> [page %d/%d]"
+MENU_CQ_BACK                "<color=0077ff>Druecken Sie $INPUT_FIRE4 zum zurueckkehren.</color>"
+MENU_CQ_INFO                "<color=ffff00>Partie info:</color> (Version %s)\n\n<color=ffff00>Titel:</color>  %s\n<color=ffff00>Autor:</color> %s\n%s"
+MENU_CQ_DEFAULT             "Normale Partie"
+MENU_CQ_TUTORIAL            "Lernen Sie Open Sonic zu spielen"
+MENU_CQ_SUPERBOSSES         "Kaempfen Sie gegen maechtige Bosse!"
+MENU_CQ_EXTRA               "Extra Levels"
+
+
+// Quest names
+TUTORIAL_QUEST_NAME         "Einfuehrung"
+SUPERBOSSES_NAME            "Super Bosse" 
+EXTRA_LEVELS_NAME           "Extra Level"
+DEFAULT_QUEST_NAME          "Normale Partie"
+
+
+// Quest cleared!
+QUESTCLEARED_TITLE          "Partie beendet"
+//QUESTCLEARED_TEXT           "Glueckwunsch!\n"%s"\nist nun beendet!\n\n\n     <color=0077ff>Gesamtpunkte:</color> %d\n\n     <color=0077ff>Gesamtzeit:</color> %dh %dm %ds\n\n     <color=0077ff>Zauberglaeser:</color> %d\n\n     <color=0077ff>Grusse Ringe:</color> %d\n\Vielen Dank, dass Sie gespielt haben. Warten Sie\nauf neue Versionen von %s!\nBesuchen Sie uns im Internet:\n<color=ffff00>%s</color>\nDruecke $INPUT_FIRE3 um das Spiel neu zu starten."
+
+
+// End of demo
+ENDOFDEMO_TITLE             "VIELEN DANK"
+ENDOFDEMO_TEXT              "Vielen Dank, dass Sie %s gespielt haben!\nWir hoffen, dass Ihnen dieses Spiel genauso gefallen\nhat, wie uns die Entwicklung! :)\n\nDies ist das Ende dieser Demo,\njedoch nicht das Ende des Spiels.\nLaden Sie neue Levels von unserer\nWebsite!\n\nDieses Spiel ist weiter in Entwicklung.\nSchauen Sie nach neuen Versionen bei:\n<color=ffff00>%s</color>\n\nBitte warten Sie %d Sekunden..."
+
+
+// Bonus levels
+BONUSMSG_TITLE              "BONUS"
+BONUSMSG_TEXT               "Bonusstufen wurden noch nicht implementiert ;)"
+
+
+// Confirm boxes
+    // Quit game?
+    CBOX_QUIT_QUESTION      "WOLLEN SIE WIRKLICH BEENDEN?"
+    CBOX_QUIT_OPTION1       "JA"
+    CBOX_QUIT_OPTION2       "NEIN"
+
+
+// Input devices
+    // keyboard
+    INPUT_KEYB_DIRECTIONAL  "die PFEILTASTEN"
+    INPUT_KEYB_LEFT         "die LINKE TASTE"
+    INPUT_KEYB_RIGHT        "die RECHTE TASTE"
+    INPUT_KEYB_UP           "die HOCH TASTE"
+    INPUT_KEYB_DOWN         "die RUNTER TASTE"
+    INPUT_KEYB_FIRE1        "die LEERTASTE"
+    INPUT_KEYB_FIRE2        "die LINKE STRG TASTE"
+    INPUT_KEYB_FIRE3        "ENTER"
+    INPUT_KEYB_FIRE4        "ESC"
+
+
+    // joystick
+    INPUT_JOY_DIRECTIONAL   "die RICHTUNGSTASTEN"
+    INPUT_JOY_LEFT          "die LINKS TASTE"
+    INPUT_JOY_RIGHT         "die RECHTS TASTE"
+    INPUT_JOY_UP            "die HOCH TASTE"
+    INPUT_JOY_DOWN          "die RUNTER TASTE"
+    INPUT_JOY_FIRE1         "TASTE 1"
+    INPUT_JOY_FIRE2         "TASTE 2"
+    INPUT_JOY_FIRE3         "TASTE 3"
+    INPUT_JOY_FIRE4         "TASTE 4"
+
+
+// Tutorial
+    // act 1
+    TUTORIAL_1_TITLE_0      "SONIC"
+    TUTORIAL_1_MSG_0        "Willkommen zur Uebung! Benutzen Sie <color=$COLOR_INPUT>$INPUT_DIRECTIONAL</color> um <color=$COLOR_P1>Sonic</color> zu bewegen und <color=$COLOR_INPUT>$INPUT_FIRE1</color> zum springen."
+    TUTORIAL_1_TITLE_1      "TUER"
+    TUTORIAL_1_MSG_1        "Ein <color=$COLOR_SPECIAL>PARTNER</color> kann diese Tuer fuer Sie oeffnen. Druecken Sie <color=$COLOR_INPUT>$INPUT_FIRE2</color> um den aktuellen Spieler umzuschalten."
+    TUTORIAL_1_TITLE_2      "KNUCKLES"
+    TUTORIAL_1_MSG_2        "<color=$COLOR_P3>Knuckles</color> kann auf Waende klettern! Druecken Sie mit <color=$COLOR_P3>Knuckles</color> zwei mal (langsam) <color=$COLOR_INPUT>SPRINGEN</color> und treffen Sie eine Wand."
+    TUTORIAL_1_TITLE_3      "TELEPORTER"
+    TUTORIAL_1_MSG_3        "Dies ist ein <color=$COLOR_SPECIAL>Teleporter</color>. Druecken Sie den Schalter um das gesamte Team zu diesem Platz zu bringen. Es funktioniert nur ein mal."
+    TUTORIAL_1_TITLE_4      "TAILS"
+    TUTORIAL_1_MSG_4        "<color=$COLOR_P2>Tails</color> kann fliegen! Druecken Sie mit <color=$COLOR_P2>Tails</color> die <color=$COLOR_INPUT>SPRINGEN</color> Taste fortwaehrend (jedoch nicht gedrueckt halten)."
+    TUTORIAL_1_TITLE_5      "ZIEL"
+    TUTORIAL_1_MSG_5        "Gut gemacht!"
+
+    // act 2
+    TUTORIAL_2_TITLE_0      "UEBUNG"
+    TUTORIAL_2_MSG_0        "Nun koennen Sie es selbst veruchen. Dort gibt es einige Gegener dagegen."
+    TUTORIAL_2_TITLE_1      "TUER"
+    TUTORIAL_2_MSG_1        "Bitte beachten Sie, dass Sie den aktuellen Spieler nur dann umschalten koennen, wenn Sie auf dem Boden stehen!"
+    TUTORIAL_2_TITLE_2      "DREHSPURT"
+    TUTORIAL_2_MSG_2        "Kennen Sie den <color=$COLOR_SPECIAL>Drehspurt</color>-Zug? Halten Sie <color=$COLOR_INPUT>RUNTER</color>, druecken Sie <color=$COLOR_INPUT>SPRINGEN</color> und dann lassen Sie die <color=$COLOR_INPUT>RUNTER</color> Taste los."
+    TUTORIAL_2_TITLE_3      "ZIEL"
+    TUTORIAL_2_MSG_3        "Glueckwunsch! Jetzt wissen Sie wie man Open Sonic spielt!"
+
+
+// Blue Ocean Zone
+    // act 1
+    BOZ_1_TITLE_0           "WILLKOMMEN!"
+    BOZ_1_MSG_0             "Willkommen! Wenn Sie das erste Mal spielen, sollten Sie zuerst die <color=$COLOR_SPECIAL>Uebung</color> sehen (im Hauptmenue)"
+    BOZ_1_TITLE_1           "TUER"
+    BOZ_1_MSG_1             "Waehrend Sie auf dem Boden stehen, druecken Sie <color=$COLOR_INPUT>$INPUT_FIRE2</color> zum Umschalten des aktuellen Spielers"
+    BOZ_1_TITLE_2           "BRILLE"
+    BOZ_1_MSG_2             "Zerschlagen Sie die Box um die <color=$COLOR_SPECIAL>Zauberbrille</color> zu bekommen! Diese Brille hat besondere Kraefte."
+    BOZ_1_TITLE_3           "FLIEGEN!"
+    BOZ_1_MSG_3             "Sowohl <color=$COLOR_P2>Tails</color> als auch <color=$COLOR_P3>Knuckles</color> koennen fliegen. Versuchen Sie die Taste <color=$COLOR_INPUT>SPRINGEN</color> einige Male zu druecken."
+    BOZ_1_TITLE_4           "GUT!"
+    BOZ_1_MSG_4             "Sie machen es gut! Ein <color=$COLOR_SPECIAL>PARTNER</color> kann Ihnen helfen diese Tuer zu oeffnen."
+    BOZ_1_TITLE_5           "DREHSPURT"
+    BOZ_1_MSG_5             "Kennen Sie den <color=$COLOR_SPECIAL>Drehspurt</color>-Zug? Halten Sie <color=$COLOR_INPUT>RUNTER</color>, druecken Sie <color=$COLOR_INPUT>SPRINGEN</color> und dann lassen sie die <color=$COLOR_INPUT>RUNTER</color> Taste los."
+
+    // act 3
+    BOZ_3_TITLE_0           "BOSS"
+    BOZ_3_MSG_0             "Bitte waehlen Sie jetzt eine Figur. Waehrend dem Kampf mit dem Boss koennen Sie den aktiven Spieler nicht umschalten."
+
+
+// Exotic Paradise
+    // act 1
+    EP_1_TITLE_0            "DREHSPURT    "
+    EP_1_MSG_0              "Kennen Sie den <color=$COLOR_SPECIAL>Drehspurt</color>-Zug? Halten Sie <color=$COLOR_INPUT>RUNTER</color>, druecken Sie <color=$COLOR_INPUT>SPRINGEN</color> und dann lassen Sie die <color=$COLOR_INPUT>RUNTER</color> Taste los."
+
+    // act 2
+    EP_2_TITLE_0            "DNA TUER"
+    EP_2_MSG_0              "Dies ist eine <color=$COLOR_SPECIAL>DNA TUER</color>. Nur <color=$COLOR_P1>Sonic</color> kann Tueren wie diese passieren."
+
+
+// Prototype Level
+    // act 1
+    PROTOTYPE_1_TITLE_0     "PROTOTYP"
+    PROTOTYPE_1_MSG_0       "Dies wurd im fruehen Projektstatus verwendet. Wie Sie sehen koennen ist es ein sehr schoenes Level. Geniessen Sie es! ;)"
+
+
+// Test Zone
+    // act 1
+    TESTZONE_1_TITLE_0      "TESTZONE"
+    TESTZONE_1_MSG_0        "Dies ist die Testzone. Es wurde dazu verwendet einige Teile der Spiele-Engine zu testen. Geniessen Sie es! ;)"
+
+
+// Chilpoctli Temple Zone
+    // act 1
+    DESERT1_TITLE_0         "Willkommen" 
+    DESERT1_MSG_0           "Diese Mini-Level stellen Celdeceas erste OpenSonic-Steine zur Schau!"
+    DESERT1_TITLE_1         "ZIEL" 
+    DESERT1_MSG_1           "Was dachten Sie? Das Ziel ist nicht mehr weit!"
+    DESERT1_TITLE_2         "Geheim" 
+    DESERT1_MSG_2           "Dies ist ein Platz fuer jene, die sehen koennen..."
+    DESERT1_TITLE_3         "Reserviert"
+    DESERT1_MSG_3           "Hier wird irgendwann ein Looping sein."
