@@ -1,0 +1,136 @@
+--- /dev/null
++++ b/ChangeLog
+@@ -0,0 +1,133 @@
++-------------------------
++Open Sonic - Changelog
++http://opensnc.sourceforge.net
++-------------------------
++
++
++Version 0.1.4 (2010-09-19)
++-------------------------
++Team:
++Alexandre Martins <alemartf (at) gmail (dot) com> - Project leader, Programmer
++Di Rodrigues <di_contato (at) yahoo (dot) com (dot) br> - Musician
++Colin <silvercpb (at) gmail (dot) com> - Forum moderator, Story designer, Artist, Musician
++Mateus Reis <oxidmedia (at) gmail (dot) com> - Sound effects designer
++Christopher Martinus <christophermartinus (at) yahoo (dot) com> - Wiki manager, Indonesian translation
++Celdecea <brian (at) zablocky (dot) org> - Artist
++Christian Zigotzky <chzigotzky (at) bayern-mail (dot) de> - Mac OS X port
++Joepotato28 <tate.joe1 (at) gmail (dot) com> - Musician
++Arthur Blot <arthur (dot) blot78 (at) gmail (dot) com> - French translation
++Reimund Renner <rei (dot) opensnc (at) gmail (dot) com> - German translation
++Szymon Weihs <sz (dot) weihs (at) gmail (dot) com> - Polish translation
++Tomires <tomirescz (at) gmail (dot) com> - Czech translation
++Sascha de waal <saschadewaal (at) ssdw (dot) nl> - Dutch translation
++Francesco Sciusco <Frank50_S (at) libero (dot) it> - Italian translation
++
++    * Object scripting system: users are now able to create custom items, enemies and bosses
++    * Refactored the built-in item system and implemented MANY new items as well
++    * New translations: Dutch, Indonesian, Italian. Dropped the Spanish translation
++    * New shields: fire shield, water shield, thunder shield, wind shield, acid shield
++    * New user-made songs: title screen, boss, invincibility, Blue Ocean, Exotic Paradise
++    * New user-made sound effects: jump, shields, springs, checkpoint orb, spikes and a few others
++    * New user-made graphics: item boxes, shields, spring pads, DNA doors, bumpers and a few others
++    * Refactored the background system. Now, it's also possible to create foregrounds
++    * Refactored the audio system. Dropped .mod/.it/.xm/.s3m support (use .ogg for musics instead)
++    * Upgraded to Allegro 4.4. Added .jpg image support
++    * Lots of other refactorings at the core of the engine
++    * Bugfixes and other optimizations
++
++Version 0.1.3 (2010-02-16)
++-------------------------
++Team:
++Alexandre Martins <alemartf(at)gmail.com> - Project Leader, Lead Programmer
++Di Rodrigues <di_contato(at)yahoo.com.br> - Lead Musician
++Bastian von Halem <hauptbasis(at)web.de> - Lead Artist
++Neoblast <jdh228(at)gmail.com> - Dreamcast port
++Lainz <leandrodiazezequiel(at)hotmail.com> - Spanish translation
++Arthur Blot <arthur.blot78(at)gmail.com> - French translation
++Reimund Renner <rei.opensnc(at)gmail.com> - German translation
++Szymon Weihs <sz.weihs(at)gmail.com> - Polish translation
++Tomires <tomirescz(at)gmail.com> - Czech translation
++
++    * Tails has gained a new move: now he is able to pick up the other characters and carry them around
++    * Improved the level editor (it includes a bigger work area and new buttons)
++    * New level editor feature: grids
++    * New level editor feature: groups. You can now easily place groups of objects in your level. Useful to make loops and other common structures
++    * New level editor features: undo and redo
++    * New translations: German, Polish, Czech
++    * New songs: options screen and stage cleared
++    * New screen: options screen
++    * Removed the launcher program
++    * Improved the joystick programming. Just plug your joypad before starting the game and start playing!
++    * New icon
++    * New engine feature: bricks have a z-index property. Now it's possible to design background/foreground bricks
++    * New engine feature: clouds. Clouds are types of bricks also known as "one-way platforms"
++    * Implemented jump sensitivity and spindash through multiple boxes
++    * Centered Tails' sprites when jumping
++    * Improved the GUI/HUD
++    * New level: Chilpoctli Temple Zone (user-made graphics - thanks, Celdecea!)
++    * New level: Template (user-made graphics)
++    * Custom quests may be launched via command line using the --quest option (see opensonic --help)
++    * Removed the Master Quest
++    * New quests: Extra levels, Super Bosses
++    * Updated the docs
++    * Code improvements
++    * Bugfixes and lots of small changes
++
++
++Version 0.1.2 (2009-07-23)
++-------------------------
++Developers:
++Alexandre Martins <alemartf(at)gmail.com> - programmer
++Di Rodrigues <di_contato(at)yahoo.com.br> - musician
++Lainz <leandrodiazezequiel(at)hotmail.com> - contributor
++Arthur Blot <arthur.blot78(at)gmail.com> - contributor
++Neoblast <jdh228(at)gmail.com> - contributor
++
++    * Improved physics
++    * Multi-Language support (English, Portuguese, French and Spanish)
++    * Joystick support
++    * OGG music support
++    * New original songs by Di Rodrigues: Title Screen and Extra Life
++    * English and Portuguese translations by Alexandre Martins
++    * Spanish translation by Lainz
++    * French translation by Arthur Blot
++    * Mac OS X support is now experimental
++    * Dreamcast port by Neoblast
++    * New command-line option: --color-depth and new 256-color mode
++    * New command-line option: --low-memory, used to reduce memory usage (slow hardware) - useful to port the game to other platforms
++    * Knuckles can break walls just by touching them (spindash isn't needed anymore)
++    * New original sprites by Celdecea (checkpoint orb, spring pads and ring shields)
++    * Some graphics were improved by Lainz
++    * New fonts
++    * If the ESC key is pressed while playing, a confirmation box is shown
++    * Improved the compiling process
++    * New credits screen
++    * Updated the docs
++    * Updated the launcher
++    * Improved the wordwrap routines
++    * Bugfixes and some small changes
++
++
++Version 0.1.1 (2009-02-15)
++-------------------------
++Developers:
++Alexandre Martins <alemartf(at)gmail.com> - programmer
++
++    * Better friction and gravity
++    * The teleporters now work only once
++    * Improved the slopes
++    * Updated the launcher
++    * Updated the docs
++    * Linux users can now save/load data (levels, quests, images, etc.) to/from $HOME/.opensonic/ (please see the docs for more information)
++    * Linux users can now use the "make install" command (only when using the source package - please see the docs)
++    * New level editor command: change spawn point
++    * Bugfixes
++
++
++Version 0.1.0 (2009-02-07)
++-------------------------
++Developers:
++Alexandre Martins <alemartf(at)gmail.com> - programmer
++
++    * Initial release
++
