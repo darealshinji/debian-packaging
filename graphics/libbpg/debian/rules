@@ -1,0 +1,53 @@
+#!/usr/bin/make -f
+
+VERSION = $(shell cat VERSION)
+MAN1 = bpgdec.1 bpgenc.1
+MANPAGES = $(MAN1) bpg.5
+
+export CFLAGS  := -Wall $(shell dpkg-buildflags --get CFLAGS)
+export LDFLAGS := -Wl,-z,defs $(shell dpkg-buildflags --get LDFLAGS)
+
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean
+	dh_auto_clean -Dpng
+
+override_dh_auto_configure:
+	sed -e 's/@VERSION@/$(VERSION)/;' debian/libbpg.pc.in > libbpg.pc
+	autoreconf -ivf png
+	cd png && ./configure --prefix=/usr --enable-shared=no --enable-static=yes
+	cp -f png/libpng.pc png/libpng16.pc
+
+override_dh_auto_build:
+	dh_auto_build -Dpng
+	dh_auto_build
+
+override_dh_installdocs:
+	dh_installdocs -A doc/bpg_spec.txt README
+
+override_dh_installchangelogs:
+	dh_installchangelogs -A ChangeLog
+
+override_dh_installman: $(MANPAGES)
+	dh_installman -plibbpg-bin $^
+	dh_installman -plibpng16-dev debian/libpng16-config.1
+
+$(MAN1):
+	sed -e 's/@VERSION@/$(VERSION)/;' debian/$@.header > $@
+	./$(subst .1,,$@) >> $@ || true
+	cat debian/$@.footer >> $@
+
+bpg.5:
+	sed -e 's/@VERSION@/$(VERSION)/;' debian/$@.header > $@
+	cat doc/bpg_spec.txt >> $@
+	cat debian/$@.footer >> $@
+
+override_dh_clean:
+	dh_clean libbpg.pc png/libpng16.pc $(MANPAGES)
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

@@ -1,0 +1,79 @@
+--- a/Makefile
++++ b/Makefile
+@@ -36,9 +36,10 @@
+ 
+ PWD:=$(shell pwd)
+ 
+-CFLAGS:=-Os -Wall -MMD -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -fno-math-errno -fno-signed-zeros -fno-tree-vectorize -fomit-frame-pointer
+-CFLAGS+=-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_REENTRANT
+-CFLAGS+=-I.
++CFLAGS=-O3 -Wall -MMD -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -fno-math-errno -fno-signed-zeros -fno-tree-vectorize -fomit-frame-pointer
++CFLAGS+=-fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security
++CFLAGS+=-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_REENTRANT -DUSE_PNG -D_FORTIFY_SOURCE=2
++CFLAGS+=-I. -Ipng
+ CFLAGS+=-DCONFIG_BPG_VERSION=\"$(shell cat VERSION)\"
+ ifdef USE_JCTVC_HIGH_BIT_DEPTH
+ CFLAGS+=-DRExt__HIGH_BIT_DEPTH_SUPPORT
+@@ -57,6 +58,7 @@
+ else
+ LDFLAGS+=-Wl,--gc-sections
+ endif
++LDFLAGS+=-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,defs
+ CFLAGS+=-g
+ CXXFLAGS=$(CFLAGS)
+ 
+@@ -130,10 +132,10 @@
+ else
+ LIBS:=-lrt
+ endif # !CONFIG_APPLE 
+-LIBS+=-lm -lpthread
++LIBS+=-lm -lpthread -lz
+ endif # !CONFIG_WIN32
+ 
+-BPGENC_LIBS+=-lpng -ljpeg $(LIBS)
++BPGENC_LIBS+=-Lpng/.libs -lpng16 -ljpeg $(LIBS)
+ 
+ bpgenc.o: CFLAGS+=-Wno-unused-but-set-variable
+ 
+@@ -141,7 +143,7 @@
+ 	$(AR) rcs $@ $^
+ 
+ bpgdec$(EXE): bpgdec.o libbpg.a
+-	$(CC) $(LDFLAGS) -o $@ $^ -lpng $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ -Lpng/.libs -lpng16 $(LIBS)
+ 
+ bpgenc$(EXE): $(BPGENC_OBJS)
+ 	$(CXX) $(LDFLAGS) -o $@ $^ $(BPGENC_LIBS)
+@@ -157,9 +159,6 @@
+ 	size bpgdec libbpg.o libavcodec/*.o libavutil/*.o | sort -n
+ 	gzip < bpgdec | wc
+ 
+-install: bpgenc bpgdec
+-	install -s -m 755 $^ $(prefix)/bin
+-
+ CLEAN_DIRS=doc html libavcodec libavutil \
+      jctvc jctvc/TLibEncoder jctvc/TLibVideoIO jctvc/TLibCommon jctvc/libmd5
+ 
+--- a/jctvc/Makefile
++++ b/jctvc/Makefile
+@@ -1,7 +1,9 @@
+ CC=gcc
+-CFLAGS=-m64 -Os -Wall -MMD -fno-asynchronous-unwind-tables -g -Wno-sign-compare -Wno-unused-but-set-variable
++CFLAGS=-m64 -O3 -Wall -MMD -fno-asynchronous-unwind-tables -g -Wno-sign-compare -Wno-unused-but-set-variable
++CFLAGS+=-fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security
+ LDFLAGS= -m64 -g
+-CFLAGS+=-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
++LDFLAGS+=-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,defs
++CFLAGS+=-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_FORTIFY_SOURCE=2
+ PWD:=$(shell pwd)
+ CFLAGS+=-I$(PWD)
+ 
+@@ -34,7 +36,7 @@
+ 	$(CXX) -o $@ $(LDFLAGS) $^ -lm
+ 
+ jsenc: jsenc.o jctvc_glue.o $(ENC_OBJS)
+-	$(CXX) -o $@ $(LDFLAGS) $^ -lpng -lm
++	$(CXX) -o $@ $(LDFLAGS) $^ -lpng16 -lm
+ 
+ %.o: %.c
+ 	$(CC) $(CFLAGS) -c -o $@ $<

@@ -1,0 +1,7 @@
+.TH BPGDEC 1 "December 2014" "@VERSION@"
+.SH NAME
+bpgdec \- decoder for BPG image format files
+
+.SH OPTIONS
+.nf
+\f[C]

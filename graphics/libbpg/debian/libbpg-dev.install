@@ -1,0 +1,4 @@
+libbpg.h bpgenc.h   /usr/include
+libbpg.a            /usr/lib
+libbpg.pc           /usr/lib/pkgconfig
+html/*              /usr/share/doc/libbpg-dev/libjs-bpgdec

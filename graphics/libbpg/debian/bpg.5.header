@@ -1,0 +1,7 @@
+.TH BPG 5 "December 2014" "@VERSION@"
+.SH NAME
+BPG \- Better Portable Graphics (BPG) format
+
+.SH DESCRIPTION
+.nf
+\f[C]

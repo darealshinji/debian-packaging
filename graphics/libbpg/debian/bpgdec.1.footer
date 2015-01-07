@@ -1,0 +1,11 @@
+.fi
+
+.SH COPYRIGHT
+Copyright \(co 2014 Fabrice Bellard <fabrice@bellard.org>.
+.B bpgdec
+is released under the LGPL license (the FFmpeg part is under the LGPL,
+the BPG specific part is released under the MIT license).
+
+.SH "SEE ALSO"
+.BR bpgenc (1),
+.BR bpg (5)
