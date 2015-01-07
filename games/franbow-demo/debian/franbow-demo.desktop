@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Fran Bow (demo)
+Exec=franbow-demo
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=franbow-demo

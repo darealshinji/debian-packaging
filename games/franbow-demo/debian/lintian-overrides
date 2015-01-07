@@ -1,0 +1,4 @@
+# closed source
+franbow-demo: embedded-library usr/lib/games/franbow-demo/runner: curl
+franbow-demo: embedded-library usr/lib/games/franbow-demo/runner: libjpeg
+franbow-demo: embedded-library usr/lib/games/franbow-demo/runner: libpng
