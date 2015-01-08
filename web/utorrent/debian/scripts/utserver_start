@@ -1,0 +1,11 @@
+#!/bin/sh
+
+settingspath="$HOME/.local/share/utorrent"
+
+mkdir -p "$settingspath" &&
+cd "$settingspath" &&
+ln -fs /usr/bin/utserver &&
+ln -fs /usr/share/utorrent/webui.zip &&
+utserver -daemon
+
+exit 0

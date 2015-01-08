@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf utorrent-* converted_icons
+
+override_dh_auto_build:
+	tar xvf utserver.tar.gz
+	chmod 0755 utorrent-*/utserver
+	chmod 0644 utorrent-*/webui.zip utorrent-*/docs/*
+	./make-icons.sh utorrent.png
+
+override_dh_installchangelogs:
+	dh_installchangelogs utorrent-*/docs/Changes.txt
+
+override_dh_compress:
+	dh_compress -X.pdf
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/usr/bin/utserver_start &&
+/usr/bin/x-www-browser http://admin@localhost:8080/gui/web/index.html
+

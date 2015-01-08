@@ -1,0 +1,5 @@
+utorrent-*/utserver        /usr/bin
+utorrent-*/webui.zip       /usr/share/utorrent
+debian/*.desktop           /usr/share/applications
+debian/scripts/*           /usr/bin
+converted_icons/icons      /usr/share

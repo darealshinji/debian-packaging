@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=µTorrent
+GenericName=BitTorrent Client
+Comment=
+Exec=utorrent
+TryExec=utorrent
+Terminal=false
+Icon=utorrent
+Categories=Network;FileTransfer;P2P;
+StartupNotify=true
