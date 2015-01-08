@@ -27,5 +27,6 @@ This Makefile will create three Debian packages:
    You can find the files in their documentation directories.
 
 libbpg homepage: http://www.bellard.org/bpg/<br>
-libpng homepage: http://www.libpng.org/pub/png/libpng.html
+libpng homepage: http://www.libpng.org/pub/png/libpng.html<br>
+x265 homepage: https://bitbucket.org/multicoreware/x265/
 

@@ -1,5 +1,14 @@
 --- a/Makefile
 +++ b/Makefile
+@@ -5,7 +5,7 @@
+ # Enable compilation of Javascript decoder with Emscripten
+ #USE_EMCC=y
+ # Enable x265 for the encoder (you must install it before)
+-#USE_X265=y
++USE_X265=y
+ # Enable the JCTVC code (best quality but slow) for the encoder
+ USE_JCTVC=y
+ # Enable it to use bit depths > 12 (need more tests to validate encoder)
 @@ -36,9 +36,10 @@
  
  PWD:=$(shell pwd)
@@ -10,7 +19,7 @@
 +CFLAGS=-O3 -Wall -MMD -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -fno-math-errno -fno-signed-zeros -fno-tree-vectorize -fomit-frame-pointer
 +CFLAGS+=-fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security
 +CFLAGS+=-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_REENTRANT -DUSE_PNG -D_FORTIFY_SOURCE=2
-+CFLAGS+=-I. -Ipng
++CFLAGS+=-I. -Ipng -Ix265/source
  CFLAGS+=-DCONFIG_BPG_VERSION=\"$(shell cat VERSION)\"
  ifdef USE_JCTVC_HIGH_BIT_DEPTH
  CFLAGS+=-DRExt__HIGH_BIT_DEPTH_SUPPORT
@@ -22,29 +31,48 @@
  CFLAGS+=-g
  CXXFLAGS=$(CFLAGS)
  
-@@ -130,10 +132,10 @@
- else
- LIBS:=-lrt
- endif # !CONFIG_APPLE 
+@@ -89,7 +91,7 @@
+ 
+ ifdef USE_X265
+ BPGENC_OBJS+=x265_glue.o
+-BPGENC_LIBS+= -lx265
++BPGENC_LIBS+=-Lx265/source -lx265
+ bpgenc.o: CFLAGS+=-DUSE_X265
+ endif # USE_X265
+ 
+@@ -121,19 +123,10 @@
+ bpgenc.o: CFLAGS+=-DUSE_JCTVC
+ endif # USE_JCTVC
+ 
+-ifdef CONFIG_WIN32
+-LIBS:=-lz
+-LDFLAGS+=-static
+-else
+-ifdef CONFIG_APPLE
+-LIBS:=
+-else
+-LIBS:=-lrt
+-endif # !CONFIG_APPLE 
 -LIBS+=-lm -lpthread
-+LIBS+=-lm -lpthread -lz
- endif # !CONFIG_WIN32
+-endif # !CONFIG_WIN32
++LIBS:=-Lpng/.libs -lpng16 -lrt -lm -lpthread -lz
++
  
 -BPGENC_LIBS+=-lpng -ljpeg $(LIBS)
-+BPGENC_LIBS+=-Lpng/.libs -lpng16 -ljpeg $(LIBS)
++BPGENC_LIBS+=-ljpeg $(LIBS)
  
  bpgenc.o: CFLAGS+=-Wno-unused-but-set-variable
  
-@@ -141,7 +143,7 @@
+@@ -141,7 +134,7 @@
  	$(AR) rcs $@ $^
  
  bpgdec$(EXE): bpgdec.o libbpg.a
 -	$(CC) $(LDFLAGS) -o $@ $^ -lpng $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ $^ -Lpng/.libs -lpng16 $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
  
  bpgenc$(EXE): $(BPGENC_OBJS)
  	$(CXX) $(LDFLAGS) -o $@ $^ $(BPGENC_LIBS)
-@@ -157,9 +159,6 @@
+@@ -157,9 +150,6 @@
  	size bpgdec libbpg.o libavcodec/*.o libavutil/*.o | sort -n
  	gzip < bpgdec | wc
  

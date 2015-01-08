@@ -7,6 +7,13 @@ MANPAGES = $(MAN1) bpg.5
 export CFLAGS  := -Wall $(shell dpkg-buildflags --get CFLAGS)
 export LDFLAGS := -Wl,-z,defs $(shell dpkg-buildflags --get LDFLAGS)
 
+x265_confflags = \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_VERBOSE_MAKEFILE=ON \
+	-DENABLE_CLI=OFF \
+	-DENABLE_SHARED=OFF \
+	-DENABLE_PIC=OFF
+
 
 %:
 	dh $@ --parallel
@@ -14,15 +21,18 @@ export LDFLAGS := -Wl,-z,defs $(shell dpkg-buildflags --get LDFLAGS)
 override_dh_auto_clean:
 	dh_auto_clean
 	dh_auto_clean -Dpng
+	dh_auto_clean -Dx265/source
 
 override_dh_auto_configure:
 	sed -e 's/@VERSION@/$(VERSION)/;' debian/libbpg.pc.in > libbpg.pc
 	autoreconf -ivf png
 	cd png && ./configure --prefix=/usr --enable-shared=no --enable-static=yes
 	cp -f png/libpng.pc png/libpng16.pc
+	cd x265/source && cmake $(x265_confflags) .
 
 override_dh_auto_build:
 	dh_auto_build -Dpng
+	dh_auto_build -Dx265/source
 	dh_auto_build
 
 override_dh_installdocs:

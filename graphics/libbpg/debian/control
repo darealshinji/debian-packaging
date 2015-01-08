@@ -5,7 +5,9 @@ Maintainer: djcj <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 9),
  dh-autoreconf,
+ cmake (>= 2.8.8),
  libjpeg8-dev,
+ yasm (>= 1.2.0),
  zlib1g-dev
 Standards-Version: 3.9.5
 Homepage: http://bellard.org/bpg/
