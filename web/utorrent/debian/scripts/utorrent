@@ -1,5 +1,24 @@
 #!/bin/sh
 
-/usr/bin/utserver_start &&
-/usr/bin/x-www-browser http://admin@localhost:8080/gui/web/index.html
+settingspath="$HOME/.local/share/utorrent"
+pidfile="$settingspath/pidfile"
+
+if [ x"${1}" = x"-stop" ] ; then
+    if [ -f "$pidfile" ] ; then
+        kill `cat "$pidfile"`
+        rm "$pidfile"
+    else
+        echo "no utserver process running"
+    fi
+    exit 0
+fi
+if [ ! -f "$settingspath/webui.zip" ] ; then
+    mkdir -p "$settingspath"
+    cp /usr/share/utorrent/webui.zip "$settingspath"
+fi
+if [ ! -f "$pidfile" ] ; then
+    utserver -daemon -settingspath "$settingspath" -pidfile "$pidfile"
+fi
+
+x-www-browser http://admin@localhost:8080/gui/web/index.html
 

@@ -2,7 +2,7 @@
 
 set -e
 
-utserver_stop || true
+utorrent -stop
 
 #DEBHELPER#
 
