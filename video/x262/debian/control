@@ -1,0 +1,29 @@
+Source: x262
+Section: libs
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ help2man,
+ libgpac-dev,
+ libjpeg-turbo8-dev,
+ libpng12-dev,
+ libx11-dev,
+ pkg-config,
+ yasm,
+ zlib1g-dev
+Standards-Version: 3.9.5
+Vcs-Git: https://github.com/kierank/x262.git
+Vcs-Browser: https://github.com/kierank/x262
+Homepage: https://github.com/kierank/x262
+
+Package: x262
+Section: graphics
+Architecture: any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: x264 with MPEG-2 support
+ x262 is an advanced commandline encoder for creating H.264 (MPEG-4 AVC)
+ and MPEG-2 video streams.
+

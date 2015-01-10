@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+
+export V=1
+
+CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
+LDFLAGS  := $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed -Wl,-z,noexecstack
+
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean -Dffmpeg || true
+	dh_auto_clean -Dx262-source || true
+
+override_dh_auto_build:
+	cd ffmpeg && ./configure \
+		--prefix=$(CURDIR)/ffmpeg/usr \
+		--disable-debug \
+		--disable-programs \
+		--disable-doc \
+		--disable-bzlib \
+		--disable-lzma \
+		--enable-gpl \
+		--enable-version3
+	$(MAKE) -C ffmpeg
+	$(MAKE) -C ffmpeg install
+
+	cd x262-source && PKG_CONFIG_PATH=$(CURDIR)/ffmpeg/usr/lib/pkgconfig \
+		./configure --extra-ldflags="-lpng -ljpeg -lz"
+	$(MAKE) -C x262-source
+	mv x262-source/x264 x262-source/x262
+	help2man -n "fast h264/mpeg2 encoder" -N -s1 -S "Videolan project" \
+		-h '--fullhelp' x262-source/x262 > x262-source/x262.1
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

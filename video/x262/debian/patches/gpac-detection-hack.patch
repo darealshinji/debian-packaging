@@ -1,0 +1,15 @@
+--- a/x262-source/configure
++++ b/x262-source/configure
+@@ -954,11 +954,7 @@
+         cc_check "" -lwinmm && GPAC_LIBS="$GPAC_LIBS -lwinmm"
+     fi
+     if cc_check gpac/isomedia.h "$GPAC_LIBS" ; then
+-        if cc_check gpac/isomedia.h "$GPAC_LIBS" "gf_isom_set_pixel_aspect_ratio(0,0,0,0,0);" ; then
+-            gpac="yes"
+-        else
+-            echo "Warning: gpac is too old, update to 2007-06-21 UTC or later"
+-        fi
++        gpac="yes"
+     fi
+ fi
+ 
