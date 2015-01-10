@@ -21,6 +21,9 @@ x264-configure = \
 	dh $@ --parallel
 
 override_dh_auto_clean:
+	dh_auto_clean -Dl-smash || true
+	dh_auto_clean -Dffmpeg || true
+	dh_auto_clean -Dx264-source || true
 	rm -f debian/test.y4m test.mp4 x264_2pass.log*
 
 override_dh_auto_build:
