@@ -1,0 +1,11 @@
+.fi
+
+.SH COPYRIGHT
+Copyright \(co 2014 Fabrice Bellard <fabrice@bellard.org>.
+.B bpgenc
+is released under the MIT license.
+It includes the JCTVC code which is copyright \(co 2010-2014 ITU/ISO/IEC
+and released under the BSD-3-Clause license.
+
+.SH "SEE ALSO"
+.BR bpgdecmod (1)

@@ -1,0 +1,39 @@
+Source: libbpgmod
+Section: libs
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ dh-autoreconf,
+ cmake (>= 2.8.8),
+ libjpeg8-dev,
+ yasm (>= 1.2.0),
+ zlib1g-dev
+Standards-Version: 3.9.5
+Homepage: http://bellard.org/bpg/
+
+Package: libbpgmod-bin
+Section: graphics
+Architecture: any
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Provides: libjs-bpgdec
+Description: tools for manipulating BPG image format files
+ BPG (Better Portable Graphics) is an image format whose purpose is to
+ replace the JPEG image format when quality or file size is an issue.
+ .
+ Its main advantages are:
+  - High compression ratio. Files are much smaller than JPEG for similar
+    quality.
+  - Supported by most Web browsers with a small Javascript decoder.
+  - Based on a subset of the HEVC open video compression standard.
+  - Supports the same chroma formats as JPEG (grayscale, YCbCr 4:2:0,
+    4:2:2, 4:4:4) to reduce the losses during the conversion. An alpha
+    channel is supported. The RGB, YCgCo and CMYK color spaces are also
+    supported.
+  - Native support of 8 to 14 bits per channel for a higher dynamic
+    range.
+  - Lossless compression is supported.
+  - Various metadata (such as EXIF, ICC profile, XMP) can be included.
+

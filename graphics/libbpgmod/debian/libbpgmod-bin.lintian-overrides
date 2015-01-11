@@ -1,0 +1,4 @@
+# it's libpng16 which is not available in the repositories
+# and we don't need to build a shared library for this purpose here
+libbpgmod-bin: embedded-library usr/bin/bpgdecmod: libpng
+libbpgmod-bin: embedded-library usr/bin/bpgencmod: libpng
