@@ -35,6 +35,11 @@ override_dh_auto_build:
 	dh_auto_build -Dx265/source
 	dh_auto_build
 
+override_dh_auto_test:
+	./bpgdec -o outfile.png html/lena512color.bpg
+	./bpgenc -e jctvc -o out-jctvc.bpg outfile.png
+	./bpgenc -e x265 -o out-x265.bpg outfile.png
+
 override_dh_installdocs:
 	dh_installdocs -A doc/bpg_spec.txt README
 

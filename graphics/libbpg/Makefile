@@ -16,6 +16,6 @@ download:
 	tar xvf $(bpg-bin)
 	tar xvf $(png-bin)
 	tar xvf tip.tar.bz2
-	mv libpng-$(png-ver) libbpg-$(bpg-ver)/png
-	mv multicoreware-x265-* libbpg-$(bpg-ver)/x265
+	mv libpng-$(png-ver) $(builddir)/png
+	mv multicoreware-x265-* $(builddir)/x265
 
