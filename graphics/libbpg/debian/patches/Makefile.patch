@@ -1,107 +1,498 @@
 --- a/Makefile
 +++ b/Makefile
-@@ -5,7 +5,7 @@
- # Enable compilation of Javascript decoder with Emscripten
- #USE_EMCC=y
- # Enable x265 for the encoder (you must install it before)
+@@ -1,79 +1,22 @@
+-# libbpg Makefile
+-# 
+-# Compile options:
+-#
+-# Enable compilation of Javascript decoder with Emscripten
+-#USE_EMCC=y
+-# Enable x265 for the encoder (you must install it before)
 -#USE_X265=y
-+USE_X265=y
- # Enable the JCTVC code (best quality but slow) for the encoder
- USE_JCTVC=y
- # Enable it to use bit depths > 12 (need more tests to validate encoder)
-@@ -36,9 +36,10 @@
+-# Enable the JCTVC code (best quality but slow) for the encoder
+-USE_JCTVC=y
+-# Compile bpgview (SDL and SDL_image libraries needed)
+-USE_BPGVIEW=y
+-# Enable it to use bit depths > 12 (need more tests to validate encoder)
+-#USE_JCTVC_HIGH_BIT_DEPTH=y
+-# Enable the cross compilation for Windows
+-#CONFIG_WIN32=y
+-# Enable for compilation on MacOS X
+-#CONFIG_APPLE=y
+-# Installation prefix
+-prefix=/usr/local
+-
+-
+-#################################
+-
+-ifdef CONFIG_WIN32
+-#CROSS_PREFIX:=x86_64-w64-mingw32-
+-CROSS_PREFIX=i686-w64-mingw32-
+-EXE:=.exe
+-else
+-CROSS_PREFIX:=
+-EXE:=
+-endif
++include config.mak
  
- PWD:=$(shell pwd)
- 
+-CC=$(CROSS_PREFIX)gcc
+-CXX=$(CROSS_PREFIX)g++
+-AR=$(CROSS_PREFIX)ar
+-EMCC=emcc
+-
+-PWD:=$(shell pwd)
+-
 -CFLAGS:=-Os -Wall -MMD -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -fno-math-errno -fno-signed-zeros -fno-tree-vectorize -fomit-frame-pointer
 -CFLAGS+=-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_REENTRANT
 -CFLAGS+=-I.
-+CFLAGS=-O3 -Wall -MMD -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -fno-math-errno -fno-signed-zeros -fno-tree-vectorize -fomit-frame-pointer
-+CFLAGS+=-fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security
-+CFLAGS+=-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_REENTRANT -DUSE_PNG -D_FORTIFY_SOURCE=2
-+CFLAGS+=-I. -Ipng -Ix265/source
- CFLAGS+=-DCONFIG_BPG_VERSION=\"$(shell cat VERSION)\"
- ifdef USE_JCTVC_HIGH_BIT_DEPTH
- CFLAGS+=-DRExt__HIGH_BIT_DEPTH_SUPPORT
-@@ -57,6 +58,7 @@
- else
- LDFLAGS+=-Wl,--gc-sections
- endif
-+LDFLAGS+=-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,defs
- CFLAGS+=-g
- CXXFLAGS=$(CFLAGS)
+-CFLAGS+=-DCONFIG_BPG_VERSION=\"$(shell cat VERSION)\"
+-ifdef USE_JCTVC_HIGH_BIT_DEPTH
+-CFLAGS+=-DRExt__HIGH_BIT_DEPTH_SUPPORT
+-endif
++CFLAGS   += $(CPPFLAGS)
++CXXFLAGS += $(CPPFLAGS)
  
-@@ -89,7 +91,7 @@
+-# Emscriptem config
+-EMLDFLAGS:=-s "EXPORTED_FUNCTIONS=['_bpg_decoder_open','_bpg_decoder_decode','_bpg_decoder_get_info','_bpg_decoder_start','_bpg_decoder_get_frame_duration','_bpg_decoder_get_line','_bpg_decoder_close','_malloc','_free']"
+-EMLDFLAGS+=-s NO_FILESYSTEM=1 -s NO_BROWSER=1
+-#EMLDFLAGS+=-O1 --post-js post.js
+-EMLDFLAGS+=-O3 --memory-init-file 0 --closure 1 --post-js post.js
+-EMCFLAGS:=$(CFLAGS)
+-
+-LDFLAGS=-g
+-ifdef CONFIG_APPLE
+-LDFLAGS+=-Wl,-dead_strip
+-else
+-LDFLAGS+=-Wl,--gc-sections
+-endif
+-CFLAGS+=-g
+-CXXFLAGS=$(CFLAGS)
  
- ifdef USE_X265
+ PROGS=bpgdec$(EXE) bpgenc$(EXE)
+-ifdef USE_BPGVIEW
++ifeq ($(USE_BPGVIEW), y)
+ PROGS+=bpgview$(EXE)
+-endif
+-ifdef USE_EMCC
++endif # USE_BPGVIEW
++ifeq ($(USE_EMCC), y)
+ PROGS+=bpgdec.js bpgdec8.js bpgdec8a.js
+-endif
++endif # USE_EMCC
++
+ 
+ all: $(PROGS)
+ 
+ LIBBPG_OBJS:=$(addprefix libavcodec/, \
+-hevc_cabac.o  hevc_filter.o  hevc.o         hevcpred.o  hevc_refs.o\
++hevc_cabac.o  hevc_filter.o  hevc.o      hevcpred.o  hevc_refs.o\
+ hevcdsp.o     hevc_mvs.o     hevc_ps.o   hevc_sei.o\
+ utils.o cabac.o golomb.o videodsp.o )
+ LIBBPG_OBJS+=$(addprefix libavutil/, mem.o buffer.o log2_tab.o frame.o pixdesc.o md5.o )
+@@ -83,26 +26,26 @@
+ 
+ LIBBPG_JS8_OBJS:=$(patsubst %.o, %.js8.o, $(LIBBPG_OBJS)) tmalloc.js8.o
+ 
+-LIBBPG_JS8A_OBJS:=$(patsubst %.o, %.js8a.o, $(LIBBPG_OBJS)) tmalloc.js8a.o
++LIBBPG_COMMON_FLAGS:=-D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600 -DHAVE_AV_CONFIG_H -std=c99 -D_GNU_SOURCE=1
+ 
+-$(LIBBPG_OBJS): CFLAGS+=-D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600 -DHAVE_AV_CONFIG_H -std=c99 -D_GNU_SOURCE=1 -DUSE_VAR_BIT_DEPTH -DUSE_PRED
++$(LIBBPG_OBJS): CFLAGS+=$(LIBBPG_COMMON_FLAGS) -DUSE_VAR_BIT_DEPTH -DUSE_PRED
+ 
+-$(LIBBPG_JS_OBJS): EMCFLAGS+=-D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600 -DHAVE_AV_CONFIG_H -std=c99 -D_GNU_SOURCE=1 -DUSE_VAR_BIT_DEPTH
++$(LIBBPG_JS_OBJS): EMCFLAGS+=$(LIBBPG_COMMON_FLAGS) -DUSE_VAR_BIT_DEPTH
+ 
+-$(LIBBPG_JS8_OBJS): EMCFLAGS+=-D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600 -DHAVE_AV_CONFIG_H -std=c99 -D_GNU_SOURCE=1
++$(LIBBPG_JS8_OBJS): EMCFLAGS+=$(LIBBPG_COMMON_FLAGS)
+ 
+-$(LIBBPG_JS8A_OBJS): EMCFLAGS+=-D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600 -DHAVE_AV_CONFIG_H -std=c99 -D_GNU_SOURCE=1 -DUSE_PRED
++$(LIBBPG_JS8A_OBJS): EMCFLAGS+=$(LIBBPG_COMMON_FLAGS) -DUSE_PRED
+ 
+ BPGENC_OBJS:=bpgenc.o
+ BPGENC_LIBS:=
+ 
+-ifdef USE_X265
++ifeq ($(USE_X265), y)
  BPGENC_OBJS+=x265_glue.o
 -BPGENC_LIBS+= -lx265
-+BPGENC_LIBS+=-Lx265/source -lx265
++BPGENC_LIBS+=-lx265
  bpgenc.o: CFLAGS+=-DUSE_X265
  endif # USE_X265
  
-@@ -121,19 +123,10 @@
+-ifdef USE_JCTVC
++ifeq ($(USE_JCTVC), y)
+ JCTVC_OBJS=$(addprefix jctvc/TLibEncoder/, SyntaxElementWriter.o TEncSbac.o \
+ TEncBinCoderCABACCounter.o TEncGOP.o\
+ TEncSampleAdaptiveOffset.o TEncBinCoderCABAC.o TEncAnalyze.o\
+@@ -120,7 +63,7 @@
+ JCTVC_OBJS+=jctvc/libmd5/libmd5.o
+ JCTVC_OBJS+=jctvc/TAppEncCfg.o jctvc/TAppEncTop.o jctvc/program_options_lite.o 
+ 
+-$(JCTVC_OBJS) jctvc_glue.o: CFLAGS+=-I$(PWD)/jctvc -Wno-sign-compare
++$(JCTVC_OBJS) jctvc_glue.o: CXXFLAGS+=-Ijctvc -Wno-sign-compare
+ 
+ jctvc/libjctvc.a: $(JCTVC_OBJS)
+ 	$(AR) rcs $@ $^
+@@ -130,28 +73,15 @@
  bpgenc.o: CFLAGS+=-DUSE_JCTVC
  endif # USE_JCTVC
  
+-
 -ifdef CONFIG_WIN32
--LIBS:=-lz
+-
 -LDFLAGS+=-static
--else
+-BPGDEC_LIBS:=-Wl,-dy -lpng -lz -Wl,-dn
+-BPGENC_LIBS+=-Wl,-dy -lpng -ljpeg -lz -Wl,-dn
+-BPGVIEW_LIBS:=-lmingw32 -lSDLmain -Wl,-dy -lSDL_image -lSDL -Wl,-dn -mwindows
+-
++ifdef win32
++BPGDEC_LIBS:="-Wl,-dy -lpng16 -lz -Wl,-dn $(XLIBS)"
++BPGENC_LIBS+="-Wl,-dy -lpng16 -ljpeg -lz -Wl,-dn $(XLIBS)"
++BPGVIEW_LIBS:="-lmingw32 -lSDLmain -Wl,-dy -lSDL_image -lSDL -Wl,-dn -mwindows $(XLIBS)"
+ else
+-
 -ifdef CONFIG_APPLE
 -LIBS:=
 -else
 -LIBS:=-lrt
 -endif # !CONFIG_APPLE 
 -LIBS+=-lm -lpthread
--endif # !CONFIG_WIN32
-+LIBS:=-Lpng/.libs -lpng16 -lrt -lm -lpthread -lz
-+
- 
+-
+-BPGDEC_LIBS:=-lpng $(LIBS)
 -BPGENC_LIBS+=-lpng -ljpeg $(LIBS)
-+BPGENC_LIBS+=-ljpeg $(LIBS)
+-BPGVIEW_LIBS:=-lSDL_image -lSDL $(LIBS)
+-
+-endif #!CONFIG_WIN32
++BPGDEC_LIBS:=-lpng16 $(LIBS) $(XLIBS)
++BPGENC_LIBS+=-lpng16 -ljpeg $(LIBS) $(XLIBS)
++BPGVIEW_LIBS:=-lSDL_image -lSDL $(LIBS) $(XLIBS)
++endif
  
  bpgenc.o: CFLAGS+=-Wno-unused-but-set-variable
  
-@@ -141,7 +134,7 @@
+@@ -159,13 +89,13 @@
  	$(AR) rcs $@ $^
  
  bpgdec$(EXE): bpgdec.o libbpg.a
--	$(CC) $(LDFLAGS) -o $@ $^ -lpng $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+-	$(CC) $(LDFLAGS) -o $@ $^ $(BPGDEC_LIBS)
++	$(LD) $(LDFLAGS) -o $@ $^ $(BPGDEC_LIBS)
  
  bpgenc$(EXE): $(BPGENC_OBJS)
- 	$(CXX) $(LDFLAGS) -o $@ $^ $(BPGENC_LIBS)
-@@ -157,9 +150,6 @@
+-	$(CXX) $(LDFLAGS) -o $@ $^ $(BPGENC_LIBS)
++	$(LD) $(LDFLAGS) -o $@ $^ $(BPGENC_LIBS)
+ 
+ bpgview$(EXE): bpgview.o libbpg.a
+-	$(CC) $(LDFLAGS) -o $@ $^ $(BPGVIEW_LIBS)
++	$(LD) $(LDFLAGS) -o $@ $^ $(BPGVIEW_LIBS)
+ 
+ bpgdec.js: $(LIBBPG_JS_OBJS) post.js
+ 	$(EMCC) $(EMLDFLAGS) -s TOTAL_MEMORY=33554432 -o $@ $(LIBBPG_JS_OBJS)
+@@ -181,17 +111,26 @@
  	size bpgdec libbpg.o libavcodec/*.o libavutil/*.o | sort -n
  	gzip < bpgdec | wc
  
 -install: bpgenc bpgdec
 -	install -s -m 755 $^ $(prefix)/bin
--
++install: libbpg.pc
++	install -m755 -d $(DESTDIR)$(bindir)
++	install -m755 -d $(DESTDIR)$(libdir)/pkgconfig
++	install -m755 -d $(DESTDIR)$(includedir)
++	install -m755 -D $(PROGS) $(DESTDIR)$(bindir)
++	install -m644 -D libbpg.a $(DESTDIR)$(libdir)
++	install -m644 -D libbpg.pc $(DESTDIR)$(libdir)/pkgconfig
++	install -m644 -D libbpg.h bpgenc.h $(DESTDIR)$(includedir)
+ 
  CLEAN_DIRS=doc html libavcodec libavutil \
       jctvc jctvc/TLibEncoder jctvc/TLibVideoIO jctvc/TLibCommon jctvc/libmd5
  
---- a/jctvc/Makefile
-+++ b/jctvc/Makefile
-@@ -1,7 +1,9 @@
- CC=gcc
--CFLAGS=-m64 -Os -Wall -MMD -fno-asynchronous-unwind-tables -g -Wno-sign-compare -Wno-unused-but-set-variable
-+CFLAGS=-m64 -O3 -Wall -MMD -fno-asynchronous-unwind-tables -g -Wno-sign-compare -Wno-unused-but-set-variable
-+CFLAGS+=-fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security
- LDFLAGS= -m64 -g
--CFLAGS+=-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
-+LDFLAGS+=-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,defs
-+CFLAGS+=-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_FORTIFY_SOURCE=2
- PWD:=$(shell pwd)
- CFLAGS+=-I$(PWD)
+ clean:
+-	rm -f $(PROGS) *.o *.a *.d *~ $(addsuffix /*.o, $(CLEAN_DIRS)) \
++	rm -f $(PROGS) libbpg.pc* *.o *.a *.d *~ $(addsuffix /*.o, $(CLEAN_DIRS)) \
+           $(addsuffix /*.d, $(CLEAN_DIRS)) $(addsuffix /*~, $(CLEAN_DIRS)) \
+           $(addsuffix /*.a, $(CLEAN_DIRS))
  
-@@ -34,7 +36,7 @@
- 	$(CXX) -o $@ $(LDFLAGS) $^ -lm
- 
- jsenc: jsenc.o jctvc_glue.o $(ENC_OBJS)
--	$(CXX) -o $@ $(LDFLAGS) $^ -lpng -lm
-+	$(CXX) -o $@ $(LDFLAGS) $^ -lpng16 -lm
- 
++distclean: clean
++	rm -f config.mak
++
  %.o: %.c
  	$(CC) $(CFLAGS) -c -o $@ $<
+ 
+@@ -207,6 +146,12 @@
+ %.js8a.o: %.c
+ 	$(EMCC) $(EMCFLAGS) -c -o $@ $<
+ 
++config.mak:
++	./configure
++
++libbpg.pc:
++	sed -e 's:@BPGENC_LIBS@:$(BPGENC_LIBS):' $@.in > $@
++
+ -include $(wildcard *.d)
+ -include $(wildcard libavcodec/*.d)
+ -include $(wildcard libavutil/*.d)
+--- /dev/null
++++ b/configure
+@@ -0,0 +1,263 @@
++#!/bin/sh
++
++if test x"$1" = x"-h" -o x"$1" = x"--help" ; then
++cat << EOF
++Usage: ./configure [options]
++
++options:
++  -h, --help                   print this message
++
++  --prefix=PREFIX              install architecture-independent files into PREFIX
++                               [/usr/local]
++  --bindir=DIR                 install binaries in DIR [EPREFIX/bin]
++  --libdir=DIR                 install libs in DIR [EPREFIX/lib]
++  --includedir=DIR             install headers in DIR [PREFIX/include]
++  --destdir=DIR                installation destination
++
++  --cc=CC                      use a defined compiler for compilation and linking [gcc]
++  --cross-prefix=PREFIX        use PREFIX for compilation tools [none]
++  --target-os=OS               specifiy target OS [osx,win32,unix; default: unix]
++  --enable-debug               compile with debug symbols and never strip
++
++  --enable-emcc                enable compilation of Javascript decoder with Emscripten
++  --disable-bpgview            don\'t build bpgview
++  --disable-jctvc              disable JCTVC encoder
++  --enable-x265                enable x265 encoder
++  --enable-jctvc-high          enable bit depths > 12 in JCTVC (need more tests to
++                               validate encoder)
++
++  --extra-cflags=XCFLAGS       add XCFLAGS to CFLAGS
++  --extra-cppflags=XCPPFLAGS   add XCXXFLAGS to CPPFLAGS
++  --extra-cxxflags=XCXXFLAGS   add XCXXFLAGS to CXXFLAGS
++  --extra-ldflags=XLDFLAGS     add XLDFLAGS to LDFLAGS
++  --extra-libs=XLIBS           add XLIBS to LIBS
++EOF
++exit 1
++fi
++
++#-----------------------------------------------------------------------------
++
++error_exit()
++{
++    echo error: $1
++    exit 1
++}
++
++rm -f config.mak
++
++
++echo
++echo generating config.mak ...
++echo
++
++
++VERSION=$(cat VERSION)
++
++prefix=
++bindir=
++libdir=
++includedir=
++DESTDIR=
++
++CROSS=
++
++CC=${CROSS_PREFIX}gcc
++CXX=${CROSS_PREFIX}g++
++AR=${CROSS_PREFIX}ar
++LD=${CROSS_PREFIX}g++
++EMCC=emcc
++
++DEBUG=disabled
++EXT=
++
++# Compile bpgview (SDL and SDL_image libraries needed)
++USE_BPGVIEW=y
++# Enable compilation of Javascript decoder with Emscripten
++USE_EMCC=no
++# Enable x265 for the encoder (you must install it before)
++USE_X265=no
++# Enable the JCTVC code (best quality but slow) for the encoder
++USE_JCTVC=y
++# Enable it to use bit depths > 12 (need more tests to validate encoder)
++USE_JCTVC_HIGH_BIT_DEPTH=no
++# Enable for compilation on MacOS X
++TARGET_OS=unix
++
++
++CFLAGS="-Wall -O3  -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -fno-math-errno -fno-signed-zeros -fno-tree-vectorize -fomit-frame-pointer -I."
++CPPFLAGS="-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_REENTRANT -DCONFIG_BPG_VERSION=\\\"${VERSION}\\\""
++LDFLAGS="-L."
++LIBS="-lpng16 -lrt -lm -lpthread -lz"
++
++# Emscriptem config
++EMLDFLAGS="-s \"EXPORTED_FUNCTIONS=['_bpg_decoder_open','_bpg_decoder_decode','_bpg_decoder_get_info','_bpg_decoder_start','_bpg_decoder_get_frame_duration','_bpg_decoder_get_line','_bpg_decoder_close','_malloc','_free']\""
++EMCFLAGS="$CFLAGS"
++
++XCFLAGS=
++XCPPFLAGS=
++XCXXFLAGS=
++XLDFLAGS=
++XLIBS=
++
++for opt; do
++    optarg="${opt#*=}"
++    case "$opt" in
++        --prefix=*)
++            prefix="$optarg"
++            ;;
++        --bindir=*)
++            bindir="$optarg"
++            ;;
++        --libdir=*)
++            libdir="$optarg"
++            ;;
++        --includedir=*)
++            includedir="$optarg"
++            ;;
++        --destdir=*)
++            DESTDIR="$optarg"
++            ;;
++        --cc=*)
++            CC="$optarg"
++            LD="$optarg"
++            ;;
++        --cross-prefix=*)
++            CROSS="$optarg"
++            ;;
++        --target-os=*)
++            TARGET_OS="$optarg"
++            ;;
++        --enable-debug)
++            DEBUG="enabled"
++            ;;
++        --enable-emcc)
++            USE_EMCC="y"
++            ;;
++        --disable-bpgview)
++            USE_BPGVIEW="no"
++            ;;
++        --disable-jctvc)
++            USE_JCTVC="no"
++            ;;
++        --enable-x265)
++            USE_X265="y"
++            ;;
++        --enable-jctvc-high)
++            USE_JCTVC_HIGH_BIT_DEPTH="y"
++            ;;
++        --extra-cflags=*)
++            XCFLAGS="$optarg"
++            ;;
++        --extra-cppflags=*)
++            XCPPFLAGS="$optarg"
++            ;;
++        --extra-cxxflags=*)
++            XCXXFLAGS="$optarg"
++            ;;
++        --extra-ldflags=*)
++            XLDFLAGS="$optarg"
++            ;;
++        --extra-libs=*)
++            XLIBS="$optarg"
++            ;;
++        *)
++            echo "warning: unknown option $opt"
++            ;;
++    esac
++done
++
++test -n "$prefix" || prefix="/usr/local"
++test -n "$bindir" || bindir='${prefix}/bin'
++test -n "$libdir" || libdir='${prefix}/lib'
++test -n "$includedir" || includedir='${prefix}/include'
++
++if [ $USE_JCTVC != "y" ] && [ $USE_X265 != "y" ]; then
++    error_exit "no hevc encoder selected"
++fi
++
++
++CC="${CROSS}${CC}"
++CXX="${CROSS}${CXX}"
++AR="${CROSS}${AR}"
++LD="${CROSS}${LD}"
++EMCC="${EMCC}"
++
++for f in "$CC" "$CXX" "$AR" "$LD"; do
++    test -n "$(which $f 2> /dev/null)" || error_exit "'$f' is not executable"
++done
++if [ "$USE_EMCC" = "y" ]; then
++    test -n "$(which $EMCC 2> /dev/null)" || error_exit "'$EMCC' is not executable"
++fi
++
++if [ $TARGET_OS = "osx" ]; then
++    LDFLAGS="${LDFLAGS} -Wl,-dead_strip"
++elif [ $TARGET_OS = "win32" ]; then
++    LIBS="-lrt"
++    LDFLAGS="${LDFLAGS} -static"
++elif [ $TARGET_OS = "unix" ]; then
++    LIBS="-lrt"
++    LDFLAGS="${LDFLAGS} -Wl,--gc-sections -Wl,--as-needed"
++else
++    error_exit "unknown OS '$TARGET_OS'"
++fi
++LIBS="${LIBS} -lm -lpthread"
++
++if [ $DEBUG = "enabled" ]; then
++    CFLAGS="${CFLAGS} -g"
++fi
++if [ $USE_JCTVC_HIGH_BIT_DEPTH = "y" ]; then
++    CPPFLAGS="${CPPFLAGS} -DRExt__HIGH_BIT_DEPTH_SUPPORT"
++fi
++
++
++cat > libbpg.pc.in << EOF
++prefix=${prefix}
++exec_prefix=${prefix}
++libdir=${libdir}
++includedir=${includedir}
++
++Name: libbpg
++Description: library of functions for manipulating BPG image format files
++Version: ${VERSION}
++Libs: -L\${libdir} -lbpg
++Libs.private: @BPGENC_LIBS@
++Cflags: -I\${includedir}
++EOF
++
++
++cat >> config.mak << EOF
++DESTDIR = $DESTDIR
++prefix = $prefix
++bindir = $bindir
++libdir = $libdir
++includedir = $includedir
++CC := $CC
++CXX := $CXX
++AR := $AR
++LD := $LD
++CFLAGS += $CFLAGS $XCFLAGS
++CPPFLAGS += $CPPFLAGS $XCPPFLAGS
++CXXFLAGS += $CFLAGS $XCXXFLAGS
++LDFLAGS += $LDFLAGS $XLDFLAGS
++LIBS = $LIBS
++XLIBS = $XLIBS
++USE_EMCC = $USE_EMCC
++USE_X265 = $USE_X265
++USE_JCTVC = $USE_JCTVC
++USE_BPGVIEW = $USE_BPGVIEW
++$TARGET_OS = y
++EOF
++
++cat config.mak
++
++
++cat << EOF
++
++configure finished
++
++  type 'make'             : compile library and tools
++  type 'make install'     : install all into system
++
++EOF
++
++exit 0

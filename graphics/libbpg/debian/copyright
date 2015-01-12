@@ -4,36 +4,12 @@ Upstream-Contact: Fabrice Bellard <fabrice@bellard.org>
 Source: http://bellard.org/bpg/
 
 Files: *
-Copyright: 2014, Fabrice Bellard <fabrice@bellard.org>
+Copyright: 2014-2015, Fabrice Bellard <fabrice@bellard.org>
 License: MIT
-
-Files: jctvc/*
-Copyright: 2010-2014, ITU/ISO/IEC
-License: BSD-3-Clause
-
-Files: jctvc/libmd5/libmd5.c
-Copyright: none
-License: public-domain
- This code was written by Colin Plumb in 1993, our understanding is that no
- copyright is claimed and that this code is in the public domain.
-
-Files: libavcodec/* libavutil/*
-Copyright: the FFmpeg developers
-License: LGPL-2.1
-
-Files: png/*
-Copyright: 1998-2002, 2004, 2006-2014 Glenn Randers-Pehrson
-           1996-1997 Andreas Dilger
-           1995-1996 Guy Eric Schalnat, Group 42, Inc.
-License: libpng
 
 Files: debian/*
 Copyright: 2014-2015, djcj <djcj@gmx.de>
 License: MIT
-
-Files: debian/libpng16-config.1
-Copyright: 2003 Junichi Uekawa <dancer@debian.org>
-License: GPL-2+
 
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -54,6 +30,8 @@ License: MIT
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 
+Files: jctvc/*
+Copyright: 2010-2014, ITU/ISO/IEC
 License: BSD-3-Clause
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -79,6 +57,14 @@ License: BSD-3-Clause
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  THE POSSIBILITY OF SUCH DAMAGE.
 
+Files: jctvc/libmd5/libmd5.c
+Copyright: none
+License: public-domain
+ This code was written by Colin Plumb in 1993, our understanding is that no
+ copyright is claimed and that this code is in the public domain.
+
+Files: libavcodec/* libavutil/*
+Copyright: the FFmpeg developers
 License: LGPL-2.1
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -95,48 +81,4 @@ License: LGPL-2.1
  .
  On Debian systems, the complete text of the GNU Lesser General
  Public License version 2.1 can be found in "/usr/share/common-licenses/LGPL-2.1".
-
-License: libpng
- The PNG Reference Library is supplied "AS IS".  The Contributing Authors
- and Group 42, Inc. disclaim all warranties, expressed or implied,
- including, without limitation, the warranties of merchantability and of
- fitness for any purpose.  The Contributing Authors and Group 42, Inc.
- assume no liability for direct, indirect, incidental, special, exemplary,
- or consequential damages, which may result from the use of the PNG
- Reference Library, even if advised of the possibility of such damage.
- .
- Permission is hereby granted to use, copy, modify, and distribute this
- source code, or portions hereof, for any purpose, without fee, subject
- to the following restrictions:
- .
- 1. The origin of this source code must not be misrepresented.
- .
- 2. Altered versions must be plainly marked as such and must not
-    be misrepresented as being the original source.
- .
- 3. This Copyright notice may not be removed or altered from any
-    source or altered source distribution.
- .
- The Contributing Authors and Group 42, Inc. specifically permit, without
- fee, and encourage the use of this source code as a component to
- supporting the PNG file format in commercial products.  If you use this
- source code in a product, acknowledgment is not required but would be
- appreciated.
-
-License: GPL-2+
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 2 of the License, or (at
- your option) any later version.
- .
- This program is distributed in the hope that it will be useful, but
- WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- General Public License for more details.
- .
- You should have received a copy of the GNU General Public License
- along with this program. If not, see <http://www.gnu.org/licenses/>.
- .
- On Debian systems, the complete text of the GNU General
- Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
 

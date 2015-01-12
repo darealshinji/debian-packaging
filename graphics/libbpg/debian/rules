@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 VERSION = $(shell cat VERSION)
-MAN1 = bpgdec.1 bpgenc.1
+MAN1 = bpgdec.1 bpgenc.1 bpgview.1
 MANPAGES = $(MAN1) bpg.5
 
 export CFLAGS  := -Wall $(shell dpkg-buildflags --get CFLAGS)
@@ -19,16 +19,21 @@ x265_confflags = \
 	dh $@ --parallel
 
 override_dh_auto_clean:
-	dh_auto_clean
+	[ ! -f config.mak ] || dh_auto_clean
 	dh_auto_clean -Dpng
 	dh_auto_clean -Dx265/source
 
 override_dh_auto_configure:
-	sed -e 's/@VERSION@/$(VERSION)/;' debian/libbpg.pc.in > libbpg.pc
 	autoreconf -ivf png
 	cd png && ./configure --prefix=/usr --enable-shared=no --enable-static=yes
 	cp -f png/libpng.pc png/libpng16.pc
 	cd x265/source && cmake $(x265_confflags) .
+	chmod a+x configure
+	dh_auto_configure -- \
+		--enable-x265 \
+		--extra-cppflags="-Ipng -Ix265/source" \
+		--extra-ldflags="-Lpng/.libs -Lx265/source" \
+		--extra-libs=-lz
 
 override_dh_auto_build:
 	dh_auto_build -Dpng
@@ -61,7 +66,10 @@ bpg.5:
 	cat debian/$@.footer >> $@
 
 override_dh_clean:
-	dh_clean libbpg.pc png/libpng16.pc $(MANPAGES)
+	dh_clean png/libpng16.pc $(MANPAGES)
+
+override_dh_compress:
+	dh_compress -X.bpg
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

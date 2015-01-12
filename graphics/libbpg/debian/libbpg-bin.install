@@ -1,3 +1,2 @@
-bpgdec   /usr/bin
-bpgenc   /usr/bin
+/usr/bin
 html/*   /usr/share/doc/libbpg-bin/libjs-bpgdec

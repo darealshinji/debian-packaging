@@ -1,4 +1,4 @@
-.TH BPGENC 1 "December 2014" "@VERSION@"
+.TH BPGENC 1 "January 2015" "@VERSION@"
 .SH NAME
 bpgenc \- create BPG image format files
 
