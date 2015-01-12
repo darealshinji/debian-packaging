@@ -1,6 +1,6 @@
-.TH BPGENCMOD 1 "December 2014" "@VERSION@"
+.TH BPGENC 1 "January 2015" "@VERSION@"
 .SH NAME
-bpgencmod \- create BPG image format files
+bpgenc \- create BPG image format files
 
 .SH OPTIONS
 .nf

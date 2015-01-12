@@ -8,6 +8,7 @@ builddir        = libbpg-$(bpg-ver)
 cleanfiles      = debian/changelog debian/changelog.new
 changelog-file  = debian/changelog.new
 srcpkg          = libbpgmod
+URL             = https://raw.githubusercontent.com/darealshinji/libbpg/master
 
 download:
 	git clone --depth 1 'https://github.com/xooyoozoo/libbpg.git' $(builddir)
@@ -19,8 +20,10 @@ download:
 
 	mv libpng-$(png-ver) $(builddir)/png
 	mv multicoreware-x265-* $(builddir)/x265
-	cp -f debian/bpg.mk $(builddir)/Makefile
-	cp -f debian/jctvc.mk $(builddir)/jctvc/Makefile
+	rm $(builddir)/Makefile
+	cd $(builddir) && wget $(URL)/Makefile
+	cd $(builddir) && wget $(URL)/configure
+	chmod a+x $(builddir)/configure
 
 	latestcommit=`git -C $(builddir) log -1 --format=%ci | head -c10 | sed -e 's/-//g'`; \
 	VERSION=$(bpg-ver)+git$$latestcommit; $(changelog-entry)

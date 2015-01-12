@@ -1,0 +1,7 @@
+.TH BPGVIEW 1 "January 2015" "@VERSION@"
+.SH NAME
+bpgview \- display BPG images
+
+.SH OPTIONS
+.nf
+\f[C]

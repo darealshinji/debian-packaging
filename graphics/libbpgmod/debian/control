@@ -7,6 +7,8 @@ Build-Depends:
  dh-autoreconf,
  cmake (>= 2.8.8),
  libjpeg8-dev,
+ libsdl1.2-dev,
+ libsdl-image1.2-dev,
  yasm (>= 1.2.0),
  zlib1g-dev
 Standards-Version: 3.9.5

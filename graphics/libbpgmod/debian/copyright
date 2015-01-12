@@ -1,10 +1,11 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: libbpg
 Upstream-Contact: Fabrice Bellard <fabrice@bellard.org>
-Source: http://bellard.org/bpg/
+Source: https://github.com/xooyoozoo/libbpg
 
 Files: *
-Copyright: 2014, Fabrice Bellard <fabrice@bellard.org>
+Copyright: 2014-2015 Fabrice Bellard <fabrice@bellard.org>
+                2015 xooyoozoo
 License: MIT
 
 Files: jctvc/*
@@ -28,7 +29,7 @@ Copyright: 1998-2002, 2004, 2006-2014 Glenn Randers-Pehrson
 License: libpng
 
 Files: debian/*
-Copyright: 2014-2015, djcj <djcj@gmx.de>
+Copyright: 2014-2015 djcj <djcj@gmx.de>
 License: MIT
 
 Files: debian/libpng16-config.1

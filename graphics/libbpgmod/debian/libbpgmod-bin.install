@@ -1,3 +1,4 @@
-bpgdecmod   /usr/bin
-bpgencmod   /usr/bin
-html/*      /usr/share/doc/libbpgmod-bin/libjs-bpgdec
+bpgdecmod    /usr/bin
+bpgencmod    /usr/bin
+bpgviewmod   /usr/bin
+html/*       /usr/share/doc/libbpgmod-bin/libjs-bpgdec
