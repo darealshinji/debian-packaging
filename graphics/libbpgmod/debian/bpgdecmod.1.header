@@ -1,6 +1,6 @@
-.TH BPGDEC 1 "January 2015" "@VERSION@"
+.TH BPGDECMOD 1 "January 2015" "@VERSION@"
 .SH NAME
-bpgdec \- decoder for BPG image format files
+bpgdecmod \- decoder for BPG image format files
 
 .SH OPTIONS
 .nf

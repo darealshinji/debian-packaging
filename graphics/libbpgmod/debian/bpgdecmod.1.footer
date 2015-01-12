@@ -2,11 +2,11 @@
 
 .SH COPYRIGHT
 Copyright \(co 2014-2015 Fabrice Bellard <fabrice@bellard.org>.
-.B bpgdec
+.B bpgdecmod
 is released under the LGPL license (the FFmpeg part is under the LGPL,
 the BPG specific part is released under the MIT license).
 
 .SH "SEE ALSO"
-.BR bpgenc (1),
-.BR bpgview (1),
+.BR bpgencmod (1),
+.BR bpgviewmod (1),
 .BR bpg (5)
