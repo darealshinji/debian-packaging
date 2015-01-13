@@ -85,3 +85,16 @@ Description: Javascript decoder supporting the BPG file format
   - Lossless compression is supported.
   - Various metadata (such as EXIF, ICC profile, XMP) can be included.
 
+Package: libpng16-dev
+Section: libdevel
+Architecture: any
+Depends:
+   ${misc:Depends},
+   zlib1g-dev
+Description: PNG library - development
+ libpng is a library implementing an interface for reading and writing
+ PNG (Portable Network Graphics) format files.
+ .
+ This package contains the header and development files needed to build
+ programs and packages using libpng.
+
