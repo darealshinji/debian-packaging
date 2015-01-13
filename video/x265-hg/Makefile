@@ -14,6 +14,6 @@ download:
 	@ latesttag=`grep 'latesttag:' $(builddir)/.hg_archival.txt|cut -d' ' -f2` ;\
 	latesttagdistance=`grep 'latesttagdistance:' $(builddir)/.hg_archival.txt|cut -d' ' -f2` ;\
 	node=`grep 'node:' $(builddir)/.hg_archival.txt|cut -d' ' -f2|head -c16` ;\
-	VERSION=$${latesttag}+$${latesttagdistance}-hg$${node} ;\
+	VERSION=$${latesttag}+$${latesttagdistance}+hg$${node} ;\
 	$(changelog-entry)
 
