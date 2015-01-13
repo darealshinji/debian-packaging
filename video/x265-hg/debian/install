@@ -1,2 +1,2 @@
-source/x265         /usr/bin
-source/x265-10bit   /usr/bin
+x265-8bit/x265          /usr/bin
+x265-10bit/x265-10bit   /usr/bin

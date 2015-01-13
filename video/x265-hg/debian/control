@@ -2,13 +2,13 @@ Source: x265
 Section: video
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Homepage: https://bitbucket.org/multicoreware/x265/wiki/Home
-Standards-Version: 3.9.5
 Build-Depends:
  debhelper (>= 9),
  cmake (>= 2.8.8),
- python3-sphinx,
- yasm (>= 1.2.0)
+ python-sphinx,
+ yasm (>= 1.2)
+Standards-Version: 3.9.5
+Homepage: https://bitbucket.org/multicoreware/x265/wiki/Home
 Vcs-Browser: https://bitbucket.org/multicoreware/x265/src
 
 Package: x265
@@ -16,10 +16,23 @@ Architecture: any
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- libjs-jquery (>= 1.4),
- libjs-underscore
+ ${sphinxdoc:Depends}
 Provides: x265-doc
 Replaces: x265-doc
-Description: H.265/HEVC video encoder
- library for encoding video using the High
- Efficiency Video Coding (HEVC/H.265) standard.
+Description: H.265/HEVC video stream encoder
+ x265 is a commandline encoder for creating H.265/High Efficency Video Coding
+ (HEVC) video streams.
+ .
+ x265 supports the following features:
+  * full prediction and transform quad-tree recursion supported
+  * adaptive B-frame placement
+  * B-frames as references / arbitrary frame order
+  * CABAC (context-based adaptive binary arithmetic coding) entropy coding
+  * supports all Intra block types
+  * supports all Inter P partitions
+  * suports all Inter B partitions from 64x64 down to 8x4
+  * weighted prediction for P slices
+  * multiple reference frames
+  * scenecut detection
+  * parallel encoding on multiple CPUs
+

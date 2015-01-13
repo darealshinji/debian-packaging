@@ -1,2 +1,2 @@
-source/doc/reST/build/man/*.1
-source/doc/reST/build/man/*.3
+doc/reST/build/man/*.1
+doc/reST/build/man/*.3

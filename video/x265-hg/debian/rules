@@ -1,50 +1,40 @@
 #!/usr/bin/make -f
 
-CFLAGS   := $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
-CXXFLAGS := $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
-
-VERSION = $(shell dpkg-parsechangelog | grep -e 'Version: ' | cut -d' ' -f2 | cut -d- -f1)
-
-confflags = \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DENABLE_SHARED=OFF \
-	-DENABLE_PIC=OFF
+pass1 = --pass 1 --bitrate 10 -o /dev/null debian/test.y4m
+pass2 = --pass 2 --bitrate 10 -o test.hevc debian/test.y4m
 
 
 %:
-	dh ${@} --parallel
+	dh $@ --parallel --buildsystem=cmake \
+		--sourcedirectory=source \
+		--builddirectory=x265-8bit
 
 override_dh_auto_clean:
-	rm -f debian/test.y4m source/x265 source/x265-10bit
+	dh_auto_clean --builddirectory=x265-10bit
+	dh_auto_clean
+	rm -rf doc/reST/build debian/test.y4m x265_2pass.log* test.hevc
+
+override_dh_auto_configure:
+	dh_auto_configure --builddirectory=x265-10bit -- \
+		-DENABLE_SHARED=OFF \
+		-DHIGH_BIT_DEPTH=ON
+	dh_auto_configure -- -DENABLE_SHARED=OFF
 
 override_dh_auto_build:
-	sed -i 's/X265_VERSION \"unknown\"/X265_VERSION $(VERSION)/;' \
-	source/source/cmake/version.cmake
-
-	cd source && cmake $(confflags) -DHIGH_BIT_DEPTH=ON source
-	dh_auto_build -Dsource
-	mv source/x265 source/x265-10bit
-
-	$(MAKE) -C source clean
-	cd source && cmake $(confflags) -DHIGH_BIT_DEPTH=OFF source
-	dh_auto_build -Dsource
-
-	$(MAKE) -C source/doc/reST pickle html man
+	dh_auto_build --builddirectory=x265-10bit
+	mv x265-10bit/x265 x265-10bit/x265-10bit
+	dh_auto_build
+	$(MAKE) -C doc/reST pickle html man
 
 override_dh_auto_test:
 	unxz -fk debian/test.y4m.xz
-	source/x265 --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
-	source/x265 --pass 2 --bitrate 10 -o test.hevc debian/test.y4m
-	rm -f test.hevc
-	source/x265-10bit --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
-	source/x265-10bit --pass 2 --bitrate 10 -o test.hevc debian/test.y4m
-
-override_dh_installchangelogs:
-	dh_installchangelogs source/ChangeLog
+	x265-8bit/x265 $(pass1) && x265-8bit/x265 $(pass2)
+	rm -f test.hevc x265_2pass.log*
+	x265-10bit/x265-10bit $(pass1) && x265-10bit/x265-10bit $(pass2)
 
 override_dh_installdocs:
-	dh_installdocs -X.buildinfo
+	dh_installdocs
+	dh_sphinxdoc
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9
