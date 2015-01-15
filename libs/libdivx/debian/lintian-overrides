@@ -1,2 +1,7 @@
-# closed-source
-libdivx-dev: hardening-no-relro usr/lib/divx/libdivx.so
+# closed source
+libdivx: hardening-no-relro usr/lib/divx/libdivx.so
+libdivx: shlib-with-non-pic-code usr/lib/divx/libdivx.so
+
+# we need to refresh the cache after running update-alternatives
+libdivx: postinst-has-useless-call-to-ldconfig
+libdivx: postrm-has-useless-call-to-ldconfig

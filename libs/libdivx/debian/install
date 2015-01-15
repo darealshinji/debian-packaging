@@ -1,2 +1,2 @@
-include/*           /usr/include/divx
-lib/libdivx.so      /usr/lib/divx
+tmp/include/*        /usr/include/divx
+tmp/lib/libdivx.so   /usr/lib/divx

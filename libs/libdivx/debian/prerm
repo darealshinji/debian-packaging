@@ -1,19 +1,9 @@
-#!/bin/sh -e
 
-case "$1" in
-    remove|deconfigure)
-	update-alternatives --remove libdivx /usr/lib/libdivx.so
-    ;;
-    upgrade)
-    ;;
+#!/bin/sh
+set -e
 
-    failed-upgrade)
-    ;;
+if [ "$1" = "remove" ]; then
+  update-alternatives --remove libdivx /usr/lib/divx/libdivx.so
+fi
 
-    *)
-	echo "prerm called with unknown argument \`$1'" >&2
-	exit 0
-    ;;
-esac
-
-exit 0
+#DEBHELPER#

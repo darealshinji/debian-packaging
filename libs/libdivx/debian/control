@@ -1,13 +1,16 @@
 Source: libdivx
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
-Build-Depends: debhelper (>= 9), unzip
+Build-Depends:
+ debhelper (>= 9),
+ dh-autoreconf,
+ execstack,
+ unzip
 Standards-Version: 3.9.5
 Section: libs
 Homepage: http://labs.divx.com/DivXLinuxCodec
 
-Package: libdivx-dev
-Section: libdevel
+Package: libdivx
 Architecture: i386
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: DivX 6.1.1 codec for developers

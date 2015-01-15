@@ -4,11 +4,22 @@
 %:
 	dh $@
 
-override_dh_auto_install:
-	unzip -d $(CURDIR)/debian/tmp -P h08pzt4 contents.dat
+override_dh_auto_clean:
+	rm -rf patchelfmod-master tmp README
 
-override_dh_install:
-	dh_install --sourcedir=$(CURDIR)/debian/tmp
+override_dh_auto_configure:
+	tar xvf patchelfmod.tar.gz
+	autoreconf -ifv patchelfmod-master
+	dh_auto_configure -Dpatchelfmod-master
+
+override_dh_auto_build:
+	dh_auto_build -Dpatchelfmod-master -- check
+	unzip -d tmp -P h08pzt4 contents.dat
+	execstack -c tmp/lib/libdivx.so
+	patchelfmod-master/src/patchelfmod -d -S libdivx.so tmp/lib/libdivx.so
+	cp -f README.linux README
+
+override_dh_strip:
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9
