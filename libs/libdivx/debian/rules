@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	unzip -d $(CURDIR)/debian/tmp -P h08pzt4 contents.dat
+
+override_dh_install:
+	dh_install --sourcedir=$(CURDIR)/debian/tmp
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

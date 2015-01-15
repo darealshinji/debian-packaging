@@ -1,0 +1,218 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: DivX
+Source: http://labs.divx.com/DivXLinuxCodec
+
+Files: *
+Copyright: 2006 DivX, Inc.
+License: EULA
+ DIVX, INC. ("Licensor")
+ SDK END USER LICENSE AGREEMENT ("AGREEMENT")
+ .
+ YOU SHOULD CAREFULLY READ THE FOLLOWING TERMS AND CONDITIONS
+ BEFORE USING THIS SOFTWARE DEVELOPMENT KIT (the "SDK"). IT
+ CONTAINS SOFTWARE AND DOCUMENTATION, TOGETHER WHICH
+ CONSTITUTE THE LICENSED WORKS AND THE USE OF WHICH IS
+ LICENSED BY LICENSOR TO ITS CUSTOMERS FOR THEIR USE ONLY AS
+ SET FORTH BELOW. 
+ .
+ This DivX, Inc. End User License Agreement (the "Agreement")
+ is a legal agreement between you and DivX, Inc. for the
+ Licensed Works provided pursuant to this Agreement.  BY
+ OPENING OR USING ANY PART OF THE LICENSED WORKS YOU AGREE TO
+ BE BOUND BY THE TERMS OF THIS AGREEMENT.  IF YOU DO NOT
+ AGREE TO THE TERMS AND CONDITIONS OF THIS AGREEMENT, DO NOT
+ OPEN OR USE THE LICENSED WORKS.  OPENING OR USING ANY PART
+ OF THE LICENSED WORKS INDICATES THAT YOU ACCEPT THESE TERMS.
+ .
+ GRANT OF LICENSE: DivX, Inc. (the "Licensor") grants to you
+ this personal, limited, non-exclusive, non-transferable,
+ non-assignable license to use the Licensed Works solely
+ provided that you adhere to all of the terms and conditions
+ of this Agreement.  "Licensed Works" means computer software
+ together with any related documentation (including design,
+ systems and user), sample code, libraries, white papers and
+ other materials for use in connection with such computer
+ software in this SDK.  The foregoing is an express limited
+ use license and not an assignment, sale, or other transfer
+ of the Licensed Works or any Intellectual Property Rights
+ (as defined below) of Licensor.
+ .
+ ASSENT: By opening the file package containing the Licensed
+ Works or components thereof, you agree that this Agreement
+ is a legally binding and valid contract, agree to abide by
+ all of the terms and conditions of this Agreement, and
+ further agree to take all necessary steps to ensure that the
+ terms and conditions of this Agreement are not violated by
+ any person or entity under your control or in your service.
+ .
+ OWNERSHIP OF LICENSED WORKS: The Licensor and/or its
+ affiliates or subsidiaries own certain rights that may exist
+ from time to time in this or any other jurisdiction, whether
+ foreign or domestic, under patent law, copyright law,
+ publicity rights law, moral rights law, trade secret law,
+ trademark law, unfair competition law or other similar
+ protections, regardless of whether or not such rights or
+ protections are registered or perfected (the "Intellectual
+ Property Rights"), in the Licensed Works.  ALL INTELLECTUAL
+ PROPERTY RIGHTS IN AND TO THE LICENSED WORKS ARE AND SHALL
+ REMAIN IN LICENSOR.
+ .
+ NO COMMERCIAL USE: This Agreement grants you the right to
+ use the Licensed Works for personal use only.  Commercial
+ use of the Licensed Works or of any derivative works or work
+ products incorporating or resulting from the use of Licensed
+ Works is not permitted under this Agreement.  "Commercial
+ use" is a use which directly or indirectly generates
+ revenue.  If you desire a license for commercial use, please
+ contact Licensor (see below) for the terms and conditions of
+ such a license.
+ .
+ RESTRICTIONS:
+ .
+ (a)  You are expressly prohibited from copying, modifying,
+ merging, selling, leasing, assigning, or transferring in any
+ matter, Licensed Works or any portion thereof.
+ .
+ (b)  You may take a single copy of materials within the
+ package or otherwise related to Licensed Works only as
+ required for backup purposes.
+ .
+ (c)  You are also expressly prohibited from reverse
+ engineering, decompiling, translating, disassembling,
+ deciphering, decrypting, or otherwise attempting to discover
+ the source code of the Licensed Works as the Licensed Works
+ contain proprietary material of Licensor.  You may not
+ otherwise modify, alter, adapt, port, or merge the Licensed
+ Works.
+ .
+ (d)  You may not remove, alter, deface, overprint or
+ otherwise obscure Licensor patent, trademark, service mark
+ or copyright notices.
+ .
+ (e)  You agree that the Licensed Works will not be shipped,
+ transferred or exported into any other country, or used in
+ any manner prohibited by any government agency or any export
+ laws, restrictions or regulations.
+ .
+ (f)  You may only redistribute the Licensed Works, or
+ components thereof, in their original, unmodified form for
+ personal, non-commercial use purposes only, and only if
+ accompanied by this Agreement.  Subject to the foregoing,
+ you may not publish or distribute in any form of electronic
+ or printed communication the materials within or otherwise
+ related to Licensed Works, including but not limited to the
+ object code, documentation, help files, examples,
+ benchmarks, and any derivative works or work products
+ incorporating or resulting from the use of Licensed Works.
+ .
+ TERM: This Agreement is effective until terminated. Licensor
+ may immediately terminate this Agreement at any time if you
+ are in breach of any of the terms and conditions of this
+ Agreement.  You may terminate this Agreement at any time by
+ fulfilling the act of Termination (see below).
+ .
+ TERMINATION: Upon any termination, you agree to uninstall
+ the Licensed Works; destroy or return to Licensor all copies
+ of the Licensed Works, any accompanying documentation, and
+ all other associated materials; and cease all use and
+ redistribution of the Licensed Works or any derivative works
+ or work products incorporating or resulting from the use of
+ Licensed Works, including without limitation by any person
+ or entity under your control or in your service.
+ .
+ GOVERNING LAW: This Agreement shall be governed by the laws
+ of the State of California and by the laws of the United
+ States, excluding their conflicts of law principles. The
+ United Nations Convention on Contracts for the International
+ Sale of Goods (1980) is hereby excluded in its entirety from
+ application to this Agreement.
+ .
+ WARRANTIES AND DISCLAIMER:
+ .
+ EXCEPT AS EXPRESSLY PROVIDED OTHERWISE IN A SEPARATE WRITTEN
+ AGREEMENT BETWEEN LICENSOR AND YOU, THE LICENSED WORKS ARE
+ PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.  LICENSOR
+ EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES, WHETHER EXPRESS
+ OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+ PURPOSE, OR THE WARRANTY OF NON-INFRINGEMENT.  WITHOUT
+ LIMITING THE FOREGOING, LICENSOR MAKES NO WARRANTY THAT (i)
+ THE LICENSED WORKS WILL MEET YOUR REQUIREMENTS, (ii) THE USE
+ OF THE LICENSED WORKS WILL BE UNINTERRUPTED, TIMELY, SECURE,
+ OR ERROR-FREE, (iii) THE RESULTS THAT MAY BE OBTAINED FROM
+ THE USE OF THE LICENSED WORKS WILL BE ACCURATE OR RELIABLE,
+ (iv) THE QUALITY OF THE LICENSED WORKS WILL MEET YOUR
+ EXPECTATIONS, (v) ANY ERRORS IN THE LICENSED WORKS WILL BE
+ CORRECTED, AND/OR (vi) YOU MAY USE, PRACTICE, EXECUTE, OR
+ ACCESS THE LICENSED WORKS WITHOUT VIOLATING THE INTELLECTUAL
+ PROPERTY RIGHTS OF OTHERS. SOME STATES OR JURISDICTIONS DO
+ NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES OR LIMITATIONS
+ ON HOW LONG AN IMPLIED WARRANTY MAY LAST, SO THE ABOVE
+ LIMITATIONS MAY NOT APPLY TO YOU.  IF CALIFORNIA LAW IS NOT
+ HELD TO APPLY TO THIS AGREEMENT FOR ANY REASON, THEN IN
+ JURISDICTIONS WHERE WARRANTIES, GUARANTEES, REPRESENTATIONS,
+ AND/OR CONDITIONS OF ANY TYPE MAY NOT BE DISCLAIMED, ANY
+ SUCH WARRANTY, GUARANTEE, REPRESENATION AND/OR WARRANTY IS:
+ (1) HEREBY LIMITED TO THE PERIOD OF EITHER (A) THIRTY (30)
+ DAYS FROM THE DATE YOU OPENED THE PACKAGE CONTAINING THE
+ LICENSED WORKS OR (B) THE SHORTEST PERIOD ALLOWED BY LAW IN
+ THE APPLICABLE JURISDICTION IF A THIRTY (30) DAY LIMITATION
+ WOULD BE UNENFORCEABLE; AND (2) LICENSORS SOLE LIABILITY
+ FOR ANY BREACH OF ANY SUCH WARRANTY, GUARANTEE,
+ REPRESENTATION, AND/OR CONDITION SHALL BE TO PROVIDE YOU
+ WITH A NEW COPY OF THE LICENSED WORKS.
+ .
+ IN NO EVENT SHALL LICENSOR OR ITS SUPPLIERS BE LIABLE TO YOU
+ OR ANY THIRD PARTY FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR
+ CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES
+ WHATSOEVER, INCLUDING, WITHOUT LIMITATION, THOSE RESULTING
+ FROM LOSS OF USE, DATA OR PROFITS, WHETHER OR NOT LICENSOR
+ HAD BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, AND ON
+ ANY THEORY OF LIABILITY, ARISING OUT OF OR IN CONNECTION
+ WITH THE USE OF THE LICENSED WORKS.  SOME JURISDICTIONS
+ PROHIBIT THE EXCLUSION OR LIMITATION OF LIABILITY FOR
+ CONSEQUENTIAL OR INCIDENTAL DAMAGES, SO THE ABOVE
+ LIMITATIONS MAY NOT APPLY TO YOU.  THESE LIMITATIONS SHALL
+ APPLY NOTWITHSTANDING ANY FAILURE OF ESSENTIAL PURPOSE OF
+ ANY LIMITED REMEDY.
+ .
+ SEVERABILITY: In the event any provision of this Agreement
+ is found to be invalid, illegal or unenforceable, the
+ validity, legality and enforceability of any of the
+ remaining provisions shall not in any way be affected or
+ impaired and a valid, legal and enforceable provision of
+ similar intent and economic impact shall be substituted
+ therefor.
+ .
+ ENTIRE AGREEMENT: This Agreement sets forth the entire
+ understanding and agreement between you and Licensor,
+ supersedes all prior agreements, whether written or oral,
+ with respect to the Licensed Works, and may be amended only
+ in a writing signed by both parties.
+ .
+ DivX, Inc.
+ 4780 Eastgate Mall
+ San Diego, California 92121
+ February 1, 2006
+
+Files: debian/*
+Copyright: 2015 djcj <djcj@gmx.de>
+License: MIT
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+

@@ -1,0 +1,15 @@
+Source: libdivx
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends: debhelper (>= 9), unzip
+Standards-Version: 3.9.5
+Section: libs
+Homepage: http://labs.divx.com/DivXLinuxCodec
+
+Package: libdivx-dev
+Section: libdevel
+Architecture: i386
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: DivX 6.1.1 codec for developers
+ This package will install the old DivX 6.1.1 codec including header files
+ to link programs against it.
