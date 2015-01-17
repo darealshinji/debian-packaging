@@ -9,4 +9,5 @@ the BPG specific part is released under the MIT license).
 .SH "SEE ALSO"
 .BR bpgencmod (1),
 .BR bpgviewmod (1),
+.BR bpgmux (1),
 .BR bpg (5)

@@ -1,0 +1,7 @@
+.TH BPGMUX 1 "January 2015" "@VERSION@"
+.SH NAME
+bpgmux \- a BPG image muxing tool
+
+.SH OPTIONS
+.nf
+\f[C]
