@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs -Wl,--as-needed
+
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean -DMediaInfo/Project/GNU/GUI
+	dh_auto_clean -DMediaInfoLib/Project/GNU/Library
+	dh_auto_clean -DZenLib/Project/GNU/Library
+	rm -rf converted_icons mediainfo.png
+
+override_dh_auto_build:
+	./GUI_Compile.sh
+	cp MediaInfo/Source/Resource/Image/MediaInfoBig.png mediainfo.png
+	./make-icons.sh mediainfo.png
+
+override_dh_install:
+	dh_install --fail-missing
+	find debian/mediainfo-gui						\
+		-name \*.desktop						\
+		-exec prename 's/\.kde[34]\.desktop$$/.desktop/' '{}' '+'
+
+override_dh_installdocs:
+	dh_installdocs
+	prename 's/ReadMe_.*\.txt$$/README/' debian/*/usr/share/doc/*/ReadMe*
+
+override_dh_installchangelogs:
+	dh_installchangelogs MediaInfo/History_GUI.txt
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9
+

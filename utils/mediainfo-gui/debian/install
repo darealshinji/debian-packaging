@@ -1,0 +1,8 @@
+MediaInfo/Project/GNU/GUI/mediainfo-gui                /usr/bin
+
+converted_icons/*                                      /usr/share
+
+MediaInfo/Project/GNU/GUI/mediainfo-gui.desktop        /usr/share/applications
+MediaInfo/Project/GNU/GUI/mediainfo-gui.kde3.desktop   /usr/share/apps/konqueror/servicemenus
+MediaInfo/Project/GNU/GUI/mediainfo-gui.kde4.desktop   /usr/share/kde4/services/ServiceMenus
+
