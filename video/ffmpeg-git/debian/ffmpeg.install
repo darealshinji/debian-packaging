@@ -1,0 +1,7 @@
+doc/ffserver.conf					etc
+usr/bin/ff*               usr/lib/ffmpeg
+usr/lib/ffmpeg/*.so.*     usr/lib/ffmpeg
+usr/share/man/man1
+usr/share/ffmpeg/*.ffpreset
+RELEASE_NOTES						  usr/share/doc/ffmpeg
+debian/scripts/*          usr/bin

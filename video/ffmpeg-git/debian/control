@@ -51,22 +51,87 @@ Build-Depends:
  libxvidcore-dev,
  libxvmc-dev,
  texi2html,
+ doxygen,
  yasm,
  zlib1g-dev
 
 Package: ffmpeg
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Suggests: frei0r-plugins
-Provides: ffmpeg-docs
-Conflicts: ffmpeg-docs
-Description: Multimedia player, server, encoder and transcoder
- FFmpeg is a complete, cross-platform solution to decode, encode, record,
- convert and stream audio and video.
+Multi-Arch: foreign
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Recommends:
+ qt-faststart
+Suggests:
+ frei0r-plugins
+Description: Tools for transcoding, streaming and playing of multimedia files
+ FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
+ mux, demux, stream, filter and play pretty much anything that humans and
+ machines have created. It supports the most obscure ancient formats up to the
+ cutting edge.
  .
- This package contains the ffplay multimedia player, the ffserver
- streaming server, the ffmpeg audio and video encoder, and the ffprobe
- stream analyzer.  They support most existing file formats (AVI, MPEG,
- OGG, Matroska, ASF...) and encoding formats (MPEG, DivX, MPEG4, AC3,
- DV...). Additionally, it contains the qt-faststart utility which
- rearranges Quicktime files to facilitate network streaming.
+ This package contains:
+  * ffmpeg: a command line tool to convert multimedia files between formats
+  * ffserver: a multimedia streaming server for live broadcasts
+  * ffplay: a simple media player based on SDL and the FFmpeg libraries
+  * ffprobe: a simple multimedia stream analyzer
+ .
+ NOTE: It does not contain qt-faststart to avoid a conflict with libav-tools.
+       If you need qt-faststart from FFmpeg, install the package qt-faststart,
+       which is recommended by this package.
+
+Package: qt-faststart
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Breaks: ffmpeg (<< 7:2)
+Replaces: ffmpeg (<< 7:2)
+Description: Utility to rearrange a Quicktime file
+ FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
+ mux, demux, stream, filter and play pretty much anything that humans and
+ machines have created. It supports the most obscure ancient formats up to the
+ cutting edge.
+ .
+ This package contains qt-faststart, a utility that rearranges a Quicktime
+ file such that the moov atom is in front of the data, thus facilitating
+ network streaming.
+ .
+ NOTE: It diverts the qt-faststart from libav-tools to qt-faststart.libav.
+
+Package: ffmpeg-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Multi-Arch: same
+Depends:
+ ffmpeg (= ${binary:Version}),
+ ${misc:Depends}
+Description: Debug symbols for the FFmpeg multimedia framework
+ FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
+ mux, demux, stream, filter and play pretty much anything that humans and
+ machines have created. It supports the most obscure ancient formats up to the
+ cutting edge.
+ .
+ This package contains the debug symbols used to produce useful debugging
+ back-traces.
+
+Package: ffmpeg-doc
+Section: doc
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ libjs-jquery,
+ ${misc:Depends}
+Description: Documentation of the FFmpeg multimedia framework
+ FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
+ mux, demux, stream, filter and play pretty much anything that humans and
+ machines have created. It supports the most obscure ancient formats up to the
+ cutting edge.
+ .
+ This package contains the HTML documentation for the FFmpeg multimedia
+ framework including the API documentation created by doxygen and the manpages
+ for the libraries.
+

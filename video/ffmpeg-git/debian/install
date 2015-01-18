@@ -1,9 +1,0 @@
-doc/ffserver.conf                 /etc
-tmp/usr/bin/*                     /usr/lib/ffmpeg
-tmp/usr/lib/ffmpeg/*.so.*         /usr/lib/ffmpeg
-tools/qt-faststart                /usr/bin
-debian/scripts/*                  /usr/bin
-tmp/usr/share/doc/*               /usr/share/doc
-tmp/usr/share/man/*               /usr/share/man
-tmp/usr/share/ffmpeg/*.ffpreset   /usr/share/ffmpeg
-tmp/usr/share/ffmpeg/*.xsd        /usr/share/ffmpeg

@@ -13,9 +13,11 @@ override_dh_auto_build:
 	rename 's/\.txt$$/.1/' manpages/*.txt && \
 	rename 's/ffmpeg/ffmpeg-static/' manpages/*.1 && \
 	mv manpages/ffprobe.1 manpages/ffprobe-static.1 && \
+	mv manpages/ffserver.1 manpages/ffserver-static.1 && \
 	mv ffmpeg ffmpeg-static && \
 	mv ffmpeg-10bit ffmpeg-10bit-static && \
 	mv ffprobe ffprobe-static && \
+	mv ffserver ffserver-static && \
 	mv qt-faststart qt-faststart-static
 
 override_dh_compress:

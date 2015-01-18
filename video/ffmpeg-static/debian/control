@@ -11,13 +11,15 @@ Build-Depends: debhelper (>= 9)
 Package: ffmpeg-static
 Architecture: amd64 i386
 Depends: ${misc:Depends}
-Description: Multimedia player, server, encoder and transcoder
- FFmpeg is a complete, cross-platform solution to decode, encode, record,
- convert and stream audio and video.
+Description: Tools for transcoding, streaming and playing of multimedia files
+ FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
+ mux, demux, stream, filter and play pretty much anything that humans and
+ machines have created. It supports the most obscure ancient formats up to the
+ cutting edge.
  .
- This package contains the ffplay multimedia player, the ffserver
- streaming server, the ffmpeg audio and video encoder, and the ffprobe
- stream analyzer.  They support most existing file formats (AVI, MPEG,
- OGG, Matroska, ASF...) and encoding formats (MPEG, DivX, MPEG4, AC3,
- DV...). Additionally, it contains the qt-faststart utility which
- rearranges Quicktime files to facilitate network streaming.
+ This package contains:
+  * ffmpeg: a command line tool to convert multimedia files between formats
+  * ffserver: a multimedia streaming server for live broadcasts
+  * ffplay: a simple media player based on SDL and the FFmpeg libraries
+  * ffprobe: a simple multimedia stream analyzer
+  * qt-faststart: a utility to rearrange a Quicktime file

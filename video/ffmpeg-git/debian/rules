@@ -13,17 +13,14 @@ override_dh_auto_clean:
 
 override_dh_auto_configure:
 	CFLAGS='$(CFLAGS)' CPPFLAGS='$(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' \
-	./configure --disable-debug \
-	$(confflags) $(v3_confflags) $(nf_confflags) $(shared_build_confflags)
+	./configure $(confflags) $(v3_confflags) $(nf_confflags) $(shared_build_confflags)
 
 override_dh_auto_build:
+	dh_auto_build -- apidoc
 	dh_auto_build
 	dh_auto_build -- tools/qt-faststart
 
 override_dh_auto_test:
-
-override_dh_auto_install:
-	$(MAKE) install DESTDIR=$(CURDIR)/tmp
 
 override_dh_installchangelogs:
 	dh_installchangelogs Changelog
@@ -32,6 +29,10 @@ override_dh_makeshlibs:
 
 override_dh_shlibdeps:
 	dh_shlibdeps -Lffmpeg -l/usr/lib/ffmpeg
+
+override_dh_strip:
+	dh_strip -pffmpeg --dbg-package=ffmpeg-dbg
+	dh_strip --remaining-packages
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9

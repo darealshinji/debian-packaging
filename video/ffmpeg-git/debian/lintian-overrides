@@ -1,1 +1,0 @@
-ffmpeg: embedded-library usr/lib/ffmpeg/*: lib*

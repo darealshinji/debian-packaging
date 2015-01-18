@@ -122,3 +122,5 @@ static_build_confflags += --disable-debug
 shared_build_confflags += $(confflags) --shlibdir=/usr/lib/ffmpeg
 shared_build_confflags += --enable-shared
 shared_build_confflags += --disable-static
+shared_build_confflags += --disable-stripping
+
