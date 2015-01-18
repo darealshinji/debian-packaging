@@ -5,17 +5,16 @@
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	cd Dagon && premake4 clean || true
-	rm -rf converted_icons
+	premake4 clean || true
+	rm -rf build converted_icons
 
 override_dh_auto_configure:
-	cd Dagon && premake4 gmake
+	premake4 gmake
 
 override_dh_auto_build:
-	dh_auto_build -DDagon/build -- verbose=1
-	cp Dagon/xcode/Resources/Images.xcassets/AppIcon.appiconset/Dagon512x512.png \
-	Dagon/build/dagon.png
-	./make-icons.sh Dagon/build/dagon.png
+	dh_auto_build -Dbuild -- verbose=1
+	cp xcode/Resources/Images.xcassets/AppIcon.appiconset/Dagon512x512.png build/dagon.png
+	./make-icons.sh build/dagon.png
 
 override_dh_installdocs:
 	dh_installdocs --link-doc=dagon
