@@ -1,6 +1,6 @@
 --- a/x264-source/configure
 +++ b/x264-source/configure
-@@ -954,11 +954,7 @@
+@@ -1005,11 +1005,7 @@
          cc_check "" -lwinmm && GPAC_LIBS="$GPAC_LIBS -lwinmm"
      fi
      if cc_check gpac/isomedia.h "$GPAC_LIBS" ; then
