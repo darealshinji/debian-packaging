@@ -59,7 +59,7 @@ allcleanfiles = .pc                  \
                 $(builddir)          \
                 $(cleanfiles)
 
-alldeps  = debhelper quilt $(deps)
+alldeps  = debhelper quilt aptitude $(deps)
 ifneq ($(PBUILDER),0)
 alldeps += pbuilder
 endif
