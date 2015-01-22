@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@}
+
+override_dh_install:
+	dh_install -X.gitkeep
+
+override_dh_fixperms:
+	find $(CURDIR)/debian/mint-themes/usr -type f -exec chmod 0644 '{}' \;
+	dh_fixperms
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz -z9

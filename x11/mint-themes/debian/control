@@ -1,0 +1,15 @@
+Source: mint-themes
+Section: x11
+Priority: optional
+Maintainer: Clement Lefebvre <root@linuxmint.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+
+Package: mint-themes
+Architecture: all
+Depends: ${misc:Depends}
+Provides: libreoffice-style, libreoffice-style-default, mint-x-icons, mint-themes-gtk3
+Replaces: mint-x-icons, mint-themes-gtk3, mint-clearloox-theme, mint-x-theme, mint-z-theme, libreoffice-style-human
+Conflicts: mint-x-icons, mint-themes-gtk3, mint-clearloox-theme, mint-x-theme, mint-z-theme, libreoffice-style-human
+Description: Mint themes
+ A collection of mint themes.
