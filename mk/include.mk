@@ -109,13 +109,12 @@ build: source
 	   rm -rf $(builddir)/.pc ;                                       \
 	fi
 	echo '3.0 (native)' > $(builddir)/debian/source/format
-	dpkg-source -b $(builddir)
 
 ifeq ($(PBUILDER),0)
 ifneq ($(DEPS),0)
 	@ cd $(builddir) ;                                                                                      \
 	builddeps="`dpkg-checkbuilddeps 2>&1 | sed -e 's/dpkg-checkbuilddeps: Unmet build dependencies: //;'`"; \
-	if [ $$(printf $$builddeps | wc -m) -gt 0 ] ;                                                           \
+	if [ $$(echo -n $$builddeps | wc -m) -gt 0 ] ;                                                          \
 	then                                                                                                    \
 	    echo "" ;                                                                                           \
 	    echo "You need to install the following build dependencies:" ;                                      \
@@ -125,10 +124,11 @@ ifneq ($(DEPS),0)
 	fi
 endif
 	mkdir -p $(resultdir)
-	cd $(builddir) && dpkg-buildpackage -b -us -uc 2>&1 | tee $(LOG)
+	cd $(builddir) && dpkg-buildpackage -b -us -uc 2>&1 | tee ../$(LOG)
 	rm -f *.changes
 	mv *.deb $(resultdir)
 else
+	dpkg-source -b $(builddir)
 	@ if [ ! -f $(basetgz) ] ;                                        \
 	then                                                              \
 	    echo "" ;                                                     \
