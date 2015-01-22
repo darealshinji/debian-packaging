@@ -18,8 +18,6 @@ VER     = $(shell echo $(URL) | sed -e 's@$(MAINURL)/rar/rarlinux-$(x64)@@; s/.t
 download:
 	wget $(URL)
 	tar xvf rarlinux-$(x64)$(VER).tar.gz
-
-	VERSION=2:$(shell echo $(VER) | sed -e 's/.b/.0~b/;') ;\
-	$(changelog-entry)
+	VERSION=2:$(shell echo $(VER) | sed -e 's/b/~b/;'); $(changelog-entry)
 	cat changelog.new debian/changelog.in > debian/changelog
 
