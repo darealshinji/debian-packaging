@@ -5,7 +5,7 @@ builddir       = nightingale-hacking
 changelog-file = changelog.new
 cleanfiles     = usr *.deb
 DEBIAN_ARCH    = $(shell dpkg-architecture -qDEB_HOST_ARCH)
-XULVERSION     = 20140722-3%7Etrusty2
+XULVERSION     = 20141125-1%7Etrusty1
 
 download:
 	git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-hacking.git"
