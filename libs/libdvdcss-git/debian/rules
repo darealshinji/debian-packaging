@@ -6,5 +6,3 @@ export V=1
 %:
 	dh $@ --with autoreconf
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9

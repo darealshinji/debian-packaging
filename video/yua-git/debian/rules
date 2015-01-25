@@ -5,16 +5,10 @@ export V=1
 %:
 	dh ${@} --parallel
 
-override_dh_install:
-	dh_install -XCOPYING
-
 override_dh_shlibdeps:
 	# recognize the dependencies of the embedded helper tools
 	cp -f ffmpeg/ffmpeg $(CURDIR)/debian/yua/usr/bin
 	cp -f gpac/bin/gcc/MP4Box $(CURDIR)/debian/yua/usr/bin
 	dh_shlibdeps
 	cd $(CURDIR)/debian/yua/usr/bin && rm -f ffmpeg MP4Box 
-
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
 

@@ -34,6 +34,3 @@ override_dh_auto_install:
 	mkdir -p debian/tmp/usr/share/games
 	mv debian/tmp/usr/share/opensurge debian/tmp/usr/share/games
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

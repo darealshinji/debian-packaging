@@ -26,6 +26,3 @@ $(scripts):
 
 override_dh_makeshlibs:
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

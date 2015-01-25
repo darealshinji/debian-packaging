@@ -35,6 +35,3 @@ override_dh_auto_build:
 	help2man -n "fast h264/mpeg2 encoder" -N -s1 -S "Videolan project" \
 		-h '--fullhelp' x262-source/x262 > x262-source/x262.1
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

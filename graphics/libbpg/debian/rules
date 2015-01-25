@@ -71,6 +71,3 @@ override_dh_clean:
 override_dh_compress:
 	dh_compress -X.bpg
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

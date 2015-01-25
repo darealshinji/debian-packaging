@@ -48,6 +48,3 @@ override_dh_auto_clean:
 override_dh_shlibdeps:
 	dh_shlibdeps -l$(CURDIR)/debian/libfmodex$(SOVERSION)/usr/lib/fmodex
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

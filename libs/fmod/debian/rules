@@ -52,5 +52,3 @@ override_dh_installchangelogs:
 override_dh_compress:
 	dh_compress -X.pdf -X.mp3 -X.ogg
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9

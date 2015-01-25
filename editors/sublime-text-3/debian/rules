@@ -18,6 +18,3 @@ override_dh_auto_build:
 override_dh_installchangelogs:
 	dh_installchangelogs sublime_text_3/changelog.txt
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

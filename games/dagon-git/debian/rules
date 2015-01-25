@@ -22,6 +22,3 @@ override_dh_installdocs:
 override_dh_strip:
 	dh_strip --dbg-package=dagon-dbg
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

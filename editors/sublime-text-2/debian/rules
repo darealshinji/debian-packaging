@@ -13,6 +13,3 @@ override_dh_auto_build:
 	mv "Sublime Text 2" SublimeText2
 	rename -v 's/sublime_text.png/sublime-text-2.png/' `find SublimeText2/ -type f -name *.png`
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

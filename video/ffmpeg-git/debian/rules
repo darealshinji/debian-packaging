@@ -34,6 +34,3 @@ override_dh_strip:
 	dh_strip -pffmpeg --dbg-package=ffmpeg-dbg
 	dh_strip --remaining-packages
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

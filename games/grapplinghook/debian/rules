@@ -47,9 +47,3 @@ override_dh_installchangelogs:
 
 override_dh_makeshlibs:
 
-override_dh_builddeb:
-	dh_builddeb -pgrapplinghook -- -Zxz -z9
-ifneq ($(wildcard common-package.stamp),)
-	dh_builddeb -pgrapplinghook-common -- -Zxz -z9
-endif
-

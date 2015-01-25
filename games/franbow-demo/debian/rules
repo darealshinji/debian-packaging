@@ -14,6 +14,3 @@ override_dh_auto_build:
 	cp franbow-demo/assets/icon.png franbow-demo.png
 	./make-icons.sh franbow-demo.png
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

@@ -55,6 +55,3 @@ override_dh_auto_test:
 	x264-source/x264-10bit --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
 	x264-source/x264-10bit --pass 2 --bitrate 10 -o test.mp4 debian/test.y4m
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

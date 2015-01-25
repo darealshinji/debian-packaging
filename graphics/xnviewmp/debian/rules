@@ -37,6 +37,3 @@ override_dh_makeshlibs:
 override_dh_shlibdeps:
 	dh_shlibdeps -Lxnviewmp -l/usr/lib/xnviewmp/lib
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz
-

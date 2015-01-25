@@ -36,6 +36,3 @@ override_dh_auto_install:
 	ln -fs /usr/bin/bspatch $(libdir)/nix/bspatch
 	ln -fs nix-daemon.8.gz $(CURDIR)/debian/nix/usr/share/man/man8/nix-worker.8.gz
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

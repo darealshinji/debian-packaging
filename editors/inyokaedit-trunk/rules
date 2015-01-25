@@ -23,5 +23,3 @@ override_dh_install:
 	$(MAKE) install-plugins DESTDIR=$(CURDIR)/debian/inyokaedit-plugins
 	cp -f data/menu debian
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9

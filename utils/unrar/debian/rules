@@ -30,6 +30,3 @@ override_dh_auto_build:
 override_dh_install:
 	install -m755 unrar/unrar $(CURDIR)/debian/unrar/usr/bin/unrar-nonfree
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

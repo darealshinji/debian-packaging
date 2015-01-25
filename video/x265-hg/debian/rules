@@ -36,6 +36,3 @@ override_dh_installdocs:
 	dh_installdocs
 	dh_sphinxdoc
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
-

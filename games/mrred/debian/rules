@@ -11,5 +11,3 @@ override_dh_auto_build:
 	chmod 755 runner
 	./make-icons.sh mrred.png
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9
