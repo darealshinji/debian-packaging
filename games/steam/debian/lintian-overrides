@@ -1,0 +1,2 @@
+# Valve builds the executables, so there is nothing we can do about these
+steam binary: embedded-library usr/lib/steam/steam.real: libjpeg

@@ -1,0 +1,12 @@
+Audio Configuration
+-------------------
+
+The easiest way to get sound working in steam is to setup and configure
+pulseaudio (see https://wiki.debian.org/PulseAudio for hints).
+
+If you're not using pulseaudio, there are a couple environment variables
+that steam will use.  An example steam launch with settings for alsa is:
+
+  $ SDL_AUDIO_DRIVER=alsa AUDIODEV=hw:0,0 steam
+
+For more information, see the documentation for alsa, sdl, etc. 

@@ -1,0 +1,9 @@
+debian/scripts/steam                                     usr/games
+steam-dir/usr/lib/steam/ubuntu12_32/steam.real           usr/lib/steam
+steam-dir/usr/share/applications/steam.desktop           usr/share/applications
+steam-dir/usr/share/icons/hicolor/16x16/apps/steam.png   usr/share/icons/hicolor/16x16/apps
+steam-dir/usr/share/icons/hicolor/24x24/apps/steam.png   usr/share/icons/hicolor/24x24/apps
+steam-dir/usr/share/icons/hicolor/32x32/apps/steam.png   usr/share/icons/hicolor/32x32/apps
+steam-dir/usr/share/icons/hicolor/48x48/apps/steam.png   usr/share/icons/hicolor/48x48/apps
+steam-dir/usr/share/pixmaps/steam_tray_mono.png          usr/share/icons/hicolor/48x48/apps
+steam-dir/usr/share/icons/hicolor/256x256/apps/steam.png usr/share/icons/hicolor/256x256/apps

@@ -1,0 +1,34 @@
+Source: steam
+Section: non-free/games
+Priority: extra
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Build-Depends:
+ debhelper (>= 9),
+ libx11-6
+Standards-Version: 3.9.5
+Homepage: http://www.steampowered.com
+
+Package: steam
+Architecture: i386
+Multi-Arch: foreign
+Pre-Depends:
+ debconf
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ libudev1,
+ libxinerama1,
+ libtxc-dxtn0,
+ libgl1-mesa-dri,
+ libgl1-mesa-glx,
+ fonts-liberation,
+ xterm | x-terminal-emulator,
+ zenity
+Replaces:
+ steam64,
+ steam-launcher
+Description: Valve's Steam digital software delivery system
+ Steam (http://www.steampowered.com) is a software content delivery system
+ developed by Valve software (http://www.valvesoftware.com).  There is
+ some free software available, but for the most part the content delivered
+ is non-free.
