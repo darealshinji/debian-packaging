@@ -13,7 +13,6 @@ override_dh_auto_build:
 	gunzip steam-dir/usr/share/doc/steam-launcher/changelog.gz
 	sed -i 's@/usr/bin/steam@/usr/games/steam@' steam-dir/usr/share/applications/steam.desktop
 	cd steam-dir/usr/lib/steam && tar xvf bootstraplinux_ubuntu12_32.tar.xz
-	cd steam-dir/usr/lib/steam/ubuntu12_32 && mv steam steam.real
 
 override_dh_installchangelogs:
 	dh_installchangelogs steam-dir/usr/share/doc/steam-launcher/changelog

@@ -7,7 +7,7 @@ ubuntu32=$config/ubuntu12_32
 steam=$ubuntu32/steam
 runtime=$ubuntu32/steam-runtime
 
-real=/usr/lib/steam/steam.real
+real=/usr/lib/steam/steam
 
 # do an initial update when expected pieces are missing
 test ! -d $config && rm -rf $config && mkdir -p $config || true
