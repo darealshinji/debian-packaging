@@ -8,8 +8,9 @@ Standards-Version: 3.9.5
 Package: mint-themes
 Architecture: all
 Depends: ${misc:Depends}
-Provides: libreoffice-style, libreoffice-style-default, mint-x-icons, mint-themes-gtk3
-Replaces: mint-x-icons, mint-themes-gtk3, mint-clearloox-theme, mint-x-theme, mint-z-theme, libreoffice-style-human
-Conflicts: mint-x-icons, mint-themes-gtk3, mint-clearloox-theme, mint-x-theme, mint-z-theme, libreoffice-style-human
+Provides: mint-x-icons, mint-themes-gtk3
+Replaces: mint-x-icons, mint-themes-gtk3
 Description: Mint themes
- A collection of mint themes.
+ A collection of GTK Mint themes and icons.
+ This package is a combination of mint-themes, mint-themes-gtk3 and
+ mint-x-icons, and it's indented to be used on non-Mint distributions.

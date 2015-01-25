@@ -10,5 +10,3 @@ override_dh_fixperms:
 	find $(CURDIR)/debian/mint-themes/usr -type f -exec chmod 0644 '{}' \;
 	dh_fixperms
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz -z9

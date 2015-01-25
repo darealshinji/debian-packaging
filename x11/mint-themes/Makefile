@@ -14,5 +14,6 @@ download:
 	VER3=$$(git -C mint-themes-gtk3/ log -1 --format=%ci | head -c10 | sed -e 's/-//g'); \
 	VERSION=`echo $$VER1 $$VER2 $$VER3 | tr ' ' '\n' | sort -r | head -1`; \
 	$(changelog-entry)
-	rm -rf mint-themes/.git mint-x-icons/.git mint-themes-gtk3/.git
+	rm -rf mint-themes/.git mint-x-icons/.git mint-themes-gtk3/.git \
+		mint-themes/usr/lib mint-themes/usr/share/libreoffice
 
