@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -rf linux32 steam.sh steamcmd.sh
+
+override_dh_auto_build:
+	tar xvf steamcmd_linux.tar.gz
+

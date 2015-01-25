@@ -1,0 +1,3 @@
+# Valve builds the executables, so there is nothing we can do about these
+embedded-library
+hardening-no-relro
