@@ -11,8 +11,6 @@ Homepage: http://www.steampowered.com
 Package: steam
 Architecture: i386
 Multi-Arch: foreign
-Pre-Depends:
- debconf
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -22,8 +20,7 @@ Depends:
  libgl1-mesa-dri,
  libgl1-mesa-glx,
  fonts-liberation,
- xterm | x-terminal-emulator,
- zenity
+ xterm | x-terminal-emulator
 Replaces:
  steam64,
  steam-launcher
