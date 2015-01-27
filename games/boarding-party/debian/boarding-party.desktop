@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Boarding Party
+Exec=boarding-party
+TryExec=/usr/games/boarding-party
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=boarding-party

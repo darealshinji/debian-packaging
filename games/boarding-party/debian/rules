@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf temp converted_icons
+
+override_dh_auto_build:
+	./make-icons.sh boarding-party.png
+

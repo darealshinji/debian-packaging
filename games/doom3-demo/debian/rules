@@ -6,14 +6,14 @@ BIN = doom3-linux-1.1.1286-demo.x86.run
 %:
 	dh ${@}
 
+override_dh_auto_clean:
+	rm -rf temp converted_icons
+
 override_dh_auto_build:
 	chmod a+x $(BIN)
 	./$(BIN) --target temp --noexec
 	chmod a-x temp/gamex86.so
 	./make-icons.sh doom3-demo.png
-
-override_dh_auto_clean:
-	rm -rf temp
 
 override_dh_makeshlibs:
 
