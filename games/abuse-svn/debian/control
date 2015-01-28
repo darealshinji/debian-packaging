@@ -1,0 +1,36 @@
+Source: abuse
+Section: games
+Priority: optional
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Uploaders: Sam Hocevar <sho@debian.org>
+Build-Depends:
+ debhelper (>= 9),
+ dh-autoreconf,
+ libsdl1.2-dev,
+ libsdl2-dev,
+ libsdl-mixer1.2-dev,
+ libsdl2-mixer-dev
+Standards-Version: 3.9.5
+Homepage: http://www.abuse.zoy.org/
+
+Package: abuse
+Architecture: any
+Section: games
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Provides:
+ abuse-lib,
+ abuse-sfx
+Description: classic Abuse action game
+ A classic 2D side-scrolling shoot-em-up action game from Crack dot Com.
+ Your character is a cyborg escaping from an underground prison where several
+ inmates have transformed into mutants after being infected with a substance
+ called Abuse.  You move through a building complex fighting enemies and
+ defense systems you encounter on the way. Initially, you start off
+ having a weak laser rifle with unlimited ammo, but you can find more
+ powerful guns later on, such as grenade launchers, flamethrowers or
+ lightsabers. There are also power-ups that augment your capabilities,
+ allow you to increase your health limit, move faster, turn invisible and
+ even fly. If you're one to get easily addicted, stay away!
+
