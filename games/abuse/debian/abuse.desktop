@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Abuse
+Type=Application
+GenericName=abuse
+Comment=A side-scrolling shoot-em-up action game
+Exec=abuse
+Icon=abuse
+Terminal=false
+Hidden=false
+Categories=Game;ActionGame;

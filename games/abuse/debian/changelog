@@ -1,0 +1,302 @@
+abuse (1:0.8-3) unstable; urgency=low
+
+  * Merge abuse and abuse-lib packages
+  * Change source format to '3.0 (quilt)'
+  * Bump Standards-Version
+  * Use compat 9
+  * Use new debhelper format
+
+ -- Marshall Banana <djcj@gmx.de>  Wed, 28 Jan 2015 12:26:50 +0100
+
+abuse-sdl (1:0.8-2) unstable; urgency=low
+
+  * Team upload.
+  * Lower Recommends: abuse to Enhances: abuse in abuse-lib binary package to
+    fix a circular dependency between abuse and abuse-lib. Thanks to Bill
+    Allombert for reporting this bug! (Closes: #626555)
+
+ -- Bruno "Fuddl" Kleinert <fuddl@debian.org>  Tue, 07 Jun 2011 12:09:11 +0200
+
+abuse-sdl (1:0.8-1) unstable; urgency=low
+
+  [ Sam Hocevar ]
+  * New upstream release.
+
+  [ Evgeni Golov ]
+  * Add abuse-sfx to Suggests (Closes: #467389)
+
+  [ Ansgar Burchardt ]
+  * debian/control: Add Homepage field
+
+  [ Peter De Wachter ]
+  * Added watch file.
+
+  [ Paul Wise ]
+  * Improve the package and desktop menu description (Closes: #591027)
+
+ -- Sam Hocevar <sho@debian.org>  Mon, 09 May 2011 22:31:31 +0200
+
+abuse-sdl (1:0.7.1-1) unstable; urgency=low
+
+  [ Sam Hocevar ]
+  * New upstream release.
+  * This release fixes a portability bug that prevented from properly shooting
+    on PPC (Closes: #407945, #429805).
+
+  * Drop the abuse-sdl package. This transitional package is no longer needed.
+
+  * debian/control:
+    + Set policy to 3.7.3. No changes required.
+    + Build-depend on debhelper (>= 5.0) because DH_COMPAT is 5.
+
+  * debian/copyright:
+    + Updated copyright file.
+
+  * patches/100_rebootstrap.diff:
+  * patches/200_c++_compliance.diff:
+  * patches/201_datatypes.diff:
+  * patches/202_disable_lisp_cache.diff:
+  * patches/203_header_order.diff:
+  * patches/204_spelling.diff:
+  * patches/205_stack_malloc_sizeof.diff:
+  * patches/206_tint_fileptr.diff:
+  * patches/207_unused_vars.diff:
+    + Patches were merged upstream. Remove them from the package.
+
+  [ Ansgar Burchardt ]
+  * debian/control: Change XS-Vcs-* to Vcs-*
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Mon, 03 Mar 2008 17:58:04 +0100
+
+abuse-sdl (1:0.7.0-6) unstable; urgency=low
+
+  [ Gonéri Le Bouder ]
+  * if nostrip is set in DEB_BUILD_OPTIONS it's useless to do:
+  INSTALL_PROGRAM += -s since dh_strip already do the job
+  * adds build depends on binutils (>= 2.14.90.0.7), according to dh_strip
+  manpage
+
+  [ Jon Dowland ]
+  * update menu section to "Games/Action" for menu transition
+    (thanks Linas Žvirblis)
+
+  [ Cyril Brulebois ]
+  * Added XS-Vcs-Svn and XS-Vcs-Browser fields in the control file.
+
+  [ Sam Hocevar ]
+  * debian/rules:
+    + Don't ignore distclean errors.
+  * debian/patches/series:
+    + Added missing patches from the -5 upload and renamed patches so that the
+      applying order is more obvious.
+
+  [ Barry deFreese ]
+  * Add desktop file and call dh_desktop
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Fri, 02 Nov 2007 14:40:20 +0100
+
+abuse-sdl (1:0.7.0-5) unstable; urgency=low
+
+  * debian/control:
+    + Added XS-Vcs-Svn information.
+
+  * debian/patches/020_stack_malloc_sizeof.diff:
+    + New patch courtesy of Kees Cook. Fix heap corruption and resulting
+      at-exit crash (Closes: #188448).
+
+  * debian/patches/020_tint_fileptr.diff:
+    + New patch courtesy of Kees Cook. Fix invalid file pointer usage and
+      first-run crash (Closes: #338834).
+
+  * debian/patches/020_header_order.diff:
+    + New patch courtesy of Kees Cook. Fix powerpc (and sparc) builds.
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Sat,  7 Oct 2006 15:53:35 +0200
+
+abuse-sdl (1:0.7.0-4) unstable; urgency=low
+
+  * Maintainer upload.
+  * Acknowledging previous NMU (Closes: #366242, #352834). Thanks to Steinar
+    H. Gunderson.
+  * Moved packaging to the Debian Games Team.
+  * Use quilt for patch management.
+
+  * debian/control:
+    + Set policy to 3.7.2.
+    + Build-depend on quilt.
+  * debian/rules:
+    + Support DEB_BUILD_OPTIONS's noopt.
+
+  * debian/patches/010_rebootstrap.diff:
+    + New patch from old diff.gz -- rebootstrap package.
+
+  * debian/patches/020_c++_compliance.diff:
+    + New patch from old diff.gz -- fix C++ syntax.
+
+  * debian/patches/020_datatypes.diff:
+    + New patch from old diff.gz -- use C99 data types.
+
+  * debian/patches/020_disable_lisp_cache.diff:
+    + New patch from old diff.gz -- disable buggy lisp cache.
+
+  * debian/patches/020_spelling.diff:
+    + New patch from old diff.gz -- minor spelling fixes.
+
+  * debian/patches/020_unused_vars.diff:
+    + New patch from old diff.gz -- remove unused variables.
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Wed, 21 Jun 2006 12:55:51 +0200
+
+abuse-sdl (1:0.7.0-3.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Change all the S_* variables from long to int32_t to fix several problems
+    on amd64; patch from Maximiliano Curia. (Closes: #352834).
+
+ -- Steinar H. Gunderson <sesse@debian.org>  Sat,  6 May 2006 13:14:20 +0200
+
+abuse-sdl (1:0.7.0-3) unstable; urgency=low
+
+  * debian/menu:
+    + Added proper hints to the menu file (Closes: #311025).
+  * src/sdlport/event.cpp:
+    + Quit the program when the window gets closed (Closes: #151296).
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Fri, 11 Nov 2005 13:07:23 +0100
+
+abuse-sdl (1:0.7.0-2) unstable; urgency=low
+
+  * New upstream release.
+  * Huge code cleanup: most of the code should now be 64 bit clean.
+  * src/lisp.c src/include/lcache.hpp:
+    + Disabled the memory manager and the cache system to bypass startup hangs
+      (Closes: #188448, #185301).
+  * debian/control:
+    + Set policy to 3.6.2.1.
+    + Build-depend on debhelper version 4.
+  * aclocal-1.4 && autoconf && automake-1.4 --copy
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Fri, 11 Nov 2005 00:32:42 +0100
+
+abuse-sdl (1:0.7.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fixed warnings here and there in the source.
+  * Fixed known issues with g++-3.3 (Closes: #221379).
+  * debian/rules:
+    + Switched to classic debhelper packaging.
+    + Use debian/compat instead of DH_COMPAT.
+  * src/loader2.cpp:
+    + Disabled the file cache because it prevents Abuse from running when the
+      administrator installs an alternate level set.
+  * src/imlib/specs.cpp:
+    + Fixed uninitialised memory areas with partial reads.
+  * src/sdlport/setup.cpp:
+    + Fixed the location of the datafiles when creating the abuserc file.
+    + Documented the -a flag for addons.
+  * src/clisp.cpp:
+    + Fixed aliasing issues that caused undefined behaviour in the lisp
+      interpreter.
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Sat, 10 Jul 2004 14:12:24 +0200
+
+abuse-sdl (1:0.6.1-2) unstable; urgency=low
+
+  * New maintainer (Closes: #199545).
+  * debian/control:
+    + Set policy to 3.6.1.1.
+    + Removed the trailing full stop in the package description.
+    + Renamed the main package to abuse now that the original abuse is
+      deprecated.
+  * debian/menu:
+    + Quoted strings where appropriate.
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Fri,  9 Jul 2004 13:07:53 +0200
+
+abuse-sdl (0.6.1-1) unstable; urgency=low
+
+  * New upstream version
+  * Upstream applied patch 01, so it is removed
+  * Updated standards-version
+  * Changed build-depends to use debhelper (>> 3.0.0) instead of 2.0.0
+  * Removed auto* from build-depends
+
+ -- Arto Jantunen <viiru@debian.org>  Wed,  6 Feb 2002 18:27:45 +0200
+
+abuse-sdl (0.6.0-1) unstable; urgency=low
+
+  * New upstream version
+  * Converted to use BenC DBS
+  * Finaly got rid of the wrapper script
+
+ -- Arto Jantunen <viiru@debian.org>  Sat, 19 Jan 2002 13:56:36 +0200
+
+abuse-sdl (0.5.0-4) unstable; urgency=medium
+
+  * Applied patch from Julien Lemoine to fix bus errors on SPARC (Closes:Bug#100920)
+
+ -- Arto Jantunen <viiru@debian.org>  Tue,  8 Jan 2002 19:31:07 +0200
+
+abuse-sdl (0.5.0-3) unstable; urgency=high
+
+  * Added -lstdc++ to the link line. I dislike this solution, but can't
+    find a better one. This should make abuse-sdl build on HPPA and IA64.
+
+ -- Arto Jantunen <viiru@debian.org>  Thu,  3 Jan 2002 18:57:28 +0200
+
+abuse-sdl (0.5.0-2) unstable; urgency=medium
+
+  * Rebuilt with new sdl
+  * Modified abuse/include/bus_type.hpp to better support sparc
+
+ -- Arto Jantunen <viiru@debian.org>  Sat, 13 Oct 2001 18:23:44 +0300
+
+abuse-sdl (0.5.0-1) unstable; urgency=low
+
+  * New upstream release (Closes: Bug#98244)
+  * Fixed a few very stupid problems in my autotools-dev stuff
+
+ -- Arto Jantunen <viiru@debian.org>  Wed, 15 Aug 2001 16:27:33 +0300
+
+abuse-sdl (0.4.8-2) unstable; urgency=medium
+
+  * Added "AC_C_BIGENDIAN" to configure.in to fix problems on PPC 
+    (Closes:Bug#104606)
+  * Added support for autotools-dev
+
+ -- Arto Jantunen <viiru@debian.org>  Wed, 18 Jul 2001 19:40:01 +0300
+
+abuse-sdl (0.4.8-1) unstable; urgency=low
+
+  * New upstream version.
+  * Changed to building with libsdl1.2
+
+ -- Arto Jantunen <viiru@debian.org>  Mon, 30 Apr 2001 15:47:33 +0300
+
+abuse-sdl (0.4.7-2) unstable; urgency=low
+
+  * Changed depends to abuse-frabs | abuse-lib (>= 2.00-11)
+
+ -- Arto Jantunen <viiru@debian.org>  Fri, 20 Apr 2001 16:01:47 +0300
+
+abuse-sdl (0.4.7-1) unstable; urgency=low
+
+  * New upstream version.
+  * Edited debian/rules to install abuserc as an example
+  * Updated standards-version to 3.5.2.0 (no changes)
+  * Added AC_PATH_X to configure.in to correct the library path
+  * Removed call to dh_testversion
+
+ -- Arto Jantunen <viiru@debian.org>  Mon,  2 Apr 2001 17:11:09 +0300 
+
+abuse-sdl (0.4.6-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Arto Jantunen <viiru@debian.org>  Sun, 18 Feb 2001 23:27:02 +0200
+
+abuse-sdl (0.4.5a-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Arto Jantunen <viiru@debian.org>  Tue,  6 Feb 2001 00:30:17 +0200
