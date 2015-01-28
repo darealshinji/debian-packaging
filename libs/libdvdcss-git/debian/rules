@@ -4,5 +4,5 @@ export V=1
 
 
 %:
-	dh $@ --with autoreconf
+	dh $@ --parallel --with autoreconf
 
