@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -rf converted_icons desura lib
+
+override_dh_auto_build:
+	tar xvf desura.tgz
+	mv desura/lib $(CURDIR)
+	chmod a+x desura/scripts/*
+	rm -f lib/libcurl.so
+	./make-icons.sh desura/desura.png
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+	dh_shlibdeps -l/usr/lib/desura
+

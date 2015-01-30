@@ -1,0 +1,5 @@
+debian/scripts/desura      /usr/games
+lib/*                      /usr/lib/desura
+desura                     /usr/share
+converted_icons/*          /usr/share
+debian/desura.desktop      /usr/share/applications

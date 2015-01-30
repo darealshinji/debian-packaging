@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+local="$HOME/.local/share"
+config="$local/desura"
+
+if [ ! -d "$config" ] ; then
+    cp -r /usr/share/desura "$local" &&
+    mkdir -p "$config/lib" &&
+    cp /usr/lib/desura/* "$config/lib"
+fi
+
+cd "$config" && ./desura "$@"
+

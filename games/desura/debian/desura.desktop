@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Desura
+GenericName=Game Manager
+Comment=Download and play the best games
+Exec=desura %U
+TryExec=/usr/games/desura
+Icon=desura
+Terminal=false
+Categories=Game;
+StartupNotify=false
