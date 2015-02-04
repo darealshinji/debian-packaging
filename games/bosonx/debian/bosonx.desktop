@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Boson X
+Exec=bosonx
+TryExec=/usr/games/bosonx
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=bosonx

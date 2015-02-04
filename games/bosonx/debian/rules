@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+DEB_HOST_ARCH_BITS = $(shell dpkg-architecture -qDEB_HOST_ARCH_BITS)
+DIR  = BosonX_v1_0_5_Linux
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf $(DIR) converted_icons
+
+override_dh_auto_build:
+	unzip $(DIR).zip
+	cp $(DIR)/bosonx$(DEB_HOST_ARCH_BITS) $(DIR)/bosonx
+	cp $(DIR)/data/bosonx_symbol.png_ $(DIR)/bosonx.png
+	./make-icons.sh $(DIR)/bosonx.png
+

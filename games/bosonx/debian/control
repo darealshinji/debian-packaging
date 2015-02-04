@@ -1,0 +1,27 @@
+Source: bosonx
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ imagemagick,
+ libgl1-mesa-glx | libgl1,
+ libx11-6,
+ unzip
+Standards-Version: 3.9.5
+Homepage: http://www.boson-x.com
+
+Package: bosonx
+Architecture: i386 amd64
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: fast-paced rotational runner set in a particle accelerator
+ Quantum jump from Planck to Planck as you hit critical velocity in Boson X,
+ a new rotational runner from Mu & Heyo.
+ .
+ Build up speed inside a massive particle accelerator and generate high-energy
+ collisions to discover strange new particles.
+ Use precise timing and fast reflexes to navigate a subatomic world where
+ floors and ceilings don't exist.
+ Will you be fast enough to find the elusive Boson X? 

@@ -1,0 +1,5 @@
+# closed-source
+bosonx binary: embedded-library usr/lib/bosonx/bosonx: glew
+bosonx binary: embedded-library usr/lib/bosonx/bosonx: curl
+bosonx binary: embedded-library usr/lib/bosonx/bosonx: libpng
+bosonx binary: embedded-library usr/lib/bosonx/bosonx: zlib

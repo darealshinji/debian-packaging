@@ -1,0 +1,5 @@
+BosonX_v1_0_5_Linux/bosonx      /usr/lib/bosonx
+BosonX_v1_0_5_Linux/data/*      /usr/share/games/bosonx
+debian/scripts/bosonx           /usr/games
+debian/bosonx.desktop           /usr/share/applications
+converted_icons/icons           /usr/share
