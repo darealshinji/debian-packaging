@@ -20,3 +20,6 @@ You can run `make clean` or `make distclean` to clean up a build directory.
 To build packages of Unity engine games use the script provided here:<br>
 https://github.com/darealshinji/UnityEngine2deb<br>
 https://github.com/darealshinji/debian/tree/master/games/unityengine2deb
+
+Or you can use this repository with a small collection of Unity engine games:<br>
+https://github.com/darealshinji/UnityGames-for-debian
