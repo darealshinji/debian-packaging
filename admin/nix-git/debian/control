@@ -17,7 +17,6 @@ Build-Depends:
    libextutils-parsexs-perl,
    libgc-dev,
    libperl-dev,
-   libssl-dev,
    libsqlite3-dev,
    libwww-curl-perl,
    libxml2-utils,

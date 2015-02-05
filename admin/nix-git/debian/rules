@@ -4,13 +4,12 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 libdir = $(CURDIR)/debian/nix/usr/lib/$(DEB_HOST_MULTIARCH)
 
 CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
-export GLOBAL_CFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)) $(CPPFLAGS)
-export GLOBAL_CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) $(CPPFLAGS)
-export GLOBAL_LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS)
+export GLOBAL_CFLAGS   = $(filter-out -g -O2 -Werror=format-security,$(shell dpkg-buildflags --get CFLAGS)) $(CPPFLAGS)
+export GLOBAL_CXXFLAGS = $(filter-out -g -O2 -Werror=format-security,$(shell dpkg-buildflags --get CXXFLAGS)) $(CPPFLAGS)
+export GLOBAL_LDFLAGS  = $(shell dpkg-buildflags --get LDFLAGS)
 
 docbookxsl=/usr/share/xml/docbook/stylesheet/docbook-xsl
 docbookrng=$(docbookxsl)/slides/schema/relaxng/docbook.rng
-export Store_LDFLAGS = -lperl -pthread
 export SET_RPATH_TO_LIBS=0
 export V=1
 
@@ -20,13 +19,30 @@ export V=1
 
 override_dh_auto_clean:
 	[ ! -f Makefile.config ] || dh_auto_clean
+	dh_auto_clean -Dlibsodium
+	rm -rf tmp
+
+override_dh_autoreconf:
+	dh_autoreconf -- ./bootstrap.sh
 
 override_dh_auto_configure:
-	dh_auto_configure -- --enable-gc
 
 override_dh_auto_build:
+	# libsodium
+	dh_auto_configure -Dlibsodium -- \
+			--prefix=$(CURDIR)/tmp \
+			--libdir=$(CURDIR)/tmp/lib \
+			--enable-shared=no \
+			--enable-static=yes \
+			--with-pic
+	dh_auto_build -Dlibsodium
+	$(MAKE) -C libsodium install
+
+	# nix
+	PKG_CONFIG_PATH=$(CURDIR)/tmp/lib/pkgconfig	\
+		dh_auto_configure -- --enable-gc
 	dh_auto_build -- all doc/manual/manual.pdf \
-	docbookxsl=$(docbookxsl) docbookrng=$(docbookrng)
+		docbookxsl=$(docbookxsl) docbookrng=$(docbookrng)
 
 override_dh_auto_install:
 	dh_auto_install

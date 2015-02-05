@@ -17,7 +17,7 @@ done
 STORE_DIR=/nix/store
 if [ ! -d $STORE_DIR ]; then
     mkdir -p $STORE_DIR
-    chmod 1775 $STORE_DIR
+    chmod 1737 $STORE_DIR
 fi
 
 LISP_DIR=/nix/share/emacs/site-lisp
