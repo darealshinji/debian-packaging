@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@}
+
+override_dh_install:
+	install -m755 Yua $(CURDIR)/debian/yua/usr/bin/yua
+	dh_install
+

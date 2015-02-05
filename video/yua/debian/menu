@@ -1,0 +1,5 @@
+?package(yua):needs="X11" \
+ section="Applications/Video"\
+ title="Yua" \
+ icon="/usr/share/pixmaps/yua.xpm" \
+ command="/usr/bin/yua"
