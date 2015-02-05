@@ -39,7 +39,7 @@ override_dh_auto_build:
 	$(MAKE) -C libsodium install
 
 	# nix
-	PKG_CONFIG_PATH=$(CURDIR)/tmp/lib/pkgconfig	\
+	PKG_CONFIG_PATH=$(CURDIR)/tmp/lib/pkgconfig \
 		dh_auto_configure -- --enable-gc
 	dh_auto_build -- all doc/manual/manual.pdf \
 		docbookxsl=$(docbookxsl) docbookrng=$(docbookrng)
