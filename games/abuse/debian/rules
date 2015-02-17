@@ -1,18 +1,14 @@
 #!/usr/bin/make -f
 
+CXXFLAGS += -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-function
+
 
 %:
 	dh $@ --parallel --with autoreconf
-
-override_dh_autoreconf:
-	dh_autoreconf -- ./bootstrap
-
-override_dh_auto_clean:
-	dh_auto_clean -- clobber
 
 override_dh_auto_configure:
 	dh_auto_configure -- --bindir=/usr/games
 
 override_dh_installchangelogs:
-	dh_installchangelogs ChangeLog
+	dh_installchangelogs NEWS
 
