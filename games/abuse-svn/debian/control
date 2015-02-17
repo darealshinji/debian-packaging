@@ -12,6 +12,8 @@ Build-Depends:
  libsdl2-mixer-dev
 Standards-Version: 3.9.5
 Homepage: http://www.abuse.zoy.org/
+Vcs-Svn: svn://svn.zoy.org/abuse/abuse/trunk
+Vcs-Browser: http://abuse.zoy.org/browser
 
 Package: abuse
 Architecture: any
