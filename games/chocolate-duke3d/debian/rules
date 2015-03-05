@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+CPPFLAGS += -D__SYSTEM_ENET
+
 
 %:
 	dh ${@} --parallel

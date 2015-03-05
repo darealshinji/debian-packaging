@@ -2,10 +2,10 @@ Source: chocolate-duke3d
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends:
-  debhelper (>= 9),
-  libsdl-mixer1.2-dev,
-  pkg-config
+Build-Depends: debhelper (>= 9),
+               libenet-dev,
+               libsdl-mixer1.2-dev,
+               pkg-config
 Standards-Version: 3.9.5
 Homepage: http://juanmabcblog.blogspot.com/2013/07/chocolate-duke3d.html
 Vcs-Git: https://github.com/fabiensanglard/chocolate_duke3D.git
