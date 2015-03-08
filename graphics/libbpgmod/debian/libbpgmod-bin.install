@@ -1,5 +1,2 @@
-bpgdecmod    /usr/bin
 bpgencmod    /usr/bin
-bpgviewmod   /usr/bin
 bpgmux       /usr/bin
-html/*       /usr/share/doc/libbpgmod-bin/libjs-bpgdec

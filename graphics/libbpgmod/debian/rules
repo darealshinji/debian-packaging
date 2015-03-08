@@ -1,48 +1,43 @@
 #!/usr/bin/make -f
 
 VERSION = $(shell cat VERSION)
-MANPAGES = bpgdecmod.1 bpgencmod.1 bpgviewmod.1 bpgmux.1
+MANPAGES = bpgencmod.1 bpgmux.1
 
 export CFLAGS  := -Wall $(shell dpkg-buildflags --get CFLAGS)
 export LDFLAGS := -Wl,-z,defs $(shell dpkg-buildflags --get LDFLAGS)
 
-x265_confflags = \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DENABLE_CLI=OFF \
-	-DENABLE_SHARED=OFF \
-	-DENABLE_PIC=OFF
-
 
 %:
-	dh $@ --parallel
+	dh $@ --parallel --with autoreconf
 
 override_dh_auto_clean:
-	[ ! -f config.mak ] || dh_auto_clean
+	dh_auto_clean
 	dh_auto_clean -Dpng
 	dh_auto_clean -Dx265/source
+	rm -f bpgencmod
 
 override_dh_auto_configure:
 	autoreconf -ivf png
 	dh_auto_configure -Dpng -- --enable-shared=no --enable-static=yes
-	cp -f png/libpng.pc png/libpng16.pc
-	cd x265/source && cmake $(x265_confflags) .
-	dh_auto_configure -- \
-		--enable-x265 \
-		--extra-cppflags="-Ipng -Ix265/source" \
-		--extra-ldflags="-Lpng/.libs -Lx265/source" \
-		--extra-libs=-lz
+	cd x265/source && cmake \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_VERBOSE_MAKEFILE=ON \
+		-DENABLE_CLI=OFF \
+		-DENABLE_SHARED=OFF \
+		-DENABLE_PIC=OFF .
 
 override_dh_auto_build:
 	dh_auto_build -Dpng
 	dh_auto_build -Dx265/source
-	dh_auto_build
-	mv bpgdec bpgdecmod
+	CFLAGS="-Ipng -Ix265/source -DUSE_X265" \
+	CXXFLAGS="-Ipng -Ix265/source -DUSE_X265" \
+	LDFLAGS="-Lpng/.libs" LIBS="x265/source/libx265.a -lpthread" \
+	./configure --disable-shared
+	dh_auto_build -- bpgmux bpgenc bpgdec
 	mv bpgenc bpgencmod
-	mv bpgview bpgviewmod
 
 override_dh_auto_test:
-	./bpgdecmod -o outfile.png html/lena512color.bpg
+	./bpgdec -o outfile.png html/lena512color.bpg
 	./bpgencmod -e jctvc -o out-jctvc.bpg outfile.png
 	./bpgencmod -e x265 -o out-x265.bpg outfile.png
 

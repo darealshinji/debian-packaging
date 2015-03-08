@@ -1,7 +1,0 @@
-.TH BPGVIEWMOD 1 "January 2015" "@VERSION@"
-.SH NAME
-bpgviewmod \- display BPG images
-
-.SH OPTIONS
-.nf
-\f[C]

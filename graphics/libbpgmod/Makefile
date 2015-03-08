@@ -19,9 +19,11 @@ download:
 
 	mv libpng-$(png-ver) $(builddir)/png
 	mv multicoreware-x265-* $(builddir)/x265
-	cp -f files/* $(builddir)
 
 	latestcommit=`git -C $(builddir) log -1 --format=%ci | head -c10 | sed -e 's/-//g'`; \
 	VERSION=$(bpg-ver)+git$$latestcommit; $(changelog-entry)
 	cat debian/changelog.new debian/changelog.in > debian/changelog
+
+	# force x265
+	echo 'bpgenc_SOURCES  += x265_glue.c' >> $(builddir)/Makefile.am
 

@@ -1,7 +1,0 @@
-.TH BPGDECMOD 1 "January 2015" "@VERSION@"
-.SH NAME
-bpgdecmod \- decoder for BPG image format files
-
-.SH OPTIONS
-.nf
-\f[C]
