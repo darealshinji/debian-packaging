@@ -1,4 +1,5 @@
-boarding-party.jar                 /usr/share/games/boarding-party
-debian/scripts/boarding-party      /usr/games
-debian/boarding-party.desktop      /usr/share/applications
-converted_icons/icons              /usr/share
+build/*.jar                     /usr/share/games/boarding-party
+build/*.so                      /usr/lib/boarding-party
+debian/scripts/boarding-party   /usr/games
+debian/boarding-party.desktop   /usr/share/applications
+converted_icons/icons           /usr/share

@@ -1,0 +1,4 @@
+/usr/lib/@DEB_HOST_MULTIARCH@/libopenal.so.1                  /usr/share/games/boarding-party/libopenal@BITS@.so
+/usr/lib/boarding-party/libgdx@BITS@.so                       /usr/share/games/boarding-party/libgdx@BITS@.so
+/usr/lib/boarding-party/libgdx-controllers-desktop@BITS@.so   /usr/share/games/boarding-party/libgdx-controllers-desktop@BITS@.so
+/usr/lib/boarding-party/liblwjgl@BITS@.so                     /usr/share/games/boarding-party/liblwjgl@BITS@.so

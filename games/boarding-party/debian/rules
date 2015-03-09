@@ -1,12 +1,43 @@
 #!/usr/bin/make -f
 
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+ifeq ($(DEB_HOST_MULTIARCH),x86_64-linux-gnu)
+BITS=64
+endif
+
 
 %:
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf temp converted_icons
+	rm -rf build converted_icons patchelfmod-master
 
 override_dh_auto_build:
+	mkdir build
+
+	# recompress boarding-party.jar
+	cd build && unzip -d tmp ../boarding-party.jar
+	mv build/tmp/*.jar build/
+	find build/tmp/ -name .DS_Store -delete
+	cd build/tmp/ && zip -r ../boarding-party.jar *
+
+	# extract natives
+	unzip build/gdx-backend-lwjgl-natives.jar -d build/
+	unzip build/gdx-controllers-desktop-natives.jar -d build/
+	rm -rf build/META-INF
+	unzip build/gdx-natives.jar -d build/
+
+	# delete files
+	cd build && rm -f *-natives.jar libopenal*
+ifeq ($(DEB_HOST_MULTIARCH),x86_64-linux-gnu)
+	cd build && rm -f libgdx.so libgdx-controllers-desktop.so liblwjgl.so
+else
+	cd build && rm -f libgdx64.so libgdx-controllers-desktop64.so liblwjgl64.so
+endif
+
 	./make-icons.sh boarding-party.png
+	sed 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g; s/@BITS@/$(BITS)/g;' debian/links.in > debian/links
+
+override_dh_clean:
+	dh_clean debian/links
 

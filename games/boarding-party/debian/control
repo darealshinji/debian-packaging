@@ -2,25 +2,24 @@ Source: boarding-party
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends:
- debhelper (>= 9),
- imagemagick
+Build-Depends: debhelper (>= 9),
+               imagemagick,
+               libx11-6,
+               libxcursor1 [amd64],
+               libxext6 [amd64],
+               libxrandr2 [amd64],
+               libxxf86vm1 [amd64],
+               unzip,
+               zip
 Standards-Version: 3.9.5
 Homepage: http://7dfps.com/?action=games&id=228
 
 Package: boarding-party
 Architecture: i386 amd64
-Depends:
- ${misc:Depends},
- default-jre-headless,
- libc6 (>= 2.4),
- libgcc1 (>= 1:4.1.1),
- libstdc++6 (>= 4.4.0),
- libx11-6,
- libxcursor1 (>> 1.1.2),
- libxext6,
- libxrandr2 (>= 4.3),
- libxxf86vm1
+Depends: default-jre-headless,
+         ${misc:Depends},
+         ${shlibs:Depends},
+         libopenal1
 Description: fast paced old school style FPS
  Boarding Party is a fast paced old school style FPS made in 7 days.
  Make it down to the escape pod by fighting through the hordes of aliens
@@ -30,4 +29,3 @@ Description: fast paced old school style FPS
   * Swarms of enemies
   * Piles of guns
   * Randomly generated levels
-
