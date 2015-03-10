@@ -1,0 +1,48 @@
+#!/usr/bin/make -f
+
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+ifeq ($(DEB_HOST_ARCH), amd64)
+X64    = _64
+FMOD64 = 64
+endif
+PATCHELF = patchelfmod-master/src/patchelfmod
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf skulltag fmodapi42416linux fmodapi42416linux64 patchelfmod-master
+
+override_dh_auto_build:
+	tar xfv patchelfmod.tar.gz
+	autoreconf -ivf patchelfmod-master
+	cd patchelfmod-master && ./configure
+	dh_auto_build -Dpatchelfmod-master -- check
+
+	mkdir skulltag
+	cd skulltag && tar xvf ../st-v098d_linux-x86$(X64).tbz
+	tar xvf fmodapi42416linux$(FMOD64).tgz
+	cp fmodapi42416linux$(FMOD64)/api/lib/libfmodex$(FMOD64)-4.24.16.so skulltag
+	chmod a-x skulltag/*.so skulltag/*.pk3
+	cd skulltag && chrpath -d skulltag skulltag-server
+ifeq ($(DEB_HOST_ARCH), amd64)
+	# broken symlink
+	rm skulltag/liboutput_sdl.so
+endif
+
+override_dh_installchangelogs:
+	dh_installchangelogs changelog.txt
+
+override_dh_shlibdeps:
+	$(PATCHELF) -n libjpeg.so.62,libjpeg.so.8 $(CURDIR)/debian/skulltag/usr/lib/skulltag/skulltag-server
+	$(PATCHELF) -n libjpeg.so.62,libjpeg.so.8 $(CURDIR)/debian/skulltag/usr/lib/skulltag/skulltag
+ifneq ($(DEB_HOST_ARCH), amd64)
+	$(PATCHELF) -a libSDL-1.2.so.0 $(CURDIR)/debian/skulltag/usr/lib/skulltag/liboutput_sdl.so
+endif
+	$(PATCHELF) -r libgdk_pixbuf-2.0.so.0,libpng12.so.0,libgmodule-2.0.so.0,libXext.so.6,libgthread-2.0.so.0,libfreetype.so.6,libgio-2.0.so.0,libfontconfig.so.1,libpango-1.0.so.0,libpangocairo-1.0.so.0,libatk-1.0.so.0,libSM.so.6,libpangoft2-1.0.so.0,libICE.so.6,libX11.so.6,libgdk-x11-2.0.so.0,libcairo.so.2,libXfixes.so.3,libXrandr.so.2,libXinerama.so.1,libXi.so.6,libXcomposite.so.1,libXcursor.so.1,libXrender.so.1,libXdamage.so.1 \
+		$(CURDIR)/debian/skulltag/usr/lib/skulltag/skulltag
+
+	dh_shlibdeps -l$(CURDIR)/debian/skulltag/usr/lib/skulltag -- -v
+

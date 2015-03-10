@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /usr/lib/skulltag &&
+LD_LIBRARY_PATH="$PWD:$LD_LIBRARY_PATH" ./skulltag "$@"
