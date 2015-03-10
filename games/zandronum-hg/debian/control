@@ -1,0 +1,32 @@
+Source: zandronum
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               cmake,
+               libbz2-dev,
+               libfluidsynth-dev,
+               libgl1-mesa-dev,
+               libgtk2.0-dev,
+               libjpeg-dev,
+               libsdl1.2-dev,
+               libssl-dev,
+               libsqlite3-dev,
+               pkg-config,
+               zlib1g-dev
+Standards-Version: 3.9.5
+Vcs-Hg: https://bitbucket.org/Torr_Samaho/zandronum
+Vcs-Browser: https://bitbucket.org/Torr_Samaho/zandronum/src
+Homepage: http://www.zandronum.com/
+
+Package: zandronum
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: Multiplayer ZDoom
+ Zandronum is a multiplayer oriented port, based off Skulltag, for Doom
+ and Doom II by id Software.
+ .
+ Zandronum brings classic Doom into the 21st century, maintaining the essence
+ of what has made Doom great for so many years and, at the same time, adding
+ new features to modernize it, creating a fresh, fun new experience.

@@ -1,0 +1,2 @@
+# closed-source library
+zandronum binary: hardening-no-relro usr/lib/zandronum/libfmodex*.so
