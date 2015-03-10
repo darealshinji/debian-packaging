@@ -15,24 +15,24 @@ basetgz   = "/var/cache/pbuilder/debian-packages-$(ARCH).tgz"
 
 
 define verifysha256
-    sha256_2=$$(sha256sum $(1) | head -c64) ;                      \
-    if [ $$sha256_2 != $(2) ] ; then                               \
-        echo "$(1):" ;                                             \
-        echo "SHA256 checksum is $$sha256_2 but should be $(2)." ; \
-        echo "Delete '$(1)' and try it again." ;                   \
-        exit 1 ;                                                   \
-    else                                                           \
-        echo "$(1): checksum ok." ;                                \
-    fi
+	sha256_2=$$(sha256sum $(1) | head -c64) ;                      \
+	if [ $$sha256_2 != $(2) ] ; then                               \
+	    echo "$(1):" ;                                             \
+	    echo "SHA256 checksum is $$sha256_2 but should be $(2)." ; \
+	    echo "Delete '$(1)' and try it again." ;                   \
+	    exit 1 ;                                                   \
+	else                                                           \
+	    echo "$(1): checksum ok." ;                                \
+	fi
 endef
 
 
 
 
-MAINTAINER      = Marshall Banana <djcj@gmx.de>
-changelog-msg   = Current git snapshot
-changelog-file  = $(builddir)/debian/changelog
-srcpkg          = `grep 'Source: ' debian/control | cut -d' ' -f2`
+MAINTAINER     = Marshall Banana <djcj@gmx.de>
+changelog-msg  = Current git snapshot
+changelog-file = $(builddir)/debian/changelog
+srcpkg         = `grep 'Source: ' debian/control | cut -d' ' -f2`
 
 changelog-entry =                                                              \
     mkdir -p $(shell dirname $(changelog-file)) ;                              \
@@ -136,7 +136,7 @@ else
 	    sudo -k pbuilder                                              \
 	         --create                                                 \
 	         --components "main restricted universe multiverse"       \
-		 --debootstrapopts --arch --debootstrapopts $(ARCH)       \
+	         --debootstrapopts --arch --debootstrapopts $(ARCH)       \
 	         --debootstrapopts --variant=buildd                       \
 	         --basetgz $(basetgz)                                     \
 	         --extrapackages "debhelper fakeroot" ;                   \
@@ -173,14 +173,14 @@ endif
 
 
 	@ echo ""
-	@ if [ $$(dpkg-query -W -f='$${Status}' pbuilder-satisfydepends-dummy 2>/dev/null | grep -c "ok installed") -ne 0 ] ; \
-	then                                                                                                                  \
-	    echo "Additional build dependencies have been installed." ;                                                       \
-	    read -p "Do you want to remove them (recommended)? (Y/n) " REMOVE ;                                               \
-	    if [ x$$REMOVE = xy ] || [ x$$REMOVE = xY ] || [ x$$REMOVE = x ] ;                                                \
-	    then                                                                                                              \
-	         sudo -k apt-get autoremove --purge pbuilder-satisfydepends-dummy ;                                           \
-	    fi                                                                                                                \
+	@ dummy_pkg_status=$$(dpkg-query -W -f='$${Status}' pbuilder-satisfydepends-dummy 2>/dev/null | grep -c "ok installed") ; \
+	if [ $$dummy_pkg_status -ne 0 ] ;                                                    \
+	then                                                                                 \
+	    echo "Additional build dependencies have been installed." ;                      \
+	    read -p "Do you want to remove them (recommended)? (Y/n) " REMOVE ;              \
+	    if [ x$$REMOVE = xy ] || [ x$$REMOVE = xY ] || [ x$$REMOVE = x] ;                \
+	    then                                                                             \
+	        sudo -k apt-get autoremove --purge pbuilder-satisfydepends-dummy ;           \
+	    fi                                                                               \
 	fi
-
 
