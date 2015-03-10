@@ -40,5 +40,5 @@ override_dh_auto_build:
 	dh_auto_build -Dzdoom
 
 override_dh_shlibdeps:
-	dh_shlibdeps -l$(CURDIR)/debian/zdoom/usr/lib/games/zdoom
+	dh_shlibdeps -l$(CURDIR)/debian/zdoom/usr/lib/zdoom
 
