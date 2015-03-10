@@ -52,6 +52,7 @@ allcleanfiles = .pc                  \
                 converted_icons      \
                 tmp                  \
                 temp                 \
+                *.build              \
                 *.changes            \
                 *.deb                \
                 *.dsc                \
