@@ -9,7 +9,6 @@ Build-Depends: debhelper (>= 9),
                libglib2.0-0,
                libglu1-mesa,
                libgtk2.0-0,
-               libjpeg8,
                libsdl1.2debian,
                zlib1g
 Standards-Version: 3.9.5

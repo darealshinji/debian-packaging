@@ -2,4 +2,5 @@ debian/scripts/*           usr/games
 skulltag/skulltag          usr/lib/skulltag
 skulltag/skulltag-server   usr/lib/skulltag
 skulltag/*.so              usr/lib/skulltag
+skulltag/libjpeg.so.62     usr/lib/skulltag
 skulltag/*.pk3             usr/share/games/skulltag
