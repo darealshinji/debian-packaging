@@ -13,9 +13,14 @@ PATCHELF = patchelfmod-master/src/patchelfmod
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -rf skulltag fmodapi42416linux fmodapi42416linux64 libjpeg62 patchelfmod-master
+	dh_auto_clean -Dlibjpeg6b-patched
+	$(MAKE) -C libjpeg6b-patched -f makefile.simple clean
+	rm -rf skulltag fmodapi42416linux fmodapi42416linux64 patchelfmod-master
 
 override_dh_auto_build:
+	# libjpeg
+	$(MAKE) -C libjpeg6b-patched -f makefile.simple
+
 	# patchelfmod
 	tar xfv patchelfmod.tar.gz
 	autoreconf -ivf patchelfmod-master
@@ -35,10 +40,6 @@ endif
 	# fmod
 	tar xvf fmodapi42416linux$(FMOD64).tgz
 	cp fmodapi42416linux$(FMOD64)/api/lib/libfmodex$(FMOD64)-4.24.16.so skulltag
-
-	# libjpeg
-	dpkg-deb -x libjpeg62_6b-15ubuntu1.1_$(DEB_HOST_ARCH).deb libjpeg62
-	cp libjpeg62/usr/lib/libjpeg.so.62.0.0 skulltag/libjpeg.so.62
 
 override_dh_installchangelogs:
 	dh_installchangelogs changelog.txt
