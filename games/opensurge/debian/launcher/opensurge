@@ -1,2 +1,2 @@
 #!/bin/sh
-cd /usr/lib/games/opensurge && ./opensurge "$@"
+cd /usr/lib/opensurge && ./opensurge "$@"
