@@ -11,3 +11,6 @@ download:
 	VERSION="$${scriptVersion}+git$${latestcommit}" ;\
 	sed -e "s/@VERSION@/$${VERSION}/g; s/@DATE@/`date -R`/g" debian/changelog.in > debian/changelog
 
+	# https://github.com/KittyKatt/screenFetch/issues/194
+	sed -i 's/exec 3> stderrOut/exec 3> \/dev\/null/' screenFetch/screenfetch-dev
+
