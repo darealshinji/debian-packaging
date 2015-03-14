@@ -3,7 +3,6 @@ include ../../mk/include.mk
 deps           = git dh-autoreconf
 srcpkg         = patchelfmod
 builddir       = $(srcpkg)
-cleanfiles     = $(builddir)
 changelog-file = changelog.new
 
 download:

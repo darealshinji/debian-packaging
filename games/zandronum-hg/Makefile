@@ -13,11 +13,11 @@ FMOD_64          = 64
 endif
 
 download:
-	test -f tip.tar.bz2 || wget "https://bitbucket.org/Torr_Samaho/zandronum/get/tip.tar.bz2"
-	test -f $(fmod).tgz || wget -O $(fmod).tgz "http://zandronum.com/essentials/fmod/$(fmod).tar.gz"
+	@ $(call download,zandronum.tar.gz,https://bitbucket.org/Torr_Samaho/zandronum/get/tip.tar.bz2)
+	@ $(call download,$(fmod).tgz,http://zandronum.com/essentials/fmod/$(fmod).tar.gz)
 	@ $(call verifysha256,$(fmod).tgz,$(sha256sum_fmod))
 
-	tar xvf tip.tar.bz2
+	tar xvf zandronum.tar.gz
 	mv Torr_Samaho-zandronum-* $(builddir)
 	cp $(fmod).tgz $(builddir)
 

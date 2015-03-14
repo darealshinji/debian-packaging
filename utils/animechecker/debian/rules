@@ -10,7 +10,7 @@ override_dh_auto_clean:
 
 override_dh_auto_build:
 	rm -rf patchelfmod-master
-	tar xvf patchelfmod.tgz
+	tar xvf patchelfmod.tar.gz
 	cd patchelfmod-master && autoreconf -ifv
 	cd patchelfmod-master && ./configure && $(MAKE) check
 

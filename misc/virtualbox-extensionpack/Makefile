@@ -14,7 +14,7 @@ major_minor   = $(shell echo $(version) | cut -d. -f1,2)
 next          = $(major_minor).$(shell echo $$(( $$(echo $(version) | cut -d. -f3) + 1 )) )
 
 download:
-	wget "$(URL)/$(version)/$(bin)"
+	@ $(call download,$(bin),$(URL)/$(version)/$(bin))
 	@ $(call verifysha256, $(bin), $(sha256sum))
 	sed -e 's/@bin@/$(bin)/; s/@sha256sum@/$(sha256sum)/;' debian/postinst.in > debian/postinst
 	sed -e 's/@VERSION@/$(version)/g; s/@MAJ_MIN@/$(major_minor)/g; s/@NEXT@/$(next)/g' debian/control.in > debian/control

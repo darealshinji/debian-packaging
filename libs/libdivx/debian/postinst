@@ -1,9 +1,0 @@
-#!/bin/sh
-set -e
-
-if [ "$1" = "configure" ]; then
-  update-alternatives --install /usr/lib/libdivx.so libdivx /usr/lib/divx/libdivx.so 10
-	ldconfig
-fi
-
-#DEBHELPER#

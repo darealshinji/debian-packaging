@@ -8,6 +8,6 @@ srcfiles      = $(bin)
 changelog-msg = Current release version
 
 download:
-	wget "http://media.steampowered.com/installer/$(bin)"
+	@ $(call download,$(bin)http://media.steampowered.com/installer/$(bin))
 	VERSION=`stat steamcmd_linux.tar.gz | grep Modify | cut -d' ' -f2 | tr -d -`; \
-		$(changelog-entry)
+	$(changelog-entry)

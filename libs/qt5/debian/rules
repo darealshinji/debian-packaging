@@ -1,21 +1,21 @@
 #!/usr/bin/make -f
 
-tmp = $(CURDIR)/debian/tmp
 VERSION = $(shell dpkg-parsechangelog -SSource | sed 's/libqt//')
 scripts = debian/postinst debian/prerm
+tmp     = $(CURDIR)/debian/tmp
 
 
 %:
 	dh ${@}
 
 override_dh_install: $(scripts)
-	mkdir -p $(tmp)/usr/lib/Qt $(tmp)/mysql
 	7z x addons.7z
 	7z x essentials.7z
 	7z x icu.7z
-	dpkg-deb -x deb/libmysqlclient16.deb $(tmp)/mysql
+	tar xvf libmysqlclient16.txz
+	mkdir -p $(tmp)/usr/lib/Qt
 	mv $(VERSION) $(tmp)/usr/lib/Qt
-	mv $(tmp)/mysql/usr/lib/*.so.* $(tmp)/usr/lib/Qt/*/*/lib/
+	cp libmysqlclient16/*.so.* $(tmp)/usr/lib/Qt/*/*/lib/
 	dh_install
 
 override_dh_clean:

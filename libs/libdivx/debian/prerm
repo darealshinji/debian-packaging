@@ -1,9 +1,0 @@
-
-#!/bin/sh
-set -e
-
-if [ "$1" = "remove" ]; then
-  update-alternatives --remove libdivx /usr/lib/divx/libdivx.so
-fi
-
-#DEBHELPER#

@@ -8,6 +8,5 @@ srcfiles       = $(tgz) patchelfmod.tar.gz
 
 download:
 	./download.sh
-	test -f $(tgz) && true || mv fmodapi*linux.tar.gz $(tgz)
 	debian/rules debian/control
 

@@ -7,5 +7,5 @@ srcfiles       = $(bin)
 distcleanfiles = $(bin)
 
 download:
-	test -f $(bin) || wget -O $(bin) "http://www.desura.com/desura-x86_64.tar.gz"
+	@ $(call download,$(bin),http://www.desura.com/desura-x86_64.tar.gz)
 

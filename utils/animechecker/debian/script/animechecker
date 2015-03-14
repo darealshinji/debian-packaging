@@ -1,11 +1,11 @@
 #!/bin/sh
 
-if [ ! -d "$HOME/.config/animechecker" ]; then
-   mkdir -p "$HOME/.config/animechecker"
-fi
-if [ ! -L "$HOME/.config/animechecker/animechecker" ]; then
-   ln -fs /usr/lib/animechecker/animechecker "$HOME/.config/animechecker/animechecker"
-fi
+# save configurations in ~/.config/animechecker
 
-LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/animechecker" "$HOME/.config/animechecker/animechecker" "$@"
+confdir="$HOME/.config/animechecker"
+test -d "$confdir" || mkdir -p "$confdir"
+test -L "$confdir/animechecker" || ln -fs /usr/lib/animechecker/animechecker "$confdir/animechecker"
+
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/animechecker"
+"$confdir/animechecker" "$@"
 

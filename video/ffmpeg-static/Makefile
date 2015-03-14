@@ -11,6 +11,6 @@ BIN  = $(shell wget -q -O - http://johnvansickle.com/ffmpeg/ | grep -e 'ffmpeg-g
 DATE = $(shell echo $(BIN) | cut -d- -f3)
 
 download:
-	wget -O ffmpeg-static.tar.xz "http://johnvansickle.com/ffmpeg/builds/$(BIN)"
+	@ $(call download,ffmpeg-static.tar.xz,http://johnvansickle.com/ffmpeg/builds/$(BIN))
 	@ VERSION=$(DATE); $(changelog-entry)
 

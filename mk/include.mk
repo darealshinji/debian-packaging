@@ -27,6 +27,11 @@ define verifysha256
 endef
 
 
+define download
+    test -f $(1) || wget -O $(1) '$(2)'
+endef
+
+
 
 
 MAINTAINER     = Marshall Banana <djcj@gmx.de>
@@ -179,7 +184,7 @@ endif
 	then                                                                                 \
 	    echo "Additional build dependencies have been installed." ;                      \
 	    read -p "Do you want to remove them (recommended)? (Y/n) " REMOVE ;              \
-	    if [ x$$REMOVE = xy ] || [ x$$REMOVE = xY ] || [ x$$REMOVE = x] ;                \
+	    if [ x$$REMOVE = xy ] || [ x$$REMOVE = xY ] || [ x$$REMOVE = x ] ;               \
 	    then                                                                             \
 	        sudo -k apt-get autoremove --purge pbuilder-satisfydepends-dummy ;           \
 	    fi                                                                               \

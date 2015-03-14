@@ -17,18 +17,20 @@ version=$(echo $pointversion | sed -e 's/\.//g')
 rm -f $changelog
 
 dirname=fmodapi${version}linux
-fname=${dirname}.tar.gz
+fname=fmodapi-linux.tgz
 
-if [ -f fmodapi-linux.tgz ] ; then
-    ln -s fmodapi-linux.tgz $fname
-else
+if [ ! -f $fname ] ; then
     echo "download fmod ex"
-    if [ ! -f $fname ] ; then
-        wget "http://www.fmod.org/download/fmodex/api/Linux/$fname"
-    fi
+    wget -O $fname "http://www.fmod.org/download/fmodex/api/Linux/${dirname}.tar.gz"
 fi
 rm -rf "$dirname"
 tar xvf "$fname"
+
+echo "download patchelfmod"
+TGZ=patchelfmod.tar.gz
+if [ ! -f $TGZ ] ; then
+wget -O $TGZ "https://github.com/darealshinji/patchelfmod/archive/master.tar.gz"
+fi
 
 sed -e "s/@REV@/$rev/; s/@VERSION@/$pointversion/; s/@DATE@/$(date -R)/;" \
 debian/changelog.in > debian/changelog

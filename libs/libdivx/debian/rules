@@ -15,8 +15,10 @@ override_dh_auto_configure:
 override_dh_auto_build:
 	dh_auto_build -Dpatchelfmod-master -- check
 	unzip -d tmp -P h08pzt4 contents.dat
-	execstack -c tmp/lib/libdivx.so
-	patchelfmod-master/src/patchelfmod -d -S libdivx.so tmp/lib/libdivx.so
+	mv tmp/lib/libdivx.so tmp/lib/libdivx.so.6.1.1
+	execstack -c tmp/lib/libdivx.so.6.1.1
+	# fake soname version, like in libjpeg
+	patchelfmod-master/src/patchelfmod -d -S libdivx.so.6.1.1 tmp/lib/libdivx.so.6.1.1
 	cp -f README.linux README
 
 override_dh_strip:

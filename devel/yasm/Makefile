@@ -9,14 +9,14 @@ SITE       = http://www.tortall.net/projects/yasm
 bin        = yasm-$(VERSION).tar.gz
 
 download:
-	wget "$(SITE)/releases/$(bin)"
-	wget "$(SITE)/manual/manual.pdf"
-	wget -O manual-ru.pdf "$(SITE)/manual/ru/manual.pdf"
-	wget -k "$(SITE)/manual/html/manual.html"
-	wget -k -O manual-ru.html "$(SITE)/manual/ru/html/manual.html"
-	wget "$(SITE)/manual/html/objfmt-win64/calling-convention.png"
-	wget "$(SITE)/manual/html/objfmt-win64/stack-frame-detailed.png"
-	wget "$(SITE)/manual/html/arch-x86/x86-registers.png"
+	@ $(call download,$(bin),$(SITE)/releases/$(bin))
+	@ $(call download,manual.pdf,$(SITE)/manual/manual.pdf)
+	@ $(call download,manual-ru.pdf,$(SITE)/manual/ru/manual.pdf)
+	test -f manual.html || wget -k "$(SITE)/manual/html/manual.html"
+	test -f manual-ru.html || wget -k -O manual-ru.html "$(SITE)/manual/ru/html/manual.html"
+	@ $(call download,calling-convention.png,$(SITE)/manual/html/objfmt-win64/calling-convention.png)
+	@ $(call download,stack-frame-detailed.png,$(SITE)/manual/html/objfmt-win64/stack-frame-detailed.png)
+	@ $(call download,x86-registers.png,$(SITE)/manual/html/arch-x86/x86-registers.png)
 
 	sed -i 's@$(SITE)/manual/html/objfmt-win64/calling-convention.png@images/calling-convention.png@;' manual.html
 	sed -i 's@$(SITE)/manual/html/objfmt-win64/stack-frame-detailed.png@images/stack-frame-detailed.png@;' manual.html

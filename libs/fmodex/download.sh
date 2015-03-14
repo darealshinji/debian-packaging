@@ -17,15 +17,11 @@ version=$(echo $pointversion | sed -e 's/\.//g')
 rm -f $changelog
 
 dirname=fmodapi${version}linux
-fname=${dirname}.tar.gz
+fname=fmodapi-linux.tgz
 
-if [ -f fmodapi-linux.tgz ] ; then
-    ln -s fmodapi-linux.tgz $fname
-else
+if [ ! -f $fname ] ; then
     echo "download fmod ex"
-    if [ ! -f $fname ] ; then
-        wget "http://www.fmod.org/download/fmodex/api/Linux/$fname"
-    fi
+    wget -O $fname "http://www.fmod.org/download/fmodex/api/Linux/${dirname}.tar.gz"
 fi
 rm -rf "$dirname"
 tar xvf "$fname"

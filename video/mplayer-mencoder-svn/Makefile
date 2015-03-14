@@ -10,7 +10,7 @@ changelog-msg  = Current svn snapshot
 
 
 download:
-	wget "http://mplayerhq.hu/MPlayer/releases/$(bin)"
+	@ $(call download,$(bin),http://mplayerhq.hu/MPlayer/releases/$(bin))
 	mkdir -p $(builddir)
 	cd $(builddir) && tar xvf ../$(bin)
 	mv $(builddir)/mplayer-export-*/* $(builddir)
@@ -18,9 +18,7 @@ download:
 	git clone -b master --depth 1 "git://source.ffmpeg.org/ffmpeg.git" $(builddir)/ffmpeg
 
 	@ REV=$$(cat $(builddir)/snapshot_version | cut -d- -f1) ;\
-	VERSION=$(VERSION)+svn$${REV} ;\
-	$(changelog-entry)
+	VERSION=$(VERSION)+svn$${REV} ;	$(changelog-entry)
 
-	cd $(builddir) && \
-	rm -rf debian ffmpeg/mp_auto_pull ffmpeg/.git mplayer-export-*
+	cd $(builddir) && rm -rf debian ffmpeg/mp_auto_pull ffmpeg/.git mplayer-export-*
 

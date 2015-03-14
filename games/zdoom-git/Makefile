@@ -1,10 +1,12 @@
 include ../../mk/include.mk
 
-deps       = wget git
-cleanfiles = fmodapi*linux zdoom debian/changelog
-srcfiles   = zdoom fmodapi*linux.tar.gz
+deps           = wget git
+builddir       = zdoom
+cleanfiles     = fmodapi*linux debian/changelog
+distcleanfiles = *.tgz
+srcfiles       = fmodapi444*linux.tgz
 
 download:
-	./download.sh
-	rm -rf zdoom/.git
+	test -d $(builddir) || ./download.sh
+	rm -rf $(builddir)/.git
 

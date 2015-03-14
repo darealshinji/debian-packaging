@@ -6,24 +6,21 @@ LANG=C
 LANGUAGE=C
 LC_ALL=C
 
-# get latest fmod ex version
-changelog=revision_4.44.txt
-wget "http://www.fmod.org/files/$changelog"
-
-pointversion=$(grep -e "Stable branch update" $changelog | cut -d' ' -f2 | head -n1)
-version=$(echo $pointversion | sed -e 's/\.//g')
-rm -f $changelog
-
-dirname=fmodapi${version}linux
-fname=${dirname}.tar.gz
-
 # fmod ex
-if [ -f fmodapi-linux.tgz ] ; then
-    ln -s fmodapi-linux.tgz $fname
-else
+if [ ! -f fmodapi-linux.tgz ] ; then
+    # get latest fmod ex version
+    changelog=revision_4.44.txt
+    wget "http://www.fmod.org/files/$changelog"
+
+    pointversion=$(grep -e "Stable branch update" $changelog | cut -d' ' -f2 | head -n1)
+    version=$(echo $pointversion | sed -e 's/\.//g')
+    rm -f $changelog
+
+    dirname=fmodapi${version}linux
+
     echo "download fmod ex"
-    if [ ! -f $fname ] ; then
-        wget "http://www.fmod.org/download/fmodex/api/Linux/$fname"
+    if [ ! -f ${dirname}.tgz ] ; then
+        wget -O ${dirname}.tgz "http://www.fmod.org/download/fmodex/api/Linux/${dirname}.tar.gz"
     fi
 fi
 

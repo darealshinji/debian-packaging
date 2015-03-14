@@ -14,6 +14,6 @@ VERSION       = $(shell wget -q -O - http://www.xnview.com/en/nconvert/ | grep -
 		perl -ne 'printf qq[%s\n], $$1 if m/<p>([^<]+)<\/p>/' | cut -d' ' -f2)
 
 download:
-	wget "http://download.xnview.com/$(bin)"
+	@ $(call download,$(bin),http://download.xnview.com/$(bin))
 	VERSION=$(VERSION); $(changelog-entry)
 

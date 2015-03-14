@@ -15,15 +15,11 @@ version=$(echo $pointversion | sed -e 's/\.//g')
 rm -f $changelog
 
 dirname=fmodstudioapi${version}linux
-fname=${dirname}.tar.gz
+fname=fmodstudioapi-linux.tgz
 
-if [ -f fmodstudioapi-linux.tgz ] ; then
-    ln -s fmodstudioapi-linux.tgz $fname
-else
+if [ ! -f $fname ] ; then
     echo "download fmod"
-    if [ ! -f $fname ] ; then
-        wget "http://www.fmod.org/download/fmodstudio/api/Linux/$fname"
-    fi
+    wget -O $fname "http://www.fmod.org/download/fmodstudio/api/Linux/${dirname}.tar.gz"
 fi
 rm -rf "$dirname"
 tar xvf "$fname"
