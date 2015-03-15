@@ -1,0 +1,6 @@
+# pre-built binary
+cmake-curses-gui: embedded-library usr/bin/ccmake: *
+cmake-curses-gui: hardening-no-relro usr/bin/ccmake
+
+# will be installed with cmake-data
+cmake-curses-gui: menu-icon-missing usr/share/pixmaps/cmake.xpm

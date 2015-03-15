@@ -1,0 +1,5 @@
+debian/cmake.xpm    usr/share/pixmaps
+usr/share/aclocal/cmake.m4
+usr/share/cmake-*/*
+usr/share/cmake-*/editors/emacs/cmake-mode.el  usr/share/emacs/site-lisp
+usr/share/man/man7/*

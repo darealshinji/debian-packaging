@@ -1,0 +1,3 @@
+# pre-built binary
+cmake: embedded-library usr/bin/*: *
+cmake: hardening-no-relro usr/bin/*

@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@ --with=bash-completion
+
+override_dh_auto_clean:
+	rm -rf cmake-*-Linux-*/
+
+override_dh_auto_install:
+	tar xvf cmake.tgz
+	mkdir -p debian/tmp/usr/
+	cp -r cmake-*-Linux-*/* debian/tmp/usr/
+	mv debian/tmp/usr/man debian/tmp/usr/share/
+	rm -r debian/tmp/usr/share/cmake-*/Licenses
+	rm -r debian/tmp/usr/share/cmake-*/Help
+	cp debian/MultiArchCross.cmake debian/tmp/usr/share/cmake-*/Modules
+	chrpath -d debian/tmp/usr/bin/*
+
+override_dh_install:
+	dh_install --list-missing
+
+override_dh_installdocs:
+	dh_installdocs -A ReleaseNotes
+
+override_dh_shlibdeps:
+	dh_shlibdeps -- -v
+

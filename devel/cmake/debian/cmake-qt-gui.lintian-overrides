@@ -1,0 +1,6 @@
+# pre-built binary
+cmake-qt-gui: embedded-library usr/bin/cmake-gui: *
+cmake-qt-gui: hardening-no-relro usr/bin/cmake-gui
+
+# will be installed with cmake-data
+cmake-qt-gui: menu-icon-missing usr/share/pixmaps/cmake.xpm
