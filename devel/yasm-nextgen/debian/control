@@ -1,0 +1,40 @@
+Source: yasm-nextgen
+Section: devel
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               cmake (>= 2.4),
+               help2man,
+               python
+Standards-Version: 3.9.5
+Vcs-Git: https://github.com/yasm/yasm-nextgen.git
+Vcs-Browser: https://github.com/yasm/yasm-nextgen
+Homepage: https://github.com/yasm/yasm-nextgen
+
+Package: yasm-nextgen
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: Yasm Assembler rewrite (experimental)
+ This project is a translation of the Yasm mainline C code into ANSI/ISO C++.
+ It's currently somewhat of an experimental project, so a number of features
+ present in the mainline version of yasm are not yet implemented.
+ .
+ Major things that work:
+  * GNU AS syntax (more complete than mainline)
+  * NASM basic syntax (no preprocessor)
+  * Most object files (ELF, Win32/64)
+  * DWARF2 debug info
+ .
+ Major things that don't work / don't exist:
+  * NASM preprocessor
+  * Mach-O object files
+  * List file output
+ .
+ Some interesting things being worked on:
+  * "ygas" frontend - dropin replacement for GNU AS
+  * "ygas" branch - configure based, stripped down distribution for the above
+  * "ygas-c" branch - backtranslation to C of the above for improved
+    portability
+  * yobjdump - dropin replacement for GNU objdump
+

@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+
+CFLAGS   += -O3 -Wall -Wno-unused-result $(CPPFLAGS)
+CXXFLAGS  = $(CFLAGS)
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf build
+
+override_dh_auto_configure:
+	mkdir -p build
+	cd build && cmake \
+		-DBUILD_STATIC=ON \
+		-DBUILD_TESTING=OFF \
+		-DBUILD_TESTS=OFF \
+		-DBUILD_TEST_COVERAGE=OFF \
+		-DCMAKE_VERBOSE_MAKEFILE=ON \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		$(CURDIR)
+
+override_dh_auto_build:
+	dh_auto_build -Dbuild
+	mv build/yasm build/yasm2
+	help2man -N -h '-help' -n 'Yasm Assembler rewrite' build/yasm2 > build/yasm2.1
+	help2man -N -h '-help' -n 'dropin replacement for GNU AS' build/ygas > build/ygas.1
+	help2man -N -h '-help-hidden' -n 'dropin replacement for GNU objdump' build/yobjdump > build/yobjdump.1
+

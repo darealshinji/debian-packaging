@@ -1,0 +1,3 @@
+build/yasm2      /usr/bin
+build/ygas       /usr/bin
+build/yobjdump   /usr/bin
