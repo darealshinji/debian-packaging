@@ -2,18 +2,15 @@ Source: utorrent
 Section: non-free/web
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends:
- debhelper (>= 9),
- imagemagick,
- libssl1.0.0 (>= 1.0.0)
+Build-Depends: debhelper (>= 9),
+               imagemagick,
+			   libssl1.0.0 (>= 1.0.0)
 Standards-Version: 3.9.5
 Homepage: http://www.utorrent.com
 
 Package: utorrent
 Architecture: amd64 i386
-Depends:
- ${misc:Depends},
- ${shlibs:Depends},
- firefox | iceweasel | chromium-browser | midori | epiphany-browser | rekonq | konqueror | arora | qupzilla | google-chrome-stable | opera | www-browser
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: firefox | iceweasel | chromium-browser | midori | epiphany-browser | rekonq | konqueror | arora | qupzilla | google-chrome-stable | opera | www-browser
 Description: BitTorrent Client
  µTorrent is a tiny BitTorrent client.

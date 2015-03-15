@@ -11,5 +11,5 @@ download:
 	rm -rf ffmpeg/.git
 	cp -vf /usr/share/misc/config.guess x264-source
 	cp -vf /usr/share/misc/config.sub x264-source
-	@ VERSION=2:$$(./version.sh)-1 ; $(changelog-entry)
+	@ VERSION=2:$$(./version.sh) ; $(changelog-entry)
 

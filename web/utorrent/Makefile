@@ -14,7 +14,7 @@ checksum = 6e4f836d5ca6bc5ec48632b4e425a936d1a09ab38a6ed2ab8d7016dd8e2b81bf
 endif
 
 download:
-	wget -O $(bin) "http://download-new.utorrent.com/endpoint/utserver/os/linux-$(DLARCH)-ubuntu-13-04/track/beta"
-	wget -O $(png) "http://www.utorrent.com/img/banners/utSmartBanner.png"
-	@$(call verifysha256,$(bin),$(checksum))
+	@ $(call download,$(bin),http://download-new.utorrent.com/endpoint/utserver/os/linux-$(DLARCH)-ubuntu-13-04/track/beta)
+	@ $(call download,$(png),http://www.utorrent.com/img/banners/utSmartBanner.png)
+	@ $(call verifysha256,$(bin),$(checksum))
 
