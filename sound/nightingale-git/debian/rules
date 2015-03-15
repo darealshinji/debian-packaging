@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-DEB_HOST_GNU_CPU ?= $(shell dpkg-architecture -qDEB_HOST_GNU_CPU)
-
 CXXFLAGS = \
 	$(CPPFLAGS) \
 	$(filter-out -g,$(shell dpkg-buildflags --get CXXFLAGS)) \
@@ -23,7 +21,7 @@ ac_add_options = \
 override_dh_auto_configure:
 
 override_dh_auto_build:
-	cd dependencies && tar xvf linux-$(DEB_HOST_GNU_CPU)-lintian-release.tar.lzma
+	cd dependencies && tar xvf linux-*-lintian-release.tar.lzma
 
 	$(foreach OPTION,$(ac_add_options),\
 	  echo 'ac_add_options $(OPTION)' >> nightingale.config ;)
