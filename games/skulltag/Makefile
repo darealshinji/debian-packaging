@@ -21,7 +21,7 @@ download:
 	@ $(call download,changelog.txt,http://skulltag.com/download/files/release/Skulltag%20Version%20History.txt)
 	@ $(call download,patchelfmod.tar.gz,https://github.com/darealshinji/patchelfmod/archive/master.tar.gz)
 	@ $(call download,$(bin).tbz,http://www.skulltag.com/download/files/release/$(bin).tar.bz2)
-	@ $(call download,$(fmod).tgz,http://zandronum.com/essentials/fmod/$(fmod).tar.gz)
+	@ $(call download,$(fmod).tgz,http://www.fmod.org/download/fmodex/api/Linux/$(fmod).tar.gz)
 	@ $(call download,$(jpeg),https://github.com/darealshinji/libjpeg6b/archive/patched.tar.gz)
 	@ $(call verifysha256,$(bin).tbz,$(sha256sum))
 	@ $(call verifysha256,$(fmod).tgz,$(sha256sum_fmod))
