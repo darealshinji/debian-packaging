@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf SpaghettiArmageddon
+
+override_dh_auto_build:
+	tar xvf SpaghettiArmageddon_Linux.tar.gz
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+	dh_shlibdeps -l/usr/lib/spaghetti-armageddon
+

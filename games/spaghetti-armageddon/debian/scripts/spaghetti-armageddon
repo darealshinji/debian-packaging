@@ -1,0 +1,13 @@
+#!/bin/sh
+
+libdir=/usr/lib/spaghetti-armageddon
+datdir=/usr/share/games/spaghetti-armageddon
+dat=SpaghettiArmageddon.dat
+
+confdir="$HOME/.config/SpaghettiArmageddon"
+mkdir -p "$confdir"
+ln -fs "$datdir/$dat" "$confdir/$dat"
+cd "$confdir"
+
+LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$libdir" "$libdir/SpaghettiArmageddon" "$@"
+

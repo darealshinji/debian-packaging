@@ -1,0 +1,6 @@
+SpaghettiArmageddon/libsfml-*.so.1.6             /usr/lib/spaghetti-armageddon
+SpaghettiArmageddon/SpaghettiArmageddon          /usr/lib/spaghetti-armageddon
+SpaghettiArmageddon/SpaghettiArmageddon.dat      /usr/share/games/spaghetti-armageddon
+debian/scripts/spaghetti-armageddon              /usr/games
+debian/spaghetti-armageddon.desktop              /usr/share/applications
+debian/spaghetti-armageddon.xpm                  /usr/share/pixmaps

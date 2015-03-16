@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Spaghetti Armageddon
+Exec=spaghetti-armageddon
+TryExec=/usr/games/spaghetti-armageddon
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=spaghetti-armageddon
