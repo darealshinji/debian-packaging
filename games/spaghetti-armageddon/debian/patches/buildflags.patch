@@ -1,0 +1,74 @@
+--- a/SFML-1.6/src/SFML/Makefile
++++ b/SFML-1.6/src/SFML/Makefile
+@@ -17,9 +17,10 @@
+ 
+ export CC         = gcc
+ export CPP        = g++
+-export CFLAGS     = -W -Wall -pedantic -I../../../include -I../../ $(DEBUGFLAGS) $(BUILDFLAGS)
++export CFLAGS    += -Wall -pedantic $(CPPFLAGS) -I../../../include -I../../ $(DEBUGFLAGS) $(BUILDFLAGS)
++export CXXFLAGS   = $(CFLAGS)
+ export CFLAGSEXT  = -I../../../include -I../.. $(DEBUGFLAGS) $(BUILDFLAGS)
+-export LDFLAGS    = $(LINKFLAGS)
++export LDFLAGS   += $(LINKFLAGS)
+ export LIBPATH    = ../../../lib
+ export VERSION    = 1.6
+ export CP         = cp
+--- a/SFML-1.6/src/SFML/Audio/Makefile
++++ b/SFML-1.6/src/SFML/Audio/Makefile
+@@ -19,10 +19,10 @@
+ 	$(AR) $(ARFLAGS) $(LIBNAME) $(OBJ) $(OBJVORBIS)
+ 
+ libsfml-audio.so: $(OBJ) $(OBJVORBIS)
+-	$(CPP) $(LDFLAGS) -Wl,-soname,$(LIB).$(VERSION) -o $(LIBNAME) $(OBJ) $(OBJVORBIS) -lsndfile -lopenal $(LIBPATH)/libsfml-system.so.$(VERSION)
++	$(CXX) $(LDFLAGS) -Wl,-soname,$(LIB).$(VERSION) -o $(LIBNAME) $(OBJ) $(OBJVORBIS) -lsndfile -lopenal $(LIBPATH)/libsfml-system.so.$(VERSION)
+ 
+ $(OBJ): %.o: %.cpp
+-	$(CPP) -o $@ -c $< $(CFLAGS)
++	$(CXX) -o $@ -c $< $(CXXFLAGS)
+ 
+ $(OBJVORBIS): %.o: %.c
+ 	$(CC) -o $@ -c $< $(CFLAGSEXT)
+--- a/SFML-1.6/src/SFML/Graphics/Makefile
++++ b/SFML-1.6/src/SFML/Graphics/Makefile
+@@ -20,7 +20,7 @@
+ 	$(CPP) $(LDFLAGS) -Wl,-soname,$(LIB).$(VERSION) -o $(LIBNAME) $(OBJ) -lGLEW -ljpeg -lpng -lSOIL -lfreetype $(LIBPATH)/libsfml-system.so.$(VERSION) $(LIBPATH)/libsfml-window.so.$(VERSION) -lGL
+ 
+ $(OBJ): %.o: %.cpp
+-	$(CPP) -o $@ -c $< $(CFLAGS) -I/usr/include/freetype2
++	$(CXX) -o $@ -c $< $(CXXFLAGS) -I/usr/include/freetype2
+ 
+ .PHONY: clean mrproper
+ 
+--- a/SFML-1.6/src/SFML/Network/Makefile
++++ b/SFML-1.6/src/SFML/Network/Makefile
+@@ -20,7 +20,7 @@
+ 	$(CPP) $(LDFLAGS) -Wl,-soname,$(LIB).$(VERSION) -o $(LIBNAME) $(OBJ)
+ 
+ $(OBJ): %.o: %.cpp
+-	$(CPP) -o $@ -c $< $(CFLAGS)
++	$(CXX) -o $@ -c $< $(CXXFLAGS)
+ 
+ .PHONY: clean mrproper
+ 
+--- a/SFML-1.6/src/SFML/System/Makefile
++++ b/SFML-1.6/src/SFML/System/Makefile
+@@ -20,7 +20,7 @@
+ 	$(CPP) $(LDFLAGS) -Wl,-soname,$(LIB).$(VERSION) -o $(LIBNAME) $(OBJ) -lpthread
+ 
+ $(OBJ): %.o: %.cpp
+-	$(CPP) -o $@ -c $< $(CFLAGS)
++	$(CXX) -o $@ -c $< $(CXXFLAGS)
+ 
+ .PHONY: clean mrproper
+ 
+--- a/SFML-1.6/src/SFML/Window/Makefile
++++ b/SFML-1.6/src/SFML/Window/Makefile
+@@ -20,7 +20,7 @@
+ 	$(CPP) $(LDFLAGS) -Wl,-soname,$(LIB).$(VERSION) -o $(LIBNAME) $(OBJ) -lX11 -lXrandr -lGL $(LIBPATH)/libsfml-system.so.$(VERSION)
+ 
+ $(OBJ): %.o: %.cpp
+-	$(CPP) -o $@ -c $< $(CFLAGS)
++	$(CXX) -o $@ -c $< $(CXXFLAGS)
+ 
+ .PHONY: clean mrproper
+ 

@@ -5,10 +5,12 @@
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf SpaghettiArmageddon
+	dh_auto_clean -DSFML-1.6
+	rm -rf SpaghettiArmageddon SFML-1.6/lib
 
 override_dh_auto_build:
-	tar xvf SpaghettiArmageddon_Linux.tar.gz
+	dh_auto_build -DSFML-1.6
+	tar xvf SpaghettiArmageddon_Linux.tgz
 
 override_dh_makeshlibs:
 

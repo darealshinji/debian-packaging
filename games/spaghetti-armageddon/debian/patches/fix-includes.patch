@@ -1,0 +1,100 @@
+--- a/SFML-1.6/include/SFML/System/Resource.hpp
++++ b/SFML-1.6/include/SFML/System/Resource.hpp
+@@ -28,6 +28,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <set>
+ 
+ 
+--- a/SFML-1.6/include/SFML/Audio/Music.hpp
++++ b/SFML-1.6/include/SFML/Audio/Music.hpp
+@@ -28,6 +28,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <SFML/Audio/SoundStream.hpp>
+ #include <string>
+ #include <vector>
+--- a/SFML-1.6/include/SFML/Audio/Sound.hpp
++++ b/SFML-1.6/include/SFML/Audio/Sound.hpp
+@@ -28,6 +28,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <SFML/System/Resource.hpp>
+ #include <SFML/System/Vector3.hpp>
+ #include <SFML/Audio/AudioResource.hpp>
+--- a/SFML-1.6/include/SFML/Audio/SoundBuffer.hpp
++++ b/SFML-1.6/include/SFML/Audio/SoundBuffer.hpp
+@@ -28,6 +28,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <SFML/System/Resource.hpp>
+ #include <SFML/Audio/AudioResource.hpp>
+ #include <string>
+--- a/SFML-1.6/include/SFML/Graphics/PostFX.hpp
++++ b/SFML-1.6/include/SFML/Graphics/PostFX.hpp
+@@ -28,6 +28,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <SFML/Graphics/Drawable.hpp>
+ #include <SFML/Graphics/Image.hpp>
+ #include <istream>
+--- a/SFML-1.6/include/SFML/Graphics/RenderWindow.hpp
++++ b/SFML-1.6/include/SFML/Graphics/RenderWindow.hpp
+@@ -28,6 +28,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <SFML/Graphics/Image.hpp>
+ #include <SFML/Graphics/RenderTarget.hpp>
+ #include <SFML/Window/Window.hpp>
+--- a/SFML-1.6/include/SFML/Graphics/Sprite.hpp
++++ b/SFML-1.6/include/SFML/Graphics/Sprite.hpp
+@@ -28,6 +28,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <SFML/System/Resource.hpp>
+ #include <SFML/Graphics/Drawable.hpp>
+ #include <SFML/Graphics/Rect.hpp>
+--- a/SFML-1.6/include/SFML/Graphics/String.hpp
++++ b/SFML-1.6/include/SFML/Graphics/String.hpp
+@@ -28,6 +28,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <SFML/System/Resource.hpp>
+ #include <SFML/System/Unicode.hpp>
+ #include <SFML/Graphics/Drawable.hpp>
+--- a/SFML-1.6/src/SFML/Graphics/Font.cpp
++++ b/SFML-1.6/src/SFML/Graphics/Font.cpp
+@@ -25,6 +25,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <SFML/Graphics/Font.hpp>
+ #include <SFML/Graphics/FontLoader.hpp>
+ #include <iostream>
+--- a/SFML-1.6/src/SFML/Graphics/Image.cpp
++++ b/SFML-1.6/src/SFML/Graphics/Image.cpp
+@@ -25,6 +25,7 @@
+ ////////////////////////////////////////////////////////////
+ // Headers
+ ////////////////////////////////////////////////////////////
++#include <cstddef>
+ #include <SFML/Graphics/Image.hpp>
+ #include <SFML/Graphics/ImageLoader.hpp>
+ #include <SFML/Graphics/RenderWindow.hpp>
