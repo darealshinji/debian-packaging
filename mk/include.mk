@@ -114,6 +114,7 @@ build: source
 	   cd $(builddir) && QUILT_PATCHES=debian/patches quilt push -a ; \
 	   rm -rf $(builddir)/.pc ;                                       \
 	fi
+	mkdir -p $(builddir)/debian/source
 	echo '3.0 (native)' > $(builddir)/debian/source/format
 
 ifeq ($(PBUILDER),0)
