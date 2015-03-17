@@ -6,5 +6,5 @@
 +for d in MediaInfo/Project/GNU/GUI MediaInfoLib/Project/GNU/Library ZenLib/Project/GNU/Library ;
 +do
 +    sed -i 's@AM_INIT_AUTOMAKE(\[@AM_INIT_AUTOMAKE([subdir-objects @' $d/configure.ac
-+	autoreconf -ivf $d
++    autoreconf -ivf $d
 +done
