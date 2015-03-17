@@ -6,7 +6,11 @@ LDFLAGS  += -Wl,-z,defs -Wl,--as-needed
 
 
 %:
-	dh $@ --parallel
+	dh $@ --parallel --with autoreconf
+
+override_dh_autoreconf:
+	chmod a+x ./autogen.sh
+	dh_autoreconf -- ./autogen.sh
 
 override_dh_auto_clean:
 	dh_auto_clean -DMediaInfo/Project/GNU/CLI
