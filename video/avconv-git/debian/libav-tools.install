@@ -1,0 +1,6 @@
+debian/scripts/*        usr/bin/
+tools/qt-faststart      usr/bin/
+usr/bin/av*             usr/lib/libav-tools/
+usr/share/avconv/*.avpreset
+usr/share/man/man1/av*
+usr/lib/libav-tools/*.so.*

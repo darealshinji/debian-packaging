@@ -1,0 +1,34 @@
+#!/usr/bin/make -f
+
+include debian/confflags
+
+export V=1
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean || true
+
+override_dh_auto_configure:
+	CFLAGS='$(CFLAGS)' CPPFLAGS='$(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' \
+	./configure $(confflags) $(v3_confflags) $(nf_confflags) $(shared_build_confflags)
+
+override_dh_auto_build:
+	dh_auto_build
+	dh_auto_build -- tools/qt-faststart
+
+override_dh_auto_test:
+
+override_dh_installchangelogs:
+	dh_installchangelogs Changelog
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+	dh_shlibdeps -Llibav-tools -l/usr/lib/libav-tools
+
+override_dh_strip:
+	dh_strip --dbg-package=libav-dbg
+

@@ -1,0 +1,92 @@
+Source: ffmpeg
+Section: video
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Standards-Version: 3.9.5
+Vcs-Git: git://source.ffmpeg.org/ffmpeg.git
+Vcs-Browser: http://git.videolan.org/?p=ffmpeg.git;a=tree
+Homepage: http://www.ffmpeg.org/
+Build-Depends:
+ debhelper (>= 9),
+ doxygen,
+ frei0r-plugins-dev,
+ libasound2-dev,
+ libbz2-dev,
+ libcdio-cdda-dev,
+ libcdio-dev,
+ libcdio-paranoia-dev,
+ libdc1394-22-dev,
+ libfdk-aac-dev,
+ libfreetype6-dev,
+ libgnutls-dev,
+ libgsm1-dev,
+ libjack-dev,
+ libmp3lame-dev,
+ libopencore-amrnb-dev,
+ libopencore-amrwb-dev,
+ libopencv-dev,
+ libopenjpeg-dev,
+ libopus-dev,
+ libpulse-dev,
+ libraw1394-dev,
+ librtmp-dev,
+ libschroedinger-dev,
+ libsdl1.2-dev,
+ libspeex-dev,
+ libtheora-dev,
+ libtiff-dev,
+ libva-dev,
+ libvdpau-dev,
+ libvo-aacenc-dev,
+ libvo-amrwbenc-dev,
+ libvorbis-dev,
+ libvpx-dev,
+ libx11-dev,
+ libx264-dev,
+ libx265-dev,
+ libxext-dev,
+ libxfixes-dev,
+ libxcb1-dev,
+ libxcb-xfixes0-dev,
+ libxcb-shm0-dev,
+ libxvidcore-dev,
+ libxvmc-dev,
+ texi2html,
+ yasm,
+ zlib1g-dev
+
+Package: libav-tools
+Section: video
+Architecture: any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Suggests:
+ frei0r-plugins
+Description: Multimedia player, encoder and transcoder
+ Libav is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package contains the avplay multimedia player, the avconv audio
+ and video encoder, and the avprobe stream analyzer.  They support most
+ existing file formats (AVI, MPEG, OGG, Matroska, ASF...) and encoding
+ formats (MPEG, DivX, MPEG4, AC3, DV...). Additionally, it contains the
+ qt-faststart utility which rearranges Quicktime files to facilitate
+ network streaming.
+
+Package: libav-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends:
+ libav-tools (= ${binary:Version}),
+ ${misc:Depends}
+Description: Debug symbols for Libav related packages
+ Libav is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package contains debug data of the Libav related shared libraries.
+ .
+ Most people will not need this package. Please install it to produce useful
+ stacktraces to help debugging the Libav library.
+

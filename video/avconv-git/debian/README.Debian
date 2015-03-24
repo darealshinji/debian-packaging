@@ -1,0 +1,36 @@
+lintian override shlib-with-non-pic-codeshlib-with-non-pic-code
+==================================================================
+
+The lintian overrides for the non-pic shared libs error messages is not
+really a matter of silencing lintian. The general idea is that the
+override would serve as an indication that we know about the error
+message and we're avoiding any bug reports or complaints by others about
+the errors.
+
+We are aware that this override is too strict. It should only cover the
+i386 architecture, as we know that the upstream build system will
+produce PIC libraries where necessary. Only architectures like i386 will
+be built non-PIC, mainly for performance reasons.
+
+ -- Reinhard Tartler <siretart@tauware.de>, Sat, 28 Jun 2014 09:38:52 -0400
+
+Source package
+==============
+
+Libav represents the successor of the former ffmpeg source package. It
+provides all libraries and provides an upgrade path for existing
+application packages.
+
+ -- Reinhard Tartler <siretart@tauware.de>  Sat, 19 Mar 2011 08:13:46 +0100
+
+License of the Debian ffmpeg packages
+=====================================
+
+The license for the whole work is the GPL, not the LGPL, because
+GPL-only parts of ffmpeg were activated -- namely libswscale, x11grab
+and other GPL licensed libraries. If you need LGPL versions of the
+libraries, please comment out the appropriate line in debian/confflags.
+
+Because libavcodec-extra-* links against libraries that are licensed
+under Apache License 2.0, the resulting binaries are distributed under
+the GPL version 3 or later.

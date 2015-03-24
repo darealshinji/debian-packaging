@@ -1,0 +1,9 @@
+# Create a stand-alone package with private libraries to prevent any package conflicts.
+libav-tools: embedded-library usr/lib/libav-tools/*: lib*
+
+# According to Debian policy [1], non position independent code is permitted
+# in a shared library on i386 and position independent code may have a
+# performance penalty, especially on i386.
+# Therefore -fPIC is not used by the upstream build system on i386.
+# 1: https://www.debian.org/doc/debian-policy/footnotes.html#f84
+libav-tools: shlib-with-non-pic-code usr/lib/libav-tools/*

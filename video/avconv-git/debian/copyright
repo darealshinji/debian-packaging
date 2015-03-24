@@ -1,0 +1,514 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Libav
+Upstream-Contact: libav-devel@libav.org
+Source: http://libav.org
+Comment:
+  The license for the whole work is the GPL, not the LGPL, because GPL-only
+  parts of Libav were activated -- namely libswscale, x11grab and
+  other GPL licensed libraries. If you need LGPL versions of the libraries,
+  please comment out the appropriate line in debian/confflags.
+  .
+  Because libavcodec-extra-* links against libraries that are licensed
+  under Apache License 2.0, the resulting binaries are distributed under
+  the GPL version 3 or later.
+
+Files: *
+Copyright: 1994-2012, the Xiph.Org Foundation and contributors
+  1995, The Bitmap Brothers Ltd.
+  1999-2000, Sebastien Rougeaux <sebastien.rougeaux@anu.edu.au>
+  1999, Intel Corporation
+  1999, Roger Hardiman
+  2000-2001, Gerard Lantau
+  2000-2001, Michel Lespinasse <walken@zoy.org>
+  2000-2001, Peter Gubanov <peter@elecard.net.ru>
+  2000-2003,2005,2010, Fabrice Bellard
+  2000-2011, The libav developers
+  2001-2003, BERO <bero@geocities.co.jp>
+  2001,2003, Dr. Tim Ferguson
+  2001-2005, The ffmpeg Project
+  2001-2012, Michael Niedermayer <michaelni@gmx.at>
+  2001, Daniel Maas <dmaas@dcine.com>
+  2001, Juan J. Sierralta P
+  2001, Lionel Ulmer
+  2002-2004,2006-2011, Maxim Poliakovski
+  2002,2005, Francois Revol <revol@free.fr>
+  2002-2005, Roberto Togni
+  2002-2006, Alex Beregszaszi
+  2002-2008, The Libav Project
+  2002, Brian Foley
+  2002, Dieter Shirley
+  2002, Falk Hueffner <falk@debian.org>
+  2002, Frederic 'dilb' Boulay
+  2002, Gildas Bazin <gbazin@netcourrier.com>
+  2002, Gunnar Monell <gmo@linux.nu>
+  2002, Laszlo Torok <torokl@alpha.dfmk.hu>
+  2002, Lennert Buytenhek <buytenh@gnu.org>
+  2002, Mark Hills <mark@pogo.org.uk>
+  2002, Remi Guyomarch <rguyom@pobox.com>
+  2002, Steve O'Hara-Smith
+  2002, the xine project
+  2003-2004,2006, Roman Shaposhnik
+  2003-2004,2007, Mike Melanson <melanson@pcisys.net>
+  2003-2004, Romain Dolbeau <romain@dolbeau.org>
+  2003-2005, Christopher R. Hertel <crh@ubiqx.mn.org>
+  2003,2006-2007, Michel Bardiaux <mbardiaux@mediaxim.be>
+  2003,2008-2011, Sascha Sommer <saschasommer@freenet.de>
+  2003-2012, x264 project
+  2003, David S. Miller <davem@redhat.com>
+  2003, Ewald Snel
+  2003, Gustavo Sverzut Barbieri <gsbarbieri@yahoo.com.br>
+  2003, International Business Machines, Corp
+  2003, Ivan Kalvachev
+  2003, James Klicman <james@klicman.org>
+  2003, Max Krasnyansky <maxk@qualcomm.com>
+  2003, Nick Kurshev
+  2003, Pascal Massimino <skal@planet-d.net>
+  2003, Thomas Raivio
+  2003, Tinic Uro
+  2004-2005,2007-2010,2012, Loren Merritt <lorenm@u.washignton.edu>
+  2004-2005,2007, Denes Balatoni <dbalatoni@programozo.hu>
+  2004,2007, Benjamin Zores <ben@geexbox.org>
+  2004-2007, Eric Lasota
+  2004,2007, Marc Hoffman <marc.hoffman@analog.com>
+  2004-2012, Konstantin Shishkov
+  2004, Adam Thayer <krevnik@comcast.net>
+  2004, AGAWA Koji <i@atty.jp>
+  2004, Gildas Bazin <gbazin@videolan.org>
+  2004, Maarten Daniels
+  2005-2006, DivX, Inc
+  2005-2006, Oded Shimon <ods15@ods15.dyndns.org>
+  2005-2006, Robert Edele <yartrebo@earthlink.net>
+  2005,2007-2008, Ian Caulfield
+  2005,2007,2011-2012, Luca Barbato <lu_zero@gentoo.org>
+  2005,2007, Wolfram Gloger
+  2005-2008, Diego Biurrun
+  2005-2011, Benjamin Larsson
+  2005-2011, Reimar Döffinger <Reimar.Doeffinger@gmx.de>
+  2005-2012, Mans Rullgard <mans@mansr.com>
+  2005, Alban Bedel <albeu@free.fr>
+  2005, Anonymous
+  2005, David Hammerton
+  2005, Jeff Muizelaar
+  2005, Matthieu CASTET
+  2005, Ole André Vadla Ravnås <oleavr@gmail.com>
+  2005, Roine Gustafsson
+  2005, Steve Underwood <steveu@coppice.org>
+  2005, Vidar Madsen
+  2005, Wim Taymans
+  2005, Zoltan Hidvegi <hzoli@hzoli.com>
+  2006-2007, Baptiste Coudurier <baptiste.coudurier@smartjog.com>
+  2006-2007, Maxim Gavrilov <maxim.gavrilov@gmail.com>
+  2006-2007, Reynaldo H. Verdejo Pinochet
+  2006-2007, Ryan Martell <rdm4@martellventures.com>
+  2006-2007, SmartJog S.A.
+  2006-2008, Baptiste Coudurier <baptiste.coudurier@free.fr>
+  2006,2008, Gregory Montoir <cyx@users.sourceforge.net>
+  2006-2009, Luca Abeni <lucabe72@email.it>
+  2006-2009, Ramiro Polla <ramiro.polla@gmail.com>
+  2006-2009, Robert Swain <rob@opendot.cl>
+  2006,2009, Stefan Gehrer <stefan.gehrer@gmx.de>
+  2006-2010, Aurelien Jacobs <aurel@gnuage.org>
+  2006-2010, Prakash Punnoor <prakash@punnoor.de>
+  2006-2012, Justin Ruggles <justin.ruggles@gmail.com>
+  2006, Corey Hickey
+  2006, Daniel Maas <dmaas@maasdigital.com>
+  2006, Guillaume Poirier <gpoirier@mplayerhq.hu>
+  2006, Kartikey Mahendra BHATT <bhattkm@gmail.com>
+  2006, Michael Benjamin <michael.benjamin@analog.com>
+  2006, Patrick Guimond
+  2006, Paul Richards <paul.richards@gmail.com>
+  2006, Steve Lhomme
+  2006, Thijs Vermeir <thijs.vermeir@barco.com>
+  2007-2008, Ivo van Poorten
+  2007-2008, Joseph Artsimovich <jart@users.sourceforge.net>
+  2007-2008, Marco Gerards <marco@gnu.org>
+  2007-2008, Siarhei Siamashka <ssvb@users.sourceforge.net>
+  2007-2008, UAB "DKD"
+  2007,2009-2012, Nicolas George <nicolas.george@normalesup.org>
+  2007-2009, Bartlomiej Wolowiec <bartek.wolowiec@gmail.com>
+  2007,2009, Björn Axelsson
+  2007,2010, Anssi Hannula <anssi.hannula@gmail.com>
+  2007,2010, Bobby Bingham
+  2007-2010, David Conrad
+  2007-2010, Vitor Sessak <vitor1001@gmail.com>
+  2007-2011, Stefano Sabatini
+  2007, Alexis Ballier
+  2007, Benoit Fouet <benoit.fouet@free.fr>
+  2007, Christian Ohm
+  2007, Clemens Fruhwirth <clemens@endorphin.org>
+  2007, Collabora Ltd
+  2007, Denes Balatoni <dbalatoni@interware.hu>
+  2007, Edward Hervey
+  2007, Marc Hoffman <mmhoffm@gmail.com>
+  2007, Marc Hoffman <mmh@pleasantst.com>
+  2007, Nicholas Tung
+  2007, Nokia Corporation
+  2007, Philippe Kalaf
+  2007, Ronald S. Bultje <rbultje@ronald.bitfreak.net>
+  2007, Ulion
+  2008-2009, Andrej Stepanchuk
+  2008-2009, Baptiste Coudurier <baptiste.coudurier@gmail.com>
+  2008-2009, Jaikrishnan Menon <realityman@gmx.net>
+  2008-2009, Ronald S. Bultje
+  2008-2009, Splitted-Desktop Systems
+  2008,2010, Alexander Strange <astrange@ithinksw.com>
+  2008,2010, Eli Friedman <eli.friedman@gmail.com>
+  2008-2010, Laurent Aimar <fenrir@videolan.org>
+  2008-2010, Paul Kendall <paul@kcbbs.gen.nz>
+  2008,2010, Zhentan Feng <spyfeng at gmail dot com>
+  2008, Affine Systems, Inc (Michael Sullivan, Bobby Impollonia)
+  2008, Alessandro Sappia
+  2008, Anuradha Suraparaju <asuraparaju@gmail.com>
+  2008, BBC
+  2008, GUCAS
+  2008, NVIDIA
+  2008, Robert Marston
+  2008, robs@users.sourceforge.net
+  2008, Sisir Koppaka
+  2008, Victor Paesa
+  2008, Vladimir Voroshilov
+  2008, vmrsss
+  2009-2010, Alex Converse <alex.converse@gmail.com>
+  2009-2010, Daniel Verkamp <daniel@drv.nu>
+  2009-2010, Howard Chu
+  2009-2010, Thilo Borgmann <thilo.borgmann@googlemail.com>
+  2009-2012, Martin Storsjo
+  2009,2012, Nathan Caldwell <saintdev@gmail.com>
+  2009, Christian Schmidt
+  2009, Colin McQuillan
+  2009, Colin McQuillian
+  2009, Dylan Yudaken
+  2009, Giliard B. de Freitas <giliarde@gmail.com>
+  2009, Ivan Schreter
+  2009, James Darnley
+  2009, Jimmy Christensen
+  2009, Kenan Gillet
+  2009, Michael Tison
+  2009, Naotoshi Nojiri
+  2009, Nicolas Martin <martinic@iro.umontreal.ca>
+  2009, Samalyse
+  2009, Sebastien Lucas <sebastien.lucas@gmail.com>
+  2009, Stephen Backway
+  2009, Thomas P. Higdon <thomas.p.higdon@gmail.com>
+  2009, Tobias Bindhammer
+  2009, Toshimitsu Kimura
+  2009, Xuggle Incorporated
+  2009, Zuxy Meng <zuxy.meng@gmail.com>
+  2010-2011, Anatoly Nenashev
+  2010,2011, Anton Khirnov <anton@khirnov.net>
+  2010-2011, Janne Grunau <janne-libav@jannau.net>
+  2010-2011, Vitor Sessak <vitor1001@gmail.com>
+  2010,2012, Google, Inc
+  2010,2012, Ronald S. Bultje <rsbultje@gmail.com>
+  2010, Adrian Daerr
+  2010, Amanda, Y.N. Wu <amanda11192003@gmail.com>
+  2010, Baptiste Coudurier
+  2010, Brandon Mintern
+  2010, Carl Eugen Hoyos
+  2010, Daniel G. Taylor <dan@programmer-art.org>
+  2010, Francesco Lavra <francescolavra@interfree.it>
+  2010, Holger Lubitz
+  2010, Jacob Meuser
+  2010, Jason Garrett-Glaser <darkshikari@gmail.com>
+  2010, Josh Allmann
+  2010, Marcelo Galvao Povoa
+  2010, Mark Nauwelaerts
+  2010, Michael Chinen
+  2010, Michele Orrù
+  2010, Mohamed Naufal Basheer <naufal11@gmail.com>
+  2010, Nolan Lum <nol888@gmail.com>
+  2010, Rafael Carre
+  2010, Rob Clark <rob@ti.com>
+  2010, Sebastian Vater <cdgs.basty@googlemail.com>
+  2010, S.N. Hemanth Meenakshisundaram
+  2010, Tomas Härdin
+  2011-2012, Daniel Kang
+  2011-2012, Derek Buitenhuis
+  2011-2012, Mashiat Sarker Shakkhar
+  2011-2012, Paul B Mahol
+  2011, Andreas Öman
+  2011, Juan Carlos Rodriguez <ing.juancarlosrodriguez@hotmail.com>
+  2011, Kieran Kunhya <kieran@kunhya.com>
+  2011, Mark Himsley
+  2011, Matthew Hoops <clone2727@gmail.com>
+  2011, Max Horn
+  2011, Michael Bradshaw <mbradshaw@sorensonmedia.com>
+  2011, Michael Karcher
+  2011, Mina Nagy Zaki
+  2011, Miroslav Slugeň <Thunder.m@seznam.cz>
+  2011, MirriAd Ltd
+  2011, Sebastien Zwickert
+  2011, Sven Hesse <drmccoy@drmccoy.de>
+  2012, Aneesh Dogra (lionaneesh) <lionaneesh@gmail.com>
+  2012, Antti Seppälä
+  2012, Christophe Gisquet <christophe.gisquet@gmail.com>
+  2012, Jan Ekström
+  2012, Samuel Pitoiset
+  CMU 1993, Computer Science, Speech Group Chengxiang Lu and Alex
+ Hauptmann
+  Sebastien Bechet <s.bechet@av7.net>
+License: LGPL-2.1+~Libav
+Comments:
+ Some copyright holder details extracted from referenced sources at
+ <http://samples.libav.org/A-codecs/Nelly_Moser/ASAO/ASAO.zip>.
+
+Files: doc/doxy/doxy_stylesheet.css
+Copyright: 2012, Twitter, Inc
+License: Apache-2.0
+
+Files: libavcodec/jfdctfst.c
+ libavcodec/jfdctint_template.c
+ libavcodec/jrevdct.c
+Copyright: 1991-1996, Thomas G. Lane
+License: IJG
+
+Files: libavdevice/x11grab.c
+ libavfilter/yadif.h
+ libavfilter/vf_blackframe.c
+ libavfilter/vf_boxblur.c
+ libavfilter/vf_cropdetect.c
+ libavfilter/vf_delogo.c
+ libavfilter/vf_hqdn3d.c
+ libavfilter/vf_yadif.c
+ libavfilter/x86/yadif.c
+ libavfilter/x86/yadif_template.c
+Copyright: 1997-1998, Rasca, Berlin
+  2000-2001, Fabrice Bellard
+  2002-2003, Brian J. Murrell
+  2002,2006-2010 Michael Niedermayer <michaelni@gmx.at>
+  2002, A'rpi
+  2002, Jindrich Makovicka <makovick@gmail.com>
+  2003-2004 Karl H. Beckers, Frankfurt
+  2003, Daniel Moreno <comac@comac.darktech.org>
+  2006, Clemens Fruhwirth <clemens@endorphin.org>
+  2006, Edouard Gomez <ed.gomez@free.fr>
+  2006, Ivo van Poorten
+  2006, Julian Hall
+  2010-2011, Stefano Sabatini
+  2010, Baptiste Coudurier
+  2012, Loren Merritt
+License: GPL-2+~Libav
+
+Files: doc/texi2pod.pl
+Copyright: 1999-2001, Free Software Foundation, Inc
+License: GPL-2+~GCC
+
+Files:
+ libavcodec/arm/jrevdct_arm.S
+ libavcodec/nellymoser.c
+ libavcodec/nellymoserdec.c
+ libavcodec/nellymoser.h
+ libavcodec/x86/vc1dsp_init.c
+ libavcodec/x86/vc1dsp_mmx.c
+ libavformat/metadata-example.c
+ libavformat/oggdec.c
+ libavformat/oggdec.h
+ libavformat/oggparseogm.c
+ libavformat/oggparsespeex.c
+ libavformat/oggparsetheora.c
+ libavformat/oggparsevorbis.c
+ libavformat/output-example.c
+Copyright: 2005, Alex Beregszaszi
+  2001, Lionel Ulmer <lionel.ulmer@free.fr> / <bbrox@bbrox.org>
+  2003, Fabrice Bellard
+  2005, Matthieu CASTET
+  2005, Michael Ahlberg
+  2005, Måns Rullgård
+  2007, 520e17cd55896441042b14df2566a6eb610ed444
+  2007, 539459aeb7d425140b62a3ec7dbf6dc8e408a306
+  2007, a840bda5870ba11f19698ff6eb9581dfb0f95fa5
+  2007, Benjamin Larsson
+  2007, Christophe GISQUET <christophe.gisquet@free.fr>
+  2007, Loic Minier <lool@dooz.org>
+  2008, Reimar Döffinger <Reimar.Doeffinger@gmx.de>
+  2011, Reinhard Tartler
+License: Expat
+
+Files: libavcodec/faandct.c
+ libavcodec/zerocodec.c
+Copyright: 2003, Michael Niedermayer <michaelni@gmx.at>
+  2003, Roman Shaposhnik
+  2012, Derek Buitenhuis
+License: ISC
+
+Files: libavcodec/arm/vp8dsp_armv6.S
+Copyright: 2010, Google Inc
+  2010, Rob Clark <rob@ti.com>
+  2011, Mans Rullgard <mans@mansr.com>
+License: BSD-3-clause~Google and LGPL-2.1+~Libav
+
+Files: libavutil/adler32.c
+Copyright: 1995, Mark Adler
+License: Zlib
+
+License: LGPL-2.1+~Libav
+ Libav is free software; you can redistribute it and/or modify it under
+ the terms of the GNU Lesser General Public License as published by the
+ Free Software Foundation; either version 2.1 of the License, or (at
+ your option) any later version.
+ .
+ Libav is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
+ License for more details.
+ .
+ Comment:
+ .
+ On Debian systems the 'GNU Lesser General Public License' version 2.1
+ is located in '/usr/share/common-licenses/LGPL-2.1'.
+ .
+ You should have received a copy of the 'GNU Lesser General Public
+ License' along with this program.  If not, see
+ <http://www.gnu.org/licenses/>.
+
+License: GPL-2+~Libav
+ Libav is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free
+ Software Foundation; either version 2 of the License, or (at your
+ option) any later version.
+ .
+ Libav is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ for more details.
+ .
+ Comment:
+ .
+ On Debian systems the 'GNU General Public License' version 2 is located
+ in '/usr/share/common-licenses/GPL-2'.
+ .
+ You should have received a copy of the 'GNU General Public License'
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+License: GPL-2+~GCC
+ GNU CC is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free
+ Software Foundation; either version 2, or (at your option) any later
+ version.
+ .
+ GNU CC is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ for more details.
+
+License: Apache-2.0
+ Licensed under the Apache License v2.0
+ .
+ http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Comment:
+ .
+ On Debian systems the 'Apache License' version 2.0 is located in
+ '/usr/share/common-licenses/Apache-2.0'.
+
+License: IJG
+ Permission is hereby granted to use, copy, modify, and distribute this
+ software (or portions thereof) for any purpose, without fee, subject to
+ these conditions:
+ .
+ (1) If any part of the source code for this software is distributed,
+ then this README file must be included, with this copyright and
+ no-warranty notice unaltered; and any additions, deletions, or changes
+ to the original files must be clearly indicated in accompanying
+ documentation.
+ .
+ (2) If only executable code is distributed, then the accompanying
+ documentation must state that "this software is based in part on the
+ work of the Independent JPEG Group".
+ .
+ (3) Permission for use of this software is granted only if the user
+ accepts full responsibility for any undesirable consequences; the
+ authors accept NO LIABILITY for damages of any kind.
+ .
+ These conditions apply to any software derived from or based on the IJG
+ code, not just to the unmodified library.  If you use our work, you
+ ought to acknowledge us.
+ .
+ Permission is NOT granted for the use of any IJG author's name or
+ company name in advertising or publicity relating to this software or
+ products derived from it.  This software may be referred to only as
+ "the Independent JPEG Group's software".
+ .
+ We specifically permit and encourage the use of this software as the
+ basis of commercial products, provided that all warranty or liability
+ claims are assumed by the product vendor.
+
+License: BSD-3-clause~Google
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+  * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ .
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ .
+  * Neither the name of Google nor the names of its contributors may be
+    used to endorse or promote products derived from this software
+    without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: Zlib
+ This software is provided 'as-is', without any express or implied
+ warranty.  In no event will the authors be held liable for any damages
+ arising from the use of this software.
+ .
+ Permission is granted to anyone to use this software for any purpose,
+ including commercial applications, and to alter it and redistribute it
+ freely, subject to the following restrictions:
+ .
+ 1. The origin of this software must not be misrepresented; you must not
+    claim that you wrote the original software. If you use this software
+    in a product, an acknowledgment in the product documentation would
+    be appreciated but is not required.
+ 2. Altered source versions must be plainly marked as such, and must not
+    be misrepresented as being the original software.
+ 3. This notice may not be removed or altered from any source
+    distribution.
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and associated documentation files (the
+ "Software"), to deal in the Software without restriction, including
+ without limitation the rights to use, copy, modify, merge, publish,
+ distribute, sublicense, and/or sell copies of the Software, and to
+ permit persons to whom the Software is furnished to do so, subject to
+ the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included
+ in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+ THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+License: ISC
+ Permission to use, copy, modify, and/or distribute this software for
+ any purpose with or without fee is hereby granted, provided that the
+ above copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR
+ BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES
+ OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
+ WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
+ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
+ SOFTWARE.
