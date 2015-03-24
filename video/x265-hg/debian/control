@@ -17,8 +17,8 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  ${sphinxdoc:Depends}
-Provides: x265-doc
-Replaces: x265-doc
+Provides: libx265-doc
+Replaces: libx265-doc
 Description: H.265/HEVC video stream encoder
  x265 is a commandline encoder for creating H.265/High Efficency Video Coding
  (HEVC) video streams.
@@ -35,4 +35,16 @@ Description: H.265/HEVC video stream encoder
   * multiple reference frames
   * scenecut detection
   * parallel encoding on multiple CPUs
+
+Package: libx265-dev
+Architecture: any
+Section: libdevel
+Depends: ${misc:Depends}
+Suggests: libx265-doc | x265
+Description: H.265/HEVC video stream encoder (development files)
+ libx265 is an encoding library for creating H.265/High Efficency Video Coding
+ (HEVC) video streams.
+ .
+ This is the development package which contains headers and libraries for
+ libx265.
 

@@ -17,8 +17,12 @@ override_dh_auto_clean:
 override_dh_auto_configure:
 	dh_auto_configure --builddirectory=x265-10bit -- \
 		-DENABLE_SHARED=OFF \
-		-DHIGH_BIT_DEPTH=ON
-	dh_auto_configure -- -DENABLE_SHARED=OFF
+		-DENABLE_PIC=ON \
+		-DHIGH_BIT_DEPTH=ON \
+		-DLIB_INSTALL_DIR=lib/x265-10bit
+	dh_auto_configure -- \
+		-DENABLE_SHARED=OFF \
+		-DENABLE_PIC=ON
 
 override_dh_auto_build:
 	dh_auto_build --builddirectory=x265-10bit
