@@ -1,0 +1,2 @@
+debian/script/nuget   /usr/bin/
+NuGet.exe             /usr/lib/nuget/
