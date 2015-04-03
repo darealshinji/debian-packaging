@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf firefox firefox.png converted_icons
+
+override_dh_auto_build:
+	tar xvf firefox.tbz
+	find firefox -type f -name *.so -exec chmod 0644 '{}' \;
+	cp firefox/browser/icons/mozicon128.png firefox.png
+	./make-icons.sh firefox.png
+
+override_dh_shlibdeps:
+	dh_shlibdeps -l$(CURDIR)/debian/firefox/usr/lib/firefox
+
