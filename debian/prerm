@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+rm -rf /var/cache/neroaac
+rm -f /usr/bin/neroAacDec
+rm -f /usr/bin/neroAacEnc
+rm -f /usr/bin/neroAacTag
+rm -f /usr/share/doc/neroaac/changelog.txt
+rm -f /usr/share/doc/neroaac/NeroAAC_tut.pdf
+
+#DEBHELPER#
+
+exit 0

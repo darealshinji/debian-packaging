@@ -1,0 +1,49 @@
+#!/bin/sh
+
+set -e
+
+archive=NeroAACCodec-1.5.1.zip
+sha256_1=e0496ad856e2803001a59985368d21b22f4fbdd55589c7f313d6040cefff648b
+cache=/var/cache/neroaac
+
+case "$1" in
+    install|configure|upgrade)
+    rm -rf $cache
+    rm -f /usr/bin/neroAacDec
+    rm -f /usr/bin/neroAacEnc
+    rm -f /usr/bin/neroAacTag
+
+    mkdir -p $cache
+    cd $cache
+    wget "ftp://ftp6.nero.com/tools/$archive" \
+        || ( echo "Couldn't download NeroAAC"; exit 1 )
+
+    sha256_2=$(sha256sum $archive | head -c64)
+    if [ $sha256_2 != $sha256_1 ]; then
+        echo "$archive:"
+        echo "SHA256 checksum is $sha256_2 but should be $sha256_1."
+        exit 1
+    fi
+
+    unzip $archive
+    install -m755 -D linux/neroAacDec /usr/bin/neroAacDec
+    install -m755 -D linux/neroAacEnc /usr/bin/neroAacEnc
+    install -m755 -D linux/neroAacTag /usr/bin/neroAacTag
+    install -m644 -D changelog.txt /usr/share/doc/neroaac/changelog.txt
+    install -m644 -D NeroAAC_tut.pdf /usr/share/doc/neroaac/NeroAAC_tut.pdf
+
+    rm -rf $cache
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

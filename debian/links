@@ -1,0 +1,6 @@
+/usr/bin/neroAacDec   usr/bin/neroaacdec
+/usr/bin/neroAacEnc   usr/bin/neroaacenc
+/usr/bin/neroAacTag   usr/bin/neroaactag
+/usr/share/man/man1/neroAacDec.1.gz   usr/share/man/man1/neroaacdec.1.gz
+/usr/share/man/man1/neroAacEnc.1.gz   usr/share/man/man1/neroaacenc.1.gz
+/usr/share/man/man1/neroAacTag.1.gz   usr/share/man/man1/neroaactag.1.gz

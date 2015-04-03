@@ -1,0 +1,11 @@
+neroaac (1.5.4.0~ppa2~trusty) trusty; urgency=low
+
+  * Re-release
+ 
+ -- Marshall Banana <djcj@gmx.de>  Fri, 24 Oct 2014 11:00:47 +0200
+
+neroaac (1.5.4.0~ppa1~trusty) trusty; urgency=low
+
+  * Initial release
+ 
+ -- Marshall Banana <djcj@gmx.de>  Wed, 16 Jul 2014 11:51:55 +0200
