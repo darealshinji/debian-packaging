@@ -1,0 +1,47 @@
+#!/bin/sh
+
+set -e
+
+archive=tsmuxer.orig.tar.gz
+sha256_1=815a383aebc67e59b6e541b927ce14480efed9d103fe99e74ced9ea381f61764
+cache=/var/cache/tsmuxer
+bin=tsMuxerGUI
+
+case "$1" in
+    install|configure|upgrade)
+    rm -rf $cache
+    rm -f /usr/bin/$bin
+
+    mkdir -p $cache
+    cd $cache
+    wget -nv -O $archive 'https://docs.google.com/uc?authuser=0&id=0B0VmPcEZTp8NekJxLUVJRWMwejQ&export=download' \
+        || ( echo "Couldn't download $bin"; exit 1 )
+
+    sha256_2=$(sha256sum $archive | head -c64)
+    if [ $sha256_2 != $sha256_1 ]; then
+        echo "$archive:"
+        echo "SHA256 checksum is $sha256_2 but should be $sha256_1."
+        exit 1
+    fi
+
+    tar zxvf $archive >/dev/null
+
+    upx-ucl -qqq -d $bin
+    strip -s $bin
+
+    install -m755 -D $bin /usr/bin/$bin
+    rm -rf $cache
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

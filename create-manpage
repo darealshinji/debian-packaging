@@ -1,0 +1,3 @@
+#!/bin/sh
+description='simple program to mux video to TS/M2TS files or create BD disks'
+help2man -N --version-string=2.6.11 -n "$description" --help-option=' ' ./tsMuxeR > tsmuxer.1

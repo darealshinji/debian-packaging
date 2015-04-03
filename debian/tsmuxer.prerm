@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+rm -f /usr/bin/tsMuxeR
+rm -rf /var/cache/tsmuxer
+
+#DEBHELPER#
+
+exit 0

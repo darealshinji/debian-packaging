@@ -1,0 +1,61 @@
+Source: tsmuxer
+Section: video
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: http://forum.doom9.org/showthread.php?t=168539
+
+Package: tsmuxer
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         libc6 (>= 2.4) [i386],
+         libgcc1 (>= 1:4.1.1) [i386],
+         libstdc++6 (>= 4.2.1) [i386],
+         libfreetype6 (>= 2.2.1) [i386],
+         libc6-i386 (>= 2.4) [amd64],
+         lib32gcc1 (>= 1:4.1.1) [amd64],
+         lib32stdc++6 (>= 4.2.1) [amd64],
+         libfreetype6:i386 (>= 2.2.1) [amd64],
+         zlib1g:i386 (>= 1:1.1.4) [amd64],
+         upx-ucl
+Provides: tsmuxer, tsmuxer-bin
+Replaces: tsmuxer, tsmuxer-bin
+Description: mux video to TS/M2TS files or create BD disks
+ tsMuxer is a Transport Stream muxer. Remux/mux elementary streams,
+ EVO/VOB/MPG, MKV/MKA, MP4/MOV, TS, M2TS to TS to M2TS.
+ Supported video codecs H.264, VC-1, MPEG2. Supported audio codecs AAC,
+ AC3 / E-AC3(DD+), DTS/ DTS-HD. Ability to set muxing fps manually and
+ automatically, Ability to change level for H.264 streams, Ability to
+ shift a sound tracks, Ability to extract DTS core from DTS-HD,
+ Ability to join files. Output/Author to compliant Blu-ray Disc or AVCHD.
+ Blu-ray 3D support in version 1.11+.
+
+Package: tsmuxergui
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         libc6 (>= 2.1.3) [i386],
+         libgcc1 (>= 1:4.1.1) [i386],
+         libstdc++6 (>= 4.1.1) [i386],
+         libqtcore4 (>= 4:4.7.0~beta1) [i386],
+         libqtgui4 (>= 4:4.5.3) [i386],
+         libc6-i386 (>= 2.1.3) [amd64],
+         lib32gcc1 (>= 1:4.1.1) [amd64],
+         lib32stdc++6 (>= 4.1.1) [amd64],
+         libqtcore4:i386 (>= 4:4.7.0~beta1) [amd64],
+         libqtgui4:i386 (>= 4:4.5.3) [amd64],
+         tsmuxer (>= 2.6),
+         upx-ucl
+Provides: tsmuxergui, tsmuxergui-bin
+Replaces: tsmuxer, tsmuxer-bin
+Description: mux video to TS/M2TS files or create BD disks - GUI
+ tsMuxer is a Transport Stream muxer. Remux/mux elementary streams,
+ EVO/VOB/MPG, MKV/MKA, MP4/MOV, TS, M2TS to TS to M2TS.
+ Supported video codecs H.264, VC-1, MPEG2. Supported audio codecs AAC,
+ AC3 / E-AC3(DD+), DTS/ DTS-HD. Ability to set muxing fps manually and
+ automatically, Ability to change level for H.264 streams, Ability to
+ shift a sound tracks, Ability to extract DTS core from DTS-HD,
+ Ability to join files. Output/Author to compliant Blu-ray Disc or AVCHD.
+ Blu-ray 3D support in version 1.11+.
+ .
+ This package installs the GUI for tsMuxeR.
