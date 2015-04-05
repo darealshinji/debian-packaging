@@ -1,0 +1,29 @@
+Source: coreutils-git
+Maintainer: djcj <djcj@gmx.de>
+XSBC-Original-Maintainer: Michael Stone <mstone@debian.org>
+Section: utils
+Priority: required
+Standards-Version: 3.9.5
+Build-Depends: gettext (>= 0.10.37),
+               debhelper (>= 9),
+               autotools-dev,
+               dh-buildinfo,
+               texinfo (>= 4.2),
+               groff,
+               libattr1-dev,
+               libacl1-dev,
+               libselinux1-dev (>= 1.32),
+               gperf,
+               bison
+Homepage: http://www.gnu.org/software/coreutils
+Vcs-Git: git://git.sv.gnu.org/coreutils
+Vcs-Browser: http://git.sv.gnu.org/gitweb/?p=coreutils.git
+
+Package: coreutils-git
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: GNU core utilities - recent Git snapshot
+ This package contains the basic file, shell and text manipulation
+ utilities which are expected to exist on every operating system.
+ .
+ Specifically, this package includes: 

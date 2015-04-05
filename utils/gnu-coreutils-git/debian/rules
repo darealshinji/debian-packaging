@@ -1,0 +1,55 @@
+#!/usr/bin/make -f
+
+CFLAGS += -Wall -DSYSLOG_SUCCESS -DSYSLOG_FAILURE -DSYSLOG_NON_ROOT
+
+BIN_PROGS = cat chgrp chmod chown cp date dd df dir echo false ln ls mkdir \
+	mknod mv pwd readlink rm rmdir vdir sleep stty sync touch true uname \
+	mktemp
+
+d=debian/coreutils-git
+p=g
+
+
+%:
+	dh $@ --parallel --with autoreconf
+
+override_dh_autoreconf:
+	dh_autoreconf ./bootstrap -- --no-git --gnulib-srcdir=gnulib
+
+override_dh_auto_configure:
+	dh_auto_configure -- --program-prefix=$(p) \
+		--enable-install-program=arch \
+		--enable-no-install-program=\[ \
+		--disable-silent-rules
+	./thanks-gen THANKS.in > THANKS
+
+# comment out to enable tests
+override_dh_auto_test:
+
+override_dh_auto_install:
+	dh_auto_install --destdir=$(CURDIR)/debian/tmp
+
+override_dh_install:
+	dh_install
+	cp doc/coreutils.info coreutils-git.info
+
+	# some things go in root rather than usr
+	for f in $(BIN_PROGS); do \
+		mv $(d)/usr/bin/$(p)$$f $(d)/bin/$(p)$$f; \
+	done
+
+	# gnu thinks chroot is in bin, debian thinks it's in sbin
+	mv $(d)/usr/bin/$(p)chroot $(d)/usr/sbin/$(p)chroot
+	sed s/\"1\"/\"8\"/1 $(d)/usr/share/man/man1/$(p)chroot.1 > $(d)/usr/share/man/man8/$(p)chroot.8
+	rm $(d)/usr/share/man/man1/$(p)chroot.1
+
+	# update program list in debian/control
+	cp -f debian/control.in debian/control; \
+	dir=debian/coreutils-git; \
+	progs="$$(echo `ls -1 $$dir/bin/` `ls -1 $$dir/usr/bin` `ls -1 $$dir/usr/sbin` | tr ' ' '\n' | sort | tr '\n' ' ')"; \
+	echo $$progs | fold -s -w 76 | sed 's/^/ /' >> debian/control; \
+	printf " .\n The commands are all prefixed to not conflict with the system's coreutils\n package." >> debian/control
+
+override_dh_clean:
+	dh_clean coreutils-git.info THANKS
+
