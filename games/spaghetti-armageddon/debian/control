@@ -3,17 +3,11 @@ Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
-               libgl1-mesa-glx,
-               mesa-common-dev,
-               libglu1-mesa-dev,
-               libxrandr-dev,
-               libfreetype6-dev,
+               libgl1-mesa-dev,
+               libglu1-mesa,
                libopenal-dev,
                libsndfile1-dev,
-               libjpeg-dev,
-               libpng-dev,
-               libglew1.5-dev,
-               libsoil-dev
+               libxrandr-dev
 Standards-Version: 3.9.5
 Homepage: http://alienbug.itch.io/spaghetti-armageddon
 

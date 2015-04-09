@@ -1,5 +1,0 @@
-include-unistd.patch
-fix-includes.patch
-interlinking.patch
-repacking.patch
-buildflags.patch

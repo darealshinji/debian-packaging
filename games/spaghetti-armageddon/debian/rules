@@ -6,10 +6,10 @@
 
 override_dh_auto_clean:
 	dh_auto_clean -DSFML-1.6
-	rm -rf SpaghettiArmageddon SFML-1.6/lib
+	rm -rf SpaghettiArmageddon
 
 override_dh_auto_build:
-	dh_auto_build -DSFML-1.6
+	dh_auto_build -DSFML-1.6/src/SFML -- sfml-system sfml-window sfml-audio
 	tar xvf SpaghettiArmageddon_Linux.tgz
 
 override_dh_makeshlibs:
