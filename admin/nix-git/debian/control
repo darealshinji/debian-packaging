@@ -12,6 +12,7 @@ Build-Depends:
    flex,
    graphviz,
    libbz2-dev,
+   libcurl-dev,
    libdbd-sqlite3-perl,
    libdbi-perl,
    libextutils-parsexs-perl,
@@ -34,9 +35,9 @@ Pre-Depends:
 Depends:
    bsdiff,
    curl,
-   libdbd-sqlite3-perl,
    ${misc:Depends},
    ${shlibs:Depends},
+   libdbd-sqlite3-perl,
    ${perl:Depends}
 Suggests:
    libgc-dev

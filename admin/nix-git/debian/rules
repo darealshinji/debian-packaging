@@ -23,7 +23,7 @@ override_dh_auto_clean:
 	rm -rf tmp
 
 override_dh_autoreconf:
-	dh_autoreconf -- ./bootstrap.sh
+	dh_autoreconf ./bootstrap
 
 override_dh_auto_configure:
 

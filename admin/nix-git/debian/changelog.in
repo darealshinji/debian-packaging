@@ -1,5 +1,0 @@
-nix (@VERSION@) unstable; urgency=low
-
-  * Current Git snapshot
-
- -- Marshall Banana <djcj@gmx.de>  @DATE@

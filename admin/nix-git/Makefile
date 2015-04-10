@@ -1,17 +1,16 @@
 include ../../mk/include.mk
 
-deps       = git libtool
-cleanfiles = debian/changelog
-builddir   = nix
+deps     = git
+builddir = nix
 
 download:
 	git clone --depth 1500 "https://github.com/NixOS/nix.git"
 	git clone --depth 1 "https://github.com/jedisct1/libsodium.git" nix/libsodium
-	./changelog.sh
+	@ VERSION=`./changelog.sh`; $(changelog-entry)
 
-	rm -rf nix/.git nix/libsodium/.git nix/config/*
-	cp /usr/share/libtool/config/config.* /usr/share/libtool/config/install-sh nix/config/
-	cp -f debian/bootstrap.sh nix/
+	rm -rf nix/.git nix/libsodium/.git
+	cp -f ../../mk/config.* ../../mk/install-sh nix/config/
+	cp -f debian/bootstrap nix/
 
 	# link perl module correctly
 	echo "Store_LDFLAGS += -lperl -pthread" >> nix/perl/local.mk
