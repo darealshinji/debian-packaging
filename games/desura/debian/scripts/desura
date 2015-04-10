@@ -9,5 +9,5 @@ if [ ! -d "$config" ] ; then
     cp /usr/lib/desura/* "$config/lib"
 fi
 
-cd "$config" && ./desura "$@"
+cd "$config" && ./desura "$@" 2> error.log
 
