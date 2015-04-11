@@ -1,0 +1,14 @@
+# GLEW and libav.  These libraries differ too much between distributions
+# so it's better to include them.
+python-renpy binary: embedded-library usr/lib/python2.7/dist-packages/pysdlsound/libav*
+python-renpy binary: embedded-library usr/lib/python2.7/dist-packages/pysdlsound/libsw*
+python-renpy binary: embedded-library usr/lib/python2.7/dist-packages/renpy/gl/libGLEW.so.*
+
+# Pre-built binaries. And stripping them fails with the message "Not enough
+# room for program headers".
+python-renpy binary: unstripped-binary-or-object usr/lib/python2.7/dist-packages/*
+
+# This is normal for libav on i386.
+python-renpy binary: shlib-with-non-pic-code usr/lib/python2.7/dist-packages/pysdlsound/libav*
+python-renpy binary: shlib-with-non-pic-code usr/lib/python2.7/dist-packages/pysdlsound/libsw*
+

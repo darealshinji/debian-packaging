@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=The Question
+GenericName=renpy-thequestion
+Comment=a simple visual-novel game with Ren'Py
+Comment[es]=una sencilla novela gráfica con Ren'Py
+Icon=renpy-thequestion
+Exec=the_question
+Terminal=false
+Categories=Application;Game;

@@ -1,0 +1,5 @@
+tutorial/*                  /usr/share/games/renpy/demo/
+debian/renpy-demo.sh        /usr/share/games/renpy/
+renpy.py                    /usr/share/games/renpy/
+debian/renpy-demo.xpm       /usr/share/pixmaps
+debian/renpy-demo.desktop   /usr/share/applications

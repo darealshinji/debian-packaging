@@ -1,0 +1,3 @@
+?package(renpy):needs="x11" section="Games/Adventure" \
+	title="Ren'Py" command="/usr/games/renpy" \
+	icon="/usr/share/pixmaps/renpy.xpm"

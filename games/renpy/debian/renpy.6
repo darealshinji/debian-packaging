@@ -1,0 +1,27 @@
+.\" 
+.TH "renpy" "6" "May 2007" "" "Games"
+.SH "NAME"
+renpy \- engine for creating visual novels
+.SH "SYNOPSIS"
+.B renpy \fB[path to the script directory]\fR
+.SH "DESCRIPTION"
+Ren'Py is a programming language and runtime, intended to ease the creation of visual\-novel type games. It contains features that make it easy to display thoughts, dialogue, and menus; to display images to the user; to write game logic; and to support the saving and loading of games.
+
+Ren'Py tries to be like an executable script, allowing you to get a working game without much more effort than is required to type the game script into the computer.
+
+Ren'Py is implemented on top of python, and that python heritage shows through in many places. Many Ren'Py statements allow python expressions to be used, and there are also Ren'Py statements that allow for the execution of arbitrary python code. Many of the less\-used features of Ren'Py are exposed to the user by way of python. By only requiring use of the simplest features of python, it's hoped that Ren'Py will be usable by all game authors.
+.SH "USAGE"
+If you run the program without any arguments, zou will get an interactive launcher from where you can select, run and work different projects.
+
+For running a script, you need to give the full path to the directory that contains the game you want to play.
+
+For example:
+renpy /usr/share/games/renpy/demo/
+
+To learn how to use the game interface, you should install and play renpy\-demo.
+.SH "FILES"
+The game data for each user is stored at ~/.renpy/ directory.
+
+The scripts can be installed in the system bz placing them under /usr/share/games/renpy/ , but you can run any script in an arbitrarz directory just by telling the path as the parameter to the game.
+.SH "SEE ALSO"
+You can find more information at http://www.renpy.org/

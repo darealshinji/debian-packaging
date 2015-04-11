@@ -1,0 +1,10 @@
+Document: renpy
+Title: Ren'Py Documentation
+Author: PyTom <pytom@bishoujo.us>
+Abstract: This is the official documentation for Ren'Py,
+ a framework for developing visual-novel type games.
+Section: Programming/Python
+
+Format: HTML
+Index: /usr/share/doc/renpy/html/index.html
+Files: /usr/share/doc/renpy/html/*.html

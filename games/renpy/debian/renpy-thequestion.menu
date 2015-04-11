@@ -1,0 +1,3 @@
+?package(renpy-thequestion):needs="x11" section="Games/Adventure" \
+	title="The Question" command="/usr/games/the_question" \
+	icon="/usr/share/pixmaps/renpy-thequestion.xpm"
