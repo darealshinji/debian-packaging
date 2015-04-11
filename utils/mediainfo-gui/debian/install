@@ -1,4 +1,5 @@
 MediaInfo/Project/GNU/GUI/mediainfo-gui                /usr/bin
+MediaInfo/Project/GNU/GUI/mediainfo-gui.appdata.xml    /usr/share/appdata
 
 converted_icons/*                                      /usr/share
 

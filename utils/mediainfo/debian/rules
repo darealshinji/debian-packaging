@@ -1,16 +1,12 @@
 #!/usr/bin/make -f
 
-CFLAGS   += -Wall
-CXXFLAGS += -Wall -Wno-write-strings
-LDFLAGS  += -Wl,-z,defs -Wl,--as-needed
+CFLAGS    = -Wall $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS  = -Wall $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) -Wno-write-strings
+LDFLAGS  += -Wl,-z,defs
 
 
 %:
-	dh $@ --parallel --with autoreconf
-
-override_dh_autoreconf:
-	chmod a+x ./autogen.sh
-	dh_autoreconf -- ./autogen.sh
+	dh $@ --parallel
 
 override_dh_auto_clean:
 	dh_auto_clean -DMediaInfo/Project/GNU/CLI

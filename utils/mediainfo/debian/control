@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Homepage: http://www.mediaarea.net
 Build-Depends: debhelper (>= 9),
-               dh-autoreconf,
                zlib1g-dev
 Standards-Version: 3.9.5
 
