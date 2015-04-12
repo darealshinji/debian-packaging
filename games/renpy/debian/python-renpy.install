@@ -1,7 +1,0 @@
-lib/linux-*/lib/python2.7/renpy        /usr/lib/python2.7/dist-packages/
-lib/linux-*/lib/python2.7/pysdlsound   /usr/lib/python2.7/dist-packages/
-lib/linux-*/lib/python2.7/_renpy*      /usr/lib/python2.7/dist-packages/
-module/pysdlsound/__init__.py          /usr/lib/python2.7/dist-packages/pysdlsound/
-lib/linux-*/libav*.so.*                /usr/lib/python2.7/dist-packages/pysdlsound/
-lib/linux-*/libsw*.so.*                /usr/lib/python2.7/dist-packages/pysdlsound/
-lib/linux-*/libGLEW.so.*               /usr/lib/python2.7/dist-packages/renpy/gl/
