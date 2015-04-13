@@ -1,0 +1,3 @@
+hardening-no-relro
+embedded-library
+image-file-in-usr-lib
