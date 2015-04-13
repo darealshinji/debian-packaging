@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+  APT_KEY="`which apt-key 2> /dev/null`"
+  if [ -x "$APT_KEY" ]; then
+    "$APT_KEY" add /usr/lib/google-chrome/linux_signing_key.pub >/dev/null 2>&1
+  fi
+
+  PRIORITY=200
+
+  update-alternatives \
+    --install \
+    /usr/bin/x-www-browser x-www-browser \
+    /usr/bin/google-chrome-stable $PRIORITY
+ 
+  update-alternatives \
+    --install \
+    /usr/bin/gnome-www-browser gnome-www-browser \
+    /usr/bin/google-chrome-stable $PRIORITY
+
+  update-alternatives \
+    --install \
+      /usr/bin/google-chrome google-chrome \
+      /usr/bin/google-chrome-stable $PRIORITY \
+    --slave \
+      /usr/share/man/man1/google-chrome.1.gz google-chrome.1.gz \
+      /usr/share/man/man1/google-chrome-stable.1.gz
+fi
+
+#DEBHELPER#
+

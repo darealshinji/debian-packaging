@@ -1,0 +1,5 @@
+chrome-files/usr/share/applications           /usr/share
+chrome-files/usr/share/gnome-control-center   /usr/share
+chrome-files/opt/google/chrome/*              /usr/lib/google-chrome
+linux_signing_key.pub                         /usr/lib/google-chrome
+debian/google-chrome-stable.list              /etc/apt/sources.list.d
