@@ -33,11 +33,13 @@ Architecture: any
 Depends: lsb-release,
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends:	libcanberra0,
+Recommends: libcanberra0,
             libdbusmenu-glib4,
-			libdbusmenu-gtk4
+            libdbusmenu-gtk4
 Provides: www-browser,
-          gnome-www-browser
+          gnome-www-browser,
+          firefox-locale-@L10N@
+Replaces: firefox-locale-@L10N@
 Suggests: ttf-lyx
 Description: Safe and easy web browser from Mozilla
  Firefox delivers safe, easy web browsing. A familiar user interface,

@@ -3,7 +3,7 @@ include ../../mk/include.mk
 deps           = wget
 bin            = firefox.tbz
 srcfiles       = $(bin)
-distcleanfiles = $(bin) VERSION
+distcleanfiles = $(bin) VERSION debian/control
 changelog-msg  = New release version
 
 
