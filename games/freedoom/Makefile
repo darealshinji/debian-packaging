@@ -9,8 +9,8 @@ freedoom   = freedoom-$(VERSION)
 srcfiles   = $(freedm) $(freedoom) files
 
 download:
-	@ $(call download,$(bin),$(URL)/v$(VERSION)/$(freedoom).zip)
-	@ $(call download,$(bin),$(URL)/v$(VERSION)/$(freedm).zip)
+	@ $(call download,$(freedoom).zip,$(URL)/v$(VERSION)/$(freedoom).zip)
+	@ $(call download,$(freedm).zip,$(URL)/v$(VERSION)/$(freedm).zip)
 	unzip $(freedoom).zip
 	unzip $(freedm).zip
 
