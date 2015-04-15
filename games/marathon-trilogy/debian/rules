@@ -13,7 +13,3 @@ override_dh_install:
 override_dh_compress:
 	dh_compress -X.pdf
 
-override_dh_builddeb:
-	dh_builddeb -pmarathon -- -Zxz
-	dh_builddeb -pmarathon2 -pmarathon-infinity -- -Zbzip2
-

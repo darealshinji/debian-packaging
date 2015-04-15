@@ -28,8 +28,8 @@ download:
 	else \
 		svn checkout "svn://svn.code.sf.net/p/marathon/code/scenarios" $(builddir); \
 		svn info $(builddir) | grep 'Rev:' | cut -d' ' -f4 > $(builddir)/REVISION; \
-		cd $(builddir) && rm -rf .svn M1A1 XBLA_HUD \
-			"M1A1/trunk/Plugins/TTEP_v7/DON'T UNZIP ME - PUT ME IN PLUGINS FOLDER.txt"; \
+		rm -rf $(builddir)/.svn $(builddir)/Marathon $(builddir)/XBLA_HUD \
+			"$(builddir)/M1A1/trunk/Plugins/TTEP_v7/DON'T UNZIP ME - PUT ME IN PLUGINS FOLDER.txt"; \
 		mv '$(builddir)/$(m) 2' $(builddir)/$(m)-2; \
 		mv '$(builddir)/$(m) Infinity' $(builddir)/$(m)-Infinity; \
 		echo "create backup"; \
