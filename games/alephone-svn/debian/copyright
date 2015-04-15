@@ -32,7 +32,7 @@ License: ProFontAO License
 Files: data/default_theme/resources/DejaVuLGCSansCondensed-Bold*.ttf
 Copyright: 2003 Bitstream, Inc.
            2006 Tavmjong Bah <tavmjong@free.fr>
-License: Bitstream Vera Fonts Copyright, Arev Fonts Copyright
+License: Bitstream Vera Fonts Copyright and Arev Fonts Copyright
 Comment:
  Fonts are (c) Bitstream. DejaVu changes are in public domain.
  Glyphs imported from Arev fonts are (c) Tavmjong Bah.
