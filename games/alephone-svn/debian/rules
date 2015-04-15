@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+common_flags = -Wall -Wno-sign-compare -Wno-parentheses
+
+export CFLAGS=$(common_flags) $(shell dpkg-buildflags --get CFLAGS)
+export CXXFLAGS=$(common_flags) -Wno-reorder $(shell dpkg-buildflags --get CXXFLAGS)
+export CPPFLAGS=-DLUA_USE_MKSTEMP
+
+
+%:
+	dh ${@} --parallel --with autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- --bindir=/usr/games --datadir=/usr/share/games
+
+override_dh_install:
+	dh_install -XLICENSE-DejaVu -XSquarishSansCT.README
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=alephone
+	rename 's/\(//; s/\)//;' debian/alephone/usr/share/doc/alephone/*
+
+override_dh_strip:
+	dh_strip --dbg-package=alephone-dbg
+
