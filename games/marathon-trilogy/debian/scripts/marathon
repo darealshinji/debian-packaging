@@ -1,2 +1,2 @@
 #!/bin/sh
-alephone -f /usr/share/games/AlephOne/marathon "$@"
+alephone -f /usr/share/games/AlephOne/m1a1 "$@" 2>&1 | tee "$HOME/.alephone/m1a1.log"

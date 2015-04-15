@@ -1,2 +1,2 @@
 #!/bin/sh
-alephone -f /usr/share/games/AlephOne/marathon-infinity "$@"
+alephone -f /usr/share/games/AlephOne/marathon-infinity "$@" 2>&1 | tee "$HOME/.alephone/marathon-infinity.log"
