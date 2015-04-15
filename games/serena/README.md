@@ -6,6 +6,4 @@ Where is she? Things in the cabin evoke memories, and the husband comes to a dis
 realization... This short point-and-click adventure is the result of a massive collaborative
 effort between dozens of fans and designers of adventure games.
 
-To play this game you need to build the Dagon engine too.
-
-Run `make` to build Serena.
+To play this game you need to build the [Dagon engine](../dagon-git) too.
