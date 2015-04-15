@@ -3,6 +3,7 @@ Upstream-Name: Marathon
 Source: https://sourceforge.net/p/marathon/code/HEAD/tree/scenarios/
 
 Files: *
+       debian/*.png
 Copyright: 1995-2015 Bungie Software Corporation
 License:
  Copyright (c) 1995-2015 Bungie Software Corporation, all rights reserved.
