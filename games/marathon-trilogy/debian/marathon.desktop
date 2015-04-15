@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Marathon
+Comment=Old-school first-person shooter
+Exec=marathon
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=marathon

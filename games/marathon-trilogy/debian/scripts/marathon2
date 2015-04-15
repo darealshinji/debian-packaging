@@ -1,0 +1,2 @@
+#!/bin/sh
+alephone -f /usr/share/games/AlephOne/marathon2 "$@"

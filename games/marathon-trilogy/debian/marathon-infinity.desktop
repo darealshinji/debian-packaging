@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Marathon Infinity
+Comment=Old-school first-person shooter
+Exec=marathon-infinity
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=marathon-infinity

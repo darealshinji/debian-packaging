@@ -1,0 +1,3 @@
+debian/scripts/marathon2      /usr/games
+debian/marathon2.desktop      /usr/share/applications
+Marathon-2/trunk/*            /usr/share/games/AlephOne/marathon2
