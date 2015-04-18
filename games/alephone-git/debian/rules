@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@} --parallel --with autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- --bindir=/usr/games --datadir=/usr/share/games
+
+override_dh_install:
+	dh_install -XLICENSE-DejaVu -XSquarishSansCT.README
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=alephone
+
+override_dh_strip:
+	dh_strip --dbg-package=alephone-dbg
+
