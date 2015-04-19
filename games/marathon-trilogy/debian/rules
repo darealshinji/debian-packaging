@@ -8,7 +8,7 @@ override_dh_install:
 	dh_install -X.ttf.txt -XLICENSE-DejaVu -XMakefile -X.pdf -X.rtf -XREADME -XReadme
 	$(foreach PKG,marathon marathon2 marathon-infinity,\
 	  find debian/$(PKG)/usr/share/games/AlephOne -type f -exec chmod 0644 '{}' \; ;\
-	  ./make-icons.sh debian/$(PKG).png debian/$(PKG)/usr/share ;)
+	  ./make-icons.sh $(PKG).png debian/$(PKG)/usr/share ;)
 
 override_dh_compress:
 	dh_compress -X.pdf
