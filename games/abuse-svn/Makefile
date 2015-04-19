@@ -5,10 +5,11 @@ builddir      = abuse-trunk
 changelog-msg = Current development snapshot
 
 VERSION  = 0.8
-REVISION = `svn info $(builddir) | grep '^Last Changed Rev:' | cut -d' ' -f2`
 
 download:
+	rm -rf $(builddir)
 	svn co svn://svn.zoy.org/abuse/abuse/trunk $(builddir)
-	VERSION=1:$(VERSION)+svn$(REVISION) ; $(changelog-entry)
+	REVISION=`svn info $(builddir) | grep '^Revision:' | cut -d' ' -f2`; \
+	VERSION="1:$(VERSION)+svn$$REVISION" ; $(changelog-entry)
 	rm -rf $(builddir)/.svn
 
