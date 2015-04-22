@@ -3,9 +3,6 @@
 set -e
 
 rm -f /usr/bin/DivX265
-
-if [ -d /var/cache/divx265 ]; then
-    rm -r /var/cache/divx265
-fi
+rm -rf /var/cache/divx265
 
 #DEBHELPER#

@@ -3,12 +3,12 @@ Upstream-Name: DivX265
 Source: http://labs.divx.com/divx265
 
 Files: DivX265
-Copyright: 2000-2014 DivX, LLC.
+Copyright: 2000-2015 DivX, LLC.
 License: other-1
- Copyright 2000-2014 DivX, LLC.
+ Copyright 2000-2015 DivX, LLC.
 
 Files: *
-Copyright: 2014 djcj <djcj@gmx.de>
+Copyright: 2014-2015 djcj <djcj@gmx.de>
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal

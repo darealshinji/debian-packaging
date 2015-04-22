@@ -1,16 +1,22 @@
-divx265 (1.4.21~ppa3~utopic) utopic; urgency=low
+divx265 (1.5.0.8~ppa1~vivid) vivid; urgency=low
+
+  * New upstream release
+
+ -- Marshall Banana <djcj@gmx.de>  Wed, 22 Apr 2015 19:57:09 +0200
+
+divx265 (1.4.21~ppa3~trusty) trusty; urgency=low
 
   * Use lib32stdc++6 on amd64
 
  -- Marshall Banana <djcj@gmx.de>  Fri, 12 Dec 2014 17:21:59 +0100
 
-divx265 (1.4.21~ppa2~utopic) utopic; urgency=low
+divx265 (1.4.21~ppa2~trusty) trusty; urgency=low
 
   * Fix FSSTND-dir-in-usr
 
  -- Marshall Banana <djcj@gmx.de>  Mon, 10 Nov 2014 00:45:25 +0100
 
-divx265 (1.4.21~ppa1~utopic) utopic; urgency=low
+divx265 (1.4.21~ppa1~trusty) trusty; urgency=low
 
   * Initial release
 

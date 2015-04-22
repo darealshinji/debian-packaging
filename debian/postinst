@@ -2,17 +2,15 @@
 
 set -e
 
-VERSION=1.4.21
+VERSION=1_5_8
 
-sha256_1=f1887ba3ef72f47ed0330eb40751e6e966653b84fc2035fd08c1b22b0f2e62ef
+sha256_1=d8bfbfac33280358fee85580c8694ccecb9a97cb6a78dba9e9c6e8942230fcb3
 cache=/var/cache/divx265
 bin=DivX265_$VERSION
 
 case "$1" in
     install|configure|upgrade)
-    if [ -d $cache ]; then
-        rm -r $cache
-    fi
+    rm -rf $cache
     rm -f /usr/bin/$bin
 
     mkdir -p $cache
@@ -28,9 +26,7 @@ case "$1" in
     fi
 
     install -m755 -D $bin /usr/bin/DivX265
-    if [ -d $cache ]; then
-        rm -r $cache
-    fi
+    rm -rf $cache
     ;;
 
     abort-upgrade)
