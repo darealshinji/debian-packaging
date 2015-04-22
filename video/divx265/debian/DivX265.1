@@ -1,4 +1,4 @@
-.TH DIVX265 "1" "November 2014" "1.4.21" "User Commands"
+.TH DIVX265 "1" "April 2015" "1.5.0.8" "User Commands"
 .SH NAME
 DivX265 \- DivX HEVC Community Encoder
 
@@ -13,7 +13,7 @@ DivX265 \- DivX HEVC Community Encoder
 \fI-h  (for help)\fR
 
 .SH DESCRIPTION
-This tool will allow you to encode HEVC streams that are within DivX HEVC profile.
+This tool will allow you to encode HEVC streams that are within DivX HEVC profile (Main, Main 10).
 After encoding, you can mux video using MKVToolnix.
 
 .SH OPTIONS
@@ -51,6 +51,9 @@ Enable 10 bit, main10
 .TP
 \fB\-\-no\-wpp\fR
 Disable WPP
+.TP
+\fB\-ts\fR, \fB\-\-temporal\-scalability\fR
+Enable two layer temporal scalability, where the frame rate of the baselayer is reduced by 2
 .TP
 \fB\-709\fR
 Selects 709 for colour\-primaries, transfer\-characteristics and matrix coefficients
@@ -130,5 +133,5 @@ Miscellaneous:
 Calculate PSNR metrics
 
 .SH COPYRIGHT
-Copyright \(co 2000\-2014 DivX, LLC.
+Copyright \(co 2000\-2015 DivX, LLC.
 
