@@ -4,7 +4,7 @@ VERSION = $(shell dpkg-parsechangelog -SVersion | sed -e 's/1://;')
 MINOR   = $(shell echo $(VERSION) | cut -d~ -f1 | cut -d. -f2)
 MICRO   = $(shell echo $(VERSION) | cut -d~ -f1 | cut -d. -f3)
 
-CXXFLAGS += -Wall -Wno-parentheses -Wno-switch -Wno-sign-compare -DRARVER_MINOR=$(MINOR)$(MICRO)
+CXXFLAGS += -fno-strict-aliasing -Wall -Wno-parentheses -Wno-switch -Wno-sign-compare -DRARVER_MINOR=$(MINOR)$(MICRO)
 
 
 %:
