@@ -1,0 +1,45 @@
+--- /dev/null
++++ b/Makefile
+@@ -0,0 +1,42 @@
++VERSIONS = \
++	1.0.7 \
++	1.1.4 \
++	1.2.5 \
++	1.3.6 \
++	1.4.0 \
++	1.5.8 \
++	1.6.0 \
++	1.7.0 \
++	1.8.0 \
++	1.9.0 \
++	1.10.0 \
++	1.11.0 \
++	1.12.0
++
++CC = gcc
++LD = gcc
++CFLAGS = -fPIC $(shell dpkg-buildflags --get CFLAGS)
++CPPFLAGS = $(shell dpkg-buildflags --get CPPFLAGS)
++LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
++
++
++all: lib
++
++clean:
++	$(foreach VER,$(VERSIONS),\
++	  $(MAKE) -C glew-$(VER) clean ;)
++
++lib:
++	$(foreach VER,$(VERSIONS),\
++	  cd glew-$(VER) && \
++	  mkdir -p lib && \
++	  $(MAKE) lib/libGLEW.so.$(VER) CC=$(CC) LD=$(LD) \
++	  OPT='$(CFLAGS) $(CPPFLAGS)' LDFLAGS.EXTRA='$(LDFLAGS)'; \
++	  cd .. ;)
++	mkdir -p lib
++	cp -f -d glew-*/lib/libGLEW.so.1.* lib
++	ln -fs libGLEW.so.1.0.7 lib/libGLEW.so.1.0
++	ln -fs libGLEW.so.1.1.4 lib/libGLEW.so.1.1
++	ln -fs libGLEW.so.1.2.5 lib/libGLEW.so.1.2
++	find lib -type f -exec chmod 0644 '{}' \;
++

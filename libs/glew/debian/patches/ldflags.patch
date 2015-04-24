@@ -1,0 +1,33 @@
+--- a/glew-1.0.7/Makefile
++++ b/glew-1.0.7/Makefile
+@@ -78,7 +78,7 @@
+ 	$(AR) cr $@ $^
+ 
+ lib/$(LIB.SO): $(LIB.OBJS)
+-	$(LD) -shared -o $@ $^
++	$(LD) -shared -Wl,-soname,libGLEW.so.1.0 $(LDFLAGS.EXTRA) -lXmu -lXi -lGLU -lGL -lXext -lX11  -o $@ $^
+ 	$(LN) $(LIB.SO) lib/$(LIB.SO.LNK)
+ 
+ bin/$(BIN): $(BIN.SRCS) lib/$(LIB.A)
+--- a/glew-1.1.4/Makefile
++++ b/glew-1.1.4/Makefile
+@@ -69,7 +69,7 @@
+ CC = cc
+ LD = ld
+ CFLAGS.EXTRA = 
+-LDFLAGS.SO = -shared -soname $(LIB.SONAME)
++LDFLAGS.SO = -shared -Wl,-soname,libGLEW.so.1.1
+ LDFLAGS.EXTRA = -L/usr/X11R6/lib
+ LDFLAGS.GL = -lXmu -lXi -lGLU -lGL -lXext -lX11
+ NAME = GLEW
+--- a/glew-1.2.5/Makefile
++++ b/glew-1.2.5/Makefile
+@@ -100,7 +100,7 @@
+ CFLAGS.EXTRA = -DGLEW_MX
+ endif
+ PICFLAG = -fPIC
+-LDFLAGS.SO = -shared -soname $(LIB.SONAME)
++LDFLAGS.SO = -shared -Wl,-soname,libGLEW.so.1.2
+ LDFLAGS.EXTRA = -L/usr/X11R6/lib
+ LDFLAGS.GL = -lXmu -lXi -lGLU -lGL -lXext -lX11
+ LDFLAGS.STATIC = -Wl,-Bstatic
