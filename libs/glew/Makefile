@@ -31,7 +31,10 @@ debian/control:
   else \
     section="oldlibs"; \
   fi; \
-  sed "s/@N@/$$n/; s/@SECTION@/$$section/;" $@.template >> $@; \
+  sed "s/@N@/$$n/; s/@SECTION@/$$section/;" $@.libglew.in >> $@; \
+  if [ $$n -ge 6 ]; then \
+    sed "s/@N@/$$n/; s/@SECTION@/$$section/;" $@.libglewmx.in >> $@; \
+  fi; \
 done
 
 download: debian/control

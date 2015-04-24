@@ -10,6 +10,6 @@ Build-Depends: debhelper (>= 9),
                libxmu-dev
 Standards-Version: 3.9.5
 Homepage: http://glew.sourceforge.net
-Vcs-Git: git://anonscm.debian.org/collab-maint/glew.git
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/glew.git
+Vcs-Git: git://git.code.sf.net/p/glew/code
+Vcs-Browser: https://sourceforge.net/p/glew/code/ci/master/tree/
 

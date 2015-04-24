@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+libdir = /usr/lib/$(DEB_HOST_MULTIARCH)
 
 
 %:
@@ -8,8 +9,16 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
 override_dh_install:
 	dh_install
+
+	# GLEW
 	for n in $(shell seq 0 12); do \
-  mkdir -p debian/libglew1.$$n/usr/lib/$(DEB_HOST_MULTIARCH) ;\
-  cp -d lib/libGLEW.so.1.$$n lib/libGLEW.so.1.$$n.* debian/libglew1.$$n/usr/lib/$(DEB_HOST_MULTIARCH) ;\
+  mkdir -p debian/libglew1.$$n$(libdir) ;\
+  cp -d lib/libGLEW.so.1.$$n lib/libGLEW.so.1.$$n.* debian/libglew1.$$n$(libdir) ;\
+done
+
+	# GLEWmx
+	for n in $(shell seq 6 12); do \
+  mkdir -p debian/libglewmx1.$$n$(libdir) ;\
+  cp -d lib/libGLEWmx.so.1.$$n lib/libGLEWmx.so.1.$$n.* debian/libglewmx1.$$n$(libdir) ;\
 done
 
