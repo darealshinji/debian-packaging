@@ -6,7 +6,7 @@ srcfiles       = *.pdf *.png
 distcleanfiles = $(srcfiles) $(builddir)-backup
 
 URL1 = http://archives2.bungie.org/manuals
-URL2 = https://raw.githubusercontent.com/darealshinji/aleph-one/master/desktop/256x256/apps
+URL2 = https://raw.githubusercontent.com/darealshinji/aleph-one/patched/desktop/256x256/apps
 
 mpdfsum  = aab85b1e9fbc0eafdf6f8cf533ead1ee506a3e582fce260ac25c6a2f02a739d3
 m2pdfsum = 7a83e14c70a8783b55297f9b19bb3be59cba0c555298c318a122083923f07846
