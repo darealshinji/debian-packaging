@@ -1,0 +1,38 @@
+#!/usr/bin/make -f
+
+CPPFLAGS = $(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS   = $(filter-out -g -O2, $(shell dpkg-buildflags --get CFLAGS)) $(CPPFLAGS)
+CXXFLAGS = $(filter-out -g -O2, $(shell dpkg-buildflags --get CXXFLAGS)) $(CPPFLAGS)
+
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf build *.png
+
+override_dh_auto_configure:
+	mkdir build
+	cd build && cmake ../neo \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_SKIP_INSTALL_RPATH=ON \
+		-DCMAKE_SKIP_RPATH=ON \
+		-DCMAKE_VERBOSE_MAKEFILE=ON \
+		-DFFMPEG=ON \
+		-DONATIVE=ON \
+		-DOPENAL=ON \
+		-DSDL2=ON \
+		-DUSE_MFC_TOOLS=ON \
+		-DUSE_SYSTEM_LIBGLEW=ON \
+		-DUSE_SYSTEM_LIBJPEG=ON \
+		-DUSE_SYSTEM_LIBPNG=ON \
+		-DUSE_SYSTEM_ZLIB=ON
+
+override_dh_auto_build:
+	dh_auto_build -Dbuild
+	mv build/RBDoom3BFG build/rbdoom3bfg
+	convert neo/sys/win32/rc/res/doom.ico doom.png
+	mv doom-3.png rbdoom3bfg.png
+
