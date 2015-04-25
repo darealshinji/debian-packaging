@@ -1,14 +1,9 @@
 #!/usr/bin/make -f
 
-CPPFLAGS += -D__SYSTEM_ENET
-
 
 %:
 	dh ${@} --parallel
 
-override_dh_installdocs:
-	dh_installdocs --link-doc=chocolate-duke3d
-
-override_dh_strip:
-	dh_strip --dbg-package=chocolate-duke3d-dbg
+override_dh_auto_clean:
+	dh_auto_clean | true
 

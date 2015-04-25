@@ -3,7 +3,6 @@ Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
-               libenet-dev,
                libsdl-mixer1.2-dev,
                pkg-config
 Standards-Version: 3.9.5
@@ -23,21 +22,3 @@ Description: Duke Nukem 3D source port
   * Portable and compiling in one click on Windows, OS X and Linux.
   * Aimed at education, with lots of comments and documentation added in
     order to help programmers to understand and learn
-
-Package: chocolate-duke3d-dbg
-Section: debug
-Priority: extra
-Architecture: i386
-Depends: ${misc:Depends},
-         chocolate-duke3d (= ${binary:Version})
-Description: Duke Nukem 3D source port
- Chocolate Duke Nukem 3D is the equivalent of Chocolate Doom.
- .
- A port that:
-  * Remains as faithful as possible to the original source code.
-  * Portable and compiling in one click on Windows, OS X and Linux.
-  * Aimed at education, with lots of comments and documentation added in
-    order to help programmers to understand and learn
- .
- This package contains the debug symbols for Chocolate Duke3D.
-
