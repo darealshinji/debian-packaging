@@ -1,0 +1,3 @@
+debian/scripts/giteye   /usr/bin
+debian/giteye.desktop   /usr/share/applications
+giteye.tar.gz           /usr/share/giteye

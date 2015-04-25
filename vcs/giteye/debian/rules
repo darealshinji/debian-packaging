@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -f giteye.xpm giteye.tar.gz giteye
+
+override_dh_auto_build:
+	unzip -d giteye giteye.zip
+	tar zcvf giteye.tar.gz giteye
+	cp -f giteye/icon.xpm giteye.xpm
+
+override_dh_install:
+	dh_install
+	./make-icons.sh giteye.xpm $(CURDIR)/debian/giteye/usr/share
+

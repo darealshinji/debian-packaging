@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+local="$HOME/.local/share"
+config="$local/giteye"
+
+if [ ! -d "$config" ] ; then
+    cd "$local" && tar xvf /usr/share/giteye/giteye.tar.gz
+fi
+
+cd "$config" && ./GitEye "$@" 2> error.log
+

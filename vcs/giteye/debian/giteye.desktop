@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=GitEye
+GenericName=graphical Git client
+Comment=CollabNet GitEye is a desktop for Git
+Exec=giteye %U
+Icon=giteye
+Terminal=false
+Categories=Development;Qt;
+StartupNotify=false

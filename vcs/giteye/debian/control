@@ -1,0 +1,28 @@
+Source: giteye
+Section: vcs
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               imagemagick,
+               unzip
+Standards-Version: 3.9.5
+Homepage: http://www.giteyeapp.com/
+
+Package: giteye
+Architecture: amd64 i386
+Depends: libc6 (>= 2.3),
+         libgdk-pixbuf2.0-0,
+         libgtk-3-0,
+         libgtk2.0-0,
+         libglib2.0-0,
+         libx11-6,
+         openjdk-7-jre,
+         ${misc:Depends}
+Suggests: git
+Description: graphical Git client
+ CollabNet GitEye is a desktop for Git. It works with TeamForge, CloudForge
+ and other Git services.
+ .
+ GitEye combines a simple-to-use graphical Git client with central visibility
+ into essential developer tasks such as defect tracking, agile planning, code
+ reviews and build services.
