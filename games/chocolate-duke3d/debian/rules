@@ -1,9 +1,8 @@
 #!/usr/bin/make -f
 
+export V=1
+
 
 %:
 	dh ${@} --parallel
-
-override_dh_auto_clean:
-	dh_auto_clean | true
 
