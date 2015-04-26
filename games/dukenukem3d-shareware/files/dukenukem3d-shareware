@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+# chocolate-duke3d requires r+w rights on the game files
+
+local="$HOME/.local/share"
+config="$local/dukenukem3d-shareware"
+
+if [ ! -d "$config" ] ; then
+    cp -r /usr/share/games/dukenukem3d-shareware "$local"
+fi
+
+cd "$config" && chocolate-duke3d "$@" 2> error.log
+

@@ -1,0 +1,9 @@
+DN3DSW13/*.CON   /usr/share/games/dukenukem3d-shareware
+DN3DSW13/*.DMO   /usr/share/games/dukenukem3d-shareware
+DN3DSW13/*.RTS   /usr/share/games/dukenukem3d-shareware
+DN3DSW13/*.GRP   /usr/share/games/dukenukem3d-shareware
+DN3DSW13/*.PCK   /usr/share/games/dukenukem3d-shareware
+DN3DSW13/*.INI   /usr/share/games/dukenukem3d-shareware
+
+files/dukenukem3d-shareware.desktop   /usr/share/applications
+files/dukenukem3d-shareware           /usr/games
