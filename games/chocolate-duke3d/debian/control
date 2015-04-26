@@ -3,6 +3,7 @@ Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
+               libenet-dev,
                libsdl-mixer1.2-dev,
                pkg-config
 Standards-Version: 3.9.5

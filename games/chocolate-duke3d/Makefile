@@ -11,4 +11,6 @@ download:
 	latestcommit=`git -C $(builddir)/ log -1 --format=%ci | head -c10 | sed -e 's/-//g')` ;\
 	sed -e "s/@VERSION@/1.5+git$${latestcommit}/g; s/@DATE@/`date -R`/g" debian/changelog.in > debian/changelog
 	rm -rf $(builddir)/.git
+	mv $(builddir)/Makefile $(builddir)/Makefile-old
+	cp debian/chocolate-duke3d.make $(builddir)/Makefile
 
