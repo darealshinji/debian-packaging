@@ -6,6 +6,7 @@ export LC_ALL=C
 
 
 ARCH      = $(shell dpkg-architecture -qDEB_HOST_ARCH)
+ARCHREAL  = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 builddir  = pbuilder-source
 LOG       = $(shell basename $$PWD)-build.log
 resultdir = "$$HOME/buildresult"
@@ -85,6 +86,17 @@ distclean: clean
 
 
 predepends:
+ifeq ($(PBUILDER),0)
+	@ echo ""
+	@ # why does 'ifneq ($(ARCH),$(ARCHREAL))' not work?
+	@ if [ $(ARCH) != $(ARCHREAL) ];                                              \
+	then                                                                          \
+		echo "Cannot build packages for $(ARCH) architecture without pbuilder." ; \
+		echo "Try again without \`PBUILDER=0'" ;                                  \
+		echo "" ;                                                                 \
+		exit 1 ;                                                                  \
+	fi
+endif
 ifeq ($(DEPS),0)
 	@ echo "dependency checks skipped"
 else
