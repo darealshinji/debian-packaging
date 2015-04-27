@@ -1,8 +1,11 @@
 #!/usr/bin/make -f
 
-export V=1
+export CFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
 
 
 %:
-	dh ${@} --parallel
+	dh ${@} --parallel --with autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- --bindir=/usr/games --disable-silent-rules
 
