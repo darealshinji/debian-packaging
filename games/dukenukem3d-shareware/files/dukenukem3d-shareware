@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# chocolate-duke3d requires r+w rights on the game files
+# chocolate-duke3d requires r+w rights on the .grp file
 
 local="$HOME/.local/share"
 config="$local/dukenukem3d-shareware"

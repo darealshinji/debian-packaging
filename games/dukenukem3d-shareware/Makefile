@@ -5,7 +5,7 @@ dir            = 3dduke13
 bin            = $(dir).zip
 cleanfiles     = $(dir) debian/copyright
 distcleanfiles = $(bin)
-srcfiles       = $(dir)/DN3DSW13 files
+srcfiles       = $(dir)/DN3DSW13/DUKE3D.GRP files/*
 
 download:
 	@ $(call download,$(bin),http://www.moddb.com/downloads/mirror/14732/102/836e28a052f1e3da7d0b88777bf9897d)
