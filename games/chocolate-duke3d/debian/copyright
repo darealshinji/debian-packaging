@@ -1,6 +1,6 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Chocolate Duke3D
-Source: https://github.com/fabiensanglard/chocolate_duke3D
+Source: https://github.com/darealshinji/chocolate_duke3D
 
 Files: debian/*
 Copyright: 2015 djcj <djcj@gmx.de>
