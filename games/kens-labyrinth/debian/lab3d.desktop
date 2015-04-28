@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Ken's Labyrinth
+Exec=lab3d
+TryExec=/usr/games/lab3d
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=lab3d

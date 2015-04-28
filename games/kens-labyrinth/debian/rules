@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f lab3d.xpm
+
+override_dh_auto_build:
+	dh_auto_build
+	convert ken.bmp lab3d.xpm
+
+override_dh_installchangelogs:
+	dh_installchangelogs CHANGELOG
+

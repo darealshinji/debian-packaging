@@ -1,0 +1,6 @@
+lab3d.xpm                          /usr/share/pixmaps
+debian/lab3d.desktop               /usr/share/applications
+debian/scripts/lab3d               /usr/games
+debian/settings.ini                /usr/share/games/lab3d
+lab3d                              /usr/lib
+hires *.kzp *.dat *.bmp *.ini      /usr/share/games/lab3d

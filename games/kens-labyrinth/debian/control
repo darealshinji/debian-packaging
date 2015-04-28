@@ -1,0 +1,24 @@
+Source: lab3d-sdl
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               imagemagick,
+               libsdl2-dev,
+               libsdl2-image-dev,
+               libgl1-mesa-dev,
+               libglu1-mesa-dev,
+               zlib1g-dev
+Standards-Version: 3.9.5
+Homepage: http://www.advsys.net/ken/klab.htm
+Vcs-Git: https://github.com/jspenguin/lab3d-sdl.git
+Vcs-Browser: https://github.com/jspenguin/lab3d-sdl
+
+Package: kens-labyrinth
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: first Wolf3D clone
+ LAB3D/SDL is a port of Ken's Labyrinth to modern operating systems, using
+ OpenGL for graphics output and the SDL library to provide user input, sound
+ output, threading, and some graphics support functions.

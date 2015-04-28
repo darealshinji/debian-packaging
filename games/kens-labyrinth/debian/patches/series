@@ -1,0 +1,4 @@
+Add-high_deadzone-to-stick-calculations.patch
+Add-current-stick-values-to-debug-display.patch
+command-line-options.patch
+Makefile.patch

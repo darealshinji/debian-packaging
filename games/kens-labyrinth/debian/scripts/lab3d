@@ -1,0 +1,16 @@
+#!/bin/sh
+
+datdir=/usr/share/games/lab3d
+confdir="$HOME/.config/lab3d"
+
+if [ ! -d "$confdir" ]; then
+  mkdir -p "$confdir"
+  for f in "$datdir"/* ; do
+    ln -fs "$f" "$confdir/$(basename $f)"
+  done
+  rm -f "$confdir"/savgame* "$confdir/settings.ini"
+  cp -f "$datdir"/savgame* "$datdir/settings.ini" "$confdir"
+fi
+
+cd "$confdir" && "/usr/lib/lab3d" "$@"
+

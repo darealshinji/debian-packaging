@@ -1,0 +1,74 @@
+.TH LAB3D "6" "April 2015" "3.0" "Games Manual"
+.SH NAME
+LAB3D/SDL \- first Wolf3D clone
+.SH SYNOPSIS
+\fBlab3d\fR [options]
+.SH DESCRIPTION
+LAB3D/SDL is a port of Ken's Labyrinth to modern operating systems, using
+OpenGL for graphics output and the SDL library to provide user input, sound
+output, threading, and some graphics support functions.
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-help\fR
+Print this help.
+.TP
+\fB\-V\fR, \fB\-version\fR
+Print detected game version.
+.TP
+\fB\-res\fR <w> <h> <virtual w> <virtual h>
+Set screen resolution.  Default: 800 600 360 240
+.TP
+\fB\-asp\fR <aspw> <asph>
+Aspect ratio correction.  Default: 1.0 1.0
+.TP
+\fB\-win\fR
+Start in window mode.
+.TP
+\fB\-fullscreen\fR
+Start in fullscreen mode.
+.TP
+\fB\-nearest\fR
+Use nearest neighbor texture resize filter.
+.TP
+\fB\-trilinear\fR
+Use trilinear texture resize filter.
+.TP
+\fB\-stereo\fR
+Enable stereoscopic view.
+.TP
+\fB\-gmmusic\fR
+Use General MIDI for music.
+.TP
+\fB\-admusic\fR
+Use Adlib emulation for music.
+.TP
+\fB\-nomusic\fR
+Don't play music.
+.TP
+\fB\-sound\fR
+Enable sound.
+.TP
+\fB\-nosound\fR
+Disable sound.
+.TP
+\fB\-skip\fR
+Skip intro sequence and start a new game right away.
+.TP
+\fB\-load\fR <slot>
+Load a saved game from one of the 8 available slots.
+.TP
+\fB\-record\fR <slot> <dem>
+Load a game (slot 1\-8) and record a demo.
+If <slot> is set to 0 a new game will be started.
+.TP
+\fB\-recordx\fR <slot> <dem>
+Same as \fB\-record\fR but saves an uncompressed demo file.
+.TP
+\fB\-play\fR <dem>
+Play a demo file.
+.TP
+\fB\-setup\fR
+Start in settings menu.
+.TP
+\fB\-v\fR, \fB\-debug\fR
+Verbose output.
