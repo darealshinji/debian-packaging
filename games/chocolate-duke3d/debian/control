@@ -12,7 +12,7 @@ Vcs-Git: https://github.com/darealshinji/chocolate_duke3D.git
 Vcs-Browser: https://github.com/darealshinji/chocolate_duke3D
 
 Package: chocolate-duke3d
-Architecture: i386
+Architecture: any
 Multi-Arch: foreign
 Depends: ${misc:Depends},
          ${shlibs:Depends}

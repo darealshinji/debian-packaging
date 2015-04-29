@@ -1,7 +1,5 @@
 include ../../mk/include.mk
 
-# Chocolate Duke3D doesn't build on amd64
-ARCH       = i386
 deps       = git
 cleanfiles = debian/changelog
 builddir   = chocolate_duke3D
