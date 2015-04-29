@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Quake (shareware)
+GenericName=First Person Shooter Game
+Comment=The freely redistributable first episode of Quake
+Keywords=first;person;shooter;shareware;
+Exec=/usr/games/quake-shareware
+Icon=quake-shareware
+Terminal=false
+Type=Application
+Categories=Game;ActionGame;

@@ -1,0 +1,2 @@
+#!/bin/sh
+darkplaces -basedir /usr/share/games/quake-shareware "$@"

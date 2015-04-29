@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf quake106
+
+override_dh_auto_build:
+	unzip -d quake106 quake106.zip
+	cd quake106 && lha -x resource.1
+	fromdos quake106/slicnse.txt quake106/readv106.txt
+	cat debian/copyright.in quake106/slicnse.txt > debian/copyright
+	mv quake106/readv106.txt quake106/README
+	./make-icons.sh quake-shareware.png
+

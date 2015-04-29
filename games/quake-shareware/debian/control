@@ -1,0 +1,19 @@
+Source: quake-shareware
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               imagemagick,
+               tofrodos,
+               lhasa,
+               unzip
+Standards-Version: 3.9.5
+Homepage: http://www.moddb.com/games/quake/downloads/quake-shareware-106
+
+Package: quake-shareware
+Architecture: all
+Multi-Arch: foreign
+Depends: darkplaces, ${misc:Depends}
+Description: Quake shareware version
+ The freely redistributable first episode of Quake,
+ taken from the DOS version.

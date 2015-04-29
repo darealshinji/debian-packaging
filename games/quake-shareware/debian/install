@@ -1,0 +1,4 @@
+debian/scripts/quake-shareware   /usr/games
+quake106/id1                     /usr/share/games/quake-shareware
+debian/quake-shareware.desktop   /usr/share/applications
+converted_icons/icons            /usr/share
