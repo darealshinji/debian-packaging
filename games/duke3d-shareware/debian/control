@@ -1,4 +1,4 @@
-Source: dukenukem3d-shareware
+Source: duke3d-shareware
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.5
 Homepage: http://www.moddb.com/games/duke-nukem-3d
 
-Package: dukenukem3d-shareware
+Package: duke3d-shareware
 Architecture: all
 Multi-Arch: foreign
 Depends: chocolate-duke3d, ${misc:Depends}

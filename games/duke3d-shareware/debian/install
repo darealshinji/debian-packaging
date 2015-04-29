@@ -1,0 +1,3 @@
+DUKE3D.GRP                        /usr/share/games/duke3d-shareware
+debian/duke3d-shareware.desktop   /usr/share/applications
+debian/scripts/duke3d-shareware   /usr/games
