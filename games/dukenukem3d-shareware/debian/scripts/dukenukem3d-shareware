@@ -3,8 +3,8 @@
 config="$HOME/.config/dukenukem3d-shareware"
 
 test ! -d "$config" && mkdir -p "$config" || true
-test ! -e "$config/DUKE3D.GRP" && ln -s "$config/DUKE3D.GRP" \
-  "/usr/share/games/dukenukem3d-shareware/DUKE3D.GRP" || true
+test ! -e "$config/DUKE3D.GRP" && \
+  ln -s "/usr/share/games/dukenukem3d-shareware/DUKE3D.GRP" "$config/DUKE3D.GRP" || true
 
 cd "$config" && chocolate-duke3d "$@" 2> error.log
 
