@@ -8,4 +8,5 @@ OpenGL for graphics output and the SDL library to provide user input, sound
 output, threading, and some graphics support functions.
 
 Homepage: http://www.advsys.net/ken/klab.htm
+Source: https://github.com/jspenguin/lab3d-sdl
 

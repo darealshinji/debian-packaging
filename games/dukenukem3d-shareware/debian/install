@@ -1,3 +1,3 @@
-DUKE3D.GRP                      /usr/share/games/dukenukem3d-shareware
-dukenukem3d-shareware.desktop   /usr/share/applications
-dukenukem3d-shareware           /usr/games
+DUKE3D.GRP                             /usr/share/games/dukenukem3d-shareware
+debian/dukenukem3d-shareware.desktop   /usr/share/applications
+debian/scripts/dukenukem3d-shareware   /usr/games

@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-config="$HOME/.local/share/dukenukem3d-shareware"
+config="$HOME/.config/dukenukem3d-shareware"
 
 test ! -d "$config" && mkdir -p "$config" || true
 test ! -e "$config/DUKE3D.GRP" && ln -s "$config/DUKE3D.GRP" \
