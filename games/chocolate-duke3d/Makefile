@@ -1,5 +1,6 @@
 include ../../mk/include.mk
 
+ARCH       = i386
 deps       = git
 cleanfiles = debian/changelog
 builddir   = chocolate_duke3D
