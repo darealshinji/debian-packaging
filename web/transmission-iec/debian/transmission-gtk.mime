@@ -1,0 +1,1 @@
+application/x-bittorrent; transmission-gtk %s; description="GTK-based BitTorrent client"; test=test -n "$DISPLAY"

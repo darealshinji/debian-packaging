@@ -1,0 +1,14 @@
+Transmission for Debian
+--------------------------------------------------------------------------------
+
+The upstream bug tracking system can be found at
+http://trac.transmissionbt.com/
+
+Mime Types
+----------
+To make transmission your default torrent client add the following line to
+your ~/.mailcap file:
+
+application/x-bittorrent; transmission %s
+
+ -- Philipp Benner <pbenner@uni-osnabrueck.de>, Wed,  6 Feb 2008 09:07:37 +0100

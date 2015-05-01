@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  upgrade)
+    if dpkg --compare-versions "$2" lt "2.84-0.2~"; then
+        mkdir -p /var/lib/transmission-daemon/.config/transmission-daemon
+        chown -R debian-transmission:debian-transmission /var/lib/transmission-daemon
+        usermod debian-transmission -d /var/lib/transmission-daemon
+        mv /var/lib/transmission-daemon/info/* /var/lib/transmission-daemon/.config/transmission-daemon
+        rmdir /var/lib/transmission-daemon/info
+    fi
+  ;;
+  install|abort-upgrade)
+  ;;
+  *)
+    echo "preinst called with unknown argument '$1'" >&2
+    exit 1
+  ;;
+esac
+
+#DEBHELPER#

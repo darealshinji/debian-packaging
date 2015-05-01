@@ -1,0 +1,5 @@
+debian/tmp/usr/share/man/man1/transmission-cli.1
+debian/tmp/usr/share/man/man1/transmission-remote.1
+debian/tmp/usr/share/man/man1/transmission-show.1
+debian/tmp/usr/share/man/man1/transmission-edit.1
+debian/tmp/usr/share/man/man1/transmission-create.1

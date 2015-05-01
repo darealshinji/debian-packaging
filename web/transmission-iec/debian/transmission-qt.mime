@@ -1,0 +1,1 @@
+application/x-bittorrent; transmission-qt %s; description="Qt-based BitTorrent client"; test=test -n "$DISPLAY"

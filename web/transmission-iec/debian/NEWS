@@ -1,0 +1,10 @@
+transmission (2.10-1) experimental; urgency=low
+  
+  As of 2.10 all binaries have been renamed to a more homogeneous 
+  format, indicative of the UI type:
+    - transmission      -> transmission-gtk 
+    - transmissioncli   -> transmission-cli
+    - qtr               -> transmission-qt
+
+ -- Leo Costela <costela@debian.org>  Wed, 13 Oct 2010 22:34:00 +0200
+

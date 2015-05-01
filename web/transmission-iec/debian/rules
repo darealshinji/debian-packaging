@@ -1,0 +1,56 @@
+#!/usr/bin/make -f
+
+export V=1
+#export DH_VERBOSE=1
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed,--no-undefined,--no-add-needed
+
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+DH_EXTRA_ARGS := --with autoreconf
+
+DEB_HOST_ARCH_OS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+ifeq ($(DEB_HOST_ARCH_OS),linux)
+	DH_EXTRA_ARGS += --with systemd
+endif
+
+%:
+	dh $@ $(DH_EXTRA_ARGS)
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		--enable-cli --enable-daemon \
+		--enable-external-natpmp
+	# qt client has a separate build-system
+	dh_auto_configure -Dqt
+
+override_dh_auto_build:
+	dh_auto_build
+	dh_auto_build -Dqt
+	(cd qt && lrelease qtr.pro)
+
+override_dh_auto_clean:
+	dh_auto_clean
+	dh_auto_clean -Dqt
+	rm -f qt/translations/*.qm
+
+override_dh_installchangelogs:
+	dh_installchangelogs -p transmission-common NEWS
+override_dh_installdocs:
+	dh_installdocs -p transmission-common
+override_dh_installexamples:
+	dh_installexamples -p transmission-common
+
+override_dh_install:
+	dh_install --list-missing -X LICENSE # extra copy in web dir - costela 2008-08-15
+
+override_dh_auto_install:
+	dh_auto_install
+	dh_auto_install -Dqt -- INSTALL_ROOT=$(CURDIR)/debian/tmp/usr
+
+override_dh_strip:
+	dh_strip --dbg-package=transmission-dbg
+
+override_dh_bugfiles:
+	dh_bugfiles -A

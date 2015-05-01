@@ -1,0 +1,30 @@
+start on (filesystem and net-device-up IFACE=lo)
+stop on runlevel [!2345]
+
+# give time to send info to trackers
+kill timeout 30
+
+setuid debian-transmission
+setgid debian-transmission
+
+respawn
+
+pre-start script
+
+  # stop job from continuing if no config file found for daemon
+  [ ! -f /etc/default/transmission-daemon ] && { stop; exit 0; }
+
+  # source the config file
+  . /etc/default/transmission-daemon
+
+  # stop job from continuing if admin has not enabled service in
+  # config file.
+  [ "$ENABLE_DAEMON" != 0 ] || { stop; exit 0; }
+
+end script
+
+script
+  . /etc/default/transmission-daemon
+
+  exec /usr/bin/transmission-daemon -f $OPTIONS
+end script

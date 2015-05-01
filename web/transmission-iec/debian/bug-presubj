@@ -1,0 +1,2 @@
+If reporting a crash, please remember to install transmission-dbg and
+provide a gdb backtrace.

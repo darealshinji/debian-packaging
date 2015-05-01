@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -e
+
+test $DEBIAN_SCRIPT_DEBUG && set -v -x
+
+chperms() {
+	# chperms <user> <group> <perms> <file>
+	if ! OVERRIDE=`dpkg-statoverride --list $4 2>&1`; then
+		if [ -e $4 ]; then
+			chown $1:$2 $4
+			chmod $3 $4
+		fi
+	fi
+}
+
+case "$1" in
+  configure)
+    if ! getent passwd debian-transmission > /dev/null; then
+        adduser --quiet \
+                --system \
+                --group \
+                --no-create-home \
+                --disabled-password \
+                --home /var/lib/transmission-daemon \
+                debian-transmission
+    fi
+
+    chperms debian-transmission debian-transmission 4750 /var/lib/transmission-daemon/.config/transmission-daemon
+
+    chperms debian-transmission debian-transmission 4775 /var/lib/transmission-daemon/downloads
+
+    chperms debian-transmission debian-transmission 0660 /etc/transmission-daemon/settings.json
+
+    chperms root debian-transmission 2775 /etc/transmission-daemon
+
+  ;;
+esac
+
+#DEBHELPER#
+
+exit 0;
