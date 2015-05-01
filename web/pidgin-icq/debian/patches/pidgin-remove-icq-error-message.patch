@@ -1,0 +1,16 @@
+--- a/libpurple/protocols/oscar/oscar.c
++++ b/libpurple/protocols/oscar/oscar.c
+@@ -4171,13 +4171,7 @@
+ 			} break;
+ 
+ 			default: { /* La la la */
+-				gchar *buf;
+ 				purple_debug_error("oscar", "ssi: Action 0x%04hx was unsuccessful with error 0x%04hx\n", retval->action, retval->ack);
+-				buf = g_strdup_printf(_("Unable to add the buddy %s for an unknown reason."),
+-						(retval->name ? retval->name : _("(no name)")));
+-				if ((retval->name != NULL) && !purple_conv_present_error(retval->name, purple_connection_get_account(gc), buf))
+-					purple_notify_error(gc, NULL, _("Unable to Add"), buf);
+-				g_free(buf);
+ 			} break;
+ 		}
+ 

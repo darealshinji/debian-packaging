@@ -1,3 +1,9 @@
+pidgin (1:2.10.11-1icq1) unstable; urgency=low
+
+  * Disable annoying ICQ error message
+
+ -- Marshall Banana <djcj@gmx.de>  Fri, 01 May 2015 20:45:10 +0200
+
 pidgin (2.10.11-1) unstable; urgency=low
 
   * Recommend gstreamer0.10-alsa and gstreamer0.10-ffmpeg for voice/video calls
