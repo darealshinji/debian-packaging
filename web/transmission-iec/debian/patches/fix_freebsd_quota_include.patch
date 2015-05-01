@@ -9,7 +9,7 @@
    #include <ufs/ufs/quota.h> /* quotactl() */
   #elif defined (__NetBSD__)
    #include <sys/param.h>
-@@ -246,7 +246,7 @@ getquota (const char * device)
+@@ -246,7 +246,7 @@
    int64_t freespace;
    int64_t spaceused;
  
@@ -18,7 +18,7 @@
    if (quotactl(device, QCMD(Q_GETQUOTA, USRQUOTA), getuid(), (caddr_t) &dq) == 0)
      {
  #elif defined(__sun)
-@@ -278,7 +278,7 @@ getquota (const char * device)
+@@ -278,7 +278,7 @@
            /* No quota enabled for this user */
            return -1;
          }

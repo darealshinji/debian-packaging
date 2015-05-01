@@ -14,11 +14,9 @@ Description: fix segfaults due to wrong systemd service file
  daemon/transmission-daemon.service | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/daemon/transmission-daemon.service b/daemon/transmission-daemon.service
-index 8a1d429..3687cf3 100644
 --- a/daemon/transmission-daemon.service
 +++ b/daemon/transmission-daemon.service
-@@ -3,7 +3,7 @@ Description=Transmission BitTorrent Daemon
+@@ -3,7 +3,7 @@
  After=network.target
  
  [Service]

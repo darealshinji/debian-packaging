@@ -1,0 +1,249 @@
+--- a/cli/cli.c
++++ b/cli/cli.c
+@@ -38,25 +38,7 @@
+ ****
+ ***/
+ 
+-#define MEM_K 1024
+-#define MEM_K_STR "KiB"
+-#define MEM_M_STR "MiB"
+-#define MEM_G_STR "GiB"
+-#define MEM_T_STR "TiB"
+-
+-#define DISK_K 1000
+-#define DISK_B_STR   "B"
+-#define DISK_K_STR "kB"
+-#define DISK_M_STR "MB"
+-#define DISK_G_STR "GB"
+-#define DISK_T_STR "TB"
+-
+-#define SPEED_K 1000
+-#define SPEED_B_STR  "B/s"
+-#define SPEED_K_STR "kB/s"
+-#define SPEED_M_STR "MB/s"
+-#define SPEED_G_STR "GB/s"
+-#define SPEED_T_STR "TB/s"
++#include "../utils/units.h"
+ 
+ /***
+ ****
+--- a/daemon/daemon.c
++++ b/daemon/daemon.c
+@@ -39,25 +39,7 @@
+ 
+ #define MY_NAME "transmission-daemon"
+ 
+-#define MEM_K 1024
+-#define MEM_K_STR "KiB"
+-#define MEM_M_STR "MiB"
+-#define MEM_G_STR "GiB"
+-#define MEM_T_STR "TiB"
+-
+-#define DISK_K 1000
+-#define DISK_B_STR  "B"
+-#define DISK_K_STR "kB"
+-#define DISK_M_STR "MB"
+-#define DISK_G_STR "GB"
+-#define DISK_T_STR "TB"
+-
+-#define SPEED_K 1000
+-#define SPEED_B_STR  "B/s"
+-#define SPEED_K_STR "kB/s"
+-#define SPEED_M_STR "MB/s"
+-#define SPEED_G_STR "GB/s"
+-#define SPEED_T_STR "TB/s"
++#include "../utils/units.h"
+ 
+ #define LOGFILE_MODE_STR "a+"
+ 
+--- a/daemon/remote.c
++++ b/daemon/remote.c
+@@ -41,26 +41,7 @@
+ 
+ #define ARGUMENTS TR_KEY_arguments
+ 
+-#define MEM_K 1024
+-#define MEM_B_STR   "B"
+-#define MEM_K_STR "KiB"
+-#define MEM_M_STR "MiB"
+-#define MEM_G_STR "GiB"
+-#define MEM_T_STR "TiB"
+-
+-#define DISK_K 1000
+-#define DISK_B_STR  "B"
+-#define DISK_K_STR "kB"
+-#define DISK_M_STR "MB"
+-#define DISK_G_STR "GB"
+-#define DISK_T_STR "TB"
+-
+-#define SPEED_K 1000
+-#define SPEED_B_STR  "B/s"
+-#define SPEED_K_STR "kB/s"
+-#define SPEED_M_STR "MB/s"
+-#define SPEED_G_STR "GB/s"
+-#define SPEED_T_STR "TB/s"
++#include "../utils/units.h"
+ 
+ /***
+ ****
+--- a/gtk/util.c
++++ b/gtk/util.c
+@@ -32,23 +32,25 @@
+ ****  UNITS
+ ***/
+ 
+-const int mem_K = 1024;
+-const char * mem_K_str = N_("KiB");
+-const char * mem_M_str = N_("MiB");
+-const char * mem_G_str = N_("GiB");
+-const char * mem_T_str = N_("TiB");
++#include "../utils/units.h"
+ 
+-const int disk_K = 1000;
+-const char * disk_K_str = N_("kB");
+-const char * disk_M_str = N_("MB");
+-const char * disk_G_str = N_("GB");
+-const char * disk_T_str = N_("TB");
++const int mem_K = MEM_K;
++const char * mem_K_str = N_(MEM_K_STR);
++const char * mem_M_str = N_(MEM_M_STR);
++const char * mem_G_str = N_(MEM_G_STR);
++const char * mem_T_str = N_(MEM_T_STR);
+ 
+-const int speed_K = 1000;
+-const char * speed_K_str = N_("kB/s");
+-const char * speed_M_str = N_("MB/s");
+-const char * speed_G_str = N_("GB/s");
+-const char * speed_T_str = N_("TB/s");
++const int disk_K = DISK_K;
++const char * disk_K_str = N_(DISK_K_STR);
++const char * disk_M_str = N_(DISK_K_STR);
++const char * disk_G_str = N_(DISK_K_STR);
++const char * disk_T_str = N_(DISK_K_STR);
++
++const int speed_K = SPEED_K;
++const char * speed_K_str = N_(SPEED_K_STR);
++const char * speed_M_str = N_(SPEED_M_STR);
++const char * speed_G_str = N_(SPEED_G_STR);
++const char * speed_T_str = N_(SPEED_T_STR);
+ 
+ /***
+ ****
+--- a/libtransmission/libtransmission-test.c
++++ b/libtransmission/libtransmission-test.c
+@@ -179,26 +179,7 @@
+     }
+ }
+ 
+-#define MEM_K 1024
+-#define MEM_B_STR   "B"
+-#define MEM_K_STR "KiB"
+-#define MEM_M_STR "MiB"
+-#define MEM_G_STR "GiB"
+-#define MEM_T_STR "TiB"
+-
+-#define DISK_K 1000
+-#define DISK_B_STR  "B"
+-#define DISK_K_STR "kB"
+-#define DISK_M_STR "MB"
+-#define DISK_G_STR "GB"
+-#define DISK_T_STR "TB"
+-
+-#define SPEED_K 1000
+-#define SPEED_B_STR  "B/s"
+-#define SPEED_K_STR "kB/s"
+-#define SPEED_M_STR "MB/s"
+-#define SPEED_G_STR "GB/s"
+-#define SPEED_T_STR "TB/s"
++#include "../utils/units.h"
+ 
+ tr_session *
+ libttest_session_init (tr_variant * settings)
+--- a/configure.ac
++++ b/configure.ac
+@@ -438,6 +438,22 @@
+ 
+ dnl ----------------------------------------------------------------------------
+ dnl
++dnl  use IEC size units (1024 b = 1 kiB)
++
++use_iec_units="no"
++AC_ARG_ENABLE([iec-units],
++              AS_HELP_STRING([--enable-iec-units],[Use IEC size units (1024 b = 1 kiB)]),
++              [want_iec_units=${enableval}],
++              [want_iec_units=no])
++if test "x$want_iec_units" != "xno" ; then
++     CXXFLAGS="$CXXFLAGS -DUSE_IEC_UNITS"
++     CPPFLAGS="$CPPFLAGS -DUSE_IEC_UNITS"
++     use_iec_units="yes"
++fi
++
++
++dnl ----------------------------------------------------------------------------
++dnl
+ dnl  platform-specific stuff.
+ 
+ AC_CANONICAL_HOST
+@@ -558,6 +574,7 @@
+ 
+    Source code location:                              ${srcdir}
+    Compiler:                                          ${CXX}
++   Use IEC size units:                                ${use_iec_units}
+ 
+    Build libtransmission:                             yes
+       * optimized for low-resource systems:           ${enable_lightweight}
+--- /dev/null
++++ b/utils/units.h
+@@ -0,0 +1,52 @@
++/*
++ * This file Copyright (C) 2012-2014 Mnemosyne LLC
++ *
++ * It may be used under the GNU GPL versions 2 or 3
++ * or any future license endorsed by Mnemosyne LLC.
++ *
++ * $Id:$
++ */
++
++#ifndef UNITS_H
++#define UNITS_H
++
++#define MEM_K 1024
++#define MEM_K_STR "KiB"
++#define MEM_M_STR "MiB"
++#define MEM_G_STR "GiB"
++#define MEM_T_STR "TiB"
++
++#define DISK_B_STR "B"
++#define SPEED_B_STR "B/s"
++
++#ifdef USE_IEC_UNITS
++
++#define DISK_K 1024
++#define DISK_K_STR "kiB"
++#define DISK_M_STR "MiB"
++#define DISK_G_STR "GiB"
++#define DISK_T_STR "TiB"
++
++#define SPEED_K 1024
++#define SPEED_K_STR "kiB/s"
++#define SPEED_M_STR "MiB/s"
++#define SPEED_G_STR "GiB/s"
++#define SPEED_T_STR "TiB/s"
++
++#else
++
++#define DISK_K 1000
++#define DISK_K_STR "kB"
++#define DISK_M_STR "MB"
++#define DISK_G_STR "GB"
++#define DISK_T_STR "TB"
++
++#define SPEED_K 1000
++#define SPEED_K_STR "kB/s"
++#define SPEED_M_STR "MB/s"
++#define SPEED_G_STR "GB/s"
++#define SPEED_T_STR "TB/s"
++
++#endif
++
++#endif

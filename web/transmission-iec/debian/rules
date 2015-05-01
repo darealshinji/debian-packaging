@@ -21,14 +21,7 @@ endif
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		--enable-cli --enable-daemon \
-		--enable-external-natpmp
-	# qt client has a separate build-system
-	dh_auto_configure -Dqt
-
-override_dh_auto_build:
-	dh_auto_build
-	dh_auto_build -Dqt
-	(cd qt && lrelease qtr.pro)
+		--enable-iec-units
 
 override_dh_auto_clean:
 	dh_auto_clean
@@ -44,10 +37,6 @@ override_dh_installexamples:
 
 override_dh_install:
 	dh_install --list-missing -X LICENSE # extra copy in web dir - costela 2008-08-15
-
-override_dh_auto_install:
-	dh_auto_install
-	dh_auto_install -Dqt -- INSTALL_ROOT=$(CURDIR)/debian/tmp/usr
 
 override_dh_strip:
 	dh_strip --dbg-package=transmission-dbg

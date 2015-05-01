@@ -1,3 +1,0 @@
-?package(transmission-qt):needs="X11" section="Applications/Network/File Transfer" \
-  title="Transmission BitTorrent Client (Qt)" command="/usr/bin/transmission-qt" \
-  icon="/usr/share/pixmaps/transmission.xpm"
