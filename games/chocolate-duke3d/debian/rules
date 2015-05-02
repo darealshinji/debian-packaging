@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-export CFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
-
 
 %:
 	dh ${@} --parallel --with autoreconf
