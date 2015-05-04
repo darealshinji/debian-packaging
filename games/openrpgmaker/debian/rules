@@ -1,0 +1,34 @@
+#!/usr/bin/make -f
+
+DEB_HOST_ARCH_BITS = $(shell dpkg-architecture -qDEB_HOST_ARCH_BITS)
+
+dir = openrpgmaker-0.2.3-linux
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf $(dir) icons-big icons-small
+
+override_dh_auto_build:
+	tar xvf $(dir).tbz
+	find $(dir) -name .directory -delete
+	rm -f $(dir)/fmodex/lib/libfmodexL*
+	cp $(dir)/OpenRPGMaker$(DEB_HOST_ARCH_BITS) $(dir)/openrpgmaker
+ifeq ($(DEB_HOST_ARCH_BITS),64)
+	rm -rf $(dir)/fmodex/lib/libfmodex.so $(dir)/data/importers32
+else
+	rm -rf $(dir)/fmodex/lib/libfmodex64.so $(dir)/data/importers64
+endif
+	./make-icons.sh $(dir)/openrpgmaker.png icons-small
+	./make-icons.sh $(dir)/logo.png icons-big
+	rename 's/logo.png/openrpgmaker.png/' icons-big/icons/hicolor/*/apps/*
+
+override_dh_installchangelogs:
+	dh_installchangelogs ChangeLog
+
+override_dh_shlibdeps:
+	dh_shlibdeps -Lopenrpgmaker -lusr/lib/openrpgmaker
+

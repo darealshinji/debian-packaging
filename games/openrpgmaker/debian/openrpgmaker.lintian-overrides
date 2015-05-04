@@ -1,0 +1,2 @@
+openrpgmaker: hardening-no-relro usr/lib/openrpgmaker/libfmodex*.so
+openrpgmaker: image-file-in-usr-lib usr/lib/openrpgmaker/data/*

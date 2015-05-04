@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Open RPG Maker
+GenericName=2D RPG creation utility
+Comment=Create 2D RPG games
+TryExec=openrpgmaker
+Exec=openrpgmaker
+Icon=openrpgmaker
+Type=Application
+Categories=Qt;Utility;
+StartupNotify=true

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /usr/lib/openrpgmaker && \
+LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/openrpgmaker" ./openrpgmaker "$@"
+

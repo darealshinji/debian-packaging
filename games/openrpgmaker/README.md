@@ -1,0 +1,17 @@
+Open RPG Maker
+==============
+
+Open RPG Maker is a free and open source 2D RPG creation utility, similar to
+the popular RPG Maker series. Open RPG Maker is mostly based on RPG Maker
+2003, but with some added features, and more advanced usability. This tool
+will allow users to create 2D RPG games similar to the original Final Fantasy
+games, such as FF5 and FF6. Though it will also support the creation of games
+following a Zelda like playability.
+
+Unlike the RPG Maker series, Open RPG Maker will have the ability to play more
+than just midi and wav music files. Open RPG Maker will also be using 32x32
+tiles of up to 24bpp, instead of the 16x16 8bpp limit in RPG Maker 2003.
+Also, Open RPG Maker will support more than just PNG graphics formats.
+
+Homepage: http://openrpgmaker.sourceforge.net/
+
