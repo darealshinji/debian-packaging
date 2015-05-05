@@ -10,7 +10,7 @@ download:
 
 	mv $(builddir)/debian-upstream $(builddir)/debian
 	mv $(builddir)/debian/changelog $(builddir)/debian/changelog.in
-	latestcommit=$$(git -C $(builddir)/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\
+	@ latestcommit=$$(git -C $(builddir)/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\
 	VERSION=$$(cat $(builddir)/version | tr -d "\n")+git$$latestcommit ;\
 	$(changelog-entry)
 

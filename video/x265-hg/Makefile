@@ -3,8 +3,7 @@ include ../../mk/include.mk
 deps           = wget
 bin            = x265.tar.bz2
 builddir       = x265-source
-cleanfiles     = $(bin) debian/changelog
-changelog-file = debian/changelog
+cleanfiles     = $(bin)
 changelog-msg  = Current snapshot
 
 download:
@@ -13,6 +12,5 @@ download:
 	mv multicoreware-x265-* $(builddir)
 	@ latesttag=`grep 'latesttag:' $(builddir)/.hg_archival.txt|cut -d' ' -f2` ;\
 	latesttagdistance=`grep 'latesttagdistance:' $(builddir)/.hg_archival.txt|cut -d' ' -f2` ;\
-	VERSION=$${latesttag}+$${latesttagdistance} ;\
-	$(changelog-entry)
-
+	VERSION=$${latesttag}+$${latesttagdistance} ; $(changelog-entry)
+	cp -f ../x264/debian/test.y4m.xz $(builddir)/debian/

@@ -2,7 +2,7 @@ include ../../mk/include.mk
 
 deps          = git
 srcfiles      = ffmpeg x264-source
-cleanfiles    = $(srcfiles) debian/changelog
+cleanfiles    = $(srcfiles)
 changelog-msg = Update to new upstream snapshot
 
 download:

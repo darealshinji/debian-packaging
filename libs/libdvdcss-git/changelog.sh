@@ -18,6 +18,5 @@ if [ $v -lt 0 ]; then
    git="~git${latestcommit}"
 fi
 
-sed -e "s/@VERSION@/${VERSION}${git}/g; s/@DATE@/$(date -R)/g" \
-debian/changelog.in > debian/changelog
+echo "${VERSION}${git}"
 

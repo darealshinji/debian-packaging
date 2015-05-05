@@ -14,9 +14,10 @@ gistid    = a366574234de27487a5c
 mysql_sum = fef2726e7004a43a4e066c0575bb78a7adf1f1f7bf3a200399bf09a3c79e3300
 endif
 
-QTVER1         = $(shell dpkg-parsechangelog -SSource | sed 's/libqt//')
+QTVER1         = 5.4
 QTVER2         = $(shell echo $(QTVER1) | tr -d .)
-QTPOINTVER     = $(shell dpkg-parsechangelog -SVersion)
+QTPOINTVER     = 5.4.0
+changelog-msg  = Initial release
 URL            = http://download.qt.io/online/qtsdkrepository/$(LINUX)/desktop/qt5_$(QTVER2)/qt.$(QTVER2).gcc$(GCCARCH)
 
 addons         = $(QTPOINTVER)-1qt5_addons.7z
@@ -45,4 +46,5 @@ download:
 	@ $(call verifysha256,icu.7z,$(icu_sum))
 	@ $(call verifysha256,essentials.7z,$(essentials_sum))
 	@ $(call verifysha256,$(mysql),$(mysql_sum))
+	@ VERSION=$(VERSION); $(changelog-entry)
 

@@ -7,4 +7,4 @@ builddir = fetch-master
 download:
 	@ $(call download,$(bin),https://github.com/darealshinji/fetch/archive/master.tar.gz)
 	tar xvf $(bin)
-	VERSION=`cat $(builddir)/source/VERSION`; $(changelog-entry)
+	@ VERSION=`cat $(builddir)/source/VERSION`; $(changelog-entry)

@@ -3,6 +3,8 @@ include ../../mk/include.mk
 srcfiles       = glew-1.*.0 glew-1.5.8 glew-1.3.6 glew-1.2.5 glew-1.1.4 glew-1.0.7
 cleanfiles     = $(srcfiles) debian/control
 distcleanfiles = *.tgz
+VERSION        = 1.0
+changelog-msg  = Initial release
 
 OLDVERSIONS = \
 	1.0.7 \
@@ -47,4 +49,5 @@ download: debian/control
 	  $(call download,glew-$(VER).tgz,$(URL)/$(VER)/glew-$(VER).tgz?r) ;\
 	  tar xf glew-$(VER).tgz ;\
 	 )
+	@ VERSION=$(VERSION); $(changelog-entry)
 

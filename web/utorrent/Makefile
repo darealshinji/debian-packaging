@@ -6,6 +6,9 @@ png        = utorrent.png
 srcfiles   = $(png) $(bin)
 cleanfiles = $(png)
 
+VERSION       = 3.3
+changelog-msg = Initial release
+
 DLARCH   = i386
 checksum = ec8bbe21eb3fab14f725c0d3ea648b61d035bf8a2871bb006abd3405f99ed067
 ifeq ($(ARCH), amd64)
@@ -17,4 +20,4 @@ download:
 	@ $(call download,$(bin),http://download-new.utorrent.com/endpoint/utserver/os/linux-$(DLARCH)-ubuntu-13-04/track/beta)
 	@ $(call download,$(png),http://www.utorrent.com/img/banners/utSmartBanner.png)
 	@ $(call verifysha256,$(bin),$(checksum))
-
+	@ VERSION=$(VERSION); $(changelog-entry)
