@@ -12,6 +12,8 @@ LOG       = $(shell basename $$PWD)-build.log
 resultdir = "$$HOME/buildresult"
 basetgz   = "/var/cache/pbuilder/debian-packages-$(ARCH).tgz"
 
+default_compat_level = 9
+
 
 
 
@@ -128,6 +130,7 @@ build: source
 	fi
 	mkdir -p $(builddir)/debian/source
 	echo '3.0 (native)' > $(builddir)/debian/source/format
+	test -f $(builddir)/debian/compat || echo '$(default_compat_level)' > $(builddir)/debian/compat
 
 ifeq ($(PBUILDER),0)
 ifneq ($(DEPS),0)
