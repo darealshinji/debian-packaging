@@ -1,0 +1,21 @@
+Source: fetch
+Section: utils
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               automake,
+               bmake,
+               libssl-dev
+Standards-Version: 3.9.5
+Homepage: http://www.FreeBSD.org/
+Vcs-Git: https://github.com/darealshinji/fetch.git
+Vcs-Browser: https://github.com/darealshinji/fetch
+
+Package: fetch
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: retrieve a file by URL
+ fetch is a command line for transferring files with URL syntax.
+ Supported schemas are FTP, HTTP, HTTPS and FILE.  It includes Advanced
+ features like proxy connections and restarting of interrupted transfers.

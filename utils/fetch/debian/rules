@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+export PREFIX=/usr
+
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean -- clobber
+

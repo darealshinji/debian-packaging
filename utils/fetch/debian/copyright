@@ -1,0 +1,384 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: fetch
+Source: http://ftp.netbsd.org/pub/pkgsrc/stable/pkgsrc.tar.gz
+
+Files: source/fetch.c
+Copyright: 2000-2004 Dag-Erling Coïdan Smørgrav
+License: BSD-2-clause
+
+Files: source/fetch.1
+Copyright: 2000-2004 Dag-Erling Coïdan Smørgrav
+           1999 Massachusetts Institute of Technology
+License: BSD-2-clause
+
+Files: libfetch/common.c
+Copyright: 1998-2004 Dag-Erling Coïdan Smørgrav
+           2008, 2010 Joerg Sonnenberger <joerg@NetBSD.org>
+License: BSD-3-clause
+
+Files: libfetch/common.h
+Copyright: 1998-2004 Dag-Erling Coïdan Smørgrav
+License: BSD-3-clause
+
+Files: libfetch/fetch.3
+Copyright: 1998-2004 Dag-Erling Coïdan Smørgrav
+           2010 Joerg Sonnenberger <joerg@NetBSD.org>
+License: BSD-2-clause
+
+Files: libfetch/fetch.c
+Copyright: 1998-2004 Dag-Erling Coïdan Smørgrav
+           2008 Joerg Sonnenberger <joerg@NetBSD.org>
+License: BSD-3-clause
+
+Files: libfetch/fetch.h
+Copyright: 1998-2004 Dag-Erling Coïdan Smørgrav
+License: BSD-3-clause
+
+Files: libfetch/file.c
+Copyright: 1998-2004 Dag-Erling Coïdan Smørgrav
+           2008-2009 Joerg Sonnenberger <joerg@NetBSD.org>
+License: BSD-3-clause
+
+Files: libfetch/ftp.c
+Copyright: 1998-2004 Dag-Erling Coïdan Smørgrav
+           2008-2010 Joerg Sonnenberger <joerg@NetBSD.org>
+License: BSD-3-clause
+
+Files: libfetch/http.c
+Copyright: 2000-2004 Dag-Erling Coïdan Smørgrav
+           2003 Thomas Klausner <wiz@NetBSD.org>
+           2008-2009 Joerg Sonnenberger <joerg@NetBSD.org>
+License: BSD-3-clause
+
+Files: libnbcompat/asprintf.c
+Copyright: 2007 Joerg Sonnenberger <joerg@NetBSD.org>
+License: BSD-2-clause
+
+Files: libnbcompat/err.c
+Copyright: 1997-2000 Luke Mewburn <lukem@netbsd.org>
+License: BSD-3-clause
+
+Files: libnbcompat/engine.c
+       libnbcompat/findenv.c
+       libnbcompat/fnmatch.c
+       libnbcompat/__fts13.c
+       libnbcompat/getenv.c
+       libnbcompat/getopt.c
+       libnbcompat/gettemp.c
+       libnbcompat/__glob13.c
+       libnbcompat/mkdtemp.c
+       libnbcompat/mkstemp.c
+       libnbcompat/regcomp.c
+       libnbcompat/regerror.c
+       libnbcompat/regexec.c
+       libnbcompat/regfree.c
+       libnbcompat/setenv.c
+       libnbcompat/setmode.c
+       libnbcompat/strdup.c
+       libnbcompat/strmode.c
+       libnbcompat/strsep.c
+       libnbcompat/strtoll.c
+       libnbcompat/__unsetenv13.c
+       libnbcompat/unvis.c
+       libnbcompat/db/*
+       libnbcompat/nbcompat/db.h
+       libnbcompat/nbcompat/fnmatch.h
+       libnbcompat/nbcompat/fts.h
+       libnbcompat/nbcompat/glob.h
+       libnbcompat/nbcompat/mpool.h
+       libnbcompat/nbcompat/ndbm.h
+       libnbcompat/nbcompat/regex.h
+Copyright: 1987-1994 The Regents of the University of California
+License: BSD-3-clause
+
+Files: libnbcompat/nbcompat/err.h
+       libnbcompat/nbcompat/queue.h
+       libnbcompat/nbcompat/vis.h
+Copyright: 1989-1991, 1993 The Regents of the University of California
+License: BSD-4-clause
+
+Files: libnbcompat/fgetln.c
+       libnbcompat/getopt_long.c
+       libnbcompat/nbcompat.h
+       libnbcompat/poll.c
+       libnbcompat/setgroupent.c
+       libnbcompat/setpassent.c
+       libnbcompat/statvfs.c
+       libnbcompat/usleep.c
+       libnbcompat/utimes.c
+       libnbcompat/nbcompat/assert.h
+       libnbcompat/nbcompat/cdefs.h
+       libnbcompat/nbcompat/ctype.h
+       libnbcompat/nbcompat/dirent.h
+       libnbcompat/nbcompat/endian.h
+       libnbcompat/nbcompat/getopt.h
+       libnbcompat/nbcompat/grp.h
+       libnbcompat/nbcompat/limits.h
+       libnbcompat/nbcompat/param.h
+       libnbcompat/nbcompat/paths.h
+       libnbcompat/nbcompat/poll.h
+       libnbcompat/nbcompat/pwd.h
+       libnbcompat/nbcompat/stat.h
+       libnbcompat/nbcompat/statvfs.h
+       libnbcompat/nbcompat/stdbool.h
+       libnbcompat/nbcompat/stdio.h
+       libnbcompat/nbcompat/stdlib.h
+       libnbcompat/nbcompat/string.h
+       libnbcompat/nbcompat/termcap.h
+       libnbcompat/nbcompat/time.h
+       libnbcompat/nbcompat/types.h
+       libnbcompat/nbcompat/tzfile.h
+       libnbcompat/nbcompat/unistd.h
+       libnbcompat/nbcompat/util.h
+Copyright: 1998-2000, 2003-2004 The NetBSD Foundation, Inc.
+License: BSD-2-clause
+
+Files: libnbcompat/fparseln.c
+Copyright: 1997 Christos Zoulas
+License: modified BSD-4-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. All advertising materials mentioning features or use of this software
+    must display the following acknowledgement:
+	This product includes software developed by Christos Zoulas.
+ 4. The name of the author may not be used to endorse or promote products
+    derived from this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+ IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Files: libnbcompat/fts.c
+       libnbcompat/glob.c
+       libnbcompat/md5hl.c
+       libnbcompat/sha1.c
+       libnbcompat/unsetenv.c
+       libnbcompat/nbcompat/sha1.h
+Copyright: none
+License: Public-Domain
+ This code was released to the public domain.
+
+Files: libnbcompat/getaddrinfo.c
+Copyright: 2000-2003 Damien Miller
+           1999 WIDE Project
+License: BSD-3-clause
+
+Files: libnbcompat/isblank.c
+Copyright: 1989 The Regents of the University of California
+           UNIX System Laboratories, Inc.
+License: BSD-3-clause
+
+Files: libnbcompat/lchflags.c
+       libnbcompat/lchmod.c
+       libnbcompat/lchown.c
+       libnbcompat/lutimes.c
+Copyright: 2002 The NetBSD Foundation, Inc.
+License: BSD-2-clause
+
+Files: libnbcompat/md5c.c
+       libnbcompat/nbcompat/md5.h
+Copyright: 1991-1992, RSA Data Security, Inc.
+License: RSA MD5 Algorithm License
+
+Files: libnbcompat/mdXhl.c
+       libnbcompat/rmd160hl.c
+       libnbcompat/sha1hl.c
+Copyright: 1996 Poul-Henning Kamp <phk@login.dkuug.dk>
+License: THE BEER-WARE LICENSE
+
+Files: libnbcompat/pwcache.c
+Copyright: 1992 Keith Muller.
+           1992, 1993 The Regents of the University of California
+License: BSD-3-clause
+
+Files: libnbcompat/setprogname.c
+       libnbcompat/shquote.c
+Copyright: 2001 Christopher G. Demetriou
+License: modified BSD-4-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. All advertising materials mentioning features or use of this software
+    must display the following acknowledgement:
+          This product includes software developed for the
+          NetBSD Project.  See http://www.NetBSD.org/ for
+          information about NetBSD.
+ 4. The name of the author may not be used to endorse or promote products
+    derived from this software without specific prior written permission.
+ . 
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+ IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Files: libnbcompat/sha2.c
+       libnbcompat/sha2hl.c
+       libnbcompat/nbcompat/sha2.h
+Copyright: 2000 Aaron D. Gifford
+License: BSD-3-clause
+
+Files: libnbcompat/snprintf.c
+Copyright: 2007 Tobias Nygren <tnn@NetBSD.org>
+License: BSD-2-clause
+
+Files: libnbcompat/strlcat.c
+       libnbcompat/strlcpy.c
+Copyright: 1998 Todd C. Miller <Todd.Miller@courtesan.com>
+License:
+ Permission to use, copy, modify, and distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND TODD C. MILLER DISCLAIMS ALL
+ WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
+ OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL TODD C. MILLER BE LIABLE
+ FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
+ OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+ CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+Files: libnbcompat/timegm.c
+Copyright: 2001-2006, NLnet Labs
+License: BSD-3-clause
+
+Files: libnbcompat/vis.c
+Copyright: 1989, 1993 The Regents of the University of California
+           1999 The NetBSD Foundation, Inc.
+License: BSD-4-clause
+
+Files: libnbcompat/warn.c
+Copyright: 1997-2000 Luke Mewburn <lukem@netbsd.org>
+License: BSD-3-clause
+
+Files: libnbcompat/nbcompat/netdb.h
+Copyright: 2000-2003 Damien Miller
+           1999 WIDE Project
+License: BSD-3-clause
+
+Files: debian/*
+Copyright: 2015 djcj <djcj@gmx.de>
+License: BSD-2-clause
+
+License: BSD-2-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHORS AND CONTRIBUTORS ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+License: BSD-3-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer
+    in this position and unchanged.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. The name of the author may not be used to endorse or promote products
+    derived from this software without specific prior written permission
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+ IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: BSD-4-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. All advertising materials mentioning features or use of this software
+    must display the following acknowledgement:
+	This product includes software developed by the University of
+	California, Berkeley and its contributors.
+ 4. Neither the name of the University nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+License: RSA MD5 Algorithm License
+ License to copy and use this software is granted provided that it
+ is identified as the "RSA Data Security, Inc. MD5 Message-Digest
+ Algorithm" in all material mentioning or referencing this software
+ or this function.
+ .
+ License is also granted to make and use derivative works provided
+ that such works are identified as "derived from the RSA Data
+ Security, Inc. MD5 Message-Digest Algorithm" in all material
+ mentioning or referencing the derived work.
+ .
+ RSA Data Security, Inc. makes no representations concerning either
+ the merchantability of this software or the suitability of this
+ software for any particular purpose. It is provided "as is"
+ without express or implied warranty of any kind.
+ .
+ These notices must be retained in any copies of any part of this
+ documentation and/or software.
+
+License: THE BEER-WARE LICENSE
+ "THE BEER-WARE LICENSE" (Revision 42):
+ <phk@login.dkuug.dk> wrote this file.  As long as you retain this notice you
+ can do whatever you want with this stuff. If we meet some day, and you think
+ this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
