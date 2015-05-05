@@ -1,0 +1,21 @@
+Source: grpar
+Section: utils
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               freebsd-glue,
+               libbsd-dev
+Standards-Version: 3.9.5
+Homepage: http://contribs.martymac.org/
+Vcs-Git: https://github.com/martymac/grpar.git
+Vcs-Browser: https://github.com/martymac/grpar
+
+Package: grpar
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: extract Build engine group (.grp) files
+ Grpar is a tool to extract Build engine group (.grp) files.
+ .
+ See Ken Silverman's Build engine page (http://advsys.net/ken/build.htm) for
+ more information.

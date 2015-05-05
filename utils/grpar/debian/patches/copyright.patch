@@ -1,0 +1,11 @@
+--- a/grpar.c
++++ b/grpar.c
+@@ -325,7 +325,7 @@
+ version(void)
+ {
+     fprintf(stderr, "grpar, v." GRPAR_VERSION 
+-        ", (c) 2010 - Ganael LAPLANCHE, http://contribs.martymac.org\n");
++        ", (c) 2010-2014 - Ganael LAPLANCHE, http://contribs.martymac.org\n");
+ }
+ 
+ /* Print grpar usage */
