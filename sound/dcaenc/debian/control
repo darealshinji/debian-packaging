@@ -1,0 +1,25 @@
+Source: dcaenc
+Section: sound
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Standards-Version: 3.9.5
+Build-Depends:
+ autoconf (>= 2.65),
+ debhelper (>= 9),
+ dh-autoreconf,
+ libasound2-dev (>= 1.0.11),
+ pandoc,
+ pkg-config (>= 0.9.0)
+Homepage: http://gitorious.org/dtsenc
+Vcs-Git: git://gitorious.org/dtsenc/dtsenc.git
+Vcs-Browser: https://git.gitorious.org/dtsenc/dtsenc.git
+
+Package: dcaenc
+Architecture: any
+Section: sound
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Encoder for the DTS Coherent Acoustics audio format
+ It may be useful if you want to create a DTS CD or a DTS soundtrack for a DVD
+ from a 6-channel PCM wav file using linux. Another use case is related to
+ real-time encoding of multichannel PCM audio output from arbitrary linux
+ applications for transmission over SPDIF.
