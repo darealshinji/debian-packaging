@@ -1,0 +1,150 @@
+.TH BDSUP2SUB++ "1" "October 2014" "v1.0.2" "User Commands"
+.SH NAME
+bdsup2sub++ \- Convert and tweak bitmap subtitles
+.SH SYNTAX:
+.B bdsup2sub++
+[options] \fB\-o\fR outfile infile
+
+.SH DESCRIPTION
+BDSup2Sub++ \(co 2012 is a port of the original BDSup2Sub \(co 2009 by 0xdeadbeef
+and incorporating enhancements from  Miklos Juhasz.
+It is a subtitle conversion tool for image based stream formats with scaling
+capabilities and some other nice features.
+
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+List options
+.TP
+\fB\-\-load\-settings\fR
+Set to load settings stored in INI file.
+.TP
+\fB\-\-resolution\fR x
+Set resolution to 480, 576, 720 or 1080. Default: 576.
+.br
+Supported values: keep, ntsc=480, pal=576, 1440x1080.
+.TP
+\fB\-\-fps\-source\fR x
+Synchronize source frame rate to <x>. Default: auto.
+.br
+Supported values: 24p=23.976, 25p=25, 30p=29.967.
+.TP
+\fB\-\-fps\-target\fR x
+Convert the target frame rate to <x>. Default: keep.
+.br
+Supported values: 24p=23.976, 25p=25, 30p=29.967.
+.TP
+\fB\-\-delay\fR x
+Set delay in ms. Default: 0.0.
+.TP
+\fB\-\-filter\fR x
+Set the filter to use for scaling. Default: bilinear.
+.br
+Supported values: bilinear, triangle, bicubic, bell,
+b\-spline, hermite, lanczos3, mitchell.
+.TP
+\fB\-\-palette\-mode\fR x
+Palette mode: keep, create, dither. Default: create.
+.TP
+\fB\-\-minimum\-time\fR x
+Set the minimum display time in ms. Default: 500.
+.TP
+\fB\-\-merge\-time\fR x
+Set max time diff to merge subs in ms. Default: 200.
+.TP
+\fB\-\-move\-in\-ratio\fR x
+Move captions from inside screen ratio <x>.
+.TP
+\fB\-\-move\-out\-ratio\fR x
+Move captions from outside screen ratio <x>.
+.TP
+\fB\-\-move\-y\-origin\fR x
+Move captions from the original vertical position.
+.br
+Supported values: up, down.
+.TP
+\fB\-\-move\-y\-offset\fR x
+Set optional +/\- offset to move captions by.
+.TP
+\fB\-\-move\-x\fR x
+Move captions horizontally from specified position.
+.br
+Supported values: left, right, center, origin.
+.TP
+\fB\-\-move\-x\-offset\fR x
+Set optional +/\- offset to move captions by.
+.TP
+\fB\-\-crop\-y\fR x
+Crop the upper/lower n lines. Default: 0
+.TP
+\fB\-\-alpha\-crop\fR x
+Set the alpha cropping threshold. Default: 10
+.TP
+\fB\-\-scale\-x\fR x
+Scale captions horizontally by factor. Default 1.0.
+.TP
+\fB\-\-scale\-y\fR x
+Scale captions vertically by factor. Default 1.0.
+.TP
+\fB\-\-no\-export\-palette\fR
+Do not export palette file.
+.TP
+\fB\-\-export\-palette\fR
+Export target palette in PGCEdit format.
+.TP
+\fB\-\-forced\-only\fR
+Export only forced subtitles.
+.TP
+\fB\-\-force\-all\fR x
+Set or clear the forced flag for all subpictures.
+.br
+Supported values: set/clear.
+.TP
+\fB\-\-swap\fR
+Swap Cr/Cb components.
+.TP
+\fB\-\-no\-fix\-invisible\fR
+Do not fix zero alpha frame palette.
+.TP
+\fB\-\-fix\-invisible\fR
+Fix zero alpha frame palette.
+.TP
+\fB\-\-no\-verbose\fR
+Switch off verbose console output mode.
+.TP
+\fB\-\-verbose\fR
+Switch on verbose console output mode.
+.TP
+\fB\-\-log\-to\-stderr\fR
+Switch to change progress output to standard error.
+
+.SS "Options only for SUB/IDX or SUP/IFO as target:"
+.TP
+\fB\-\-alpha\-thr\fR x
+Set alpha threshold 0..255. Default 80.
+.TP
+\fB\-\-med\-low\-thr\fR x
+Set luminance low/med threshold 0..255.
+.TP
+\fB\-\-med\-hi\-thr\fR x
+Set luminance med/hi threshold 0..255.
+.TP
+\fB\-\-language\fR x
+Set language to <n>. Default: de (Vobsub Only).
+.TP
+\fB\-\-palette\-file\fR x
+Load palette file <n>. Overrides default palette.
+
+.SS "Output:"
+.TP
+\fB\-o\fR x, \fB\-\-output\fR x
+Specify output file.
+
+.SS "Wildcard support:"
+Use "*" for any character and "?" for one character in the source name.
+.br
+Use exactly one "*" in the target file name.
+
+.SS "Example:"
+.B bdsup2sub++ \-\-resolution\fR 720 \fB\-\-fps\-target\fR 25p \fB\-o\fR dvd_*.sub 'movie* 1?.sup'
+

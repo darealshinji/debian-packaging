@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BDSup2Sub++
+GenericName=Bitmap subtitles editor
+Comment=Convert and tweak bitmap subtitles
+Exec=bdsup2sub++ %U
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=AudioVideo;AudioVideoEditing;
+Icon=bdsup2subpp

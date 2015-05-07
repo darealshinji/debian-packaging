@@ -1,0 +1,19 @@
+Source: bdsup2sub++
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               chrpath,
+               libqt4-dev,
+               libqxt-dev
+Standards-Version: 3.9.5
+Section: utils
+Homepage: https://github.com/amichaelt/BDSup2SubPlusPlus
+Vcs-Git: https://github.com/amichaelt/BDSup2SubPlusPlus.git
+Vcs-Browser: https://github.com/amichaelt/BDSup2SubPlusPlus
+
+Package: bdsup2sub++
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Convert and tweak bitmap subtitles
+ It is a subtitle conversion tool for image based stream formats
+ with scaling capabilities and some other nice features.
