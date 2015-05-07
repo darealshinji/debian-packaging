@@ -1,10 +1,11 @@
 include ../../mk/include.mk
 
-deps     = wget dh-autoreconf
-bin      = fetch.tar.gz
-builddir = fetch-master
+deps     = git dh-autoreconf
+builddir = fetch
 
 download:
-	@ $(call download,$(bin),https://github.com/darealshinji/fetch/archive/master.tar.gz)
-	tar xvf $(bin)
-	@ VERSION=`cat $(builddir)/source/VERSION`; $(changelog-entry)
+	rm -rf $(builddir)
+	git clone --depth 1 "https://github.com/darealshinji/fetch.git"
+	@ VER=`cat $(builddir)/source/VERSION`; \
+	latestcommit=`git -C $(builddir) log -1 --format=%ci | head -c10 | sed -e 's/-//g'`; \
+	VERSION="$${VER}+git$${latestcommit}"; $(changelog-entry)
