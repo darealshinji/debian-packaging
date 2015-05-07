@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+
+VERSION = $(shell grep 'VERSION_STRING' src/global.h | cut -d '"' -f2)
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean -Dsrc || true
+	rm -f test.hevc debian/test.y4m kvazaar.1
+
+override_dh_auto_build:
+	dh_auto_build -Dsrc
+	help2man --no-discard-stderr -N -n "open-source HEVC encoder" -h '' \
+	--version-string=$(VERSION) src/kvazaar > kvazaar.1
+
+override_dh_auto_test:
+	unxz -fk debian/test.y4m.xz
+	src/kvazaar -i debian/test.y4m --input-res 640x480 --frames 20 -o test.hevc
+
+override_dh_installdocs:
+	dh_installdocs -pkvazaar
+	dh_installdocs -pkvazaar-dbg --link-doc=kvazaar
+
+override_dh_strip:
+	dh_strip --dbg-package=kvazaar-dbg
+
