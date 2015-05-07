@@ -1,0 +1,3 @@
+delaycut                    /usr/bin
+extra/delaycut.desktop      /usr/share/applications
+extra/delaycut.xpm          /usr/share/pixmaps
