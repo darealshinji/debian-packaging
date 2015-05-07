@@ -1,0 +1,16 @@
+Source: framecounter
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9), libqt4-dev
+Standards-Version: 3.9.5
+Section: video
+Homepage: http://www.selur.de
+Vcs-Git: https://github.com/Selur/FrameCounter.git
+Vcs-Browser: https://github.com/Selur/FrameCounter
+
+Package: framecounter
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: counting frames in raw streams
+ Count frames in raw MPEG-4 ASP/AVC, VC-1, MPEG-2 files
+
