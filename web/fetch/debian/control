@@ -1,5 +1,5 @@
 Source: fetch
-Section: utils
+Section: web
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
