@@ -1,0 +1,18 @@
+Source: aften
+Section: sound
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+XSBC-Original-Maintainer: Alessio Treglia <quadrispro@ubuntu.com>
+Standards-Version: 3.8.3
+Build-Depends: debhelper (>= 9), cmake, help2man
+Homepage: http://aften.sourceforge.net/
+Vcs-Git: git://git.code.sf.net/p/aften/code
+Vcs-Browser: https://sourceforge.net/p/aften/code/ci/master/tree/
+
+Package: aften
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: audio AC3 encoder
+ Aften is an audio encoder which generates compressed audio streams based on
+ ATSC A/52 specification. This type of audio is also known as AC-3 or Dolby®
+ Digital and is one of the audio codecs used in DVD-Video content.
