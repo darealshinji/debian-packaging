@@ -1,0 +1,20 @@
+Source: fdk-aac
+Section: non-free/sound
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+XSBC-Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 9), dh-autoreconf
+Homepage: https://sourceforge.net/projects/opencore-amr/
+Vcs-Git: git://git.code.sf.net/p/opencore-amr/fdk-aac
+Vcs-Browser: https://sourceforge.net/p/opencore-amr/fdk-aac/ci/master/tree/
+
+Package: aac-enc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Fraunhofer FDK AAC Encoder
+ The FDK AAC Codec Library For Android contains an encoder implementation
+ of the Advanced Audio Coding (AAC) audio codec.
+ .
+ This package contains a frontend binary capable of encoding WAVE files
+ using the Fraunhofer FDK AAC Codec Library. 
