@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-REVISION = $(shell dpkg-parsechangelog -SVersion | tail -c+3)
+REVISION = $(shell dpkg-parsechangelog -SVersion)
 
 
 %:
@@ -11,7 +11,7 @@ override_dh_auto_clean:
 	rm -rf sublime_text_3 sublime-text-3.1
 
 override_dh_auto_build:
-	tar xvf sublime_text_3.tar.bz2
+	tar xvf sublime_text_3.tbz
 	rename -v 's/sublime-text.png/sublime-text-3.png/' `find sublime_text_3/ -type f -name *.png`
 	sed -e 's/@REVISION@/$(REVISION)/' debian/sublime-text-3.1.in > sublime-text-3.1
 
