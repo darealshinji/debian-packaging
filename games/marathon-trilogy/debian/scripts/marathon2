@@ -1,2 +1,4 @@
 #!/bin/sh
+
+mkdir -p "$HOME/.alephone"
 alephone -f /usr/share/games/AlephOne/marathon2 "$@" 2>&1 | tee "$HOME/.alephone/marathon2.log"
