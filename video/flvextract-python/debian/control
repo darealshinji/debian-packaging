@@ -1,0 +1,25 @@
+Source: flvextract-python
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9), dh-python, python
+Standards-Version: 3.9.5
+Section: video
+Homepage: https://github.com/sherpya/FLVExtractCL
+Vcs-Git: https://github.com/sherpya/FLVExtractCL.git
+Vcs-Browser: https://github.com/sherpya/FLVExtractCL
+
+Package: flvextract-python
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}
+Provides: flvextractcl
+Description: extract streams from FLV files
+ It's pure python and has no external dependencies.
+ .
+ Right now it supports:
+  - WAV writer
+  - MP3 writer
+  - AVI writer (vp6/screen/h263)
+  - AAC writer
+  - Speex writer
+  - RAW H264 writer
+

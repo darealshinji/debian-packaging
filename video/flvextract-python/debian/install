@@ -1,0 +1,3 @@
+audio          /usr/share/flvextract-python
+video          /usr/share/flvextract-python
+*.py           /usr/share/flvextract-python

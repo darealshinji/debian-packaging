@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+configure)
+
+    update-alternatives \
+    --install \
+        /usr/bin/flvextract flvextract \
+        /usr/share/flvextract-python/flvextract.py 50 \
+		--slave \
+        /usr/share/man/man1/flvextract.1.gz flvextract.1.gz \
+		    /usr/share/man/man1/flvextract.py.1.gz
+
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

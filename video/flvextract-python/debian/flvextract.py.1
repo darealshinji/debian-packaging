@@ -1,0 +1,40 @@
+.TH FLVEXTRACT "1" "January 2015" "v1.6.2"
+.SH NAME
+FLVExtract - extract streams from FLV files
+.SH SYNOPSIS
+.B flvextract
+[options] <source-path>
+.SH DESCRIPTION
+Extracts video and audio from FLV files without decompressing or recompressing.
+The video is saved as AVI (H.263/FLV1 and VP6/VP6F) or raw elementary stream (H.264/AVC).
+The audio is saved as MP3, AAC (with ADTS headers), Speex, or WAV (PCM).
+You cannot change the video/audio format that FLV Extract outputs.
+It depdends on what is contained in the FLV file. If you need a different format, you'll
+have to use other software to convert it. Or, ffmpeg (command line) can extract
+from FLV and convert in one step.
+The AVIs might not play unless you have the right decoders.
+.SH OPTIONS
+.TP
+\fB\-h, \-\-help
+Show help message and exit.
+.TP
+\fB\-v
+Extract video.
+.TP
+\fB\-a
+Extract audio.
+.TP
+\fB\-t
+Extract timecodes.
+.TP
+\fB\-o
+Overwrite output files without prompting.
+.TP
+\fB\-d \fR<dir>
+Output directory.
+If not specified, output files will be written in the same directory as the source file.
+.SH COPYRIGHT
+Copyright \(co 2012-2014 Gianluigi Tiesi <sherpya@netfarm.it>.
+.PP
+https://github.com/sherpya/FLVExtractCL
+

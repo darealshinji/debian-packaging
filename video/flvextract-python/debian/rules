@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@} --with python2
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f flvextract *.pyc audio/*.pyc video/*.pyc README
+
+override_dh_installdocs:
+	cp -f README.txt README
+	dh_installdocs
+
+override_dh_installman:
+	# force installation into section 1
+	mkdir -p debian/flvextract-python/usr/share/man/man1/
+	install -m644 debian/flvextract.py.1 $(CURDIR)/debian/flvextract-python/usr/share/man/man1/
+
