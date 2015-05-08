@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+deconfigure|remove)
+
+    update-alternatives --remove flvextract /usr/bin/FLVExtractCL
+
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

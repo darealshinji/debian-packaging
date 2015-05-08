@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_build:
+	$(CXX) -c -Wall -Wextra -Wno-unused-but-set-variable -Wno-unused-variable $(CXXFLAGS) -O3 -o FLVExtractCL.o FLVExtractCL.cpp
+	$(CXX) $(LDFLAGS) -o FLVExtractCL FLVExtractCL.o -lboost_filesystem -lboost_system
+
+override_dh_clean:
+	dh_clean FLVExtractCL FLVExtractCL.o
+

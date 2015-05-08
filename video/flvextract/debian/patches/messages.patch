@@ -1,0 +1,14 @@
+--- a/FLVFile.hpp
++++ b/FLVFile.hpp
+@@ -1205,9 +1205,9 @@
+     if (_fileLength < 4 || ReadUInt32() != 0x464C5601)
+     {
+       if (_fileLength >= 8 && ReadUInt32() == 0x66747970)
+-        throw std::runtime_error("This is a MP4 file. YAMB or MP4Box can be used to extract streams.");
++        throw std::runtime_error("This is an MP4 file. MP4Box can be used to extract streams.");
+       else
+-        throw std::runtime_error("This isn't a FLV file.");
++        throw std::runtime_error("This isn't an FLV file.");
+     }
+     
+     if (std::find(_outputExtensions.begin(), _outputExtensions.end(), boost::filesystem::path(_inputPath).extension()) != _outputExtensions.end())
