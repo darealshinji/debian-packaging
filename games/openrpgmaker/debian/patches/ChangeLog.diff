@@ -1,0 +1,61 @@
+--- /dev/null
++++ b/ChangeLog
+@@ -0,0 +1,58 @@
++0.2.3
++  * Fixed some crashing bugs in the "Classes" tab of the Database
++  * Fixed descriptions getting blanked in the "Items" tab of the Database
++  * Fixed a crashing bug when adding a new layer to a map
++  * Fixed a crashing bug when increasing the size of a map
++
++0.2.2
++  * Forgot to update the global data files to the latest file format version
++    * This simply caused issues creating new projects, any projects already made will get converted without a problem
++
++0.2.1
++  * Fixed the filenames to correctly reflect their proper version string
++  * Fixed the crashing issue when someone's username uses non-Ascii characters on windows
++    * However I can only test this fix so much so please report on the formum if you still see it
++  * Improved the phase passability system to now include directional passability
++    * For further documentation on these changes please refer to the "File Format Changes" in the help manual that comes with Open RPG Maker
++  * Fixed a crashing bug when adding a new tileset in the database
++  * NOTE: I have started preliminary work on the engine, however those changes are not present in this release since there's no actual visuals done yet, mostly just loading everything from the XML files.
++
++0.2.0
++  * Added multi-layering support to map mechanics
++  * Added phase passability system to map mechanics
++  * Updated font mechanics to use actual gradient colors instead of images
++  * Removed the 32px character height limitation on the fonts
++  * Fixed a nasty bug crashing the program when deleting a map and then attempting to save the project
++  * Fixed the bug where the map view sometimes shows nothing up against the bottom and right edges when switching maps or changing the zoom
++  * Implemented the new "Character Sprites" tab in the database
++  * Map sprite mechanics changed to allow multiple different animations with up to 24 frames per pose
++  * All images have been converted to 32bit with full alpha support
++  * Added to ability to crop a map to the current selection
++  * Removed the minimum map size requirement
++  * Added a border tile to the map properties (tile shown when screen extends beyond the edge of the map)
++  * Replaced the wrapping mode in the map properites with a new horizontal and vertical modes
++  * Changed the resource management system to allow multiple resources (including raw files) to be exported into a single resource file
++  * Changed the resource management system to compress the exported resource file
++  * Change tile format so that all tiles are animated and the image's width divided by the tile size (32 pixels for now) determines the number of frames
++  * Added the ability to specify each individual tile's frame rate and ping pong
++  * Added a built in jumping mechanic (won't be noticable until engine is ready)
++  * Added a built in grapple hook mechanic (won't be noticable until engine is ready)
++  * Added a "Variable Multi-Value Branch" event
++  * Added a "Previous Selected Area Branch" event (works similar to the variable multi-value conditional branch)
++  * Added a "Play System BGM" event
++  * Added a "Play System Sound Effect" event
++  * Added an "Easy Navigation Creator" to the menu layouts
++  * Moved all events for menu objects and menu's global events into a single dialog for quicker editing
++  * Implemented the title screen layout editor
++  * Fixed fmod issues when compiling on linux (fmod no longer needs to be installed)
++  * Created linux binaries for 32bit and 64bit systems (debs and rpms coming soon)
++  * Multiple minor bug fixes
++  * Maybe more minor stuff that I forgot about
++
++0.1.2
++  * Fixed a bug crashing the program when adding new fonts
++  * Fixed the bug with the Popup Menu editor not saving the data correctly
++
++0.1.1
++  * Fixed some compiler issues with the importers
++  * Fixed the issue with compiling for windows
