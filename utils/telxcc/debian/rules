@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@}
+
+override_dh_auto_build:
+	$(CC) -c -Wall $(CFLAGS) $(CPPFLAGS) -std=gnu99 -O3 -o telxcc.o telxcc.c
+	$(CC) $(LDFLAGS) -o telxcc telxcc.o
+
+override_dh_clean:
+	dh_clean telxcc telxcc.o
+

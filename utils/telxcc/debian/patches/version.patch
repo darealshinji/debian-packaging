@@ -1,0 +1,11 @@
+--- a/telxcc.c
++++ b/telxcc.c
+@@ -38,7 +38,7 @@
+ #include "hamming.h"
+ #include "teletext.h"
+ 
+-#define TELXCC_VERSION "2.6.0"
++#define TELXCC_VERSION "2.5.3"
+ 
+ #ifdef _WIN32
+ #define PLATFORM "Windows"

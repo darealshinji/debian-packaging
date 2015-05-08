@@ -1,0 +1,35 @@
+--- a/telxcc.1
++++ b/telxcc.1
+@@ -10,7 +10,7 @@
+ 
+ .SH DESCRIPTION
+ .B telxcc
+-is utility extracting teletext Closed Captions from Transport Stream binary files (TS) into SubRip text files (SRT).
++is a utility to extract and convert teletext Closed Captions from Transport Stream binary files (TS) into SubRip text files (SRT).
+ .P
+ .B telxcc
+ conforms to ETSI 300 706 Presentation Level 1.5: Presentation Level 1 defines the basic Teletext page,
+@@ -22,7 +22,7 @@
+ .SH OPTIONS
+ 
+ .IP "\-V"
+-Prints out version and quit.
++Print out version and quit.
+ .IP "\-h"
+ Show a summary of command line options and exit.
+ .IP "\-i file"
+@@ -121,7 +121,7 @@
+ .SH COPYRIGHT
+ Licensed under the GPL.
+ .P
+-(c) 2011-2014 Petr Kutalek, Forers, s. r. o.: telxcc
++(c) 2011-2015 Petr Kutalek, Forers, s. r. o.: telxcc
+ .P
+ Some portions/inspirations:
+ .br
+@@ -161,4 +161,4 @@
+ Igor Abakumov <igor.abakumov@gmail.com> for bug reporting and patient testing
+ 
+ .SH WWW
+-https://github.com/forers/telxcc
++https://github.com/petrkutalek/telxcc

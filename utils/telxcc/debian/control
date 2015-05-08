@@ -1,0 +1,16 @@
+Source: telxcc
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Section: video
+Homepage: https://github.com/petrkutalek/telxcc
+Vcs-Git: https://github.com/petrkutalek/telxcc.git
+Vcs-Browser: https://github.com/petrkutalek/telxcc
+
+Package: telxcc
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: TELeteXt Closed Captions decoder
+ It's a utility to extract and convert teletext Closed Captions
+ from Transport Stream binary files (TS) into SubRip text files (SRT).
