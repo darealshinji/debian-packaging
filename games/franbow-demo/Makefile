@@ -1,9 +1,9 @@
 include ../../mk/include.mk
 
-ARCH       = i386
-deps       = wget
-bin        = franbow-demo.tar.gz
-srcfiles   = $(bin)
+ARCH     = i386
+deps     = wget
+bin      = franbow-demo.tar.gz
+srcfiles = $(bin)
 
 download:
 	@ $(call download,$(bin),https://www.dropbox.com/s/6x4qdvxyadryn4x/Fran%20Bow%20Demo.tar.gz?dl=1)

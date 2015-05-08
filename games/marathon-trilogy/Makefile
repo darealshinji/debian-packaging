@@ -39,5 +39,5 @@ download:
 		echo "create backup"; \
 		cp -r $(builddir) $(builddir)-backup; \
 	fi
-	VERSION=1+svn`cat $(builddir)/REVISION`; $(changelog-entry)
+	@ VERSION=1+svn`cat $(builddir)/REVISION`; $(changelog-entry)
 

@@ -9,6 +9,6 @@ changelog-msg = Latest upstream release
 
 download:
 	@ $(call download,$(bin),http://media.steampowered.com/client/installer/$(bin))
-	VERSION=1:`dpkg-deb -I $(bin) | grep Version: | sed 's/ Version: //'` ; \
+	@ VERSION=1:`dpkg-deb -I $(bin) | grep Version: | sed 's/ Version: //'` ; \
 	$(changelog-entry)
 

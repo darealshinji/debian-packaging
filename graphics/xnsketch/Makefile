@@ -12,5 +12,5 @@ VERSION       = $(shell wget -q -O - http://www.xnview.com/en/xnsketch/ | grep -
 
 download:
 	@ $(call download,$(bin),http://download.xnview.com/$(bin))
-	VERSION=$(VERSION); $(changelog-entry)
+	@ VERSION=$(VERSION); $(changelog-entry)
 

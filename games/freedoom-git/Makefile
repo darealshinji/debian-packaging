@@ -1,11 +1,13 @@
 include ../../mk/include.mk
 
 deps       = git
-cleanfiles = freedoom debian/changelog
-srcfiles   = freedoom files
+builddir   = freedoom
+cleanfiles = debian/changelog
+srcfiles   = $(builddir) files
 
 download:
+	rm -rf $(builddir)
 	git clone "https://github.com/freedoom/freedoom.git"
-	./changelog.sh
-	rm -rf freedoom/.git
+	@ VERSION=`./changelog.sh`; $(changelog-entry)
+	rm -rf $(builddir)/.git
 
