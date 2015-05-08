@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-set -v
 
 . ../../mk/vercmp.inc
 
