@@ -1,0 +1,50 @@
+#!/usr/bin/make -f
+
+CFLAGS  := $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CFLAGS  += -fno-aggressive-loop-optimizations -fno-strict-aliasing
+CFLAGS  += -Wno-maybe-uninitialized -Wno-deprecated-declarations
+LDFLAGS += -Wl,-z,noexecstack
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean || true
+	rm -f ffmbc.pod ffmbc.1
+
+override_dh_auto_configure:
+	./configure --enable-gpl \
+		--enable-nonfree \
+		--disable-shared \
+		--enable-runtime-cpudetect \
+		--enable-x11grab \
+		--enable-bzlib \
+		--enable-libass \
+		--enable-libdc1394 \
+		--enable-libdirac \
+		--enable-libfaac \
+		--enable-libgsm \
+		--enable-libmp3lame \
+		--enable-libopenjpeg \
+		--enable-librtmp \
+		--enable-libschroedinger \
+		--enable-libspeex \
+		--enable-libtheora \
+		--enable-libvorbis \
+		--enable-libvpx \
+		--enable-libx264 \
+		--enable-libxvid \
+		--enable-openal \
+		--enable-zlib
+
+override_dh_auto_build:
+	dh_auto_build -- ffmbc V=1
+	doc/texi2pod.pl doc/ffmbc.texi > ffmbc.pod
+	pod2man ffmbc.pod > ffmbc.1 || true
+
+override_dh_auto_install:
+
+override_dh_installchangelogs:
+	dh_installchangelogs Changelog.FFmbc
+

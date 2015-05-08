@@ -1,0 +1,69 @@
+Source: ffmbc
+Section: video
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Standards-Version: 3.9.5
+Homepage: https://code.google.com/p/ffmbc/
+Build-Depends:
+ debhelper (>= 9),
+ libasound-dev,
+ libass-dev,
+ libbz2-dev,
+ libdc1394-22-dev,
+ libdirac-dev,
+ libfaac-dev,
+ libgsm1-dev,
+ libmp3lame-dev,
+ libopenjpeg-dev,
+ libpulse-dev,
+ librtmp-dev,
+ libschroedinger-dev,
+ libsdl1.2-dev,
+ libspeex-dev,
+ libtheora-dev,
+ libva-dev,
+ libvdpau-dev,
+ libvorbis-dev,
+ libvpx-dev,
+ libx264-dev,
+ libxvidcore-dev,
+ libopenal-dev,
+ yasm,
+ zlib1g-dev
+
+Package: ffmbc
+Architecture: any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Suggests: ffmpeg | avconv
+Description: FFmpeg customized for broadcast and professional usage
+ What you can do with FFmbc:
+ .
+  * Import your files in Final Cut Pro, AVID Media Composer, Adobe Premiere 
+ .
+  * Create XDCAM HD422 files in .mov or .mxf
+  * Create XDCAM IMX/D-10 files in .mov or .mxf
+  * Create AVID DNxHD files in .mov
+  * Create DVCPROHD files in .mov or .mxf
+  * Create ProRes 422 or 4444 files in .mov 
+ .
+  * Convert V210 Files
+  * Convert HD YUV BT709 to SD BT601 and vice versa
+  * Convert AVCIntra 50 and 100
+  * Convert MPEG-TS files with SMPTE 302M audio
+  * Convert AVCHD files correctly
+  * Convert ProRes 422 and 4444 files 
+ .
+  * Rewrap IMX/D-10, AVCHD, DVCPROHD to Quicktime for editing in Final Cut Pro 
+ .
+  * Burn ASS or SRT subtitles files in videos 
+ .
+  * Merge and split your audio tracks
+  * Create Quicktime files containing time code tracks
+  * Color conversion from HD to SD 
+ .
+  * Read timecode tracks from MXF, Quicktime
+  * Creating audio files (mp3 and m4a) with cover art
+  * Keep or add covert art when converting your audio files
+  * Faststart MP4 for streaming (replace header in front) automatically 

@@ -1,0 +1,6 @@
+ffmbc: embedded-library usr/bin/ffmbc: libpostproc
+ffmbc: embedded-library usr/bin/ffmbc: libavdevice
+ffmbc: embedded-library usr/bin/ffmbc: libavutil
+ffmbc: embedded-library usr/bin/ffmbc: libavcodec
+ffmbc: embedded-library usr/bin/ffmbc: libavfilter
+ffmbc: embedded-library usr/bin/ffmbc: libswscale
