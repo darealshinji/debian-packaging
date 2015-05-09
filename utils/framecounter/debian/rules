@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+LDFLAGS += -Wl,--as-needed
+export LDFLAGS
+
 
 %:
 	dh $@
