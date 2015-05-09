@@ -5,7 +5,7 @@ Maintainer: djcj <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
                dh-autoreconf,
                cmake (>= 2.8.8),
-               libjpeg8-dev,
+               libjpeg-dev,
                libsdl1.2-dev,
                libsdl-image1.2-dev,
                yasm (>= 1.2),
