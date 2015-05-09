@@ -1,0 +1,19 @@
+Description: install tjunittest
+
+---
+ Makefile.am |    4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -89,9 +89,7 @@
+ 
+ if WITH_TURBOJPEG
+ 
+-bin_PROGRAMS += tjbench
+-
+-noinst_PROGRAMS += tjunittest
++bin_PROGRAMS += tjbench tjunittest
+ 
+ tjbench_SOURCES = tjbench.c bmp.h bmp.c tjutil.h tjutil.c rdbmp.c rdppm.c \
+ 	wrbmp.c wrppm.c
