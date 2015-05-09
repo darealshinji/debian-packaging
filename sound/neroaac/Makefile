@@ -1,6 +1,5 @@
 include ../../mk/include.mk
 
-ARCH       = i386
 deps       = wget unzip
 bin        = NeroAACCodec-1.5.1.zip
 srcfiles   = neroaac

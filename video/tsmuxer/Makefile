@@ -1,6 +1,5 @@
 include ../../mk/include.mk
 
-ARCH       = i386
 deps       = wget
 srcfiles   = *.png $(bin)
 bin        = tsmuxer$(VERSION).tar.gz

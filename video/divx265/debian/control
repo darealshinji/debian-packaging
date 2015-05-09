@@ -7,8 +7,14 @@ Homepage: http://labs.divx.com/divx265
 Build-Depends: debhelper (>= 9)
 
 Package: divx265
-Architecture: i386
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         libc6:i386 (>= 2.4) [amd64],
+         libgcc1:i386 (>= 1:4.1.1) [amd64],
+         libstdc++6:i386 (>= 4.4.0) [amd64],
+         libc6 (>= 2.4) [i386],
+         libgcc1 (>= 1:4.1.1) [i386],
+         libstdc++6 (>= 4.4.0) [i386]
 Suggests: mkvtoolnix-gui
 Description: DivX HEVC Community Encoder
  This tool will allow you to encode HEVC streams that are within
