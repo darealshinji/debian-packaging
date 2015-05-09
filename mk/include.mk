@@ -69,7 +69,7 @@ allcleanfiles = .pc                  \
                 $(cleanfiles)
 
 alldeps  = debhelper quilt aptitude $(deps)
-ifneq ($(PBUILDER),0)
+ifeq ($(PBUILDER),1)
 alldeps += pbuilder
 endif
 
@@ -88,13 +88,13 @@ distclean: clean
 
 
 predepends:
-ifeq ($(PBUILDER),0)
+ifneq ($(PBUILDER),1)
 	@ echo ""
 	@ # why does 'ifneq ($(ARCH),$(ARCHREAL))' not work?
 	@ if [ $(ARCH) != $(ARCHREAL) ];                                              \
 	then                                                                          \
 		echo "Cannot build packages for $(ARCH) architecture without pbuilder." ; \
-		echo "Try again without \`PBUILDER=0'" ;                                  \
+		echo "Try again with \`PBUILDER=1'" ;                                     \
 		echo "" ;                                                                 \
 		exit 1 ;                                                                  \
 	fi
@@ -132,7 +132,7 @@ build: source
 	echo '3.0 (native)' > $(builddir)/debian/source/format
 	test -f $(builddir)/debian/compat || echo '$(default_compat_level)' > $(builddir)/debian/compat
 
-ifeq ($(PBUILDER),0)
+ifneq ($(PBUILDER),1)
 ifneq ($(DEPS),0)
 	@ cd $(builddir) ;                                                                                      \
 	builddeps="`dpkg-checkbuilddeps 2>&1 | sed -e 's/dpkg-checkbuilddeps: Unmet build dependencies: //;'`"; \

@@ -7,8 +7,8 @@ projects and to package some multimedia programs with embedded libav libraries.
 
 Move to a directory and run make: `cd devel/yasm && make`<br>
 
-The package will be built in a pbuilder chroot environment.
-If you want to build without pbuilder run make with "PBUILDER=0": `cd devel/yasm && make PBUILDER=0`
+If you want to build the package in a pbuilder chroot environment run make with "PBUILDER=1": `cd devel/yasm && make PBUILDER=0`
+This will work for Ubuntu only though.
 
 To skip dependency checking run make with "DEPS=0": `cd devel/yasm && make DEPS=0`
 
