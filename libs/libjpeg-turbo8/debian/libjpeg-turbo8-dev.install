@@ -1,0 +1,5 @@
+jpegint.h usr/include/
+usr/include
+usr/lib/*/libjpeg.a
+usr/lib/*/libjpeg.so
+usr/lib/*/libturbojpeg.a
