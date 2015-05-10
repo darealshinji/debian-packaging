@@ -1,11 +1,9 @@
-Source: ffmpeg
+Source: libav
 Section: video
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 Standards-Version: 3.9.5
-Vcs-Git: git://source.ffmpeg.org/ffmpeg.git
-Vcs-Browser: http://git.videolan.org/?p=ffmpeg.git;a=tree
-Homepage: http://www.ffmpeg.org/
+Homepage: http://www.libav.org/
 Build-Depends:
  debhelper (>= 9),
  doxygen,
@@ -16,11 +14,11 @@ Build-Depends:
  libcdio-dev,
  libcdio-paranoia-dev,
  libdc1394-22-dev,
+ libfaac-dev,
  libfdk-aac-dev,
  libfreetype6-dev,
- libgnutls-dev,
+ libgnutls-dev | libgnutls28-dev,
  libgsm1-dev,
- libjack-dev,
  libmp3lame-dev,
  libopencore-amrnb-dev,
  libopencore-amrwb-dev,
@@ -43,7 +41,7 @@ Build-Depends:
  libvpx-dev,
  libx11-dev,
  libx264-dev,
- libx265-dev,
+ libx265-dev | libc6,
  libxext-dev,
  libxfixes-dev,
  libxcb1-dev,
