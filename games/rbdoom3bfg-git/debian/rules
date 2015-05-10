@@ -3,6 +3,7 @@
 CPPFLAGS = $(shell dpkg-buildflags --get CPPFLAGS)
 CFLAGS   = $(filter-out -g -O2, $(shell dpkg-buildflags --get CFLAGS)) $(CPPFLAGS)
 CXXFLAGS = $(filter-out -g -O2, $(shell dpkg-buildflags --get CXXFLAGS)) $(CPPFLAGS)
+LDFLAGS  = $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
 
 
 %:

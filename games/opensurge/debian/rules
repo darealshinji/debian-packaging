@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 CFLAGS  += -I$(CURDIR)/alfont/include $(CPPFLAGS)
-LDFLAGS += -L$(CURDIR)/alfont
+LDFLAGS += -Wl,--as-needed -L$(CURDIR)/alfont
 
 
 %:

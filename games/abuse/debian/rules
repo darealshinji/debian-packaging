@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 
 CXXFLAGS += -fno-strict-aliasing -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-function
+LDFLAGS  += -Wl,--as-needed
 
 
 %:

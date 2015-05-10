@@ -3,7 +3,7 @@
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
 CFLAGS  = -Wall -Wno-attributes $(shell dpkg-buildflags --get CFLAGS)
-LDFLAGS = $(filter-out -Wl,-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS))
+LDFLAGS = $(filter-out -Wl,-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS)) -Wl,--as-needed
 
 
 %:

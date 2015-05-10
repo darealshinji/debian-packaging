@@ -3,8 +3,8 @@
 VERSION = $(shell cat VERSION)
 MANPAGES = bpgencmod.1 bpgmux.1
 
-export CFLAGS  := -Wall $(shell dpkg-buildflags --get CFLAGS)
-export LDFLAGS := -Wl,-z,defs $(shell dpkg-buildflags --get LDFLAGS)
+export CFLAGS  = -Wall $(shell dpkg-buildflags --get CFLAGS)
+export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,-z,defs -Wl,--as-needed
 
 
 %:

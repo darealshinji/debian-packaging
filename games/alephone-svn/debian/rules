@@ -5,6 +5,7 @@ common_flags = -Wall -Wno-sign-compare -Wno-parentheses
 export CFLAGS=$(common_flags) $(shell dpkg-buildflags --get CFLAGS)
 export CXXFLAGS=$(common_flags) -Wno-reorder $(shell dpkg-buildflags --get CXXFLAGS)
 export CPPFLAGS=-DLUA_USE_MKSTEMP
+export LDFLAGS=$(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
 
 
 %:

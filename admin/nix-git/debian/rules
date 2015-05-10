@@ -6,7 +6,7 @@ libdir = $(CURDIR)/debian/nix/usr/lib/$(DEB_HOST_MULTIARCH)
 CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
 export GLOBAL_CFLAGS   = $(filter-out -g -O2 -Werror=format-security,$(shell dpkg-buildflags --get CFLAGS)) -Wformat-security $(CPPFLAGS)
 export GLOBAL_CXXFLAGS = $(filter-out -g -O2 -Werror=format-security,$(shell dpkg-buildflags --get CXXFLAGS)) -Wformat-security $(CPPFLAGS)
-export GLOBAL_LDFLAGS  = $(shell dpkg-buildflags --get LDFLAGS)
+export GLOBAL_LDFLAGS  = $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
 
 docbookxsl=/usr/share/xml/docbook/stylesheet/docbook-xsl
 docbookrng=$(docbookxsl)/slides/schema/relaxng/docbook.rng

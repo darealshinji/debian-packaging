@@ -4,8 +4,8 @@ VERSION = $(shell cat VERSION)
 MAN1 = bpgdec.1 bpgenc.1 bpgview.1
 MANPAGES = $(MAN1) bpg.5
 
-export CFLAGS  := -Wall $(shell dpkg-buildflags --get CFLAGS)
-export LDFLAGS := -Wl,-z,defs $(shell dpkg-buildflags --get LDFLAGS)
+export CFLAGS  = -Wall $(shell dpkg-buildflags --get CFLAGS)
+export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,-z,defs -Wl,--as-needed
 
 x265_confflags = \
 	-DCMAKE_BUILD_TYPE=Release \

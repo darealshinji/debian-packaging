@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+export LDFLAGS=$(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
+
 
 %:
 	dh ${@} --parallel --with autoreconf
