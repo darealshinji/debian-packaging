@@ -18,3 +18,14 @@ Description: Fraunhofer FDK AAC Encoder
  .
  This package contains a frontend binary capable of encoding WAVE files
  using the Fraunhofer FDK AAC Codec Library. 
+
+Package: libfdk-aac-dev
+Architecture: any
+Section: non-free/libdevel
+Depends: ${misc:Depends}
+Description: Fraunhofer FDK AAC Encoder
+ The FDK AAC Codec Library For Android contains an encoder implementation
+ of the Advanced Audio Coding (AAC) audio codec.
+ .
+ This package contains header files and a static library to link programs
+ against the Fraunhofer FDK AAC Codec Library.
