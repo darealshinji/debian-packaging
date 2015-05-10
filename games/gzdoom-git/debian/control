@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 9),
                libglew-dev,
                libgtk2.0-dev,
                libjpeg-dev,
-               libsdl1.2-dev,
+               libsdl2-dev,
                zlib1g-dev
 Standards-Version: 3.9.5
 Vcs-Git: https://github.com/coelckers/gzdoom.git
