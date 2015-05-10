@@ -3,8 +3,8 @@
 VERSION = $(shell cat VERSION)
 MANPAGES = bpgencmod.1 bpgmux.1
 
-export CFLAGS  = -Wall $(shell dpkg-buildflags --get CFLAGS)
-export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,-z,defs -Wl,--as-needed
+CFLAGS  += -Wall -Wno-unused-but-set-variable
+LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 
 
 %:
@@ -29,9 +29,9 @@ override_dh_auto_configure:
 override_dh_auto_build:
 	dh_auto_build -Dpng
 	dh_auto_build -Dx265/source
-	CFLAGS="-Ipng -Ix265/source -DUSE_X265" \
-	CXXFLAGS="-Ipng -Ix265/source -DUSE_X265" \
-	LDFLAGS="-Lpng/.libs" LIBS="x265/source/libx265.a -lpthread" \
+	CFLAGS="$(CFLAGS) -Ipng -Ix265/source -DUSE_X265" \
+	CXXFLAGS="$(CXXFLAGS) -Ipng -Ix265/source -DUSE_X265" \
+	LDFLAGS="$(LDFLAGS) -Lpng/.libs" LIBS="x265/source/libx265.a -ldl -lpthread" \
 	./configure --disable-shared
 	dh_auto_build -- bpgmux bpgenc bpgdec
 	mv bpgenc bpgencmod

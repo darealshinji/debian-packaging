@@ -41,7 +41,7 @@ override_dh_auto_build:
 	dh_auto_build -Dbuild
 	# re-link liboutput_sdl.so against SDL
 	rm build/output_sdl/liboutput_sdl.so
-	$(CC) -shared -Wl,-soname,liboutput_sdl.so -fPIC $(LDFLAGS) -o \
+	$(CC) -shared -Wl,-soname,liboutput_sdl.so $(LDFLAGS) -o \
 		build/output_sdl/liboutput_sdl.so \
 		build/output_sdl/CMakeFiles/output_sdl.dir/output_sdl.o -lSDL
 	cp $(fmodlib) build

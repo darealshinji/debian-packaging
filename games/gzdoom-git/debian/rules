@@ -9,7 +9,7 @@ fmodrevision = $(shell ls fmodapi444*linux.tar.gz | sed -e 's/fmodapi444//; s/li
 fmoddirname = $(CURDIR)/fmodapi444$(fmodrevision)linux
 fmodlib = libfmodex$(LIB64)-4.44.$(fmodrevision).so
 
-export LDFLAGS=$(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
+LDFLAGS += -Wl,--as-needed
 
 
 %:

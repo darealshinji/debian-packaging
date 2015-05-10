@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-export LDFLAGS=$(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
+LDFLAGS += -Wl,--as-needed
 
 
 %:

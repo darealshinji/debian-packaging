@@ -9,7 +9,7 @@ fmodrevision = $(shell ls fmodapi444*linux.tgz | sed -e 's/fmodapi444//; s/linux
 fmoddirname = $(CURDIR)/fmodapi444$(fmodrevision)linux
 fmodlib = libfmodex$(LIB64)-4.44.$(fmodrevision).so
 
-LDFLAGS  += -Wl,--as-needed
+LDFLAGS += -Wl,--as-needed
 
 
 %:

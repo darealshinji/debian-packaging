@@ -4,8 +4,8 @@ VERSION = $(shell cat VERSION)
 MAN1 = bpgdec.1 bpgenc.1 bpgview.1
 MANPAGES = $(MAN1) bpg.5
 
-export CFLAGS  = -Wall $(shell dpkg-buildflags --get CFLAGS)
-export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,-z,defs -Wl,--as-needed
+CFLAGS  += -Wall -Wno-unused-but-set-variable
+LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 
 x265_confflags = \
 	-DCMAKE_BUILD_TYPE=Release \
@@ -33,7 +33,7 @@ override_dh_auto_configure:
 		--enable-x265 \
 		--extra-cppflags="-Ipng -Ix265/source" \
 		--extra-ldflags="-Lpng/.libs -Lx265/source" \
-		--extra-libs=-lz
+		--extra-libs="-lz -ldl"
 
 override_dh_auto_build:
 	dh_auto_build -Dpng
