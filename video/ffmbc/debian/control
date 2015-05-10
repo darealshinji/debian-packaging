@@ -11,7 +11,6 @@ Build-Depends:
  libbz2-dev,
  libdc1394-22-dev,
  libdirac-dev,
- libfaac-dev,
  libgsm1-dev,
  libmp3lame-dev,
  libopenjpeg-dev,
