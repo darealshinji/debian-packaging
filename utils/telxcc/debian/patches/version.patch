@@ -1,6 +1,8 @@
---- a/telxcc.c
-+++ b/telxcc.c
-@@ -38,7 +38,7 @@
+Index: telxcc-2.5.3/telxcc.c
+===================================================================
+--- telxcc-2.5.3.orig/telxcc.c
++++ telxcc-2.5.3/telxcc.c
+@@ -38,7 +38,7 @@ Werner Brückner -- Teletext in digital
  #include "hamming.h"
  #include "teletext.h"
  

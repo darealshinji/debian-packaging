@@ -1,5 +1,7 @@
---- a/telxcc.1
-+++ b/telxcc.1
+Index: telxcc-2.5.3/telxcc.1
+===================================================================
+--- telxcc-2.5.3.orig/telxcc.1
++++ telxcc-2.5.3/telxcc.1
 @@ -10,7 +10,7 @@
  
  .SH DESCRIPTION
@@ -9,7 +11,7 @@
  .P
  .B telxcc
  conforms to ETSI 300 706 Presentation Level 1.5: Presentation Level 1 defines the basic Teletext page,
-@@ -22,7 +22,7 @@
+@@ -22,7 +22,7 @@ Selection of national option sub-sets re
  .SH OPTIONS
  
  .IP "\-V"
@@ -18,7 +20,7 @@
  .IP "\-h"
  Show a summary of command line options and exit.
  .IP "\-i file"
-@@ -121,7 +121,7 @@
+@@ -121,7 +121,7 @@ company <info@forers.com>.
  .SH COPYRIGHT
  Licensed under the GPL.
  .P
@@ -27,7 +29,7 @@
  .P
  Some portions/inspirations:
  .br
-@@ -161,4 +161,4 @@
+@@ -161,4 +161,4 @@ Piotr Oleszczyk <piotr.oleszczyk@gmail.c
  Igor Abakumov <igor.abakumov@gmail.com> for bug reporting and patient testing
  
  .SH WWW
