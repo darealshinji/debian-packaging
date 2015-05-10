@@ -5,6 +5,11 @@ SVN_VERSION := $(shell sed -e 's/-snapshot//' snapshot_version)
 DEB_HOST_ARCH    ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 DEB_HOST_ARCH_OS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
 DEB_VENDOR       ?= $(shell dpkg-vendor --query Vendor)
+
+LDFLAGS := $(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS))
+LDFLAGS += -Wl,--as-needed
+export LDFLAGS
+
 EXTRA_CFLAGS      = \
 	$(filter-out -g -O2 -Werror=format-security,$(shell dpkg-buildflags --get CFLAGS)) \
 	-Wno-unused-parameter \

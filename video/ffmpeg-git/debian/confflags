@@ -101,7 +101,7 @@ nf_confflags += $(call cond_enable_nf,/usr/include/fdk-aac/aacenc_lib.h,libfdk-a
 CFLAGS := $(filter-out -Werror=format-security -g -O2,$(shell dpkg-buildflags --get CFLAGS))
 CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
 LDFLAGS := $(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS))
-LDFLAGS += -Wl,-z,noexecstack
+LDFLAGS += -Wl,-z,noexecstack -Wl,--as-needed
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 # Various parts of ffmpeg FTBFS when compiling with -fPIC

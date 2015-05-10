@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 
 CXXFLAGS += -Wno-unused-parameter -Wno-unused-variable -Wno-reorder
+LDFLAGS  += -Wl,--as-needed
 
 
 %:
