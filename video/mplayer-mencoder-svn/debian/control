@@ -28,7 +28,6 @@ Build-Depends:
  libdvdread-dev,
  libenca-dev,
  libesd0-dev,
- libfaad-dev,
  libfontconfig1-dev,
  libfreetype6-dev,
  libfribidi-dev,
