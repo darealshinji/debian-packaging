@@ -176,6 +176,7 @@ endif
 	rm -f $(resultdir)/*.tar.?z*
 
 
+ifneq ($(SUMMARY),0)
 	@ echo ""
 	@ echo ""
 	@ for f in $(resultdir)/*.deb ;      \
@@ -192,6 +193,7 @@ endif
 	    dpkg-deb -c $$f ;                \
 	    echo "" ;                        \
 	done 2>&1 | tee -a $(LOG)
+endif
 
 
 	@ echo ""

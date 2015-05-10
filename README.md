@@ -12,6 +12,8 @@ This will work for Ubuntu only though.
 
 To skip dependency checking run make with "DEPS=0": `cd devel/yasm && make DEPS=0`
 
+To disable the summary after a build run make with "SUMMARY=0": `cd devel/yasm && make SUMMARY=0`
+
 The final packages are saved in `$HOME/buildresult`
 
 You can run `make clean` or `make distclean` to clean up a build directory.
