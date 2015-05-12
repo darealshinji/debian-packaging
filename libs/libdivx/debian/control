@@ -11,8 +11,11 @@ Homepage: http://labs.divx.com/DivXLinuxCodec
 
 Package: libdivx6.1.1-dev
 Section: libdevel
-Architecture: i386
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         libc6 (>= 2.1.3),
+         libgcc1 (>= 1:4.1.1),
+         libstdc++6 (>= 4.1.1)
 Description: DivX 6.1.1 codec for developers
  This package will install the old DivX 6.1.1 codec including header files
  to link programs against it.

@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+PKG = divx265
+
+
 %:
 	dh ${@}
 
@@ -7,4 +10,8 @@ override_dh_install:
 	install -m0755 DivX265 $(CURDIR)/debian/divx265/usr/bin
 
 override_dh_shlibdeps:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
 

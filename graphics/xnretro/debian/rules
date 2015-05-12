@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+PKG = xnretro
+
+
 %:
 	dh ${@}
 
@@ -8,18 +11,17 @@ override_dh_auto_clean:
 
 override_dh_auto_build:
 	tar xvfz XnRetro-linux.tgz
+	rm -rf XnRetro/lib
 
 	find XnRetro -type f -exec chmod 0644 '{}' \;
-	chmod 0755 XnRetro/XnRetro
-	chrpath -d XnRetro/XnRetro `find XnRetro/ -type f -name *.so*`
+	chmod a+x XnRetro/XnRetro
+	chrpath -d XnRetro/XnRetro
 
 	./make-icons.sh XnRetro/xnretro.png
 
-override_dh_install:
-	dh_install -Xlibphonon.so.4
-
-override_dh_makeshlibs:
-
 override_dh_shlibdeps:
-	dh_shlibdeps -Lxnretro -l/usr/lib/xnretro/lib
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
 

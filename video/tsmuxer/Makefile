@@ -2,7 +2,7 @@ include ../../mk/include.mk
 
 deps       = wget
 srcfiles   = *.png $(bin)
-bin        = tsmuxer$(VERSION).tar.gz
+bin        = tsmuxer.tar.gz
 cleanfiles = $(srcfiles) *.1
 
 VERSION       = 2.6.11

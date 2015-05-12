@@ -4,7 +4,6 @@ Name=XnSketch
 GenericName=XnSketch
 Comment=turn your photos into cartoon or sketch images
 Exec=xnsketch %U
-TryExec=/usr/lib/xnsketch/XnSketch
 Terminal=false
 Icon=xnsketch
 Categories=Graphics;

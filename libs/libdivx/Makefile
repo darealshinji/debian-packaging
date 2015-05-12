@@ -1,13 +1,12 @@
 include ../../mk/include.mk
 
-ARCH           = i386
-deps           = wget
-dir            = divx611-20060201-gcc4.0.1
-bin            = $(dir).tar.gz
-builddir       = $(dir)
-srcfiles       = patchelfmod.tar.gz
-VERSION        = 2.6.11
-changelog-msg  = Initial release
+deps          = wget
+dir           = divx611-20060201-gcc4.0.1
+bin           = $(dir).tar.gz
+builddir      = $(dir)
+srcfiles      = patchelfmod.tar.gz
+VERSION       = 2.6.11
+changelog-msg = Initial release
 
 
 download:

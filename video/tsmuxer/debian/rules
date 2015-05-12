@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-VERSION = $(shell head -n1 debian/changelog | cut -d' ' -f2 | head -c-2 | tail -c+2)
-
 
 %:
 	dh ${@}
@@ -10,7 +8,7 @@ override_dh_auto_clean:
 	rm -rf converted_icons tsMuxeR tsMuxerGUI release_notes.txt
 
 override_dh_auto_build:
-	tar xvf tsmuxer$(VERSION).tar.gz
+	tar xvf tsmuxer.tar.gz
 	upx-ucl -d tsMuxeR tsMuxerGUI
 	./make-icons.sh tsMuxerGUI.png
 
@@ -21,4 +19,9 @@ override_dh_installchangelogs:
 	dh_installchangelogs release_notes.txt
 
 override_dh_shlibdeps:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/tsmuxer/DEBIAN/control
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/tsmuxergui/DEBIAN/control
 

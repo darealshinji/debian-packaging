@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+PKG = libdivx6.1.1-dev
+
 
 %:
 	dh $@
@@ -22,4 +24,10 @@ override_dh_auto_build:
 	cp -f README.linux README
 
 override_dh_strip:
+
+override_dh_shlibdeps:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
 

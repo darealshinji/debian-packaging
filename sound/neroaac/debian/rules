@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+PKG = neroaac
+
 %:
 	dh ${@}
 
@@ -10,4 +12,8 @@ override_dh_compress:
 	dh_compress -X.pdf
 
 override_dh_shlibdeps:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
 
