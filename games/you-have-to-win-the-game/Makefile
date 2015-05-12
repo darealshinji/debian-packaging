@@ -1,6 +1,5 @@
 include ../../mk/include.mk
 
-ARCH       = amd64
 deps       = wget unzip
 bin        = TheGame_2014-01-30
 ega        = YHtWtG_EGA

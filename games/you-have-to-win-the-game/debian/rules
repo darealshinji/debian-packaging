@@ -13,3 +13,10 @@ override_dh_installchangelogs:
 override_dh_strip:
 	dh_strip --dbg-package=thegame-dbg
 
+override_dh_shlibdeps:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: i386/Architecture: amd64/g' debian/thegame/DEBIAN/control
+	sed -i 's/Architecture: i386/Architecture: amd64/g' debian/thegame-dbg/DEBIAN/control
+
