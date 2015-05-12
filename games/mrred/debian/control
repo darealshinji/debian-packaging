@@ -2,22 +2,22 @@ Source: mrred
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends:
- debhelper (>= 9),
- imagemagick,
- libgl1-mesa-glx | libgl1,
- libopenal1,
- libpulse0,
- libssl1.0.0,
- libx11-6,
- libxxf86vm1,
- zlib1g
+Build-Depends: debhelper (>= 9), imagemagick
 Standards-Version: 3.9.5
 Homepage: https://killmonday.wordpress.com/games-2/mr-reds-adventure-the-missing-balls/
 
 Package: mrred
-Architecture: i386
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         libgcc1 (>= 1:4.1.1),
+         libc6 (>= 2.15),
+         libgl1-mesa-glx | libgl1,
+         libopenal1 (>= 1:1.13),
+         libssl1.0.0 (>= 1.0.0),
+         libstdc++6 (>= 4.1.1),
+         libx11-6,
+         libxxf86vm1,
+         zlib1g (>= 1:1.1.4)
 Description: 2D platformer
  Mr Red's adventure in The Missing Balls is a fun and hard platformer where
  you play as the red hand puppet Mr Red and try collecting the 24 lost balls

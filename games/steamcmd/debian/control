@@ -2,17 +2,16 @@ Source: steamcmd
 Section: non-free/games
 Priority: extra
 Maintainer: djcj <djcj@gmx.de>
-Build-Depends:
- debhelper (>= 9)
+Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.5
 Homepage: https://developer.valvesoftware.com/wiki/SteamCMD
 
 Package: steamcmd
-Architecture: i386
+Architecture: amd64 i386
 Multi-Arch: foreign
-Depends:
- ${misc:Depends},
- ${shlibs:Depends}
+Depends: ${misc:Depends},
+         libc6 (>= 2.3.6-6~),
+         libstdc++6 (>= 4.3)
 Description: Valve's Steam digital software delivery system - command-line version
  The Steam Console Client or SteamCMD is a command-line version of the Steam
  client.  Its primary use is to install and update various dedicated servers

@@ -2,24 +2,24 @@ Source: crayon-physics-demo
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends:
- debhelper (>= 9),
- chrpath,
- imagemagick,
- libgl1-mesa-glx | libgl1,
- libglu1-mesa | libglu1,
- libqtcore4,
- libqtgui4,
- libsdl-image1.2,
- libsdl-mixer1.2,
- libsdl1.2debian,
- libx11-6
+Build-Depends: debhelper (>= 9), chrpath, imagemagick
 Standards-Version: 3.9.5
 Homepage: https://www.crayonphysics.com/
 
 Package: crayon-physics-demo
-Architecture: i386
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         libc6 (>= 2.11),
+         libgcc1 (>= 1:4.1.1),
+         libgl1-mesa-glx | libgl1,
+         libglu1-mesa | libglu1,
+         libqtcore4 (>= 4:4.5.3),
+         libqtgui4 (>= 4:4.5.3),
+         libsdl-image1.2 (>= 1.2.10),
+         libsdl-mixer1.2,
+         libsdl1.2debian (>= 1.2.11),
+         libstdc++6 (>= 4.5),
+         libx11-6
 Description: 2D physics puzzle / sandbox game
  Crayon Physics Deluxe Demo is a 2D physics puzzle / sandbox game, in which
  you get to experience what it would be like if your drawings would be

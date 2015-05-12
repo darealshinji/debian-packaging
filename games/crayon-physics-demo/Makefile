@@ -1,6 +1,5 @@
 include ../../mk/include.mk
 
-ARCH           = i386
 deps           = wget
 bin            = crayon_release_demo.tgz
 distcleanfiles = $(bin)

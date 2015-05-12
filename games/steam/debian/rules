@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+PKG = steam
+
 
 %:
 	dh $@
@@ -8,7 +10,7 @@ override_dh_auto_clean:
 	rm -rf steam-dir
 
 override_dh_auto_build:
-	dpkg -x steam.deb steam-dir
+	dpkg -x steam-deb steam-dir
 	gunzip steam-dir/usr/share/man/man6/steam.6.gz
 	gunzip steam-dir/usr/share/doc/steam-launcher/changelog.gz
 	sed -i 's@/usr/bin/steam@/usr/games/steam@' steam-dir/usr/share/applications/steam.desktop
@@ -16,4 +18,10 @@ override_dh_auto_build:
 
 override_dh_installchangelogs:
 	dh_installchangelogs steam-dir/usr/share/doc/steam-launcher/changelog
+
+override_dh_shlibdeps:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
 

@@ -2,17 +2,17 @@ Source: doom3-demo
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends:
- debhelper (>= 9),
- imagemagick,
- libstdc++5,
- libx11-6,
- libxext6
+Build-Depends: debhelper (>= 9), imagemagick
 Standards-Version: 3.9.5
 
 Package: doom3-demo
-Architecture: i386
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         libc6 (>= 2.3.6-6~),
+         libgcc1 (>= 1:4.1.1),
+         libstdc++5 (>= 1:3.3.6-15),
+         libx11-6,
+         libxext6
 Recommends: libasound2-plugins
 Description: Doom 3 demo
  Doom 3 is an fps game from id Software.

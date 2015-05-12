@@ -2,22 +2,22 @@ Source: franbow-demo
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends:
- debhelper (>= 9),
- imagemagick,
- libgl1-mesa-glx | libgl1,
- libopenal1,
- libpulse0,
- libssl1.0.0,
- libx11-6,
- libxxf86vm1,
- zlib1g
+Build-Depends: debhelper (>= 9), imagemagick
 Standards-Version: 3.9.5
 Homepage: http://www.franbow.com/
 
 Package: franbow-demo
-Architecture: i386
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         libc6 (>= 2.15),
+         libgcc1 (>= 1:4.1.1),
+         libgl1-mesa-glx | libgl1,
+         libopenal1 (>= 1:1.13),
+         libssl1.0.0 (>= 1.0.0),
+         libstdc++6 (>= 4.1.1),
+         libx11-6,
+         libxxf86vm1,
+         zlib1g (>= 1:1.1.4)
 Description: point and click adventure with a touch of horror
  Fran Bow is a point and click adventure with a touch of horror.
  You play as Fran Bow, a little girl with a troubled mind and a story to tell!

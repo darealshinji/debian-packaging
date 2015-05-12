@@ -1,6 +1,6 @@
-SFML-1.6/lib/libsfml-audio.so.1.6                /usr/lib/spaghetti-armageddon
-SFML-1.6/lib/libsfml-system.so.1.6               /usr/lib/spaghetti-armageddon
-SFML-1.6/lib/libsfml-window.so.1.6               /usr/lib/spaghetti-armageddon
+libsfml-audio.so.1.6                             /usr/lib/spaghetti-armageddon
+libsfml-system.so.1.6                            /usr/lib/spaghetti-armageddon
+libsfml-window.so.1.6                            /usr/lib/spaghetti-armageddon
 SpaghettiArmageddon/SpaghettiArmageddon          /usr/lib/spaghetti-armageddon
 SpaghettiArmageddon/SpaghettiArmageddon.dat      /usr/share/games/spaghetti-armageddon
 debian/scripts/spaghetti-armageddon              /usr/games

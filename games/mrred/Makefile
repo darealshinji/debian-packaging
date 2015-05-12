@@ -1,11 +1,11 @@
 include ../../mk/include.mk
 
-ARCH       = i386
-deps       = wget
-bin        = mrred.tar.gz
-icon       = mrred.png
-cleanfiles = $(icon)
-srcfiles   = $(bin) $(icon)
+deps           = wget
+bin            = mrred.tgz
+icon           = mrred.png
+cleanfiles     = $(icon)
+distcleanfiles = $(bin)
+srcfiles       = $(bin) $(icon)
 
 download:
 	@ $(call download,$(bin),https://www.dropbox.com/s/z8b534gi6xxhgki/Mr%20Reds%20Adventure%20TMB.tar.gz?dl=1)

@@ -2,19 +2,22 @@ Source: spaghetti-armageddon
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends: debhelper (>= 9),
-               libgl1-mesa-dev,
-               libglu1-mesa,
-               libopenal-dev,
-               libsndfile1-dev,
-               libxrandr-dev
+Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.5
 Homepage: http://alienbug.itch.io/spaghetti-armageddon
 
 Package: spaghetti-armageddon
-Architecture: i386
+Architecture: amd64 i386
 Depends: ${misc:Depends},
-         ${shlibs:Depends}
+         libc6 (>= 2.4),
+         libgcc1 (>= 1:4.1.1),
+         libgl1-mesa-glx | libgl1,
+         libglu1-mesa | libglu1,
+         libopenal1 (>= 1:1.13),
+         libsndfile1 (>= 1.0.20),
+         libstdc++6 (>= 4.4.0),
+         libx11-6,
+         libxrandr2
 Description: lo-fi first person shooter
  An inscrutably vague tale of espionage shown through the lens of a
  reprehensible, lo-fi first person shooter.

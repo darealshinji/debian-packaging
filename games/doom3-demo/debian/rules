@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 
 BIN = doom3-linux-1.1.1286-demo.x86.run
+PKG = doom3-demo
 
 
 %:
@@ -17,5 +18,11 @@ override_dh_auto_build:
 
 override_dh_makeshlibs:
 
+override_dh_shlibdeps:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
+
 override_dh_builddeb:
-	dh_builddeb -- -z1
+	dh_builddeb -- -Zgzip -z1

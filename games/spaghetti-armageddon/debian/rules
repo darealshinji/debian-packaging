@@ -1,19 +1,23 @@
 #!/usr/bin/make -f
 
+PKG = spaghetti-armageddon
+
 
 %:
 	dh ${@}
 
 override_dh_auto_clean:
-	dh_auto_clean -DSFML-1.6
-	rm -rf SpaghettiArmageddon
+	rm -rf SpaghettiArmageddon lib*.so.*
 
 override_dh_auto_build:
-	dh_auto_build -DSFML-1.6/src/SFML -- sfml-system sfml-window sfml-audio
 	tar xvf SpaghettiArmageddon_Linux.tgz
+	tar xvf SFML-1.6.txz
 
 override_dh_makeshlibs:
 
 override_dh_shlibdeps:
-	dh_shlibdeps -l/usr/lib/spaghetti-armageddon
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
 
