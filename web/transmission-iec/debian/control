@@ -2,6 +2,7 @@ Source: transmission
 Section: net
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
+XSBC-Original-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: autotools-dev,
                debhelper (>= 8),
                dh-autoreconf,
