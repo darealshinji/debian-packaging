@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 XSBC-Original-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: autotools-dev,
-               debhelper (>= 8),
+               debhelper (>= 9),
                dh-autoreconf,
                dh-systemd [linux-any],
                intltool (>= 0.40),

@@ -1,22 +1,12 @@
 #!/usr/bin/make -f
 
 export V=1
-#export DH_VERBOSE=1
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed,--no-undefined,--no-add-needed
 
-DPKG_EXPORT_BUILDFLAGS = 1
-include /usr/share/dpkg/buildflags.mk
-
-DH_EXTRA_ARGS := --with autoreconf
-
-DEB_HOST_ARCH_OS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
-ifeq ($(DEB_HOST_ARCH_OS),linux)
-	DH_EXTRA_ARGS += --with systemd
-endif
 
 %:
-	dh $@ $(DH_EXTRA_ARGS)
+	dh $@ --with autoreconf,systemd
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
@@ -30,8 +20,10 @@ override_dh_auto_clean:
 
 override_dh_installchangelogs:
 	dh_installchangelogs -p transmission-common NEWS
+
 override_dh_installdocs:
 	dh_installdocs -p transmission-common
+
 override_dh_installexamples:
 	dh_installexamples -p transmission-common
 
