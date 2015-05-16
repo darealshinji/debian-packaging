@@ -117,9 +117,9 @@
 -const char * speed_T_str = N_("TB/s");
 +const int disk_K = DISK_K;
 +const char * disk_K_str = N_(DISK_K_STR);
-+const char * disk_M_str = N_(DISK_K_STR);
-+const char * disk_G_str = N_(DISK_K_STR);
-+const char * disk_T_str = N_(DISK_K_STR);
++const char * disk_M_str = N_(DISK_M_STR);
++const char * disk_G_str = N_(DISK_G_STR);
++const char * disk_T_str = N_(DISK_T_STR);
 +
 +const int speed_K = SPEED_K;
 +const char * speed_K_str = N_(SPEED_K_STR);
