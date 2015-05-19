@@ -13,5 +13,5 @@ override_dh_auto_build:
 	fromdos quake106/slicnse.txt quake106/readv106.txt
 	cat debian/copyright.in quake106/slicnse.txt > debian/copyright
 	mv quake106/readv106.txt quake106/README
-	./make-icons.sh quake-shareware.png
+	./make-icons.sh quake-shareware.svg
 
