@@ -1,9 +1,9 @@
 include ../../mk/include.mk
 
 deps           = wget
+srcfiles       = $(bin)
+distcleanfiles = $(bin)
 bin            = XnSketch-linux.tgz
-srcfiles       = $(bin) *.png
-distcleanfiles = $(bin) *.png
 
 #changelog-msg = Initial release
 #VERSION       = $(shell wget -q -O - http://www.xnview.com/en/xnsketch/ | grep -e 'Download <strong>XnSketch' | \
@@ -12,5 +12,4 @@ distcleanfiles = $(bin) *.png
 
 download:
 	@ $(call download,$(bin),http://download.xnview.com/$(bin))
-	@ $(call download,xnsketch.png,http://www.xnview.com/assets/img/app-xnsketch-512.png)
 

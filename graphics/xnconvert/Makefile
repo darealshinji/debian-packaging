@@ -1,8 +1,8 @@
 include ../../mk/include.mk
 
 deps           = wget
-srcfiles       = $(bin) *.png
-distcleanfiles = $(bin) *.png
+srcfiles       = $(bin)
+distcleanfiles = $(bin)
 
 bin = XnConvert-linux$(x64).tgz
 ifeq ($(ARCH), amd64)
@@ -15,6 +15,5 @@ VERSION       = $(shell wget -q -O - http://www.xnview.com/en/xnconvert/ | grep 
 
 download:
 	@ $(call download,$(bin),http://download.xnview.com/$(bin))
-	@ $(call download,xnconvert.png,http://www.xnview.com/assets/img/app-xnconvert-512.png)
 	@ VERSION=$(VERSION); $(changelog-entry)
 

@@ -21,8 +21,8 @@ override_dh_auto_build:
 	dos2unix XnView/*.txt
 	sed -e 's/@VERSION@/$(VERSION)/;' debian/xnviewmp.1.in > xnviewmp.1
 
-	./make-icons.sh xnview.png
-	./make-icons.sh xnview_2.png
+	./make-icons.sh XnView/xnview.png
+	./make-icons.sh XnView/xnview_2.png
 
 	chrpath -d XnView/XnView `find XnView/ -type f -name *.so*`
 

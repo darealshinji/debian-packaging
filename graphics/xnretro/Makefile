@@ -2,8 +2,8 @@ include ../../mk/include.mk
 
 deps           = wget
 bin            = XnRetro-linux.tgz
-srcfiles       = $(bin) *.png
-distcleanfiles = $(bin) *.png
+srcfiles       = $(bin)
+distcleanfiles = $(bin)
 
 #changelog-msg = Initial release
 #VERSION       = $(shell wget -q -O - http://www.xnview.com/en/xnretro/ | grep -e 'Download <strong>XnRetro' | \
@@ -11,5 +11,4 @@ distcleanfiles = $(bin) *.png
 
 download:
 	@ $(call download,$(bin),http://download.xnview.com/$(bin))
-	@ $(call download,xnretro.png,http://www.xnview.com/assets/img/app-retro-512.png)
 
