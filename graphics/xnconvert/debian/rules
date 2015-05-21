@@ -18,7 +18,7 @@ override_dh_auto_build:
 	find XnConvert -type f -exec chmod 0644 '{}' \;
 	chmod 0755 XnConvert/XnConvert
 
-	./make-icons.sh XnConvert/xnconvert.png
+	./make-icons.sh xnconvert.png
 
 	chrpath -d XnConvert/XnConvert `find XnConvert/ -type f -name *.so*`
 ifeq ($(shell uname -p), x86_64)

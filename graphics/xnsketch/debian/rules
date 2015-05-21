@@ -17,7 +17,7 @@ override_dh_auto_build:
 	chrpath -d XnSketch/XnSketch
 	mv XnSketch/XnSketch XnSketch/xnsketch
 
-	./make-icons.sh XnSketch/xnsketch.png
+	./make-icons.sh xnsketch.png
 
 override_dh_shlibdeps:
 

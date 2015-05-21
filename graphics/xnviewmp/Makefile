@@ -1,8 +1,8 @@
 include ../../mk/include.mk
 
 deps           = wget
-srcfiles       = $(bin)
-distcleanfiles = $(bin)
+srcfiles       = $(bin) *.png
+distcleanfiles = $(bin) *.png
 
 bin = XnViewMP-linux$(x64).tgz
 ifeq ($(ARCH), amd64)
@@ -15,5 +15,7 @@ VERSION       = $(shell wget -q -O - http://www.xnview.com/en/xnviewmp/ | grep -
 
 download:
 	@ $(call download,$(bin),http://download.xnview.com/$(bin))
+	@ $(call download,xnview.png,http://www.xnview.com/assets/img/app-xnviewmp-512.png)
+	@ $(call download,xnview_2.png,http://www.xnview.com/assets/img/app-xnsoft-512.png)
 	@ VERSION=$(VERSION); $(changelog-entry)
 
