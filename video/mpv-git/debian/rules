@@ -1,7 +1,5 @@
 #! /usr/bin/make -f
 
-VERSION = $(shell dpkg-parsechangelog -SVersion | cut -d: -f2)
-
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
 CFLAGS   := $(filter-out -Werror=format-security -g -O2,$(shell dpkg-buildflags --get CFLAGS))
@@ -15,9 +13,9 @@ LDFLAGS  += -Wl,--as-needed
 
 override_dh_auto_clean:
 	dh_auto_clean -Dffmpeg || true
-	cd mpv && ./waf distclean || true
-	rm -rf libs
-	find mpv -type f -name \*.pyc -delete
+	./waf distclean || true
+	rm -rf build libs
+	find . -type f -name \*.pyc -delete
 
 override_dh_auto_configure:
 	cd ffmpeg && ./configure \
@@ -44,15 +42,14 @@ override_dh_auto_build:
 	dh_auto_build -Dffmpeg -- V=1
 	$(MAKE) -C ffmpeg install V=1
 
-	cd mpv && PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig" \
+	PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig" \
 		./waf configure --prefix=/usr --confdir=/etc/mpv --enable-sdl2 --enable-zsh-comp
-	sed -i 's/UNKNOWN/$(VERSION)/' mpv/build/version.h
-	cd mpv && ./waf build -j `nproc` -v
+	./waf build -j `nproc` -v
 
 override_dh_install:
 	dh_install
 	for s in 16x16 32x32 64x64 ; do \
-  install -m644 -D mpv/etc/mpv-icon-8bit-$${s}.png $(CURDIR)/debian/mpv/usr/share/icons/hicolor/$${s}/apps/mpv.png ;\
+  install -m644 -D etc/mpv-icon-8bit-$${s}.png $(CURDIR)/debian/mpv/usr/share/icons/hicolor/$${s}/apps/mpv.png ;\
 done
 
 override_dh_installdocs:
