@@ -1,0 +1,86 @@
+Source: mpv
+Section: video
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Standards-Version: 3.9.5
+Build-Depends:
+ debhelper (>= 9),
+ ladspa-sdk,
+ libasound2-dev [linux-any],
+ libass-dev,
+ libbluray-dev,
+ libbs2b-dev,
+ libcaca-dev,
+ libcdio-paranoia-dev,
+ libdvdnav-dev,
+ libdvdread-dev,
+ libegl1-mesa-dev [linux-any],
+ libenca-dev,
+ libfontconfig-dev,
+ libfreetype6-dev,
+ libfribidi-dev,
+ libgl1-mesa-dev,
+ libgsm1-dev,
+ libguess-dev,
+ libharfbuzz-dev,
+ libjpeg-dev,
+ libopenjpeg-dev,
+ liblcms2-dev,
+ liblircclient-dev,
+ liblua5.2-dev,
+ libmp3lame-dev,
+ libopus-dev,
+ libopencore-amrnb-dev,
+ libopencore-amrwb-dev,
+ libpulse-dev,
+ librubberband-dev,
+ libschroedinger-dev,
+ libsdl2-dev,
+ libsmbclient-dev,
+ libspeex-dev,
+ libtheora-dev,
+ libtool,
+ libtwolame-dev,
+ libv4l-dev [!hurd-any],
+ libva-dev [!hurd-any],
+ libvdpau-dev,
+ libvorbis-dev,
+ libvo-aacenc-dev,
+ libvo-amrwbenc-dev,
+ libvpx-dev,
+ libwavpack-dev,
+ libx264-dev,
+ libx11-dev,
+ libxext-dev,
+ libxinerama-dev,
+ libxrandr-dev,
+ libxss-dev,
+ libxv-dev,
+ libxvidcore-dev,
+ pkg-config,
+ python,
+ python-docutils,
+ rst2pdf,
+ x11proto-core-dev,
+ yasm,
+ zlib1g-dev
+Homepage: https://mpv.io/
+Vcs-Git: https://github.com/mpv-player/mpv.git
+Vcs-Browser: https://github.com/mpv-player/mpv
+
+Package: mpv
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: mplayer/mplayer2 based video player
+ MPV is a versatile CLI movie player, based on mplayer and mplayer2.
+
+Package: mpv-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: mpv (= ${binary:Version}), ${misc:Depends}
+Description: mplayer/mplayer2 based video player - debug
+ MPV is a versatile CLI movie player, based on mplayer and mplayer2.
+ .
+ This package provides debug symbols for mpv.
+

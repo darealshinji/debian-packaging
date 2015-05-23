@@ -1,0 +1,3 @@
+mpv/build/mpv                    /usr/bin
+mpv/etc/encoding-profiles.conf   /etc/mpv
+mpv/etc/mpv.desktop              /usr/share/applications
