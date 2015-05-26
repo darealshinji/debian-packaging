@@ -1,0 +1,24 @@
+Source: pwnfps
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9),
+               liblua5.1-dev,
+               libsdl1.2-dev
+Standards-Version: 3.9.5
+Homepage: http://fanzyflani.itch.io/pwnfps-engine
+Vcs-Git: https://github.com/fanzyflani/pwnfps.git
+Vcs-Browser: https://github.com/fanzyflani/pwnfps
+
+Package: pwnfps
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: Raytraced non-euclidean portal engine
+ An incomplete game engine made for 7DFPS 2014 using C and a bit of Lua.
+ It's a realtime raytracer that happens to be pretty shiny.
+ .
+ Some stuff to do if you intend on using this:
+  * Add Lua bindings for key presses and camera placement/orientation.
+  * Move the player physics from C to Lua.
+  * Make it possible to win and/or die.

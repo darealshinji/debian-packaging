@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+LDFLAGS += -Wl,--as-needed
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf converted_icons
+
+override_dh_auto_build:
+	dh_auto_build
+	./make-icons.sh pwnfps.png
+
