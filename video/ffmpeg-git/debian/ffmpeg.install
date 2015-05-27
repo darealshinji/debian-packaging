@@ -1,6 +1,7 @@
-doc/ffserver.conf         etc
-usr/bin/ff*               usr/lib/ffmpeg
+usr/lib/ffmpeg/ff*
 usr/lib/ffmpeg/*.so.*
 usr/share/man/man1
 usr/share/ffmpeg/*.ffpreset
-debian/scripts/*          usr/bin
+ffmpeg/doc/ffserver.conf      etc
+debian/scripts/*              usr/bin
+ffmpeg-10bit                  usr/bin

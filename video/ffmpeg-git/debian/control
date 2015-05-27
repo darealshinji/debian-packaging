@@ -8,35 +8,35 @@ Vcs-Browser: http://git.videolan.org/?p=ffmpeg.git;a=tree
 Homepage: http://www.ffmpeg.org/
 Build-Depends:
  debhelper (>= 9),
- frei0r-plugins-dev,
+ libbz2-dev,
+ liblzma-dev,
+ zlib1g-dev,
  libasound2-dev,
+ libopenal-dev,
+ libpulse-dev,
+ libsdl1.2-dev,
+ frei0r-plugins-dev,
  libass-dev,
  libbluray-dev,
- libbz2-dev,
- libcdio-cdda-dev,
  libcdio-dev,
+ libcdio-cdda-dev,
  libcdio-paranoia-dev,
  libdc1394-22-dev,
- libfaac-dev,
- libfdk-aac-dev,
+ libraw1394-dev,
+#libfdk-aac-dev,
  libfreetype6-dev,
- libgnutls-dev | libgnutls28-dev,
+#libgnutls28-dev conflicts with librtmp-dev
+ libgnutls-dev,
  libgsm1-dev,
- libimlib2-dev,
- liblzo2-dev,
  libmp3lame-dev,
+#libopenh264-dev,
  libopencore-amrnb-dev,
  libopencore-amrwb-dev,
- libopenjpeg-dev,
  libopus-dev,
- libpulse-dev,
- libraw1394-dev,
  librtmp-dev,
  libschroedinger-dev,
- libsdl1.2-dev,
  libspeex-dev,
  libtheora-dev,
- libtiff-dev,
  libva-dev,
  libvdpau-dev,
  libvo-aacenc-dev,
@@ -44,28 +44,23 @@ Build-Depends:
  libvorbis-dev,
  libvpx-dev,
  libwavpack-dev,
- libx11-dev,
- libx264-dev,
- libx265-dev | libc6,
- libxext-dev,
- libxfixes-dev,
+ libwebp-dev,
+ libx11-xcb-dev,
+#libx264-dev,
+#libx265-dev,
  libxvidcore-dev,
- libxvmc-dev,
- texi2html,
  doxygen,
- yasm,
- zlib1g-dev
+ texinfo,
+ yasm (>= 1.2),
+ cmake (>= 2.8.8),
+ dh-autoreconf
 
 Package: ffmpeg
 Architecture: any
 Multi-Arch: foreign
-Depends:
- ${shlibs:Depends},
- ${misc:Depends}
-Recommends:
- qt-faststart
-Suggests:
- frei0r-plugins
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: qt-faststart
+Suggests: frei0r-plugins
 Description: Tools for transcoding, streaming and playing of multimedia files
  FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
  mux, demux, stream, filter and play pretty much anything that humans and
@@ -85,9 +80,7 @@ Description: Tools for transcoding, streaming and playing of multimedia files
 Package: qt-faststart
 Architecture: any
 Multi-Arch: foreign
-Depends:
- ${shlibs:Depends},
- ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Breaks: ffmpeg (<< 7:2)
 Replaces: ffmpeg (<< 7:2)
 Description: Utility to rearrange a Quicktime file
@@ -102,30 +95,11 @@ Description: Utility to rearrange a Quicktime file
  .
  NOTE: It diverts the qt-faststart from libav-tools to qt-faststart.libav.
 
-Package: ffmpeg-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Multi-Arch: same
-Depends:
- ffmpeg (= ${binary:Version}),
- ${misc:Depends}
-Description: Debug symbols for the FFmpeg multimedia framework
- FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
- mux, demux, stream, filter and play pretty much anything that humans and
- machines have created. It supports the most obscure ancient formats up to the
- cutting edge.
- .
- This package contains the debug symbols used to produce useful debugging
- back-traces.
-
 Package: ffmpeg-doc
 Section: doc
 Architecture: all
 Multi-Arch: foreign
-Depends:
- libjs-jquery,
- ${misc:Depends}
+Depends: libjs-jquery, ${misc:Depends}
 Description: Documentation of the FFmpeg multimedia framework
  FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
  mux, demux, stream, filter and play pretty much anything that humans and

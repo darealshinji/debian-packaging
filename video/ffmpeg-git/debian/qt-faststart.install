@@ -1,2 +1,2 @@
-tools/qt-faststart					usr/bin
-debian/qt-faststart.1				usr/share/man/man1
+ffmpeg/tools/qt-faststart     usr/bin
+debian/qt-faststart.1         usr/share/man/man1

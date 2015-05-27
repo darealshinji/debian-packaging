@@ -1,4 +1,4 @@
-# Create a stand-alone package with private libraries to prevent any package conflicts.
+ffmpeg: embedded-library usr/bin/ffmpeg-10bit: lib*
 ffmpeg: embedded-library usr/lib/ffmpeg/*: lib*
 
 # These are due to two too long lines in upstream texi files, but shortening these lines wouldn't make much sense.

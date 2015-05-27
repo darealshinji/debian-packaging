@@ -1,36 +1,154 @@
 #!/usr/bin/make -f
 
-include debian/confflags
-
 export V=1
+
+# building FFmpeg's shared libraries with -pie in LDFLAGs will fail
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all,-pie
+
+CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)) -fPIE
+CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) -fPIE
+
+LDFLAGS  := $(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS))
+LDFLAGS  += -Wl,-z,noexecstack -Wl,--as-needed -fPIE
+
+FDK_CONFIG := --enable-static=yes --enable-shared=no --with-pic=yes
+
+X264_CONFIG := \
+	--disable-cli \
+	--enable-static \
+	--enable-pic \
+	--disable-avs \
+	--disable-swscale \
+	--disable-lavf \
+	--disable-ffms \
+	--disable-gpac \
+	--disable-lsmash
+
+X265_CONFIG := \
+	-DLIB_INSTALL_DIR=lib \
+	-DENABLE_CLI=OFF \
+	-DENABLE_PIC=ON \
+	-DENABLE_SHARED=OFF \
+	-DCMAKE_VERBOSE_MAKEFILE=ON
+
+FFMPEG_CONFIG := \
+	--disable-debug \
+	--enable-avresample \
+	--enable-pthreads \
+	--enable-runtime-cpudetect \
+	--enable-avisynth \
+	--enable-libass \
+	--enable-libbluray \
+	--enable-libdc1394 \
+	--enable-libfreetype \
+	--enable-frei0r \
+	--enable-gnutls \
+	--enable-libgsm \
+	--enable-libmp3lame \
+	--enable-openal \
+	--enable-libopus \
+	--enable-libpulse \
+	--enable-librtmp \
+	--enable-libschroedinger \
+	--enable-libspeex \
+	--enable-libtheora \
+	--enable-vaapi \
+	--enable-vdpau \
+	--enable-libvorbis \
+	--enable-libvpx \
+	--enable-libwavpack \
+	--enable-libwebp \
+	--enable-gpl \
+	--enable-postproc \
+	--enable-libcdio \
+	--enable-libxcb \
+	--enable-libx264 \
+	--enable-libx265 \
+	--enable-libxvid \
+	--enable-version3 \
+	--enable-libopencore-amrnb \
+	--enable-libopencore-amrwb \
+	--enable-libvo-aacenc \
+	--enable-libvo-amrwbenc \
+	--enable-nonfree \
+	--enable-libfdk-aac
 
 
 %:
-	dh ${@} --parallel
+	dh ${@} --parallel --with autoreconf
+
+override_dh_autoreconf:
+	dh_autoreconf autoreconf -- -ivf fdk-aac
 
 override_dh_auto_clean:
-	dh_auto_clean || true
+	dh_auto_clean -Dfdk-aac
+	[ ! -f x264/config.mak ] || dh_auto_clean -Dx264
+	[ ! -f ffmpeg/config.mak ] || dh_auto_clean -Dffmpeg
+	rm -rf x265/build ffmpeg-10bit 10bit-libs libs
 
 override_dh_auto_configure:
-	CFLAGS='$(CFLAGS)' CPPFLAGS='$(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' \
-	./configure $(confflags) $(v3_confflags) $(nf_confflags) $(shared_build_confflags)
 
 override_dh_auto_build:
-	dh_auto_build -- apidoc
-	dh_auto_build
-	dh_auto_build -- tools/qt-faststart
+	# fdk-aac
+	cd fdk-aac && ./configure --prefix=$(CURDIR)/libs $(FDK_CONFIG)
+	dh_auto_build -Dfdk-aac
+	$(MAKE) -C fdk-aac install
+	cd fdk-aac && ./configure --prefix=$(CURDIR)/10bit-libs $(FDK_CONFIG)
+	dh_auto_build -Dfdk-aac
+	$(MAKE) -C fdk-aac install
 
-override_dh_auto_test:
+	# x264
+	cd x264 && ./configure --prefix=$(CURDIR)/libs --bit-depth=8 $(X264_CONFIG)
+	$(MAKE) -C x264
+	$(MAKE) -C x264 install
+	dh_auto_clean -Dx264
+	# x264 10bit
+	cd x264 && ./configure --prefix=$(CURDIR)/10bit-libs --bit-depth=10 $(X264_CONFIG)
+	$(MAKE) -C x264
+	$(MAKE) -C x264 install
+
+	# x265
+	mkdir -p x265/build
+	cd x265/build && cmake ../source \
+	-DCMAKE_INSTALL_PREFIX=$(CURDIR)/libs -DHIGH_BIT_DEPTH=OFF $(X265_CONFIG)
+	$(MAKE) -C x265/build
+	$(MAKE) -C x265/build install
+	rm -rf x265/build && mkdir -p x265/build
+	# x265 10bit
+	cd x265/build && cmake ../source \
+	-DCMAKE_INSTALL_PREFIX=$(CURDIR)/10bit-libs -DHIGH_BIT_DEPTH=ON $(X265_CONFIG)
+	$(MAKE) -C x265/build
+	$(MAKE) -C x265/build install
+
+	# ffmpeg 10bit
+	cd ffmpeg && CFLAGS="$(CFLAGS) -I$(CURDIR)/10bit-libs/include" \
+	LDFLAGS="$(LDFLAGS) -pie -L$(CURDIR)/10bit-libs/lib" \
+	PKG_CONFIG_PATH="$(CURDIR)/10bit-libs/lib/pkgconfig" \
+	./configure $(FFMPEG_CONFIG)
+	dh_auto_build -Dffmpeg
+	cp ffmpeg/ffmpeg ffmpeg-10bit
+	dh_auto_clean -Dffmpeg
+	# ffmpeg
+	cd ffmpeg && CFLAGS="$(CFLAGS) -I$(CURDIR)/libs/include" \
+	LDFLAGS="$(LDFLAGS) -L$(CURDIR)/libs/lib" \
+	PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig" \
+	./configure --prefix=/usr --bindir=/usr/lib/ffmpeg --libdir=/usr/lib/ffmpeg \
+	--enable-shared --disable-static $(FFMPEG_CONFIG)
+	dh_auto_build -Dffmpeg
+	dh_auto_build -Dffmpeg -- apidoc
+	dh_auto_build -Dffmpeg -- tools/qt-faststart
+
+override_dh_auto_install:
+	dh_auto_install -Dffmpeg
+
+override_dh_installdocs:
+	dh_installdocs -A ffmpeg/CREDITS ffmpeg/MAINTAINERS
 
 override_dh_installchangelogs:
-	dh_installchangelogs Changelog
+	dh_installchangelogs -A ffmpeg/Changelog
 
 override_dh_makeshlibs:
 
 override_dh_shlibdeps:
 	dh_shlibdeps -Lffmpeg -l/usr/lib/ffmpeg
-
-override_dh_strip:
-	dh_strip -pffmpeg --dbg-package=ffmpeg-dbg
-	dh_strip --remaining-packages
 
