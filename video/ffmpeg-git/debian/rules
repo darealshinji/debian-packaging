@@ -146,7 +146,7 @@ override_dh_auto_build:
 		./configure $(FFMPEG_CONFIG)
 	dh_auto_build -Dffmpeg
 	cp ffmpeg/ffmpeg ffmpeg-10bit
-	#dh_auto_clean -Dffmpeg
+	dh_auto_clean -Dffmpeg
 	# ffmpeg
 	cd ffmpeg && \
 		CFLAGS="$(CFLAGS) -I$(CURDIR)/libs/include" \
