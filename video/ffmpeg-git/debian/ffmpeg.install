@@ -1,7 +1,5 @@
-usr/lib/ffmpeg/ff*
-usr/lib/ffmpeg/*.so.*
+usr/bin/ff*
 usr/share/man/man1
 usr/share/ffmpeg/*.ffpreset
 ffmpeg/doc/ffserver.conf      etc
-debian/scripts/*              usr/bin
 ffmpeg-10bit                  usr/bin

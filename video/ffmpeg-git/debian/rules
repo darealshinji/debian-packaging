@@ -1,17 +1,11 @@
 #!/usr/bin/make -f
 
 export V=1
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
-# building FFmpeg's shared libraries with -pie in LDFLAGs will fail
-export DEB_BUILD_MAINT_OPTIONS=hardening=+all,-pie
-
-CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)) -fPIE
-CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) -fPIE
-
-LDFLAGS  := $(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS))
-LDFLAGS  += -Wl,-z,noexecstack -Wl,--as-needed -fPIE
-
-FDK_CONFIG := --enable-static=yes --enable-shared=no --with-pic=yes
+CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
+LDFLAGS  := $(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS)) -Wl,--as-needed
 
 X264_CONFIG := \
 	--disable-cli \
@@ -32,6 +26,7 @@ X265_CONFIG := \
 	-DCMAKE_VERBOSE_MAKEFILE=ON
 
 FFMPEG_CONFIG := \
+	--prefix=/usr \
 	--disable-debug \
 	--enable-avresample \
 	--enable-pthreads \
@@ -90,50 +85,74 @@ override_dh_auto_configure:
 
 override_dh_auto_build:
 	# fdk-aac
-	cd fdk-aac && ./configure --prefix=$(CURDIR)/libs $(FDK_CONFIG)
+	cd fdk-aac && \
+	./configure \
+		--prefix=$(CURDIR)/libs \
+		--enable-static=yes \
+		--enable-shared=no
 	dh_auto_build -Dfdk-aac
 	$(MAKE) -C fdk-aac install
-	cd fdk-aac && ./configure --prefix=$(CURDIR)/10bit-libs $(FDK_CONFIG)
+	cd fdk-aac && \
+	./configure \
+		--prefix=$(CURDIR)/10bit-libs \
+		--enable-static=yes \
+		--enable-shared=no
 	dh_auto_build -Dfdk-aac
 	$(MAKE) -C fdk-aac install
 
 	# x264
-	cd x264 && ./configure --prefix=$(CURDIR)/libs --bit-depth=8 $(X264_CONFIG)
+	cd x264 && \
+	./configure \
+		--prefix=$(CURDIR)/libs \
+		--bit-depth=8 \
+		$(X264_CONFIG)
 	$(MAKE) -C x264
 	$(MAKE) -C x264 install
 	dh_auto_clean -Dx264
 	# x264 10bit
-	cd x264 && ./configure --prefix=$(CURDIR)/10bit-libs --bit-depth=10 $(X264_CONFIG)
+	cd x264 && \
+	./configure \
+		--prefix=$(CURDIR)/10bit-libs \
+		--bit-depth=10 \
+		$(X264_CONFIG)
 	$(MAKE) -C x264
 	$(MAKE) -C x264 install
 
 	# x265
 	mkdir -p x265/build
-	cd x265/build && cmake ../source \
-	-DCMAKE_INSTALL_PREFIX=$(CURDIR)/libs -DHIGH_BIT_DEPTH=OFF $(X265_CONFIG)
+	cd x265/build && \
+	cmake ../source \
+		-DCMAKE_INSTALL_PREFIX=$(CURDIR)/libs \
+		-DHIGH_BIT_DEPTH=OFF \
+		$(X265_CONFIG)
 	$(MAKE) -C x265/build
 	$(MAKE) -C x265/build install
-	rm -rf x265/build && mkdir -p x265/build
+	rm -rf x265/build
+	mkdir -p x265/build
 	# x265 10bit
-	cd x265/build && cmake ../source \
-	-DCMAKE_INSTALL_PREFIX=$(CURDIR)/10bit-libs -DHIGH_BIT_DEPTH=ON $(X265_CONFIG)
+	cd x265/build && \
+	cmake ../source \
+		-DCMAKE_INSTALL_PREFIX=$(CURDIR)/10bit-libs \
+		-DHIGH_BIT_DEPTH=ON \
+		$(X265_CONFIG)
 	$(MAKE) -C x265/build
 	$(MAKE) -C x265/build install
 
 	# ffmpeg 10bit
-	cd ffmpeg && CFLAGS="$(CFLAGS) -I$(CURDIR)/10bit-libs/include" \
-	LDFLAGS="$(LDFLAGS) -pie -L$(CURDIR)/10bit-libs/lib" \
-	PKG_CONFIG_PATH="$(CURDIR)/10bit-libs/lib/pkgconfig" \
-	./configure $(FFMPEG_CONFIG)
+	cd ffmpeg && \
+		CFLAGS="$(CFLAGS) -I$(CURDIR)/10bit-libs/include" \
+		LDFLAGS="$(LDFLAGS) -L$(CURDIR)/10bit-libs/lib" \
+		PKG_CONFIG_PATH="$(CURDIR)/10bit-libs/lib/pkgconfig" \
+		./configure $(FFMPEG_CONFIG)
 	dh_auto_build -Dffmpeg
 	cp ffmpeg/ffmpeg ffmpeg-10bit
-	dh_auto_clean -Dffmpeg
+	#dh_auto_clean -Dffmpeg
 	# ffmpeg
-	cd ffmpeg && CFLAGS="$(CFLAGS) -I$(CURDIR)/libs/include" \
-	LDFLAGS="$(LDFLAGS) -L$(CURDIR)/libs/lib" \
-	PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig" \
-	./configure --prefix=/usr --bindir=/usr/lib/ffmpeg --libdir=/usr/lib/ffmpeg \
-	--enable-shared --disable-static $(FFMPEG_CONFIG)
+	cd ffmpeg && \
+		CFLAGS="$(CFLAGS) -I$(CURDIR)/libs/include" \
+		LDFLAGS="$(LDFLAGS) -L$(CURDIR)/libs/lib" \
+		PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig" \
+		./configure $(FFMPEG_CONFIG)
 	dh_auto_build -Dffmpeg
 	dh_auto_build -Dffmpeg -- apidoc
 	dh_auto_build -Dffmpeg -- tools/qt-faststart
@@ -146,9 +165,4 @@ override_dh_installdocs:
 
 override_dh_installchangelogs:
 	dh_installchangelogs -A ffmpeg/Changelog
-
-override_dh_makeshlibs:
-
-override_dh_shlibdeps:
-	dh_shlibdeps -Lffmpeg -l/usr/lib/ffmpeg
 
