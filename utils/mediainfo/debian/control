@@ -30,5 +30,5 @@ Description: command-line utility for reading information from audio/video files
   - Subtitles: SRT, SSA, ASS, SAMI...
  MediaInfo supplies technical and tag information about a video or audio file
  .
- This package includes the command line interface.
+ This package provides the command line interface.
 

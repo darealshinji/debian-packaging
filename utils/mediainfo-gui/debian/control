@@ -32,5 +32,6 @@ Description: graphical utility for reading information from audio/video files
   - Audio: OGG, MP3, WAV, RA, AC3, DTS, AAC, M4A, AU, AIFF...
   - Subtitles: SRT, SSA, ASS, SAMI...
  .
- This package contains the graphical user interface.
+ This package provides the graphical user interface. The default view is set
+ to HTML.
 

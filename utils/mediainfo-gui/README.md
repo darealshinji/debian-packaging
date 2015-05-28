@@ -19,7 +19,7 @@ MediaInfo supports the following formats:
 
 MediaInfo supplies technical and tag information about a video or audio file
 
-This package includes the graphical interface.
+This package provides the graphical interface. The default view is set to HTML.
 
 
 **Homepage**: http://www.mediaarea.net

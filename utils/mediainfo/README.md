@@ -19,7 +19,7 @@ MediaInfo supports the following formats:
 
 MediaInfo supplies technical and tag information about a video or audio file
 
-This package includes the command line interface.
+This package provides the command line interface.
 
 
 **Homepage**: http://www.mediaarea.net
