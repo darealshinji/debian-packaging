@@ -26,6 +26,7 @@ download:
 
 	rm -rf $(builddir)/debian/*
 	cp ngdeps-tar-lzma $(builddir)/dependencies/$(ngdepsbin)
+	sed -i 's/-Os//g' $(builddir)/configure.ac
 
 	$(call download,$(builddir)/debian/changelog.in,$(changelogurl))
 	@ latestcommit=$$(git -C $(builddir)/ log -1 --format=%ci | head -c10 | sed -e 's/-//g') ;\

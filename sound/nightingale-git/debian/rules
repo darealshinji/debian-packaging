@@ -1,10 +1,10 @@
 #!/usr/bin/make -f
 
-CXXFLAGS = \
-	$(CPPFLAGS) \
-	$(filter-out -g,$(shell dpkg-buildflags --get CXXFLAGS)) \
-	-fomit-frame-pointer -pipe -fpermissive
-LDFLAGS += -Wl,--as-needed
+export V=1
+export CXXFLAGS = $(filter-out -g,$(shell dpkg-buildflags --get CXXFLAGS)) \
+	-Wno-delete-non-virtual-dtor -Wno-unused-but-set-variable \
+	-I/usr/include/nspr $(shell dpkg-buildflags --get CPPFLAGS)
+export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
 
 ac_add_options = \
 	--with-taglib-source=packaged \
@@ -18,14 +18,12 @@ ac_add_options = \
 %:
 	dh ${@} --parallel
 
+override_dh_auto_clean:
+	dh_auto_clean -- clobber
+
 override_dh_auto_configure:
-
-override_dh_auto_build:
 	cd dependencies && tar xvf linux-*-lintian-release.tar.lzma
-
-	$(foreach OPTION,$(ac_add_options),\
-	  echo 'ac_add_options $(OPTION)' >> nightingale.config ;)
-	dh_auto_build
+	$(foreach OPTION,$(ac_add_options),echo 'ac_add_options $(OPTION)' >> nightingale.config ;)
 
 override_dh_auto_test:
 
@@ -59,9 +57,6 @@ done
 
 override_dh_shlibdeps:
 	dh_shlibdeps -Lnightingale -l/usr/lib/nightingale/xulrunner
-
-override_dh_auto_clean:
-	dh_auto_clean -- clobber
 
 override_dh_clean:
 	dh_clean debian/nightingale.links nightingale.config config.log
