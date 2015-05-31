@@ -1,0 +1,3 @@
+qt/translations/*.qm usr/share/qt4/translations/
+qt/transmission-qt.desktop usr/share/applications/
+usr/bin/transmission-qt

@@ -161,7 +161,7 @@
  libttest_session_init (tr_variant * settings)
 --- a/configure.ac
 +++ b/configure.ac
-@@ -438,6 +438,22 @@
+@@ -438,6 +438,24 @@
  
  dnl ----------------------------------------------------------------------------
  dnl
@@ -175,8 +175,10 @@
 +if test "x$want_iec_units" != "xno" ; then
 +     CXXFLAGS="$CXXFLAGS -DUSE_IEC_UNITS"
 +     CPPFLAGS="$CPPFLAGS -DUSE_IEC_UNITS"
++     IEC_UNITS_QT="USE_IEC_UNITS"
 +     use_iec_units="yes"
 +fi
++AC_SUBST(IEC_UNITS_QT)
 +
 +
 +dnl ----------------------------------------------------------------------------
@@ -184,7 +186,7 @@
  dnl  platform-specific stuff.
  
  AC_CANONICAL_HOST
-@@ -558,6 +574,7 @@
+@@ -558,6 +576,7 @@
  
     Source code location:                              ${srcdir}
     Compiler:                                          ${CXX}
@@ -194,7 +196,7 @@
        * optimized for low-resource systems:           ${enable_lightweight}
 --- /dev/null
 +++ b/utils/units.h
-@@ -0,0 +1,52 @@
+@@ -0,0 +1,53 @@
 +/*
 + * This file Copyright (C) 2012-2014 Mnemosyne LLC
 + *
@@ -207,24 +209,25 @@
 +#ifndef UNITS_H
 +#define UNITS_H
 +
-+#define MEM_K 1024
++#define MEM_K     1024
 +#define MEM_K_STR "KiB"
 +#define MEM_M_STR "MiB"
 +#define MEM_G_STR "GiB"
 +#define MEM_T_STR "TiB"
 +
-+#define DISK_B_STR "B"
++#define DISK_B_STR  "B"
++#define MEM_B_STR   "B"
 +#define SPEED_B_STR "B/s"
 +
 +#ifdef USE_IEC_UNITS
 +
-+#define DISK_K 1024
++#define DISK_K     1024
 +#define DISK_K_STR "kiB"
 +#define DISK_M_STR "MiB"
 +#define DISK_G_STR "GiB"
 +#define DISK_T_STR "TiB"
 +
-+#define SPEED_K 1024
++#define SPEED_K     1024
 +#define SPEED_K_STR "kiB/s"
 +#define SPEED_M_STR "MiB/s"
 +#define SPEED_G_STR "GiB/s"
@@ -232,13 +235,13 @@
 +
 +#else
 +
-+#define DISK_K 1000
++#define DISK_K     1000
 +#define DISK_K_STR "kB"
 +#define DISK_M_STR "MB"
 +#define DISK_G_STR "GB"
 +#define DISK_T_STR "TB"
 +
-+#define SPEED_K 1000
++#define SPEED_K     1000
 +#define SPEED_K_STR "kB/s"
 +#define SPEED_M_STR "MB/s"
 +#define SPEED_G_STR "GB/s"
@@ -247,3 +250,75 @@
 +#endif
 +
 +#endif
+--- a/qt/formatter.cc
++++ b/qt/formatter.cc
+@@ -14,6 +14,7 @@
+ 
+ #include "formatter.h"
+ #include "speed.h"
++#include "../utils/units.h"
+ 
+ /***
+ ****  Constants
+@@ -31,36 +32,36 @@
+ void
+ Formatter :: initUnits ()
+ {
+- speed_K = 1000;
+- unitStrings[SPEED][B]  = tr ( "B/s");
+- unitStrings[SPEED][KB] = tr ("kB/s");
+- unitStrings[SPEED][MB] = tr ("MB/s");
+- unitStrings[SPEED][GB] = tr ("GB/s");
+- unitStrings[SPEED][TB] = tr ("TB/s");
++ speed_K = SPEED_K;
++ unitStrings[SPEED][B]  = tr (SPEED_B_STR);
++ unitStrings[SPEED][KB] = tr (SPEED_K_STR);
++ unitStrings[SPEED][MB] = tr (SPEED_K_STR);
++ unitStrings[SPEED][GB] = tr (SPEED_K_STR);
++ unitStrings[SPEED][TB] = tr (SPEED_K_STR);
+  tr_formatter_speed_init (speed_K,
+                           unitStrings[SPEED][KB].toUtf8().constData(),
+                           unitStrings[SPEED][MB].toUtf8().constData(),
+                           unitStrings[SPEED][GB].toUtf8().constData(),
+                           unitStrings[SPEED][TB].toUtf8().constData());
+ 
+-  size_K = 1000;
+-  unitStrings[SIZE][B]  = tr ( "B");
+-  unitStrings[SIZE][KB] = tr ("kB");
+-  unitStrings[SIZE][MB] = tr ("MB");
+-  unitStrings[SIZE][GB] = tr ("GB");
+-  unitStrings[SIZE][TB] = tr ("TB");
++  size_K = DISK_K;
++  unitStrings[SIZE][B]  = tr (DISK_B_STR);
++  unitStrings[SIZE][KB] = tr (DISK_K_STR);
++  unitStrings[SIZE][MB] = tr (DISK_M_STR);
++  unitStrings[SIZE][GB] = tr (DISK_G_STR);
++  unitStrings[SIZE][TB] = tr (DISK_T_STR);
+   tr_formatter_size_init (size_K,
+                           unitStrings[SIZE][KB].toUtf8().constData(),
+                           unitStrings[SIZE][MB].toUtf8().constData(),
+                           unitStrings[SIZE][GB].toUtf8().constData(),
+                           unitStrings[SIZE][TB].toUtf8().constData());
+ 
+-  mem_K = 1024;
+-  unitStrings[MEM][B]  = tr (  "B");
+-  unitStrings[MEM][KB] = tr ("KiB");
+-  unitStrings[MEM][MB] = tr ("MiB");
+-  unitStrings[MEM][GB] = tr ("GiB");
+-  unitStrings[MEM][TB] = tr ("TiB");
++  mem_K = MEM_K;
++  unitStrings[MEM][B]  = tr (MEM_B_STR);
++  unitStrings[MEM][KB] = tr (MEM_K_STR);
++  unitStrings[MEM][MB] = tr (MEM_M_STR);
++  unitStrings[MEM][GB] = tr (MEM_G_STR);
++  unitStrings[MEM][TB] = tr (MEM_T_STR);
+   tr_formatter_mem_init (mem_K,
+                          unitStrings[MEM][KB].toUtf8().constData(),
+                          unitStrings[MEM][MB].toUtf8().constData(),
+--- a/qt/config.pri.in
++++ b/qt/config.pri.in
+@@ -1,3 +1,4 @@
+ LIBUTP_LIBS = @LIBUTP_LIBS_QT@ 
+ LIBUPNP_LIBS = @LIBUPNP_LIBS_QT@
+ LIBNATPMP_LIBS = @LIBNATPMP_LIBS_QT@
++DEFINES += @IEC_UNITS_QT@

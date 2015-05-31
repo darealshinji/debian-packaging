@@ -1,3 +1,2 @@
 systemd_service_fixes.patch
-fix_freebsd_quota_include.patch
 IEC-size-units.patch

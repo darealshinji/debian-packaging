@@ -1,11 +1,10 @@
 transmission (2.84-0.2ubuntu1+iec) vivid; urgency=low
 
   * Display IEC filesizes
-  * Don't build Qt client because I haven't figured out how to patch the
-    filesizes there
   * Don't build the transmission meta package
+  * Delete fix_freebsd_quota_include.patch
 
- -- Marshall Banana <djcj@gmx.de>  Fri, 01 May 2015 20:12:08 +0200
+ -- Marshall Banana <djcj@gmx.de>  Sun, 31 May 2015 16:55:57 +0200
 
 transmission (2.84-0.2ubuntu1) vivid; urgency=low
 
