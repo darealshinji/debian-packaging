@@ -45,6 +45,10 @@ FFMPEG_CONFFLAGS = \
 		--disable-ffserver \
 		--disable-doc \
 		--disable-lzma \
+		--disable-dxva2 \
+		--disable-vaapi \
+		--disable-vda \
+		--disable-vdpau \
 		--enable-avresample \
 		--enable-gpl \
 		--enable-libx264 \
