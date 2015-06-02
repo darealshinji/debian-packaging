@@ -273,9 +273,9 @@
 + speed_K = SPEED_K;
 + unitStrings[SPEED][B]  = tr (SPEED_B_STR);
 + unitStrings[SPEED][KB] = tr (SPEED_K_STR);
-+ unitStrings[SPEED][MB] = tr (SPEED_K_STR);
-+ unitStrings[SPEED][GB] = tr (SPEED_K_STR);
-+ unitStrings[SPEED][TB] = tr (SPEED_K_STR);
++ unitStrings[SPEED][MB] = tr (SPEED_M_STR);
++ unitStrings[SPEED][GB] = tr (SPEED_G_STR);
++ unitStrings[SPEED][TB] = tr (SPEED_T_STR);
   tr_formatter_speed_init (speed_K,
                            unitStrings[SPEED][KB].toUtf8().constData(),
                            unitStrings[SPEED][MB].toUtf8().constData(),
