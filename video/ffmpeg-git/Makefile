@@ -16,7 +16,7 @@ download:
 	cp -f ../../mk/config.* x264
 	tar xvf ffmpeg.tbz
 
-	# fixes x265 detection (stupid ffmpeg!)
+	# we want to link against static x265 by default
 	sed -i 's/-lx265/-lx265 @PRIVATE_LIBS@/' x265/source/x265.pc.in
 
 	@ VER=$$(grep -v 'version <next>:' ffmpeg/Changelog | grep 'version ' | head -n1 | sed 's/version //; s/://' -) ;\
