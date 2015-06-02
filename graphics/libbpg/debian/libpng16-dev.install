@@ -1,6 +1,4 @@
-png/png.h              usr/include/libpng16
-png/pngconf.h          usr/include/libpng16
-png/pnglibconf.h       usr/include/libpng16
-png/libpng16.pc        usr/lib/pkgconfig
-png/.libs/libpng16.a   usr/lib
-png/libpng16-config    usr/bin
+/usr/include
+/usr/lib/*/pkgconfig/libpng16.pc
+/usr/lib/*/libpng16.a
+/usr/bin/libpng16-config

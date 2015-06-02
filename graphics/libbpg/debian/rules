@@ -22,6 +22,7 @@ override_dh_auto_clean:
 	[ ! -f config.mak ] || dh_auto_clean
 	dh_auto_clean -Dpng
 	dh_auto_clean -Dx265/source
+	rm -rf debian/png-tmp
 
 override_dh_auto_configure:
 	autoreconf -ivf png
@@ -44,6 +45,14 @@ override_dh_auto_test:
 	./bpgdec -o outfile.png html/lena512color.bpg
 	./bpgenc -e jctvc -o out-jctvc.bpg outfile.png
 	./bpgenc -e x265 -o out-x265.bpg outfile.png
+
+override_dh_auto_install:
+	dh_auto_install
+	dh_auto_install -Dpng --destdir=$(CURDIR)/debian/png-tmp
+
+override_dh_install:
+	dh_install -plibpng16-dev --sourcedir=$(CURDIR)/debian/png-tmp
+	dh_install --remaining-packages
 
 override_dh_installdocs:
 	dh_installdocs -A doc/bpg_spec.txt README
