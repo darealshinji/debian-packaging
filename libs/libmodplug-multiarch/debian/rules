@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@ --with autoreconf,autotools-dev
+
+override_dh_installchangelogs:
+	dh_installchangelogs ChangeLog
+

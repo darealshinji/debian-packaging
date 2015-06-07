@@ -1,0 +1,42 @@
+Source: libmodplug
+Section: libs
+Priority: optional
+Maintainer: Zed Pobre <zed@debian.org>
+Build-Depends: debhelper (>= 9), dh-autoreconf, autotools-dev
+Standards-Version: 3.9.6
+Vcs-Git: git://anonscm.debian.org/collab-maint/libmodplug.git -b debian
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/libmodplug.git
+Homepage: http://modplug-xmms.sourceforge.net/
+
+Package: libmodplug1
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Conflicts: xmms-modplug (<< 2.04-1)
+Replaces: xmms-modplug (<< 2.04-1)
+Description: shared libraries for mod music based on ModPlug
+ Module files (MOD music, tracker music) are a family of music file
+ formats originating from the MOD file format on Amiga systems used in
+ late 1980s.
+ .
+ This is a library based on the mod music rendering code from ModPlug,
+ a popular Windows mod player written by Olivier Lapicque, found at
+ http://www.modplug.com.
+
+Package: libmodplug-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends: libmodplug1 (>= ${source:Version}), libmodplug1 (<< ${source:Version}.1~), ${misc:Depends}
+Conflicts: xmms-modplug (<< 2.04-1)
+Replaces: xmms-modplug (<< 2.04-1)
+Description: development files for mod music based on ModPlug
+ Module files (MOD music, tracker music) are a family of music file
+ formats originating from the MOD file format on Amiga systems used in
+ late 1980s.
+ .
+ This package contains the header files and .so symlinks required to
+ compile code against libmodplug, a library based on the mod rendering
+ code from ModPlug, a popular Windows mod player written by Olivier
+ Lapicque, found at http://www.modplug.com.

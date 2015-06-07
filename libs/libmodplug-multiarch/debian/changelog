@@ -1,0 +1,524 @@
+libmodplug (1:0.8.8.5-1) unstable; urgency=medium
+
+  * New upstream version
+  * Add build-arch and build-indep targets to debian/rules
+  * Add debian/watch file
+  * Explicitly depend on Debhelper >= 9
+  * Move Homepage entry from binaries to source
+  * Switch dh_clean -k to dh_prep
+  * Remove rendundant Section entry from libmodplug1 binary control area
+  * Use new canonical anonscm.debian.org Vcs-Git location
+
+ -- Zed Pobre <zed@debian.org>  Mon, 01 Jun 2015 15:12:24 -0400
+
+libmodplug (1:0.8.8.4-5) unstable; urgency=medium
+
+  * Officially log NMU by Eric Dorland
+  * Incorporate multiarch support patch provided by
+    Francois Gouget <fgouget@codeweavers.com>
+  * Change build-dependency from "automake1.11" to just "automake" to
+    allow building under Jessie.
+  * Standards-Version 3.9.6
+  * debian/rules now only cleans files that did not originally exist.
+    This means that repeated builds will probably only work via
+    git-buildpackage.
+
+ -- Zed Pobre <zed@debian.org>  Mon, 01 Jun 2015 14:36:13 -0400
+
+libmodplug (1:0.8.8.4-4.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * debian/control: Switch to automake1.11. (Closes: #724407)
+
+ -- Eric Dorland <eric@debian.org>  Sat, 08 Mar 2014 17:32:36 -0500
+
+libmodplug (1:0.8.8.4-4) unstable; urgency=high
+
+    * Merge all changes from latest upstream Git repository (0.8.8.4 with
+      additional patches), including the following security changes:
+      * CVE-2013-4233: fix integer overflow in load_abc.cpp
+      * CVE-2013-4234: fix heap overflows in abc_MIDI_drum and abc_MIDI_gchord
+      * Closes: #719642
+    * Standards-Version: 3.9.4
+      * Added Vcs-Git and Vcs-Browser entries
+
+ -- Zed Pobre <zed@debian.org>  Mon, 02 Sep 2013 22:31:46 -0400
+
+libmodplug (1:0.8.8.4-3) unstable; urgency=low
+
+  * Fix missing backslash on dpkg-buildflags line (closes: #654817)
+
+ -- Zed Pobre <zed@debian.org>  Mon, 09 Apr 2012 11:44:45 -0400
+
+libmodplug (1:0.8.8.4-2) unstable; urgency=low
+
+  * Enable hardened build flags via dpkg-buildflags (closes: #654817)
+    This requires dpkg-buildflags from the dpkg-dev package to be at least
+    version 1.16.1 (when the --export=configure flag was defined)
+
+ -- Zed Pobre <zed@debian.org>  Fri, 06 Apr 2012 14:55:26 -0400
+
+libmodplug (1:0.8.8.4-1) unstable; urgency=high
+
+  * New upstream version
+    * Fixes buffer overflow in load_abc (CVE-2011-1761, closes: #625966)
+    * Fixes integer overflow in load_wav (SA45131.1)
+    * Fixes stack overflow in load_s3m (SA45131.2)
+    * Fixes off-by-one errors in load_ams and load_dms that can cause
+      stack and memory corruption (SA45131.3-5)
+  * Added a few lines to the package description describing what mod
+    music is.  (closes: #637854)
+  * Allow CC and CXX to contain spaces in debian/rules (closes: #636863)
+  * Standards-Version: 3.9.2
+
+ -- Zed Pobre <zed@debian.org>  Mon, 05 Sep 2011 19:21:47 -0400
+
+libmodplug (1:0.8.8.2-3) unstable; urgency=medium
+
+  * Remove redundant AM_SILENT_RULES macro outside of the ifdef to
+    prevent breaking builds on many platforms (closes: #624403)
+
+ -- Zed Pobre <zed@debian.org>  Thu, 28 Apr 2011 11:16:26 -0400
+
+libmodplug (1:0.8.8.2-2) unstable; urgency=low
+
+  * Removed outdated references to xmms-modplug package
+    (closes: #624300)
+
+ -- Zed Pobre <zed@debian.org>  Wed, 27 Apr 2011 11:10:29 -0400
+
+libmodplug (1:0.8.8.2-1) unstable; urgency=high
+
+  * New upstream version
+    * Fixes buffer overflow in ReadS3M function
+      (SEC Consult SA-20110407-0)
+
+ -- Zed Pobre <zed@debian.org>  Thu, 14 Apr 2011 14:05:13 -0400
+
+libmodplug (1:0.8.8.1-2) unstable; urgency=low
+
+  * libmodplug-dev no longer depends on libstdc++-dev (which should have
+    been unnecessary since the move of -lstdc++ to Libs.private in
+    0.8.4-2).
+
+    Closes: #596463
+  * Standards-Version: 3.9.1 (no changes needed)
+
+ -- Zed Pobre <zed@debian.org>  Sat, 11 Sep 2010 15:02:34 -0400
+
+libmodplug (1:0.8.8.1-1) unstable; urgency=high
+
+  * New upstream version
+    * 0.8.8 introduced an ABI change without updating the major version.
+      This was causing potential problems in clients linked against
+      libmodplug0c2, including silence.
+
+      This version changes the binary package from libmodplug0c2 to
+      libmodplug1, so all related applications will have to be
+      recompiled to use a version greater than is in Lenny (0.8.4).
+
+      Closes: #588465
+  * debian/copyright updated with additional contributors and the license
+    description properly set to public domain
+
+ -- Zed Pobre <zed@debian.org>  Sun, 18 Jul 2010 21:25:08 -0400
+
+libmodplug (1:0.8.8-2) unstable; urgency=low
+
+  * Capitalize "Windows" in long descriptions (closes: #586114)
+
+ -- Zed Pobre <zed@debian.org>  Wed, 16 Jun 2010 11:18:56 -0400
+
+libmodplug (1:0.8.8-1) unstable; urgency=high
+
+  * New upstream version
+    * Fix 32 to 32 bit "downsampling" on 64bit platforms. (Closes: #585699)
+      * The above bug is causing crashes in the Gnome file browser during
+        previews, thus urgency is set to high.
+    * Fix usage of bigendian in include files
+    * Fix PSM files on bigendian computers
+    * Allow configuration of Stereo Seperation and MaxMixChannels
+    * Fix possible problem with misaligned data structure when converting
+      to int32 (load_669)
+  * Added AC_PROG_LIBTOOL to configure.in to allow libtool during rebuild
+  * Added real package alternative dependency for libstdc++-dev
+  * Standards-Version: 3.8.4 (no changes required)
+  * Added misc:Depends to dependencies
+
+ -- Zed Pobre <zed@debian.org>  Sun, 13 Jun 2010 12:54:12 -0400
+
+libmodplug (1:0.8.7-1) unstable; urgency=high
+
+  * New upstream version
+    * Fixes integer overflow in CSoundFile::ReadMed (CVE-2009-1438)
+      (closes: #526657)
+    * Fixes PATinst() Buffer Overflow (SA34927) (closes: #526084)
+    * Fixes 24/32-bit conversion routine
+
+ -- Zed Pobre <zed@debian.org>  Sun, 10 May 2009 15:03:45 -0400
+
+libmodplug (1:0.8.4-5) unstable; urgency=low
+
+  * Fix ftbfs on all architectures (Closes: #524417):
+    * Build-depends: automake1.9
+    * re-order autotools/libtool calls.
+    * Thanks to Fathi Boudra for the patch.
+
+ -- Zed Pobre <zed@debian.org>  Mon, 20 Apr 2009 14:29:36 -0400
+
+libmodplug (1:0.8.4-4) unstable; urgency=low
+
+  * libmodplug-dev depends on libstdc++-dev now (closes: #524259)
+
+ -- Zed Pobre <zed@debian.org>  Wed, 15 Apr 2009 19:34:24 -0400
+
+libmodplug (1:0.8.4-3) unstable; urgency=low
+
+  * Switch automake dependency back to just automake, pull versioned usage
+    of automake/aclocal. (closes: #506020)
+
+ -- Zed Pobre <zed@debian.org>  Mon, 17 Nov 2008 16:24:26 -0500
+
+libmodplug (1:0.8.4-2) unstable; urgency=low
+
+  * Use Libs.private in libmodplug.pc for -lstdc++ -lm to avoid certain
+    build failure cases. (closes: #457278, #360248)
+  * Slight improvement to debian/rules clean
+  * Force automake to v1.9
+  * Add copyright notice to debian/copyright
+  * Thanks to Steve Langasek for the long-standing patch covering the above.
+  * Move homepage information out of Description and into Homepage field.
+  * Add Section: libs to source package in debian/control
+  * Standards-Version: 3.8.0
+
+ -- Zed Pobre <zed@debian.org>  Wed, 24 Sep 2008 13:52:58 -0400
+
+libmodplug (1:0.8.4-1) unstable; urgency=low
+
+  * New upstream version (closes: #458792)
+  * libmodplug0c2 is now in section libs (closes: #478143)
+  * libmodplug-dev is now in section libdevel (closes: #306327)
+  * Removed debian/watch -- there doesn't seem to be any way to get it to
+    separate out the libmodplug version number from the modplug-xmms version
+    number, which is not the same. (closes: #449893)
+
+ -- Zed Pobre <zed@debian.org>  Sat, 26 Jul 2008 18:14:38 -0400
+
+libmodplug (1:0.7-7) unstable; urgency=low
+
+  * Debhelper compatibility level 5, using debian/compat
+  * use both >= and << for source:Version for the -dev package, to
+    properly handle binNMU safety (closes: #437489)
+  * Build-Depends: autotools-dev.  Also sort build-depends packages
+    alphabetically.
+  * Standards-Version 3.7.2.2 (no changes required)
+
+ -- Zed Pobre <zed@debian.org>  Thu, 23 Aug 2007 15:43:14 -0400
+
+libmodplug (1:0.7-6) unstable; urgency=low
+
+  * use source:Version for -dev package in debian/control for binNMU
+    safety -- however, the originally submitted patch also wanted to
+    change the relationship from = to >=, which I am _not_ doing, as it
+    does not appear to be necessary. (closes: #437489)
+  * Acknowledge Automake NMU (closes: #376456)
+  * Acknowledge overflow NMU (closes: #383574)
+
+ -- Zed Pobre <zed@debian.org>  Wed, 22 Aug 2007 21:45:46 -0400
+
+libmodplug (1:0.7-5.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Check for very large sample sizes that could create overflows, enabling an
+    attacker to allocate zero bytes and possibly execute arbitrary codes as
+    the user [CVE-2006-4192]. (Closes: #383574)
+  * Run aclocal-1.9 instead of aclocal, as automake1.9 doesn't provide the
+    latter; fixes FTBFS.
+
+ -- Steinar H. Gunderson <sesse@debian.org>  Mon, 25 Sep 2006 17:36:29 +0200
+
+libmodplug (1:0.7-5.1) unstable; urgency=low
+
+  * NMU.
+  * debian/control: Update automake Build-Depend to automake1.9. (Closes:
+    #376456)
+
+ -- Eric Dorland <eric@debian.org>  Sat, 19 Aug 2006 14:22:53 -0400
+
+libmodplug (1:0.7-5) unstable; urgency=low
+
+  * Official build, acknowledging NMU, and closing out the bugs
+    (closes: #318392, #318994)
+  * Standards-Version: 3.6.2.0 (no changes required)
+
+ -- Zed Pobre <zed@debian.org>  Fri, 19 Aug 2005 18:13:54 -0500
+
+libmodplug (1:0.7-4.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Medium-urgency upload for RC bugfix.
+  * Rebuild against g++-4.0 for the C++ ABI transition, renaming
+    libmodplug0 to libmodplug0c2 and conflicting with libmodplug0.
+
+ -- Steve Langasek <vorlon@debian.org>  Mon, 18 Jul 2005 19:10:24 -0700
+
+libmodplug (1:0.7-4) unstable; urgency=low
+
+  * Use stdafx.h from upstream CVS, correcting issues with 64-bit
+    architectures.
+  * Altered short description to better follow policy
+  * Debhelper cleanups
+
+ -- Zed Pobre <zed@debian.org>  Wed,  2 Feb 2005 17:29:28 -0600
+
+libmodplug (1:0.7-3) unstable; urgency=low
+
+  * Acknowledge NMU. (closes: #267204)
+  * Fixed Makefile.in locations in clean: target.
+  * Changed "copyright" to "license" when describing the license in
+    debian/copyright.
+  * Make the shlibs force a version >= 1:0.7-1 to be safe.
+
+ -- Zed Pobre <zed@debian.org>  Fri, 10 Sep 2004 14:05:53 -0500
+
+libmodplug (1:0.7-2.1) unstable; urgency=high
+
+  * NMU
+  * debian/control: (Closes: #267204)
+    - removed build-dependency on libxmms-dev, libglib2.0-dev;
+    - libmodplug-dev now depends on libmodplug (= ${Source-Version})
+  * debian/rules: enable CFLAGS and CXXFLAGS, set to "-O2", so that the
+    "-g" flag is inhibited. This makes the build slightly faster.
+
+ -- Wolfgang Sourdeau <was@debian.org>  Sat, 28 Aug 2004 23:05:11 -0400
+
+libmodplug (1:0.7-2) unstable; urgency=high
+
+  * Depends: libmodplug0, not Recommends.  This is breaking builds of a
+    number of other packages, so the urgency is high.  (closes: #266794)
+  * Standards-Version: 3.6.1.0 (no changes needed)
+  * Deleted unneeded manpage template.
+
+ -- Zed Pobre <zed@debian.org>  Fri, 20 Aug 2004 10:02:24 -0500
+
+libmodplug (1:0.7-1) unstable; urgency=low
+
+  * libmodplug split off from modplugxmms
+  * Epoch needed, as actual version of libmodplug is lower than the
+    version of modplugxmms from which it was forked.
+
+ -- Zed Pobre <zed@debian.org>  Mon,  2 Aug 2004 14:02:18 -0500
+
+modplugxmms (2.05-1) unstable; urgency=low
+
+  * New upstream version (closes: #262960)
+
+ -- Zed Pobre <zed@debian.org>  Mon,  2 Aug 2004 13:18:12 -0500
+
+modplugxmms (2.04-2) unstable; urgency=low
+
+  * Corrected outdated README.Debian information.
+  * Arch: any (removed hppa exclusion) (closes: #126985 again)
+  * Add Conflicts/Replaces lines to debian/control for libmodplug0 and
+    libmodplug-dev to allow clean upgrade from the NMU. (closes: #199840)
+  * Added libmodplug_la_LIBADD = -lstdc++ to libmodplug/Makefile.am to
+    force the module to be compiled against libstdc++ to correct some
+    problems other programs may have linking against it (thanks to Sam
+    Hocevar <sam@zoy.org> for this).
+
+ -- Zed Pobre <zed@debian.org>  Thu,  3 Jul 2003 10:10:36 -0500
+
+modplugxmms (2.04-1) unstable; urgency=low
+
+  * New upstream version. (closes: #147604)
+    - This is the first version that actually compiles properly with gcc
+      3.x. (closes: #126985)
+    - A new binary is included, modplugplay, that I have for now stowed
+      in the xmms-modplug binary package.  Since this is a self-standing
+      player, the Depends: xmms in xmms-modplug has been demoted to a
+      Recommends.
+  * ** WARNING FOR PEOPLE THAT HAVE USED THE NMU VERSIONS (2.04-0.x) **
+    - If you have created any files that have made use of libmodplug as
+      provided in the NMU, be aware that the files are now in a different
+      binary package (libmodplug0 and libmodplug-dev), and if you created
+      any packages, your dependencies are now wrong.
+    - I have not used any of the NMU code due to an absolute lack of any
+      attempt at coordination with me on the part of the uploader.
+      However, everything that was fixed there should be fixed here as
+      well.
+  * This version corrects endianness issues that were causing it
+    to play nothing but noise on PowerPC (closes: #196941)
+  * Backed out gcc/g++3.2 changes that I had started to make, since
+    upstream seems to have taken care of things fairly well.
+  * Backed out uint32 change in gui/main.cpp (no longer needed)
+  * Edited modplugxmms/Makefile.am to force the libtool relinking to
+    search the ../libtool/.libs directory for libmodplug.so.  This removes
+    the circular build-dependency described below under the changes from
+    2.02-1.
+  * Fixed the Author(s) to Authors in debian/copyright
+  * Changed build-dependency from libglib1.2-dev to libglib2.0-dev
+    -- CHANGES FROM 2.03-1 (not uploaded) --
+  * New upstream version.  This still does not compile.
+  * Recommends: unzip, bzip2.  Note that the xmms-modplug may refuse to
+    play some zip files created in MS Windows until they have been
+    decompressed and recompressed with standard zip.
+  * Removed emacs stuff from changelog
+    -- CHANGES FROM 2.02-1 (not uploaded) --
+  * New upstream version.  New upstream maintainer. (closes: #147604)
+  * Supposedly works fine now under gcc 3.x.  It doesn't (tested against
+    gcc/g++3.2, but it's different things breaking now than before).
+    * modplugxmms/gui/main.cpp modified to use stringstream instead of
+      strstream. -- Nope, backed out.  This would require changes to the
+      headers as well that I will need more time to deal with.  I need
+      someone else to help me do c++ cleanup, please.
+  * modplugxmms/gui/main.cpp: counter i changed from uint32 to unsigned
+    long int.  I'm surprised that it compiles for anyone without this.
+  * libmodplug.so is a separate library built by the program that is
+    required by the libmodplugxmms.so plugin to XMMS.  This library must
+    be in /usr/lib at make install time, or libmodplugxmms will fail to
+    build and install (though the make process does not abort with error,
+    making it easy to miss).  I have split libmodplug out into separate
+    lib and -dev packages.  Thanks to Joanne Hunter
+    <jrhunter@menagerie.tf> for helping me figure this out.
+    (closes: #190993)
+  * The above introduces a circular build dependency, of a sort (and this
+    has been entered into the Build-Depends) -- the package will
+    successfully build without the libmodplug0 and libmodplug-dev packages
+    installed, but it will create an xmms-modplug package with no plugin.
+    If the libmodplug packages are then installed and the package is
+    rebuilt, it will rebuild all packages correctly.  This may be
+    correctable inside the main source, but I don't have time to work on
+    it properly at the moment.  Patches welcome.
+  * Noted the above in README.Debian.
+  * This version correctly handles the .rar file that was crashing it
+    before (closes: #148166)
+  * This version will still crash if fed a .rar file when unrar is not
+    installed.  I am tempted to remove .rar support entirely for this
+    reason, since unrar is an egregiously non-free utility anyway, but I
+    am leaving it in for now.
+
+ -- Zed Pobre <zed@debian.org>  Mon, 23 Jun 2003 20:16:14 -0500
+
+modplugxmms (2.04-0.3) unstable; urgency=low
+
+  * NMU.
+  * debian/control:
+    + Added a build dependency on libglib2.0-dev so that we get the
+      AM_GLIB_GNU_GETTEXT macro.
+  * debian/rules:
+    + Removed the .la file from /usr/lib/xmms.
+  * Linked libmodplug.so with libstdc++.
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Sat, 21 Jun 2003 19:27:10 +0200
+
+modplugxmms (2.04-0.2) unstable; urgency=low
+
+  * NMU (RC bug more than one year old).
+  * New upstream release (Closes: #147604).
+    + Upstream fixed endianness issues for PPC (Closes: #196941).
+    + Upstream fixed gcc3 builds (Closes: #126985).
+  * debian/control:
+    + Set policy to 3.5.10.
+    + Build-depend on debhelper (>=2.0).
+    + Added trailing slashes to URLs.
+    + We recommend unzip and bzip2 because they are needed to uncompress some
+      module formats.
+    + Ditto for unrar, but we merely suggest it since it is non-free.
+  * debian/rules:
+    + Set prefix to /usr everywhere to fix installation issues.
+    + Added a call to dh_makeshlibs.
+    + Removed the override file.
+  * debian/copyright:
+    + Replaced "Author(s)" with "Author".
+  * Removed spurious debian/manpage.sgml.ex file.
+
+ -- Sam Hocevar (Debian packages) <sam+deb@zoy.org>  Sat, 21 Jun 2003 16:30:23 +0200
+
+modplugxmms (2.0-1) unstable; urgency=low
+
+  * New upstream version.  Upstream maintainer is looking for someone to
+    take over development from him, so if you have an interest in this
+    package, send him e-mail at temporal@gauge3d.org.
+  * PowerPC patches have been integrated upstream.
+  * Integrated a few C++ fixes to make a slight dent in the g++-3.0 build
+    failures.  Unfortunately, the code makes extensive use of procbuf.h,
+    which has gone away with g++-3.0, so I'm removing hppa from the arch
+    list for now and downgrading the bug.  Someone will need to port this
+    section to g++-3.0, which is more than I have time or skill for.
+  * Standards-Version: 3.5.6 (no changes needed)
+  * Problem with DESTDIR not being handled correctly fixed upstream;
+    workaround removed in debian/rules.  Unfortunately, libmodplug.so is
+    now being dumped in /usr/lib instead of /usr/lib/xmms/Input, so it
+    has to be moved in the debian/rules install target.
+  * I originally packaged this back in March, but because the resulting so
+    file was not visible to XMMS, it was never uploaded.
+
+ -- Zed Pobre <zed@debian.org>  Tue, 21 May 2002 20:59:28 -0500
+
+modplugxmms (1.5a-2) unstable; urgency=low
+
+  * Added Build-Depends on libtool (closes: #104981)
+  * Applied patches from Adam Goode <adam@evdebs.org> to get it working on
+    PowerPC (closes: #95221).  Thanks Adam!  Sorry for the delay.
+  * Call aclocal, automake, autoconf after libtoolize -f to get a correct
+    configure script.  Add automake and autoconf to Build-Depends.
+  * Do $(MAKE) distclean before removing specific files to make sure we
+    don't delete anything that $(MAKE) distclean needs to succeed.
+
+ -- Zed Pobre <zed@debian.org>  Sun, 15 Jul 2001 12:30:52 -0500
+
+modplugxmms (1.5a-1) unstable; urgency=low
+
+  * New upstream version, includes preamp bugfix patch upstream, *really*
+    supports polyphase and 8-tap sampling now, and other bugfixes.
+  * Added dependency on xmms.
+  * INSTALL file removed.
+
+ -- Zed Pobre <zed@debian.org>  Sun, 25 Feb 2001 19:29:07 -0600
+
+modplugxmms (1.5-2) unstable; urgency=low
+
+  * Upstream bugfix to fix the problem that the preamp volume isn't
+    properly saved in the config file.
+
+ -- Zed Pobre <zed@debian.org>  Sat, 27 Jan 2001 09:50:03 -0600
+
+modplugxmms (1.5-1) unstable; urgency=low
+
+  * New upstream version (support for MT2 and PSM mod formats and
+    polyphase sampling).
+  * Pitch bend problem fixed (closes: #76255)
+
+ -- Zed Pobre <zed@debian.org>  Thu, 25 Jan 2001 22:58:25 -0600
+
+modplugxmms (1.3a-3) unstable; urgency=low
+
+  * Added libtoolize -f to debian/rules to update config.guess,
+    config.sub, ltconfig, and ltmain.sh to fix ARM/HURD breakage (those
+    files are now removed on clean) (closes: #78669)
+  * Moved to DH_COMPAT=2
+  * Moved override.Lintian to /usr/share/lintian/overrides/xmms-modplug
+  * Removed extraneous /usr/bin and /usr/sbin directories
+  * Thanks to Eduard Bloch <blade@debian.org> for the patches for the last
+    two entries.
+  * Added a watch file
+  * Removed a number of example files from the debian/ directory that I
+    figured I probably wouldn't need to keep for this package.
+  * Added a note to README.Debian about having to disable the XMMS default
+    modplayer plugin before this one will work.
+
+ -- Zed Pobre <zed@debian.org>  Mon,  1 Jan 2001 17:24:14 -0600
+
+modplugxmms (1.3a-2) unstable; urgency=low
+
+  * Added xmms-dev and libglib1.2-dev (this is weird, since the configure
+    script uses glib-config to set an include path for glib, but the
+    module doesn't link to it).  Closes: #72576
+
+ -- Zed Pobre <zed@debian.org>  Sat, 30 Sep 2000 11:21:03 -0500
+
+modplugxmms (1.3a-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Zed Pobre <zed@debian.org>  Sat,  2 Sep 2000 20:32:25 -0500
