@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/ia32-libs/DEBIAN/control
+
