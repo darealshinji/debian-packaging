@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+# http://askubuntu.com/a/261736
+rm -f /var/lib/update-notifier/user.d/steam-install-notify
+
+#DEBHELPER#
+
+exit 0
+
