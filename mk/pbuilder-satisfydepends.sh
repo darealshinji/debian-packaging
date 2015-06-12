@@ -211,24 +211,6 @@ versioneddep_to_aptcmd() {
 	echo "$PACKAGE_WITHVERSION"
 }
 
-print_help() {
-    # print out help message
-    cat <<EOF
-pbuilder-satisfydepends -- satisfy dependencies
-Copyright 2002-2007  Junichi Uekawa <dancer@debian.org>
-
---help:        give help
---control:     specify control file (debian/control, *.dsc)
---chroot:      operate inside chroot
---binary-all:  include binary-all
---binary-arch: include binary-arch only
---echo:        echo mode, do nothing. (--force-version required for most operation)
---force-version: skip version check.
---continue-fail: continue even when failed.
-
-EOF
-}
-
 
 
 
@@ -237,10 +219,6 @@ EOF
 #   Copyright (C) 2007 Loïc Minier
 #
 # module to satisfy build dependencies; aptitude flavor
-
-#export PBUILDER_PKGLIBDIR="${PBUILDER_PKGLIBDIR:-$PBUILDER_ROOT/usr/lib/pbuilder}"
-
-#. "$PBUILDER_PKGLIBDIR"/pbuilder-satisfydepends-funcs
 
 
 # filter out dependencies sent on input not for this arch; deps can have
@@ -345,8 +323,6 @@ Copyright 2002-2007  Junichi Uekawa <dancer@debian.org>
 
 EOF
 }
-
-#. "$PBUILDER_PKGLIBDIR"/pbuilder-satisfydepends-checkparams
 
 
 
