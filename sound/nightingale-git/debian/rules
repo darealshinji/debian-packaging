@@ -1,9 +1,13 @@
 #!/usr/bin/make -f
 
 export V=1
-export CXXFLAGS = $(filter-out -g,$(shell dpkg-buildflags --get CXXFLAGS)) \
-	-Wno-delete-non-virtual-dtor -Wno-unused-but-set-variable \
-	-I/usr/include/nspr $(shell dpkg-buildflags --get CPPFLAGS)
+export CXXFLAGS = \
+	$(filter-out -g,$(shell dpkg-buildflags --get CXXFLAGS)) \
+	-fomit-frame-pointer \
+	-Wno-delete-non-virtual-dtor \
+	-Wno-unused-but-set-variable \
+	-I/usr/include/nspr \
+	$(shell dpkg-buildflags --get CPPFLAGS)
 export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
 
 ac_add_options = \
