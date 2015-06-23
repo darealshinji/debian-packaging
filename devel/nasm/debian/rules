@@ -1,5 +1,7 @@
 #! /usr/bin/make -f
 
+export CFLAGS=-fno-strict-aliasing $(shell dpkg-buildflags --get CFLAGS) -Wno-unused-result $(shell dpkg-buildflags --get CPPFLAGS)
+
 
 %:
 	dh $@ --parallel --with autoreconf
