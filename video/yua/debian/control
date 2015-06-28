@@ -28,7 +28,7 @@ Build-Depends:
  libxi6,
  libxrender1,
  zlib1g
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: https://forum.speeddemosarchive.com/post/yua3.html
 
 Package: yua

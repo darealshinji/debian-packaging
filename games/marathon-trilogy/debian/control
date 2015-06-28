@@ -3,7 +3,7 @@ Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), imagemagick
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://marathon.bungie.org/
 Vcs-Svn: svn://svn.code.sf.net/p/marathon/code/trunk
 Vcs-Browser: https://sourceforge.net/p/marathon/code/HEAD/tree/scenarios/

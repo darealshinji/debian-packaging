@@ -5,7 +5,7 @@ Build-Depends: debhelper (>= 9),
                chrpath,
                libqt4-dev,
                libqxt-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Section: utils
 Homepage: https://github.com/amichaelt/BDSup2SubPlusPlus
 Vcs-Git: https://github.com/amichaelt/BDSup2SubPlusPlus.git

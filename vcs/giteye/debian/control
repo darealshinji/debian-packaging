@@ -5,7 +5,7 @@ Maintainer: djcj <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
                imagemagick,
                unzip
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.giteyeapp.com/
 
 Package: giteye

@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), pandoc
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: https://github.com/KittyKatt/screenFetch
 Vcs-Git: https://github.com/KittyKatt/screenFetch.git
 Vcs-Browser: https://github.com/KittyKatt/screenFetch

@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 9),
                imagemagick,
                libwxgtk3.0-dev | libwxgtk2.8-dev,
                zlib1g-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 
 Package: mediainfo-gui
 Architecture: any

@@ -11,7 +11,7 @@ Build-Depends:
  libsdl-image1.2-dev,
  yasm (>= 1.2),
  zlib1g-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://bellard.org/bpg/
 
 Package: libbpg-bin

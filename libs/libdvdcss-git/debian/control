@@ -3,7 +3,7 @@ Priority: extra
 Maintainer: Kubuntu Developers <kubuntu-devel@lists.ubuntu.com>
 XSBC-Original-Maintainer: Jonathan Riddell <jriddell@ubuntu.com>
 Build-Depends: debhelper (>= 9), dh-autoreconf
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Section: libs
 Homepage: http://www.videolan.org/developers/libdvdcss.html
 Vcs-Git: git://git.videolan.org/libdvdcss

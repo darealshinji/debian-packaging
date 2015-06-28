@@ -2,7 +2,7 @@ Source: dcaenc
 Section: sound
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Build-Depends:
  autoconf (>= 2.65),
  debhelper (>= 9),

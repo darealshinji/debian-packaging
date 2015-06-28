@@ -8,7 +8,7 @@ Build-Depends:
    libglib2.0-0,
    libx11-6,
    python (>= 2.7)
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.sublimetext.com/
 
 Package: sublime-text-2

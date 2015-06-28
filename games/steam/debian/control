@@ -3,7 +3,7 @@ Section: non-free/games
 Priority: extra
 Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
 Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.steampowered.com
 
 Package: steam

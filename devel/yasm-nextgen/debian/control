@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 9),
                cmake (>= 2.4),
                help2man,
                python
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Git: https://github.com/yasm/yasm-nextgen.git
 Vcs-Browser: https://github.com/yasm/yasm-nextgen
 Homepage: https://github.com/yasm/yasm-nextgen

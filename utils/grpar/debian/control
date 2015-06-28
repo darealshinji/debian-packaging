@@ -5,7 +5,7 @@ Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
                freebsd-glue,
                libbsd-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://contribs.martymac.org/
 Vcs-Git: https://github.com/martymac/grpar.git
 Vcs-Browser: https://github.com/martymac/grpar

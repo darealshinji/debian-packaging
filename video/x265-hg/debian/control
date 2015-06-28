@@ -7,7 +7,7 @@ Build-Depends:
  cmake (>= 2.8.8),
  python-sphinx,
  yasm (>= 1.2)
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: https://bitbucket.org/multicoreware/x265/wiki/Home
 Vcs-Browser: https://bitbucket.org/multicoreware/x265/src
 

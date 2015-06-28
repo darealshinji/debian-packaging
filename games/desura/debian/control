@@ -36,7 +36,7 @@ Build-Depends:
  libxslt1.1,
  libxt6,
  zlib1g
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.desura.com
 
 Package: desura

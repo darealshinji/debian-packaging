@@ -23,7 +23,7 @@ Build-Depends:
    libxml2-utils,
    pkg-config,
    xsltproc
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://nixos.org/nix/
 Vcs-Git: https://github.com/NixOS/nix.git
 Vcs-Browser: https://github.com/NixOS/nix

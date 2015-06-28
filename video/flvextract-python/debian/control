@@ -2,7 +2,7 @@ Source: flvextract-python
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), dh-python, python
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Section: video
 Homepage: https://github.com/sherpya/FLVExtractCL
 Vcs-Git: https://github.com/sherpya/FLVExtractCL.git

@@ -22,7 +22,7 @@ Build-Depends: debhelper (>= 9),
                libxext6,
                libxrender1,
                libxt6
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: https://www.mozilla.org/thunderbird/
 
 Package: thunderbird

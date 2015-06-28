@@ -24,7 +24,7 @@ Build-Depends:
  libxml2,
  libxrender1,
  zlib1g
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.xnview.com
 
 Package: xnviewmp

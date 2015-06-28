@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 9),
                libx11-dev,
                libxi-dev,
                libxmu-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://glew.sourceforge.net
 Vcs-Git: git://git.code.sf.net/p/glew/code
 Vcs-Browser: https://sourceforge.net/p/glew/code/ci/master/tree/

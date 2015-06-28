@@ -3,7 +3,7 @@ Section: sound
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.nero.com/eng/company/about-nero/nero-aac-codec.php
 
 Package: neroaac

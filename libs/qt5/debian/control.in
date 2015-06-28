@@ -33,7 +33,7 @@ Build-Depends:
  libxrender1,
  libxslt1.1 (>= 1.1.25),
  zlib1g (>= 1:1.2.0)
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.qt.io/download-open-source/
 
 Package: libqt@VERSION@

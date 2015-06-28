@@ -27,7 +27,7 @@ Build-Depends: debhelper (>= 9),
                libxdmcp6,
                libxft2,
                libxpm4
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.adobe.com/
 
 Package: adobe-flashplugin

@@ -10,7 +10,7 @@ Build-Depends:
  bison,
  gettext,
  xmlto
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Svn: svn://svn.debian.org/sam-hocevar/pkg-misc/unstable/yasm
 Vcs-Browser: http://svn.debian.org/wsvn/sam-hocevar/pkg-misc/unstable/yasm/
 Homepage: http://www.tortall.net/projects/yasm/

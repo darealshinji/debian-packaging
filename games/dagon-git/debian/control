@@ -14,7 +14,7 @@ Build-Depends:
   libtheora-dev,
   libsdl2-dev,
   premake4
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.senscape.net/dagon/
 Vcs-Git: https://github.com/Senscape/Dagon.git
 Vcs-Browser: https://github.com/Senscape/Dagon

@@ -17,7 +17,7 @@ Build-Depends:
  pkg-config,
  yasm,
  zlib1g-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Git: git://anonscm.debian.org/pkg-multimedia/x264.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-multimedia/x264.git
 Homepage: http://www.videolan.org/developers/x264.html

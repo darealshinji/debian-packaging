@@ -8,7 +8,7 @@ Build-Depends:
  dh-autoreconf,
  libsdl1.2-dev,
  libsdl-mixer1.2-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.abuse.zoy.org/
 
 Package: abuse

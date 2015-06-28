@@ -2,7 +2,7 @@ Source: ffmpeg-static
 Section: video
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Git: git://source.ffmpeg.org/ffmpeg.git
 Vcs-Browser: http://git.videolan.org/?p=ffmpeg.git;a=tree
 Homepage: http://johnvansickle.com/ffmpeg/

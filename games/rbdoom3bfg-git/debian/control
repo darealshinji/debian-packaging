@@ -15,7 +15,7 @@ Build-Depends: debhelper (>= 9),
                libavutil-dev,
                libswscale-dev,
                zlib1g-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Git: https://github.com/RobertBeckebans/RBDOOM-3-BFG.git
 Vcs-Browser: https://github.com/RobertBeckebans/RBDOOM-3-BFG
 Homepage: https://github.com/RobertBeckebans/RBDOOM-3-BFG

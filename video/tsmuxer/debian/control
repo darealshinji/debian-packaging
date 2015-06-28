@@ -5,7 +5,7 @@ Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
                imagemagick,
                upx-ucl
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://forum.doom9.org/showthread.php?t=168539
 
 Package: tsmuxer

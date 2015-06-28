@@ -12,7 +12,7 @@ Build-Depends:
  pkg-config,
  yasm,
  zlib1g-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Git: https://github.com/kierank/x262.git
 Vcs-Browser: https://github.com/kierank/x262
 Homepage: https://github.com/kierank/x262

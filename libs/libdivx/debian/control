@@ -5,7 +5,7 @@ Build-Depends: debhelper (>= 9),
                dh-autoreconf,
                execstack,
                unzip
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Section: oldlibs
 Homepage: http://labs.divx.com/DivXLinuxCodec
 

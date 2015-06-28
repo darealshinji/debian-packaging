@@ -3,7 +3,7 @@ Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), imagemagick
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 
 Package: doom3-demo
 Architecture: amd64 i386

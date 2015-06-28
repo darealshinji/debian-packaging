@@ -31,7 +31,7 @@ Build-Depends: debhelper (>= 9),
                libxrender1,
                libxss1,
                libxtst6
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: https://www.google.com/chrome/browser/desktop/
 
 Package: google-chrome-stable

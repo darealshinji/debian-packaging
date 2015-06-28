@@ -11,7 +11,7 @@ Build-Depends: debhelper (>= 9),
                libjpeg-dev,
                libsdl2-dev,
                zlib1g-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Git: https://github.com/coelckers/gzdoom.git
 Vcs-Browser: https://github.com/coelckers/gzdoom
 Homepage: http://www.osnanet.de/c.oelckers/gzdoom/

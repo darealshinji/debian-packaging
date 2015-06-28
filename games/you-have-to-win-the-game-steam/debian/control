@@ -5,7 +5,7 @@ Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 9),
  libgl1-mesa-glx | libgl1
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.piratehearts.com/
 #Homepage: http://store.steampowered.com/app/286100/
 

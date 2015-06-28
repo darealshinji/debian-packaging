@@ -21,7 +21,7 @@ Build-Depends:
  libxrender1,
  libxtst6,
  zlib1g
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://animechecker.sourceforge.net/
 
 Package: animechecker

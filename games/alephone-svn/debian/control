@@ -28,7 +28,7 @@ Build-Depends: debhelper (>= 9),
                libzzip-dev,
                zlib1g-dev,
                pkg-config
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://source.bungie.org/
 Vcs-Svn: svn://svn.code.sf.net/p/marathon/code/trunk
 Vcs-Browser: http://sourceforge.net/p/marathon/code/HEAD/tree/trunk/
