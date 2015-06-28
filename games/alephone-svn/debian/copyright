@@ -24,23 +24,23 @@ License: MIT
 
 Files: data/AlephSansMono-Bold.ttf
 Copyright: 2003 Bitstream, Inc.
-License: Bitstream Vera Fonts Copyright
+License: Bitstream-Vera-Fonts-Copyright
 
 Files: data/ProFontAO.ttf
 Copyright: 2004 Tobias Jung <mail@tobias-jung.de>
-License: ProFontAO License
+License: ProFontAO
 
 Files: data/default_theme/resources/DejaVuLGCSansCondensed-Bold*.ttf
 Copyright: 2003 Bitstream, Inc.
            2006 Tavmjong Bah <tavmjong@free.fr>
-License: Bitstream Vera Fonts Copyright and Arev Fonts Copyright
+License: Bitstream-Vera-Fonts-Copyright and Arev-Fonts-Copyright
 Comment:
  Fonts are (c) Bitstream. DejaVu changes are in public domain.
  Glyphs imported from Arev fonts are (c) Tavmjong Bah.
 
 Files: data/default_theme/resources/Squarish_Sans_CT_Medium.ttf
 Copyright: 2011 Tim Larson
-License: SIL OPEN FONT LICENSE Version 1.0
+License: SIL-OPEN-FONT-LICENSE-Version-1.0
 
 Files: debian/*
 Copyright: 2015 djcj <djcj@gmx.de>
@@ -82,7 +82,7 @@ License: MIT
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
-License: Bitstream Vera Fonts Copyright
+License: Bitstream-Vera-Fonts-Copyright
  Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is
  a trademark of Bitstream, Inc.
  .
@@ -127,7 +127,7 @@ License: Bitstream Vera Fonts Copyright
  Inc., respectively. For further information, contact: fonts at gnome dot
  org.
 
-License: Arev Fonts Copyright
+License: Arev-Fonts-Copyright
  Copyright (c) 2006 by Tavmjong Bah. All Rights Reserved.
  .
  Permission is hereby granted, free of charge, to any person obtaining
@@ -173,7 +173,7 @@ License: Arev Fonts Copyright
  from Tavmjong Bah. For further information, contact: tavmjong @ free
  . fr.
 
-License: SIL OPEN FONT LICENSE Version 1.0
+License: SIL-OPEN-FONT-LICENSE-Version-1.0
  SIL OPEN FONT LICENSE
  .
  Version 1.0 - 22 November 2005
@@ -263,7 +263,7 @@ License: SIL OPEN FONT LICENSE Version 1.0
  FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
  OTHER DEALINGS IN THE FONT SOFTWARE.
 
-License: ProFontAO License
+License: ProFontAO
  This distribution is provided in the hope that it will be useful.
  However, it is provided AS IS and carries NO WARRANTY that it will
  do anything good and NO WARRANTY that it will not do anything bad.
