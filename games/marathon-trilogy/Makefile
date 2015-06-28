@@ -2,27 +2,22 @@ include ../../mk/include.mk
 
 deps           = subversion wget
 builddir       = marathon-code
-srcfiles       = *.pdf *.png
+srcfiles       = *.pdf
 distcleanfiles = $(srcfiles) $(builddir)-backup
 
-URL1 = http://archives2.bungie.org/manuals
-URL2 = https://raw.githubusercontent.com/darealshinji/aleph-one/patched/desktop/256x256/apps
+URL = http://archives2.bungie.org/manuals
 
 mpdfsum  = aab85b1e9fbc0eafdf6f8cf533ead1ee506a3e582fce260ac25c6a2f02a739d3
 m2pdfsum = 7a83e14c70a8783b55297f9b19bb3be59cba0c555298c318a122083923f07846
 mipdfsum = d24dc8e955d7c3705e21d050d18ec342e2eae8e38c6fa481ad8bd76b5eab58ca
 
 M = Marathon
-m = marathon
 
 
 download:
-	@ $(call download,$(M)_Manual.pdf,$(URL1)/$(M)_Manual.pdf)
-	@ $(call download,$(M)_2_Manual.pdf,$(URL1)/$(M)_2_Manual.pdf)
-	@ $(call download,$(M)_Infinity_Manual.pdf,$(URL1)/Trilogy_Manual.pdf)
-	@ $(call download,$(m).png,$(URL2)/$(m).png)
-	@ $(call download,$(m)2.png,$(URL2)/$(m)2.png)
-	@ $(call download,$(m)-infinity.png,$(URL2)/$(m)-infinity.png)
+	@ $(call download,$(M)_Manual.pdf,$(URL)/$(M)_Manual.pdf)
+	@ $(call download,$(M)_2_Manual.pdf,$(URL)/$(M)_2_Manual.pdf)
+	@ $(call download,$(M)_Infinity_Manual.pdf,$(URL)/Trilogy_Manual.pdf)
 	@ $(call verifysha256,$(M)_Manual.pdf,$(mpdfsum))
 	@ $(call verifysha256,$(M)_2_Manual.pdf,$(m2pdfsum))
 	@ $(call verifysha256,$(M)_Infinity_Manual.pdf,$(mipdfsum))
