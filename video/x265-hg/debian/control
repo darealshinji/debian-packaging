@@ -6,9 +6,10 @@ Build-Depends:
  debhelper (>= 9),
  cmake (>= 2.8.8),
  python-sphinx,
- yasm (>= 1.2)
+ yasm (>= 1.2) [amd64]
 Standards-Version: 3.9.6
 Homepage: https://bitbucket.org/multicoreware/x265/wiki/Home
+Vcs-Hg: https://bitbucket.org/multicoreware/x265
 Vcs-Browser: https://bitbucket.org/multicoreware/x265/src
 
 Package: x265
@@ -17,8 +18,7 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  ${sphinxdoc:Depends}
-Provides: libx265-doc
-Replaces: libx265-doc
+Suggests: libx265-doc
 Description: H.265/HEVC video stream encoder
  x265 is a commandline encoder for creating H.265/High Efficency Video Coding
  (HEVC) video streams.
@@ -36,15 +36,44 @@ Description: H.265/HEVC video stream encoder
   * scenecut detection
   * parallel encoding on multiple CPUs
 
+Package: x265-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+ x265 (= ${binary:Version})
+Description: H.265/HEVC video stream encoder (debugging symbols)
+ x265 is a commandline encoder for creating H.265/High Efficency Video Coding
+ (HEVC) video streams.
+ .
+ This package provides the debugging symbols for x265.
+
 Package: libx265-dev
 Architecture: any
 Section: libdevel
 Depends: ${misc:Depends}
-Suggests: libx265-doc | x265
+Suggests: libx265-doc
 Description: H.265/HEVC video stream encoder (development files)
  libx265 is an encoding library for creating H.265/High Efficency Video Coding
  (HEVC) video streams.
  .
  This is the development package which contains headers and libraries for
  libx265.
+
+Package: libx265-doc
+Section: doc
+Architecture: all
+Depends:
+ ${misc:Depends},
+ ${sphinxdoc:Depends}
+Provides: x265-doc
+Replaces: x265-doc
+Description: H.265/HEVC video stream encoder (documentation)
+ libx265 is an encoding library for creating H.265/High Efficency Video Coding
+ (HEVC) video streams.
+ .
+ This package contains documentation for the command line encoder and the
+ static library.
 

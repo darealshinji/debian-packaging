@@ -6,5 +6,5 @@ Abstract: This is the official documentation x265,
 Section: Video
 
 Format: HTML
-Index: /usr/share/doc/x265/html/index.html
-Files: /usr/share/doc/x265/html/*.html
+Index: /usr/share/doc/libx265-doc/html/index.html
+Files: /usr/share/doc/libx265-doc/html/*.html
