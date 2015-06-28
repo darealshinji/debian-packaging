@@ -3,7 +3,7 @@ Upstream-Name: Aleph One
 Source: http://source.bungie.org/
 
 Files: *
-       debian/alephone.png
+       debian/*.png
 Copyright: 1995-2015 Bungie Software Corporation
            2000-2005 Christian Bauer, Loren Petrich, Chris Pruett, Rhys Hill,
                      Ben Thompson, Woody Zenfell, Mihai Pararita, Bo Lindbergh et al.
