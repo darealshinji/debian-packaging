@@ -40,7 +40,6 @@ Package: x265-dbg
 Priority: extra
 Section: debug
 Architecture: any
-Multi-Arch: same
 Depends:
  ${misc:Depends},
  x265 (= ${binary:Version})

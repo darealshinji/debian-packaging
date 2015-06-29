@@ -1,4 +1,4 @@
 usr/include/*
-usr/lib/libx265.a
-usr/lib/pkgconfig
-x265-10bit/libx265.a   /usr/lib/x265-10bit/
+usr/lib/*/libx265.a
+usr/lib/*/libx265_main10.a
+usr/lib/*/pkgconfig
