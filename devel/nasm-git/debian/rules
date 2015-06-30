@@ -1,0 +1,22 @@
+#! /usr/bin/make -f
+
+CFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CFLAGS += -fno-strict-aliasing -Wno-unused-result
+CFLAGS += $(shell dpkg-buildflags --get CPPFLAGS)
+export CFLAGS
+
+
+%:
+	dh $@ --parallel --with autoreconf
+
+override_dh_auto_build:
+	dh_auto_build -- all doc
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	dh_auto_install -- INSTALLROOT=$(CURDIR)/debian/nasm install install_rdf
+
+override_dh_compress:
+	dh_compress -X.pdf
+
