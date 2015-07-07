@@ -35,6 +35,7 @@ Description: H.265/HEVC video stream encoder
   * multiple reference frames
   * scenecut detection
   * parallel encoding on multiple CPUs
+  * output bitdept of 8, 10 and 12 bits
 
 Package: x265-dbg
 Priority: extra

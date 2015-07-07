@@ -1,22 +1,20 @@
 #!/usr/bin/make -f
 
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+VERSION := $(shell dpkg-parsechangelog -SVersion | cut -d- -f1)
 
 pass1 = 8bit/x265 --pass 1 --bitrate 10 -o /dev/null --input debian/test.y4m -D
 pass2 = 8bit/x265 --pass 2 --bitrate 10 -o test.hevc --input debian/test.y4m -D
 
-# force cmake to use /usr/local/bin/g++ if present
-confflags = -DCMAKE_CXX_COMPILER=g++
-confflags += -DEXPORT_C_API=OFF
+confflags := -DENABLE_SHARED=OFF
 # enables stack-protector, so we don't need it
 # among the dpkg-buildflags
 confflags += -DENABLE_AGGRESSIVE_CHECKS=ON
-confflags += -DENABLE_SHARED=OFF
 # build static libraries with -fPIC
 confflags += -DENABLE_PIC=ON
 
 # set all flags manually instead of substracting certain flags
-# from dpkg-buildflags output
+# from dpkg-buildflags's output
 CFLAGS   := -g -O3 -Wformat -Werror=format-security
 CXXFLAGS := -g -O3 -Wformat -Werror=format-security
 CPPFLAGS := -D_FORTIFY_SOURCE=2
@@ -30,43 +28,59 @@ LDFLAGS  := -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
 		--builddirectory=8bit
 
 override_dh_auto_clean:
+	dh_auto_clean --builddirectory=12bit
 	dh_auto_clean --builddirectory=10bit
 	dh_auto_clean
-	rm -rf doc/reST/build debian/test.y4m x265_2pass.log* test.hevc
+	rm -rf doc/reST/build debian/test.y4m debian/x265.pc x265_2pass.log* test.hevc
 
 override_dh_auto_configure:
+	dh_auto_configure --builddirectory=12bit -- \
+		$(confflags) \
+		-DHIGH_BIT_DEPTH=ON \
+		-DEXPORT_C_API=OFF \
+		-DENABLE_CLI=OFF \
+		-DMAIN12=ON
 	dh_auto_configure --builddirectory=10bit -- \
 		$(confflags) \
 		-DHIGH_BIT_DEPTH=ON \
+		-DEXPORT_C_API=OFF \
 		-DENABLE_CLI=OFF
+	sed -e 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g; s|@VERSION@|$(VERSION)|g' \
+		debian/x265.pc.in > debian/x265.pc
 
 override_dh_auto_build:
+	dh_auto_build --builddirectory=12bit
 	dh_auto_build --builddirectory=10bit
 	mkdir 8bit
 	cp 10bit/libx265.a 8bit/libx265_main10.a
+	cp 12bit/libx265.a 8bit/libx265_main12.a
 	dh_auto_configure -- \
 		$(confflags) \
 		-DHIGH_BIT_DEPTH=OFF \
 		-DLIB_INSTALL_DIR=lib/$(DEB_HOST_MULTIARCH) \
-		-DEXTRA_LIB=x265_main10 \
-		-DEXTRA_LINK_FLAGS=-L$(CURDIR)/8bit
+		-DEXTRA_LIB="x265_main10.a;x265_main12.a;-ldl" \
+		-DEXTRA_LINK_FLAGS="-L$(CURDIR)/8bit" \
+		-DCMAKE_SHARED_LINKER_FLAGS="-Wl,-Bsymbolic" \
+		-DLINKED_10BIT=ON -DLINKED_12BIT=ON
 	dh_auto_build
 	$(MAKE) -C doc/reST pickle html man
 
 override_dh_auto_install:
 	dh_auto_install
-	cp 8bit/libx265_main10.a debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)
+	cp -f 8bit/libx265_main*.a debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)
+	cp -f debian/x265.pc debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig
 
 override_dh_auto_test:
 	unxz -fk debian/test.y4m.xz
-	$(pass1) 8 && $(pass2) 8
-	rm -f test.hevc x265_2pass.log*
-	$(pass1) 10 && $(pass2) 10
+	$(pass1) 8 && $(pass2) 8 && rm -f test.hevc x265_2pass.log*
+	$(pass1) 10 && $(pass2) 10 && rm -f test.hevc x265_2pass.log*
+	$(pass1) 12 && $(pass2) 12
 
 override_dh_installdocs:
 	dh_installdocs
 	dh_sphinxdoc
 
 override_dh_strip:
+	strip --strip-debug debian/libx265-dev/usr/lib/$(DEB_HOST_MULTIARCH)/libx265*.a
 	dh_strip --dbg-package=x265-dbg
 

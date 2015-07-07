@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib/@DEB_HOST_MULTIARCH@
+includedir=${prefix}/include
+
+Name: x265
+Description: H.265/HEVC video encoder
+Version: @VERSION@
+Libs: -L${libdir} -lx265
+Libs.private: -L${libdir} -lx265_main10 -lx265_main12 -ldl -lstdc++ -lm -lrt
+Cflags: -I${includedir}

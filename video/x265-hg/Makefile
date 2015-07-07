@@ -14,3 +14,7 @@ download:
 	latesttagdistance=`grep 'latesttagdistance:' $(builddir)/.hg_archival.txt|cut -d' ' -f2` ;\
 	VERSION=$${latesttag}+$${latesttagdistance} ; $(changelog-entry)
 	cp -f ../../mk/test.y4m.xz $(builddir)/debian/
+
+	# fix output of --help
+	sed -i 's@depth 8|10   @depth 8|10|12@' $(builddir)/source/x265cli.h
+

@@ -5,7 +5,7 @@ Source: https://bitbucket.org/multicoreware/x265/wiki/Home
 
 
 Files: *
-Copyright: 2013-2014 x265 project
+Copyright: 2013-2015 x265 project
 License: GPL-2.0+
 
 Files: source/common/const-a.asm
@@ -35,7 +35,7 @@ Copyright: 2010-2013 ITU/ISO/IEC
 License: BSD-3-clause
 
 Files: debian/*
-Copyright: 2014 djcj <djcj@gmx.de>
+Copyright: 2014-2015 djcj <djcj@gmx.de>
 License: ISC
 
 
