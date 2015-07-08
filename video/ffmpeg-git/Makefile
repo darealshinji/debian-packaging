@@ -16,11 +16,13 @@ download:
 	cp -f ../../mk/config.* x264
 	tar xvf ffmpeg.tbz
 
-	# we want to link against static x265 by default
-	sed -i 's/-lx265/-lx265 @PRIVATE_LIBS@/' x265/source/x265.pc.in
+	@ latesttag=`grep 'latesttag:' x265/.hg_archival.txt|cut -d' ' -f2` ;\
+	latesttagdistance=`grep 'latesttagdistance:' x265/.hg_archival.txt|cut -d' ' -f2` ;\
+	echo "$${latesttag}+$${latesttagdistance}" > x265/VERSION
+	sed -i 's@depth 8|10   @depth 8|10|12@' x265/source/x265cli.h
 
 	@ VER=$$(grep -v 'version <next>:' ffmpeg/Changelog | grep 'version ' | head -n1 | sed 's/version //; s/://' -) ;\
-	GIT=$$(cd ffmpeg && ./version.sh | sed 's/git-/git/'); VERSION=8:$${VER}+$${GIT} ;\
+	GIT=$$(cd ffmpeg && ./version.sh | sed -e 's/git-//' -e 's/N-//'); VERSION=8:$${VER}+$${GIT} ;\
 	$(changelog-entry)
 
 	rm -rf */.git x265/build

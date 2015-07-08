@@ -1,0 +1,11 @@
+prefix=@PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: x265
+Description: H.265/HEVC video encoder
+Version: @VERSION@
+Libs: -L${libdir} -lx265 -lx265_main10 -lx265_main12 -ldl -lstdc++ -lm -lrt
+Libs.private:
+Cflags: -I${includedir}
