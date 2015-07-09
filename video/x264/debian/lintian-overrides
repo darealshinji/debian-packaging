@@ -1,1 +1,11 @@
-embedded-library
+# Yes, these are FFmpeg libraries
+x264: embedded-library usr/lib/lib*: lib*
+
+# This is normal when building FFmpeg on i386
+x264: shlib-with-non-pic-code usr/lib/lib*
+
+# To make the installation easier I've added all binaries and libraries to the
+# same package.  Furthermore these libraries are only used by the binaries
+# provided with this package and they shouldn't conflict with any other
+# package anyway.
+x264: package-name-doesnt-match-sonames *

@@ -1,17 +1,24 @@
 #!/usr/bin/make -f
 
+DEB_HOST_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+
+CFLAGS  := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+LDFLAGS := -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
+
 export V=1
 
-CFLAGS   = -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
-CXXFLAGS = -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
-LDFLAGS  = $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
+help2man = \
+	LD_LIBRARY_PATH="$${LD_LIBRARY_PATH}:$(CURDIR)/ffmpeg/usr/lib" \
+	help2man -n "fast h264 encoder" -N -s1 -S "Videolan project" -h '--fullhelp'
 
-HELP2MAN = help2man -n "fast h264 encoder" -N -s1 -S "Videolan project" -h '--fullhelp'
-
-x264-configure = \
+x264_configure = \
 	cd x264-source && \
-	PKG_CONFIG_PATH=$(CURDIR)/ffmpeg/usr/lib/pkgconfig \
-	./configure --extra-ldflags="-lpng -ljpeg -lz"
+	CFLAGS="$(CFLAGS) -I$(CURDIR)/ffmpeg/usr/include" \
+	LDFLAGS="$(LDFLAGS) -L$(CURDIR)/ffmpeg/usr/lib" \
+	./configure \
+		--prefix=/usr \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--extra-ldflags="-lswresample -lpng -ljpeg -lz"
 
 
 %:
@@ -21,11 +28,17 @@ override_dh_auto_clean:
 	dh_auto_clean -Dl-smash || true
 	dh_auto_clean -Dffmpeg || true
 	dh_auto_clean -Dx264-source || true
-	rm -f debian/test.y4m test.mp4 x264_2pass.log*
+	rm -rf ffmpeg/usr
+	rm -f debian/test.y4m test.mp4 x264_2pass.log* \
+	x264-source/x264-10bit x264-source/x264-10bit.1 x264-source/x264.1
 
 override_dh_auto_build:
 	cd ffmpeg && ./configure \
 		--prefix=$(CURDIR)/ffmpeg/usr \
+		--libdir=$(CURDIR)/ffmpeg/usr/lib \
+		--disable-static \
+		--enable-shared \
+		--build-suffix=-x264 \
 		--disable-debug \
 		--disable-programs \
 		--disable-doc \
@@ -33,24 +46,28 @@ override_dh_auto_build:
 		--disable-lzma \
 		--enable-gpl \
 		--enable-version3
-	$(MAKE) -C ffmpeg
+	dh_auto_build -Dffmpeg
 	$(MAKE) -C ffmpeg install
+	$(foreach LIB, avcodec avdevice avfilter avformat avutil postproc swresample swscale,\
+	ln -s lib$(LIB)-x264.so $(CURDIR)/ffmpeg/usr/lib/lib$(LIB).so ;)
 
-	$(x264-configure) --bit-depth=10
-	$(MAKE) -C x264-source
+	$(x264_configure) --bit-depth=10
+	dh_auto_build -Dx264-source
 	mv x264-source/x264 x264-source/x264-10bit
-	$(HELP2MAN) x264-source/x264-10bit > x264-source/x264-10bit.1
-	$(MAKE) -C x264-source distclean
+	$(help2man) x264-source/x264-10bit > x264-source/x264-10bit.1
+	dh_auto_clean -Dx264-source
 
-	$(x264-configure)
-	$(MAKE) -C x264-source
-	$(HELP2MAN) x264-source/x264 > x264-source/x264.1
+	$(x264_configure)
+	dh_auto_build -Dx264-source
+	$(help2man) x264-source/x264 > x264-source/x264.1
 
 override_dh_auto_test:
 	unxz -k debian/test.y4m.xz
+	export LD_LIBRARY_PATH="$${LD_LIBRARY_PATH}:$(CURDIR)/ffmpeg/usr/lib"; \
 	x264-source/x264 --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
 	x264-source/x264 --pass 2 --bitrate 10 -o test.mp4 debian/test.y4m
 	rm -f test.mp4 x264_2pass.log*
+	export LD_LIBRARY_PATH="$${LD_LIBRARY_PATH}:$(CURDIR)/ffmpeg/usr/lib"; \
 	x264-source/x264-10bit --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
 	x264-source/x264-10bit --pass 2 --bitrate 10 -o test.mp4 debian/test.y4m
 
