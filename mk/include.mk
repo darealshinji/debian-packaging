@@ -183,7 +183,6 @@ ifneq ($(SUMMARY),0)
 	do                                   \
 	    echo "$$f:" ;                    \
 	    dpkg-deb -I $$f ;                \
-	    lintian $$f ;                    \
 	    echo "" ;                        \
 	done 2>&1 | tee -a $(LOG) ;          \
 	                                     \
