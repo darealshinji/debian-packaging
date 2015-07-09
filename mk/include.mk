@@ -192,6 +192,13 @@ ifneq ($(SUMMARY),0)
 	    echo "$$f:" ;                    \
 	    dpkg-deb -c $$f ;                \
 	    echo "" ;                        \
+	done 2>&1 | tee -a $(LOG) ;          \
+	                                     \
+	for f in $(resultdir)/*.deb ;        \
+	do                                   \
+	    echo "Lintian tags for $$f:" ;   \
+	    lintian $$f ;                    \
+	    echo "" ;                        \
 	done 2>&1 | tee -a $(LOG)
 endif
 
