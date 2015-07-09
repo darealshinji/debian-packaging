@@ -1,4 +1,6 @@
 usr/bin/ff*
+usr/lib/*.so.*
 usr/share/man/man1
+usr/share/man/man3
 usr/share/ffmpeg/*.ffpreset
 ffmpeg/doc/ffserver.conf      etc

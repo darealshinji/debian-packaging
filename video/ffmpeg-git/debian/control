@@ -57,7 +57,6 @@ Build-Depends:
 
 Package: ffmpeg
 Architecture: any
-Multi-Arch: foreign
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: qt-faststart
 Suggests: frei0r-plugins
@@ -79,7 +78,6 @@ Description: Tools for transcoding, streaming and playing of multimedia files
 
 Package: qt-faststart
 Architecture: any
-Multi-Arch: foreign
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Breaks: ffmpeg (<< 7:2)
 Replaces: ffmpeg (<< 7:2)
@@ -98,7 +96,6 @@ Description: Utility to rearrange a Quicktime file
 Package: ffmpeg-doc
 Section: doc
 Architecture: all
-Multi-Arch: foreign
 Depends: libjs-jquery, ${misc:Depends}
 Description: Documentation of the FFmpeg multimedia framework
  FFmpeg is the leading multimedia framework, able to decode, encode, transcode,

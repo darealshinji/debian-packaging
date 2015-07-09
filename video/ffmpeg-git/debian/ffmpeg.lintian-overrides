@@ -1,4 +1,14 @@
-ffmpeg: embedded-library usr/bin/ff*: lib*
+# Yes, these are FFmpeg libraries
+ffmpeg: embedded-library usr/lib/lib*: lib*
+
+# This is normal when building FFmpeg on i386
+ffmpeg: shlib-with-non-pic-code usr/lib/lib*
+
+# To make the installation easier I've added all binaries and libraries to the
+# same package.  Furthermore these libraries are only used by the binaries
+# provided with this package and they shouldn't conflict with any other
+# package anyway.
+ffmpeg: package-name-doesnt-match-sonames *
 
 # These are due to two too long lines in upstream texi files, but shortening these lines wouldn't make much sense.
 # docs/ffmpeg.texi: @item -map_channel [@var{input_file_id}.@var{stream_specifier}.@var{channel_id}|-1][:@var{output_file_id}.@var{stream_specifier}]
@@ -9,4 +19,3 @@ ffmpeg: manpage-has-errors-from-man usr/share/man/man1/ffmpeg-filters.1.gz * can
 ffmpeg: manpage-has-errors-from-man usr/share/man/man1/ffplay-all.1.gz * can't break line
 ffmpeg: manpage-has-errors-from-man usr/share/man/man1/ffprobe-all.1.gz * can't break line
 ffmpeg: manpage-has-errors-from-man usr/share/man/man1/ffserver-all.1.gz * can't break line
-

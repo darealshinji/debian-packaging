@@ -1,16 +1,20 @@
 #!/usr/bin/make -f
 
-DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
-
-export V=1
-export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+DEB_HOST_ARCH     ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 
 CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
 CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
 LDFLAGS  := -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
 
+export V=1
+
 X264_CONFIG := \
+	--prefix=$(CURDIR)/libs \
+	--libdir=$(CURDIR)/libs/lib \
+	--host=$(DEB_HOST_GNU_TYPE) \
 	--disable-cli \
+	--enable-pic \
 	--enable-static \
 	--disable-avs \
 	--disable-swscale \
@@ -23,15 +27,19 @@ X265_CONFIG := \
 	-DENABLE_CLI=OFF \
 	-DENABLE_SHARED=OFF \
 	-DENABLE_AGGRESSIVE_CHECKS=ON \
-	-DENABLE_PIC=OFF
+	-DENABLE_PIC=ON
 
 ifneq ($(DEB_HOST_ARCH),amd64)
+# asm not supported for i386
 X265_CONFIG += -DENABLE_ASSEMBLY=OFF
 endif
 
 FFMPEG_CONFIG := \
 	--prefix=/usr \
+	--libdir=/usr/lib \
 	--disable-debug \
+	--enable-shared \
+	--build-suffix=-ffmpeg-git \
 	--enable-avresample \
 	--enable-pthreads \
 	--enable-runtime-cpudetect \
@@ -88,21 +96,10 @@ override_dh_auto_clean:
 override_dh_auto_configure:
 
 override_dh_auto_build:
-	# fdk-aac
-	cd fdk-aac && \
-	./configure \
-		--prefix=$(CURDIR)/libs \
-		--enable-static=yes \
-		--enable-shared=no
-	dh_auto_build -Dfdk-aac
-	$(MAKE) -C fdk-aac install
-
 	# x264
-	cd x264 && \
-	./configure --prefix=$(CURDIR)/libs $(X264_CONFIG)
+	cd x264 && ./configure $(X264_CONFIG)
 	dh_auto_build -Dx264
 	$(MAKE) -C x264 install
-	dh_auto_clean -Dx264
 
 	# x265 main10 main12
 	dh_auto_configure \
@@ -145,12 +142,22 @@ override_dh_auto_build:
 	sed -e 's|@PREFIX@|$(CURDIR)/libs|g; s|@VERSION@|$(shell cat x265/VERSION)|g' \
 		debian/x265.pc.in > $(CURDIR)/libs/lib/pkgconfig/x265.pc
 
+	# fdk-aac
+	dh_auto_configure -Dfdk-aac -- \
+		--prefix=$(CURDIR)/libs \
+		--libdir=$(CURDIR)/libs/lib \
+		--enable-static=yes \
+		--enable-shared=no \
+		--with-pic=yes
+	dh_auto_build -Dfdk-aac
+	$(MAKE) -C fdk-aac install
+
 	# ffmpeg
 	cd ffmpeg && \
 		CFLAGS="$(CFLAGS) -I$(CURDIR)/libs/include" \
 		LDFLAGS="$(LDFLAGS) -L$(CURDIR)/libs/lib" \
 		PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig" \
-		./configure $(FFMPEG_CONFIG)
+		./configure $(FFMPEG_CONFIG) || (cat $(CURDIR)/ffmpeg/config.log && exit 1)
 	dh_auto_build -Dffmpeg
 	dh_auto_build -Dffmpeg -- apidoc
 	dh_auto_build -Dffmpeg -- tools/qt-faststart
