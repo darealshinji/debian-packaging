@@ -82,7 +82,7 @@ const unsigned int pageSize = 4096;
 static bool debugMode = false;
 static bool debugModeFull = false;
 static bool forceRPath = false;
-static bool goldSupport = false;
+static bool goldSupport = true;
 
 static string fileName;
 
@@ -139,9 +139,7 @@ template < ElfFileParams > class ElfFile {
 	void printInterpreter();
 	void setInterpreter(const string & newInterpreter);
 
-	typedef enum { rpPrint, rpType, rpShrink, rpSet, rpDelete,
-		rpConvert
-	} RPathOp;
+	typedef enum { rpPrint, rpType, rpShrink, rpSet, rpDelete, rpConvert } RPathOp;
 	void modifyRPath(RPathOp op, string newRPath);
 
 	typedef enum { addNeeded, removeNeeded } neededOp;
@@ -163,8 +161,7 @@ template < ElfFileParams > class ElfFile {
 				return true;
 			if (y.p_type == PT_PHDR)
 				return false;
-			return elfFile->rdi(x.p_paddr) <
-			    elfFile->rdi(y.p_paddr);
+			return elfFile->rdi(x.p_paddr) < elfFile->rdi(y.p_paddr);
 	}};
 
 	friend struct CompPhdr;
@@ -174,8 +171,7 @@ template < ElfFileParams > class ElfFile {
 	struct CompShdr {
 		ElfFile *elfFile;
 		bool operator () (const Elf_Shdr & x, const Elf_Shdr & y) {
-			return elfFile->rdi(x.sh_offset) <
-			    elfFile->rdi(y.sh_offset);
+			return elfFile->rdi(x.sh_offset) < elfFile->rdi(y.sh_offset);
 	}};
 
 	friend struct CompShdr;
