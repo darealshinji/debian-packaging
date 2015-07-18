@@ -7,5 +7,6 @@ cleanfiles = debian/changelog
 download:
 	git clone --depth 1 "git://git.videolan.org/libdvdcss"
 	@ VERSION=`./changelog.sh`; $(changelog-entry)
-	rm -rf libdvdcss/.git
+	rm -rf $(builddir)/.git
+	touch $(builddir)/ChangeLog
 
