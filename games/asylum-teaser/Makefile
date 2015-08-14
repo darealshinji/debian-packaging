@@ -1,14 +1,21 @@
 include ../../mk/include.mk
 
-deps           = wget unzip
+deps           = git wget unzip
 cleanfiles     = *.png
-distcleanfiles = Asylum-Teaser-master
-srcfiles       = Asylum-Teaser-master files *.png
+dir            = Asylum-Teaser
+bin            = Asylum_Teaser_Unix.zip
+cleanfiles     = $(dir) *.png
+distcleanfiles = $(bin)
+srcfiles       = $(dir) files *.png
 
 download:
-	test -d Asylum-Teaser-master && true || ( \
-	wget "https://github.com/Senscape/Asylum-Teaser/archive/master.tar.gz" ;\
-	tar xvf master.tar.gz ;\
-	wget -O asylum-teaser.png "http://s14.directupload.net/images/141112/cbqmarg3.png" ;\
-	cd Asylum-Teaser-master && ./download-game-content.sh )
+	@ $(call download,$(bin),http://www.facethehorror.com/files/$(bin))
+
+	if [ ! -d $(dir) ]; then \
+  git clone --depth 1 "https://github.com/Senscape/Asylum-Teaser.git" ;\
+  wget -O asylum-teaser.png "http://s14.directupload.net/images/141112/cbqmarg3.png" ;\
+fi
+
+	ln -sf ../$(bin) $(dir)/$(bin)
+	cd Asylum-Teaser && ./download-game-content.sh
 

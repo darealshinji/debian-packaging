@@ -1,13 +1,13 @@
 #!/bin/sh -e
 
-GAMEDIR=/usr/share/games/serena
-CONFDIR="$HOME/.config/serena"
+gamedir=/usr/share/games/serena
+confdir="$HOME/.config/serena"
 
-if [ ! -d "$CONFDIR" ] ; then
-    mkdir -p "$CONFDIR"
-    cp $GAMEDIR/config.lua "$CONFDIR"
-    ln -s $GAMEDIR/resources "$CONFDIR/resources"
-    ln -s $GAMEDIR/scripts "$CONFDIR/scripts"
+if [ ! -d "$confdir" ] ; then
+    mkdir -p "$confdir"
+    cp $gamedir/config.lua "$confdir"
+    ln -s $gamedir/resources "$confdir/resources"
+    ln -s $gamedir/scripts "$confdir/scripts"
 fi
 
-cd "$CONFDIR" && dagon "$@"
+cd "$confdir" && dagon "$@"

@@ -7,5 +7,3 @@
 override_dh_auto_build:
 	./make-icons.sh asylum-teaser.png
 
-override_dh_builddeb:
-	dh_builddeb -- -z1

@@ -1,6 +1,6 @@
 files/asylum-teaser              /usr/games
 files/asylum-teaser.desktop      /usr/share/applications
 files/config.lua                 /usr/share/games/asylum-teaser
-Asylum-Teaser-master/resources   /usr/share/games/asylum-teaser
-Asylum-Teaser-master/scripts     /usr/share/games/asylum-teaser
+Asylum-Teaser/resources          /usr/share/games/asylum-teaser
+Asylum-Teaser/scripts            /usr/share/games/asylum-teaser
 converted_icons/*                /usr/share
