@@ -1,0 +1,11 @@
+--- a/libpurple/protocols/irc/irc.h
++++ b/libpurple/protocols/irc/irc.h
+@@ -34,7 +34,7 @@
+ #include "roomlist.h"
+ #include "sslconn.h"
+ 
+-#define IRC_DEFAULT_SERVER "irc.freenode.net"
++#define IRC_DEFAULT_SERVER "irc.ubuntu.com"
+ #define IRC_DEFAULT_PORT 6667
+ #define IRC_DEFAULT_SSL_PORT 994
+ 

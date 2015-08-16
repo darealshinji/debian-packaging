@@ -1,1 +1,14 @@
-pidgin-remove-icq-error-message.patch
+04_let_crasher_for_apport.patch
+05_default_to_irc_ubuntu_com.patch
+10_docklet_default_off.patch
+11_buddy_list_really_show.patch
+13_sounds_and_timers.patch
+60_1024x600_gtkpounce.c.patch
+60_1024x600_gtkprefs.c.patch
+xmessagingmenu.patch
+pounce-webview.patch
+hg-remove-SIGCHLD-handler.patch
+dtmf-pad.patch
+gstreamer1.patch
+python3.patch
+zzz-pidgin-remove-icq-error-message.patch

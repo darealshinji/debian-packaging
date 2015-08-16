@@ -1,0 +1,21 @@
+=== modified file 'pidgin/gtksound.c'
+--- a/pidgin/gtksound.c
++++ b/pidgin/gtksound.c
+@@ -228,7 +228,7 @@
+ }
+ 
+ /*
+- * We mute sounds for the 10 seconds after you log in so that
++ * We mute sounds for the 15 seconds after you log in so that
+  * you don't get flooded with sounds when the blist shows all
+  * your buddies logging in.
+  */
+@@ -238,7 +238,7 @@
+ 	if (mute_login_sounds_timeout != 0)
+ 		purple_timeout_remove(mute_login_sounds_timeout);
+ 	mute_login_sounds = TRUE;
+-	mute_login_sounds_timeout = purple_timeout_add_seconds(10, unmute_login_sounds_cb, NULL);
++	mute_login_sounds_timeout = purple_timeout_add_seconds(15, unmute_login_sounds_cb, NULL);
+ }
+ 
+ const char *

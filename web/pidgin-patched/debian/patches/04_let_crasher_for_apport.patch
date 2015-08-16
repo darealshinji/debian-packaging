@@ -1,0 +1,10 @@
+--- a/pidgin/gtkmain.c
++++ b/pidgin/gtkmain.c
+@@ -84,7 +84,6 @@
+  * Each list terminated with -1
+  */
+ static const int catch_sig_list[] = {
+-	SIGSEGV,
+ 	SIGINT,
+ 	SIGTERM,
+ 	SIGQUIT,

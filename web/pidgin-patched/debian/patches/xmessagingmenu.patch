@@ -1,0 +1,20 @@
+---
+ pidgin.desktop.in |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/pidgin/data/pidgin.desktop.in
++++ b/pidgin/data/pidgin.desktop.in
+@@ -8,4 +8,5 @@
+ Terminal=false
+ Type=Application
+ Categories=Network;InstantMessaging;
++X-MessagingMenu-UsesChatSection=true
+ 
+--- a/pidgin/data/pidgin.desktop.in.in
++++ b/pidgin/data/pidgin.desktop.in.in
+@@ -9,3 +9,5 @@
+ Type=Application
+ Categories=Network;InstantMessaging;
+ @USES_MM_CHAT_SECTION@
++X-MessagingMenu-UsesChatSection=true
++
