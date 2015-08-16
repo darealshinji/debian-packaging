@@ -1,5 +1,7 @@
 include ../../mk/include.mk
 
+ARCH = i386
+
 deps          = wget
 bin           = steam-deb
 cleanfiles    = $(bin)
