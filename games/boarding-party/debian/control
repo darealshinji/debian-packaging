@@ -16,7 +16,7 @@ Homepage: http://7dfps.com/?action=games&id=228
 
 Package: boarding-party
 Architecture: i386 amd64
-Depends: default-jre-headless,
+Depends: default-jre,
          ${misc:Depends},
          ${shlibs:Depends},
          libopenal1
