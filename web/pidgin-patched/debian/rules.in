@@ -2,6 +2,7 @@
 
 export DEB_BUILD_HARDENING=1
 
+include /usr/share/cdbs/1/rules/autoreconf.mk
 include /usr/share/cdbs/1/class/autotools.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/gnome.mk
@@ -10,19 +11,15 @@ include /usr/share/cdbs/1/rules/utils.mk
 # Build into a separate directory
 DEB_BUILDDIR = $(DEB_SRCDIR)/build
 
+CFLAGS  += $(CPPFLAGS)
 LDFLAGS += -Wl,--as-needed
 DEB_CONFIGURE_EXTRA_FLAGS = --disable-gevolution \
 	    --enable-cap --with-system-ssl-certs=/etc/ssl/certs \
 	    --enable-perl --with-zephyr=/usr --enable-dbus --enable-gnutls=no \
-	    --enable-nss=yes --enable-cyrus-sasl --enable-vv \
+	    --enable-nss=yes --enable-cyrus-sasl --enable-vv --enable-farsight \
 	    --enable-tcl --enable-tk \
+	    --enable-nm @UNITY@ \
 	    --with-dynamic-prpls=bonjour,gg,irc,jabber,msn,myspace,mxit,novell,oscar,sametime,simple,yahoo,zephyr # disable silc
-ifeq ($(DEB_BUILD_ARCH_OS),linux)
-  DEB_CONFIGURE_EXTRA_FLAGS += --enable-nm
-else
-  DEB_CONFIGURE_EXTRA_FLAGS += --disable-nm
-endif
-
 
 DEB_INSTALL_DOCS_ALL := -XAUTHORS -XNEWS -XREADME
 
@@ -59,6 +56,10 @@ common-install-impl::
 		-e '/@OSCAR_AUTHORS@/r libpurple/protocols/oscar/AUTHORS' \
 		-e '/@OSCAR_AUTHORS@/d' \
 	debian/copyright.in > debian/copyright
+	# Translation domain to desktop file
+	echo 'X-Ubuntu-Gettext-Domain=pidgin' >> debian/tmp/usr/share/applications/pidgin.desktop
+	# Call intltool-update to build the .pot
+	cd $(DEB_SRCDIR)/po; intltool-update -p
 
 cleanbuilddir/pidgin::
 	rm -rf $(DEB_SRCDIR)/build
@@ -67,8 +68,14 @@ build/pidgin-dev::
 	pod2man debian/dh_pidgin > debian/dh_pidgin.1
 	cd build; make docs
 
+binary-install/pidgin::
+	# Add the launcher for pidgin
+	mkdir -p debian/pidgin/usr/share/indicators/messages/applications
+	echo /usr/share/applications/pidgin.desktop > debian/pidgin/usr/share/indicators/messages/applications/pidgin
+
 binary-install/pidgin-dev::
 	dh_installdocs -ppidgin-dev debian/README.Debian.dev
 
 cleanbuilddir/pidgin-dev::
 	rm -f debian/dh_pidgin.1
+

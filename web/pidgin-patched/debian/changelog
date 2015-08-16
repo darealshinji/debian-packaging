@@ -1,8 +1,9 @@
 pidgin (1:2.10.11-1icq1) unstable; urgency=low
 
   * Disable annoying ICQ error message
+  * Apply patches from the Ubuntu package
 
- -- Marshall Banana <djcj@gmx.de>  Fri, 01 May 2015 20:45:10 +0200
+ -- Marshall Banana <djcj@gmx.de>  Sun, 16 Aug 2015 20:24:57 +0200
 
 pidgin (2.10.11-1) unstable; urgency=low
 

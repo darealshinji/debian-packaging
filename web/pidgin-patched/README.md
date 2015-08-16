@@ -12,3 +12,4 @@ Homepage: http://www.pidgin.im/
 
 PS: Epoch version number 1 is used because of Ubuntu.
 
+PPS: If you're running Ubuntu and Unity integration is not enabled, try to run `make` with `UBUNTU=1`
