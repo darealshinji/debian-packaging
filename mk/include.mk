@@ -68,7 +68,7 @@ allcleanfiles = .pc                  \
                 $(builddir)          \
                 $(cleanfiles)
 
-alldeps  = debhelper fakeroot quilt aptitude lintian $(deps)
+alldeps  = build-essential debhelper fakeroot quilt aptitude lintian $(deps)
 ifeq ($(PBUILDER),1)
 alldeps += pbuilder
 endif
