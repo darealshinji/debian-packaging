@@ -1,0 +1,5 @@
+wxHexEditor/wxHexEditor   /usr/lib/wxHexEditor
+wxHexEditor/locale        /usr/lib/wxHexEditor
+files/wxHexEditor         /usr/bin
+files/*.desktop           /usr/share/applications
+files/*.png               /usr/share/pixmaps

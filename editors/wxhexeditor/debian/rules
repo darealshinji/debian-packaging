@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -rf wxHexEditor
+
+override_dh_auto_build:
+	tar xvf wxHexEditor.tbz
+	upx-ucl -d wxHexEditor/wxHexEditor
+
+override_dh_installchangelogs:
+	dh_installchangelogs wxHexEditor/Change.log
+

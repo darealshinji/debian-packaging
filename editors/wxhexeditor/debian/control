@@ -1,0 +1,16 @@
+Source: wxhexeditor
+Section: editors
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+XSBC-Original-Maintainer: Andrew Shadura <andrewsh@debian.org>
+Build-Depends: debhelper (>= 9), upx-ucl, libgtk2.0-0, libgomp1, libxxf86vm1
+Standards-Version: 3.9.6
+Homepage: http://sourceforge.net/projects/wxhexeditor
+
+Package: wxhexeditor
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: hexadecimal editor for massive files
+ wxHexEditor is a hexadecimal file editor suitable
+ for editing very big files. Supported file size
+ is up to 2^64 bytes.
