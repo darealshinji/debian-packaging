@@ -1,7 +1,6 @@
 include ../../mk/include.mk
 
 deps     = git
-srcfiles = files/*
 builddir = BDSup2SubPlusPlus
 
 download:
