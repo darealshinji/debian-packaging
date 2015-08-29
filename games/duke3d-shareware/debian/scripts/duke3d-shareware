@@ -2,9 +2,11 @@
 
 config="$HOME/.config/duke3d-shareware"
 
-test ! -d "$config" && mkdir -p "$config" || true
-test ! -e "$config/DUKE3D.GRP" && \
-  ln -s "/usr/share/games/duke3d-shareware/DUKE3D.GRP" "$config/DUKE3D.GRP" || true
+mkdir -p "$config"
+cd "$config"
 
-cd "$config" && chocolate-duke3d "$@"
+ln -fs "/usr/share/games/duke3d-shareware/DUKE3D.GRP"
+ln -fs "/usr/lib/chocolate-duke3d"
+
+./chocolate-duke3d "$@"
 
