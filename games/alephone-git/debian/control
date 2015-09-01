@@ -26,9 +26,9 @@ Build-Depends: debhelper (>= 9),
                zlib1g-dev,
                pkg-config
 Standards-Version: 3.9.6
-Homepage: http://source.bungie.org/
-Vcs-Svn: svn://svn.code.sf.net/p/marathon/code/trunk
-Vcs-Browser: http://sourceforge.net/p/marathon/code/HEAD/tree/trunk/
+Homepage: http://aleph-one-marathon.github.io/
+Vcs-Git: https://github.com/Aleph-One-Marathon/alephone
+Vcs-Browser: https://github.com/Aleph-One-Marathon/alephone
 
 Package: alephone
 Architecture: any

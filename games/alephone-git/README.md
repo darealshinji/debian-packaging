@@ -6,4 +6,4 @@ Available for Mac OS X, Windows, and Linux, Aleph One supports [Marathon](../mar
 [Marathon 2](../marathon-trilogy) and [Marathon Infinity](../marathon-trilogy) natively. Many third party scenarios and net
 maps are also available.
 
-Homepage: http://source.bungie.org/
+Homepage: http://aleph-one-marathon.github.io/
