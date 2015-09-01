@@ -1,6 +1,6 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Marathon
-Source: https://sourceforge.net/p/marathon/code/HEAD/tree/scenarios/
+Source: https://github.com/Aleph-One-Marathon
 
 Files: *
        debian/*.png

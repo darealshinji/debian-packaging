@@ -1,3 +1,3 @@
 debian/scripts/marathon-infinity      /usr/games
 debian/marathon-infinity.desktop      /usr/share/applications
-Marathon-Infinity/trunk/*             /usr/share/games/AlephOne/marathon-infinity
+marathon-infinity                     /usr/share/games/AlephOne
