@@ -8,8 +8,8 @@ Build-Depends: debhelper (>= 9),
                pkg-config
 Standards-Version: 3.9.6
 Homepage: http://juanmabcblog.blogspot.com/2013/07/chocolate-duke3d.html
-Vcs-Git: https://github.com/darealshinji/chocolate_duke3D.git
-Vcs-Browser: https://github.com/darealshinji/chocolate_duke3D
+Vcs-Git: https://github.com/fabiensanglard/chocolate_duke3D
+Vcs-Browser: https://github.com/fabiensanglard/chocolate_duke3D
 
 Package: chocolate-duke3d
 Architecture: any
