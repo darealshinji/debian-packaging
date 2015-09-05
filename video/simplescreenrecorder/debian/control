@@ -5,7 +5,6 @@ Maintainer: Maarten Baert (v2) <maarten-baert@hotmail.com>
 Build-Depends:
  debhelper (>= 9),
  pkg-config,
- help2man,
  libgl1-mesa-dev,
  libglu1-mesa-dev,
  qt4-qmake,

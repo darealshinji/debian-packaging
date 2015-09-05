@@ -1,8 +1,5 @@
 #!/usr/bin/make -f
 
-help2man = help2man -N --no-discard-stderr --version-string='0.3.3' -n
-bin = debian/simplescreenrecorder/usr/bin
-
 CFLAGS   += -Wall
 CXXFLAGS += -Wall
 LDFLAGS  += -Wl,--as-needed
@@ -19,12 +16,4 @@ override_dh_installdocs:
 
 override_dh_installchangelogs:
 	dh_installchangelogs -A CHANGELOG.md
-
-override_dh_installman:
-	$(help2man) 'feature-rich screen recorder that supports X11 and OpenGL' $(bin)/simplescreenrecorder > simplescreenrecorder.1
-	$(help2man) 'inject the GLInject library into a given command' $(bin)/ssr-glinject > ssr-glinject.1
-	dh_installman simplescreenrecorder.1 ssr-glinject.1
-
-override_dh_clean:
-	dh_clean simplescreenrecorder.1 ssr-glinject.1
 
