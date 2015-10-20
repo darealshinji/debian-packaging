@@ -1,0 +1,100 @@
+#!/bin/bash
+#   pbuilder -- personal Debian package builder
+#   Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+#
+# module to satisfy build dependencies; parse command line parameters
+
+
+DEBIAN_CONTROL=debian/control
+CHROOT=""
+CHROOTEXEC=""
+BINARY_ARCH="no"
+FORCEVERSION=""
+CONTINUE_FAIL="no"
+CHROOTEXEC_AFTER_INTERNAL_CHROOTEXEC=no
+ALLOWUNTRUSTED=no
+
+while [ -n "$1" ]; do
+    case "$1" in
+	--control|-c)
+	    DEBIAN_CONTROL="$2"
+	    shift; shift
+	    ;;
+
+	# --chroot option and --internal-chrootexec options and --echo options somewhat conflict with each other.
+
+	--chroot)
+	    CHROOT="$2"
+	    CHROOTEXEC="chroot $2 "
+	    if [ ${CHROOTEXEC_AFTER_INTERNAL_CHROOTEXEC} = maybe ]; then
+		echo '--chroot specified after --internal-chrootexec' >&2
+		exit 1
+	    fi
+	    shift; shift
+	    ;;
+	--internal-chrootexec)
+	    CHROOTEXEC="$2"
+	    CHROOTEXEC_AFTER_INTERNAL_CHROOTEXEC=maybe
+	    shift; shift 
+	    ;;
+	--echo)
+	    CHROOTEXEC="echo $CHROOTEXEC"
+	    CHROOTEXEC_AFTER_INTERNAL_CHROOTEXEC=maybe
+	    shift
+	    ;;
+
+	--binary-all)
+	    BINARY_ARCH="no"
+	    shift
+	    ;;
+	--binary-arch)
+	    BINARY_ARCH="yes"
+	    shift
+	    ;;
+	--continue-fail)
+	    CONTINUE_FAIL="yes"
+	    shift
+	    ;;
+	--force-version)
+	    FORCEVERSION="yes"
+	    shift;
+	    ;;
+	--check-key)
+	    ALLOWUNTRUSTED=no
+	    shift;
+	    ;;
+	--allow-untrusted)
+	    ALLOWUNTRUSTED=yes
+	    shift;
+	    ;;
+	--help|-h|*)
+	    print_help
+	    exit 1
+	    ;;
+    esac
+done
+
+if [ $ALLOWUNTRUSTED = yes ]; then
+	# Also duplicated in pbuilder-checkparams!
+	# apt flag to accept untrusted packages
+	APTGETOPT[${#APTGETOPT[@]}]='--force-yes'
+	# aptitude flag to accept untrusted packages
+	APTITUDEOPT[${#APTITUDEOPT[@]}]='-o'
+	APTITUDEOPT[${#APTITUDEOPT[@]}]='Aptitude::CmdLine::Ignore-Trust-Violations=true'
+fi
+
+checkbuilddep_internal

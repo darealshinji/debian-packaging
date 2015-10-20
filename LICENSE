@@ -76,7 +76,7 @@ of the GNU General Public License, version 3 ("GPLv3").
 
 
 
-mk/pbuilder-satisfydepends.sh:
+mk/pbuilder-satisfydepends.sh, mk/pbuilder-satisfydepends-orig/*:
 
 Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
 Copyright (C) 2007 Loïc Minier

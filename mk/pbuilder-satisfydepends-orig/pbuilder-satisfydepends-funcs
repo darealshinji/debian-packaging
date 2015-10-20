@@ -1,0 +1,220 @@
+#!/bin/bash
+#   pbuilder -- personal Debian package builder
+#   Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
+#   Copyright (C) 2007 Loïc Minier
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+#
+# module to satisfy build dependencies; common functions
+
+
+package_versions() {
+	local PACKAGE="$1"
+	LC_ALL=C $CHROOTEXEC /usr/bin/apt-cache show "$PACKAGE" | sed -n 's/^Version: //p'
+}
+
+candidate_version() {
+	local PACKAGE="$1"
+	LC_ALL=C $CHROOTEXEC apt-cache policy "$PACKAGE" | sed -n 's/ *Candidate: //p'
+}
+
+checkbuilddep_versiondeps() {
+    local PACKAGE="$1"
+    local COMPARESTRING="$2"
+    local DEPSVERSION="$3"
+    local PACKAGEVERSIONS=$( package_versions "$PACKAGE" | xargs)
+    # no versioned provides.
+    if [ "${FORCEVERSION}" = "yes" ]; then
+	return 0;
+    fi
+    for PACKAGEVERSION in $PACKAGEVERSIONS ; do
+      if dpkg --compare-versions "$PACKAGEVERSION" "$COMPARESTRING" "$DEPSVERSION"; then
+	# satisfies depends
+	return 0;
+      fi
+    done
+    echo "      Tried versions: $PACKAGEVERSIONS"
+    # cannot satisfy depends
+    return 1;
+}
+
+get_source_control_field() {
+    local field="$1"
+
+    sed -n -e "s/^$field://i" -e '
+t store
+/^-----BEGIN PGP SIGNED MESSAGE-----$/ {
+    : pgploop
+    n
+    /^$/ d
+    b pgploop
+}
+/^$/q
+d
+: store
+H
+: loop
+n
+/^#/ b loop
+/^[ \t]/ b store
+x
+# output on single line
+s/\n//g
+# change series of tabs and spaces into a space
+s/[\t ]\+/ /g
+# normalize space before and after commas
+s/ *, */, /g
+# normalize space before and after pipes
+s/ *| */ | /g
+# normalize space before and after parentheses
+s/ *( */ (/g
+s/ *) */)/g
+# normalize space before and after brackets
+s/ *\[ */ [/g
+s/ *\] */]/g
+# normalize space after exclamation mark
+s/! */!/g
+# normalize space between operator and version
+s/(\(>>\|>=\|>\|==\|=\|<=\|<<\|<\|!=\) *\([^)]*\))/(\1 \2)/g
+# normalize space at beginning and end of line
+s/^ *//
+s/ *$//
+p' \
+        "$DEBIAN_CONTROL"
+}
+
+get_build_deps() {
+    local output
+
+    output="`get_source_control_field "Build-Depends"`"
+    output="${output%, }"
+    if [ "$BINARY_ARCH" = no ]; then
+        output="${output:+$output, }`get_source_control_field "Build-Depends-Indep"`"
+        output="${output%, }"
+    fi
+    echo "$output"
+}
+
+get_build_conflicts() {
+    local output
+
+    output="`get_source_control_field "Build-Conflicts"`"
+    if [ "$BINARY_ARCH" = no ]; then
+        output="${output:+$output, }`get_source_control_field "Build-Conflicts-Indep"`"
+    fi
+    echo "$output"
+}
+
+checkbuilddep_archdeps() {
+    # returns FALSE on INSTALL
+    local INSTALLPKG="$1"
+    local ARCH="$2"
+    # architectures listed between [ and ] for this dep
+    local DEP_ARCHES="$(echo "$INSTALLPKG" | sed -e 's/.*\[\(.*\)\].*/\1/' -e 'y|/| |')"
+    local PKG="$(echo "$INSTALLPKG" | cut -d ' ' -f 1)"
+    local USE_IT
+    local IGNORE_IT
+    local INCLUDE
+    # Use 'dpkg-architecture' to support architecture wildcards.
+    for d in $DEP_ARCHES; do
+        if echo "$d" | grep -q '!'; then
+            d="$(echo $d | sed 's/!//')"
+            if dpkg-architecture -a$ARCH -i$d; then
+                IGNORE_IT="yes"
+            fi
+        else
+            if dpkg-architecture -a$ARCH -i$d; then
+                USE_IT="yes"
+            fi
+            INCLUDE="yes"
+        fi
+    done
+    if [ $IGNORE_IT ] && [ $USE_IT ]; then
+        printf "W: inconsistent arch restriction on $PKG: " >&2
+        printf "$DEP_ARCHES depedency\n" >&2
+    fi
+    if [ $IGNORE_IT ] || ( [ $INCLUDE ] && [ ! $USE_IT ] ); then
+        return 0
+    fi
+    return 1
+}
+
+checkbuilddep_provides() {
+    local PACKAGENAME="$1"
+    # PROVIDED needs to be used outside of this function.
+    PROVIDED=$($CHROOTEXEC /usr/bin/apt-cache showpkg $PACKAGENAME \
+	| awk '{p=0}/^Reverse Provides:/,/^$/{p=1}{if(p && ($0 !~ "Reverse Provides:")){PACKAGE=$1}} END{print PACKAGE}')
+}
+
+# returns either "package=version", to append to an apt-get install line, or
+# package
+versioneddep_to_aptcmd() {
+	local INSTALLPKG="$1"
+
+	local PACKAGE
+	local PACKAGE_WITHVERSION
+	local PACKAGEVERSIONS
+	local CANDIDATE_VERSION
+	local COMPARESTRING
+	local DEPSVERSION
+
+	PACKAGE="$(echo "$INSTALLPKG" | sed -e 's/^[/]*//' -e 's/[[/(].*//')"
+	PACKAGE_WITHVERSION="$PACKAGE"
+
+	# if not versionned, we skip directly to outputting $PACKAGE
+	if echo "$INSTALLPKG" | grep '[(]' > /dev/null; then
+	    # package versions returned by APT, in reversed order
+	    PACKAGEVERSIONS="$( package_versions "$PACKAGE" | tac | xargs )"
+	    CANDIDATE_VERSION="$( candidate_version "$PACKAGE" )"
+
+	    COMPARESTRING="$(echo "$INSTALLPKG" | tr "/" " " | sed 's/^.*( *\(<<\|<=\|>=\|=\|<\|>>\|>\) *\(.*\)).*$/\1/')"
+	    DEPSVERSION="$(echo "$INSTALLPKG" | tr "/" " " | sed 's/^.*( *\(<<\|<=\|>=\|=\|<\|>>\|>\) *\(.*\)).*$/\2/')"
+	    # if strictly versionned, we skip to outputting that version
+	    if [ "=" = "$COMPARESTRING" ]; then
+		PACKAGE_WITHVERSION="$PACKAGE=$DEPSVERSION"
+	    else
+		# try the candidate version, then all available versions (asc)
+		for VERSION in $CANDIDATE_VERSION $PACKAGEVERSIONS; do
+		    if dpkg --compare-versions "$VERSION" "$COMPARESTRING" "$DEPSVERSION"; then
+			if [ $VERSION != $CANDIDATE_VERSION ]; then
+			    PACKAGE_WITHVERSION="$PACKAGE=$VERSION"
+			fi
+			break;
+		    fi
+		done
+	    fi
+	fi
+
+	echo "$PACKAGE_WITHVERSION"
+}
+
+print_help() {
+    # print out help message
+    cat <<EOF
+pbuilder-satisfydepends -- satisfy dependencies
+Copyright 2002-2007  Junichi Uekawa <dancer@debian.org>
+
+--help:        give help
+--control:     specify control file (debian/control, *.dsc)
+--chroot:      operate inside chroot
+--binary-all:  include binary-all
+--binary-arch: include binary-arch only
+--echo:        echo mode, do nothing. (--force-version required for most operation)
+--force-version: skip version check.
+--continue-fail: continue even when failed.
+
+EOF
+}
+
