@@ -23,5 +23,5 @@ version="$(wget -q -O - $url/en-US/ | tr '>' '\n' | grep '^firefox-' | sed 's|fi
 rm -f firefox.tbz
 wget -O firefox.tbz "$url/$fflang/firefox-$version.tar.bz2"
 echo $version > VERSION
-sed "s/@L10N@/$fflang/g" debian/control.in > debian/control
+sed "s/@L10N@/$(echo $fflang | tr '[A-Z]' '[a-z]')/g" debian/control.in > debian/control
 
