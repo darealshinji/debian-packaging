@@ -23,4 +23,4 @@ version="$(wget -q -O - $url/en-US/ | tr '>' '\n' | grep '^thunderbird-' | sed '
 rm -f thunderbird.tbz
 wget -O thunderbird.tbz "$url/$fflang/thunderbird-$version.tar.bz2"
 echo "1:$version" > VERSION
-sed "s/@L10N@/$fflang/g" debian/control.in > debian/control
+sed "s/@L10N@/$(echo $fflang | tr '[A-Z]' '[a-z]')/g" debian/control.in > debian/control
