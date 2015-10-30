@@ -1,22 +1,8 @@
 #!/usr/bin/make -f
 
-share = debian/alephone/usr/share
-
-mime_icons = \
-	application-alephone-music.png \
-	application-x-alephone-fila.png \
-	application-x-alephone-imga.png \
-	application-x-alephone-phya.png \
-	application-x-alephone-scea.png \
-	application-x-alephone-sgaa.png \
-	application-x-alephone-shpa.png \
-	application-x-alephone-snda.png \
-	text-x-alephone-mml.png
-
-common_flags = -Wall -Wno-sign-compare -Wno-narrowing -fno-strict-aliasing
+common_flags = -Wall -Wno-sign-compare -Wno-narrowing -Wno-maybe-uninitialized -fno-strict-aliasing
 CFLAGS   += $(common_flags)
 CXXFLAGS += $(common_flags) -Wno-reorder
-CPPFLAGS += -DLUA_USE_MKSTEMP
 LDFLAGS  += -Wl,--as-needed
 
 
@@ -28,15 +14,6 @@ override_dh_auto_configure:
 
 override_dh_install:
 	dh_install -XLICENSE-DejaVu -XSquarishSansCT.README
-
-	$(foreach ICON,$(mime_icons),./make-icons.sh debian/$(ICON) $(share) ;)
-
-	$(foreach SIZE,16 22 24 32 48 64 96 128 256,\
-	  mv $(share)/icons/hicolor/$(SIZE)x$(SIZE)/apps \
-	  $(share)/icons/hicolor/$(SIZE)x$(SIZE)/mimetypes ;)
-
-	./make-icons.sh debian/alephone.png $(share)
-	rm -rf $(share)/pixmaps
 
 override_dh_installdocs:
 	dh_installdocs --link-doc=alephone

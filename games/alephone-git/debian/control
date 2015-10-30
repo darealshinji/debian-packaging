@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9),
                dh-autoreconf,
-               imagemagick,
                libavcodec-dev,
                libavformat-dev,
                libavutil-dev,
@@ -26,7 +25,7 @@ Build-Depends: debhelper (>= 9),
                zlib1g-dev,
                pkg-config
 Standards-Version: 3.9.6
-Homepage: http://aleph-one-marathon.github.io/
+Homepage: https://alephone.lhowon.org/
 Vcs-Git: https://github.com/Aleph-One-Marathon/alephone
 Vcs-Browser: https://github.com/Aleph-One-Marathon/alephone
 
