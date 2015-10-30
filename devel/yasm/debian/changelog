@@ -1,8 +1,17 @@
-yasm (1.3.0-1) trusty; urgency=low
+yasm (1.3.0-2) unstable; urgency=medium
 
-  * New upstream release.
+  * 100_ytasm_parsing_error.diff: fix more bugs in argument parsing.
 
- -- Marshall Banana <djcj@gmx.de>  Wed, 05 Nov 2014 11:38:09 +0100
+ -- Sam Hocevar <sho@debian.org>  Sun, 03 May 2015 22:15:47 +0200
+
+yasm (1.3.0-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #770184).
+  * Upgrade to debhelper 9 because itâ€™s so much more concise.
+  * 100_ytasm_parsing_error.diff: new patch fixing an argument parsing
+    bug in ytasm (Closes: #716639).
+
+ -- Sam Hocevar <sho@debian.org>  Sun, 03 May 2015 16:37:12 +0200
 
 yasm (1.2.0-2) unstable; urgency=medium
 
