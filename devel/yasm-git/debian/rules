@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 export CFLAGS = -Wall -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
-export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,-z,defs
+
 
 %:
 	dh ${@} --parallel --with autoreconf,autotools_dev
