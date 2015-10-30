@@ -3,7 +3,6 @@ include ../../mk/include.mk
 deps       = git
 builddir   = freedoom
 cleanfiles = debian/changelog
-srcfiles   = $(builddir) files
 
 download:
 	rm -rf $(builddir)

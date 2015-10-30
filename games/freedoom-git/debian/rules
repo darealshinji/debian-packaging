@@ -8,23 +8,23 @@ PATH := /usr/games:$(PATH)
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	dh_auto_clean -Dfreedoom || true
-	rm -f freedoom/freedm.xpm freedoom/freedoom1.xpm freedoom/freedoom2.xpm
+	dh_auto_clean || true
+	rm -f freedm.xpm freedoom1.xpm freedoom2.xpm
 
 override_dh_auto_build:
-	$(MAKE) -C freedoom wads/freedm.wad
-	$(MAKE) -C freedoom wads/freedoom1.wad
-	$(MAKE) -C freedoom wads/freedoom2.wad
-	cd freedoom && asciidoc README.adoc
+	$(MAKE) wads/freedm.wad
+	$(MAKE) wads/freedoom1.wad
+	$(MAKE) wads/freedoom2.wad
+	asciidoc README.adoc
 
 	# icon stuff
-	convert freedoom/sprites/cposa2a8.gif freedoom/freedoom1.xpm
-	sed -i 's/cyan/None/' freedoom/freedoom1.xpm
-	convert freedoom/sprites/heada1.gif freedoom/freedoom2.xpm
-	sed -i 's/cyan/None/' freedoom/freedoom2.xpm
-	convert freedoom/sprites/sht2a0.gif freedoom/freedm.xpm
-	sed -i 's/cyan/None/' freedoom/freedm.xpm
+	convert sprites/cposa2a8.gif freedoom1.xpm
+	sed -i 's/cyan/None/' freedoom1.xpm
+	convert sprites/heada1.gif freedoom2.xpm
+	sed -i 's/cyan/None/' freedoom2.xpm
+	convert sprites/sht2a0.gif freedm.xpm
+	sed -i 's/cyan/None/' freedm.xpm
 
 override_dh_installdocs:
-	dh_installdocs -A freedoom/CREDITS freedoom/README.html
+	dh_installdocs -A CREDITS README.html
 
