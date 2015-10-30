@@ -2,10 +2,11 @@ include ../../mk/include.mk
 
 VERSION   = $(shell dpkg-parsechangelog -SVersion)
 
-deps     = wget
-bin      = GrapplingHook.tar.gz
-bin_demo = GrapplingHook_Demo.tar.gz
-lwjgl    = lwjgl-2.9.1.zip
+deps            = wget
+bin             = GrapplingHook.tar.gz
+bin_demo        = GrapplingHook_Demo.tar.gz
+bin_demo_repack = GrapplingHook_Demo_repack.tar.gz
+lwjgl           = lwjgl-2.9.1.zip
 
 srcfiles  = $(lwjgl) ghook.png
 ifeq ($(COMMON_PKG),1)
@@ -14,12 +15,12 @@ endif
 
 cleanfiles     = $(lwjgl) ghook.png common-package.stamp
 # overriding to not delete GrapplingHook.tar.gz
-allcleanfiles  = $(LOG) *.dsc *.deb $(builddir) $(cleanfiles) grapplinghook_$(VERSION).tar.gz
+allcleanfiles  = $(LOG) *.dsc *.deb $(builddir) $(cleanfiles) grapplinghook_$(VERSION).tar.gz $(bin_demo_repack)
 distcleanfiles = $(bin) $(bin_demo)
 
 
 download: ghook
-	@ $(call download,$(lwjgl),http://downloads.sourceforge.net/project/java-game-lib/Official%20Releases/LWJGL%202.9.1/$(lwjgl)?r=&ts=1419016399)
+	@ $(call download,$(lwjgl),http://downloads.sourceforge.net/project/java-game-lib/Official%20Releases/LWJGL%202.9.1/$(lwjgl)?r=)
 	@ $(call download,ghook.png,http://fs1.directupload.net/images/141216/kvgj7f7q.png)
 	@ $(call verifysha256,$(lwjgl),52543c14469055c49327d3cbeb62dc7c615a966825bb9856c3c35e2560aebe77)
 	@ $(call verifysha256,ghook.png,bc2b644124f37b0f0ef4f3baadba7350d5a4b2fe0517ac98c1bb38dad4fda0e6)
@@ -29,7 +30,7 @@ ifeq ($(wildcard $(bin)),$(bin))
 srcfiles += $(bin)
 ghook: ghook_full
 else
-srcfiles += $(bin_demo)
+srcfiles += $(bin_demo_repack)
 ghook: ghook_demo
 endif
 
@@ -45,7 +46,7 @@ ghook_demo:
 	@ $(call verifysha256,$(bin_demo),b1970af780ce6023f12b0689ec35bae4e4a806868ac9b48ad94e73a3452665bb)
 	tar xvf $(bin_demo)
 	mv GrapplingHook_Demo GrapplingHook
-	rm $(bin_demo)
-	tar cfz $(bin_demo) GrapplingHook
-	rm -r GrapplingHook
+	rm -f $(bin_demo_repack)
+	tar cfz $(bin_demo_repack) GrapplingHook
+	rm -rf GrapplingHook
 
