@@ -2,12 +2,52 @@
 
 local="$HOME/.local/share"
 config="$local/desura"
+url="http://www.desura.com/desura-x86_64.tar.gz"
 
-if [ ! -d "$config" ] ; then
-    cp -r /usr/share/desura "$local" &&
-    mkdir -p "$config/lib" &&
-    cp /usr/lib/desura/* "$config/lib"
-fi
 
-cd "$config" && ./desura "$@" 2> error.log
+help () {
+cat << EOF
+usage: $0 [--help|--reset]
+
+   --help   show this message
+   --reset  delete and re-download the local client files
+
+EOF
+exit 0
+}
+
+
+download_desura () {
+    rm -rf "$config" desura.tar.gz
+    cd "$local"
+	wget -O desura.tar.gz "$url"
+    tar xvf desura.tar.gz
+    rm -f desura.tar.gz
+}
+
+
+download_desura_gui () {
+    rm -rf "$config" desura.tar.gz
+    cd "$local"
+    wget -O desura.tar.gz "$url" 2>&1 | \
+        sed -u 's/^[a-zA-Z\-].*//; s/.* \{1,2\}\([0-9]\{1,3\}\)%.*/\1\n#Downloading... \1%/; s/^20[0-9][0-9].*/#Done./' | \
+        zenity --progress \
+               --title="Downloading Desura Client" \
+               --auto-close || exit 0
+    tar xvf desura.tar.gz | zenity --progress \
+                   --pulsate \
+                   --title="Extract package" \
+                   --auto-close
+    rm -f desura.tar.gz
+}
+
+
+test -f "$local/desura.tar.gz" && rm -f "$local/desura.tar.gz" || true
+test x"$1" = x"--help"         && help || true
+test x"$1" = x"--reset"        && download_desura && echo "Re-download and installation completed." && exit 0 || true
+test ! -d "$config"            && download_desura_gui || true
+test ! -x "$config/desura"     && download_desura_gui || true
+
+
+cd "$config" && ./desura "$@"
 
