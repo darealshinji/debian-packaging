@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
-CFLAGS   += -O3 -Wall -Wno-unused-result $(CPPFLAGS)
-CXXFLAGS  = $(CFLAGS)
+CFLAGS   = -Wall -O3 $(filter-out -g -O2, $(shell dpkg-buildflags --get CFLAGS)) -Wno-unused-result $(CPPFLAGS)
+CXXFLAGS = $(CFLAGS)
 
 
 %:
@@ -13,7 +13,8 @@ override_dh_auto_clean:
 
 override_dh_auto_configure:
 	mkdir -p build
-	cd build && cmake \
+	cd build && cmake -Wno-dev \
+		-DCMAKE_BUILD_TYPE=None \
 		-DBUILD_STATIC=ON \
 		-DBUILD_TESTING=OFF \
 		-DBUILD_TESTS=OFF \
