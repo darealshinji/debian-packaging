@@ -2,7 +2,9 @@ Source: franbow-demo
 Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends: debhelper (>= 9), imagemagick
+Build-Depends: debhelper (>= 9),
+               imagemagick,
+               unzip
 Standards-Version: 3.9.6
 Homepage: http://www.franbow.com/
 

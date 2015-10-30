@@ -11,8 +11,5 @@ dreams and she starts to plot her escape… During her way back home she will
 get help from strange creatures and find out that the murder of her parents
 is unimaginably terrible, and finally confront the one responsible...
 
-The release is planned Early 2015, for PC (Windows, Linux, Mac), Mobile and
-Tablet (iOS and Android). DRM free.
-
 Homepage: http://www.franbow.com/
 

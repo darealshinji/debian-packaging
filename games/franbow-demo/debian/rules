@@ -7,13 +7,12 @@ PKG = franbow-demo
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf converted_icons franbow-demo franbow-demo.png
+	rm -rf converted_icons Fran_Bow_Demo franbow-demo.png
 
 override_dh_auto_build:
-	tar xvf franbow-demo.tgz
-	mv "Fran Bow Demo" franbow-demo
-	chmod 755 franbow-demo/runner
-	cp franbow-demo/assets/icon.png franbow-demo.png
+	unzip franbow-demo.zip
+	chmod 755 Fran_Bow_Demo/runner
+	cp Fran_Bow_Demo/assets/icon.png franbow-demo.png
 	./make-icons.sh franbow-demo.png
 
 override_dh_shlibdeps:

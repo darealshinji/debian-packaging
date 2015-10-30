@@ -1,4 +1,4 @@
-franbow-demo/runner           /usr/lib/games/franbow-demo
-franbow-demo/assets           /usr/share/games/franbow-demo
+Fran_Bow_Demo/runner          /usr/lib/games/franbow-demo
+Fran_Bow_Demo/assets          /usr/share/games/franbow-demo
 converted_icons/*             /usr/share
 debian/franbow-demo.desktop   /usr/share/applications
