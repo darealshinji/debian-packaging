@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /usr/lib/gzdoom &&
+cd /usr/lib/games/gzdoom &&
 LD_LIBRARY_PATH="$PWD:$LD_LIBRARY_PATH" ./gzdoom "$@"
 
 if [ $? != 0 ] ; then
