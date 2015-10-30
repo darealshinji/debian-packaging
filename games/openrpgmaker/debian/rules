@@ -26,6 +26,10 @@ endif
 	./make-icons.sh $(dir)/logo.png icons-big
 	rename 's/logo.png/openrpgmaker.png/' icons-big/icons/hicolor/*/apps/*
 
+override_dh_install:
+	dh_install
+	cd debian/openrpgmaker/usr/lib/openrpgmaker/data && rm -rf helpManual images
+
 override_dh_installchangelogs:
 	dh_installchangelogs ChangeLog
 

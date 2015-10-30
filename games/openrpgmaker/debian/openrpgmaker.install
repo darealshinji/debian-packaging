@@ -7,3 +7,5 @@ debian/scripts/openrpgmaker                /usr/games
 openrpgmaker-0.2.3-linux/data              /usr/lib/openrpgmaker
 openrpgmaker-0.2.3-linux/fmodex/lib/*      /usr/lib/openrpgmaker
 openrpgmaker-0.2.3-linux/openrpgmaker      /usr/lib/openrpgmaker
+openrpgmaker-0.2.3-linux/data/images       /usr/share/openrpgmaker
+openrpgmaker-0.2.3-linux/data/helpManual   /usr/share/openrpgmaker
