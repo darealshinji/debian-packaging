@@ -12,7 +12,8 @@ Build-Depends:
   libloadpng4-dev,
   liblogg4-dev,
   libopenal-dev,
-  libpng12-dev
+  libpng12-dev,
+  unrar
 Standards-Version: 3.9.6
 Homepage: http://opensnc.sourceforge.net/home/
 

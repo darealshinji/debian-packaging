@@ -9,15 +9,19 @@ LDFLAGS += -Wl,--as-needed -L$(CURDIR)/alfont
 
 override_dh_auto_clean:
 	dh_auto_clean
-	dh_auto_clean -Dalfont
-	rm -rf build
+	rm -rf alfont build
 
 override_dh_auto_configure:
 
 override_dh_auto_build:
+	unrar x AlFont209.rar 2>&1 >/dev/null
+	cp -f debian/Makefile.alfont alfont/Makefile
 	dh_auto_build -Dalfont -- libalfont.a
 	mkdir build
-	cd build && cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_LIBRARY_PATH=$(CURDIR)/alfont $(CURDIR)
+	cd build && cmake $(CURDIR) \
+		-DCMAKE_LIBRARY_PATH=$(CURDIR)/alfont \
+		-DCMAKE_VERBOSE_MAKEFILE=ON \
+		-DCMAKE_BUILD_TYPE=None
 	dh_auto_build -Dbuild
 
 override_dh_auto_install:

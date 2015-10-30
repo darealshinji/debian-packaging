@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Open Surge
+GenericName=free retro-style 2D sidescroller
+Exec=opensurge %U
+Type=Application
+Categories=Game;
+StartupNotify=false
+Icon=opensurge

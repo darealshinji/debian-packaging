@@ -1,6 +1,6 @@
 debian/launcher/opensurge               /usr/games
-src/misc/opensurge.desktop              /usr/share/applications
-src/misc/opensurge.xpm                  /usr/share/pixmaps
+debian/opensurge.desktop                /usr/share/applications
+debian/opensurge.xpm                    /usr/share/pixmaps
 /usr/share/games/opensurge/opensurge    /usr/lib/opensurge
 /usr/share/games/opensurge/characters
 /usr/share/games/opensurge/config

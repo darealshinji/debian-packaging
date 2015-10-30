@@ -1,0 +1,26 @@
+# Makefile for AllegroFont using FreeType 2
+
+CC := gcc
+
+TARGETFLAGS = $(CFLAGS) $(CPPFLAGS) -Wall -O3 \
+	-Wno-maybe-uninitialized -Wno-unused -Wno-strict-overflow \
+	-fomit-frame-pointer -finline-functions -ffast-math \
+	-include malloc.h -D'_msize=malloc_usable_size' -DALFONT_LINUX \
+	-Iinclude `freetype-config --cflags` `allegro-config --cflags`
+
+
+all: libalfont.a libalfont.so
+
+libalfont.a:
+	rm -f alfont.o $@
+	$(CC) $(TARGETFLAGS) -o alfont.o -c src/alfont.c
+	ar cru $@ alfont.o
+
+libalfont.so:
+	rm -f alfont.o $@
+	$(CC) -fPIC -DPIC $(TARGETFLAGS) -o alfont.o -c src/alfont.c
+	$(CC) -shared -Wl,-soname,$@ $(LDFLAGS) -o $@ alfont.o `freetype-config --libs` `allegro-config --libs`
+
+clean:
+	rm -f libalfont.a libalfont.so alfont.o
+
