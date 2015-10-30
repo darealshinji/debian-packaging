@@ -7,8 +7,11 @@ Build-Depends: debhelper (>= 9),
                libbz2-dev,
                libfluidsynth-dev,
                libglew-dev,
+               libgme-dev,
                libgtk2.0-dev,
                libjpeg-dev,
+               libmpg123-dev,
+               libopenal-dev,
                libsdl2-dev,
                zlib1g-dev
 Standards-Version: 3.9.6
@@ -36,7 +39,6 @@ Multi-Arch: foreign
 Depends: ${misc:Depends},
          freedoom-iwads,
          gzdoom
-Pre-Depends: dpkg (>= 1.15.6~)
 Description: Play Freedoom with OpenGL engine
  This is a Doom source port based on ZDoom. It features an
  OpenGL renderer and lots of new features, among them:
