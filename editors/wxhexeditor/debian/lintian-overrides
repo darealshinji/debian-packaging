@@ -1,0 +1,2 @@
+# pre-built binary
+wxhexeditor: embedded-library usr/lib/wxHexEditor/wxHexEditor: *
