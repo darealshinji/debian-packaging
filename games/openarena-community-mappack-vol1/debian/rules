@@ -4,3 +4,14 @@
 %:
 	dh $@
 
+override_dh_auto_clean:
+	rm -rf unpacked
+
+override_dh_auto_build:
+	unzip -d unpacked oacmp-volume1-v3.zip
+	cd unpacked/baseoa && unzip -d unpacked z_oacmp-volume1-v3.pk3
+	mv unpacked/baseoa/unpacked/sources/maps/ unpacked/sources/
+	rm -rf unpacked/baseoa/unpacked
+	cd unpacked/sources/ && tar cvfJ maps.tar.xz maps
+	cd unpacked/sources/ && tar cvfJ textures.tar.xz textures
+
