@@ -3,6 +3,6 @@ hardening-no-relro
 
 # Skulltag was linked against the old libjpeg62 version 6b which
 # is incompatible with the new version 6b1.
-# This binary was taken from Ubuntu 10.04 and added as a private library.
-skulltag binary: embedded-library usr/lib/skulltag/libjpeg.so.62: libjpeg
+# This binary was build from source and added as a private library.
+skulltag binary: embedded-library usr/lib/games/skulltag/libjpeg.so.62: libjpeg
 

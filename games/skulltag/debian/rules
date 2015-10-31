@@ -5,7 +5,16 @@ ifeq ($(DEB_HOST_ARCH), amd64)
 X64    = _64
 FMOD64 = 64
 endif
-PATCHELF = patchelfmod-master/src/patchelfmod
+
+libdir = $(CURDIR)/debian/skulltag/usr/lib/games/skulltag
+
+unwanted_libs = \
+	libgdk_pixbuf-2.0.so.0 libpng12.so.0 libgmodule-2.0.so.0 libXext.so.6 \
+	libgthread-2.0.so.0 libfreetype.so.6 libgio-2.0.so.0 libfontconfig.so.1 \
+	libpango-1.0.so.0 libpangocairo-1.0.so.0 libatk-1.0.so.0 libSM.so.6 \
+	libpangoft2-1.0.so.0 libICE.so.6 libX11.so.6 libgdk-x11-2.0.so.0 \
+	libcairo.so.2 libXfixes.so.3 libXrandr.so.2 libXinerama.so.1 libXi.so.6 \
+	libXcomposite.so.1 libXcursor.so.1 libXrender.so.1 libXdamage.so.1
 
 
 %:
@@ -15,21 +24,19 @@ override_dh_auto_clean:
 	dh_auto_clean
 	dh_auto_clean -Dlibjpeg6b-patched
 	$(MAKE) -C libjpeg6b-patched -f makefile.simple clean
-	rm -rf skulltag fmodapi42416linux fmodapi42416linux64 patchelfmod-master
+	rm -rf skulltag fmodapi42416linux fmodapi42416linux64 patchelf
 
 override_dh_auto_build:
 	# libjpeg
 	$(MAKE) -C libjpeg6b-patched -f makefile.simple
 
-	# patchelfmod
-	tar xfv patchelfmod.tar.gz
-	autoreconf -ivf patchelfmod-master
-	cd patchelfmod-master && ./configure
-	dh_auto_build -Dpatchelfmod-master -- check
+	# patchelf
+	g++ -w -DPACKAGE_STRING=\"patchelf\" -o patchelf patchelf.cpp
 
 	# skulltag
 	mkdir skulltag
 	cd skulltag && tar xvf ../st-v098d_linux-x86$(X64).tbz
+	cd skulltag && tar xvf ../st-v098d_linux-base.tbz
 	chmod a-x skulltag/*.so skulltag/*.pk3
 	cd skulltag && chrpath -d skulltag skulltag-server
 ifeq ($(DEB_HOST_ARCH), amd64)
@@ -47,11 +54,12 @@ override_dh_installchangelogs:
 override_dh_makeshlibs:
 
 override_dh_shlibdeps:
+	cd $(libdir) && strip --strip-all skulltag skulltag-server *.so libjpeg.so.62
 ifneq ($(DEB_HOST_ARCH), amd64)
-	$(PATCHELF) -a libSDL-1.2.so.0 $(CURDIR)/debian/skulltag/usr/lib/skulltag/liboutput_sdl.so
+	./patchelf --add-needed libSDL-1.2.so.0 $(libdir)/liboutput_sdl.so
 endif
-	$(PATCHELF) -r libgdk_pixbuf-2.0.so.0,libpng12.so.0,libgmodule-2.0.so.0,libXext.so.6,libgthread-2.0.so.0,libfreetype.so.6,libgio-2.0.so.0,libfontconfig.so.1,libpango-1.0.so.0,libpangocairo-1.0.so.0,libatk-1.0.so.0,libSM.so.6,libpangoft2-1.0.so.0,libICE.so.6,libX11.so.6,libgdk-x11-2.0.so.0,libcairo.so.2,libXfixes.so.3,libXrandr.so.2,libXinerama.so.1,libXi.so.6,libXcomposite.so.1,libXcursor.so.1,libXrender.so.1,libXdamage.so.1 \
-		$(CURDIR)/debian/skulltag/usr/lib/skulltag/skulltag
+	$(foreach LIB, $(unwanted_libs),./patchelf --remove-needed $(LIB) $(libdir)/skulltag;)
+	dh_shlibdeps -l$(libdir)
 
-	dh_shlibdeps -l$(CURDIR)/debian/skulltag/usr/lib/skulltag
+override_dh_strip:
 

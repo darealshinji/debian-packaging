@@ -1,6 +1,8 @@
 debian/scripts/*                     usr/games
-skulltag/skulltag                    usr/lib/skulltag
-skulltag/skulltag-server             usr/lib/skulltag
-skulltag/*.so                        usr/lib/skulltag
-libjpeg6b-patched/libjpeg.so.62      usr/lib/skulltag
-skulltag/*.pk3                       usr/share/games/skulltag
+skulltag/skulltag                    usr/lib/games/skulltag
+skulltag/skulltag-server             usr/lib/games/skulltag
+skulltag/*.so                        usr/lib/games/skulltag
+skulltag/*.pk3                       usr/lib/games/skulltag
+skulltag/announcer                   usr/lib/games/skulltag
+skulltag/skins                       usr/lib/games/skulltag
+libjpeg6b-patched/libjpeg.so.62      usr/lib/games/skulltag
