@@ -3,7 +3,7 @@ include ../../mk/include.mk
 deps           = wget unzip
 cleanfiles     = Serena *.txt *.png
 distcleanfiles = $(bin)
-srcfiles       = Serena files *.png
+srcfiles       = Serena *.png
 bin            = serena.zip
 icon           = serena.png
 

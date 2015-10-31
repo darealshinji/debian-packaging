@@ -7,3 +7,6 @@
 override_dh_auto_build:
 	./make-icons.sh serena.png
 
+override_dh_builddeb:
+	dh_builddeb -- -Zgzip
+
