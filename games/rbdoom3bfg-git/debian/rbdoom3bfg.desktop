@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=RBDoom3BFG
-GenericName=Doom 3 BFG Edition Engine
-Exec=rbdoom3bfg
-Type=Application
-Categories=Game;
-StartupNotify=true
-Icon=rbdoom3bfg
