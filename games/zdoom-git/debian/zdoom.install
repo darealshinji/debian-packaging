@@ -1,7 +1,5 @@
-debian/scripts/zdoom                  usr/games
-build/zdoom                           usr/lib/zdoom
-build/output_sdl/liboutput_sdl.so     usr/lib/zdoom
-build/libfmodex-4.44.so               usr/lib/zdoom
-build/*.pk3                           usr/share/games/zdoom
-debian/zdoom.desktop                  usr/share/applications
-debian/zdoom.xpm                      usr/share/pixmaps
+debian/scripts/zdoom     usr/games
+build/zdoom              usr/lib/games/zdoom
+build/*.pk3              usr/lib/games/zdoom
+debian/zdoom.desktop     usr/share/applications
+debian/zdoom.xpm         usr/share/pixmaps

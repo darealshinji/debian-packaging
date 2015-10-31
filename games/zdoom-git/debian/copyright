@@ -17,8 +17,6 @@ Doom source license
     Note that many parts of Heretic and Hexen support were written before their source code was released, and are original independent work instead. 
 DUMB license
     The foo_DUMB code is under the DUMB license. 
-FMOD Ex license
-    ZDoom's use of the FMOD Ex audio library is covered under the terms of the FMOD non-commercial license. The license also requires that the string "FMOD Sound System, copyright © Firelight Technologies Pty, Ltd., 1994-2011." be printed by the application (you see it during startup and in the console log). 
 GPL
     The FraggleScript code is under the GPLv2. The GPL is normally incompatible with any non-commercial license (such as the FMOD and Build ones), and the code is therefore used with special permission from Simon Howard. Code from SMMU can be used in ZDoom or derived ports, as long as the source code remains open and the full copyright notice remains in place. 
 LGPL

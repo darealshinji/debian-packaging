@@ -1,14 +1,5 @@
 #!/usr/bin/make -f
 
-DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
-ifeq ($(DEB_HOST_ARCH), amd64)
-LIB64 = 64
-endif
-
-fmodrevision = $(shell ls fmodapi444*linux.tgz | sed -e 's/fmodapi444//; s/linux.tgz//;')
-fmoddirname = $(CURDIR)/fmodapi444$(fmodrevision)linux
-fmodlib = libfmodex$(LIB64)-4.44.$(fmodrevision).so
-
 LDFLAGS += -Wl,--as-needed
 
 
@@ -16,32 +7,20 @@ LDFLAGS += -Wl,--as-needed
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	rm -rf build $(fmoddirname)
+	rm -rf build
 
 override_dh_auto_configure:
 	mkdir -p build
-
-	# FMOD ex doesn't have a soname entry. The linker will therefore use
-	# its filename to declare dependencies. Using a different filename allows
-	# manual library updates without re-linking the zdoom binary.
-	tar xvf fmodapi444*linux.tgz
-	cp $(fmoddirname)/api/lib/$(fmodlib) $(CURDIR)/build/libfmodex-4.44.so
-
-	cd build && cmake \
-	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DCMAKE_INSTALL_PREFIX=/usr \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_SKIP_RPATH=ON \
-	-DFORCE_INTERNAL_BZIP2=OFF \
-	-DFORCE_INTERNAL_GME=ON \
-	-DFORCE_INTERNAL_JPEG=OFF \
-	-DFORCE_INTERNAL_ZLIB=OFF \
-	-DFMOD_LIBRARY=libfmodex-4.44.so \
-	-DFMOD_INCLUDE_DIR=$(fmoddirname)/api/inc/ $(CURDIR)
+	cd build && cmake .. \
+		-DCMAKE_VERBOSE_MAKEFILE=ON \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_SKIP_RPATH=ON \
+		-DFORCE_INTERNAL_BZIP2=OFF \
+		-DFORCE_INTERNAL_GME=OFF \
+		-DFORCE_INTERNAL_JPEG=OFF \
+		-DFORCE_INTERNAL_ZLIB=OFF
 
 override_dh_auto_build:
 	dh_auto_build -Dbuild
-
-override_dh_shlibdeps:
-	dh_shlibdeps -l$(CURDIR)/debian/zdoom/usr/lib/zdoom
 
