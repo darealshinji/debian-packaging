@@ -3,7 +3,6 @@ include ../../mk/include.mk
 deps           = wget
 builddir       = zandronum-source
 fmod           = fmodapi42416linux$(FMOD_64)
-cleanfiles     = debian/changelog
 distcleanfiles = *.tgz
 
 sha256sum_fmod   = a516e48c0c715c31efdc0c810f26188c2bb484615e7a5e53ca936ad1d5e0b18d
@@ -24,8 +23,8 @@ download:
 	# link the executable against the system's sqlite3 library
 	sed -i '/add_subdirectory( sqlite )/d' $(builddir)/CMakeLists.txt
 
-	@ latesttag=`grep 'latesttag:' $(builddir)/.hg_archival.txt|cut -d' ' -f2` ;\
+	@ latesttag=`grep 'latesttag:' $(builddir)/.hg_archival.txt|cut -d' ' -f2|sed 's|ZA_||'` ;\
 	latesttagdistance=`grep 'latesttagdistance:' $(builddir)/.hg_archival.txt|cut -d' ' -f2` ;\
-	VERSION=$${latesttag}+$${latesttagdistance} ;\
+	VERSION=$${latesttag}+hg$${latesttagdistance} ;\
 	$(changelog-entry)
 

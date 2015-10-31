@@ -2,16 +2,26 @@
 
 CC ?= gcc
 
-common_flags  = -Wall -Wno-maybe-uninitialized -Wno-unused-but-set-variable -Wno-parentheses
-common_flags += $(shell pkg-config --cflags sdl)
-common_flags += $(shell pkg-config --cflags sqlite3)
-common_flags += $(CPPFLAGS)
+CFLAGS   = $(filter-out -Werror=format-security, $(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS = $(filter-out -Werror=format-security, $(shell dpkg-buildflags --get CXXFLAGS))
+
+common_flags = \
+	-Wall \
+	-Wno-maybe-uninitialized \
+	-Wno-unused-but-set-variable \
+	-Wno-parentheses \
+	-Wformat-security \
+	-fno-strict-aliasing \
+	-fno-aggressive-loop-optimizations \
+	$(shell pkg-config --cflags sdl) \
+	$(shell pkg-config --cflags sqlite3) \
+	$(CPPFLAGS)
 
 CFLAGS   += $(common_flags) -Wno-pointer-sign
 CXXFLAGS += $(common_flags)
-LDFLAGS  += -Wl,--as-needed
+
 # link the executable against the system's sqlite3 library
-LDFLAGS  += $(shell pkg-config --libs sqlite3)
+LDFLAGS += -Wl,--as-needed $(shell pkg-config --libs sqlite3)
 
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 ifeq ($(DEB_HOST_ARCH), amd64)
@@ -30,12 +40,17 @@ override_dh_auto_clean:
 override_dh_auto_configure:
 	tar xvf $(fmoddir)$(LIB64).tgz
 	mkdir build
-	cd build && cmake .. \
-	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_SKIP_RPATH=ON \
-	-DFMOD_INCLUDE_DIR=$(CURDIR)/$(fmoddir)$(LIB64)/api/inc \
-	-DFMOD_LIBRARY=$(fmodlib)
+	cd build && cmake .. -Wno-dev \
+		-DCMAKE_VERBOSE_MAKEFILE=ON \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_SKIP_RPATH=ON \
+		-DFORCE_INTERNAL_BZIP2=OFF \
+		-DFORCE_INTERNAL_GME=OFF \
+		-DFORCE_INTERNAL_JPEG=OFF \
+		-DFORCE_INTERNAL_ZLIB=OFF \
+		-DFMOD_INCLUDE_DIR=$(CURDIR)/$(fmoddir)$(LIB64)/api/inc \
+		-DFMOD_LIBRARY=$(fmodlib)
 
 override_dh_auto_build:
 	dh_auto_build -Dbuild
@@ -47,5 +62,5 @@ override_dh_auto_build:
 	cp $(fmodlib) build
 
 override_dh_shlibdeps:
-	dh_shlibdeps -l$(CURDIR)/debian/zandronum/usr/lib/zandronum
+	dh_shlibdeps -Lzandronum -l/usr/lib/games/zandronum
 

@@ -1,5 +1,5 @@
 debian/scripts/zandronum              usr/games
-build/zandronum                       usr/lib/zandronum
-build/output_sdl/liboutput_sdl.so     usr/lib/zandronum
-build/libfmodex*.so                   usr/lib/zandronum
-build/*.pk3                           usr/share/games/zandronum
+build/zandronum                       usr/lib/games/zandronum
+build/output_sdl/liboutput_sdl.so     usr/lib/games/zandronum
+build/libfmodex*.so                   usr/lib/games/zandronum
+build/*.pk3                           usr/lib/games/zandronum
