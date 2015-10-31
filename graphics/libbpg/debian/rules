@@ -1,81 +1,38 @@
 #!/usr/bin/make -f
 
-VERSION = $(shell cat VERSION)
-MAN1 = bpgdec.1 bpgenc.1 bpgview.1
-MANPAGES = $(MAN1) bpg.5
-
-CFLAGS  += -Wall -Wno-unused-but-set-variable
-LDFLAGS += -Wl,-z,defs -Wl,--as-needed
-
-x265_confflags = \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DENABLE_CLI=OFF \
-	-DENABLE_SHARED=OFF \
-	-DENABLE_PIC=OFF
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+LDFLAGS += -L$(CURDIR)/libpng16/.libs -Wl,-z,defs
 
 
 %:
 	dh $@ --parallel
 
 override_dh_auto_clean:
-	[ ! -f config.mak ] || dh_auto_clean
-	dh_auto_clean -Dpng
-	dh_auto_clean -Dx265/source
-	rm -rf debian/png-tmp
+	dh_auto_clean -Dlibpng16
+	dh_auto_clean
 
 override_dh_auto_configure:
-	autoreconf -ivf png
-	dh_auto_configure -Dpng -- --enable-shared=no --enable-static=yes
-	cp -f png/libpng.pc png/libpng16.pc
-	cd x265/source && cmake $(x265_confflags) .
-	chmod a+x configure
-	dh_auto_configure -- \
-		--enable-x265 \
-		--extra-cppflags="-Ipng -Ix265/source" \
-		--extra-ldflags="-Lpng/.libs -Lx265/source" \
-		--extra-libs="-lz -ldl"
+	dh_auto_configure -Dlibpng16 -- --enable-static=yes --enable-shared=no
 
 override_dh_auto_build:
-	dh_auto_build -Dpng
-	dh_auto_build -Dx265/source
+	dh_auto_build -Dlibpng16
 	dh_auto_build
-
-override_dh_auto_test:
-	./bpgdec -o outfile.png html/lena512color.bpg
-	./bpgenc -e jctvc -o out-jctvc.bpg outfile.png
-	./bpgenc -e x265 -o out-x265.bpg outfile.png
-
-override_dh_auto_install:
-	dh_auto_install
-	dh_auto_install -Dpng --destdir=$(CURDIR)/debian/png-tmp
-
-override_dh_install:
-	dh_install -plibpng16-dev --sourcedir=$(CURDIR)/debian/png-tmp
-	dh_install --remaining-packages
 
 override_dh_installdocs:
 	dh_installdocs -A doc/bpg_spec.txt README
 
+override_dh_auto_install:
+	$(MAKE) -C libpng16 install DESTDIR=$(CURDIR)/debian/tmp
+	install -m644 libbpg.a $(CURDIR)/debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)
+
+override_dh_install:
+	dh_install
+	mkdir -p debian/libbpg-dev/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig
+	sed 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|;' \
+		debian/libbpg.pc.in > debian/libbpg-dev/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/libbpg.pc
+
 override_dh_installchangelogs:
 	dh_installchangelogs -A ChangeLog
-
-override_dh_installman: $(MANPAGES)
-	dh_installman -plibbpg-bin $^
-	dh_installman -plibpng16-dev debian/libpng16-config.1
-
-$(MAN1):
-	sed -e 's/@VERSION@/$(VERSION)/;' debian/$@.header > $@
-	./$(subst .1,,$@) >> $@ || true
-	cat debian/$@.footer >> $@
-
-bpg.5:
-	sed -e 's/@VERSION@/$(VERSION)/;' debian/$@.header > $@
-	cat doc/bpg_spec.txt >> $@
-	cat debian/$@.footer >> $@
-
-override_dh_clean:
-	dh_clean png/libpng16.pc $(MANPAGES)
 
 override_dh_compress:
 	dh_compress -X.bpg

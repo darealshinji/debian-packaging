@@ -1,4 +1,4 @@
 /usr/include
-/usr/lib/*/pkgconfig/libpng16.pc
+/usr/lib/*/pkgconfig
 /usr/lib/*/libpng16.a
 /usr/bin/libpng16-config

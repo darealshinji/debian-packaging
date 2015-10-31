@@ -1,2 +1,4 @@
+libpng16.patch
 Makefile.patch
-implicit-function-declaration.patch
+missing-include.patch
+no-yasm-on-i386.patch

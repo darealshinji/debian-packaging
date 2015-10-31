@@ -1,4 +1,3 @@
-/usr/include/libpng16
-/usr/lib/*/*.a
-/usr/lib/*/pkgconfig
+/usr/lib/*/libbpg.a
 html/*              /usr/share/doc/libbpg-dev/libjs-bpgdec
+libbpg.h            /usr/include

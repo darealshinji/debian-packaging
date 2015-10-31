@@ -9,10 +9,12 @@ Build-Depends:
  libjpeg-dev,
  libsdl1.2-dev,
  libsdl-image1.2-dev,
- yasm (>= 1.2),
+ yasm (>= 1.2) [amd64],
  zlib1g-dev
 Standards-Version: 3.9.6
 Homepage: http://bellard.org/bpg/
+Vcs-Git: https://github.com/mirrorer/libbpg.git
+Vcs-Browser: https://github.com/mirrorer/libbpg.git
 
 Package: libbpg-bin
 Section: graphics

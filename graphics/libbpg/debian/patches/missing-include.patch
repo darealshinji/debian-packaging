@@ -1,10 +1,10 @@
 --- a/bpgdec.c
 +++ b/bpgdec.c
-@@ -25,6 +25,7 @@
+@@ -24,6 +24,7 @@
+ 
  #include <stdlib.h>
  #include <stdio.h>
- #include <math.h>
 +#include <string.h>
+ #include <math.h>
  #include <getopt.h>
  #include <inttypes.h>
- 

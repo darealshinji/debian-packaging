@@ -1,3 +1,9 @@
+libbpg (0.9.6) unstable; urgency=low
+
+  * New upstream release
+
+ -- Marshall Banana <djcj@gmx.de>  Sat, 31 Oct 2015 12:18:09 +0100
+
 libbpg (0.9.5) unstable; urgency=low
 
   * New upstream release

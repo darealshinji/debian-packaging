@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${prefix}/lib/@DEB_HOST_MULTIARCH@
+
+Name: libbpg
+Description: library of functions for manipulating BPG image format files
+URL: http://bellard.org/bpg/
+Version: 0.9.6
+Cflags: -I${includedir}
+Libs: -L${libdir} -lbpg -lm
