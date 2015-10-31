@@ -122,12 +122,12 @@ source: download
 
 
 build: source
-	rm -rf .pc
 	@ if [ -f $(builddir)/debian/patches/series ] ;                   \
 	then                                                              \
-	   cd $(builddir) && QUILT_PATCHES=debian/patches quilt push -a ; \
 	   rm -rf $(builddir)/.pc ;                                       \
+	   cd $(builddir) && QUILT_PATCHES=debian/patches quilt push -a ; \
 	fi
+	rm -rf $(builddir)/.pc
 	mkdir -p $(builddir)/debian/source
 	echo '3.0 (native)' > $(builddir)/debian/source/format
 	test -f $(builddir)/debian/compat || echo '$(default_compat_level)' > $(builddir)/debian/compat
