@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=pwnfps
-Exec=pwnfps
-TryExec=/usr/games/pwnfps
-Type=Application
-Categories=Game;
-StartupNotify=true
-Icon=pwnfps
