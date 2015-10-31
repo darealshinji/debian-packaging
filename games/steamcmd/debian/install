@@ -1,2 +1,2 @@
 debian/scripts/steamcmd   usr/games
-linux32/steamcmd          usr/lib/steamcmd
+linux32/steamcmd          usr/lib
