@@ -1,8 +1,0 @@
-# closed source
-hardening-no-relro
-shlib-with-non-pic-code
-
-# we don't need a regular lib package, since this package
-# is only useful to developers anyway
-package-name-doesnt-match-sonames
-non-dev-pkg-with-shlib-symlink
