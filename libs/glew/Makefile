@@ -1,8 +1,9 @@
 include ../../mk/include.mk
 
-srcfiles       = glew-1.*.0 glew-1.5.8 glew-1.3.6 glew-1.2.5 glew-1.1.4 glew-1.0.7
-cleanfiles     = $(srcfiles) debian/control
-distcleanfiles = *.tgz
+srcfiles       = extracted/*
+cleanfiles     = extracted debian/control
+bin            = $(glew_release).tgz
+distcleanfiles = $(bin)
 VERSION        = 1.0
 changelog-msg  = Initial release
 
@@ -21,13 +22,16 @@ VERSIONS = \
 	1.9.0 \
 	1.10.0 \
 	1.11.0 \
-	1.12.0
+	1.12.0 \
+	1.13.0
 
-URL = http://downloads.sourceforge.net/project/glew/glew
+glew_release  = glew-1.0.7-1.13.0
+glew_checksum = 31c691539d576523d3e8af26612fe2778260d20d48c5cbef693c532f235b5909
+
 
 debian/control:
 	cp -f $@.in $@
-	for n in $(shell seq 0 12); do \
+	for n in $(shell seq 0 13); do \
   if [ $$n -ge 6 ]; then \
     section="libs"; \
   else \
@@ -40,14 +44,26 @@ debian/control:
 done
 
 download: debian/control
-	$(foreach VER, $(OLDVERSIONS),\
-	  $(call download,glew-$(VER).tgz,$(URL)/$(VER)/glew-$(VER)-src.tgz?r) ;\
-	  tar xf glew-$(VER).tgz ;\
-	  mv glew glew-$(VER) ;\
-	 )
-	$(foreach VER, $(VERSIONS),\
-	  $(call download,glew-$(VER).tgz,$(URL)/$(VER)/glew-$(VER).tgz?r) ;\
-	  tar xf glew-$(VER).tgz ;\
-	 )
+	$(call download,$(bin),https://github.com/darealshinji/glew/releases/download/$(glew_release)/$(glew_release).tar.gz)
+	$(call verifysha256,$(bin),$(glew_checksum))
+	mkdir extracted
+	cd extracted && tar xvf ../$(bin)
+	cd extracted && $(foreach VER,$(OLDVERSIONS),tar xf glew-$(VER).tgz && mv glew glew-$(VER) ;)
+	cd extracted && $(foreach VER,$(VERSIONS),tar xf glew-$(VER).tgz ;)
 	@ VERSION=$(VERSION); $(changelog-entry)
+
+
+
+#URL = http://downloads.sourceforge.net/project/glew/glew
+
+#	$(foreach VER, $(OLDVERSIONS),\
+#	  $(call download,glew-$(VER).tgz,$(URL)/$(VER)/glew-$(VER)-src.tgz?r) ;\
+#	  tar xf glew-$(VER).tgz ;\
+#	  mv glew glew-$(VER) ;\
+#	 )
+#	$(foreach VER, $(VERSIONS),\
+#	  $(call download,glew-$(VER).tgz,$(URL)/$(VER)/glew-$(VER).tgz?r) ;\
+#	  tar xf glew-$(VER).tgz ;\
+#	 )
+
 

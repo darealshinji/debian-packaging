@@ -3,23 +3,72 @@
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 libdir = /usr/lib/$(DEB_HOST_MULTIARCH)
 
+CC = gcc
+LD = gcc
+CFLAGS  += -fPIC -DPIC
 LDFLAGS += -Wl,--as-needed
+
+VERSIONS = \
+	1.0.7 \
+	1.1.4 \
+	1.2.5 \
+	1.3.6 \
+	1.4.0 \
+	1.5.8
+
+MXVERSIONS = \
+	1.6.0 \
+	1.7.0 \
+	1.8.0 \
+	1.9.0 \
+	1.10.0 \
+	1.11.0 \
+	1.12.0 \
+	1.13.0
 
 
 %:
 	dh $@ --parallel
 
+override_dh_auto_build:
+	# 1.0-1.5
+	$(foreach VER,$(VERSIONS),\
+	  cd glew-$(VER) && mkdir -p lib && \
+	  $(MAKE) lib/libGLEW.so.$(VER) CC=$(CC) LD=$(LD) \
+	  OPT='$(CFLAGS) $(CPPFLAGS)' LDFLAGS.EXTRA='$(LDFLAGS)'; \
+	  cd .. ;)
+	# 1.6-x
+	$(foreach VER,$(MXVERSIONS),\
+	  cd glew-$(VER) && mkdir -p lib && \
+	  $(MAKE) lib/libGLEW.so.$(VER) lib/libGLEWmx.so.$(VER) CC=$(CC) LD=$(LD) \
+	  OPT='$(CFLAGS) $(CPPFLAGS)' LDFLAGS.EXTRA='$(LDFLAGS)'; \
+	  cd .. ;)
+	mkdir -p lib
+	cp -f -d glew-*/lib/libGLEW*.so.1.* lib
+	find lib -type f -exec chmod 0644 '{}' \;
+	ln -fs libGLEW.so.1.0.7 lib/libGLEW.so.1.0
+	ln -fs libGLEW.so.1.1.4 lib/libGLEW.so.1.1
+	ln -fs libGLEW.so.1.2.5 lib/libGLEW.so.1.2
+	$(foreach N,$(shell seq 0 6),ln -fs libGLEW.so.1.0.7 lib/libGLEW.so.1.0.$(N) ;)
+	$(foreach N,$(shell seq 0 3),ln -fs libGLEW.so.1.1.4 lib/libGLEW.so.1.1.$(N) ;)
+	$(foreach N,$(shell seq 0 4),ln -fs libGLEW.so.1.2.5 lib/libGLEW.so.1.2.$(N) ;)
+	$(foreach N,$(shell seq 0 5),ln -fs libGLEW.so.1.3.6 lib/libGLEW.so.1.3.$(N) ;)
+	$(foreach N,$(shell seq 0 7),ln -fs libGLEW.so.1.5.8 lib/libGLEW.so.1.5.$(N) ;)
+
+override_dh_auto_clean:
+	dh_auto_clean
+	$(foreach VER,$(VERSIONS) $(MXVERSIONS),$(MAKE) -C glew-$(VER) clean ;)
+	rm -rf lib
+
 override_dh_install:
 	dh_install
-
 	# GLEW
-	for n in $(shell seq 0 12); do \
+	for n in $(shell seq 0 13); do \
   mkdir -p debian/libglew1.$$n$(libdir) ;\
   cp -d lib/libGLEW.so.1.$$n lib/libGLEW.so.1.$$n.* debian/libglew1.$$n$(libdir) ;\
 done
-
 	# GLEWmx
-	for n in $(shell seq 6 12); do \
+	for n in $(shell seq 6 13); do \
   mkdir -p debian/libglewmx1.$$n$(libdir) ;\
   cp -d lib/libGLEWmx.so.1.$$n lib/libGLEWmx.so.1.$$n.* debian/libglewmx1.$$n$(libdir) ;\
 done
