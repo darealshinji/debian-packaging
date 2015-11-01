@@ -1,2 +1,0 @@
-?package(xnviewmp):needs="X11" section="Applications/Graphics"\
- title="XnView MP" icon="/usr/share/pixmaps/xnview.xpm" command="/usr/bin/xnviewmp"

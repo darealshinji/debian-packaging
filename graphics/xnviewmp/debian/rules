@@ -1,8 +1,8 @@
 #!/usr/bin/make -f
 
 VERSION = $(shell dpkg-parsechangelog -SVersion)
-
-ifeq ($(shell uname -p), x86_64)
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+ifeq ($(DEB_HOST_ARCH),amd64)
 x64 = -x64
 endif
 
@@ -15,19 +15,17 @@ override_dh_auto_clean:
 
 override_dh_auto_build:
 	tar xvfz XnViewMP-linux$(x64).tgz
-	find XnView -type f -exec chmod 0644 '{}' \;
-	chmod 0755 XnView/XnView
-
+	find XnView -type f -name *.gif -exec chmod 0644 '{}' \;
+	find XnView -type f -name *.png -exec chmod 0644 '{}' \;
 	dos2unix XnView/*.txt
 	sed -e 's/@VERSION@/$(VERSION)/;' debian/xnviewmp.1.in > xnviewmp.1
-
-	./make-icons.sh XnView/xnview.png
-	./make-icons.sh XnView/xnview_2.png
-
 	chrpath -d XnView/XnView `find XnView/ -type f -name *.so*`
-
-override_dh_install:
-	dh_install -Xstyle_sheet_win.qss -Xstyle_sheet_mac.qss
+	rm -rf XnView/lib/phonon_backend
+ifeq ($(DEB_HOST_ARCH),amd64)
+	if [ "x$$(file XnView/Plugins/rwz_sdk.so | grep 'ELF 32-bit')" != "x" ]; then \
+	  rm -f XnView/Plugins/rwz_sdk.so; \
+	fi
+endif
 
 override_dh_installchangelogs:
 	dh_installchangelogs XnView/WhatsNew.txt
