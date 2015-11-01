@@ -9,13 +9,15 @@ Build-Depends:
  libfontconfig1,
  libfreetype6,
  libglib2.0-0,
- libgomp1,
+ libgtk2.0-0,
  libice6,
  libilmbase6,
  libpng12-0,
  libsm6,
  libx11-6,
- libxext6,
+ libx11-xcb1,
+ libxcb1,
+ libxi6,
  libxrender1,
  zlib1g
 Standards-Version: 3.9.6
