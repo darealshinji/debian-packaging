@@ -1,8 +1,17 @@
 #!/usr/bin/make -f
 
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
 VERSION = $(shell dpkg-parsechangelog -SSource | sed 's/libqt//')
 scripts = debian/postinst debian/prerm
 tmp     = $(CURDIR)/debian/tmp
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+libdir=/usr/lib/Qt/$(VERSION)/gcc_64/lib
+else
+libdir=/usr/lib/Qt/$(VERSION)/gcc/lib
+endif
 
 
 %:
@@ -15,7 +24,10 @@ override_dh_install: $(scripts)
 	tar xvf libmysqlclient16.txz
 	mkdir -p $(tmp)/usr/lib/Qt
 	mv $(VERSION) $(tmp)/usr/lib/Qt
-	cp libmysqlclient16/*.so.* $(tmp)/usr/lib/Qt/*/*/lib/
+	cp libmysqlclient16/*.so.* $(tmp)$(libdir)
+	ln -s /lib/$(DEB_HOST_MULTIARCH)/libssl.so.1.0.0 $(tmp)$(libdir)/libssl.so.10
+	ln -s /lib/$(DEB_HOST_MULTIARCH)/libcrypto.so.1.0.0 $(tmp)$(libdir)/libcrypto.so.10
+	test -e $(tmp)$(libdir)/libQt5Positioning.so.5 || cp -fP /usr/lib/$(DEB_HOST_MULTIARCH)/libQt5Positioning.so.5* $(tmp)$(libdir)
 	dh_install
 
 override_dh_clean:
@@ -25,4 +37,7 @@ $(scripts):
 	sed -e 's/@VERSION@/$(VERSION)/g' $@.in > $@
 
 override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+	dh_shlibdeps -Llibqt$(VERSION) -l$(libdir)
 

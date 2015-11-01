@@ -5,41 +5,42 @@ Maintainer: djcj <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 9),
  p7zip-full,
- libasound2 (>= 1.0.16),
- libc6 (>= 2.11),
- libcups2 (>= 1.4.0),
- libegl1-mesa (>= 7.8.1) | libegl1-x11,
- libfontconfig1 (>= 2.9.0),
- libfreetype6 (>= 2.3.5),
- libgcc1 (>= 1:4.1.1),
- libgeoclue0 (>= 0.11.1),
+ libqt5positioning5,
+ libasound2,
+ libcups2,
+ libegl1-mesa | libegl1-x11,
+ libfontconfig1,
+ libfreetype6,
+ libgeoclue0,
  libgl1-mesa-glx | libgl1,
- libglib2.0-0 (>= 2.24.0),
- libgstreamer-plugins-base0.10-0 (>= 0.10.32),
- libgstreamer0.10-0 (>= 0.10.33),
- libgtk2.0-0 (>= 2.24.0),
- libice6 (>= 1:1.0.0),
- libpango-1.0-0 (>= 1.14.0),
+ libglib2.0-0,
+ libgstreamer-plugins-base0.10-0,
+ libgstreamer0.10-0,
+ libgtk2.0-0,
+ libice6,
+ libpango-1.0-0,
  libpq5,
- libpulse0 (>= 1:0.99.1),
+ libpulse0,
  libsm6,
- libstdc++6 (>= 4.6),
+ libssl1.0.0,
  libx11-6,
  libx11-xcb1,
  libxcb1,
- libxcomposite1 (>= 1:0.3-1),
- libxi6 (>= 2:1.2.99.4),
- libxml2 (>= 2.7.4),
+ libxcomposite1,
+ libxi6,
+ libxml2,
  libxrender1,
- libxslt1.1 (>= 1.1.25),
- zlib1g (>= 1:1.2.0)
+ libxslt1.1,
+ zlib1g
 Standards-Version: 3.9.6
 Homepage: http://www.qt.io/download-open-source/
 
 Package: libqt@VERSION@
 Architecture: amd64 i386
 Depends:
- ${misc:Depends}, ${shlibs:Depends}
+ ${misc:Depends},
+ ${shlibs:Depends},
+ libssl1.0.0
 Description: Qt @VERSION@
  Qt is a cross-platform C++ application framework. Qt's primary feature
  is its rich set of widgets that provide standard GUI functionality.
