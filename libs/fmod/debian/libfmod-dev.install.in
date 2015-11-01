@@ -1,3 +1,0 @@
-api/lowlevel/inc/* usr/include/fmod
-debian/fmod.pc usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig
-api/lowlevel/lib/@ARCH@/*.so usr/lib/@DEB_HOST_MULTIARCH@

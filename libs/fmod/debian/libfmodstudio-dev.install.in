@@ -1,3 +1,0 @@
-api/studio/inc/* usr/include
-debian/fmodstudio.pc usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig
-api/studio/lib/@ARCH@/*.so usr/lib/@DEB_HOST_MULTIARCH@

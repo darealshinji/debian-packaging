@@ -1,3 +1,0 @@
-version=3
-opts="dversionmangle=s/\.//g" \
-http://www.fmod.org/download/ fmodstudio/api/Linux/fmodstudioapi(.+)linux\.tar\.(?:xz|bz2|gz)
