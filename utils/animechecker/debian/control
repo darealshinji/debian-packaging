@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 9),
- automake,
  dos2unix,
  imagemagick,
  librsvg2-bin,
