@@ -1,0 +1,11 @@
+--- a/app/preferences/songbird-prefs.js.in
++++ b/app/preferences/songbird-prefs.js.in
+@@ -260,7 +260,7 @@
+ pref("songbird.url.addons.feathers", "http://addons.getnightingale.com/");
+ pref("songbird.url.addons.mediaviews", "http://addons.getnightingale.com/");
+ pref("browser.startup.homepage", "http://addons.getnightingale.com/");
+-pref("songbird.url.firstrunpage", "http://firstrun.getnightingale.com/?type=install");
++pref("songbird.url.firstrunpage", "/usr/lib/nightingale/addons");
+ pref("nightingale.update.url", "http://firstrun.getnightingale.com/?type=upgrade");
+ pref("songbird.url.bugzilla", "http://github.com/nightingale-media-player/nightingale-hacking/issues/");
+ pref("songbird.url.metrics", "");

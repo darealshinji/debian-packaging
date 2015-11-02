@@ -1,0 +1,34 @@
+--- a/nightingale-deps/xulrunner-1.9.2/Makefile.songbird
++++ b/nightingale-deps/xulrunner-1.9.2/Makefile.songbird
+@@ -72,7 +72,7 @@
+ HAVE_XR_release_BUILD = test -d $(CURDIR)/mozilla/compiled/xulrunner-release
+ HAVE_XR_debug_BUILD = test -d $(CURDIR)/mozilla/compiled/xulrunner-debug
+ 
+-xr-all: xr-clean xr-build-debug xr-build-release xr-symbols xr-packaging
++xr-all: xr-clean xr-build-release xr-symbols xr-packaging
+ ifdef SB_VENDOR_AUTOCLEAN_OBJDIRS
+ 	$(RM) -rf $(CURDIR)/mozilla/compiled
+ else
+@@ -93,7 +93,7 @@
+    endif
+ endif
+ 
+-xr-packaging: xr-packaging-debug xr-packaging-release
++xr-packaging: xr-packaging-release
+ ifneq (,$(SB_VENDOR_BUILD_LOG))
+ 	$(CP) $(CURDIR)/$(SB_VENDOR_BUILD_LOG) $(SB_VENDOR_BINARIES_DIR)/$(SB_VENDOR_TARGET)
+ endif
+--- a/nightingale-deps/songbird-vendor-defs.mk
++++ b/nightingale-deps/songbird-vendor-defs.mk
+@@ -267,11 +267,6 @@
+    SB_CONFIGURE_OPTS += --build=$(CONFIGURE_TARGET)
+ endif
+ 
+-ifneq (,$(filter linux-i686 macosx-i686,$(SB_TARGET_ARCH)))
+-   SB_CFLAGS += -g -gstabs+
+-   SB_CXXFLAGS += -g -gstabs+
+-endif
+-
+ ifeq (debug,$(SB_BUILD_TYPE))
+    SB_CONFIGURE_OPTS += --enable-debug
+    SB_BUILD_TYPE_DETECTED = 1

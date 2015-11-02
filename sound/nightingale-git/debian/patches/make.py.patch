@@ -1,0 +1,26 @@
+--- a/addons/make.py
++++ b/addons/make.py
+@@ -1,3 +1,5 @@
++#!/usr/bin/env python
++
+ import os
+ import sys
+ from zipfile import ZipFile
+@@ -9,7 +11,7 @@
+   install = parse(os.path.join(sys.argv[1], "install.rdf"))
+   element = install.getElementsByTagName("em:version")[0]
+   version = element.firstChild.data
+-  xpiName = sys.argv[1] + "-" + version + ".xpi"
++  xpiName = sys.argv[1].rstrip("/") + "-" + version + ".xpi"
+   xpi = ZipFile(xpiName, "w")
+   os.chdir(sys.argv[1])
+   for root, dirs, files in os.walk("."):
+@@ -18,7 +20,7 @@
+           xpi.write(path, path, 8)
+   xpi.close()
+   os.chdir("..")
+-  if os.path.exists(xpiName):
++  if os.path.exists(os.path.basename(xpiName)):
+       print(xpiName + " successfully written.")
+   else:
+       sys.exit(xpiName + " could not be written.")

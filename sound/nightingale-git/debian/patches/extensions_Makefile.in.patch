@@ -1,0 +1,26 @@
+--- a/extensions/Makefile.in
++++ b/extensions/Makefile.in
+@@ -39,11 +39,7 @@
+ 
+ # AlbumArt is not on the list because it's used internally by the bird, so
+ # we need to build it regardless of platform
+-NOARCH_EXTENSIONS = albumartlastfm \
+-                    lastfm \
+-                    mashTape \
+-                    shoutcast \
+-                    amazonmusic \
++NOARCH_EXTENSIONS = shoutcast \
+                     $(NULL)
+ 
+ # Right now, all of these addons are so-called "noarch" addons; because
+@@ -72,8 +68,8 @@
+ 
+ # MPRIS & GTK Window Hiding
+ ifeq (linux,$(SB_PLATFORM))
+-    DEFAULT_EXTENSIONS += mpris \
+-                          hide-on-close \
++    DEFAULT_EXTENSIONS += minimizetotray \
++                          mpris \
+                           $(NULL)
+ endif
+ 

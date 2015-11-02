@@ -1,0 +1,5 @@
+deps-no-debug.patch
+deps-no-shlibsign.patch
+firstrun-startpage.patch
+make.py.patch
+extensions_Makefile.in.patch

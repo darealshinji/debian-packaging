@@ -2,29 +2,37 @@ Source: nightingale
 Section: sound
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
-Build-Depends: autoconf,
-               autotools-dev,
-               debhelper (>= 9),
-               libasound2,
-               libdbus-glib-1-dev,
-               libevent-2.0-5,
-               libgnomevfs2-dev,
-               libgstreamer-plugins-base0.10-dev,
-               libgtk2.0-dev,
-               libhunspell-1.3-0,
-               libidl0,
-               libjpeg-turbo8,
-               libsqlite0-dev,
-               libtag1-dev,
-               libnotify-dev,
-               libnspr4-dev,
-               libnss3,
-               libpng12-0,
-               libunity-dev,
-               libxext-dev,
-               libxt6,
-               unzip,
-               zip
+Build-Depends:
+ debhelper (>= 9),
+ automake,
+ autoconf2.13,
+ autotools-dev,
+ libtool,
+ cmake,
+ libasound2-dev,
+ libbz2-dev,
+ libcairo2-dev,
+ libdbus-glib-1-dev,
+ libevent-dev,
+ libfreetype6-dev,
+ libgnomevfs2-dev,
+ libgstreamer-plugins-base0.10-dev,
+ libgtk2.0-dev,
+ libharfbuzz-dev,
+ libhunspell-dev,
+ libidl-dev,
+ libjpeg-turbo8-dev,
+ libnotify-dev,
+ libnspr4-dev,
+ libnss3-dev,
+ libpixman-1-dev,
+ libpng12-dev,
+ libsqlite0-dev,
+ libsqlite3-dev,
+ libxext-dev,
+ libxt-dev,
+ zip,
+ zlib1g-dev
 Standards-Version: 3.9.6
 Homepage: http://www.getnightingale.com
 Vcs-Browser: https://github.com/nightingale-media-player/nightingale-hacking
@@ -52,15 +60,3 @@ Description: Play, manage and organize digital media
  it is built from the Mozilla cross-platform and open source framework,
  and based on Songbird.
 
-Package: ngale-unity-addon
-Architecture: any
-Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         nightingale (= ${binary:Version})
-Description: Unity integration plugin
- This desktop media player is a digital jukebox and Web browser mash-up.
- It supports extensions and feathers (skins). Like Firefox/Iceweasel,
- it is built from the Mozilla cross-platform and open source framework,
- and based on Songbird.
- .
- This package adds support for Unity's sound menu.

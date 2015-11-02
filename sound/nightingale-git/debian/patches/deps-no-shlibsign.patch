@@ -1,0 +1,49 @@
+--- a/nightingale-deps/xulrunner-1.9.2/mozilla/security/nss/cmd/shlibsign/Makefile
++++ b/nightingale-deps/xulrunner-1.9.2/mozilla/security/nss/cmd/shlibsign/Makefile
+@@ -76,18 +76,6 @@
+ endif
+ 
+ 
+-# sign any and all shared libraries that contain the word freebl
+-
+-CHECKLIBS = $(DIST)/lib/$(DLL_PREFIX)softokn3.$(DLL_SUFFIX)
+-CHECKLIBS += $(wildcard $(DIST)/lib/$(DLL_PREFIX)freebl*3.$(DLL_SUFFIX))
+-ifndef NSS_DISABLE_DBM
+-CHECKLIBS += $(DIST)/lib/$(DLL_PREFIX)nssdbm3.$(DLL_SUFFIX)
+-endif
+-CHECKLOC = $(CHECKLIBS:.$(DLL_SUFFIX)=.chk)
+-
+-MD_LIB_RELEASE_FILES = $(CHECKLOC)
+-ALL_TRASH += $(CHECKLOC)
+-
+ 
+ #######################################################################
+ # (5) Execute "global" rules. (OPTIONAL)                              #
+@@ -109,16 +97,3 @@
+ 
+ SRCDIR = $(call core_abspath,.)
+ 
+-%.chk: %.$(DLL_SUFFIX) 
+-ifeq ($(OS_TARGET), OS2)
+-	cd $(OBJDIR) ; cmd.exe /c $(SRCDIR)/sign.cmd $(DIST) \
+-	$(call core_abspath,$(OBJDIR)) $(OS_TARGET) \
+-	$(call core_abspath,$(NSPR_LIB_DIR)) $(call core_abspath,$<)
+-else
+-	cd $(OBJDIR) ; sh $(SRCDIR)/sign.sh $(call core_abspath,$(DIST)) \
+-	$(call core_abspath,$(OBJDIR)) $(OS_TARGET) \
+-	$(call core_abspath,$(NSPR_LIB_DIR)) $(call core_abspath,$<)
+-endif
+-
+-libs install :: $(CHECKLOC)
+-
+--- a/nightingale-deps/xulrunner-1.9.2/mozilla/security/manager/Makefile.in
++++ b/nightingale-deps/xulrunner-1.9.2/mozilla/security/manager/Makefile.in
+@@ -310,6 +310,8 @@
+ 	$(MAKE) -C pki $@
+ endif
+ 
++SKIP_CHK=1
++
+ libs::
+ ifndef MOZ_NATIVE_NSS
+ 	$(NSSMAKE) -C $(topsrcdir)/security/coreconf $(DEFAULT_GMAKE_FLAGS)
