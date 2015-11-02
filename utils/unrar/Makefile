@@ -28,5 +28,5 @@ download:
 	cat changelog.new debian/changelog.in > debian/changelog
 
 	# patch files
-	sed -i 's/FLAGS=/FLAGS+=/g' unrar/makefile
+	sed -i 's/FLAGS=/FLAGS+=/g; s/-O2//g;' unrar/makefile
 	sed -i '/RARVER_MINOR/d' unrar/version.hpp
