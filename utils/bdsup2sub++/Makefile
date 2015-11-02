@@ -5,4 +5,4 @@ builddir = BDSup2SubPlusPlus
 
 download:
 	rm -rf $(builddir)
-	git clone --depth 1 "https://github.com/amichaelt/BDSup2SubPlusPlus.git"
+	git clone --depth 1 "https://github.com/darealshinji/BDSup2SubPlusPlus.git"

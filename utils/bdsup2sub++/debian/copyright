@@ -1,6 +1,6 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: BDSup2Sub++
-Source: https://github.com/amichaelt/BDSup2SubPlusPlus
+Source: https://github.com/darealshinji/BDSup2SubPlusPlus
 
 Files: *
 Copyright: 2012 Adam T.

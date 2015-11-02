@@ -8,8 +8,8 @@ Build-Depends: debhelper (>= 9),
 Standards-Version: 3.9.6
 Section: utils
 Homepage: https://github.com/amichaelt/BDSup2SubPlusPlus
-Vcs-Git: https://github.com/amichaelt/BDSup2SubPlusPlus.git
-Vcs-Browser: https://github.com/amichaelt/BDSup2SubPlusPlus
+Vcs-Git: https://github.com/darealshinji/BDSup2SubPlusPlus.git
+Vcs-Browser: https://github.com/darealshinji/BDSup2SubPlusPlus
 
 Package: bdsup2sub++
 Architecture: any
