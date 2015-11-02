@@ -10,7 +10,7 @@ override_dh_auto_install:
 override_dh_installman:
 	help2man -N -h '-h' -n "A/52 audio encoder" --version-string=0.0.8 \
 		debian/tmp/usr/bin/aften > build/aften.1
-	help2man -N -h '' --no-discard-stderr --version-string=0.0.8 \
+	help2man -N -h '' -n "part of Aften" --no-discard-stderr --version-string=0.0.8 \
 		debian/tmp/usr/bin/wavfilter  > build/wavfilter.1
 	help2man -N -h '-h' -n "utility program to calculate AC-3 dialnorm" \
 		--version-string=0.0.8 debian/tmp/usr/bin/wavrms > build/wavrms.1
