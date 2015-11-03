@@ -15,7 +15,6 @@ override_dh_auto_clean:
 
 override_dh_auto_configure:
 	./configure --enable-gpl \
-		--enable-nonfree \
 		--disable-shared \
 		--enable-runtime-cpudetect \
 		--enable-x11grab \
@@ -23,7 +22,6 @@ override_dh_auto_configure:
 		--enable-libass \
 		--enable-libdc1394 \
 		--enable-libdirac \
-		--enable-libfaac \
 		--enable-libgsm \
 		--enable-libmp3lame \
 		--enable-libopenjpeg \
