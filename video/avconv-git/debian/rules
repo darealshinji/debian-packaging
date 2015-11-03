@@ -1,34 +1,207 @@
 #!/usr/bin/make -f
 
-include debian/confflags
+CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
+LDFLAGS  := -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
 
 export V=1
+
+X264_CONFIG = \
+	--host=$(DEB_HOST_GNU_TYPE) \
+	--prefix=$(CURDIR)/libs \
+	--libdir=$(CURDIR)/libs/lib \
+	--disable-cli \
+	--enable-pic \
+	--enable-static \
+	--disable-avs \
+	--disable-swscale \
+	--disable-lavf \
+	--disable-ffms \
+	--disable-gpac \
+	--disable-lsmash
+
+X265_CONFIG = \
+	-DENABLE_CLI=OFF \
+	-DENABLE_SHARED=OFF \
+	-DENABLE_AGGRESSIVE_CHECKS=ON \
+	-DENABLE_PIC=ON
+
+ifneq ($(DEB_HOST_ARCH),amd64)
+# asm not supported for i386
+X265_CONFIG += -DENABLE_ASSEMBLY=OFF
+endif
+
+DEB_REVISION = $(word 2, $(subst -, ,$(shell dpkg-parsechangelog -SVersion)))
+
+CONFIG = --prefix=/usr \
+	--extra-version="$(DEB_REVISION)" \
+	--libdir=/usr/lib/libav-tools \
+	--shlibdir=/usr/lib/libav-tools \
+	--enable-shared \
+	--disable-static \
+	--disable-debug \
+	--toolchain=hardened \
+	--enable-pthreads \
+	--enable-runtime-cpudetect \
+	--enable-d3d11va \
+	--enable-dxva2 \
+	--enable-vaapi \
+	--enable-vda \
+	--enable-vdpau \
+	--enable-gpl \
+	--enable-version3 \
+	--enable-nonfree \
+	--enable-bzlib \
+	--enable-frei0r \
+	--enable-gnutls \
+	--enable-libbs2b \
+	--enable-libcdio \
+	--enable-libdc1394 \
+	--enable-libfaac \
+	--enable-libfdk-aac \
+	--enable-libfreetype \
+	--enable-libgsm \
+	--enable-libkvazaar \
+	--enable-libmp3lame \
+	--enable-libopencore-amrnb \
+	--enable-libopencore-amrwb \
+	--enable-libopencv \
+	--enable-libopenjpeg \
+	--enable-libopus \
+	--enable-libpulse \
+	--enable-librtmp \
+	--enable-libschroedinger \
+	--enable-libsnappy \
+	--enable-libspeex \
+	--enable-libtheora \
+	--enable-libtwolame \
+	--enable-libvo-aacenc \
+	--enable-libvo-amrwbenc \
+	--enable-libvorbis \
+	--enable-libvpx \
+	--enable-libwavpack \
+	--enable-libwebp \
+	--enable-libx264 \
+	--enable-libx265 \
+	--enable-libxcb-shm \
+	--enable-libxcb-xfixes \
+	--enable-libxvid \
+	--enable-zlib
+
 
 
 %:
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	dh_auto_clean || true
+	[ ! -f config.mak ] || $(MAKE) distclean
+	[ ! -f x264/config.mak ] || $(MAKE) -C x264 distclean
+	dh_auto_clean -Dfdk-aac
+	dh_auto_clean -Dkvazaar/src
+	rm -rf x265_12bit x265_10bit x265_8bit libs
+	rm -f avtools-qt-faststart
 
 override_dh_auto_configure:
-	CFLAGS='$(CFLAGS)' CPPFLAGS='$(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' \
-	./configure $(confflags) $(v3_confflags) $(nf_confflags) $(shared_build_confflags)
+	# x264
+	cd x264 && ./configure $(X264_CONFIG)
+
+	# x265 main10 main12
+	dh_auto_configure \
+		--buildsystem=cmake \
+		--sourcedirectory=x265/source \
+		--builddirectory=x265_12bit \
+		-- $(X265_CONFIG) \
+		-DHIGH_BIT_DEPTH=ON \
+		-DEXPORT_C_API=OFF \
+		-DMAIN12=ON
+	dh_auto_configure \
+		--buildsystem=cmake \
+		--sourcedirectory=x265/source \
+		--builddirectory=x265_10bit \
+		-- $(X265_CONFIG) \
+		-DHIGH_BIT_DEPTH=ON \
+		-DEXPORT_C_API=OFF
+
+	# x265 main
+	mkdir x265_8bit
+	ln -s ../x265_10bit/libx265.a x265_8bit/libx265_main10.a
+	ln -s ../x265_12bit/libx265.a x265_8bit/libx265_main12.a
+	dh_auto_configure \
+		--buildsystem=cmake \
+		--sourcedirectory=x265/source \
+		--builddirectory=x265_8bit \
+		-- $(X265_CONFIG) \
+		-DCMAKE_INSTALL_PREFIX=$(CURDIR)/libs \
+		-DLIB_INSTALL_DIR=lib \
+		-DHIGH_BIT_DEPTH=OFF \
+		-DEXTRA_LIB="x265_main10.a;x265_main12.a;-ldl" \
+		-DEXTRA_LINK_FLAGS="-L$(CURDIR)/x265_8bit" \
+		-DLINKED_10BIT=ON \
+		-DLINKED_12BIT=ON
+
+	# fdk-aac
+	autoreconf -fi fdk-aac
+	dh_auto_configure -Dfdk-aac -- \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/libs \
+		--libdir=$(CURDIR)/libs/lib \
+		--enable-static=yes \
+		--enable-shared=no \
+		--with-pic=yes
 
 override_dh_auto_build:
+	# x264
+	dh_auto_build -Dx264
+	$(MAKE) -C x264 install
+
+	# x265
+	dh_auto_build --builddirectory=x265_12bit
+	dh_auto_build --builddirectory=x265_10bit
+	dh_auto_build -Dx265_8bit
+	$(MAKE) -C x265_8bit install
+	cp x265_8bit/libx265_main*.a $(CURDIR)/libs/lib
+	sed -e 's|@PREFIX@|$(CURDIR)/libs|g; s|@VERSION@|$(shell cat x265/VERSION)|g' \
+		debian/x265.pc.in > $(CURDIR)/libs/lib/pkgconfig/x265.pc
+
+	# fdk-aac
+	dh_auto_build -Dfdk-aac
+	$(MAKE) -C fdk-aac install
+
+	# kvazaar
+	CFLAGS="$(CFLAGS) -fPIC -DPIC $(CPPFLAGS)" \
+		ARCH=$(DEB_HOST_ARCH) \
+		$(MAKE) -C kvazaar/src lib-static
+	ARCH=$(DEB_HOST_ARCH) \
+		$(MAKE) -C kvazaar/src install-static install-pc \
+		PREFIX=$(CURDIR)/libs
+
+	# libav
+	# set all relevant hardening flags with --toolchain=hardened
+	CFLAGS="-I$(CURDIR)/libs/include" CPPFLAGS="" \
+	LDFLAGS="-L$(CURDIR)/libs/lib -Wl,-z,noexecstack -Wl,-rpath,XORIGIN/../lib/libav-tools" \
+	PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig" \
+		./configure $(CONFIG) || (cat config.log && exit 1)
 	dh_auto_build
+	dh_auto_build -- apidoc
 	dh_auto_build -- tools/qt-faststart
+	chrpath -d tools/qt-faststart
+	mv tools/qt-faststart avtools-qt-faststart
 
 override_dh_auto_test:
+
+override_dh_auto_install:
+	dh_auto_install --destdir=$(CURDIR)/debian/tmp
+	for f in debian/tmp/usr/bin/av* ; \
+do \
+  chrpath -r '$$ORIGIN/../lib/libav-tools' $$f ;\
+done
+	for f in debian/tmp/usr/lib/libav-tools/*.so.* ; \
+do \
+  chrpath -r '$$ORIGIN' $$f ;\
+done
 
 override_dh_installchangelogs:
 	dh_installchangelogs Changelog
 
 override_dh_makeshlibs:
-
-override_dh_shlibdeps:
-	dh_shlibdeps -Llibav-tools -l/usr/lib/libav-tools
-
-override_dh_strip:
-	dh_strip --dbg-package=libav-dbg
 
