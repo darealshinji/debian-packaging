@@ -91,7 +91,10 @@ CONFIG = --prefix=/usr \
 
 
 %:
-	dh ${@} --parallel
+	dh ${@} --parallel --with autoreconf
+
+override_dh_autoreconf:
+	dh_autoreconf autoreconf -- -ivf fdk-aac
 
 override_dh_auto_clean:
 	[ ! -f config.mak ] || $(MAKE) distclean
@@ -140,7 +143,6 @@ override_dh_auto_configure:
 		-DLINKED_12BIT=ON
 
 	# fdk-aac
-	autoreconf -fi fdk-aac
 	dh_auto_configure -Dfdk-aac -- \
 		--host=$(DEB_HOST_GNU_TYPE) \
 		--prefix=$(CURDIR)/libs \

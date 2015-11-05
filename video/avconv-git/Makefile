@@ -1,10 +1,10 @@
 include ../../mk/include.mk
 
-deps       = wget git
-builddir   = libav
+deps     = wget git
+builddir = libav
 
 download:
-	rm -rf $(srcfiles)
+	rm -rf libav
 	git clone --depth 1 "git://git.libav.org/libav.git"
 	@ $(call download,x265.tar.bz2,https://bitbucket.org/multicoreware/x265/get/tip.tar.bz2)
 	git clone --depth 1 "git://git.videolan.org/x264.git" libav/x264

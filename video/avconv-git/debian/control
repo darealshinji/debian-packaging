@@ -19,6 +19,7 @@ Build-Depends:
  libcdio-paranoia-dev,
  libdc1394-22-dev,
  libfaac-dev,
+ libfontconfig1-dev,
  libfreetype6-dev,
 #libgnutls28-dev conflicts with librtmp-dev
  libgnutls-dev,
@@ -48,7 +49,6 @@ Build-Depends:
  libvpx-dev,
  libwavpack-dev,
  libwebp-dev,
- libx264-dev,
  libxext-dev,
  libx11-xcb-dev,
  libxvidcore-dev,
