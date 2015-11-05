@@ -1,0 +1,2 @@
+#!/bin/sh
+LD_PRELOAD="/usr/lib/ffmpeg/x264_10bit/libx264.so" ffmpeg $*

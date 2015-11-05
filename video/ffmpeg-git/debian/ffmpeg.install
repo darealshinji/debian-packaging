@@ -1,6 +1,10 @@
-usr/bin/ff*
-usr/lib/*.so.*
-usr/share/man/man1
-usr/share/man/man3
-usr/share/ffmpeg/*.ffpreset
-ffmpeg/doc/ffserver.conf      etc
+/usr/bin/ff*
+/usr/lib/ffmpeg/*.so.*
+/usr/share/doc/ffmpeg/*.html
+/usr/share/ffmpeg/*.ffpreset
+/usr/share/ffmpeg/ffprobe.xsd
+/usr/share/man/man1/ff*
+ffmpeg-qt-faststart                /usr/bin
+doc/ffserver.conf                  /etc
+libs/lib/libx264.so.*              /usr/lib/ffmpeg
+x264_10bit/libs/lib/libx264.so*    /usr/lib/ffmpeg/x264_10bit

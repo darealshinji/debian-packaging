@@ -4,106 +4,88 @@ Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 Standards-Version: 3.9.6
 Vcs-Git: git://source.ffmpeg.org/ffmpeg.git
-Vcs-Browser: http://git.videolan.org/?p=ffmpeg.git;a=tree
+Vcs-Browser: http://git.videolan.org/?p=ffmpeg.git
 Homepage: http://www.ffmpeg.org/
 Build-Depends:
  debhelper (>= 9),
- libbz2-dev,
- liblzma-dev,
- zlib1g-dev,
- libasound2-dev,
- libopenal-dev,
- libpulse-dev,
- libsdl1.2-dev,
+ dh-autoreconf,
+ chrpath,
+ cmake,
+ doxygen,
+ flite1-dev,
  frei0r-plugins-dev,
+ ladspa-sdk,
+ libasound2-dev,
  libass-dev,
+ libavc1394-dev,
  libbluray-dev,
+ libbs2b-dev,
+ libbz2-dev,
+ libcaca-dev,
  libcdio-dev,
  libcdio-cdda-dev,
  libcdio-paranoia-dev,
  libdc1394-22-dev,
- libraw1394-dev,
-#libfdk-aac-dev,
+ libfaac-dev,
+ libfontconfig1-dev,
  libfreetype6-dev,
+ libfribidi-dev,
+ libgl1-mesa-dev,
+ libgme-dev,
+ libgsm1-dev,
 #libgnutls28-dev conflicts with librtmp-dev
  libgnutls-dev,
- libgsm1-dev,
+ libiec61883-dev,
+ liblzma-dev,
+ libmodplug-dev,
  libmp3lame-dev,
-#libopenh264-dev,
+ libnuma-dev,
+ libopenal-dev,
  libopencore-amrnb-dev,
  libopencore-amrwb-dev,
+ libopencv-dev,
+ libopenjpeg-dev,
  libopus-dev,
+ libpulse-dev,
+ librubberband-dev,
+ libquvi-dev,
+ libraw1394-dev,
  librtmp-dev,
  libschroedinger-dev,
+ libsdl1.2-dev,
+ libsmbclient-dev,
+ libsnappy-dev,
+ libsoxr-dev,
  libspeex-dev,
+ libssh-dev,
+ libtesseract-dev,
  libtheora-dev,
- libva-dev,
- libvdpau-dev,
+ libtwolame-dev,
+ libv4l-dev,
  libvo-aacenc-dev,
  libvo-amrwbenc-dev,
  libvorbis-dev,
  libvpx-dev,
  libwavpack-dev,
  libwebp-dev,
+ libxext-dev,
  libx11-xcb-dev,
-#libx264-dev,
-#libx265-dev,
  libxvidcore-dev,
- doxygen,
+ libzvbi-dev,
+ ocl-icd-opencl-dev,
+ opencl-headers,
+ pkg-config,
  texinfo,
- yasm (>= 1.2),
- cmake (>= 2.8.8),
- dh-autoreconf
+ yasm,
+ zlib1g-dev
 
 Package: ffmpeg
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: qt-faststart
-Suggests: frei0r-plugins
+Suggests: frei0r-plugins, ladspa-sdk
 Description: Tools for transcoding, streaming and playing of multimedia files
  FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
  mux, demux, stream, filter and play pretty much anything that humans and
  machines have created. It supports the most obscure ancient formats up to the
  cutting edge.
- .
- This package contains:
-  * ffmpeg: a command line tool to convert multimedia files between formats
-  * ffserver: a multimedia streaming server for live broadcasts
-  * ffplay: a simple media player based on SDL and the FFmpeg libraries
-  * ffprobe: a simple multimedia stream analyzer
- .
- NOTE: It does not contain qt-faststart to avoid a conflict with libav-tools.
-       If you need qt-faststart from FFmpeg, install the package qt-faststart,
-       which is recommended by this package.
-
-Package: qt-faststart
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: ffmpeg (<< 7:2)
-Replaces: ffmpeg (<< 7:2)
-Description: Utility to rearrange a Quicktime file
- FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
- mux, demux, stream, filter and play pretty much anything that humans and
- machines have created. It supports the most obscure ancient formats up to the
- cutting edge.
- .
- This package contains qt-faststart, a utility that rearranges a Quicktime
- file such that the moov atom is in front of the data, thus facilitating
- network streaming.
- .
- NOTE: It diverts the qt-faststart from libav-tools to qt-faststart.libav.
-
-Package: ffmpeg-doc
-Section: doc
-Architecture: all
-Depends: libjs-jquery, ${misc:Depends}
-Description: Documentation of the FFmpeg multimedia framework
- FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
- mux, demux, stream, filter and play pretty much anything that humans and
- machines have created. It supports the most obscure ancient formats up to the
- cutting edge.
- .
- This package contains the HTML documentation for the FFmpeg multimedia
- framework including the API documentation created by doxygen and the manpages
- for the libraries.
 
