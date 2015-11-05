@@ -182,21 +182,21 @@ ifneq ($(SUMMARY),0)
 	@ packages="$$(find "$(resultdir)" -maxdepth 1 -type f -name *.deb)" ; \
 	if [ -n "$$packages" ] ;             \
 	then                                 \
-		for f in $$packages ; do         \
-			echo "$$f:" ;                \
-			dpkg-deb -I $$f ;            \
-			echo "" ;                    \
-		done 2>&1 | tee -a $(LOG) ;      \
-		for f in $$packages ; do         \
-			echo "$$f:" ;                \
-			dpkg-deb -c $$f ;            \
-			echo "" ;                    \
-		done 2>&1 | tee -a $(LOG) ;      \
-		for f in $$packages ; do         \
-			echo "$$f:" ;                \
-			lintian $$f ;                \
-			echo "" ;                    \
-		done 2>&1 | tee -a $(LOG) ;      \
+	    for f in $$packages ; do         \
+	        echo "$$f:" ;                \
+	        dpkg-deb -I $$f ;            \
+	        echo "" ;                    \
+	    done 2>&1 | tee -a $(LOG) ;      \
+	    for f in $$packages ; do         \
+	        echo "$$f:" ;                \
+	        dpkg-deb -c $$f ;            \
+	        echo "" ;                    \
+	    done 2>&1 | tee -a $(LOG) ;      \
+	    for f in $$packages ; do         \
+	        echo "$$f:" ;                \
+	        lintian $$f ;                \
+	        echo "" ;                    \
+	    done 2>&1 | tee -a $(LOG) ;      \
 	fi
 endif
 
