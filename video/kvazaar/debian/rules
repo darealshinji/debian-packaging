@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-VERSION = $(shell grep 'VERSION_STRING' src/global.h | cut -d '"' -f2)
+VERSION = $(shell dpkg-parsechangelog -SVersion | cut -d- -f1 | cut -d+ -f1)
 
 
 %:
@@ -14,10 +14,6 @@ override_dh_auto_build:
 	dh_auto_build -Dsrc
 	help2man --no-discard-stderr -N -n "open-source HEVC encoder" -h '' \
 	--version-string=$(VERSION) src/kvazaar > kvazaar.1
-
-override_dh_auto_test:
-	unxz -fk debian/test.y4m.xz
-	src/kvazaar -i debian/test.y4m --input-res 640x480 --frames 20 -o test.hevc
 
 override_dh_installdocs:
 	dh_installdocs -pkvazaar

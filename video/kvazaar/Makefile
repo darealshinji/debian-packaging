@@ -5,9 +5,8 @@ deps = git
 download:
 	rm -rf $(builddir)
 	git clone --depth 1 "https://github.com/ultravideo/kvazaar.git" $(builddir)
-	@ VER=`grep 'VERSION_STRING' $(builddir)/src/global.h | cut -d '"' -f2`; \
+	@ VER=`grep 'KVZ_VERSION' $(builddir)/src/global.h | head -n1 | cut -d ' ' -f3`; \
 	latestcommit=`git -C $(builddir) log -1 --format=%ci | head -c10 | tr -d '-'`; \
 	VERSION="$${VER}+git$${latestcommit}"; $(changelog-entry)
-	cp -f ../../mk/test.y4m.xz $(builddir)/debian/
 	sed -i 's/-Werror//g' $(builddir)/src/Makefile
 
