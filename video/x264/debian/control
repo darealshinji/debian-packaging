@@ -9,6 +9,7 @@ Uploaders:
  djcj <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 9),
+ chrpath,
  help2man,
  libgpac-dev,
  libjpeg-dev,

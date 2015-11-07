@@ -11,5 +11,4 @@ download:
 	cp -f ../../mk/config.* x264-source
 	rm -rf ffmpeg/.git
 	@ VERSION=2:$$(./version.sh) ; $(changelog-entry)
-	cp -f ../../mk/test.y4m.xz $(builddir)/debian/
 

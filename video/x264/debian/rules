@@ -1,20 +1,18 @@
 #!/usr/bin/make -f
 
-DEB_HOST_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
-
-CFLAGS  := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
-LDFLAGS := -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
+CFLAGS  := $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+LDFLAGS := -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed -Wl,-rpath,XORIGIN/../lib/x264
 
 export V=1
 
 help2man = \
-	LD_LIBRARY_PATH="$${LD_LIBRARY_PATH}:$(CURDIR)/ffmpeg/usr/lib" \
+	LD_LIBRARY_PATH="$${LD_LIBRARY_PATH}:$(CURDIR)/libs/lib" \
 	help2man -n "fast h264 encoder" -N -s1 -S "Videolan project" -h '--fullhelp'
 
 x264_configure = \
 	cd x264-source && \
-	CFLAGS="$(CFLAGS) -I$(CURDIR)/ffmpeg/usr/include" \
-	LDFLAGS="$(LDFLAGS) -L$(CURDIR)/ffmpeg/usr/lib" \
+	CFLAGS="$(CFLAGS) -I$(CURDIR)/libs/include" \
+	LDFLAGS="$(LDFLAGS) -L$(CURDIR)/libs/lib" \
 	./configure \
 		--prefix=/usr \
 		--host=$(DEB_HOST_GNU_TYPE) \
@@ -25,31 +23,27 @@ x264_configure = \
 	dh $@ --parallel
 
 override_dh_auto_clean:
-	dh_auto_clean -Dl-smash || true
-	dh_auto_clean -Dffmpeg || true
-	dh_auto_clean -Dx264-source || true
-	rm -rf ffmpeg/usr
-	rm -f debian/test.y4m test.mp4 x264_2pass.log* \
-	x264-source/x264-10bit x264-source/x264-10bit.1 x264-source/x264.1
+	[ ! -f ffmpeg/config.mak ] || $(MAKE) -C ffmpeg distclean
+	[ ! -f x264-source/config.mak ] || $(MAKE) -C x264-source distclean
+	rm -rf libs
+	rm -f x264-source/x264-10bit x264-source/x264-10bit.1 x264-source/x264.1
 
 override_dh_auto_build:
 	cd ffmpeg && ./configure \
-		--prefix=$(CURDIR)/ffmpeg/usr \
-		--libdir=$(CURDIR)/ffmpeg/usr/lib \
+		--prefix=$(CURDIR)/libs \
+		--libdir=$(CURDIR)/libs/lib \
 		--disable-static \
 		--enable-shared \
-		--build-suffix=-x264 \
 		--disable-debug \
 		--disable-programs \
 		--disable-doc \
 		--disable-bzlib \
 		--disable-lzma \
 		--enable-gpl \
-		--enable-version3
+		--enable-version3 \
+		--disable-encoders
 	dh_auto_build -Dffmpeg
 	$(MAKE) -C ffmpeg install
-	$(foreach LIB, avcodec avdevice avfilter avformat avutil postproc swresample swscale,\
-	ln -s lib$(LIB)-x264.so $(CURDIR)/ffmpeg/usr/lib/lib$(LIB).so ;)
 
 	$(x264_configure) --bit-depth=10
 	dh_auto_build -Dx264-source
@@ -61,13 +55,12 @@ override_dh_auto_build:
 	dh_auto_build -Dx264-source
 	$(help2man) x264-source/x264 > x264-source/x264.1
 
-override_dh_auto_test:
-	unxz -k debian/test.y4m.xz
-	export LD_LIBRARY_PATH="$${LD_LIBRARY_PATH}:$(CURDIR)/ffmpeg/usr/lib"; \
-	x264-source/x264 --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
-	x264-source/x264 --pass 2 --bitrate 10 -o test.mp4 debian/test.y4m
-	rm -f test.mp4 x264_2pass.log*
-	export LD_LIBRARY_PATH="$${LD_LIBRARY_PATH}:$(CURDIR)/ffmpeg/usr/lib"; \
-	x264-source/x264-10bit --pass 1 --bitrate 10 -o /dev/null debian/test.y4m && \
-	x264-source/x264-10bit --pass 2 --bitrate 10 -o test.mp4 debian/test.y4m
+	chrpath -r '$$ORIGIN/../lib/x264' x264-source/x264
+	chrpath -r '$$ORIGIN/../lib/x264' x264-source/x264-10bit
+	for f in libs/lib/*.so.* ; \
+do \
+  chrpath -r '$$ORIGIN' $$f ;\
+done
+
+override_dh_makeshlibs:
 
