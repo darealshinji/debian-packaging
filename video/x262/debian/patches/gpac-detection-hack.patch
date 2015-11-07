@@ -1,6 +1,6 @@
 --- a/x262-source/configure
 +++ b/x262-source/configure
-@@ -954,11 +954,7 @@
+@@ -961,11 +961,7 @@
          cc_check "" -lwinmm && GPAC_LIBS="$GPAC_LIBS -lwinmm"
      fi
      if cc_check gpac/isomedia.h "$GPAC_LIBS" ; then

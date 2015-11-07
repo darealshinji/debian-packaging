@@ -12,8 +12,8 @@ LDFLAGS  := $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed -Wl,-z,noexec
 	dh $@ --parallel
 
 override_dh_auto_clean:
-	dh_auto_clean -Dffmpeg || true
-	dh_auto_clean -Dx262-source || true
+	[ ! -f ffmpeg/config.mak ] || $(MAKE) -C ffmpeg distclean
+	[ ! -f x262-source/config.mak ] || $(MAKE) -C x262-source distclean
 
 override_dh_auto_build:
 	cd ffmpeg && ./configure \
