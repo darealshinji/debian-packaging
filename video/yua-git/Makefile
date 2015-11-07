@@ -7,7 +7,8 @@ changelog-file = changelog.new
 download:
 	git clone "https://github.com/darealshinji/yua.git"
 	make -C $(builddir) download
-	cp -f debian/Makefile $(builddir)
+	mkdir -p $(builddir)/deps
+	cd $(builddir) && mv x264 ffmpeg fdk-aac gpac deps
 
 	mv $(builddir)/debian-upstream $(builddir)/debian
 	mv $(builddir)/debian/changelog $(builddir)/debian/changelog.in
@@ -17,5 +18,5 @@ download:
 	VERSION="$${yuaversion}+git$${latestcommit}"; $(changelog-entry)
 	cat changelog.new $(builddir)/debian/changelog.in > $(builddir)/debian/changelog
 
-	rm -rf $(builddir)/.git $(builddir)/gpac*.tar.bz2
+	rm -rf $(builddir)/.git $(builddir)/gpac*.tar.bz2 changelog.new
 

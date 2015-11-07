@@ -5,6 +5,21 @@ export V=1
 %:
 	dh ${@} --parallel
 
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf x264 ffmpeg fdk-aac gpac
+
+override_dh_auto_build:
+	rm -rf x264 ffmpeg fdk-aac gpac
+	cp -r deps/* $(CURDIR)
+	dh_auto_build -- static-qt4
+
+override_dh_auto_install:
+	$(MAKE) install PREFIX=/usr DESTDIR=$(CURDIR)/debian/tmp
+
+override_dh_install:
+	dh_install --sourcedir=$(CURDIR)/debian/tmp
+
 override_dh_shlibdeps:
 	# recognize the dependencies of the embedded helper tools
 	cp -f ffmpeg/ffmpeg $(CURDIR)/debian/yua/usr/bin
