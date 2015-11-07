@@ -13,4 +13,3 @@ download:
 	@ latesttag=`grep 'latesttag:' $(builddir)/.hg_archival.txt|cut -d' ' -f2` ;\
 	latesttagdistance=`grep 'latesttagdistance:' $(builddir)/.hg_archival.txt|cut -d' ' -f2` ;\
 	VERSION=$${latesttag}+$${latesttagdistance} ; $(changelog-entry)
-	cp -f ../../mk/test.y4m.xz $(builddir)/debian/

@@ -5,6 +5,7 @@ Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 9),
  cmake (>= 2.8.8),
+ libnuma-dev,
  python-sphinx,
  yasm (>= 1.2) [amd64]
 Standards-Version: 3.9.6
@@ -37,19 +38,6 @@ Description: H.265/HEVC video stream encoder
   * parallel encoding on multiple CPUs
   * output bitdept of 8, 10 and 12 bits
 
-Package: x265-dbg
-Priority: extra
-Section: debug
-Architecture: any
-Depends:
- ${misc:Depends},
- x265 (= ${binary:Version})
-Description: H.265/HEVC video stream encoder (debugging symbols)
- x265 is a commandline encoder for creating H.265/High Efficency Video Coding
- (HEVC) video streams.
- .
- This package provides the debugging symbols for x265.
-
 Package: libx265-dev
 Architecture: any
 Section: libdevel
@@ -59,8 +47,8 @@ Description: H.265/HEVC video stream encoder (development files)
  libx265 is an encoding library for creating H.265/High Efficency Video Coding
  (HEVC) video streams.
  .
- This is the development package which contains headers and libraries for
- libx265.
+ This is the development package which contains headers and static libraries
+ for libx265.
 
 Package: libx265-doc
 Section: doc
