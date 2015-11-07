@@ -7,7 +7,7 @@ download:
 	git clone -b master --depth 1 "git://source.ffmpeg.org/ffmpeg.git" $(builddir)/ffmpeg
 
 	@ latestcommit="`git -C $(builddir)/ log -1 --format=%ci | head -c10 | sed -e 's/-//g'`" ; \
-	VER="`git -C $(builddir)/ branch -r | grep 'origin/release/' | tail -n1 | cut -d '/' -f3`" ; \
+	VER="`git -C $(builddir)/ tag | sort -V | tail -n1 | tr -d 'v'`" ; \
 	VERSION="1:$${VER}+git$${latestcommit}" ; $(changelog-entry) ; \
 	echo "$${VER}+git$${latestcommit}" > $(builddir)/VERSION
 
