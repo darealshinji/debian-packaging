@@ -1,6 +1,0 @@
-?package(google-chrome-stable):needs="x11" \
-  section="Applications/Network/Web Browsing" \
-  hints="Web browsers" \
-  title="Google Chrome" \
-  icon="/usr/share/pixmaps/google-chrome.xpm" \
-  command="/usr/bin/google-chrome-stable"
