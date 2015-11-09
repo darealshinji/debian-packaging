@@ -1,0 +1,8 @@
+fmoddesignerapi/api/lib/libfmodevent@LIB64@.so                     usr/lib/fmodevent
+fmoddesignerapi/api/lib/libfmodevent@LIB64@-@VERSION@.so           usr/lib/fmodevent
+fmoddesignerapi/api/lib/libfmodeventL@LIB64@.so                    usr/lib/fmodevent
+fmoddesignerapi/api/lib/libfmodeventL@LIB64@-@VERSION@.so          usr/lib/fmodevent
+fmoddesignerapi/api/lib/libfmodeventnet@LIB64@.so                  usr/lib/fmodevent
+fmoddesignerapi/api/lib/libfmodeventnet@LIB64@-@VERSION@.so        usr/lib/fmodevent
+fmoddesignerapi/api/lib/libfmodeventnetL@LIB64@.so                 usr/lib/fmodevent
+fmoddesignerapi/api/lib/libfmodeventnetL@LIB64@-@VERSION@.so       usr/lib/fmodevent

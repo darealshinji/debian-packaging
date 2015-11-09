@@ -1,0 +1,42 @@
+Source: coreutils-git
+Maintainer: djcj <djcj@gmx.de>
+XSBC-Original-Maintainer: Michael Stone <mstone@debian.org>
+Section: utils
+Priority: required
+Standards-Version: 3.9.6
+Build-Depends: gettext (>= 0.10.37),
+               debhelper (>= 9),
+               autotools-dev,
+               dh-buildinfo,
+               texinfo (>= 4.2),
+               groff,
+               libattr1-dev,
+               libacl1-dev,
+               libselinux1-dev (>= 1.32),
+               gperf,
+               bison
+Homepage: http://www.gnu.org/software/coreutils
+Vcs-Git: git://git.sv.gnu.org/coreutils
+Vcs-Browser: http://git.sv.gnu.org/gitweb/?p=coreutils.git
+
+Package: coreutils-git
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: GNU core utilities - recent Git snapshot
+ This package contains the basic file, shell and text manipulation
+ utilities which are expected to exist on every operating system.
+ .
+ Specifically, this package includes: 
+ garch gbase64 gbasename gcat gchcon gchgrp gchmod gchown gchroot gcksum 
+ gcomm gcp gcsplit gcut gdate gdd gdf gdir gdircolors gdirname gdu gecho 
+ genv gexpand gexpr gfactor gfalse gfmt gfold ggroups ghead ghostid gid 
+ ginstall gjoin gkill glink gln glogname gls gmd5sum gmd5sum.textutils 
+ gmkdir gmkfifo gmknod gmktemp gmv gnice gnl gnohup gnproc gnumfmt god 
+ gpaste gpathchk gpinky gpr gprintenv gprintf gptx gpwd greadlink grealpath 
+ grm grmdir gruncon gseq gsha1sum gsha224sum gsha256sum gsha384sum 
+ gsha512sum gshred gshuf gsleep gsort gsplit gstat gstdbuf gstty gsum gsync 
+ gtac gtail gtee gtest gtimeout gtouch gtr gtrue gtruncate gtsort gtty 
+ guname gunexpand guniq gunlink guptime gusers gvdir gwc gwho gwhoami gyes
+ .
+ The commands are all prefixed to not conflict with the system's coreutils
+ package.

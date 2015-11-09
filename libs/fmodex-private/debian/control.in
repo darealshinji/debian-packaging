@@ -1,0 +1,140 @@
+Source: fmodex@SOVERSION@
+Priority: extra
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Section: libs
+Homepage: http://www.fmod.org/
+
+Package: libfmodex@SOVERSION@
+Section: libs
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: FMOD is a cross platform audio library and toolset
+ FMOD is a cross platform audio library and toolset to let you easily
+ implement the latest audio technologies into your title.
+ .
+ The FMOD Ex sound system is a revolutionary new audio engine for
+ game developers, multimedia developers, sound designers, musicians
+ and audio engineers, based on the years of experienced of Firelight
+ Technologies(tm) previous product FMOD.
+ It also aims high - to push the boundaries of audio implementation
+ for games and the like while at the same time using minimal resources
+ and being scalable. This new engine is written from the ground up
+ since FMOD 3 was released and involves years of experience and
+ feedback from FMOD users to create the most feature filled and easy
+ to use product possible, without the rawbacks of legacy
+ implementation that FMOD 3 may have suffered from its years of
+ continuous development.
+ .
+ Since the libraries are missing sonames and have uncommon filenames,
+ they will be saved as private libs to avoid trouble with the system.
+
+Package: libfmodex@SOVERSION@-dev
+Section: libdevel
+Architecture: amd64 i386
+Depends: libfmodex@SOVERSION@ (= ${binary:Version}),
+         ${misc:Depends}
+Description: Development package for the FMOD Ex library.
+ FMOD is a cross platform audio library and toolset to let you easily
+ implement the latest audio technologies into your title.
+ .
+ The FMOD Ex sound system is a revolutionary new audio engine for
+ game developers, multimedia developers, sound designers, musicians
+ and audio engineers, based on the years of experienced of Firelight
+ Technologies(tm) previous product FMOD.
+ It also aims high - to push the boundaries of audio implementation
+ for games and the like while at the same time using minimal resources
+ and being scalable. This new engine is written from the ground up
+ since FMOD 3 was released and involves years of experience and
+ feedback from FMOD users to create the most feature filled and easy
+ to use product possible, without the rawbacks of legacy
+ implementation that FMOD 3 may have suffered from its years of
+ continuous development.
+ .
+ This package installs the header files and libraries
+ needed to do development with FMOD Ex.
+ Since the libraries are missing sonames and have uncommon filenames,
+ they will be saved as private libs to avoid trouble with the system.
+
+Package: libfmodevent@SOVERSION@
+Section: libs
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         libfmodex@SOVERSION@ (= ${binary:Version})
+Description: Designer API library for the FMOD Ex library
+ FMOD is a cross platform audio library and toolset to let you easily
+ implement the latest audio technologies into your title.
+ .
+ The FMOD Ex sound system is a revolutionary new audio engine for
+ game developers, multimedia developers, sound designers, musicians
+ and audio engineers, based on the years of experienced of Firelight
+ Technologies(tm) previous product FMOD.
+ It also aims high - to push the boundaries of audio implementation
+ for games and the like while at the same time using minimal resources
+ and being scalable. This new engine is written from the ground up
+ since FMOD 3 was released and involves years of experience and
+ feedback from FMOD users to create the most feature filled and easy
+ to use product possible, without the rawbacks of legacy
+ implementation that FMOD 3 may have suffered from its years of
+ continuous development.
+
+Package: libfmodevent@SOVERSION@-dev
+Section: libdevel
+Architecture: amd64 i386
+Depends: libfmodevent@SOVERSION@ (= ${binary:Version}),
+         ${misc:Depends}
+Description: Development package for the FMOD Ex Designer API
+ FMOD is a cross platform audio library and toolset to let you easily
+ implement the latest audio technologies into your title.
+ .
+ The FMOD Ex sound system is a revolutionary new audio engine for
+ game developers, multimedia developers, sound designers, musicians
+ and audio engineers, based on the years of experienced of Firelight
+ Technologies(tm) previous product FMOD.
+ It also aims high - to push the boundaries of audio implementation
+ for games and the like while at the same time using minimal resources
+ and being scalable. This new engine is written from the ground up
+ since FMOD 3 was released and involves years of experience and
+ feedback from FMOD users to create the most feature filled and easy
+ to use product possible, without the rawbacks of legacy
+ implementation that FMOD 3 may have suffered from its years of
+ continuous development.
+ .
+ This package installs the header files and libraries
+ needed to do development with the FMOD Ex Designer API.
+ Since the libraries are missing sonames and have uncommon filenames,
+ they will be saved as private libs to avoid trouble with the system.
+
+Package: libfmodevent@SOVERSION@-examples
+Section: libdevel
+Architecture: all
+Depends: libfmodevent@SOVERSION@-dev (= ${binary:Version}),
+         ${misc:Depends}
+Description: Development package for the FMOD Ex Designer API
+ FMOD is a cross platform audio library and toolset to let you easily
+ implement the latest audio technologies into your title.
+ .
+ The FMOD Ex sound system is a revolutionary new audio engine for
+ game developers, multimedia developers, sound designers, musicians
+ and audio engineers, based on the years of experienced of Firelight
+ Technologies(tm) previous product FMOD.
+ It also aims high - to push the boundaries of audio implementation
+ for games and the like while at the same time using minimal resources
+ and being scalable. This new engine is written from the ground up
+ since FMOD 3 was released and involves years of experience and
+ feedback from FMOD users to create the most feature filled and easy
+ to use product possible, without the rawbacks of legacy
+ implementation that FMOD 3 may have suffered from its years of
+ continuous development.
+ .
+ This package installs example files for the FMOD Ex Designer API.
+
+Package: fmodex-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+Description: FMOD Ex documentation
+ This package installs the FMOD documentation.

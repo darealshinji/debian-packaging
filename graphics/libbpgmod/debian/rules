@@ -1,0 +1,65 @@
+#!/usr/bin/make -f
+
+VERSION = $(shell cat VERSION)
+MANPAGES = bpgencmod.1 bpgmux.1
+
+CFLAGS  += -Wall -Wno-unused-but-set-variable
+LDFLAGS += -Wl,-z,defs -Wl,--as-needed
+
+
+%:
+	dh $@ --parallel --with autoreconf
+
+override_dh_auto_clean:
+	dh_auto_clean
+	dh_auto_clean -Dpng
+	dh_auto_clean -Dx265/source
+	rm -f bpgencmod
+
+override_dh_auto_configure:
+	autoreconf -ivf png
+	dh_auto_configure -Dpng -- --enable-shared=no --enable-static=yes
+	cd x265/source && cmake \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_VERBOSE_MAKEFILE=ON \
+		-DENABLE_CLI=OFF \
+		-DENABLE_SHARED=OFF \
+		-DENABLE_PIC=OFF .
+
+override_dh_auto_build:
+	dh_auto_build -Dpng
+	dh_auto_build -Dx265/source
+	CFLAGS="$(CFLAGS) -Ipng -Ix265/source -DUSE_X265" \
+	CXXFLAGS="$(CXXFLAGS) -Ipng -Ix265/source -DUSE_X265" \
+	LDFLAGS="$(LDFLAGS) -Lpng/.libs" LIBS="x265/source/libx265.a -ldl -lpthread" \
+	./configure --disable-shared
+	dh_auto_build -- bpgmux bpgenc bpgdec
+	mv bpgenc bpgencmod
+
+override_dh_auto_test:
+	./bpgdec -o outfile.png html/lena512color.bpg
+	./bpgencmod -e jctvc -o out-jctvc.bpg outfile.png
+	./bpgencmod -e x265 -o out-x265.bpg outfile.png
+
+override_dh_auto_install:
+
+override_dh_installdocs:
+	dh_installdocs -A doc/bpg_spec.txt README
+
+override_dh_installchangelogs:
+	dh_installchangelogs -A ChangeLog
+
+override_dh_installman: $(MANPAGES)
+	dh_installman -plibbpgmod-bin $^
+
+$(MANPAGES):
+	sed -e 's/@VERSION@/$(VERSION)/;' debian/$@.header > $@
+	./$(subst .1,,$@) >> $@ || true
+	cat debian/$@.footer >> $@
+
+override_dh_clean:
+	dh_clean $(MANPAGES) out-*.bpg outfile.png
+
+override_dh_compress:
+	dh_compress -X.bpg
+

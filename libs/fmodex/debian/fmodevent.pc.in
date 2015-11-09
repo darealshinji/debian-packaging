@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib/@DEB_HOST_MULTIARCH@
+includedir=${prefix}/include
+
+Name: FMOD Event
+Description: FMOD Designer API
+Version: @VERSION@
+Cflags: -I${includedir}
+Libs: -L${libdir} -lfmodevent

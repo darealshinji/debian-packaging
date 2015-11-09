@@ -1,0 +1,4 @@
+build/*                 /usr/lib/pwnfps
+debian/pwnfps.desktop   /usr/share/applications
+debian/scripts/pwnfps   /usr/games
+converted_icons/icons   /usr/share

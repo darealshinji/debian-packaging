@@ -1,0 +1,4 @@
+debian/*.desktop        /usr/share/applications
+debian/thunderbird.sh   /usr/lib/thunderbird
+thunderbird             /usr/lib
+converted_icons/icons   /usr/share

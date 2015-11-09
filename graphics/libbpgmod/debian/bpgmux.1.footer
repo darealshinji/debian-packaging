@@ -1,0 +1,10 @@
+.fi
+
+.SH COPYRIGHT
+Copyright \(co 2015 xooyoozoo
+
+.SH "SEE ALSO"
+.BR bpgdecmod (1),
+.BR bpgencmod (1),
+.BR bpgviewmod (1),
+.BR bpg (5)

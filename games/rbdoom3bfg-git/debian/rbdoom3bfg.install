@@ -1,0 +1,4 @@
+build/rbdoom3bfg            usr/games
+debian/rbdoom3bfg.desktop   usr/share/applications
+rbdoom3bfg.png              usr/share/pixmaps
+base                        usr/share/games/doom3bfg

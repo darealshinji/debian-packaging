@@ -1,0 +1,2 @@
+# closed-source
+adobe-flashplugin: hardening-no-relro usr/lib/adobe-flashplugin/libflashplayer.so

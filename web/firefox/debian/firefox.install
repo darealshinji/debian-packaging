@@ -1,0 +1,4 @@
+debian/*.desktop        /usr/share/applications
+debian/firefox.sh       /usr/lib/firefox
+firefox                 /usr/lib
+converted_icons/icons   /usr/share
