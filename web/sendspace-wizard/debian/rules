@@ -2,8 +2,9 @@
 
 DEB_HOST_ARCH_BITS := $(shell dpkg-architecture -qDEB_HOST_ARCH_BITS)
 
-PATCHELF = $(CURDIR)/patchelfmod-master/src/patchelfmod --remove-needed \
-libgio-2.0.so.0,libfreetype.so.6,libjpeg.so.8,libfontconfig.so.1,libgthread-2.0.so.0,libatk-1.0.so.0,libpng12.so.0,libpangoft2-1.0.so.0
+LIBS = libatk-1.0.so.0 libgio-2.0.so.0 libgthread-2.0.so.0 libpangoft2-1.0.so.0 \
+	libfreetype.so.6 libfontconfig.so.1 \
+	libjpeg.so.8 libpng12.so.0
 
 
 %:
@@ -11,24 +12,22 @@ libgio-2.0.so.0,libfreetype.so.6,libjpeg.so.8,libfontconfig.so.1,libgthread-2.0.
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -rf patchelfmod-master
+	rm -f patchelf
 
 override_dh_auto_build:
-	tar xvf patchelfmod.tar.gz
-	cd patchelfmod-master && autoreconf -ifv
-	cd patchelfmod-master && ./configure && $(MAKE) check
+	g++ -w -DPACKAGE_STRING=\"\" -o patchelf patchelf.cpp
 
 override_dh_install:
 	mkdir -p debian/sswizard/usr/bin
 	install -m755 wizard/$(DEB_HOST_ARCH_BITS)bit/ssgui_app $(CURDIR)/debian/sswizard/usr/bin
 	install -m755 wizard/$(DEB_HOST_ARCH_BITS)bit/sswizard $(CURDIR)/debian/sswizard/usr/bin
-	strip -s debian/sswizard/usr/bin/*
-	$(PATCHELF) debian/sswizard/usr/bin/ssgui_app
-	$(PATCHELF) debian/sswizard/usr/bin/sswizard
 	dh_install
 
 override_dh_installchangelogs:
 	dh_installchangelogs wizard/Changelog.txt
 
 override_dh_strip:
+	dh_strip
+	./patchelf $(foreach LIB,$(LIBS),--remove-needed $(LIB)) debian/sswizard/usr/bin/ssgui_app
+	./patchelf $(foreach LIB,$(LIBS),--remove-needed $(LIB)) debian/sswizard/usr/bin/sswizard
 

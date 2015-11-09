@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 9),
- dh-autoreconf,
  libgdk-pixbuf2.0-0,
  libglib2.0-0,
  libgtk2.0-0,
