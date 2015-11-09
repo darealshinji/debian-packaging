@@ -1,4 +1,4 @@
-pidgin (1:2.10.11-1icq1) unstable; urgency=low
+pidgin (@EPOCH@2.10.11-1icq1) unstable; urgency=low
 
   * Disable annoying ICQ error message
   * Apply patches from the Ubuntu package

@@ -18,7 +18,7 @@ DEB_CONFIGURE_EXTRA_FLAGS = --disable-gevolution \
 	    --enable-perl --with-zephyr=/usr --enable-dbus --enable-gnutls=no \
 	    --enable-nss=yes --enable-cyrus-sasl --enable-vv --enable-farsight \
 	    --enable-tcl --enable-tk \
-	    --enable-nm @UNITY@ \
+	    --enable-nm @ENABLE_UNITY@ \
 	    --with-dynamic-prpls=bonjour,gg,irc,jabber,msn,myspace,mxit,novell,oscar,sametime,simple,yahoo,zephyr # disable silc
 
 DEB_INSTALL_DOCS_ALL := -XAUTHORS -XNEWS -XREADME

@@ -10,6 +10,5 @@ I recommend using gdebi for manual installations.
 
 Homepage: http://www.pidgin.im/
 
-PS: Epoch version number 1 is used because of Ubuntu.
-
-PPS: If you're running Ubuntu and Unity integration is not enabled, try to run `make` with `UBUNTU=1`
+PS: If you're running Ubuntu and Unity integration is not enabled or the package's version does not
+begin with `1:`, try to run `make` with `UBUNTU=1`
