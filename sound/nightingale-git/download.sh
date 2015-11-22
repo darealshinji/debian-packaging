@@ -1,27 +1,9 @@
 #!/bin/sh -e
 
-git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-deps.git"
-cd nightingale-deps
+git clone --depth 1 "https://github.com/darealshinji/nightingale-deps"
+rm -rf nightingale-deps/.git
 
-# remove all source files except xulrunner, taglib and sqlite
-rm -rf $(ls -1 -d */ | grep -v xulrunner | grep -v taglib | grep -v sqlite)
-
-# remove some other file to reduce size
-rm -rf xulrunner-1.9.2/mozilla/toolkit/mozapps/update/src/updater/macbuild \
-  xulrunner-1.9.2/mozilla/toolkit/crashreporter/client/macbuild \
-  xulrunner-1.9.2/mozilla/xpcom/tests/unit/data/SmallApp.app \
-  xulrunner-1.9.2/mozilla/xpcom/tests/unit/data/presentation.key \
-  xulrunner-1.9.2/mozilla/plugin/oji/JEP/JavaEmbeddingPlugin.bundle \
-  xulrunner-1.9.2/mozilla/plugin/oji/JEP/MRJPlugin.plugin/Contents \
-  xulrunner-1.9.2/mozilla/js/src/trace-test/lib/mandelbrot-results.js
-rm -f `find . -name *.a` `find . -name *.o` `find . -name *.exe` \
-  `find . -name *.dll` `find . -name *.class` `find . -name *.jar`
-
-# VCS directory
-rm -rf .git
-cd ..
-
-git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-hacking.git"
+git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-hacking"
 wget -O minimizetotray.tar.gz "https://github.com/darealshinji/minimizetotrayplus/archive/master.tar.gz"
 
 tar xfvz minimizetotray.tar.gz
