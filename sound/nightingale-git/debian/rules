@@ -1,6 +1,10 @@
 #!/usr/bin/make -f
 
-depsdir = nightingale-deps/linux-$(shell uname -m)
+ifeq ($(DEB_HOST_ARCH_CPU),amd64)
+DEPS_ARCH = x86_64
+else
+DEPS_ARCH = i686
+endif
 
 export V=1
 export CXXFLAGS = \
@@ -8,7 +12,6 @@ export CXXFLAGS = \
 	-fomit-frame-pointer \
 	-Wno-delete-non-virtual-dtor \
 	-Wno-unused-but-set-variable \
-	-I/usr/include/nspr \
 	$(shell dpkg-buildflags --get CPPFLAGS)
 export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
 
@@ -31,13 +34,8 @@ override_dh_auto_clean:
 override_dh_auto_configure:
 
 override_dh_auto_build:
-	cd nightingale-deps && ./lint-build.sh
-	rm -rf $(depsdir)/mozilla-1.9.2/debug \
-		$(depsdir)/sqlite/debug \
-		$(depsdir)/taglib/debug \
-		$(depsdir)/xulrunner-1.9.2/debug
-	mv $(depsdir) dependencies
-	dh_auto_clean -Dnightingale-deps
+	cd nightingale-deps && ./lint-build.sh --disable-debug --arch=$(DEPS_ARCH)
+	ln -s $(CURDIR)/nightingale-deps/linux-$(DEPS_ARCH) $(CURDIR)/dependencies/linux-$(DEPS_ARCH)
 
 	$(foreach OPTION,$(ac_add_options),echo 'ac_add_options $(OPTION)' >> nightingale.config ;)
 	dh_auto_build

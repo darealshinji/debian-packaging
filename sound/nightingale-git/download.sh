@@ -4,9 +4,7 @@ git clone --depth 1 "https://github.com/darealshinji/nightingale-deps"
 rm -rf nightingale-deps/.git
 
 git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-hacking"
-wget -O minimizetotray.tar.gz "https://github.com/darealshinji/minimizetotrayplus/archive/master.tar.gz"
-
-tar xfvz minimizetotray.tar.gz
+git clone --depth 1 "https://github.com/darealshinji/minimizetotrayplus"
 
 cd nightingale-hacking
 
@@ -27,14 +25,12 @@ rm -r debian tools/win32 vcproj extensions/lastfm tools/tracemalloc \
 rm -rf .git
 
 # copy minimizetotray extension
-cp -r ../minimizetotrayplus-master/src extensions/minimizetotray
-rm -r ../minimizetotray.tar.gz ../minimizetotrayplus-master
+cp -r ../minimizetotrayplus/src extensions/minimizetotray
+rm -rf ../minimizetotrayplus
 
 # download additional extensions
-wget "https://github.com/nightingale-media-player/nightingale-addons/archive/master.tar.gz"
-tar xfvz master.tar.gz
-rm master.tar.gz
-mv nightingale-addons-master addons
+git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-addons" addons
+rm -rf addons/.git
 chmod a+x addons/make.py
 cd ..
 

@@ -1,9 +1,9 @@
 include ../../mk/include.mk
 
-deps           = wget git
+deps           = git
 ngdir          = nightingale-hacking
 srcfiles       = $(ngdir)/*
-cleanfiles     = minimizetotrayplus-master nightingale-deps
+cleanfiles     = minimizetotrayplus nightingale-deps
 distcleanfiles = $(ngdir)
 changelog-file = $(ngdir)/changelog.new
 

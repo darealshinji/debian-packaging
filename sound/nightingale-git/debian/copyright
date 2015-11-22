@@ -10,17 +10,17 @@ Comment:
  .
  Certain files in this binary application ("binary") are
  Copyright(c) 2005-2007 POTI, Inc.
- Copyright(c) 2010-2011 getnightingale.com.
+ Copyright(c) 2010-2015 getnightingale.com.
  .
  Certain files in this binary contain code from VLC and XUL Runner which is 
  copyright their respective copyright holders. These files may include 
  modifications which are
  Copyright(c) 2005-2007 POTI, Inc.
- Copyright(c) 2010-2011 getnightingale.com.
+ Copyright(c) 2010-2015 getnightingale.com.
 
 Files: *
 Copyright: 2005-2007, POTI, Inc.
-           2010-2011, getnightingale.com.
+           2010-2015, getnightingale.com.
            Steven Bengtson - Stevo
            Janek Bevendorff - Manko10
            Downward
@@ -48,7 +48,7 @@ License: GPL-2+
 
 Files: dependencies/*/xulrunner-1.9.2/release/*
 Copyright: 2005-2007, POTI, Inc.
-           2010-2011, getnightingale.com.
+           2010-2015, getnightingale.com.
            John Murray - johnmurrayvi
            Dirk Steinmetz - rsjtdrjgfuzkfg
            Matt Parnell - Ilikenwf
