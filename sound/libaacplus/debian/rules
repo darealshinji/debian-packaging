@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+CFLAGS += -Wall
+
+
+%:
+	dh $@ --with autoreconf
+
+override_dh_auto_configure:
+	cp -f 26410-800.zip src
+	dh_auto_configure -- --enable-shared=no --with-pic \
+		--with-fftw3-prefix=/usr/lib/$(DEB_HOST_MULTIARCH)
+
+override_dh_installdocs:
+	dh_installdocs -A AUTHORS NEWS README
+
+override_dh_installchangelogs:
+	dh_installchangelogs ChangeLog
+

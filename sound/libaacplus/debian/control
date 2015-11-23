@@ -1,0 +1,35 @@
+Source: libaacplus
+Section: non-free/sound
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Standards-Version: 3.9.6
+Build-Depends:
+ debhelper (>= 9),
+ dh-autoreconf,
+ libfftw3-dev,
+ unzip,
+ patch,
+ pkg-config,
+ wget
+Homepage: http://tipok.org.ua/node/17
+
+Package: aacplusenc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: he-aac+ v2 encoder
+ HE-AAC audio v2 (with SBR + PS) is the superb audio encoder used to encode
+ high quality audio at really low bitrates (32 kbit/s).
+ .
+ Depending on law in your country, you may need a license for distribution,
+ any use, commercial use or even development.
+
+Package: libaacplus-dev
+Architecture: any
+Section: non-free/libdevel
+Depends: ${misc:Depends}
+Description: he-aac+ v2 encoding library - development
+ HE-AAC audio v2 (with SBR + PS) is the superb audio encoder used to encode
+ high quality audio at really low bitrates (32 kbit/s).
+ .
+ Depending on law in your country, you may need a license for distribution,
+ any use, commercial use or even development.
