@@ -27,6 +27,7 @@ Build-Depends:
  libcdio-paranoia-dev,
  libdc1394-22-dev,
  libfaac-dev,
+ libfftw3-dev,
  libfontconfig1-dev,
  libfreetype6-dev,
  libfribidi-dev,
@@ -76,6 +77,9 @@ Build-Depends:
  opencl-headers,
  pkg-config,
  texinfo,
+ patch,
+ unzip,
+ wget,
  yasm,
  zlib1g-dev
 
