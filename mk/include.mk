@@ -17,6 +17,7 @@ default_compat_level = 9
 
 
 
+# $(call verifysha256, FILE, SHA256_CHECKSUM)
 define verifysha256
 	sha256_2=$$(sha256sum $(1) | head -c64) ;                      \
 	if [ $$sha256_2 != $(2) ] ; then                               \
@@ -30,8 +31,20 @@ define verifysha256
 endef
 
 
+# $(call download, TARGET_FILENAME, URL)
 define download
     test -f $(1) || wget -O $(1) '$(2)'
+endef
+
+
+# $(call buildpackage, COMMAND, LOGFILE)
+define buildpackage
+	@ echo '$(1)' ;                                                 \
+	start=$$(date +%s) ;                                            \
+	$(1) 2>&1 | tee $(2) ;                                          \
+	seconds=$$(( $$(date +%s) - $$start )) ;                        \
+	printf "\nthe building process took $$(( $$seconds / 60 )) minute(s) " | tee -a $(2) ; \
+	printf "and $$(( $$seconds % 60 )) second(s)\n\n" | tee -a $(2)
 endef
 
 
@@ -146,7 +159,7 @@ ifneq ($(DEPS),0)
 	fi
 endif
 	mkdir -p $(resultdir)
-	cd $(builddir) && dpkg-buildpackage -b -us -uc 2>&1 | tee ../$(LOG)
+	$(call buildpackage, cd $(builddir) && dpkg-buildpackage -b -us -uc, ../$(LOG))
 	rm -f *.changes
 	mv *.deb $(resultdir)
 else
@@ -167,7 +180,7 @@ else
 	mkdir -p $(resultdir)
 	@ echo ""
 	@ echo "sudo password required to run pbuilder:"
-	sudo -k pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc 2>&1 | tee $(LOG)
+	$(call buildpackage, sudo -k pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc, $(LOG))
 endif
 
 
