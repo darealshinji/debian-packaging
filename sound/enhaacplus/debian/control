@@ -11,7 +11,7 @@ Build-Depends:
 Homepage: http://www.3gpp.org/DynaReport/26410.htm
 
 Package: enhaacplusenc
-Architecture: any
+Architecture: amd64 i386
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: 3GPP Enhanced aacPlus encoder
  HE-AAC audio v2 (with SBR + PS) is the superb audio encoder used to encode
