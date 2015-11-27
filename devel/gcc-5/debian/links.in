@@ -1,0 +1,9 @@
+/usr/share/man/man1/@PKG@-g++.1.gz        /usr/share/man/man1/@PKG@-c++.1.gz
+/usr/share/man/man1/@PKG@-gcov.1.gz       /usr/share/man/man1/@PKG@-gcov-tool.1.gz
+/usr/share/man/man1/@PKG@-g++.1.gz        /usr/share/man/man1/@HOST@-@PKG@-c++.1.gz
+/usr/share/man/man1/@PKG@-g++.1.gz        /usr/share/man/man1/@HOST@-@PKG@-g++.1.gz
+/usr/share/man/man1/@PKG@-gcj.1.gz        /usr/share/man/man1/@HOST@-@PKG@-gcj.1.gz
+/usr/share/man/man1/@PKG@-gcc.1.gz        /usr/share/man/man1/@HOST@-@PKG@-gcc.1.gz
+/usr/share/man/man1/@PKG@-gcc-ar.1.gz     /usr/share/man/man1/@HOST@-@PKG@-gcc-ar.1.gz
+/usr/share/man/man1/@PKG@-gcc-nm.1.gz     /usr/share/man/man1/@HOST@-@PKG@-gcc-nm.1.gz
+/usr/share/man/man1/@PKG@-gcc-ranlib.1.gz /usr/share/man/man1/@HOST@-@PKG@-gcc-ranlib.1.gz

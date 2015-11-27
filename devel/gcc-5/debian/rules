@@ -1,0 +1,69 @@
+#!/usr/bin/make -f
+
+PKG = gcc5opt
+SRCDIR = gcc-src
+usr = $(CURDIR)/debian/$(PKG)/usr
+
+TRIPLET = $(DEB_HOST_GNU_CPU)-pc-linux-gnu
+
+export CFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CFLAGS)) -ffunction-sections -fdata-sections
+export CXXFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CXXFLAGS)) -ffunction-sections -fdata-sections
+export CPPFLAGS=$(shell dpkg-buildflags --get CPPFLAGS)
+export LDFLAGS=-Wl,-z,relro -Wl,--gc-sections
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	rm -rf gcc-*/ gmp-*/ mpc-*/ mpfr-*/ isl-*/
+	rm -f debian/links
+
+override_dh_auto_configure:
+	debian/get-orig-source --extract
+
+	cp -f config.* $(SRCDIR)
+	$(foreach DIR,gmp mpc mpfr isl,cp -f config.* $(SRCDIR)/$(DIR);)
+
+	sed "s|@PKG@|$(PKG)|g; s|@HOST@|$(TRIPLET)|g" debian/links.in > debian/links
+
+	cp -rf debian/gcc-patches $(SRCDIR)
+	cd $(SRCDIR) && QUILT_PATCHES=gcc-patches \
+		quilt --quiltrc - push -a
+
+	cd $(SRCDIR) && ./configure \
+		--build=$(TRIPLET) \
+		--host=$(TRIPLET) \
+		--target=$(TRIPLET) \
+		--prefix=/usr/share/$(PKG) \
+		--exec-prefix=/usr/lib/$(PKG) \
+		--bindir=/usr/bin \
+		--datarootdir=/usr/share/$(PKG) \
+		--includedir=/usr/include/$(PKG) \
+		--mandir=/usr/share/man \
+		--program-prefix=$(PKG)- \
+		--enable-languages=c,c++,java,objc,obj-c++ \
+		--enable-lto \
+		--disable-bootstrap \
+		--with-system-zlib \
+		--with-pic=yes
+
+override_dh_auto_build:
+	dh_auto_build -D$(SRCDIR)
+
+override_dh_install:
+	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(PKG)
+	rm -f $(usr)/bin/$(TRIPLET)-gcc-*
+	rm -rf $(usr)/share/man/man7 $(usr)/share/$(PKG)/info
+	find $(usr)/lib/* -name \*.la -delete
+	$(foreach CMD,ar nm ranlib,\
+	  sed 's|@PKG@|$(PKG)|g' debian/gcc-$(CMD).1.in > $(usr)/share/man/man1/$(PKG)-gcc-$(CMD).1 ;)
+
+override_dh_installchangelogs:
+	dh_installchangelogs $(SRCDIR)/ChangeLog
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+	dh_shlibdeps -L$(PKG) -l/usr/lib/$(PKG)/lib:/usr/lib/$(PKG)/lib32:/usr/lib/$(PKG)/lib64
+

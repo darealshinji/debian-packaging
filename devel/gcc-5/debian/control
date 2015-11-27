@@ -1,0 +1,28 @@
+Source: gcc5opt
+Section: devel
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 5), quilt,
+ g++-multilib [amd64],
+ bison, fastjar, flex, gawk, gettext, m4,
+ perl, texinfo,
+ zlib1g-dev
+Standards-Version: 3.9.6
+Homepage: https://gcc.gnu.org/
+
+Package: gcc5opt
+Architecture: any
+Depends:
+ binutils,
+ ${shlibs:Depends},
+ ${misc:Depends},
+ python:any
+Recommends:
+ build-essential
+Description: GNU Compiler Collection
+ This build of the GNU Compiler Collection includes front ends for C, C++,
+ Objective-C, Objective-C++ and Java, as well as libraries for these languages
+ (libstdc++, libgcj,...). GCC was originally written as the compiler for the
+ GNU operating system. The GNU system was developed to be 100% free software,
+ free in the sense that it respects the user's freedom.
