@@ -135,10 +135,10 @@ source: download
 
 
 build: source
-	@ if [ -f $(builddir)/debian/patches/series ] ;                   \
-	then                                                              \
-	   rm -rf $(builddir)/.pc ;                                       \
-	   cd $(builddir) && QUILT_PATCHES=debian/patches quilt push -a ; \
+	@ if [ -f $(builddir)/debian/patches/series ] ;                               \
+	then                                                                          \
+	   rm -rf $(builddir)/.pc ;                                                   \
+	   cd $(builddir) && QUILT_PATCHES=debian/patches quilt --quiltrc - push -a ; \
 	fi
 	rm -rf $(builddir)/.pc
 	mkdir -p $(builddir)/debian/source
