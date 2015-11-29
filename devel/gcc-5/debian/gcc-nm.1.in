@@ -1,13 +1,13 @@
-.TH @PKG@-GCC-NM 1 "November 2015" @PKG@-gcc-nm ""
+.TH @PKG@\-GCC\-NM 1 "November 2015" @PKG@\-gcc\-nm ""
 .SH NAME
-@PKG@-gcc-nm \- a wrapper around nm adding the --plugin option
+@pkg@\-gcc\-nm \- a wrapper around nm adding the \-\-plugin option
 
 .SH SYNOPSIS
-@PKG@-gcc-nm [\fB\s-1OPTION\s0\fR] ... [\fI\s-1ARGS\s0\fR...]
+@pkg@\-gcc\-nm [\fB\s-1OPTION\s0\fR] ... [\fI\s-1ARGS\s0\fR...]
 
 .SH DESCRIPTION
 
-\fB@PKG@-gcc-nm\fR is a wrapper around nm(1) adding the appropriate
+\fB@pkg@\-gcc\-nm\fR is a wrapper around nm(1) adding the appropriate
 \fB\-\-plugin\fR option for the GCC compiler.
 
 .SH OPTIONS

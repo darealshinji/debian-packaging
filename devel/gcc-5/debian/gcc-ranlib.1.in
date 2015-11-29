@@ -1,13 +1,13 @@
-.TH @PKG@-GCC-RANLIB 1 "November 2015" @PKG@-gcc-ranlib ""
+.TH @PKG@\-GCC\-RANLIB 1 "November 2015" @PKG@\-gcc\-ranlib ""
 .SH NAME
-@PKG@-gcc-ranlib \- a wrapper around ranlib adding the --plugin option
+@pkg@\-gcc\-ranlib \- a wrapper around ranlib adding the \-\-plugin option
 
 .SH SYNOPSIS
-@PKG@-gcc-ranlib [\fB\s-1OPTION\s0\fR] ... [\fI\s-1ARGS\s0\fR...]
+@pkg@\-gcc\-ranlib [\fB\s-1OPTION\s0\fR] ... [\fI\s-1ARGS\s0\fR...]
 
 .SH DESCRIPTION
 
-\fB@PKG@-gcc-ranlib\fR is a wrapper around ranlib(1) adding the appropriate
+\fB@pkg@\-gcc\-ranlib\fR is a wrapper around ranlib(1) adding the appropriate
 \fB\-\-plugin\fR option for the GCC compiler.
 
 .SH OPTIONS

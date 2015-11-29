@@ -1,8 +1,12 @@
 #!/usr/bin/make -f
 
-PKG = gcc5opt
+pkg = gcc5opt
+
+PKG = $(shell echo $(pkg) | tr '[a-z]' '[A-Z]')
+VER = $(shell dpkg-parsechangelog -SVersion)
+usr = $(CURDIR)/debian/$(pkg)/usr
+cplusinc = $(usr)/share/$(pkg)/include/c++/$(VER)
 SRCDIR = gcc-src
-usr = $(CURDIR)/debian/$(PKG)/usr
 
 TRIPLET = $(DEB_HOST_GNU_CPU)-pc-linux-gnu
 
@@ -23,9 +27,11 @@ override_dh_auto_configure:
 	debian/get-orig-source --extract
 
 	cp -f config.* $(SRCDIR)
-	$(foreach DIR,gmp mpc mpfr isl,cp -f config.* $(SRCDIR)/$(DIR);)
+	cp -f config.guess $(SRCDIR)/gmp
+	cp -f config.sub $(SRCDIR)/gmp/configfsf.sub
+	$(foreach DIR,mpc mpfr isl,cp -f config.* $(SRCDIR)/$(DIR);)
 
-	sed "s|@PKG@|$(PKG)|g; s|@HOST@|$(TRIPLET)|g" debian/links.in > debian/links
+	sed "s|@pkg@|$(pkg)|g; s|@host@|$(TRIPLET)|g" debian/links.in > debian/links
 
 	cp -rf debian/gcc-patches $(SRCDIR)
 	cd $(SRCDIR) && QUILT_PATCHES=gcc-patches \
@@ -35,13 +41,12 @@ override_dh_auto_configure:
 		--build=$(TRIPLET) \
 		--host=$(TRIPLET) \
 		--target=$(TRIPLET) \
-		--prefix=/usr/share/$(PKG) \
-		--exec-prefix=/usr/lib/$(PKG) \
+		--prefix=/usr/share/$(pkg) \
+		--exec-prefix=/usr/lib/$(pkg) \
 		--bindir=/usr/bin \
-		--datarootdir=/usr/share/$(PKG) \
-		--includedir=/usr/include/$(PKG) \
+		--datarootdir=/usr/share/$(pkg) \
 		--mandir=/usr/share/man \
-		--program-prefix=$(PKG)- \
+		--program-prefix=$(pkg)- \
 		--enable-languages=c,c++,java,objc,obj-c++ \
 		--enable-lto \
 		--disable-bootstrap \
@@ -52,18 +57,40 @@ override_dh_auto_build:
 	dh_auto_build -D$(SRCDIR)
 
 override_dh_install:
-	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(PKG)
-	rm -f $(usr)/bin/$(TRIPLET)-gcc-*
-	rm -rf $(usr)/share/man/man7 $(usr)/share/$(PKG)/info
+	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(pkg)
+
+	rm -f $(usr)/bin/$(TRIPLET)-gcc-$(VER)
+	rm -rf $(usr)/share/man/man7 $(usr)/share/$(pkg)/info
 	find $(usr)/lib/* -name \*.la -delete
-	$(foreach CMD,ar nm ranlib,\
-	  sed 's|@PKG@|$(PKG)|g' debian/gcc-$(CMD).1.in > $(usr)/share/man/man1/$(PKG)-gcc-$(CMD).1 ;)
+	$(foreach CMD,gcc-ar gcc-nm gcc-ranlib g++-static-libstdc++,\
+	  sed "s|@PKG@|$(PKG)|g; s|@pkg@|$(pkg)|g" \
+	  debian/$(CMD).1.in > $(usr)/share/man/man1/$(pkg)-$(CMD).1 ;)
+
+	# fix including headers
+	for f in $(cplusinc)/$(TRIPLET)/bits/* ; do \
+  ln -rs $$f $(cplusinc)/bits/$$(basename $$f); \
+done
+	for f in $(cplusinc)/$(TRIPLET)/ext/* ; do \
+  ln -rs $$f $(cplusinc)/ext/$$(basename $$f); \
+done
+	for f in $(cplusinc)/* ; do \
+  ln -rs $$f $(usr)/share/$(pkg)/include/$$(basename $$f); \
+done
+
+	# build g++ binary that links libstdc++ statically by default
+	cd $(SRCDIR) && patch -p1 < gcc-patches/link-static-libstdc++.patch
+	cd $(SRCDIR)/host-$(TRIPLET)/gcc && rm -f xg++ cp/g++spec.o
+	$(MAKE) -C $(SRCDIR)/host-$(TRIPLET)/gcc xg++
+	install -m755 -D $(SRCDIR)/host-$(TRIPLET)/gcc/xg++ \
+	  $(usr)/bin/$(pkg)-g++-static-libstdc++
 
 override_dh_installchangelogs:
 	dh_installchangelogs $(SRCDIR)/ChangeLog
 
 override_dh_makeshlibs:
 
+lib = /usr/lib/$(pkg)/lib
+
 override_dh_shlibdeps:
-	dh_shlibdeps -L$(PKG) -l/usr/lib/$(PKG)/lib:/usr/lib/$(PKG)/lib32:/usr/lib/$(PKG)/lib64
+	dh_shlibdeps -L$(pkg) -l$(lib):$(lib)32:$(lib)64
 

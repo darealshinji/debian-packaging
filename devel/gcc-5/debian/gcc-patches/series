@@ -1,7 +1,8 @@
-as-needed.patch
-fortify-source.patch
+00-as-needed.patch
+00-fortify-source.patch
 no-strict-aliasing.patch
 redefinition-of-__always_inline.patch
-relro.patch
-stack-protector+format-security.patch
-hash-style-both.patch
+00-relro.patch
+00-stack-protector+format-security.patch
+00-hash-style-both.patch
+#link-static-libstdc++.patch

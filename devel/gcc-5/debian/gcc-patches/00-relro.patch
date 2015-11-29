@@ -1,4 +1,4 @@
-Link with "-z relro" enabled by default.
+Link with "-z relro" by default.
 
 --- a/gcc/gcc.c
 +++ b/gcc/gcc.c

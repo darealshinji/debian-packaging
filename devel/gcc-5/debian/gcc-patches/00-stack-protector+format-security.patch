@@ -1,5 +1,5 @@
 Turn on "-fstack-protector-strong -Wformat -Wformat-security" by default
-for C, C++, ObjC, ObjC++.
+for C, C++, ObjC, ObjC++.  Set ssp-buffer-size to 4.
 
 --- a/gcc/gcc.c
 +++ b/gcc/gcc.c

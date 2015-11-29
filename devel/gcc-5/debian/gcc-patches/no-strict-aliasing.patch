@@ -1,5 +1,4 @@
-Remove "-fstrict-aliasing" from "-O2" to always use "-fno-strict-aliasing"
-by default.
+Remove "-fstrict-aliasing" from "-O2" to use "-fno-strict-aliasing" by default.
 
 --- a/gcc/opts.c
 +++ b/gcc/opts.c
