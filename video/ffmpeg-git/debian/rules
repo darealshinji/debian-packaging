@@ -68,6 +68,7 @@ CONFIG = --prefix=/usr \
 	--enable-libgme \
 	--enable-libgsm \
 	--enable-libiec61883 \
+	--enable-libkvazaar \
 	--enable-libmodplug \
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
@@ -114,6 +115,7 @@ override_dh_auto_clean:
 	[ ! -f config.mak ] || $(MAKE) distclean
 	[ ! -f x264/config.mak ] || $(MAKE) -C x264 distclean
 	dh_auto_clean -Dfdk-aac
+	dh_auto_clean -Dkvazaar/src
 	dh_auto_clean -Dlibaacplus
 	rm -rf x265_12bit x265_10bit x265_8bit x264_10bit libs
 	rm -f ffmpeg-qt-faststart
@@ -214,6 +216,14 @@ override_dh_auto_build:
 	# libaacplus
 	dh_auto_build -Dlibaacplus
 	$(MAKE) -C libaacplus install
+
+	# kvazaar
+	CFLAGS="$(CFLAGS) -fPIC -DPIC $(CPPFLAGS)" \
+	ARCH=$(DEB_HOST_ARCH) \
+		$(MAKE) -C kvazaar/src lib-static
+	ARCH=$(DEB_HOST_ARCH) \
+		$(MAKE) -C kvazaar/src install-static install-pc \
+		PREFIX=$(CURDIR)/libs
 
 	# ffmpeg
 	# set all relevant hardening flags with --toolchain=hardened
