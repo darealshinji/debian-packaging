@@ -14,7 +14,7 @@ Additionally to gcc5opt-g++ there's an alternative command `gcc5opt-g++-static-l
 configured to link libstdc++ statically.
 
 GCC is patched to enable the following behaviour:
- * link with `--as-needed` and `-z relro` by default
+ * link with `-z relro --hash-style=both --as-needed` by default
  * enable Fortify Source (`-D_FORTIFY_SOURCE=2`) for optimization levels > 0
  * turn on `-fstack-protector-strong -Wformat -Wformat-security` by default
    for C, C++, ObjC, ObjC++ and set `ssp-buffer-size` to 4
