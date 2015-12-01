@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
-CFLAGS    = -Wall $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
-CXXFLAGS  = -Wall $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS)) -Wno-write-strings
+CFLAGS   += -Wall -fno-strict-aliasing
+CXXFLAGS += -Wall -Wno-write-strings -fno-strict-aliasing
 LDFLAGS  += -Wl,-z,defs
 
 

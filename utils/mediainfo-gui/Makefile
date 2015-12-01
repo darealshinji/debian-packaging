@@ -12,5 +12,5 @@ VER = $(shell echo $(URL) | cut -d '/' -f7)
 download:
 	@ $(call download,MediaInfo.tar.bz2,$(URL))
 	tar xvf MediaInfo.tar.bz2
-	@ VERSION=$(VER); $(changelog-entry)
+	@ VERSION=$(VER)+1; $(changelog-entry)
 
