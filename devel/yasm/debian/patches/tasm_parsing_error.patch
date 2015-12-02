@@ -1,8 +1,6 @@
-Index: yasm-1.3.0/frontends/tasm/tasm-options.c
-===================================================================
---- yasm-1.3.0.orig/frontends/tasm/tasm-options.c
-+++ yasm-1.3.0/frontends/tasm/tasm-options.c
-@@ -65,15 +66,18 @@ parse_cmdline(int argc, char **argv, opt
+--- a/frontends/tasm/tasm-options.c
++++ b/frontends/tasm/tasm-options.c
+@@ -65,15 +65,18 @@ parse_cmdline(int argc, char **argv, opt_option *options, size_t nopts,
  
                      param = &argv[0][1+len];
                      if (options[i].takes_param) {
@@ -25,4 +23,3 @@ Index: yasm-1.3.0/frontends/tasm/tasm-options.c
 -                            argv++;
                          }
                      } else
-                         param = NULL;

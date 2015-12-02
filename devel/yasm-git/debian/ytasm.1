@@ -1,30 +1,137 @@
-.\"     Title: ytasm
-.\"    Author: Sam Hocevar <sho@debian.org>
-.\"      Date: July 2009
-.\"    Manual: TASM Frontend For The Yasm Modular Assembler
-.\"
-.TH "YTASM" "1" "July 2009" "Tasm" "TASM Frontend For The Yasm Modular Assembler"
-.\" disable hyphenation
-.nh
-.\" disable justification (adjust text to left margin only)
-.ad l
-.SH "NAME"
+.TH YTASM "1" "December 2015" "1.3.0" "User Commands"
+.SH NAME
 ytasm \- TASM Frontend For The Yasm Modular Assembler
-.SH "SYNOPSIS"
-.HP 5
-\fBytasm\fR [\fB\fIoptions\fR\fR] {\fIsource\fR} [,\fIobject\fR] [\fI,listing\fR] [\fI,xref\fR]
-.HP 5
-\fBytasm\fR \fB/h\fR
-.SH "DESCRIPTION"
+
+.SH SYNOPSIS
+.B tasm \fR[\fIoption\fR] <\fIsource\fR> [,\fIobject\fR] [,\fIlisting\fR] [,\fIxref\fR]
+
+.SH DESCRIPTION
+The Yasm Modular Assembler is a portable, retargetable assembler written under the “new” (2 or 3 clause) BSD license.
+.B ytasm
+is the TASM-compatible frontend.
+
+.SH OPTIONS
+.TP
+\fB/version\fP
+show version text
+.TP
+\fB/license\fP
+show license text
+.TP
+\fB/a\fP
+Alphabetic segment ordering
+.TP
+\fB/s\fP
+Source segment ordering
+.TP
+\fB/c\fP
+Generate cross\-reference in listing
+.TP
+\fB/d\fP <macro[=value]>
+pre\-define a macro, optionally to value
+.TP
+\fB/e\fP
+Emulated floating\-point instructions (not supported)
+.TP
+\fB/r\fP
+Real floating\-point instructions
+.TP
+\fB/h\fP
+show help text
+.TP
+/?
+show help text
+.TP
+\fB/i\fP <path>
+add include path
+.TP
+\fB/j\fP <param>
+Jam in an assemble directive CMD (eg. \fB/jIDEAL\fP) (not supported)
+.TP
+\fB/k\fP <# symbols>
+Hash table capacity (ignored)
+.TP
+\fB/l\fP
+Generate listing
+.TP
+\fB/ml\fP
+Case sensitivity on all symbols
+.TP
+\fB/mx\fP
+Case sensitivity on global symbols
+.TP
+\fB/mu\fP
+No case sensitivity on symbols
+.TP
+\fB/mv\fP
+Set maximum valid length for symbols
+.TP
+\fB/m\fP <number of passes>
+Allow multiple passes to resolve forward reference (ignored)
+.TP
+\fB/n\fP
+Suppress symbol tables in listing
+.TP
+\fB/o\fP
+Object code
+.TP
+\fB/p\fP
+Check for code segment overrides in protected mode
+.TP
+\fB/q\fP
+Suppress OBJ records not needed for linking (ignored)
+.TP
+\fB/t\fP
+Suppress messages if successful assembly
+.TP
+\fB/u\fP
+Set version emulation
+.TP
+\fB/w\fP <w0=none, w1=w2=warnings on, w\-xxx/w+xxx=disable/enable warning xxx>
+Set warning level
+.TP
+\fB/x\fP
+Include false conditionals in listing
+.TP
+\fB/zi\fP
+Full debug info
+.TP
+\fB/zd\fP
+Line numbers debug info
+.TP
+\fB/zn\fP
+No debug info
+.TP
+\fB/z\fP
+Display source line with error message (ignored)
+.TP
+\fB/b\fP
+Build a (very) basic .exe file
 .PP
-The Yasm Modular Assembler is a portable, retargetable assembler written under the
-\(lqnew\(rq
-(2 or 3 clause) BSD license. \fBytasm\fR is the TASM-compatible frontend.
+source is asm source to be assembled.
+.SS "Sample invocation:"
+.IP
+tasm \fI/zi\fP source.asm
+
+.SH "REPORTING BUGS"
+Report bugs to <\fIbug\-yasm@tortall.net\fR>
+
 .SH "SEE ALSO"
-.PP
-\fByasm\fR(1),
+.BR yasm (1),
+.BR yasm_arch (7),
+.BR yasm_dbgfmts (7),
+.BR yasm_objfmts (7),
+.BR yasm_parsers (7)
+
 .PP
 Related tools:
-\fBas\fR(1),
-\fBld\fR(1),
-\fBnasm\fR(1)
+.BR as (1),
+.BR ld (1),
+.BR nasm (1)
+
+.SH AUTHOR
+Peter Johnson <\fIpeter@tortall.net\fR>
+
+.SH COPYRIGHT
+Copyright \(co 2001-2014 Peter Johnson and other Yasm developers
+
