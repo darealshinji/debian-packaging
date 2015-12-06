@@ -1,0 +1,3 @@
+# closed-source
+embedded-library usr/bin/hterm: tinyxml
+hardening-no-relro usr/bin/hterm

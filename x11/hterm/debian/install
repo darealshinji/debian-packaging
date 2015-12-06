@@ -1,0 +1,3 @@
+hterm                   /usr/bin
+converted_icons/icons   /usr/share
+debian/hterm.desktop    /usr/share/applications

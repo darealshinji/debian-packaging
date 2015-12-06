@@ -1,0 +1,27 @@
+Source: hterm
+Section: x11
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ dos2unix,
+ imagemagick
+Standards-Version: 3.9.6
+Homepage: http://www.der-hammer.info/terminal/
+
+Package: hterm
+Architecture: amd64 i386
+Depends:
+ libc6 (>= 2.3.6-6~),
+ libgcc1 (>= 1:4.1.1),
+ libgdk-pixbuf2.0-0 (>= 2.22.0),
+ libglib2.0-0 (>= 2.12.0),
+ libgtk2.0-0 (>= 2.24.0),
+ libpango-1.0-0 (>= 1.14.0),
+ libsm6,
+ libstdc++6 (>= 4.1.1),
+ libx11-6,
+ libxinerama1,
+ ${misc:Depends}
+Description: versatile terminal program
+ Terminal program with in and output in ASCII, hex, binary and decimal

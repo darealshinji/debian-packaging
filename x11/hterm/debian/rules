@@ -1,0 +1,39 @@
+#!/usr/bin/make -f
+
+LIBS = \
+	libatk-1.0.so.0 \
+	libexpat.so.1 \
+	libfontconfig.so.1 \
+	libgmodule-2.0.so.0 \
+	libpng12.so.0 \
+	libXcursor.so.1 \
+	libXext.so.6 \
+	libXfixes.so.3 \
+	libXi.so.6 \
+	libXrandr.so.2 \
+	libXrender.so.1 \
+	libz.so.1
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -f changelog.txt hterm LICENSE.TXT patchelf
+
+override_dh_auto_build:
+	tar xvf hterm.tar.gz
+	./make-icons.sh hterm.png
+	g++ -w -DPACKAGE_STRING=\"\" -o patchelf patchelf.cpp
+
+override_dh_installchangelogs:
+	dos2unix changelog.txt
+	dh_installchangelogs changelog.txt
+
+override_dh_shlibdeps:
+	./patchelf $(foreach LIB,$(LIBS),--remove-needed $(LIB)) debian/hterm/usr/bin/hterm
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/hterm/DEBIAN/control
+

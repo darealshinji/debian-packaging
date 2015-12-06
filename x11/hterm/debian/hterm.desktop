@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=HTerm
+Name[de_DE]=HTerm
+GenericName=Versatile terminal program
+GenericName[de_DE]=Terminal-Programm für die serielle Schnittstelle
+Comment=Terminal program with in and output in ASCII, hex, binary and decimal
+Comment[de_DE]=Terminal-Programm mit Ein- und Ausgabe in ASCII, Hex, Binär und Dezimal
+Exec=hterm %U
+Terminal=false
+Type=Application
+StartupNotify=false
+Icon=hterm
+Categories=System;Utility;
