@@ -1,0 +1,2 @@
+# pre-built binary
+quickhash: hardening-no-relro usr/bin/quickhash
