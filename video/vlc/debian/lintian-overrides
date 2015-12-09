@@ -1,0 +1,2 @@
+vlc: package-name-doesnt-match-sonames libvlc5 libvlccore8
+vlc: embedded-library */lib*_plugin.so: lib*

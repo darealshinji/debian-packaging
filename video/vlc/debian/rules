@@ -1,0 +1,245 @@
+#!/usr/bin/make -f
+
+VERSION = $(shell dpkg-parsechangelog -SVersion)
+
+export CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)) -Wno-deprecated-declarations -Wno-unused-but-set-variable
+export CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
+export LDFLAGS  := -Wl,-O1 -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
+export V=1
+
+pkgconfig = PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig pkg-config --static
+
+# tested on Ubuntu 14.04
+vlcfeatures = \
+	--enable-a52 \
+	--enable-aa \
+	--enable-bluray \
+	--enable-bonjour \
+	--enable-caca \
+	--enable-chromaprint \
+	--enable-dbus \
+	--enable-dca \
+	--enable-directfb \
+	--enable-dvbpsi \
+	--enable-dvdnav \
+	--enable-faad \
+	--enable-flac \
+	--enable-fluidsynth \
+	--enable-freerdp \
+	--enable-freetype \
+	--enable-fribidi \
+	--enable-gles1 \
+	--enable-gles2 \
+	--enable-kate \
+	--enable-libass \
+	--enable-libmpeg2 \
+	--enable-libxml2 \
+	--enable-lirc \
+	--enable-live555 \
+	--enable-mad \
+	--enable-mkv \
+	--enable-mod \
+	--enable-mpc \
+	--enable-mtp \
+	--enable-mux_ogg \
+	--enable-ncurses \
+	--enable-notify \
+	--enable-ogg \
+	--enable-opus \
+	--enable-pulse \
+	--enable-qt \
+	--enable-realrtsp \
+	--enable-samplerate \
+	--enable-schroedinger \
+	--enable-sdl \
+	--enable-sdl-image \
+	--enable-sftp \
+	--enable-shout \
+	--enable-skins2 \
+	--enable-speex \
+	--enable-svg \
+	--enable-svgdec \
+	--enable-taglib \
+	--enable-theora \
+	--enable-twolame \
+	--enable-upnp \
+	--enable-vcdx \
+	--enable-vnc \
+	--enable-vorbis \
+	--enable-x264 \
+	--enable-zvbi \
+	--with-kde-solid=/usr/share/kde4/apps/solid/actions/ \
+	\
+	--enable-alsa \
+	--enable-atmo \
+	--enable-dc1394 \
+	--enable-dv1394 \
+	--enable-linsys \
+	--enable-omxil \
+	--enable-udev \
+	--enable-v4l2 \
+	\
+	--enable-libva \
+	--enable-vcd \
+	--enable-smbclient \
+	\
+	--enable-crystalhd \
+	$(NULL)
+# enable non-free libfdk-aac
+vlcfeatures += --enable-fdkaac
+# Reasons for disabling features:
+# decklink -> not in Debian
+# dxva2 -> Windows only
+# gnomevfs -> poorly maintained
+# goom -> not in Debian
+# libtar -> security issue (#737534)
+# mfx -> currently not supported on Linux
+# opencv -> developer plugin not required by end users
+# projectm -> broken
+# sndio -> not in Debian
+# telx -> incompatible with zvbi
+# vpx -> not needed when having libavcodec
+# vsxu -> not in Debian
+# wasapi -> Windows only
+vlcfeatures += \
+	--disable-decklink \
+	--disable-dxva2 \
+	--disable-gnomevfs \
+	--disable-goom \
+	--disable-libtar \
+	--disable-mfx \
+	--disable-opencv \
+	--disable-projectm \
+	--disable-sndio \
+	--disable-telx \
+	--disable-vpx \
+	--disable-vsxu \
+	--disable-wasapi \
+	$(NULL)
+# Note: Use ALSA on Linux instead of OSS.
+#       Ubuntu has disabled OSS support in their Linux kernel.
+vlcfeatures += --disable-oss
+
+vlcfeatures += --disable-vdpau
+
+
+%:
+	dh ${@} --parallel --with autoreconf
+
+override_dh_auto_clean:
+	[ ! -f ffmpeg/config.mak ] || $(MAKE) -C ffmpeg distclean
+	dh_auto_clean -Dvlc
+	dh_auto_clean -Dlibdvdcss
+	dh_auto_clean -Dlibdvdnav
+	dh_auto_clean -Dlibdvdread
+	rm -rf libs
+	rm -f $(maintscripts)
+
+override_dh_autoreconf:
+	dh_autoreconf --as-needed debian/bootstrap.sh
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	# FFmpeg
+	# set all relevant hardening flags with --toolchain=hardened
+	cd ffmpeg && CFLAGS="" CPPFLAGS="" LDFLAGS="" \
+	./configure \
+		--prefix=$(CURDIR)/libs \
+		--disable-programs \
+		--disable-doc \
+		--disable-avdevice \
+		--disable-swresample \
+		--disable-avfilter \
+		--toolchain=hardened \
+		--enable-pic \
+		--disable-debug \
+		--enable-pthreads \
+		--enable-runtime-cpudetect \
+		--enable-gpl \
+		--enable-version3
+	dh_auto_build -Dffmpeg
+	$(MAKE) -C ffmpeg install
+
+	# libdvdcss
+	cd libdvdcss && \
+	CFLAGS="-fPIC -DPIC $(CFLAGS)" \
+	./configure \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/libs \
+		--disable-shared \
+		--enable-static
+	dh_auto_build -Dlibdvdcss
+	$(MAKE) -C libdvdcss install
+
+	# libdvdread
+	cd libdvdread && \
+	CFLAGS="-fPIC -DPIC $(CFLAGS) $$($(pkgconfig) --cflags libdvdcss)" \
+	CPPFLAGS="$(CPPFLAGS) $$($(pkgconfig) --cflags libdvdcss)" \
+	PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig \
+	./configure \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/libs \
+		--disable-shared \
+		--enable-static \
+		--with-libdvdcss
+	dh_auto_build -Dlibdvdread
+	$(MAKE) -C libdvdread install
+
+	# libdvdnav
+	cd libdvdnav && \
+	CFLAGS="-fPIC -DPIC $(CFLAGS)" \
+	DVDREAD_CFLAGS="$$($(pkgconfig) --cflags dvdread)" \
+	DVDREAD_LIBS="$$($(pkgconfig) --libs dvdread) -ldvdcss" \
+	./configure \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/libs \
+		--disable-shared \
+		--enable-static
+	dh_auto_build -Dlibdvdnav
+	$(MAKE) -C libdvdnav install
+
+	# VLC
+	cd vlc && \
+	AVCODEC_CFLAGS="$$($(pkgconfig) --cflags libavcodec)" \
+	AVCODEC_LIBS="$$($(pkgconfig) --libs libavcodec)" \
+	AVFORMAT_CFLAGS="$$($(pkgconfig) --cflags libavformat)" \
+	AVFORMAT_LIBS="$$($(pkgconfig) --libs libavformat)" \
+	SWSCALE_CFLAGS="$$($(pkgconfig) --cflags libswscale)" \
+	SWSCALE_LIBS="$$($(pkgconfig) --libs libswscale)" \
+	POSTPROC_CFLAGS="$$($(pkgconfig) --cflags libpostproc)" \
+	POSTPROC_LIBS="$$($(pkgconfig) --libs libpostproc)" \
+	DVDREAD_CFLAGS="$$($(pkgconfig) --cflags dvdread)" \
+	DVDREAD_LIBS="$$($(pkgconfig) --libs dvdread) -ldvdcss" \
+	DVDNAV_CFLAGS="$$($(pkgconfig) --cflags dvdnav)" \
+	DVDNAV_LIBS="$$($(pkgconfig) --libs dvdnav) -ldvdcss" \
+	./configure \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=/usr \
+		--libdir=/usr/lib \
+		--disable-debug \
+		--enable-mmx \
+		--enable-sse \
+		$(vlcfeatures)
+	dh_auto_build -Dvlc
+
+override_dh_auto_install:
+	dh_auto_install -Dvlc --destdir=$(CURDIR)/debian/tmp
+	# Remove development stuff
+	rm -rf debian/tmp/usr/lib/vlc/pkgconfig
+	rm -rf debian/tmp/usr/share/doc/vlc/libvlc
+	find debian/tmp -name '*.a' -delete
+	# Clean up libtool crap
+	find debian/tmp -name '*.la' -delete
+	# Remove plugin cache
+	rm -f debian/tmp/usr/lib/vlc/plugins/plugins.dat
+	# Remove useless stuff
+	ln -sf /usr/share/fonts/truetype/freefont/FreeSans.ttf debian/tmp/usr/share/vlc/skins2/fonts/FreeSans.ttf
+	ln -sf /usr/share/fonts/truetype/freefont/FreeMonoBold.ttf debian/tmp/usr/share/vlc/skins2/fonts/FreeSansBold.ttf
+	rm -f debian/tmp/usr/share/man/man1/vlc-config.1
+	# Remove additional license files
+	find debian/tmp -name LICENSE -delete
+
+override_dh_installchangelogs:
+	dh_installchangelogs vlc/ChangeLog
+

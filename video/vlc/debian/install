@@ -1,0 +1,4 @@
+usr/bin
+usr/lib/*.so.*
+usr/lib/vlc
+usr/share

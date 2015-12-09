@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+	if ! /usr/lib/vlc/vlc-cache-gen -f /usr/lib/vlc/plugins ; then
+		echo "WARNING: Regenerating VLC plugin cache failed."
+		echo "Please run '/usr/lib/vlc/vlc-cache-gen -f /usr/lib/vlc/plugins' manually."
+	fi
+fi
+
+#DEBHELPER#
