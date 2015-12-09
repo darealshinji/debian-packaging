@@ -13,7 +13,8 @@ TRIPLET = $(DEB_HOST_GNU_CPU)-pc-linux-gnu
 export CFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CFLAGS)) -ffunction-sections -fdata-sections
 export CXXFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CXXFLAGS)) -ffunction-sections -fdata-sections
 export CPPFLAGS=$(shell dpkg-buildflags --get CPPFLAGS)
-export LDFLAGS=-Wl,-z,relro -Wl,--gc-sections
+export GCJFLAGS=$(shell dpkg-buildflags --get GCJFLAGS)
+export LDFLAGS=$(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS)) -Wl,--gc-sections
 
 
 %:
