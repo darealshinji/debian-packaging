@@ -159,7 +159,7 @@ ifneq ($(DEPS),0)
 	fi
 endif
 	mkdir -p $(resultdir)
-	$(call buildpackage, cd $(builddir) && dpkg-buildpackage -b -us -uc, ../$(LOG))
+	$(call buildpackage, cd $(builddir) && dpkg-buildpackage -rfakeroot -b -us -uc, ../$(LOG))
 	rm -f *.changes
 	mv *.deb $(resultdir)
 else
