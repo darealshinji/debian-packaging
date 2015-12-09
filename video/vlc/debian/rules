@@ -9,6 +9,20 @@ export V=1
 
 pkgconfig = PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig pkg-config --static
 
+extraflags = \
+	AVCODEC_CFLAGS="$$($(pkgconfig) --cflags libavcodec)" \
+	AVCODEC_LIBS="$$($(pkgconfig) --libs libavcodec)" \
+	AVFORMAT_CFLAGS="$$($(pkgconfig) --cflags libavformat)" \
+	AVFORMAT_LIBS="$$($(pkgconfig) --libs libavformat)" \
+	SWSCALE_CFLAGS="$$($(pkgconfig) --cflags libswscale)" \
+	SWSCALE_LIBS="$$($(pkgconfig) --libs libswscale)" \
+	POSTPROC_CFLAGS="$$($(pkgconfig) --cflags libpostproc)" \
+	POSTPROC_LIBS="$$($(pkgconfig) --libs libpostproc)" \
+	DVDREAD_CFLAGS="$$($(pkgconfig) --cflags dvdread)" \
+	DVDREAD_LIBS="$$($(pkgconfig) --libs dvdread) -ldvdcss" \
+	DVDNAV_CFLAGS="$$($(pkgconfig) --cflags dvdnav)" \
+	DVDNAV_LIBS="$$($(pkgconfig) --libs dvdnav) -ldvdcss"
+
 # tested on Ubuntu 14.04
 vlcfeatures = \
 	--enable-a52 \
@@ -123,6 +137,7 @@ vlcfeatures += --disable-oss
 vlcfeatures += --disable-vdpau
 
 
+
 %:
 	dh ${@} --parallel --with autoreconf
 
@@ -200,23 +215,17 @@ override_dh_auto_build:
 	$(MAKE) -C libdvdnav install
 
 	# VLC
-	cd vlc && \
-	AVCODEC_CFLAGS="$$($(pkgconfig) --cflags libavcodec)" \
-	AVCODEC_LIBS="$$($(pkgconfig) --libs libavcodec)" \
-	AVFORMAT_CFLAGS="$$($(pkgconfig) --cflags libavformat)" \
-	AVFORMAT_LIBS="$$($(pkgconfig) --libs libavformat)" \
-	SWSCALE_CFLAGS="$$($(pkgconfig) --cflags libswscale)" \
-	SWSCALE_LIBS="$$($(pkgconfig) --libs libswscale)" \
-	POSTPROC_CFLAGS="$$($(pkgconfig) --cflags libpostproc)" \
-	POSTPROC_LIBS="$$($(pkgconfig) --libs libpostproc)" \
-	DVDREAD_CFLAGS="$$($(pkgconfig) --cflags dvdread)" \
-	DVDREAD_LIBS="$$($(pkgconfig) --libs dvdread) -ldvdcss" \
-	DVDNAV_CFLAGS="$$($(pkgconfig) --cflags dvdnav)" \
-	DVDNAV_LIBS="$$($(pkgconfig) --libs dvdnav) -ldvdcss" \
-	./configure \
+	cd vlc && $(extraflags) ./configure \
 		--host=$(DEB_HOST_GNU_TYPE) \
 		--prefix=/usr \
+		--docdir=/usr/share/doc/vlc \
 		--libdir=/usr/lib \
+		--sysconfdir=/etc \
+		--disable-maintainer-mode \
+		--disable-silent-rules \
+		--config-cache \
+		--disable-update-check \
+		--enable-fast-install \
 		--disable-debug \
 		--enable-mmx \
 		--enable-sse \
