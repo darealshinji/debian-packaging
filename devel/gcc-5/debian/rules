@@ -3,7 +3,7 @@
 pkg = gcc5opt
 
 PKG = $(shell echo $(pkg) | tr '[a-z]' '[A-Z]')
-VER = $(shell dpkg-parsechangelog -SVersion)
+VER = $(shell dpkg-parsechangelog -SVersion | cut -d+ -f1 | cut -d- -f1)
 usr = $(CURDIR)/debian/$(pkg)/usr
 cplusinc = $(usr)/share/$(pkg)/include/c++/$(VER)
 SRCDIR = gcc-src
