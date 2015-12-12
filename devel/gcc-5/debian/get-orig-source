@@ -33,10 +33,12 @@ mpfr_sum=6835a08bd992c8257641791e9a6a2b35b02336c8de26d0a8577953747e514a16
 mpc_sum=617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3
 gmp_sum=68dadacce515b0f8a54f510edf07c1b636492bcdb8e8d54c56eb216225d16989
 
-isl_dir=isl-0.14.1
+#isl_dir=isl-0.14.1
+isl_dir=isl-0.15
 isl_pkg=${isl_dir}.txz
 isl_url="http://isl.gforge.inria.fr/${isl_dir}.tar.xz"
-isl_sum=8882c9e36549fc757efa267706a9af733bb8d7fe3905cbfde43e17a89eea4675
+isl_sum=104a608839771d809558f5fd7533ca1a3b8ee5a667c5dcd9dc3499bf0a1522d5
+#isl_sum=8882c9e36549fc757efa267706a9af733bb8d7fe3905cbfde43e17a89eea4675
 
 test -f $gcc_pkg || wget -O $gcc_pkg $gcc_url
 test -f $mpfr_pkg || wget -O $mpfr_pkg $mpfr_url

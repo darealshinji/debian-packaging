@@ -726,6 +726,79 @@ On Debian systems, a copy of the licence is located in file
 
 
 
+ISL source code
+===============
+
+ISL was downloaded from <http://isl.gforge.inria.fr/>
+
+MIT License (MIT)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+isl was written by
+
+	    Sven Verdoolaege
+2006-2007   Leiden Institute of Advanced Computer Science
+	    Universiteit Leiden
+	    Niels Bohrweg 1
+	    2333 CA Leiden
+	    The Netherlands
+2008-2009   K.U.Leuven
+	    Departement Computerwetenschappen
+	    Celestijnenlaan 200A
+	    B-3001 Leuven
+	    Belgium
+2010-2011   INRIA Saclay - Ile-de-France
+	    Parc Club Orsay Universite, ZAC des vignes, 4 rue Jacques Monod
+	    91893 Orsay
+	    France
+2011-2012   consultant for Leiden Institute of Advanced Computer Science
+2012-2014   Ecole Normale Superieure
+	    45 rue d'Ulm, 75230 Paris
+	    France
+2014	    INRIA Rocquencourt
+	    Domaine de Voluceau - Rocquencourt, B.P. 105
+	    78153 Le Chesnay
+	    France
+
+Contributions by
+
+Mythri Alle
+Riyadh Baghdadi
+Serge Belyshev
+Ray Donnelly
+Johannes Doerfert
+Tobias Grosser
+Alexandre Isoard
+Andreas Kloeckner
+Michael Kruse
+Sebastian Pop
+Louis-Noel Pouchet
+Uday Kumar Reddy
+Sven van Haastregt
+
+The merge sort implementation was written by Jeffrey Stedfast.
+
+
+
+
+
 Debian packaging is copyright (c) 2015 djcj <djcj@gmx.de> and
 release under the MIT license:
 

@@ -50,6 +50,7 @@ override_dh_auto_configure:
 		--program-prefix=$(pkg)- \
 		--enable-languages=c,c++,java,objc,obj-c++ \
 		--enable-lto \
+		--enable-vtable-verify \
 		--disable-bootstrap \
 		--with-system-zlib \
 		--with-pic=yes
@@ -60,9 +61,16 @@ override_dh_auto_build:
 override_dh_install:
 	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(pkg)
 
+	# delete RPATH in libstdc++
+	$(foreach DIR,lib lib32 lib64,\
+	  chrpath -d '$$ORIGIN' $(usr)/lib/$(pkg)/$(DIR)/libstdc++.so.6 2>/dev/null || true ;)
+
+	# delete unwated stuff
 	rm -f $(usr)/bin/$(TRIPLET)-gcc-$(VER)
 	rm -rf $(usr)/share/man/man7 $(usr)/share/$(pkg)/info
 	find $(usr)/lib/* -name \*.la -delete
+
+	# create extra manpages
 	$(foreach CMD,gcc-ar gcc-nm gcc-ranlib g++-static-libstdc++,\
 	  sed "s|@PKG@|$(PKG)|g; s|@pkg@|$(pkg)|g" \
 	  debian/$(CMD).1.in > $(usr)/share/man/man1/$(pkg)-$(CMD).1 ;)
