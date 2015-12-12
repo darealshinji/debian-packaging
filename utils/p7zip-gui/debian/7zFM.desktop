@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=7zip File Manager
+Comment=7z file archiver with high compression ratio
+Keywords=7z;7zip;p7zip;extract;unpack;
+Exec=7zFM %U
+Terminal=false
+Icon=p7zip-gui
+Categories=GTK;Utility;Archiving;Compression;
+StartupNotify=true

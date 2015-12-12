@@ -1,0 +1,19 @@
+Source: p7zip-gui
+Section: utils
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ libwxgtk3.0-dev,
+ wx3.0-headers
+Standards-Version: 3.9.6
+Homepage: http://p7zip.sourceforge.net/
+
+Package: p7zip-gui
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: 7z file archiver with high compression ratio (GUI)
+ p7zip is the Unix command-line port of 7-Zip, a file archiver that
+ archives with high compression ratios.
+ .
+ This package provides the original GUI version of 7zip.

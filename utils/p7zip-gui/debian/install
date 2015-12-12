@@ -1,0 +1,6 @@
+debian/7zFM               /usr/bin
+GUI/p7zipForFilemanager   /usr/bin
+bin/*                     /usr/lib/p7zip-gui
+GUI/Lang                  /usr/lib/p7zip-gui
+debian/7zFM.desktop       /usr/share/applications
+GUI/kde4/*.desktop        /usr/share/kde4/services/ServiceMenus/
