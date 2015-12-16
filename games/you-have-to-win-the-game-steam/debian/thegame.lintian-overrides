@@ -1,3 +1,0 @@
-# it's closed source
-thegame binary: embedded-library usr/lib/thegame/TheGame_NFML: glew
-thegame binary: hardening-no-relro usr/lib/thegame/libsteam_api.so
