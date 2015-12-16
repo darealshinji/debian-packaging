@@ -1,0 +1,9 @@
+files/thegame                      usr/games
+game-data/TheGame_NFML             usr/lib/thegame
+game-data/libsteam_api.so          usr/lib/thegame
+game-data/Engine.npk               usr/share/games/thegame
+game-data/VolverHeavy.npk          usr/share/games/thegame
+game-data/Volver.npk               usr/share/games/thegame
+game-data/VolverVersion.npk        usr/share/games/thegame
+files/*.desktop                    usr/share/applications
+files/icons/hicolor                usr/share/icons

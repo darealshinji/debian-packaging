@@ -1,0 +1,2 @@
+#!/bin/sh
+LD_PRELOAD=/usr/lib/thegame/libsteam_api.so /usr/lib/thegame/TheGame_NFML
