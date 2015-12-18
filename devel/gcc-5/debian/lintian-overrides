@@ -1,0 +1,2 @@
+# keep patched ltdl copy
+gcc5opt: embedded-library *: ltdl

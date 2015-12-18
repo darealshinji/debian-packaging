@@ -21,7 +21,10 @@ Depends:
  ${misc:Depends},
  python:any
 Recommends:
- build-essential
+ build-essential,
+ fastjar,
+ java-common,
+ libantlr-java
 Description: GNU Compiler Collection
  This build of the GNU Compiler Collection includes front ends for C, C++,
  Objective-C, Objective-C++ and Java, as well as libraries for these languages

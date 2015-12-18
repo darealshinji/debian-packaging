@@ -38,6 +38,7 @@ override_dh_auto_configure:
 	cd $(SRCDIR) && QUILT_PATCHES=gcc-patches \
 		quilt --quiltrc - push -a
 
+	# reminder: gccgo doesn't build (v5.3.0)
 	cd $(SRCDIR) && ./configure \
 		--build=$(TRIPLET) \
 		--host=$(TRIPLET) \
@@ -61,14 +62,25 @@ override_dh_auto_build:
 override_dh_install:
 	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(pkg)
 
+	# build g++ binary that links libstdc++ statically by default
+	cd $(SRCDIR) && patch -p1 < gcc-patches/link-static-libstdc++.patch
+	cd $(SRCDIR)/host-$(TRIPLET)/gcc && rm -f xg++ cp/g++spec.o
+	$(MAKE) -C $(SRCDIR)/host-$(TRIPLET)/gcc xg++
+	install -m755 -D $(SRCDIR)/host-$(TRIPLET)/gcc/xg++ \
+	  $(usr)/bin/$(pkg)-g++-static-libstdc++
+
 	# delete RPATH in libstdc++
 	$(foreach DIR,lib lib32 lib64,\
-	  chrpath -d '$$ORIGIN' $(usr)/lib/$(pkg)/$(DIR)/libstdc++.so.6 2>/dev/null || true ;)
+	  chrpath -d $(usr)/lib/$(pkg)/$(DIR)/libstdc++.so.6 2>/dev/null || true ;)
 
 	# delete unwated stuff
 	rm -f $(usr)/bin/$(TRIPLET)-gcc-$(VER)
 	rm -rf $(usr)/share/man/man7 $(usr)/share/$(pkg)/info
 	find $(usr)/lib/* -name \*.la -delete
+
+	# always link these libraries statically
+	$(foreach LIB,asan lsan tsan ubsan cilkrts itm quadmath ssp vtv,\
+	  find $(usr)/lib/* -name lib$(LIB).so -delete ;)
 
 	# create extra manpages
 	$(foreach CMD,gcc-ar gcc-nm gcc-ranlib g++-static-libstdc++,\
@@ -85,13 +97,6 @@ done
 	for f in $(cplusinc)/* ; do \
   ln -rs $$f $(usr)/share/$(pkg)/include/$$(basename $$f); \
 done
-
-	# build g++ binary that links libstdc++ statically by default
-	cd $(SRCDIR) && patch -p1 < gcc-patches/link-static-libstdc++.patch
-	cd $(SRCDIR)/host-$(TRIPLET)/gcc && rm -f xg++ cp/g++spec.o
-	$(MAKE) -C $(SRCDIR)/host-$(TRIPLET)/gcc xg++
-	install -m755 -D $(SRCDIR)/host-$(TRIPLET)/gcc/xg++ \
-	  $(usr)/bin/$(pkg)-g++-static-libstdc++
 
 override_dh_installchangelogs:
 	dh_installchangelogs $(SRCDIR)/ChangeLog
