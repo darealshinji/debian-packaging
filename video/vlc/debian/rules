@@ -4,7 +4,7 @@ VERSION = $(shell dpkg-parsechangelog -SVersion)
 
 export CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)) -Wno-deprecated-declarations -Wno-unused-but-set-variable
 export CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
-export LDFLAGS  := -Wl,-O1 -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
+export LDFLAGS  := -Wl,-O1 -Wl,-Bsymbolic -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
 export V=1
 
 pkgconfig = PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig pkg-config --static
@@ -159,8 +159,7 @@ override_dh_auto_build:
 	# FFmpeg
 	# set all relevant hardening flags with --toolchain=hardened
 	cd ffmpeg && CFLAGS="" CPPFLAGS="" LDFLAGS="" \
-	./configure \
-		--prefix=$(CURDIR)/libs \
+	./configure --prefix=$(CURDIR)/libs \
 		--disable-programs \
 		--disable-doc \
 		--disable-avdevice \
@@ -179,8 +178,7 @@ override_dh_auto_build:
 	# libdvdcss
 	cd libdvdcss && \
 	CFLAGS="-fPIC -DPIC $(CFLAGS)" \
-	./configure \
-		--host=$(DEB_HOST_GNU_TYPE) \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
 		--prefix=$(CURDIR)/libs \
 		--disable-shared \
 		--enable-static
@@ -192,8 +190,7 @@ override_dh_auto_build:
 	CFLAGS="-fPIC -DPIC $(CFLAGS) $$($(pkgconfig) --cflags libdvdcss)" \
 	CPPFLAGS="$(CPPFLAGS) $$($(pkgconfig) --cflags libdvdcss)" \
 	PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig \
-	./configure \
-		--host=$(DEB_HOST_GNU_TYPE) \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
 		--prefix=$(CURDIR)/libs \
 		--disable-shared \
 		--enable-static \
@@ -206,8 +203,7 @@ override_dh_auto_build:
 	CFLAGS="-fPIC -DPIC $(CFLAGS)" \
 	DVDREAD_CFLAGS="$$($(pkgconfig) --cflags dvdread)" \
 	DVDREAD_LIBS="$$($(pkgconfig) --libs dvdread) -ldvdcss" \
-	./configure \
-		--host=$(DEB_HOST_GNU_TYPE) \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
 		--prefix=$(CURDIR)/libs \
 		--disable-shared \
 		--enable-static
