@@ -4,9 +4,15 @@ deps     = git
 builddir = nix
 
 download:
-	git clone --depth 1500 "https://github.com/NixOS/nix.git"
+	git clone "https://github.com/NixOS/nix.git"
 	git clone --depth 1 "https://github.com/jedisct1/libsodium.git" nix/libsodium
-	@ VERSION=`./changelog.sh`; $(changelog-entry)
+
+	@ latestcommit=$$(git -C nix/ log -1 --format=%ci | head -c10 | sed -e 's/-//g'); \
+	version=$$(cat nix/version); \
+	tagver=$$(git -C nix/ describe --abbrev=0 --tags | sed -e 's/v//g'); \
+	test "$$version" = "$$tagver" && git="+git" || git="~git"; \
+	VERSION="$${version}$${git}$${latestcommit}"; \
+	$(changelog-entry)
 
 	rm -rf nix/.git nix/libsodium/.git
 	cp -f ../../mk/config.* ../../mk/install-sh nix/config/

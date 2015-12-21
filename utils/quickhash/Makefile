@@ -2,7 +2,7 @@ include ../../mk/include.mk
 
 deps       = wget
 bin        = QuickHash.tar.gz
-srcfiles   = $(bin) quickhash.ico
+srcfiles   = $(bin) quickhash.ico ../../mk/make-icons.sh
 cleanfiles = *.ico
 
 VER       = 2.6.5

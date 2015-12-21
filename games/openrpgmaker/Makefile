@@ -3,7 +3,7 @@ include ../../mk/include.mk
 deps           = wget
 VERSION        = 0.2.3
 bin            = openrpgmaker-$(VERSION)-linux.tbz
-srcfiles       = $(bin)
+srcfiles       = $(bin) ../../mk/make-icons.sh
 distcleanfiles = $(bin)
 
 download:

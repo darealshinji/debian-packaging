@@ -10,8 +10,8 @@ x64 = -x64
 endif
 
 changelog-msg = New release version
-VERSION       = $(shell wget -q -O - http://www.xnview.com/en/xnviewmp/ | grep -e 'Download <strong>XnViewMP' | \
-		perl -ne 'printf qq[%s\n], $$1 if m/<strong>([^<]+)<\/strong>/' | cut -d' ' -f2)
+VERSION       = $(shell wget -q -O - http://www.xnview.com/en/xnviewmp/ | grep -e 'Download <strong>XnView' | \
+		perl -ne 'printf qq[%s\n], $$1 if m/<strong>([^<]+)<\/strong>/' | sed 's|[A-Za-z]||g; s| ||g; s|:||g')
 
 download:
 	@ $(call download,$(bin),http://download.xnview.com/$(bin))

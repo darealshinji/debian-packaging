@@ -8,7 +8,7 @@ bin_demo        = GrapplingHook_Demo.tar.gz
 bin_demo_repack = GrapplingHook_Demo_repack.tar.gz
 lwjgl           = lwjgl-2.9.1.zip
 
-srcfiles  = $(lwjgl) ghook.png
+srcfiles  = $(lwjgl) ghook.png ../../mk/make-icons.sh
 ifeq ($(COMMON_PKG),1)
 srcfiles += common-package.stamp
 endif

@@ -5,7 +5,7 @@ bin            = boarding-party.jar
 icon           = boarding-party.png
 cleanfiles     = $(icon)
 distcleanfiles = $(bin)
-srcfiles       = $(bin) $(icon)
+srcfiles       = $(bin) $(icon) ../../mk/make-icons.sh
 
 # mirror: http://www.mediafire.com/download/u6022kzu5vp2mz3/boarding-party.jar
 download:

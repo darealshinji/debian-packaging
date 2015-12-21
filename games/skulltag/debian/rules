@@ -31,7 +31,7 @@ override_dh_auto_build:
 	$(MAKE) -C libjpeg6b-patched -f makefile.simple
 
 	# patchelf
-	g++ -w -DPACKAGE_STRING=\"patchelf\" -o patchelf patchelf.cpp
+	g++ -w -DPACKAGE_STRING=\"\" -o patchelf patchelf.cpp
 
 	# skulltag
 	mkdir skulltag
@@ -58,7 +58,7 @@ override_dh_shlibdeps:
 ifneq ($(DEB_HOST_ARCH), amd64)
 	./patchelf --add-needed libSDL-1.2.so.0 $(libdir)/liboutput_sdl.so
 endif
-	$(foreach LIB, $(unwanted_libs),./patchelf --remove-needed $(LIB) $(libdir)/skulltag;)
+	./patchelf $(foreach LIB,$(unwanted_libs),--remove-needed $(LIB)) $(libdir)/skulltag
 	dh_shlibdeps -l$(libdir)
 
 override_dh_strip:

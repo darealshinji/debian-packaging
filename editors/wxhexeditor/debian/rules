@@ -10,6 +10,10 @@ override_dh_auto_build:
 	tar xvf wxHexEditor.tbz
 	upx-ucl -d wxHexEditor/wxHexEditor
 
+override_dh_install:
+	dh_install
+	./make-icons.sh files/wxHexEditor.png debian/wxhexeditor/usr/share
+
 override_dh_installchangelogs:
 	dh_installchangelogs wxHexEditor/Change.log
 

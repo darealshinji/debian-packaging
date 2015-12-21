@@ -2,8 +2,8 @@ include ../../mk/include.mk
 
 deps           = wget
 bin            = giteye.zip
-srcfiles       = $(bin)
-distcleanfiles = $(srcfiles)
+srcfiles       = $(bin) ../../mk/make-icons.sh
+distcleanfiles = $(bin)
 changelog-msg  = New release version
 
 BINARCH = Linux32

@@ -130,8 +130,8 @@ endif
 
 source: download
 	mkdir -p $(builddir)
-	cp -r ../../mk/make-icons.sh $(srcfiles) $(builddir)
-	test -d debian && cp -rf debian $(builddir) || true
+	test -z "$(srcfiles)" || cp -r $(srcfiles) $(builddir)
+	test ! -d debian || cp -rf debian $(builddir)
 
 
 build: source

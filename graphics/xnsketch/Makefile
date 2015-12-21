@@ -1,7 +1,7 @@
 include ../../mk/include.mk
 
 deps           = wget
-srcfiles       = $(bin)
+srcfiles       = $(bin) ../../mk/make-icons.sh
 distcleanfiles = $(bin)
 bin            = XnSketch-linux.tgz
 

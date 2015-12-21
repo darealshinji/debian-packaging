@@ -2,7 +2,7 @@ include ../../mk/include.mk
 
 deps           = wget
 bin            = quake106.zip
-srcfiles       = $(bin) *.svg
+srcfiles       = $(bin) *.svg ../../mk/make-icons.sh
 distcleanfiles = $(bin) *.svg
 
 svg_url = https://gist.githubusercontent.com/darealshinji/5d58ae11b03f8b023536/raw/25b376bd87b78aac6901369441bb24b2856086a8/quake.svg

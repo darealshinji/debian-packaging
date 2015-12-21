@@ -3,7 +3,7 @@ include ../../mk/include.mk
 deps       = wget
 bin        = BosonX_v1_0_5_Linux.zip
 cleanfiles = $(bin)
-srcfiles   = $(bin)
+srcfiles   = $(bin) ../../mk/make-icons.sh
 
 download:
 	@ $(call download,$(bin),http://downloads.muandheyo.com/$(bin))

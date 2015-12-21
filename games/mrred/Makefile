@@ -5,7 +5,7 @@ bin            = mrred.tgz
 icon           = mrred.png
 cleanfiles     = $(icon)
 distcleanfiles = $(bin)
-srcfiles       = $(bin) $(icon)
+srcfiles       = $(bin) $(icon) ../../mk/make-icons.sh
 
 download:
 	@ $(call download,$(bin),https://www.dropbox.com/s/z8b534gi6xxhgki/Mr%20Reds%20Adventure%20TMB.tar.gz?dl=1)

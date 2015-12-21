@@ -1,16 +1,14 @@
 #!/usr/bin/make -f
 
-CC ?= gcc
-
-CFLAGS   = $(filter-out -Werror=format-security, $(shell dpkg-buildflags --get CFLAGS))
-CXXFLAGS = $(filter-out -Werror=format-security, $(shell dpkg-buildflags --get CXXFLAGS))
+CC       ?= gcc
+CFLAGS    = $(filter-out -g -Werror=format-security, $(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS  = $(filter-out -g -Werror=format-security, $(shell dpkg-buildflags --get CXXFLAGS))
 
 common_flags = \
 	-Wall \
 	-Wno-maybe-uninitialized \
 	-Wno-unused-but-set-variable \
 	-Wno-parentheses \
-	-Wformat-security \
 	-fno-strict-aliasing \
 	-fno-aggressive-loop-optimizations \
 	$(shell pkg-config --cflags sdl) \
@@ -23,7 +21,6 @@ CXXFLAGS += $(common_flags)
 # link the executable against the system's sqlite3 library
 LDFLAGS += -Wl,--as-needed $(shell pkg-config --libs sqlite3)
 
-DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 ifeq ($(DEB_HOST_ARCH), amd64)
 LIB64 = 64
 endif
@@ -32,18 +29,14 @@ fmodlib = $(CURDIR)/$(fmoddir)$(LIB64)/api/lib/libfmodex$(LIB64)-4.24.16.so
 
 
 %:
-	dh ${@} --parallel
+	dh ${@} --parallel -Bbuild
 
 override_dh_auto_clean:
 	rm -rf build $(fmoddir) $(fmoddir)64
 
 override_dh_auto_configure:
 	tar xvf $(fmoddir)$(LIB64).tgz
-	mkdir build
-	cd build && cmake .. -Wno-dev \
-		-DCMAKE_VERBOSE_MAKEFILE=ON \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=None \
+	dh_auto_configure -Scmake -- -Wno-dev \
 		-DCMAKE_SKIP_RPATH=ON \
 		-DFORCE_INTERNAL_BZIP2=OFF \
 		-DFORCE_INTERNAL_GME=OFF \
@@ -53,12 +46,10 @@ override_dh_auto_configure:
 		-DFMOD_LIBRARY=$(fmodlib)
 
 override_dh_auto_build:
-	dh_auto_build -Dbuild
+	dh_auto_build
 	# re-link liboutput_sdl.so against SDL
-	rm build/output_sdl/liboutput_sdl.so
-	$(CC) -shared -Wl,-soname,liboutput_sdl.so $(LDFLAGS) -o \
-		build/output_sdl/liboutput_sdl.so \
-		build/output_sdl/CMakeFiles/output_sdl.dir/output_sdl.o -lSDL
+	cd build/output_sdl && $(CC) -shared -Wl,-soname,liboutput_sdl.so $(LDFLAGS) \
+		-o liboutput_sdl.so CMakeFiles/output_sdl.dir/output_sdl.o -lSDL
 	cp $(fmodlib) build
 
 override_dh_shlibdeps:

@@ -3,7 +3,7 @@ include ../../mk/include.mk
 deps       = wget
 bin        = utserver.tar.gz
 png        = utorrent.png
-srcfiles   = $(png) $(bin)
+srcfiles   = $(png) $(bin) ../../mk/make-icons.sh
 cleanfiles = $(png)
 
 VERSION       = 3.3

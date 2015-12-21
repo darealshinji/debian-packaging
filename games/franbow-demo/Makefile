@@ -2,7 +2,7 @@ include ../../mk/include.mk
 
 deps           = wget
 bin            = franbow-demo.zip
-srcfiles       = $(bin)
+srcfiles       = $(bin) ../../mk/make-icons.sh
 distcleanfiles = $(bin)
 
 download:

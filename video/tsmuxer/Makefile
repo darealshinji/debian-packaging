@@ -1,9 +1,9 @@
 include ../../mk/include.mk
 
 deps       = wget
-srcfiles   = *.png $(bin)
+srcfiles   = $(bin) *.png ../../mk/make-icons.sh
 bin        = tsmuxer.tar.gz
-cleanfiles = $(srcfiles) *.1
+cleanfiles = $(bin) *.png *.1
 
 VERSION       = 2.6.11
 changelog-msg = Initial release

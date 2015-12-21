@@ -1,26 +1,17 @@
 #!/usr/bin/make -f
 
-LDFLAGS += -Wl,--as-needed
+CFLAGS    = $(filter-out -g, $(shell dpkg-buildflags --get CFLAGS)) -Wno-unused-result -Wno-unused-but-set-variable
+CXXFLAGS  = $(filter-out -g, $(shell dpkg-buildflags --get CXXFLAGS)) -Wno-unused-result
+LDFLAGS  += -Wl,--as-needed
 
 
 %:
-	dh ${@} --parallel
-
-override_dh_auto_clean:
-	rm -rf build
+	dh ${@} --parallel -Bbuild
 
 override_dh_auto_configure:
-	mkdir -p build
-	cd build && cmake .. \
-		-DCMAKE_VERBOSE_MAKEFILE=ON \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=None \
+	dh_auto_configure -Scmake -- \
 		-DCMAKE_SKIP_RPATH=ON \
 		-DFORCE_INTERNAL_BZIP2=OFF \
 		-DFORCE_INTERNAL_GME=OFF \
 		-DFORCE_INTERNAL_JPEG=OFF \
 		-DFORCE_INTERNAL_ZLIB=OFF
-
-override_dh_auto_build:
-	dh_auto_build -Dbuild
-

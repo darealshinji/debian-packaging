@@ -2,7 +2,7 @@ include ../../mk/include.mk
 
 deps           = wget
 bin            = XnRetro-linux.tgz
-srcfiles       = $(bin)
+srcfiles       = $(bin) ../../mk/make-icons.sh
 distcleanfiles = $(bin)
 
 #changelog-msg = Initial release
