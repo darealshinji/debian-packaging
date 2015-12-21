@@ -23,7 +23,7 @@ override_dh_auto_clean:
 
 override_dh_auto_build:
 	tar xvf hterm.tar.gz
-	./make-icons.sh hterm.png
+	./make-icons.sh debian/hterm.png
 	g++ -w -DPACKAGE_STRING=\"\" -o patchelf patchelf.cpp
 
 override_dh_installchangelogs:

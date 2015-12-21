@@ -33,7 +33,7 @@ License: HTerm-terms-of-use
  If you are in doubt about a special usage or anything else contact me under
  'hterm (at) der-hammer (dot) info'
 
-Files: hterm.png
+Files: debian/hterm.png
 Copyright: 2005-2007 Everaldo Coelho <http://www.everaldo.com>
 License: LGPL-2.1+
  This library is free software; you can redistribute it and/or
