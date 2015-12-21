@@ -2,7 +2,11 @@ Source: kvazaar
 Section: video
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
-Build-Depends: debhelper (>= 9), help2man, yasm
+Build-Depends:
+ debhelper (>= 9),
+ dh-autoreconf,
+ help2man,
+ yasm
 Standards-Version: 3.9.6
 Homepage: https://github.com/ultravideo/kvazaar
 Vcs-Git: https://github.com/ultravideo/kvazaar.git

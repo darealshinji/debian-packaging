@@ -4,16 +4,20 @@ VERSION = $(shell dpkg-parsechangelog -SVersion | cut -d- -f1 | cut -d+ -f1)
 
 
 %:
-	dh ${@} --parallel
+	dh ${@} --parallel --with autoreconf
 
 override_dh_auto_clean:
-	dh_auto_clean -Dsrc || true
-	rm -f test.hevc debian/test.y4m kvazaar.1
+	dh_auto_clean
+	rm -f kvazaar.1
+
+override_dh_auto_configure:
+	dh_auto_configure -- --disable-shared \
+		--disable-werror --disable-silent-rules
 
 override_dh_auto_build:
-	dh_auto_build -Dsrc
+	dh_auto_build
 	help2man --no-discard-stderr -N -n "open-source HEVC encoder" -h '' \
-	--version-string=$(VERSION) src/kvazaar > kvazaar.1
+	  --version-string=$(VERSION) src/kvazaar > kvazaar.1
 
 override_dh_installdocs:
 	dh_installdocs -pkvazaar
