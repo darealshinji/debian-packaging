@@ -4,12 +4,10 @@ Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 Standards-Version: 3.9.6
 Build-Depends:
- autoconf (>= 2.65),
  debhelper (>= 9),
  dh-autoreconf,
- libasound2-dev (>= 1.0.11),
- pandoc,
- pkg-config (>= 0.9.0)
+ libasound2-dev,
+ pkg-config
 Homepage: http://gitorious.org/dtsenc
 Vcs-Git: https://gitorious.org/dtsenc/dtsenc.git
 Vcs-Browser: https://gitorious.org/dtsenc/dtsenc

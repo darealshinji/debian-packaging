@@ -5,14 +5,10 @@
 	dh $@ --parallel --with autoreconf
 
 override_dh_auto_configure:
-	dh_auto_configure -- --disable-shared
-	pandoc -s -f markdown -t man debian/dcaenc.1.in > dcaenc.1
+	dh_auto_configure -- --disable-shared --disable-silent-rules
 
 override_dh_auto_install:
 
 override_dh_installchangelogs:
 	dh_installchangelogs NEWS
-
-override_dh_clean:
-	dh_clean dcaenc.1
 
