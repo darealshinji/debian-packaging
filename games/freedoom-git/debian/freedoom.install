@@ -1,7 +1,7 @@
-debian/extra/freedoom1.desktop      usr/share/applications
-debian/extra/freedoom2.desktop      usr/share/applications
-debian/extra/freedoom1              usr/games
-debian/extra/freedoom2              usr/games
+files/freedoom1.desktop    usr/share/applications
+files/freedoom2.desktop    usr/share/applications
+files/freedoom1            usr/games
+files/freedoom2            usr/games
 freedoom1.xpm              usr/share/pixmaps
 freedoom2.xpm              usr/share/pixmaps
 wads/freedoom1.wad         usr/share/games/doom
