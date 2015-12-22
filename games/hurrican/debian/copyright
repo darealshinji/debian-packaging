@@ -1,0 +1,178 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Hurrican
+Source: https://sourceforge.net/p/hurrican/code/HEAD/tree/trunk/Hurrican/
+
+Files: *
+Copyright: 2002 Jörg M. Winterstein <info@eiswuxe.de>
+License: Hurrican-license
+
+Files: debian/*
+Copyright: 2015 Marshall Banana <djcj@gmx.de>
+License: MIT
+
+Files: src/cml/*
+Copyright: 2007 Jesse Anders and Demian Nave <http://cmldev.net/>
+License: Boost Software License - Version 1.0
+
+Files: src/SDLPort/*
+Copyright: 2011-2015 Scott R. Smith
+License: MIT
+
+Files: src/tinydir/*
+Copyright: 2013-2014 Cong Xu, Baudouin Feildel
+License: BSD-2-Clause
+
+Files: src/unrarlib040/*
+Copyright: 2000-2002 Christian Scheurer <www.ChristianScheurer.ch>
+           2000-2002 Johannes Winkelmann <jw@tks6.net>
+License: unrarlib-license or GPL-2+
+Comment:
+ The contents of this file are subject to the UniquE RAR File Library
+ License (the "unrarlib-license.txt"). You may not use this file except
+ in compliance with the License. You may obtain a copy of the License
+ at http://www.unrarlib.org/license.html.
+ Software distributed under the License is distributed on an "AS IS"
+ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied warranty.
+ .
+ Alternatively, the contents of this file may be used under the terms
+ of the GNU General Public License Version 2 or later (the "GPL"), in
+ which case the provisions of the GPL are applicable instead of those
+ above. If you wish to allow use of your version of this file only
+ under the terms of the GPL and not to allow others to use your version
+ of this file under the terms of the UniquE RAR File Library License,
+ indicate your decision by deleting the provisions above and replace
+ them with the notice and other provisions required by the GPL. If you
+ do not delete the provisions above, a recipient may use your version
+ of this file under the terms of the GPL or the UniquE RAR File Library
+ License.
+
+License: Hurrican-license
+ I decided to release the sourcecode for Hurrican and its level editor to the
+ public today, along with all the assets that the game contains.
+ You can take everything contained within this archive and do with it whatever
+ you find appropriate (as long as you don't charge any money for it):
+  - modify it
+  - learn from it
+  - laugh about it
+  - use it to port the game to other platforms
+  - fix bugs :D
+  - release your own game
+ .
+ I have not touched these files for years, so don't expect that everything works
+ out of the box! I trust in your skills to make it all run :)
+ Of course, I cannot be made responsible for any damage that this code might
+ cause, physical or mental!
+ .
+ If you plan to use assets from the game in a COMMERCIAL release, please contact
+ me at info@eiswuxe.de
+ .
+ It would be nice if you could give some credit to Poke53280 if you choose to use
+ anything contained within this archive in your own releases. But it's not necessary.
+ Since I would like to know how far this stuff travels, I would love to hear about
+ your releases, just to see what you make of this old stuff. So feel free to tell
+ me about your projects :)
+ .
+ cheers and have fun,
+ Eiswuxe
+
+License: MIT
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+License: Boost Software License - Version 1.0
+ Boost Software License - Version 1.0 - August 17th, 2003
+ .
+ Permission is hereby granted, free of charge, to any person or organization
+ obtaining a copy of the software and accompanying documentation covered by
+ this license (the "Software") to use, reproduce, display, distribute,
+ execute, and transmit the Software, and to prepare derivative works of the
+ Software, and to permit third-parties to whom the Software is furnished to
+ do so, all subject to the following:
+ .
+ The copyright notices in the Software and this entire statement, including
+ the above license grant, this restriction and the following disclaimer,
+ must be included in all copies of the Software, in whole or in part, and
+ all derivative works of the Software, unless such copies or derivative
+ works are solely in the form of machine-executable object code generated by
+ a source language processor.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+ SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
+ FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
+ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ DEALINGS IN THE SOFTWARE.
+
+License: BSD-2-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: unrarlib-license
+ Free License for UniquE RAR File Library
+ Copyright (C) 2000-2002 by Christian Scheurer (www.ChristianScheurer.ch)
+ UNIX port by Johannes Winkelmann (jw@tks6.net)
+ .
+ You have the permission to use, copy, modify, and distribute the
+ UniquE RAR File Library (also called URARFileLib or unrarlib) and its 
+ documentation for any purpose except for re-creating the RAR compression
+ algorithm, which is proprietary. URARFileLib may not be used or modified
+ to create RAR/WinRAR compatible archives, only decompression is permitted.
+ If you use URARFileLib, or parts of URARFileLib in your program,
+ you must give the program away for free.
+ The above copyright notice must be shipped with all copies.
+ No representations are made about the suitability of the URARFileLib
+ for any purpose. It is provided "as is" without expressed or implied warranty.
+ .
+ Christian Scheurer (cs@unrarlib.org)
+ 14. June 2002
+
+License: GPL-2+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 2 of the License, or (at
+ your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+

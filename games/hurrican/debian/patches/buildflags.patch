@@ -1,0 +1,19 @@
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -472,13 +472,13 @@
+ ALL_OBJS := $(addsuffix .o, $(ALL_FILES))
+ 
+ $(EXE) : $(ALL_OBJS)
+-	$(LD) $^ $(LDFLAGS) -o $@
++	$(LD) $^ $(XLDFLAGS) $(LDFLAGS) -o $@
+ 	
+ %.o : %.cpp
+-	$(CXX) $(CXXFLAGS) $< -o $@
++	$(CXX) $(CXXFLAGS) $(XCXXFLAGS) $< -o $@
+ 	
+ %.o : %.c
+-	$(CC) $(CFLAGS) $< -o $@
++	$(CC) $(CFLAGS) $(XCFLAGS) $< -o $@
+ 
+ .PHONY : clean
+ 

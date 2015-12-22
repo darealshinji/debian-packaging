@@ -1,0 +1,3 @@
+debian/hurrican.desktop  /usr/share/applications
+hurrican.real            /usr/games
+data lang                /usr/share/games/hurrican

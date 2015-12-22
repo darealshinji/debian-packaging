@@ -1,0 +1,63 @@
+.\" help2man -n Hurrican -s6 -N --version-string=0.0.<svnrev> -h '--help' hurrican
+.TH HURRICAN "6" "December 2015" "0.0.223"
+
+.SH NAME
+Hurrican \- freeware shoot\-em\-up game
+
+.SH SYNOPSIS
+.B hurrican \fR<arguments>
+
+.SH DESCRIPTION
+Inspired by the epic Turrican game series, Hurrican stays by all means true to
+the original game while still being highly innovative.
+
+Blast your way through myriads of enemies, explore the secrets of nine massive
+worlds and collect tons of powerups to increase your firepower in this highly
+explosive Run and Gun arcade game.
+
+Hurrican is THE ultimate "Turrican Mega-Mix", taking ideas from several
+installements of the original franchise while at the same time expanding on
+its universe.
+
+.SH OPTIONS
+.TP
+\fB\-H\fR, \fB\-?\fR, \fB\-\-help\fR
+Show this information.
+.TP
+\fB\-W\fR, \fB\-\-windowmode\fR
+Run in a window, not fullsreen.
+.TP
+\fB\-F\fR, \fB\-\-showfps\fR
+Show the current frames per second.
+.TP
+\fB\-D\fR INT, \fB\-\-depth\fR INT
+Set screen pixel depth to INT (16, 24, 32; default is 32)
+.TP
+\fB\-L\fR, \fB\-\-lowres\fR
+Use 320x240 low\-resolution screen dimensions.
+.TP
+\fB\-NV\fR, \fB\-\-novsync\fR
+Disable VSync / double\-buffering.
+.TP
+\fB\-NP\fR, \fB\-\-nonpot\fR
+Allow non\-power\-of\-two texture sizes.
+Normally, GPUs require texture dimensions that are powers of two.
+If your GPU does not require that, you can reduce VRAM usage with this switch.
+.TP
+\fB\-TF\fR INT, \fB\-\-texfactor\fR INT
+Division factor for textures.
+Valid values: 1, 2, 4.
+If set to 2, textures dimensions will be halved.
+If set to 4, textures dimensions will be quartered.
+(Default is 1 (no resizing))
+.TP
+\fB\-TS\fR INT, \fB\-\-texsizemin\fR INT
+Size limitation for texture division factor.
+Only textures with widths or heights above this value will be resized.
+MIN: 16  MAX: 1024 (Default is 1024)
+.TP
+\fB\-PD\fR PATH, \fB\-\-pathdata\fR PATH
+Look in this path for the game's read\-only data, i.e. music, sound, graphics, levels, etc.
+.TP
+\fB\-PS\fR PATH, \fB\-\-pathsave\fR PATH
+Use this path for the game's save data, i.e. save\-games, settings, high\-scores, etc.

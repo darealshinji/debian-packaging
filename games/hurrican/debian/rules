@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+
+JOBS := $(shell test `nproc` -lt 2 && echo 2 || nproc)
+
+commonflags = -Wno-unused-result $(CPPFLAGS) -DUSE_STORAGE_PATH="\"/usr/share/games/hurrican\""
+export XCXXFLAGS = $(CXXFLAGS) $(commonflags)
+export   XCFLAGS = $(CFLAGS) $(commonflags)
+export  XLDFLAGS = $(LDFLAGS) -Wl,--as-needed
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	dh_auto_clean -Dsrc
+	rm -f hurrican.real *.png
+
+override_dh_auto_build:
+	$(MAKE) -C src -j$(JOBS) -- TARGET=linux_GL1 USE_UNRARLIB=yes USE_NO_EXCEPTIONS=yes
+	mv hurricanlinux hurrican.real
+
+override_dh_install:
+	dh_install
+	install -m755 debian/hurrican.sh $(CURDIR)/debian/hurrican/usr/games/hurrican
+	convert Hurrican.ico hurrican.png
+	mv hurrican-6.png hurrican.png
+	./make-icons.sh hurrican.png $(CURDIR)/debian/hurrican/usr/share
+

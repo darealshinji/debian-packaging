@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Hurrican
+Type=Application
+GenericName=hurrican
+Comment=A side-scrolling shoot-em-up action game
+Exec=hurrican
+Icon=hurrican
+Terminal=false
+Hidden=false
+Categories=Game;ActionGame;

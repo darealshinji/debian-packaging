@@ -1,0 +1,30 @@
+Source: hurrican
+Section: non-free/games
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ imagemagick,
+ libmodplug-dev,
+ libsdl1.2-dev,
+ libsdl-image1.2-dev,
+ libsdl-mixer1.2-dev
+Standards-Version: 3.9.6
+Homepage: http://hurrican.sourceforge.net/
+Vcs-Svn: svn://svn.code.sf.net/p/hurrican/code/trunk/Hurrican
+Vcs-Browser: https://sourceforge.net/p/hurrican/code/HEAD/tree/trunk/Hurrican/
+
+Package: hurrican
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: freeware shoot-em-up game
+ Inspired by the epic Turrican game series, Hurrican stays by all means true to
+ the original game while still being highly innovative.
+ .
+ Blast your way through myriads of enemies, explore the secrets of nine massive
+ worlds and collect tons of powerups to increase your firepower in this highly
+ explosive Run and Gun arcade game.
+ .
+ Hurrican is THE ultimate "Turrican Mega-Mix", taking ideas from several
+ installements of the original franchise while at the same time expanding on
+ its universe.
