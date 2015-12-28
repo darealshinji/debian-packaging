@@ -1,0 +1,346 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: https://github.com/darealshinji/polly-b-gone
+
+Files: *
+Copyright: 2008-2012 Mike Bostock <mike@ocks.org>
+Comment:
+ For clarification: on his homepage (http://cs.stanford.edu/people/mbostock/polly/)
+ the author says >>Source code is provided "as-is" under the GNU LGPL.<< and
+ his Github repository (https://github.com/mbostock/polly-b-gone) includes
+ a copy of the LGPL-3.0.
+License: LGPL-3.0
+
+Files: resources/non-free/ceramic.jpg
+       resources/non-free/concrete.jpg
+       resources/non-free/drain.jpg
+Copyright: XY3D, Texturama.com, Eric Brian Smith
+License:
+ Texturama (http://texturama.com/) provided the textures for the ceramic,
+ concrete, and drain materials. These images are copyright XY3D, Texturama,
+ and Eric Brian Smith and may not be redistributed for any other purpose
+ without the permission of the copyright holders.
+
+Files: resources/non-free/clovers.jpg
+       resources/non-free/ivy.jpg
+Copyright: Blender for Architecture (http://blender-archi.tuxfamily.org/)
+License: CC-BY-2.5
+
+Files: resources/non-free/*.ogg
+Copyright: n/a
+License:
+ The MIDI files for the background music come from the "Very Best of GUS MIDI"
+ collection, which is available from the SDL_mixer website (see above).
+ According to the compilation author, "all of these MIDI files are freely
+ distributable, but most of them are copyrighted."
+
+Files: resources/ceramic.jpg
+Copyright: 1998-2013 Digital Paint (http://www.digitalpaint.org)
+           Nathan "jitspoe" Wulf
+Comment: http://opengameart.org/node/26809
+License: GPL-2+
+
+Files: resources/clovers.jpg
+Copyright: 2012 xmorg (http://opengameart.org/users/xmorg)
+Comment: http://opengameart.org/node/10629
+License: GPL-2+ or CC0
+
+Files: resources/concrete.jpg
+Copyright: Tiziana <unbrucom1@unbruco.it>
+Comment: http://opengameart.org/node/6989
+License: LGPL-2.1+ or LGPL-3.0+ or CC-BY-3.0
+
+Files: resources/drain.jpg
+Copyright: p0ss (http://opengameart.org/users/p0ss)
+Comment: http://opengameart.org/node/9162
+License: GPL-2+ or GPL-3+ or CC-BY-3.0
+
+Files: resources/ivy.jpg
+Copyright: 2012 xmorg (http://opengameart.org/users/xmorg)
+Comment: http://opengameart.org/node/10615
+License: GPL-2+ or CC0
+
+Files: resources/metal.jpg
+Comment: http://opengameart.org/node/8935
+Copyright: 2012 H-Hour (http://opengameart.org/users/h-hour)
+License: GPL-2+ or public-domain
+
+Files: resources/intro.ogg
+Copyright: 2015 Martin Opsahl (http://opengameart.org/users/pugly)
+Comment: http://opengameart.org/content/melody
+License: GPL-2 or GPL-3 or CC-BY-3.0 or CC-BY-SA-3.0
+
+Files: resources/loop.ogg
+Copyright: 2014 Henrique Cardoso <estudiocafofo@globo.com>
+Comment: http://opengameart.org/content/happy-game-theme-demo
+License: GPL-3
+
+Files: resources/outro.ogg
+Copyright: 2015 Martin Opsahl (http://opengameart.org/users/pugly)
+Comment: http://opengameart.org/content/kellys-sweet-dinosaur
+License: GPL-2 or GPL-3 or CC-BY-3.0 or CC-BY-SA-3.0
+
+Files: debian/*
+Copyright: 2015 djcj <djcj@gmx.de>
+License: MIT
+
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU Lesser General
+ Public License can be found in `/usr/share/common-licenses/LGPL-2.1'.
+
+License: LGPL-3.0
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License version 3.0 as published by the Free Software Foundation.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU Lesser General
+ Public License can be found in `/usr/share/common-licenses/LGPL-3.0'.
+
+License: LGPL-3.0+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 3.0 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU Lesser General
+ Public License can be found in `/usr/share/common-licenses/LGPL-3.0'.
+
+License: GPL-2
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License version 2 as
+ published by the Free Software Foundation.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in `/usr/share/common-licenses/GPL-2'.
+
+License: GPL-2+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in `/usr/share/common-licenses/GPL-2'.
+
+License: GPL-3
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License version 3 as
+ published by the Free Software Foundation.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
+
+License: GPL-3+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
+
+License: MIT
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights to
+ use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ of the Software, and to permit persons to whom the Software is furnished to do
+ so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+License: public-domain
+ No license required for any purpose; the work is not subject to copyright
+ in any jurisdiction.
+
+License: CC0
+ This is a human-readable summary of the Legal Code:
+ <http://creativecommons.org/publicdomain/zero/1.0/legalcode>
+ .
+ The person who associated a work with this deed has dedicated the work to the
+ public domain by waiving all of his or her rights to the work worldwide under
+ copyright law, including all related and neighboring rights, to the extent
+ allowed by law.
+ .
+ You can copy, modify, distribute and perform the work, even for commercial
+ purposes, all without asking permission.
+
+License: CC-BY-2.5
+ This work was made availabe under the terms of the Creative Commons
+ Attribution 2.5 Generic license (CC-BY-2.5).
+ .
+ This is a human-readable summary of (and not a substitute for) the license.
+ The complete text of the license can be found
+ at <https://creativecommons.org/licenses/by/2.5/legalcode>
+ .
+ You are free to:
+   Share - copy and redistribute the material in any medium or format
+   .
+   Adapt - remix, transform, and build upon the material for any purpose,
+   even commercially.
+ .
+ The licensor cannot revoke these freedoms as long as you follow the
+ license terms.
+ .
+ Under the following terms:
+   Attribution - You must give appropriate credit, provide a link to the
+   license, and indicate if changes were made. You may do so in any
+   reasonable manner, but not in any way that suggests the licensor
+   endorses you or your use.
+ .
+ No additional restrictions - You may not apply legal terms or
+ technological measures that legally restrict others from doing anything
+ the license permits.
+ .
+ Notices:
+ You do not have to comply with the license for elements of the material
+ in the public domain or where your use is permitted by an applicable
+ exception or limitation.
+ .
+ No warranties are given. The license may not give you all of the permissions
+ necessary for your intended use. For example, other rights such as publicity,
+ privacy, or moral rights may limit how you use the material.
+
+License: CC-BY-3.0
+ This work was made availabe under the terms of the Creative Commons
+ Attribution 3.0 Unported license (CC-BY-3.0).
+ .
+ This is a human-readable summary of (and not a substitute for) the license.
+ The complete text of the license can be found
+ at <https://creativecommons.org/licenses/by/3.0/legalcode>
+ .
+ You are free to:
+   Share - copy and redistribute the material in any medium or format
+   .
+   Adapt - remix, transform, and build upon the material for any purpose,
+   even commercially.
+ .
+ The licensor cannot revoke these freedoms as long as you follow the
+ license terms.
+ .
+ Under the following terms:
+   Attribution - You must give appropriate credit, provide a link to the
+   license, and indicate if changes were made. You may do so in any
+   reasonable manner, but not in any way that suggests the licensor
+   endorses you or your use.
+ .
+ No additional restrictions - You may not apply legal terms or
+ technological measures that legally restrict others from doing anything
+ the license permits.
+ .
+ Notices:
+ You do not have to comply with the license for elements of the material
+ in the public domain or where your use is permitted by an applicable
+ exception or limitation.
+ .
+ No warranties are given. The license may not give you all of the permissions
+ necessary for your intended use. For example, other rights such as publicity,
+ privacy, or moral rights may limit how you use the material.
+
+License: CC-BY-SA-3.0
+ This work was made availabe under the terms of the Creative Commons
+ Attribution-ShareAlike 3.0 Unported license (CC-BY-SA-3.0).
+ .
+ This is a human-readable summary of (and not a substitute for) the license.
+ The complete text of the license can be found
+ at <https://creativecommons.org/licenses/by-sa/3.0/legalcode>
+ .
+ You are free to:
+   Share - copy and redistribute the material in any medium or format
+   .
+   Adapt - remix, transform, and build upon the material for any purpose,
+   even commercially.
+ .
+ The licensor cannot revoke these freedoms as long as you follow the
+ license terms.
+ .
+ Under the following terms:
+   Attribution - You must give appropriate credit, provide a link to the
+   license, and indicate if changes were made. You may do so in any
+   reasonable manner, but not in any way that suggests the licensor
+   endorses you or your use.
+   .
+   ShareAlike - If you remix, transform, or build upon the material, you
+   must distribute your contributions under the same license as the original.
+ .
+ No additional restrictions - You may not apply legal terms or
+ technological measures that legally restrict others from doing anything
+ the license permits.
+ .
+ Notices:
+ You do not have to comply with the license for elements of the material
+ in the public domain or where your use is permitted by an applicable
+ exception or limitation.
+ .
+ No warranties are given. The license may not give you all of the permissions
+ necessary for your intended use. For example, other rights such as publicity,
+ privacy, or moral rights may limit how you use the material.

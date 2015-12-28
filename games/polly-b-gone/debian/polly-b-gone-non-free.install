@@ -1,0 +1,7 @@
+/usr/games
+/usr/share/applications
+/usr/share/icons
+resources/non-free/*   /usr/share/games/polly-b-gone
+resources/normal.frag  /usr/share/games/polly-b-gone
+resources/normal.vert  /usr/share/games/polly-b-gone
+resources/title.png    /usr/share/games/polly-b-gone

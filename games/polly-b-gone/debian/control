@@ -1,0 +1,41 @@
+Source: polly-b-gone
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ dh-autoreconf,
+ freeglut3-dev,
+ libgl1-mesa-dev,
+ libglu1-mesa-dev,
+ libglew-dev,
+ libsdl1.2-dev,
+ libsdl-image1.2-dev,
+ libsdl-mixer1.2-dev,
+ libtinyxml-dev,
+ pkg-config
+Standards-Version: 3.9.6
+Homepage: http://cs.stanford.edu/people/mbostock/polly/
+Vcs-Git: https://github.com/darealshinji/polly-b-gone.git
+Vcs-Browser: https://github.com/darealshinji/polly-b-gone
+
+Package: polly-b-gone
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: physics platform game
+ Polly-B-Gone is a 3D physics platform game that tells the story of a plucky
+ wheeled robot named Polly, who has been imprisoned by the nefarious Dr. Nurbs
+ in his laboratory. Polly must overcome a series of increasingly-elaborate
+ obstacles to escape and regain her freedom.
+
+Package: polly-b-gone-non-free
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Conflicts: polly-b-gone
+Description: physics platform game (non-free version)
+ Polly-B-Gone is a 3D physics platform game that tells the story of a plucky
+ wheeled robot named Polly, who has been imprisoned by the nefarious Dr. Nurbs
+ in his laboratory. Polly must overcome a series of increasingly-elaborate
+ obstacles to escape and regain her freedom.
+ .
+ This version uses non-free game resources.
