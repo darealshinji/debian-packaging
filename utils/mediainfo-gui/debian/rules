@@ -2,7 +2,7 @@
 
 CFLAGS   += -Wall -fno-strict-aliasing
 CXXFLAGS += -Wall -Wno-write-strings -fno-strict-aliasing
-LDFLAGS  += -Wl,-z,defs
+LDFLAGS  += -Wl,-z,defs -Wl,--as-needed
 
 
 %:
