@@ -6,3 +6,5 @@ with libdvdcss enabled and statically linked.
 You might have to manually delete a previous installation before installing the new version.
 
 Homepage: http://www.videolan.org/vlc/
+
+PS: On Unity you should deactivate the tray icon in the settings.
