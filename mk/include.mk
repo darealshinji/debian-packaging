@@ -158,9 +158,9 @@ ifneq ($(DEPS),0)
 	    sudo -k $(CURDIR)/../../mk/pbuilder-satisfydepends.sh ;                                             \
 	fi
 endif
-	mkdir -p $(resultdir)
 	$(call buildpackage, cd $(builddir) && dpkg-buildpackage -rfakeroot -b -us -uc, ../$(LOG))
 	rm -f *.changes
+	mkdir -p $(resultdir)
 	mv *.deb $(resultdir)
 else
 	dpkg-source -b $(builddir)
@@ -177,7 +177,7 @@ else
 	         --extrapackages "debhelper fakeroot" ;                   \
 	fi
 
-	mkdir -p $(resultdir)
+	mkdir -p $(resultdir)  # required for correct R/W rights
 	@ echo ""
 	@ echo "sudo password required to run pbuilder:"
 	$(call buildpackage, sudo -k pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc, $(LOG))
