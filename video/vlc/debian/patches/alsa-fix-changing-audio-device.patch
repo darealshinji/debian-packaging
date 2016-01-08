@@ -1,0 +1,15 @@
+Description: Qt: fix changing audio device
+Origin: upstream,
+ https://git.videolan.org/?p=vlc/vlc-2.2.git;a=commit;h=994c11fb4c2d7c6af7b4e406d56fac72e95e7218
+Bug-Debian: https://bugs.debian.org/801448
+--- a/vlc/modules/gui/qt4/menus.cpp
++++ b/vlc/modules/gui/qt4/menus.cpp
+@@ -1583,7 +1583,7 @@
+             action->setChecked( true );
+         actionGroup->addAction( action );
+         current->addAction( action );
+-        CONNECT(action, changed(), THEMIM->menusAudioMapper, map());
++        CONNECT(action, triggered(), THEMIM->menusAudioMapper, map());
+         THEMIM->menusAudioMapper->setMapping(action, ids[i]);
+         free( ids[i] );
+         free( names[i] );
