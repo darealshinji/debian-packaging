@@ -1,2 +1,5 @@
 systemd_service_fixes.patch
+transition_to_libsystemd.patch
+bts808333_changeset_14319.patch
+bts801300_changeset_14519.patch
 IEC-size-units.patch

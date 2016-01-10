@@ -10,6 +10,6 @@ case "$1" in
   ;;
 esac
 
-update-rc.d transmission-daemon stop >/dev/null || exit $?
+update-rc.d transmission-daemon stop >/dev/null || exit 0
 
 #DEBHELPER#

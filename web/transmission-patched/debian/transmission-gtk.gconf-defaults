@@ -1,3 +1,0 @@
-/desktop/gnome/url-handlers/transmission-gtk/command  "/usr/bin/transmission-gtk %s"
-/desktop/gnome/url-handlers/transmission-gtk/enabled  true
-/desktop/gnome/url-handlers/transmission-gtk/needs_terminal   false

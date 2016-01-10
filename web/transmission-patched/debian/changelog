@@ -1,19 +1,39 @@
-transmission (2.84-0.2ubuntu1+iec) vivid; urgency=low
+transmission (2.84-3+iec) unstable; urgency=low
 
   * Display IEC filesizes
   * Don't build the transmission meta package
   * Delete fix_freebsd_quota_include.patch
 
- -- Marshall Banana <djcj@gmx.de>  Sun, 31 May 2015 16:55:57 +0200
+ -- Marshall Banana <djcj@gmx.de>  Sun, 10 Jan 2016 09:22:13 +0100
 
-transmission (2.84-0.2ubuntu1) vivid; urgency=low
+transmission (2.84-3) unstable; urgency=medium
 
-  * Merge from Debian unstable (LP: #1407241). Remaining changes:
-    - debian/control:
-      + Build-depend on libappindicator3-dev
-    - debian/transmission-daemon.upstart: add upstart job
+  * [6b8bb2a] fix a SIGSEGV due to racing in list node allocation;
+    Closes: #808333
+  * [40ec5cb] remove libappindicator3-dev from b-d; Closes: #801299
+  * [7ceb8fe] Fix black lines to be rendered when scrolling; Closes: #801300
 
- -- Gianfranco Costamagna <costamagnagianfranco@yahoo.it>  Sat, 03 Jan 2015 12:05:12 +0100
+ -- Sandro Tosi <morph@debian.org>  Sat, 02 Jan 2016 17:54:56 +0000
+
+transmission (2.84-2) unstable; urgency=medium
+
+  * upload to unstable
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 02 Aug 2015 18:01:47 +0100
+
+transmission (2.84-1) experimental; urgency=medium
+
+  * Acknowledge NMUs: thanks to Boris Pek, Thomas Goirand, Markus Koschany;
+    Closes: #737366, #718624, #754982, #757365, #718624, #734467
+  * [323b2ad] Set me as maintaner, Leo as uploader (with Leo's blessing)
+  * [3eecf54] removed Bugs field, as it was causing bugs to be sent to upstream;
+    Closes: #740944
+  * [e5bd0af] drop gconf integration, no longer needed; Closes: #741069,
+    #745936, #756823
+  * [0432bb4] bump Standards-Version to 3.9.6 (no changes needed)
+  * [fd2b694] transition to libsystemd-dev; Closes: #779760
+
+ -- Sandro Tosi <morph@debian.org>  Fri, 10 Apr 2015 11:21:31 +0100
 
 transmission (2.84-0.2) unstable; urgency=medium
 
@@ -46,15 +66,6 @@ transmission (2.84-0.2) unstable; urgency=medium
 
  -- Markus Koschany <apo@gambaru.de>  Wed, 10 Dec 2014 08:16:13 +0100
 
-transmission (2.84-0.1ubuntu1) vivid; urgency=low
-
-  * Merge from Debian unstable (LP: #1387100). Remaining changes:
-    - debian/control:
-      + Build-depend on libappindicator3-dev
-    - debian/transmission-daemon.upstart: add upstart job
-
- -- Gianfranco Costamagna <costamagnagianfranco@yahoo.it>  Wed, 29 Oct 2014 11:06:44 +0100
-
 transmission (2.84-0.1) unstable; urgency=medium
 
   * Non-maintainer upload.
@@ -68,38 +79,6 @@ transmission (2.84-0.1) unstable; urgency=medium
     using xz compression.
 
  -- Thomas Goirand <zigo@debian.org>  Fri, 18 Jul 2014 10:35:51 +0000
-
-transmission (2.82-1.1ubuntu4) utopic; urgency=medium
-
-  * SECURITY UPDATE: denial of service and possible code execution via
-    overflow in tr_bitfieldEnsureNthBitAlloced
-    - debian/patches/CVE-2014-4909.patch: properly handle bitfields in
-      libtransmission/bitfield.c, handle invalid blocks in
-      libtransmission/peer-msgs.c.
-    - CVE-2014-4909
-
- -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Fri, 11 Jul 2014 14:07:01 -0400
-
-transmission (2.82-1.1ubuntu3) trusty; urgency=medium
-
-  * Rebuild to solve a powerpc dependency problem.
-
- -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Fri, 07 Mar 2014 11:50:49 +0200
-
-transmission (2.82-1.1ubuntu2) trusty; urgency=medium
-
-  * Rebuild against Qt 5.2.1
-
- -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 05 Mar 2014 14:14:45 +0200
-
-transmission (2.82-1.1ubuntu1) trusty; urgency=low
-
-  * Merge from Debian unstable (LP: #1282453). Remaining changes:
-    - debian/control:
-      + Build-depend on libappindicator3-dev
-    - debian/transmission-daemon.upstart: add upstart job
-
- -- Jackson Doak <noskcaj@ubuntu.com>  Sat, 15 Feb 2014 21:53:07 +0000
 
 transmission (2.82-1.1) unstable; urgency=medium
 
@@ -123,15 +102,6 @@ transmission (2.82-1.1) unstable; urgency=medium
 
  -- Boris Pek <tehnick@debian.org>  Sat, 15 Feb 2014 22:19:08 +0400
 
-transmission (2.82-1ubuntu1) trusty; urgency=low
-
-  * Merge from Debian unstable.  Remaining changes:
-    - debian/control:
-      + Build-depend on libappindicator3-dev
-    - debian/transmission-daemon.upstart: add upstart job
-
- -- Ubuntu Merge-o-Matic <mom@ubuntu.com>  Sun, 15 Sep 2013 04:18:54 +0000
-
 transmission (2.82-1) unstable; urgency=low
 
   * [5b6dca28] Imported Upstream version 2.82
@@ -146,14 +116,6 @@ transmission (2.82-1) unstable; urgency=low
 
  -- Leo Costela <costela@debian.org>  Sun, 15 Sep 2013 21:14:04 +0200
 
-transmission (2.82-0ubuntu1) saucy; urgency=low
-
-  * New upstream release.
-  * debian/control:
-    - Update dependencies from qt4 > qt5
-
- -- Jeremy Bicha <jbicha@ubuntu.com>  Mon, 12 Aug 2013 12:46:20 -0400
-
 transmission (2.81-1) unstable; urgency=low
 
   * [addd713c] Imported Upstream version 2.81
@@ -161,21 +123,6 @@ transmission (2.81-1) unstable; urgency=low
   * [1d5de1c0] debian/control: add Bugs field
 
  -- Leo Costela <costela@debian.org>  Tue, 23 Jul 2013 18:11:38 +0200
-
-transmission (2.81-0ubuntu1) saucy; urgency=low
-
-  * New upstream release.
-
- -- Jeremy Bicha <jbicha@ubuntu.com>  Sat, 27 Jul 2013 14:35:28 -0400
-
-transmission (2.80-1ubuntu1) saucy; urgency=low
-
-  * Sync with Debian. Remaining changes:
-    - debian/control:
-      + Build-depend on libappindicator3-dev
-    - * debian/transmission-daemon.upstart: add upstart job
-
- -- Jeremy Bicha <jbicha@ubuntu.com>  Wed, 17 Jul 2013 16:54:08 -0400
 
 transmission (2.80-1) unstable; urgency=low
 
