@@ -1,28 +1,21 @@
 #!/usr/bin/make -f
 
-ifeq ($(DEB_HOST_ARCH),amd64)
-BIN = Linux_x64/QuickHash-Linux-v.2.6.5-32Bit
-else
-BIN = Linux_x86/QuickHash-Linux-v.2.6.5-32Bit
-endif
-
 
 %:
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf converted_icons Linux_x* quickhash
+	rm -rf converted_icons
 
 override_dh_auto_build:
-	tar xvf QuickHash.tar.gz
-	cp $(BIN) quickhash
+	chmod a+x quickhash
 	./make-icons.sh quickhash.ico
 
 override_dh_installdocs:
-	dh_installdocs -A Linux_x86/UserManual.pdf
+	dh_installdocs -A UserManual.pdf
 
 override_dh_installchangelogs:
-	dh_installchangelogs Linux_x86/README.txt
+	dh_installchangelogs ChangeLog
 
 override_dh_compress:
 	dh_compress -X.pdf

@@ -1,8 +1,9 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Quick Hash GUI
 Source: https://github.com/tedsmith/quickhash
 
 Files: *
-Copyright: 2011-2015 Ted Smith <tedsmith28@yahoo.co.uk>
+Copyright: 2011-2016 Ted Smith <tedsmith28@yahoo.co.uk>
 License: GPL-3+
  QuickHash GUI is free software: you can redistribute it and/or modify it under
  the terms of the GNU General Public License as published by the Free Software
@@ -28,7 +29,7 @@ must notify Ted Smith and include his name in the documentation that accompanies
 the product (typically 'Acknowledgments' file or 'Authors' file).
 
 Files: debian/*
-Copyright: 2015 djcj <djcj@gmx.de>
+Copyright: 2015-2016 djcj <djcj@gmx.de>
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
