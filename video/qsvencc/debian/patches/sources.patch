@@ -1,0 +1,46 @@
+--- a/QSVPipeline/perf_monitor.cpp
++++ b/QSVPipeline/perf_monitor.cpp
+@@ -270,7 +270,7 @@
+ #if !(defined(_WIN32) || defined(_WIN64))
+     m_nSelectCheck &= (~PERF_MONITOR_THREAD_MAIN);
+     m_nSelectCheck &= (~PERF_MONITOR_THREAD_ENC);
+-    m_nSelectCheck &= (~PERF_MONITOR_THREAD_AUD);
++    m_nSelectCheck &= (~PERF_MONITOR_THREAD_AUDP);
+     m_nSelectCheck &= (~PERF_MONITOR_THREAD_OUT);
+     m_nSelectOutputPlot = 0;
+ #endif //#if defined(_WIN32) || defined(_WIN64)
+--- a/QSVEncC/QSVEncC.cpp
++++ b/QSVEncC/QSVEncC.cpp
+@@ -28,6 +28,9 @@
+ #include "qsv_version.h"
+ #include "avcodec_qsv.h"
+ 
++static const TCHAR *AVQSV_CODEC_AUTO = _T("auto");
++static const TCHAR *AVQSV_CODEC_COPY = _T("copy");
++
+ #if ENABLE_AVCODEC_QSV_READER
+ tstring getAVQSVSupportedCodecList();
+ #endif
+@@ -133,13 +136,6 @@
+             _T("output format will be raw H.264/AVC ES.\n")
+             _T("when output filename is set to \"-\", H.264/AVC ES output is thrown to stdout.\n")
+             _T("\n")
+-            _T("Example:\n")
+-            _T("  QSVEncC -i \"<avsfilename>\" -o \"<outfilename>\"\n")
+-            _T("  avs2pipemod -y4mp \"<avsfile>\" | QSVEncC --y4m -i - -o \"<outfilename>\"\n")
+-            _T("\n")
+-            _T("Example for Benchmark:\n")
+-            _T("  QSVEncC -i \"<avsfilename>\" --benchmark \"<benchmark_result.txt>\"\n")
+-            _T("\n")
+             _T("Options: \n")
+             _T("-h,-? --help                    show help\n")
+             _T("-v,--version                    show version info\n")
+@@ -413,7 +409,7 @@
+             _T("                                 same as --output-thread 0 --audio-thread 0\n")
+             _T("                                         -a 1 --input-buf 1 --output-buf 0\n")
+             _T("                                 this will cause lower performance!\n")
+-            );
++            ;
+         _ftprintf(stdout,
+             _T("   --log <string>               output log to file (txt or html).\n")
+             _T("   --log-level <string>         set output log level\n")
