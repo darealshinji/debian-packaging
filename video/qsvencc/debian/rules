@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+CXXFLAGS := $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	[ ! -f config.mak ] || $(MAKE) distclean
+
+override_dh_auto_configure:
+	./configure --prefix=/usr \
+		--disable-libva \
+		--disable-libav \
+		--disable-vapoursynth \
+		--extra-cxxflags="$(CXXFLAGS) $(CPPFLAGS)" \
+		--extra-ldflags="$(LDFLAGS)"
+
+override_dh_auto_build:
+	dh_auto_build
+	help2man -n "H.265 encoder" -s1 -N ./qsvencc > qsvencc.1
+
+override_dh_auto_install:
+
