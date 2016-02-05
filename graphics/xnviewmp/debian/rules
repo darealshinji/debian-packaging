@@ -1,10 +1,6 @@
 #!/usr/bin/make -f
 
 VERSION = $(shell dpkg-parsechangelog -SVersion)
-DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
-ifeq ($(DEB_HOST_ARCH),amd64)
-x64 = -x64
-endif
 
 
 %:
@@ -14,18 +10,12 @@ override_dh_auto_clean:
 	rm -rf converted_icons XnView xnviewmp.1
 
 override_dh_auto_build:
-	tar xvfz XnViewMP-linux$(x64).tgz
+	tar xvfz XnViewMP-linux*.tgz
 	find XnView -type f -name *.gif -exec chmod 0644 '{}' \;
 	find XnView -type f -name *.png -exec chmod 0644 '{}' \;
 	dos2unix XnView/*.txt
 	sed -e 's/@VERSION@/$(VERSION)/;' debian/xnviewmp.1.in > xnviewmp.1
 	chrpath -d XnView/XnView `find XnView/ -type f -name *.so*`
-	rm -rf XnView/lib/phonon_backend
-ifeq ($(DEB_HOST_ARCH),amd64)
-	if [ "x$$(file XnView/Plugins/rwz_sdk.so | grep 'ELF 32-bit')" != "x" ]; then \
-	  rm -f XnView/Plugins/rwz_sdk.so; \
-	fi
-endif
 
 override_dh_installchangelogs:
 	dh_installchangelogs XnView/WhatsNew.txt

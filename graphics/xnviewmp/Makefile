@@ -2,7 +2,7 @@ include ../../mk/include.mk
 
 deps           = wget
 srcfiles       = $(bin)
-distcleanfiles = $(bin)
+distcleanfiles = *.tgz
 
 bin = XnViewMP-linux$(x64).tgz
 ifeq ($(ARCH), amd64)
