@@ -7,22 +7,6 @@ export CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAG
 export LDFLAGS  := -Wl,-O1 -Wl,-Bsymbolic -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
 export V=1
 
-pkgconfig = PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig pkg-config --static
-
-extraflags = \
-	AVCODEC_CFLAGS="$$($(pkgconfig) --cflags libavcodec)" \
-	AVCODEC_LIBS="$$($(pkgconfig) --libs libavcodec)" \
-	AVFORMAT_CFLAGS="$$($(pkgconfig) --cflags libavformat)" \
-	AVFORMAT_LIBS="$$($(pkgconfig) --libs libavformat)" \
-	SWSCALE_CFLAGS="$$($(pkgconfig) --cflags libswscale)" \
-	SWSCALE_LIBS="$$($(pkgconfig) --libs libswscale)" \
-	POSTPROC_CFLAGS="$$($(pkgconfig) --cflags libpostproc)" \
-	POSTPROC_LIBS="$$($(pkgconfig) --libs libpostproc)" \
-	DVDREAD_CFLAGS="$$($(pkgconfig) --cflags dvdread)" \
-	DVDREAD_LIBS="$$($(pkgconfig) --libs dvdread) -ldvdcss" \
-	DVDNAV_CFLAGS="$$($(pkgconfig) --cflags dvdnav)" \
-	DVDNAV_LIBS="$$($(pkgconfig) --libs dvdnav) -ldvdcss"
-
 # tested on Ubuntu 14.04
 vlcfeatures = \
 	--enable-a52 \
@@ -155,8 +139,42 @@ override_dh_autoreconf:
 override_dh_auto_configure:
 
 override_dh_auto_build:
+	# libdvdcss
+	cd libdvdcss && \
+	CFLAGS="-fPIC -DPIC $(CFLAGS)" \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/libs \
+		--disable-shared \
+		--enable-static
+	dh_auto_build -Dlibdvdcss
+	$(MAKE) -C libdvdcss install
+
+	# libdvdread
+	cd libdvdread && \
+	PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig \
+	CFLAGS="-fPIC -DPIC $(CFLAGS) $$(PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig pkg-config --static --cflags libdvdcss)" \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/libs \
+		--disable-shared \
+		--enable-static \
+		--with-libdvdcss
+	dh_auto_build -Dlibdvdread
+	$(MAKE) -C libdvdread install
+
+	# libdvdnav
+	cd libdvdnav && \
+	CFLAGS="-fPIC -DPIC $(CFLAGS)" \
+	PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig" \
+	DVDREAD_LIBS="$$(PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig pkg-config --static --libs dvdread) -ldvdcss" \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/libs \
+		--disable-shared \
+		--enable-static
+	dh_auto_build -Dlibdvdnav
+	$(MAKE) -C libdvdnav install
+
 	# FFmpeg
-	# set all relevant hardening flags with --toolchain=hardened
+	# set hardening flags with --toolchain=hardened
 	cd ffmpeg && CFLAGS="" CPPFLAGS="" LDFLAGS="" \
 	./configure --prefix=$(CURDIR)/libs \
 		--disable-programs \
@@ -174,43 +192,12 @@ override_dh_auto_build:
 	dh_auto_build -Dffmpeg
 	$(MAKE) -C ffmpeg install
 
-	# libdvdcss
-	cd libdvdcss && \
-	CFLAGS="-fPIC -DPIC $(CFLAGS)" \
-	./configure --host=$(DEB_HOST_GNU_TYPE) \
-		--prefix=$(CURDIR)/libs \
-		--disable-shared \
-		--enable-static
-	dh_auto_build -Dlibdvdcss
-	$(MAKE) -C libdvdcss install
-
-	# libdvdread
-	cd libdvdread && \
-	CFLAGS="-fPIC -DPIC $(CFLAGS) $$($(pkgconfig) --cflags libdvdcss)" \
-	CPPFLAGS="$(CPPFLAGS) $$($(pkgconfig) --cflags libdvdcss)" \
-	PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig \
-	./configure --host=$(DEB_HOST_GNU_TYPE) \
-		--prefix=$(CURDIR)/libs \
-		--disable-shared \
-		--enable-static \
-		--with-libdvdcss
-	dh_auto_build -Dlibdvdread
-	$(MAKE) -C libdvdread install
-
-	# libdvdnav
-	cd libdvdnav && \
-	CFLAGS="-fPIC -DPIC $(CFLAGS)" \
-	DVDREAD_CFLAGS="$$($(pkgconfig) --cflags dvdread)" \
-	DVDREAD_LIBS="$$($(pkgconfig) --libs dvdread) -ldvdcss" \
-	./configure --host=$(DEB_HOST_GNU_TYPE) \
-		--prefix=$(CURDIR)/libs \
-		--disable-shared \
-		--enable-static
-	dh_auto_build -Dlibdvdnav
-	$(MAKE) -C libdvdnav install
-
 	# VLC
-	cd vlc && $(extraflags) ./configure \
+	cd vlc && \
+	PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig \
+	DVDREAD_LIBS="$$(PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig pkg-config --static --libs dvdread) -ldvdcss" \
+	DVDNAV_LIBS="$$(PKG_CONFIG_PATH=$(CURDIR)/libs/lib/pkgconfig pkg-config --static --libs dvdnav) -ldvdcss" \
+	./configure \
 		--host=$(DEB_HOST_GNU_TYPE) \
 		--prefix=/usr \
 		--docdir=/usr/share/doc/vlc \

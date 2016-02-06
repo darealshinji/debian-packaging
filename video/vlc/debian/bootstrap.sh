@@ -1,5 +1,7 @@
 #!/bin/sh
+set -v
+set -e
 autoreconf -if libdvdcss
 autoreconf -if libdvdnav
 autoreconf -if libdvdread
-autoreconf -if vlc
+cd vlc && ./bootstrap
