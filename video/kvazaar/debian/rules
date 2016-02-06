@@ -1,28 +1,14 @@
 #!/usr/bin/make -f
 
-VERSION = $(shell dpkg-parsechangelog -SVersion | cut -d- -f1 | cut -d+ -f1)
+CFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
 
 
 %:
 	dh ${@} --parallel --with autoreconf
 
-override_dh_auto_clean:
-	dh_auto_clean
-	rm -f kvazaar.1
-
 override_dh_auto_configure:
 	dh_auto_configure -- --disable-shared \
 		--disable-werror --disable-silent-rules
 
-override_dh_auto_build:
-	dh_auto_build
-	help2man --no-discard-stderr -N -n "open-source HEVC encoder" -h '' \
-	  --version-string=$(VERSION) src/kvazaar > kvazaar.1
-
-override_dh_installdocs:
-	dh_installdocs -pkvazaar
-	dh_installdocs -pkvazaar-dbg --link-doc=kvazaar
-
-override_dh_strip:
-	dh_strip --dbg-package=kvazaar-dbg
+override_dh_auto_install:
 

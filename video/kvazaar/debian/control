@@ -5,7 +5,6 @@ Maintainer: djcj <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 9),
  dh-autoreconf,
- help2man,
  yasm
 Standards-Version: 3.9.6
 Homepage: https://github.com/ultravideo/kvazaar
@@ -21,17 +20,3 @@ Description: open-source HEVC encoder
  This project is not yet finished and does not implement all
  the features of HEVC. Compression performance will increase as
  we add more coding tools.
-
-Package: kvazaar-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Depends:
- ${misc:Depends},
- kvazaar (= ${binary:Version})
-Description: open-source HEVC encoder (debug symbols)
- This project is not yet finished and does not implement all
- the features of HEVC. Compression performance will increase as
- we add more coding tools.
- .
- This package contains the debug symbols for kvazaar.
