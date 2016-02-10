@@ -5,7 +5,9 @@ srcpkg     = notepadqq
 builddir   = $(srcpkg)
 cleanfiles = notepadqq* CodeMirror*
 
-download:
+download: $(builddir)
+
+$(builddir):
 	git clone --depth 1 "https://github.com/notepadqq/notepadqq-packaging.git"
 	git clone "https://github.com/notepadqq/notepadqq.git"
 	mv notepadqq-packaging/Debian/debian $(builddir)
