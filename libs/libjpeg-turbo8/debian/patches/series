@@ -1,6 +1,2 @@
-# FixLibraryStartup.patch
 install-tjunittest.patch
-add-copying-for-debian-dir.patch
-CVE-2013-6629.patch
-CVE-2013-6630.patch
-AM_PROG_AR.patch
+disable-nasm-warnings.patch

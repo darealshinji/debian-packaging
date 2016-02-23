@@ -1,10 +1,25 @@
 #!/usr/bin/make -f
 
-DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+# for architecture dependent variables and changelog vars
+vafilt = $(subst $(2)=,,$(filter $(2)=%,$(1)))
 
-CFLAGS  = -Wall -Wno-attributes $(shell dpkg-buildflags --get CFLAGS)
-LDFLAGS = $(filter-out -Wl,-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS)) -Wl,--as-needed
+DPKG_VARS               := $(shell dpkg-architecture)
+DEB_BUILD_GNU_TYPE	?= $(call vafilt,$(DPKG_VARS),DEB_BUILD_GNU_TYPE)
+DEB_HOST_GNU_TYPE	?= $(call vafilt,$(DPKG_VARS),DEB_HOST_GNU_TYPE)
+DEB_HOST_MULTIARCH	?= $(call vafilt,$(DPKG_VARS),DEB_HOST_MULTIARCH)
 
+export DEB_LDFLAGS_MAINT_STRIP=-Wl,-Bsymbolic-functions
+
+CFLAGS ?= $(shell dpkg-buildflags --get CFLAGS)
+ifneq (,$(filter noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -Wall
+endif
+
+ifeq ($(DEB_HOST_GNU_TYPE),$(DEB_BUILD_GNU_TYPE))
+CC = gcc
+else
+CC = $(DEB_HOST_GNU_TYPE)-gcc
+endif
 
 %:
 	dh $@ --list-missing --parallel --with autoreconf
@@ -13,7 +28,7 @@ override_dh_auto_configure:
 	dh_auto_configure -v -- --with-jpeg8 CFLAGS="$(CFLAGS)"
 
 override_dh_auto_build:
-	dh_auto_build -v
+	dh_auto_build -v -- V=1
 	$(MAKE) -C debian/extra CC=$(CC) CFLAGS="$(CFLAGS) -Wall"
 
 override_dh_install:
@@ -23,6 +38,10 @@ override_dh_install:
 	mkdir -p debian/tmp/usr/include/$(DEB_HOST_MULTIARCH)
 	sed -e "s/#\(undef\|define\) HAVE_\(LOCALE\|\(STD\(DEF\|LIB\)\)\)_H 1//g" \
 		jconfig.h > debian/tmp/usr/include/$(DEB_HOST_MULTIARCH)/jconfig.h
+	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/
+	sed -e "s/@VERSION@/$(VERSION)/;s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/" \
+		debian/libjpeg.pc.in \
+		> debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/libjpeg.pc
 	dh_install
 
 override_dh_installchangelogs:
@@ -45,19 +64,4 @@ override_dh_auto_clean:
 	dh_auto_clean
 	$(MAKE) -C debian/extra clean
 	rm -f simd/jsimdcfg.inc
-
-deb_source := $(shell dpkg-parsechangelog | sed -n 's/^Source: //p')
-svn_rev := $(shell dpkg-parsechangelog | sed -rne 's,^Version: .*[+~]svn([0-9]+).*,\1,p')
-upstream_version := $(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
-
-.PHONY: get-orig-source
-get-orig-source:
-	rm -rf $(deb_source)-$(upstream_version).orig
-	rm -f $(deb_source)-$(upstream_version).orig.tar.gz
-	svn -q export -r $(svn_rev) https://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo/trunk \
-		$(deb_source)-$(upstream_version).orig
-	GZIP=--best tar -cz --owner root --group root --mode a+rX \
-	     -f $(deb_source)_$(upstream_version).orig.tar.gz \
-	     $(deb_source)-$(upstream_version).orig
-	rm -r $(deb_source)-$(upstream_version).orig
 

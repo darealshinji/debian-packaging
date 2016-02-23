@@ -4,9 +4,11 @@ Description: install tjunittest
  Makefile.am |    4 +---
  1 file changed, 1 insertion(+), 3 deletions(-)
 
+Index: b/Makefile.am
+===================================================================
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -89,9 +89,7 @@
+@@ -90,9 +90,7 @@ noinst_PROGRAMS = jcstest
  
  if WITH_TURBOJPEG
  
