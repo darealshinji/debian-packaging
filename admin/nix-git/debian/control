@@ -1,0 +1,50 @@
+Source: nix
+Section: admin
+Priority: extra
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+   debhelper (>= 9),
+   dh-autoreconf,
+   bison,
+   curl,
+   dblatex,
+   docbook-xsl,
+   flex,
+   graphviz,
+   libbz2-dev,
+   libcurl-dev,
+   libdbd-sqlite3-perl,
+   libdbi-perl,
+   libextutils-parsexs-perl,
+   libgc-dev,
+   libperl-dev,
+   libsqlite3-dev,
+   libwww-curl-perl,
+   libxml2-utils,
+   pkg-config,
+   xsltproc
+Standards-Version: 3.9.6
+Homepage: http://nixos.org/nix/
+Vcs-Git: https://github.com/NixOS/nix.git
+Vcs-Browser: https://github.com/NixOS/nix
+
+Package: nix
+Architecture: any
+Pre-Depends:
+   ${misc:Pre-Depends}
+Depends:
+   bsdiff,
+   curl,
+   ${misc:Depends},
+   ${shlibs:Depends},
+   libdbd-sqlite3-perl,
+   ${perl:Depends}
+Suggests:
+   libgc-dev
+Description: purely functional package manager
+ Nix is a purely functional package manager. It allows multiple
+ versions of a package to be installed side-by-side, ensures that
+ dependency specifications are complete, supports atomic upgrades and
+ rollbacks, allows non-root users to install software, and has many
+ other features. It is the basis of the NixOS Linux distribution, but
+ it can be used equally well under other Unix systems.

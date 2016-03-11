@@ -1,0 +1,5 @@
+# unstable API
+nix: shlib-without-versioned-soname usr/lib/*
+
+# no point in creating separate packages for these
+nix: package-name-doesnt-match-sonames libnixexpr libnixformat libnixmain libnixstore libnixutil

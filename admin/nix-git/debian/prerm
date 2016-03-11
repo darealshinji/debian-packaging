@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ] && [ -d "/nix" ]; then
+    rm -r "/nix"
+fi
+
+#DEBHELPER#
+
+exit 0
