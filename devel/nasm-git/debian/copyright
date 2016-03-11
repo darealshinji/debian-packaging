@@ -3,7 +3,7 @@ Upstream-Name: NASM
 Source: http://www.nasm.us/pub/nasm/releasebuilds/
 
 Files: *
-Copyright: 1996-2015 the NASM Authors
+Copyright: 1996-2016 the NASM Authors
 License: BSD-2-clause
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following
@@ -31,7 +31,7 @@ License: BSD-2-clause
     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Files: debian/*
-Copyright: 2015      djcj <djcj@gmx.de>
+Copyright: 2015-2016 djcj <djcj@gmx.de>
            1996-1999 Vincent Renardias
            1999-2001 Matej Vela
            2001      Ivo Timmermans

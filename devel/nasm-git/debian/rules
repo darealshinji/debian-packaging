@@ -10,7 +10,7 @@ export CFLAGS
 	dh $@ --parallel --with autoreconf
 
 override_dh_auto_build:
-	dh_auto_build -- all doc
+	dh_auto_build -- all doc manpages
 
 override_dh_auto_test:
 
