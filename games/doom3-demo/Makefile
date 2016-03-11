@@ -5,7 +5,7 @@ cleanfiles     = *.png
 bin            = doom3-linux-1.1.1286-demo.x86.run
 icon           = doom3-demo.png
 distcleanfiles = $(bin)
-srcfiles       = $(bin) $(icon) ../../make-icons.sh
+srcfiles       = $(bin) $(icon) ../../mk/make-icons.sh
 
 download:
 	@ $(call download,$(bin),ftp://ftp.fu-berlin.de/pc/games/idgames/idstuff/doom3/linux/$(bin))
