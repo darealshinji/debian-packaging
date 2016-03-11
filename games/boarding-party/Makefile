@@ -7,7 +7,7 @@ cleanfiles     = $(icon)
 distcleanfiles = $(bin)
 srcfiles       = $(bin) $(icon) ../../mk/make-icons.sh
 
-# mirror: http://www.mediafire.com/download/u6022kzu5vp2mz3/boarding-party.jar
+# mirror: https://www.dropbox.com/s/3tlmdo1xk644jfu/boarding-party.jar
 download:
 	@ $(call download,$(bin),http://www.intrrpt.com/downloads/boarding-party.jar)
 	@ $(call download,$(icon),http://fs2.directupload.net/images/150127/3c9odqol.png)
