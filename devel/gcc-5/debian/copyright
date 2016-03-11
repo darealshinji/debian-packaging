@@ -799,7 +799,7 @@ The merge sort implementation was written by Jeffrey Stedfast.
 
 
 
-Debian packaging is copyright (c) 2015 djcj <djcj@gmx.de> and
+Debian packaging is copyright (c) 2015-2016 djcj <djcj@gmx.de> and
 release under the MIT license:
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
