@@ -3,7 +3,7 @@ include ../../mk/include.mk
 deps           = wget
 bin            = crayon_release_demo.tgz
 distcleanfiles = $(bin)
-srcfiles       = $(bin) ../../make-icons.sh
+srcfiles       = $(bin) ../../mk/make-icons.sh
 
 download:
 	@ $(call download,$(bin),http://crayonphysics.com/downloads/crayon_release55demo_hotfix.tar.gz)
