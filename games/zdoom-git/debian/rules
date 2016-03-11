@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
-CFLAGS    = $(filter-out -g, $(shell dpkg-buildflags --get CFLAGS)) -Wno-unused-result -Wno-unused-but-set-variable
-CXXFLAGS  = $(filter-out -g, $(shell dpkg-buildflags --get CXXFLAGS)) -Wno-unused-result
+CFLAGS    = $(filter-out -g -Werror=%, $(shell dpkg-buildflags --get CFLAGS)) -Wno-unused-result -Wno-unused-but-set-variable
+CXXFLAGS  = $(filter-out -g -Werror=%, $(shell dpkg-buildflags --get CXXFLAGS)) -Wno-unused-result
 LDFLAGS  += -Wl,--as-needed
 
 
