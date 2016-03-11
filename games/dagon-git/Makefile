@@ -2,10 +2,11 @@ include ../../mk/include.mk
 
 deps       = git
 builddir   = Dagon
-cleanfiles = $(builddir) ../../mk/make-icons.sh
+cleanfiles = $(builddir)
 
 download:
 	rm -rf $(builddir) && git clone "https://github.com/Senscape/Dagon.git"
+	cp ../../mk/make-icons.sh $(builddir)
 
 	@ latestcommit=$$(git -C $(builddir) log -1 --format=%ci | head -c10 | sed -e 's/-//g'); \
 	vermaj="`grep '#define DAGON_VERSION_MAJOR' $(builddir)/src/Version.h | cut -d' ' -f3`"; \
