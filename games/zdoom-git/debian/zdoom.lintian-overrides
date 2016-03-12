@@ -1,0 +1,2 @@
+# hardening flags are all passed correctly
+zdoom: hardening-no-relro usr/lib/games/zdoom/zdoom

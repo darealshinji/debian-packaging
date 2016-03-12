@@ -1,0 +1,2 @@
+# hardening flags are all passed correctly
+gzdoom: hardening-no-relro usr/lib/games/gzdoom/gzdoom
