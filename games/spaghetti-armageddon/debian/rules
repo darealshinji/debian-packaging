@@ -7,11 +7,10 @@ PKG = spaghetti-armageddon
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf SpaghettiArmageddon lib*.so.*
+	rm -rf SpaghettiArmageddon
 
 override_dh_auto_build:
-	tar xvf SpaghettiArmageddon_Linux.tgz
-	tar xvf SFML-1.6.txz
+	tar xvf SpaghettiArmageddon.txz
 
 override_dh_makeshlibs:
 

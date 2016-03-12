@@ -1,14 +1,11 @@
 include ../../mk/include.mk
 
 deps           = wget
-bin            = SpaghettiArmageddon_Linux.tgz
-lib            = SFML-1.6.txz
-srcfiles       = $(bin) $(lib)
-distcleanfiles = $(bin) $(lib)
+bin            = SpaghettiArmageddon.txz
+srcfiles       = $(bin)
+distcleanfiles = $(bin)
 
 download:
-	@ $(call download,$(bin),http://tinyurl.com/k5a7a2x)
-	@ $(call download,$(lib),https://github.com/darealshinji/SFML-1.x/releases/download/1.6/SFML-1.6-linux-x86.tar.xz)
-	@ $(call verifysha256,$(bin),35c56e780476f7ca5d5b5344b3301e50f680cfd265ef9ceccb0b84f5fff5b4af)
-	@ $(call verifysha256,$(lib),dbd0300cbaeaf2a699064b6c140e7faad112ebfbdb6fa188052aa2532d679cbf)
+	@ $(call download,$(bin),https://drive.google.com/uc?export=download&id=0BxClEVSW8QykQkg5d245NjJDUlk)
+	@ $(call verifysha256,$(bin),2190fdd5f744ca5ca55d747d99b13354085b434447576878b2b52b7f35d0ce41)
 
