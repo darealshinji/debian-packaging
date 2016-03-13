@@ -1,8 +1,0 @@
-# tesseract.pc is missing from libtesseract-dev package
-
-Name: tesseract
-Description: Command line OCR tool
-Version: 3.03
-Libs: -L/usr/lib -ltesseract
-Libs.private: -llept -lm -lpthread -lstdc++
-Cflags: -I/usr/include

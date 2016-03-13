@@ -1,8 +1,7 @@
 FFmpeg
 ======
 
-Create a Debian package of the latest FFmpeg snapshot with latest libx264, libx265, libkvazaar and libfdk-aac enabled.
-libaacplus will also be enabled as encoder.
+Create a Debian package of the latest FFmpeg snapshot with latest libx264, libx265 and libfdk-aac enabled.
 
 The package will NOT conflict with or overwrite your distribution's libav libraries.
 

@@ -53,7 +53,6 @@ CONFIG = --prefix=/usr \
 	--enable-frei0r \
 	--enable-gnutls \
 	--enable-ladspa \
-	--enable-libaacplus \
 	--enable-libass \
 	--enable-libbluray \
 	--enable-libbs2b \
@@ -74,12 +73,12 @@ CONFIG = --prefix=/usr \
 	--enable-libopencore-amrnb \
 	--enable-libopencore-amrwb \
 	--enable-libopencv \
+	--enable-libopenh264 \
 	--enable-libopenjpeg \
 	--enable-libopus \
 	--enable-libpulse \
-	--enable-librubberband \
-	--enable-libquvi \
 	--enable-librtmp \
+	--enable-librubberband \
 	--enable-libschroedinger \
 	--enable-libsmbclient \
 	--enable-libsnappy \
@@ -90,7 +89,6 @@ CONFIG = --prefix=/usr \
 	--enable-libtheora \
 	--enable-libtwolame \
 	--enable-libv4l2 \
-	--enable-libvo-aacenc \
 	--enable-libvo-amrwbenc \
 	--enable-libvorbis \
 	--enable-libvpx \
@@ -103,6 +101,7 @@ CONFIG = --prefix=/usr \
 	--enable-libxcb-xfixes \
 	--enable-libxcb-shape \
 	--enable-libxvid \
+	--enable-libzvbi \
 	--enable-openal \
 	--enable-opencl \
 	--enable-opengl
@@ -115,8 +114,7 @@ override_dh_auto_clean:
 	[ ! -f config.mak ] || $(MAKE) distclean
 	[ ! -f x264/config.mak ] || $(MAKE) -C x264 distclean
 	dh_auto_clean -Dfdk-aac
-	dh_auto_clean -Dkvazaar/src
-	dh_auto_clean -Dlibaacplus
+	dh_auto_clean -Dkvazaar
 	rm -rf x265_12bit x265_10bit x265_8bit x264_10bit libs
 	rm -f ffmpeg-qt-faststart
 
@@ -153,6 +151,17 @@ override_dh_auto_configure:
 		-DHIGH_BIT_DEPTH=ON \
 		-DEXPORT_C_API=OFF
 
+	# kvazaar
+	autoreconf -ivf kvazaar
+	cd kvazaar && ./configure \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/libs \
+		--libdir=$(CURDIR)/libs/lib \
+		--enable-static=yes \
+		--enable-shared=no \
+		--disable-werror \
+		--with-pic=yes
+
 	# x265 main
 	mkdir x265_8bit
 	ln -s ../x265_10bit/libx265.a x265_8bit/libx265_main10.a
@@ -180,19 +189,6 @@ override_dh_auto_configure:
 		--enable-shared=no \
 		--with-pic=yes
 
-	# libaacplus
-	cp -f libaacplus/26410-800.zip libaacplus/src
-	autoreconf -ivf libaacplus
-	CFLAGS="-Wall $(CFLAGS)" \
-	dh_auto_configure -Dlibaacplus -- \
-		--host=$(DEB_HOST_GNU_TYPE) \
-		--prefix=$(CURDIR)/libs \
-		--libdir=$(CURDIR)/libs/lib \
-		--enable-static=yes \
-		--enable-shared=no \
-		--with-pic=yes \
-		--with-fftw3-prefix=/usr/lib/$(DEB_HOST_MULTIARCH)
-
 override_dh_auto_build:
 	# x264
 	dh_auto_build -Dx264
@@ -213,23 +209,15 @@ override_dh_auto_build:
 	dh_auto_build -Dfdk-aac
 	$(MAKE) -C fdk-aac install
 
-	# libaacplus
-	dh_auto_build -Dlibaacplus
-	$(MAKE) -C libaacplus install
-
 	# kvazaar
-	CFLAGS="$(CFLAGS) -fPIC -DPIC $(CPPFLAGS)" \
-	ARCH=$(DEB_HOST_ARCH) \
-		$(MAKE) -C kvazaar/src lib-static
-	ARCH=$(DEB_HOST_ARCH) \
-		$(MAKE) -C kvazaar/src install-static install-pc \
-		PREFIX=$(CURDIR)/libs
+	dh_auto_build -Dkvazaar
+	$(MAKE) -C kvazaar install
 
 	# ffmpeg
 	# set all relevant hardening flags with --toolchain=hardened
 	CFLAGS="-I$(CURDIR)/libs/include" CPPFLAGS="" \
 	LDFLAGS="-Wl,-z,defs -Wl,--allow-multiple-definition -Wl,-rpath,XORIGIN/../lib/ffmpeg -L$(CURDIR)/libs/lib" \
-	PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig:$(CURDIR)/debian" \
+	PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig:$(CURDIR)/debian/pkgconfig" \
 		./configure $(CONFIG) || (cat config.log && exit 1)
 	dh_auto_build
 	dh_auto_build -- apidoc

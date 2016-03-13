@@ -25,9 +25,10 @@ Build-Depends:
  libcdio-dev,
  libcdio-cdda-dev,
  libcdio-paranoia-dev,
+#libcelt is only available in Ubuntu 12.04
+#libcelt-dev,
  libdc1394-22-dev,
  libfaac-dev,
- libfftw3-dev,
  libfontconfig1-dev,
  libfreetype6-dev,
  libfribidi-dev,
@@ -40,20 +41,23 @@ Build-Depends:
  liblzma-dev,
  libmodplug-dev,
  libmp3lame-dev,
+# required by x265
  libnuma-dev,
  libopenal-dev,
  libopencore-amrnb-dev,
  libopencore-amrwb-dev,
  libopencv-dev,
+ libopenh264-dev,
  libopenjpeg-dev,
  libopus-dev,
  libpulse-dev,
- librubberband-dev,
- libquvi-dev,
  libraw1394-dev,
  librtmp-dev,
+ librubberband-dev,
  libschroedinger-dev,
  libsdl1.2-dev,
+#doesn't work on Ubuntu 14.04 (incompatible version?)
+#libshine-dev,
  libsmbclient-dev,
  libsnappy-dev,
  libsoxr-dev,
@@ -63,7 +67,6 @@ Build-Depends:
  libtheora-dev,
  libtwolame-dev,
  libv4l-dev,
- libvo-aacenc-dev,
  libvo-amrwbenc-dev,
  libvorbis-dev,
  libvpx-dev,
@@ -72,16 +75,17 @@ Build-Depends:
  libxext-dev,
  libx11-xcb-dev,
  libxvidcore-dev,
+#doesn't work on Ubuntu 14.04 (incompatible version?)
+#libzmq-dev,
  libzvbi-dev,
  ocl-icd-opencl-dev,
  opencl-headers,
  pkg-config,
  texinfo,
- patch,
- unzip,
- wget,
  yasm,
- zlib1g-dev
+ zlib1g-dev,
+#required by libtesseract-dev
+ libleptonica-dev
 
 Package: ffmpeg
 Architecture: any
