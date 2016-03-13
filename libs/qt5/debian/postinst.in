@@ -3,11 +3,7 @@
 set -e
 
 VERSION=@VERSION@
-
-GCC=gcc
-if [ "$(uname -p)" = "x86_64" ] ; then
 GCC=gcc_64
-fi
 
 case "$1" in
 configure)

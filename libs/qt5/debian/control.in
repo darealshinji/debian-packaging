@@ -5,42 +5,44 @@ Maintainer: djcj <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 9),
  p7zip-full,
- libqt5positioning5,
+ rpm2cpio,
+# readelf
+ binutils,
+# libraries
  libasound2,
+ libcomerr2,
  libcups2,
+ libdbus-1-3,
  libegl1-mesa | libegl1-x11,
  libfontconfig1,
  libfreetype6,
- libgeoclue0,
  libgl1-mesa-glx | libgl1,
- libglib2.0-0,
+ libgssapi-krb5-2,
  libgstreamer-plugins-base0.10-0,
- libgstreamer0.10-0,
  libgtk2.0-0,
  libice6,
- libpango-1.0-0,
+ libjasper1,
+ libk5crypto3,
+ libkrb5-3,
  libpq5,
  libpulse0,
  libsm6,
- libssl1.0.0,
  libx11-6,
  libx11-xcb1,
  libxcb1,
- libxcomposite1,
+ libxext6,
  libxi6,
  libxml2,
  libxrender1,
- libxslt1.1,
  zlib1g
 Standards-Version: 3.9.6
 Homepage: http://www.qt.io/download-open-source/
 
 Package: libqt@VERSION@
-Architecture: amd64 i386
+Architecture: amd64
 Depends:
  ${misc:Depends},
- ${shlibs:Depends},
- libssl1.0.0
+ ${shlibs:Depends}
 Description: Qt @VERSION@
  Qt is a cross-platform C++ application framework. Qt's primary feature
  is its rich set of widgets that provide standard GUI functionality.

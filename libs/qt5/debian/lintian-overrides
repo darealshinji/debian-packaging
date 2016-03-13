@@ -1,4 +1,2 @@
 embedded-library
 hardening-no-relro
-shared-lib-without-dependency-information
-shlib-with-non-pic-code
