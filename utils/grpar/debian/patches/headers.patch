@@ -1,0 +1,23 @@
+This way the binary doesn't need to be linked against libbsd
+
+--- a/grpar.c
++++ b/grpar.c
+@@ -38,6 +38,8 @@
+     [...]
+ */
+ 
++#include <stdint.h>
++
+ /* printf(3) */
+ #include <stdio.h>
+ 
+@@ -55,8 +57,7 @@
+ #include <sys/uio.h>
+ #include <unistd.h>
+ 
+-/* le32toh(9) */
+-#include <sys/endian.h>
++#include <endian.h>
+ 
+ /* stat(2) */
+ #include <sys/stat.h>

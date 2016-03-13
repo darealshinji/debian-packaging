@@ -1,6 +1,6 @@
 --- a/grpar.c
 +++ b/grpar.c
-@@ -325,7 +325,7 @@
+@@ -326,7 +326,7 @@
  version(void)
  {
      fprintf(stderr, "grpar, v." GRPAR_VERSION 

@@ -2,7 +2,13 @@
 
 
 %:
-	dh $@ --parallel
+	dh $@
+
+override_dh_auto_clean:
+	rm -f grpar
+
+override_dh_auto_build:
+	$(CC) -Wall -fno-strict-aliasing $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o grpar grpar.c
 
 override_dh_installchangelogs:
 	dh_installchangelogs Changelog
