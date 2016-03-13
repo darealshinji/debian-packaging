@@ -6,7 +6,7 @@ Standards-Version: 3.9.6
 Build-Depends:
  debhelper (>= 9),
  ladspa-sdk,
- libasound2-dev [linux-any],
+ libasound2-dev,
  libass-dev,
  libbluray-dev,
  libbs2b-dev,
@@ -14,7 +14,7 @@ Build-Depends:
  libcdio-paranoia-dev,
  libdvdnav-dev,
  libdvdread-dev,
- libegl1-mesa-dev [linux-any],
+ libegl1-mesa-dev,
  libenca-dev,
  libfontconfig-dev,
  libfreetype6-dev,
@@ -41,11 +41,10 @@ Build-Depends:
  libtheora-dev,
  libtool,
  libtwolame-dev,
- libv4l-dev [!hurd-any],
- libva-dev [!hurd-any],
+ libv4l-dev,
+ libva-dev,
  libvdpau-dev,
  libvorbis-dev,
- libvo-aacenc-dev,
  libvo-amrwbenc-dev,
  libvpx-dev,
  libwavpack-dev,
@@ -73,14 +72,3 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: mplayer/mplayer2 based video player
  MPV is a versatile CLI movie player, based on mplayer and mplayer2.
-
-Package: mpv-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Depends: mpv (= ${binary:Version}), ${misc:Depends}
-Description: mplayer/mplayer2 based video player - debug
- MPV is a versatile CLI movie player, based on mplayer and mplayer2.
- .
- This package provides debug symbols for mpv.
-

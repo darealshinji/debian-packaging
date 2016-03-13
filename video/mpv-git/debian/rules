@@ -36,7 +36,7 @@ override_dh_auto_configure:
 		--enable-libvpx \
 		--enable-libwavpack \
 		--enable-gpl --enable-libxvid --enable-libx264 \
-		--enable-version3 --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvo-aacenc --enable-libvo-amrwbenc
+		--enable-version3 --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvo-amrwbenc
 
 override_dh_auto_build:
 	dh_auto_build -Dffmpeg -- V=1
@@ -54,7 +54,4 @@ done
 
 override_dh_installdocs:
 	dh_installdocs --link-doc=mpv
-
-override_dh_strip:
-	dh_strip --dbg-package=mpv-dbg
 
