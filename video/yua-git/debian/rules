@@ -10,12 +10,11 @@ override_dh_auto_clean:
 	rm -rf x264 ffmpeg fdk-aac gpac
 
 override_dh_auto_build:
-	rm -rf x264 ffmpeg fdk-aac gpac
 	cp -r deps/* $(CURDIR)
-	dh_auto_build -- static-qt4
+	dh_auto_build
 
 override_dh_auto_install:
-	$(MAKE) install PREFIX=/usr DESTDIR=$(CURDIR)/debian/tmp
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
 
 override_dh_install:
 	dh_install --sourcedir=$(CURDIR)/debian/tmp
@@ -23,7 +22,7 @@ override_dh_install:
 override_dh_shlibdeps:
 	# recognize the dependencies of the embedded helper tools
 	cp -f ffmpeg/ffmpeg $(CURDIR)/debian/yua/usr/bin
-	cp -f gpac/bin/gcc/MP4Box $(CURDIR)/debian/yua/usr/bin
+	cp -f gpac/bin/gcc/mp4box $(CURDIR)/debian/yua/usr/bin
 	dh_shlibdeps
-	cd $(CURDIR)/debian/yua/usr/bin && rm -f ffmpeg MP4Box 
+	cd $(CURDIR)/debian/yua/usr/bin && rm -f ffmpeg mp4box
 
