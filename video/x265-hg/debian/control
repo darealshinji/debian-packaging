@@ -17,8 +17,7 @@ Package: x265
 Architecture: any
 Depends:
  ${misc:Depends},
- ${shlibs:Depends},
- ${sphinxdoc:Depends}
+ ${shlibs:Depends}
 Suggests: libx265-doc
 Description: H.265/HEVC video stream encoder
  x265 is a commandline encoder for creating H.265/High Efficency Video Coding
