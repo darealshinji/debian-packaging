@@ -11,3 +11,4 @@ Homepage: http://www.3gpp.org/DynaReport/26410.htm
 
 Note: since the "source code" includes two 32 bit static libraries whithout
 their sources, enhaacplusenc can only be encoded as a 32 bit binary.
+It's recommended to use fdk-aac instead.
