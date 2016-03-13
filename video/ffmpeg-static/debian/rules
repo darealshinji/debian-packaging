@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+VERSION = $(shell dpkg-parsechangelog -SVersion)
+
+
 %:
 	dh ${@}
 
@@ -13,7 +16,10 @@ override_dh_auto_build:
 	mv ffmpeg-10bit ffmpeg-10bit-static && \
 	mv ffprobe ffprobe-static && \
 	mv ffserver ffserver-static && \
-	mv qt-faststart qt-faststart-static
+	mv qt-faststart qt-faststart-static && \
+	help2man -n ffmpeg -s1 -N -h "-h long" --version-string=$(VERSION) ./ffmpeg-static > ffmpeg-static.1 && \
+	help2man -n ffmpeg -s1 -N -h "-h long" --version-string=$(VERSION) ./ffmpeg-10bit-static > ffmpeg-10bit-static.1 && \
+	help2man -n ffprobe -s1 -N -h "-h" --version-string=$(VERSION) ./ffprobe-static > ffprobe-static.1
 
 override_dh_compress:
 	dh_compress -X.pdf

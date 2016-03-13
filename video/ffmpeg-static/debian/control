@@ -2,11 +2,11 @@ Source: ffmpeg-static
 Section: video
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
+Build-Depends: debhelper (>= 9), help2man
 Standards-Version: 3.9.6
 Vcs-Git: git://source.ffmpeg.org/ffmpeg.git
 Vcs-Browser: http://git.videolan.org/?p=ffmpeg.git;a=tree
 Homepage: http://johnvansickle.com/ffmpeg/
-Build-Depends: debhelper (>= 9)
 
 Package: ffmpeg-static
 Architecture: amd64 i386
