@@ -61,7 +61,6 @@ CONFIG = --prefix=/usr \
 	--enable-libfdk-aac \
 	--enable-libfreetype \
 	--enable-libgsm \
-	--enable-libkvazaar \
 	--enable-libmp3lame \
 	--enable-libopencore-amrnb \
 	--enable-libopencore-amrwb \
@@ -100,7 +99,6 @@ override_dh_auto_clean:
 	[ ! -f config.mak ] || $(MAKE) distclean
 	[ ! -f x264/config.mak ] || $(MAKE) -C x264 distclean
 	dh_auto_clean -Dfdk-aac
-	dh_auto_clean -Dkvazaar/src
 	rm -rf x265_12bit x265_10bit x265_8bit libs
 	rm -f avtools-qt-faststart
 
@@ -168,14 +166,6 @@ override_dh_auto_build:
 	# fdk-aac
 	dh_auto_build -Dfdk-aac
 	$(MAKE) -C fdk-aac install
-
-	# kvazaar
-	CFLAGS="$(CFLAGS) -fPIC -DPIC $(CPPFLAGS)" \
-		ARCH=$(DEB_HOST_ARCH) \
-		$(MAKE) -C kvazaar/src lib-static
-	ARCH=$(DEB_HOST_ARCH) \
-		$(MAKE) -C kvazaar/src install-static install-pc \
-		PREFIX=$(CURDIR)/libs
 
 	# libav
 	# set all relevant hardening flags with --toolchain=hardened
