@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+PKG = animechecker
+
 unneeded_libs = \
 	libXinerama.so.1 libXdamage.so.1 libXcursor.so.1 libXcomposite.so.1 \
 	libXfixes.so.3 libXext.so.6 libXi.so.6 libXrandr.so.2 libgmodule-2.0.so.0
@@ -16,13 +18,19 @@ override_dh_auto_build:
 	tar jxf animechecker-0.9.6.1-linux-i386-bin.tar.bz2
 	dos2unix changelog.txt
 	upx-ucl -d acc animechecker
-	strip -s acc animechecker
-	g++ -w -s -DPACKAGE_STRING="\"PatchELF 0.8\"" -DHAVE_SYSCONF=1 -DHAVE_ELF_H=1 -o patchelf patchelf.cpp
-	$(foreach LIB,$(unneeded_libs),./patchelf --remove-needed $(LIB) animechecker ;)
 	./make-icons.sh animechecker.svg
 
 override_dh_strip:
+	dh_strip
+	$(CXX) -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -o patchelf patchelf.cpp
+	$(foreach LIB,$(unneeded_libs),./patchelf --remove-needed $(LIB) debian/$(PKG)/usr/lib/$(PKG)/animechecker ;)
 
 override_dh_installchangelogs:
 	dh_installchangelogs changelog.txt
+
+override_dh_shlibdeps:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
 

@@ -1,8 +1,7 @@
 include ../../mk/include.mk
 
-ARCH       = i386
 deps       = wget
-srcfiles   = $(bin) animechecker.svg patchelf.cpp
+srcfiles   = $(bin) animechecker.svg patchelf.cpp ../../mk/make-icons.sh
 cleanfiles = *.svg *.cpp
 VERSION    = 0.9.6.1
 bin        = animechecker-$(VERSION)-linux-i386-bin.tar.bz2
