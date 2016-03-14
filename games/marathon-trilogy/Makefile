@@ -32,14 +32,14 @@ download:
 			$(gitclone) $(m)/$(m) ;\
 			$(gitclone)-2 $(m)/$(m)-2 ;\
 			$(gitclone)-infinity $(m)/$(m)-infinity ;\
+			d1=`git -C $(m)/$(m) $(log)` ;\
+			d2=`git -C $(m)/$(m)-2 $(log)` ;\
+			d3=`git -C $(m)/$(m)-infinity $(log)` ;\
+			printf "$${d1}\n$${d2}\n$${d2}" | sort -r | head -n1 > $(m)/VERSION ;\
 			rm -rf $(m)/$(m)/.git $(m)/$(m)-2/.git $(m)/$(m)-infinity/.git ;\
 			cp -rl $(m) $(m)-backup ;\
 		fi ;\
 	fi
 
-	@ d1=`git -C $(m)/$(m) $(log)` ;\
-	d2=`git -C $(m)/$(m)-2 $(log)` ;\
-	d3=`git -C $(m)/$(m)-infinity $(log)` ;\
-	VERSION=`printf "$${d1}\n$${d2}\n$${d2}" | sort -r | head -n1` ;\
-	$(changelog-entry)
+	@ VERSION=`cat $(m)/VERSION`; $(changelog-entry)
 
