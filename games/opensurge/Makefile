@@ -1,10 +1,7 @@
 include ../../mk/include.mk
 
-deps       = wget subversion
-bin        = AlFont209.rar
+deps       = subversion
 builddir   = opensurge-trunk
-cleanfiles = $(bin)
-srcfiles   = $(bin)
 
 
 download:
@@ -14,6 +11,5 @@ download:
 	rev=`svn info $(builddir) | grep '^Revision:' | cut -d' ' -f2`; \
 	VERSION="$${ver}~svn$${rev}" ; $(changelog-entry)
 	rm -rf $(builddir)/.svn
-	$(call download,$(bin),http://opensnc.sourceforge.net/alfont/mirror/$(bin))
 	sed -i 's|alfont alleg|alfont freetype alleg|g' $(builddir)/CMakeLists.txt
 

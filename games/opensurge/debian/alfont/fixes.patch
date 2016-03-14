@@ -1,0 +1,189 @@
+--- a/alfont.c
++++ b/alfont.c
+@@ -13,7 +13,9 @@
+  */
+ 
+ #if defined(__GNUC__) && !defined(__MINGW32__)
++#include <malloc.h>
+ #define _msize malloc_usable_size
++#define ALFONT_LINUX
+ #endif
+ 
+ /* AllegroFont - a wrapper for FreeType 2 */
+@@ -533,7 +535,7 @@
+   memcpy((void *)font->data, (void *)data, data_len);
+ 
+   /* load the font */
+-  error = FT_New_Memory_Face(ft_library, font->data, font->data_size, 0, &font->face);
++  error = FT_New_Memory_Face(ft_library, (const FT_Byte *)font->data, font->data_size, 0, &font->face);
+ 
+   if (error) {
+     free(font->data);
+@@ -636,7 +638,6 @@
+   int ret; //decide that if the ASCII Code convert to Unicode Code is all OK when used for autofix string or used for general convert.
+   int character;
+   int alpha_table[256];
+-  int last_glyph_index;
+   int first_x=0, final_x=0, final_y=0;
+   int curr_uformat;
+   int first_flag=TRUE; //First Char flag
+@@ -907,7 +908,6 @@
+ 
+   /* draw char by char (using allegro unicode funcs) */
+   acquire_bitmap(bmp);
+-  last_glyph_index = 0;
+ 
+   if (f->fixed_width == TRUE)
+   {
+@@ -996,7 +996,6 @@
+ 		real_x += v.x >> 6;
+ 		real_y += v.y >> 6;
+ 	}*/
+-	last_glyph_index = glyph_index;
+ 
+ 	/* draw only if exists */
+ 	if ((cglyph.aa_available) && (cglyph.aabmp)) {
+@@ -1799,7 +1798,7 @@
+   char *precedingchar_pointer=NULL; //used for precedingchar character
+   int nLen;
+   int ret; //decide that if the ASCII Code convert to Unicode Code is all OK when used for autofix string or used for general convert.
+-  int character, last_glyph_index;
++  int character;
+   int first_x=0, final_x=0, final_y=0;
+   int curr_uformat;
+   int first_flag=TRUE; //First Char flag
+@@ -2044,7 +2043,6 @@
+ 
+   /* draw char by char (using allegro unicode funcs) */
+   acquire_bitmap(bmp);
+-  last_glyph_index = 0;
+ 
+   
+   if (f->fixed_width == TRUE)
+@@ -2133,7 +2131,6 @@
+ 		real_x += v.x >> 6;
+ 		real_y += v.y >> 6;
+ 	}*/
+-	last_glyph_index = glyph_index;
+ 
+ 	/* draw only if exists */
+ 	if ((cglyph.mono_available) && (cglyph.bmp)) {
+@@ -3300,7 +3297,6 @@
+ 
+ int alfont_ugetc(ALFONT_FONT *f, const char *s) {
+   char *lpszW;
+-  char *lpszW_pointer=NULL; //used for freeing string
+   char *s_pointer=NULL; //used for original string fixed by autofix
+   char *s_pointer_temp=NULL; //temporary used for autofix string
+   char *precedingchar_pointer=NULL; //used for precedingchar character
+@@ -3544,7 +3540,6 @@
+ 
+ int alfont_ugetx(ALFONT_FONT *f, char **s) {
+   char *lpszW;
+-  char *lpszW_pointer=NULL; //used for freeing string
+   char *s_pointer=NULL; //used for original string fixed by autofix
+   char *s_pointer_temp=NULL; //temporary used for autofix string
+   char *precedingchar_pointer=NULL; //used for precedingchar character
+@@ -3779,16 +3774,10 @@
+   //advances the *s pointer to the next character
+ 
+   if (f->type==1) {
+-  	ugetxc((char**)s);
+-	#ifdef ALFONT_LINUX
+-	ugetxc((char**)s);
+-	#endif
++  	ugetxc((const char**)s);
+   }
+   else if(f->type==2) {
+-	ugetxc(&lpszWS);
+-	#ifdef ALFONT_LINUX
+-	ugetxc(&lpszWS);
+-	#endif
++	ugetxc((const char**)&lpszWS);
+   	#ifdef ALFONT_DOS
+ 	if ((c_pt = iconv_open(f->language, "UTF-16LE")) == (iconv_t)-1) {
+ 		aLen = strlen(lpszWS);
+@@ -3821,7 +3810,7 @@
+  
+ 	for (lIndex = 0; lIndex < sLen - aLen; lIndex++)
+ 	{
+-		(*(*s)++);
++		(*s)++;
+ 	}
+ 
+ 	if (lpszWA) {
+@@ -3832,10 +3821,7 @@
+     #ifdef ALFONT_LINUX
+ 	set_uformat(U_UTF8);
+     #endif
+-	ugetxc((char**)s);
+-	#ifdef ALFONT_LINUX
+-	ugetxc((char**)s);
+-	#endif
++	ugetxc((const char**)s);
+   }
+ 
+   if ((f->type==1)||(f->type==2)) {
+@@ -3860,7 +3846,6 @@
+ 
+ int alfont_ugetxc(ALFONT_FONT *f, const char **s) {
+   char *lpszW;
+-  char *lpszW_pointer=NULL; //used for freeing string
+   char *s_pointer=NULL; //used for original string fixed by autofix
+   char *s_pointer_temp=NULL; //temporary used for autofix string
+   char *precedingchar_pointer=NULL; //used for precedingchar character
+@@ -4096,15 +4081,9 @@
+ 
+   if (f->type==1) {
+   	ugetxc((const char**)s);
+-	#ifdef ALFONT_LINUX
+-	ugetxc((const char**)s);
+-	#endif
+   }
+   else if(f->type==2) {
+-	ugetxc(&lpszWS);
+-	#ifdef ALFONT_LINUX
+-	ugetxc(&lpszWS);
+-	#endif
++	ugetxc((const char**)&lpszWS);
+   	#ifdef ALFONT_DOS
+ 	if ((c_pt = iconv_open(f->language, "UTF-16LE")) == (iconv_t)-1) {
+ 		aLen = strlen(lpszWS);
+@@ -4137,7 +4116,7 @@
+  
+ 	for (lIndex = 0; lIndex < sLen - aLen; lIndex++)
+ 	{
+-		(*(*s)++);
++		(*s)++;
+ 	}
+ 
+ 	if (lpszWA) {
+@@ -4149,9 +4128,6 @@
+ 	set_uformat(U_UTF8);
+     #endif
+ 	ugetxc((const char**)s);
+-	#ifdef ALFONT_LINUX
+-	ugetxc((const char**)s);
+-	#endif
+   }
+ 
+   if ((f->type==1)||(f->type==2)) {
+@@ -4176,7 +4152,6 @@
+ 
+ void alfont_get_string(ALFONT_FONT *f, const char *s , char **out){
+   char *lpszW;
+-  char *lpszW_pointer=NULL; //used for freeing string
+   char *s_pointer=NULL; //used for original string fixed by autofix
+   char *s_pointer_temp=NULL; //temporary used for autofix string
+   char *precedingchar_pointer=NULL; //used for precedingchar character
+--- a/alfont.h
++++ b/alfont.h
+@@ -10,7 +10,7 @@
+ /* See FTL.txt (FreeType Project License) for license */
+ 
+ 
+-#define ALFONT_WINDOWS   //When compiling in WINDOWS,please uncomment this line.
++//#define ALFONT_WINDOWS   //When compiling in WINDOWS,please uncomment this line.
+ //#define ALFONT_DOS 	 //When compiling in DOS,please uncomment this line. 
+ //#define ALFONT_LINUX 	 //When compiling in LINUX,please uncomment this line.
+ 

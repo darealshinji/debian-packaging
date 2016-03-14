@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
-CFLAGS  += -I$(CURDIR)/alfont/include $(CPPFLAGS)
-LDFLAGS += -Wl,--as-needed -L$(CURDIR)/alfont
+CFLAGS  += -I$(CURDIR)/debian/alfont $(CPPFLAGS)
+LDFLAGS += -Wl,--as-needed -L$(CURDIR)/debian/alfont
 
 
 %:
@@ -9,17 +9,15 @@ LDFLAGS += -Wl,--as-needed -L$(CURDIR)/alfont
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -rf alfont build
+	$(MAKE) -C debian/alfont clean
 
 override_dh_auto_configure:
 
 override_dh_auto_build:
-	unrar x AlFont209.rar 2>&1 >/dev/null
-	cp -f debian/Makefile.alfont alfont/Makefile
-	dh_auto_build -Dalfont -- libalfont.a
+	dh_auto_build -Ddebian/alfont
 	mkdir build
 	cd build && cmake $(CURDIR) \
-		-DCMAKE_LIBRARY_PATH=$(CURDIR)/alfont \
+		-DCMAKE_LIBRARY_PATH=$(CURDIR)/debian/alfont \
 		-DCMAKE_VERBOSE_MAKEFILE=ON \
 		-DCMAKE_BUILD_TYPE=None
 	dh_auto_build -Dbuild
