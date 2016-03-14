@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Giana's Return (fullscreen mode)
+Exec=gianas-return -fs
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=gianas-return

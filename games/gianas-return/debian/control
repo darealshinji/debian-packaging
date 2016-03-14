@@ -1,0 +1,33 @@
+Source: gianas-return
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ upx-ucl,
+ dos2unix
+Standards-Version: 3.9.6
+Homepage: http://www.gianas-return.de
+
+Package: gianas-return
+Architecture: amd64 i386
+Depends:
+ libc6 (>= 2.4),
+ libgcc1 (>= 1:4.1.1),
+ libsdl-mixer1.2,
+ libsdl1.2debian (>= 1.2.11),
+ libstdc++6 (>= 4.1.1),
+ zlib1g (>= 1:1.1.4)
+Description: 2D platformer
+ Evil Swampy and his followers have stolen the magic ruby, which made it once
+ possible for Giana and Maria to return from their dream. Many creatures are
+ after this ruby, but does it really has power, or was it just a coincidence?
+ As this is not bad enough, Swampy fell in love at first sight with Giana's
+ sister Maria and shamelessly kidnapped her. She simply has been at the wrong
+ place at the wrong time.
+ You will now have to take on the role of Giana and get back the magic ruby.
+ And most important of all, save your beloved sister Maria and get home save!
+ Good Luck!
+ .
+ Giana's Return aims to be a worthy unofficial sequel of "The Great Giana
+ Sisters".

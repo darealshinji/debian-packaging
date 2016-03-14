@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Giana's Return
+Exec=gianas-return
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=gianas-return

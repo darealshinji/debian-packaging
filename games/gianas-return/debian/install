@@ -1,0 +1,5 @@
+giana/giana               /usr/lib/games/gianas-return
+giana/data                /usr/lib/games/gianas-return
+giana/gianas-return.png   /usr/share/pixmaps
+debian/*.desktop          /usr/share/applications
+debian/scripts/*          /usr/games
