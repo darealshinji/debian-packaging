@@ -1,0 +1,4 @@
+numptyphysics   /usr/lib/numptyphysics
+data/*          /usr/share/games/numptyphysics
+platform/freedesktop/numptyphysics.desktop   /usr/share/applications
+converted_icons/icons   /usr/share
