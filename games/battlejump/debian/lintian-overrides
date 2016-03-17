@@ -1,0 +1,2 @@
+# i386 only, closed-source binary
+battlejump: hardening-no-relro usr/lib/battlejump/BattleJump

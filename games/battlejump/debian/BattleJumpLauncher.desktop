@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Battle Jump Launcher
+Exec=BattleJumpLauncher
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=BattleJumpLauncher

@@ -1,0 +1,59 @@
+#!/usr/bin/make -f
+
+CXX := g++
+
+ifeq ($(DEB_HOST_ARCH), amd64)
+BITS = 64
+else
+BITS = 32
+endif
+
+PKG = battlejump
+
+share = $(CURDIR)/debian/$(PKG)/usr/share
+hicolor = $(share)/icons/hicolor
+logo = $(share)/games/$(PKG)/Images/Logo
+define \n
+
+
+endef
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf battlejump converted_icons
+
+override_dh_auto_build:
+	tar xf battlejump.tgz
+	mv 'Battle Jump 0.12.0 $(BITS)Bits' battlejump
+
+	find battlejump -name \*.lnk -delete
+	find battlejump -type f -exec chmod 0644 '{}' \;
+	test -f battlejump/BattleJump || \
+		mv battlejump/"Battle Jump" battlejump/BattleJump
+	chmod 0755 battlejump/BattleJump*
+	strip battlejump/BattleJump*
+
+	mv battlejump/Docs/"Read me.txt" battlejump/Docs/README
+	mv battlejump/Docs/"Lisez-moi.txt" battlejump/Docs/README.fr
+	dos2unix battlejump/Docs/README*
+
+override_dh_install:
+	dh_install
+	$(foreach SIZE,16 32 48 64 128,mkdir -p $(hicolor)/$(SIZE)x$(SIZE)/apps;${\n}\
+	  ln -s -r $(logo)/ico-$(SIZE).png $(hicolor)/$(SIZE)x$(SIZE)/apps/BattleJump.png;${\n})
+	$(foreach SIZE,16 128,ln -s -r $(logo)/editor-$(SIZE).png \
+		$(hicolor)/$(SIZE)x$(SIZE)/apps/BattleJumpEditor.png;${\n})
+	$(foreach SIZE,16 128,ln -s -r $(logo)/launcher-$(SIZE).png \
+		$(hicolor)/$(SIZE)x$(SIZE)/apps/BattleJumpLauncher.png;${\n})
+	$(foreach SIZE,16 128,ln -s -r $(logo)/levelManager-$(SIZE).png \
+		$(hicolor)/$(SIZE)x$(SIZE)/apps/BattleJumpLevelManager.png;${\n})
+
+override_dh_compress:
+	dh_compress -X.pdf -XCC-BY-
+
+override_dh_shlibdeps:
+

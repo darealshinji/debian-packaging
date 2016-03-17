@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Battle Jump Editor
+Exec=BattleJumpEditor
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=BattleJumpEditor

@@ -1,0 +1,11 @@
+battlejump/bin           /usr/share/games/battlejump
+battlejump/Data          /usr/share/games/battlejump
+battlejump/Fonts         /usr/share/games/battlejump
+battlejump/Images        /usr/share/games/battlejump
+battlejump/Levels        /usr/share/games/battlejump
+battlejump/Musics        /usr/share/games/battlejump
+battlejump/Objects       /usr/share/games/battlejump
+battlejump/Sounds        /usr/share/games/battlejump
+battlejump/BattleJump*   /usr/lib/battlejump
+debian/launchers/*       /usr/games
+debian/*.desktop         /usr/share/applications
