@@ -1,0 +1,7 @@
+# I don't know where that was linked in statically. Let's just ignore it for compatibility.
+openhexagon: embedded-library usr/lib/SSVOpenHexagon/SSVOpenHexagon: libjsoncpp
+
+# libjpeg.so.8 is not available in Debian. This library is kept for compatibility.
+# If libjpeg.so.8 is installed in the system, the game's starter script is setup to use that library instead.
+openhexagon: embedded-library usr/lib/SSVOpenHexagon/libs2/libjpeg.so.8: libjpeg
+

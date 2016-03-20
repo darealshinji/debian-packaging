@@ -1,0 +1,9 @@
+OpenHexagon-linux-*/Assets            /usr/share/games/SSVOpenHexagon
+OpenHexagon-linux-*/bin/*             /usr/lib/SSVOpenHexagon
+OpenHexagon-linux-*/ConfigOverrides   /usr/share/games/SSVOpenHexagon
+OpenHexagon-linux-*/Packs             /usr/share/games/SSVOpenHexagon
+OpenHexagon-linux-*/Profiles          /usr/share/games/SSVOpenHexagon
+OpenHexagon-linux-*/config.json       /usr/share/games/SSVOpenHexagon
+debian/openhexagon.png                /usr/share/pixmaps
+debian/openhexagon.desktop            /usr/share/applications
+debian/launcher/openhexagon           /usr/games

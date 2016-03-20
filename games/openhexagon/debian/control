@@ -1,0 +1,30 @@
+Source: openhexagon
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: http://vittorioromeo.info/projects.html
+Vcs-Git: https://github.com/SuperV1234/SSVOpenHexagon
+Vcs-Browser: https://github.com/SuperV1234/SSVOpenHexagon
+
+Package: openhexagon
+Architecture: amd64
+Depends:
+ libc6 (>= 2.18),
+ libfreetype6 (>= 2.2.1),
+ libgcc1 (>= 1:4.8),
+ libgl1-mesa-glx | libgl1,
+ libx11-6,
+ libx11-xcb1,
+ libxcb-image0 (>= 0.3.9),
+ libxcb-randr0,
+ libxcb1,
+ zlib1g (>= 1:1.1.4)
+Description: free open-source clone of Super Hexagon
+ Open Hexagon is a free open-source clone of the game "Super Hexagon by Terry
+ Cavanagh".
+ Gameplay is easy to learn but hard to master. You control a triangle that
+ rotates around the center of the screen. Your goal is to stay alive as long as
+ possible by avoiding the walls that go towards the center.
+ Features JSON and LUA scripting for complete customization and level sharing.

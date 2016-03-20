@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf OpenHexagon-linux-x86_64
+
+override_dh_auto_build:
+	tar xf OpenHexagon.txz
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+

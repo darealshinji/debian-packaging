@@ -1,0 +1,2 @@
+Use precompiled binaries since building is a little cumbersome, especially on
+systems without a C++14 compiler.

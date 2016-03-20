@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Open Hexagon
+Exec=openhexagon
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=openhexagon
