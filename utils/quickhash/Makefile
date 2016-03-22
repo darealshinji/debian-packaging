@@ -1,27 +1,19 @@
 include ../../mk/include.mk
 
 deps       = wget
-bin        = quickhash
-srcfiles   = $(bin) *.ico *.pdf ChangeLog ../../mk/make-icons.sh
-cleanfiles = $(bin) *.ico *.pdf ChangeLog
+bin        = quickhash.tgz
+srcfiles   = $(bin) *.ico ../../mk/make-icons.sh
+cleanfiles = $(bin) *.ico
 
-VER = 2.6.6
-URL = https://downloads.sourceforge.net/project/quickhash/v$(VER)/Linux
+VER = 2.6.7
+URL = http://downloads.sourceforge.net/project/quickhash/v$(VER)/QuickHash-Linux-v$(VER).tar.gz
 
-ifeq ($(ARCH), amd64)
-BITS = 64
-sha256sum = 9c13f3469f4f859e45ef6c6b60a87690c248547698764575c41a013b891ad2da
-else
-BITS = 32
-sha256sum = ffd1716e9341db8828cdacf802235aa58b7c7a249689665b50a0b8ef8e27e348
-endif
+sha256sum = e332e6bcf4cff243da53311ac20b0ac8f7a5c9cf874f927882fbe187fb597a3c
 
 
 download:
-	@ $(call download,$(bin),$(URL)/Quickhash-v$(VER)-Linux-x$(BITS))
-	@ $(call download,UserManual.pdf,$(URL)/UserManual.pdf)
-	@ $(call download,ChangeLog,$(URL)/README.txt)
-	@ $(call download,quickhash.ico,https://github.com/tedsmith/quickhash/raw/master/project1.ico)
+	@ $(call download,$(bin),$(URL))
+	@ $(call download,quickhash.ico,https://github.com/tedsmith/quickhash/raw/4b2439a398046d4262537a7c2985b657fda3c90f/project1.ico)
 	@ $(call verifysha256,$(bin),$(sha256sum))
 	@ VERSION=$(VER); $(changelog-entry)
 
