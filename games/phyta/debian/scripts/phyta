@@ -1,7 +1,7 @@
 #!/bin/sh
 
 resolution=$(zenity \
-	--window-icon=/usr/share/pixmaps/phyta.png \
+	--window-icon=/usr/share/games/phyta/leaf2.png \
 	--title="Phyta" \
 	--text="Resolution:" \
 	--list \
@@ -27,12 +27,12 @@ case $resolution in
 		;;
 	*)
 		zenity --info \
-			--window-icon=/usr/share/pixmaps/phyta.png \
+			--window-icon=/usr/share/games/phyta/leaf2.png \
 			--title="Phyta" \
 			--text="No resolution selected.\nDefault to 800x600 windowed."
 		cmd=PhytaWindowed800x600
 		;;
 esac
 
-cd /usr/lib/games/phyta
+cd /usr/lib/games/phyta && \
 LD_PRELOAD="./libalsatoss.so.0:./libaoss.so.0" ./$cmd $@
