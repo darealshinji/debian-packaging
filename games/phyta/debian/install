@@ -1,0 +1,5 @@
+debian/scripts/*       usr/games
+debian/phyta.desktop   usr/share/applications
+Phyta/data/*           usr/share/games/phyta
+Phyta/Phyta*           usr/lib/games/phyta
+lib*.so.0              usr/lib/games/phyta

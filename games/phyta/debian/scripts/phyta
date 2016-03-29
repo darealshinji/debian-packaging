@@ -1,0 +1,38 @@
+#!/bin/sh
+
+resolution=$(zenity \
+	--window-icon=/usr/share/pixmaps/phyta.png \
+	--title="Phyta" \
+	--text="Resolution:" \
+	--list \
+	--radiolist \
+	--hide-header \
+	--hide-column=2 \
+	--column=a --column=b --column=c \
+		x a "800x600 windowed" \
+		x b "1024x768 windowed" \
+		x c "Fullscreen")
+
+test $? -ne 0 && exit 0
+
+case $resolution in
+	a)
+		cmd=PhytaWindowed800x600
+		;;
+	b)
+		cmd=PhytaWindowed1024x768
+		;;
+	c)
+		cmd=PhytaFullscreen
+		;;
+	*)
+		zenity --info \
+			--window-icon=/usr/share/pixmaps/phyta.png \
+			--title="Phyta" \
+			--text="No resolution selected.\nDefault to 800x600 windowed."
+		cmd=PhytaWindowed800x600
+		;;
+esac
+
+cd /usr/lib/games/phyta
+LD_PRELOAD="./libalsatoss.so.0:./libaoss.so.0" ./$cmd $@

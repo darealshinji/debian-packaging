@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Phyta
+Exec=phyta
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=/usr/share/games/phyta/leaf2.png

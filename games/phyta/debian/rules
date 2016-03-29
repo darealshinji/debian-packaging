@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+
+define \n
+
+
+endef
+
+deb = alsa-oss_1.0.28-1ubuntu1_i386-deb
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf alsa-oss lib*.so.0 patchelf
+
+override_dh_auto_build:
+	dpkg -x $(deb) alsa-oss
+	cp alsa-oss/usr/lib/i386-linux-gnu/lib*.so.0 .
+
+	tar xf Phyta.tgz
+	rm -f Phyta/data/Thumbs.db
+	chmod a-x Phyta/White.bmx Phyta/data/*
+
+	g++ -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -o patchelf patchelf.cpp
+	$(foreach RES, Fullscreen Windowed800x600 Windowed1024x768,\
+	./patchelf --replace-needed libGL.so.1.2 libGL.so.1 Phyta/Phyta$(RES);${\n} \
+	./patchelf --remove-needed libGLU.so.1 Phyta/Phyta$(RES);${\n} )
+
+override_dh_makeshlibs:
+override_dh_shlibdeps:
+override_dh_strip:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's|Architecture: amd64|Architecture: i386|' debian/phyta/DEBIAN/control
+
