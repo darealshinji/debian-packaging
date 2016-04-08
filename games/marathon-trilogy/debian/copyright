@@ -2,14 +2,23 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Marathon
 Source: https://github.com/Aleph-One-Marathon
 
-Files: *
+Files: marathon/*
+       marathon-2/*
+       marathon-infinity/*
        debian/*.png
-Copyright: 1995-2015 Bungie Software Corporation
+       *.pdf
+Copyright: 1994-2016 Bungie Studios
 License:
- Copyright (c) 1995-2015 Bungie Software Corporation, all rights reserved.
+ Copyright (c) 1994-2016 Bungie Studios, all rights reserved.
+Comment:
+ From http://trilogyrelease.bungie.org/faq.html about redistributing:
+ Q: can I do whatever I want with this stuff?
+ A: NO. Bungie still holds the copyrights to these files. They're allowing them
+    to be distributed for free (mostly because you can't buy them any more) - but
+    they're still Bungie's intellectual property. You can't, for example, sell them.
 
 Files: debian/*
-Copyright: 2015 djcj <djcj@gmx.de>
+Copyright: 2015-2016 djcj <djcj@gmx.de>
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
