@@ -27,41 +27,22 @@ set -e
 #   pbuilder -- personal Debian package builder
 #   Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
 #   Copyright (C) 2007 Loïc Minier
+#   Copyright (C) 2015 Mattia Rizzolo <mattia@debian.org>
 #
 # module to satisfy build dependencies; common functions
 
 
-package_versions() {
-	local PACKAGE="$1"
-	LC_ALL=C $CHROOTEXEC /usr/bin/apt-cache show "$PACKAGE" | sed -n 's/^Version: //p'
-}
-
-candidate_version() {
-	local PACKAGE="$1"
-	LC_ALL=C $CHROOTEXEC apt-cache policy "$PACKAGE" | sed -n 's/ *Candidate: //p'
-}
-
-checkbuilddep_versiondeps() {
+function package_versions() {
     local PACKAGE="$1"
-    local COMPARESTRING="$2"
-    local DEPSVERSION="$3"
-    local PACKAGEVERSIONS=$( package_versions "$PACKAGE" | xargs)
-    # no versioned provides.
-    if [ "${FORCEVERSION}" = "yes" ]; then
-	return 0;
-    fi
-    for PACKAGEVERSION in $PACKAGEVERSIONS ; do
-      if dpkg --compare-versions "$PACKAGEVERSION" "$COMPARESTRING" "$DEPSVERSION"; then
-	# satisfies depends
-	return 0;
-      fi
-    done
-    echo "      Tried versions: $PACKAGEVERSIONS"
-    # cannot satisfy depends
-    return 1;
+    LC_ALL=C $CHROOTEXEC /usr/bin/apt-cache show "$PACKAGE" | sed -n 's/^Version: //p'
 }
 
-get_source_control_field() {
+function candidate_version() {
+    local PACKAGE="$1"
+    LC_ALL=C $CHROOTEXEC apt-cache policy "$PACKAGE" | sed -n 's/ *Candidate: //p'
+}
+
+function get_source_control_field() {
     local field="$1"
 
     sed -n -e "s/^$field://i" -e '
@@ -71,6 +52,17 @@ t store
     n
     /^$/ d
     b pgploop
+}
+: leadloop
+/^[ \t]*$/ {
+    n
+    /^$/ d
+    b leadloop
+}
+/^#/ {
+    n
+    /^$/ d
+    b leadloop
 }
 /^$/q
 d
@@ -106,120 +98,53 @@ p' \
         "$DEBIAN_CONTROL"
 }
 
-get_build_deps() {
+function get_build_deps() {
     local output
 
-    output="`get_source_control_field "Build-Depends"`"
+    output="$(get_source_control_field "Build-Depends")"
     output="${output%, }"
-    if [ "$BINARY_ARCH" = no ]; then
-        output="${output:+$output, }`get_source_control_field "Build-Depends-Indep"`"
-        output="${output%, }"
-    fi
+    case "$BINARY_ARCH" in
+        any)
+            output="${output:+$output, }$(get_source_control_field "Build-Depends-Indep")"
+            output="${output%, }"
+            output="${output:+$output, }$(get_source_control_field "Build-Depends-Arch")"
+            output="${output%, }"
+            ;;
+        binary)
+            output="${output:+$output, }$(get_source_control_field "Build-Depends-Arch")"
+            output="${output%, }"
+            ;;
+        all)
+            output="${output:+$output, }$(get_source_control_field "Build-Depends-Indep")"
+            output="${output%, }"
+            ;;
+    esac
     echo "$output"
 }
 
-get_build_conflicts() {
+function get_build_conflicts() {
     local output
 
-    output="`get_source_control_field "Build-Conflicts"`"
-    if [ "$BINARY_ARCH" = no ]; then
-        output="${output:+$output, }`get_source_control_field "Build-Conflicts-Indep"`"
-    fi
+    output="$(get_source_control_field "Build-Conflicts")"
+    output="${output%, }"
+     case "$BINARY_ARCH" in
+        any)
+            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Indep")"
+            output="${output%, }"
+            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Arch")"
+            output="${output%, }"
+            ;;
+        binary)
+            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Arch")"
+            output="${output%, }"
+            ;;
+        all)
+            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Indep")"
+            output="${output%, }"
+            ;;
+    esac
     echo "$output"
 }
-
-checkbuilddep_archdeps() {
-    # returns FALSE on INSTALL
-    local INSTALLPKG="$1"
-    local ARCH="$2"
-    # architectures listed between [ and ] for this dep
-    local DEP_ARCHES="$(echo "$INSTALLPKG" | sed -e 's/.*\[\(.*\)\].*/\1/' -e 'y|/| |')"
-    local PKG="$(echo "$INSTALLPKG" | cut -d ' ' -f 1)"
-    local USE_IT
-    local IGNORE_IT
-    local INCLUDE
-    # Use 'dpkg-architecture' to support architecture wildcards.
-    for d in $DEP_ARCHES; do
-        if echo "$d" | grep -q '!'; then
-            d="$(echo $d | sed 's/!//')"
-            if dpkg-architecture -a$ARCH -i$d; then
-                IGNORE_IT="yes"
-            fi
-        else
-            if dpkg-architecture -a$ARCH -i$d; then
-                USE_IT="yes"
-            fi
-            INCLUDE="yes"
-        fi
-    done
-    if [ $IGNORE_IT ] && [ $USE_IT ]; then
-        printf "W: inconsistent arch restriction on $PKG: " >&2
-        printf "$DEP_ARCHES depedency\n" >&2
-    fi
-    if [ $IGNORE_IT ] || ( [ $INCLUDE ] && [ ! $USE_IT ] ); then
-        return 0
-    fi
-    return 1
-}
-
-checkbuilddep_provides() {
-    local PACKAGENAME="$1"
-    # PROVIDED needs to be used outside of this function.
-    PROVIDED=$($CHROOTEXEC /usr/bin/apt-cache showpkg $PACKAGENAME \
-	| awk '{p=0}/^Reverse Provides:/,/^$/{p=1}{if(p && ($0 !~ "Reverse Provides:")){PACKAGE=$1}} END{print PACKAGE}')
-}
-
-# returns either "package=version", to append to an apt-get install line, or
-# package
-versioneddep_to_aptcmd() {
-	local INSTALLPKG="$1"
-
-	local PACKAGE
-	local PACKAGE_WITHVERSION
-	local PACKAGEVERSIONS
-	local CANDIDATE_VERSION
-	local COMPARESTRING
-	local DEPSVERSION
-
-	PACKAGE="$(echo "$INSTALLPKG" | sed -e 's/^[/]*//' -e 's/[[/(].*//')"
-	PACKAGE_WITHVERSION="$PACKAGE"
-
-	# if not versionned, we skip directly to outputting $PACKAGE
-	if echo "$INSTALLPKG" | grep '[(]' > /dev/null; then
-	    # package versions returned by APT, in reversed order
-	    PACKAGEVERSIONS="$( package_versions "$PACKAGE" | tac | xargs )"
-	    CANDIDATE_VERSION="$( candidate_version "$PACKAGE" )"
-
-	    COMPARESTRING="$(echo "$INSTALLPKG" | tr "/" " " | sed 's/^.*( *\(<<\|<=\|>=\|=\|<\|>>\|>\) *\(.*\)).*$/\1/')"
-	    DEPSVERSION="$(echo "$INSTALLPKG" | tr "/" " " | sed 's/^.*( *\(<<\|<=\|>=\|=\|<\|>>\|>\) *\(.*\)).*$/\2/')"
-	    # if strictly versionned, we skip to outputting that version
-	    if [ "=" = "$COMPARESTRING" ]; then
-		PACKAGE_WITHVERSION="$PACKAGE=$DEPSVERSION"
-	    else
-		# try the candidate version, then all available versions (asc)
-		for VERSION in $CANDIDATE_VERSION $PACKAGEVERSIONS; do
-		    if dpkg --compare-versions "$VERSION" "$COMPARESTRING" "$DEPSVERSION"; then
-			if [ $VERSION != $CANDIDATE_VERSION ]; then
-			    PACKAGE_WITHVERSION="$PACKAGE=$VERSION"
-			fi
-			break;
-		    fi
-		done
-	    fi
-	fi
-
-	echo "$PACKAGE_WITHVERSION"
-}
-
-
-
-
-#   pbuilder -- personal Debian package builder
-#   Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
-#   Copyright (C) 2007 Loïc Minier
-#
-# module to satisfy build dependencies; aptitude flavor
-
 
 # filter out dependencies sent on input not for this arch; deps can have
 # multiple lines; output is on a single line or "" if empty
@@ -236,7 +161,7 @@ function filter_arch_deps() {
             sed 's/[[:space:]]*|[[:space:]]*/\n/g' |
             while read INSTALLPKG; do
                 if echo "$INSTALLPKG" | grep -q '\['; then
-                    if checkbuilddep_archdeps "$INSTALLPKG" "$ARCH"; then
+                    if checkbuilddep_archdeps "$INSTALLPKG" "$arch"; then
                         continue
                     fi
                 fi
@@ -252,6 +177,127 @@ function filter_arch_deps() {
     xargs --no-run-if-empty
 }
 
+# filter out dependencies sent on input not for selected build profiles; deps
+# can have multiple lines; output is on a single line or "" if empty
+function filter_restriction_deps() {
+    local profiles="$1"
+    local INSTALLPKGMULTI
+    local INSTALLPKG
+
+    # split on ","
+    sed 's/[[:space:]]*,[[:space:]]*/\n/g' |
+    while read INSTALLPKGMULTI; do
+        echo "$INSTALLPKGMULTI" |
+            # split on "|"
+            sed 's/[[:space:]]*|[[:space:]]*/\n/g' |
+            while read INSTALLPKG; do
+                if echo "$INSTALLPKG" | grep -q '<'; then
+                    if checkbuilddep_restrictiondeps "$INSTALLPKG" "$profiles"; then
+                        continue
+                    fi
+                fi
+                # output the selected package
+                echo "$INSTALLPKG"
+            done |
+            # remove the restriction list and add " | " between entries
+            sed 's/<.*>//; $,$! s/$/ |/' |
+            xargs --no-run-if-empty
+    done |
+    # add ", " between entries
+    sed '$,$! s/$/,/' |
+    xargs --no-run-if-empty
+}
+
+function checkbuilddep_archdeps() {
+    # returns FALSE on INSTALL
+    local INSTALLPKG="$1"
+    local ARCH="$2"
+    # architectures listed between [ and ] for this dep
+    local DEP_ARCHES="$(echo "$INSTALLPKG" | sed -e 's/.*\[\(.*\)\].*/\1/' -e 'y|/| |')"
+    local PKG="$(echo "$INSTALLPKG" | cut -d ' ' -f 1)"
+    local USE_IT
+    local IGNORE_IT
+    local INCLUDE
+    # Use 'dpkg-architecture' to support architecture wildcards.
+    for d in $DEP_ARCHES; do
+        if echo "$d" | grep -q '!'; then
+            d="$(echo "$d" | sed 's/!//')"
+            if dpkg-architecture -a"$ARCH" -i"$d" -f; then
+                IGNORE_IT="yes"
+            fi
+        else
+            if dpkg-architecture -a"$ARCH" -i"$d" -f; then
+                USE_IT="yes"
+            fi
+            INCLUDE="yes"
+        fi
+    done
+    if [ $IGNORE_IT ] && [ $USE_IT ]; then
+        printf "W: inconsistent arch restriction on %s: "  "$PKG" >&2
+        printf "%s depedency\n" "$DEP_ARCHES" >&2
+    fi
+    if [ $IGNORE_IT ] || ( [ $INCLUDE ] && [ ! $USE_IT ] ); then
+        return 0
+    fi
+    return 1
+}
+
+function checkbuilddep_restrictiondeps() {
+    # returns FALSE on INSTALL
+    local INSTALLPKG="$1"
+    local PROFILES="$2"
+    # restrictions listed between < and > for this dep
+    local DEP_RESTRICTIONS="$(echo "$INSTALLPKG" | sed -e 's/[^<]*<\(.*\)>.*/\1/' -e 's/>\s\+</;/g')"
+    local PKG="$(echo "$INSTALLPKG" | cut -d ' ' -f 1)"
+    local SEEN_PROFILE
+    local PROFILE
+    local NEGATED
+    local FOUND
+    if [ "$DEP_RESTRICTIONS" = "$INSTALLPKG" ]; then
+        # there is not a build profile, rather it's a version costraint
+        return 1
+    fi
+    IFS=';' read -ra RESTRLISTS <<< "$DEP_RESTRICTIONS"
+    for restrlist in "${RESTRLISTS[@]}"; do
+        SEEN_PROFILE="yes"
+        for restr in $restrlist; do
+            if [[ "$restr" == '!'* ]]; then
+                NEGATED="yes"
+                PROFILE=${restr#!}
+            else
+                NEGATED="no"
+                PROFILE=${restr}
+            fi
+            FOUND="no"
+            for p in $PROFILES; do
+                if [ "$p" = "$PROFILE" ]; then
+                    FOUND="yes"
+                    break
+                fi
+            done
+            if [ "$FOUND" = "$NEGATED" ]; then
+                SEEN_PROFILE="no"
+                break
+            fi
+        done
+
+        if [ "$SEEN_PROFILE" = "yes" ]; then
+            return 1
+        fi
+    done
+    return 0
+}
+
+
+
+
+#   pbuilder -- personal Debian package builder
+#   Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
+#   Copyright (C) 2007 Loïc Minier
+#
+# module to satisfy build dependencies; aptitude flavor
+
+
 function checkbuilddep_internal () {
 # Use this function to fulfill the dependency (almost)
     local ARCH=$($CHROOTEXEC dpkg-architecture -qDEB_HOST_ARCH)
@@ -260,8 +306,10 @@ function checkbuilddep_internal () {
     local DEPENDS
     local CONFLICTS
     echo " -> Attempting to satisfy build-dependencies"
-    DEPENDS="$(get_build_deps | filter_arch_deps "$ARCH")"
-    CONFLICTS="$(get_build_conflicts | filter_arch_deps "$ARCH")"
+    DEPENDS="$(get_build_deps | filter_arch_deps "$ARCH" |
+        filter_restriction_deps "$DEB_BUILD_PROFILES" )"
+    CONFLICTS="$(get_build_conflicts | filter_arch_deps "$ARCH" |
+        filter_restriction_deps "$DEB_BUILD_PROFILES" )"
     echo " -> Creating pbuilder-satisfydepends-dummy package"
     BUILD_DEP_DEB_DIR="/tmp/satisfydepends-aptitude"
     BUILD_DEP_DEB_CONTROL="$BUILD_DEP_DEB_DIR/pbuilder-satisfydepends-dummy/DEBIAN/control"
@@ -287,7 +335,7 @@ EOF
 	--force-depends \
 	--force-conflicts \
 	-i "$BUILD_DEP_DEB_DIR/pbuilder-satisfydepends-dummy.deb" || true
-    $CHROOTEXEC aptitude \
+    $CHROOTEXEC env XDG_CACHE_HOME=/root aptitude \
 	-y \
 	--without-recommends -o APT::Install-Recommends=false \
 	"${APTITUDEOPT[@]}" \
@@ -338,7 +386,7 @@ EOF
 DEBIAN_CONTROL=debian/control
 CHROOT=""
 CHROOTEXEC=""
-BINARY_ARCH="no"
+BINARY_ARCH="any"
 FORCEVERSION=""
 CONTINUE_FAIL="no"
 CHROOTEXEC_AFTER_INTERNAL_CHROOTEXEC=no
@@ -374,11 +422,11 @@ while [ -n "$1" ]; do
 	    ;;
 
 	--binary-all)
-	    BINARY_ARCH="no"
+	    BINARY_ARCH="any"
 	    shift
 	    ;;
 	--binary-arch)
-	    BINARY_ARCH="yes"
+	    BINARY_ARCH="binary"
 	    shift
 	    ;;
 	--continue-fail)

@@ -22,7 +22,7 @@
 DEBIAN_CONTROL=debian/control
 CHROOT=""
 CHROOTEXEC=""
-BINARY_ARCH="no"
+BINARY_ARCH="any"
 FORCEVERSION=""
 CONTINUE_FAIL="no"
 CHROOTEXEC_AFTER_INTERNAL_CHROOTEXEC=no
@@ -58,11 +58,11 @@ while [ -n "$1" ]; do
 	    ;;
 
 	--binary-all)
-	    BINARY_ARCH="no"
+	    BINARY_ARCH="any"
 	    shift
 	    ;;
 	--binary-arch)
-	    BINARY_ARCH="yes"
+	    BINARY_ARCH="binary"
 	    shift
 	    ;;
 	--continue-fail)
