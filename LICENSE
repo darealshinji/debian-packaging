@@ -24,7 +24,7 @@ SOFTWARE.
 
 mk/config.{guess|sub}:
 
-Copyright (C) 1992-2015 Free Software Foundation, Inc.
+Copyright (C) 1992-2016 Free Software Foundation, Inc.
 
 This file is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by
@@ -50,8 +50,9 @@ of the GNU General Public License, version 3 ("GPLv3").
 
 mk/pbuilder-satisfydepends.sh, mk/pbuilder-satisfydepends-orig/*:
 
-Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
+Copyright (C) 2001-2007 Junichi Uekawa
 Copyright (C) 2007 Loïc Minier
+Copyright (C) 2015 Mattia Rizzolo <mattia@debian.org>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -100,5 +101,5 @@ FSF changes to this file are in the public domain.
 
 
 Some of the files inside the debian directories might be under a different license.
-Refer to the corresponding debian/copyright for more details.
+Refer to the corresponding debian/copyright file for more details.
 
