@@ -20,7 +20,7 @@ export CXXFLAGS=-O2
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -f itch.png _dh_shlibdeps.log
+	rm -f itch.png
 	rm -rf build converted_icons node_modules node-v*-linux-*
 
 override_dh_auto_build:
