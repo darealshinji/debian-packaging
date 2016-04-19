@@ -4,7 +4,7 @@ JOBS := $(shell nproc || echo 2)
 
 _PATH="$(CURDIR)/`cat NODE-RELEASE`/bin:$(CURDIR)/node_modules/.bin:$$PATH"
 
-ifeq ($(shell dpkg-architecture -qDEB_HOST_ARCH),amd64)
+ifeq ($(DEB_HOST_ARCH),amd64)
 ELECTRON_ARCH=x64
 else
 ELECTRON_ARCH=ia32
@@ -26,7 +26,8 @@ override_dh_auto_clean:
 override_dh_auto_build:
 	cd sassc/libsass/ && \
 	autoreconf -if && \
-	./configure --prefix=$(CURDIR)/sassc/libsass/tmp \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/sassc/libsass/tmp \
 		--enable-static \
 		--disable-shared && \
 	$(MAKE) clean && \
@@ -35,7 +36,8 @@ override_dh_auto_build:
 
 	cd sassc && \
 	autoreconf -if && \
-	./configure --enable-static \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
+		--enable-static \
 		--disable-shared \
 		--with-libsass=$(CURDIR)/sassc/libsass/tmp && \
 	$(MAKE) clean && \
@@ -55,7 +57,9 @@ override_dh_auto_build:
 	./make-icons.sh itch.png
 
 override_dh_auto_test:
+ifeq ($(DEB_HOST_ARCH),amd64)
 	PATH=$(_PATH) npm test
+endif
 
 override_dh_install:
 	dh_install -XLICENSE -XLICENSES.chromium.html
