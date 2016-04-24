@@ -11,6 +11,5 @@ VERSION       = $(shell wget -q -O - 'http://www.nasm.us/pub/nasm/releasebuilds/
 download:
 	@ $(call download,$(bin),http://www.nasm.us/pub/nasm/releasebuilds/$(VERSION)/$(bin))
 	tar xvf $(bin)
-	@ VERSION=$$(echo $(VERSION) | sed 's|rc|~rc|'); \
-	$(changelog-entry)
+	@ VERSION=$(VERSION); $(changelog-entry)
 
