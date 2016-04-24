@@ -5,7 +5,7 @@ builddir      = nasm-$(VERSION)
 bin           = nasm-$(VERSION).tar.xz
 changelog-msg = New release version
 VERSION       = $(shell wget -q -O - 'http://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D' | \
-		grep 'alt="\[DIR]"></td><td>' - | head -n1 | cut -d '>' -f7 | sed 's@/</a@@')
+		grep -o '\/">.*\/<\/a>' | sed '/rc/d; s|/">||; s|/</a>||' | head -n1)
 
 
 download:
