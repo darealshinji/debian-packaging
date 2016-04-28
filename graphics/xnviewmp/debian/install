@@ -7,6 +7,7 @@ XnView/Plugins             usr/lib/xnviewmp
 XnView/UI                  usr/share/xnviewmp
 XnView/country.txt         usr/lib/xnviewmp
 XnView/PrintPresets.txt    usr/lib/xnviewmp
+XnView/WhatsNew.txt        usr/lib/xnviewmp
 XnView/qt.conf             usr/lib/xnviewmp
 XnView/XnView              usr/lib/xnviewmp
 XnView/*.png               usr/share/pixmaps

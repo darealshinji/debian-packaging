@@ -2,43 +2,43 @@ Source: xnviewmp
 Section: graphics
 Priority: optional
 Maintainer: Pierre-e Gougelet <contact@xnview.com>
-Build-Depends:
- debhelper (>= 9),
- chrpath,
- dos2unix,
- libasound2,
- libcups2,
- libegl1-x11,
- libfontconfig1,
- libfreetype6,
- libgl1,
- libglib2.0-0,
- libgstreamer-plugins-base0.10-0,
- libgtk2.0-0,
- libice6,
- libilmbase6,
- libpulse0,
- libsm6,
- libsqlite3-0,
- libx11-6,
- libx11-xcb1,
- libxcb1,
- libxcomposite1,
- libxext6,
- libxi6,
- libxml2,
- libxrender1,
- libxslt1.1,
- zlib1g
+Build-Depends: debhelper (>= 9), chrpath, dos2unix
 Standards-Version: 3.9.6
 Homepage: http://www.xnview.com
 
 Package: xnviewmp
 Architecture: amd64 i386
-Depends:
- ${shlibs:Depends},
- ${misc:Depends},
- ${perl:Depends}
+Depends: ${misc:Depends},
+ ${perl:Depends},
+ libasound2 (>= 1.0.16),
+ libc6 (>= 2.14) [amd64],
+ libc6 (>= 2.11) [i386],
+ libcups2 (>= 1.4.0),
+ libfontconfig1 (>= 2.9.0),
+ libfreetype6 (>= 2.2.1),
+ libgcc1 (>= 1:4.1.1),
+ libgl1-mesa-glx | libgl1,
+ libglib2.0-0 (>= 2.22.0),
+ libgstreamer-plugins-base0.10-0 (>= 0.10.31),
+ libgstreamer0.10-0 (>= 0.10.31),
+ libgtk2.0-0 (>= 2.24.0),
+ libice6 (>= 1:1.0.0),
+ libilmbase6 (>= 1.0.1),
+ libpango-1.0-0 (>= 1.14.0),
+ libpulse0 (>= 1:0.99.1),
+ libsm6,
+ libsqlite3-0 (>= 3.5.9),
+ libstdc++6 (>= 4.4.0),
+ libx11-6,
+ libx11-xcb1,
+ libxcb1 (>= 1.8),
+ libxcomposite1 (>= 1:0.3-1),
+ libxext6,
+ libxi6 (>= 2:1.2.99.4),
+ libxml2 (>= 2.7.4),
+ libxrender1,
+ libxslt1.1 (>= 1.1.25),
+ zlib1g (>= 1:1.2.0)
 Description: Graphic viewer, browser, converter.
  XnView MP is the enhanced version to XnView. It is a powerful
  cross-platform media browser, viewer and converter.
