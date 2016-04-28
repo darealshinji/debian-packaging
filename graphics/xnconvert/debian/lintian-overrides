@@ -1,6 +1,3 @@
 # it's closed-source
 hardening-no-relro
 embedded-library
-
-# pre-compiled
-xnconvert: shared-lib-without-dependency-information usr/lib/xnconvert/lib/libicudata.so.*

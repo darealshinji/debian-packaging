@@ -1,6 +1,10 @@
 #!/usr/bin/make -f
 
-ifeq ($(shell uname -p), x86_64)
+remove_libs = libatk-1.0.so.0 libcairo.so.2 libgdk_pixbuf-2.0.so.0 \
+	libgio-2.0.so.0 libgmodule-2.0.so.0 libpangocairo-1.0.so.0 \
+	libpangoft2-1.0.so.0 libXext.so.6
+
+ifeq ($(DEB_HOST_ARCH),amd64)
 x64 = -x64
 endif
 
@@ -10,16 +14,25 @@ endif
 
 override_dh_auto_clean:
 	rm -rf converted_icons XnConvert
+	rm -f patchelf
 
 override_dh_auto_build:
 	tar xvfz XnConvert-linux$(x64).tgz
 	find XnConvert -type f -exec chmod 0644 '{}' \;
 	chmod 0755 XnConvert/XnConvert
-	./make-icons.sh XnConvert/xnconvert.png
 	chrpath -d XnConvert/XnConvert `find XnConvert/ -type f -name *.so*`
+	./make-icons.sh XnConvert/xnconvert.png
+	g++ -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -o patchelf patchelf.cpp
 
 override_dh_makeshlibs:
 
 override_dh_shlibdeps:
-	dh_shlibdeps -Lxnconvert -l/usr/lib/xnconvert/lib
+	#dh_shlibdeps -Lxnconvert -l/usr/lib/xnconvert/lib
+
+override_dh_strip:
+	dh_strip
+	./patchelf $(foreach LIB,$(remove_libs),--remove-needed $(LIB)) \
+		debian/xnconvert/usr/lib/xnconvert/lib/platformthemes/libqgtk2.so
+	./patchelf --add-needed libc.so.6 \
+		debian/xnconvert/usr/lib/xnconvert/lib/libicudata.so.54
 

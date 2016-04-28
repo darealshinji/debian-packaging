@@ -2,30 +2,28 @@ Source: xnconvert
 Section: graphics
 Priority: optional
 Maintainer: Pierre-e Gougelet <contact@xnview.com>
-Build-Depends:
- debhelper (>= 9),
- imagemagick,
- chrpath,
- libfontconfig1,
- libfreetype6,
- libglib2.0-0,
- libgtk2.0-0,
- libice6,
- libilmbase6,
- libpng12-0,
- libsm6,
- libx11-6,
- libx11-xcb1,
- libxcb1,
- libxi6,
- libxrender1,
- zlib1g
+Build-Depends: debhelper (>= 9), imagemagick, chrpath
 Standards-Version: 3.9.6
 Homepage: http://www.xnview.com
 
 Package: xnconvert
-Architecture: amd64 i386
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Architecture: any
+Depends: ${misc:Depends},
+ libc6 (>= 2.14) [amd64],
+ libc6 (>= 2.11) [i386],
+ libfontconfig1 (>= 2.9.0),
+ libfreetype6 (>= 2.2.1),
+ libgcc1 (>= 1:4.1.1),
+ libgl1-mesa-glx | libgl1,
+ libstdc++6 (>= 4.2.1) [amd64],
+ libstdc++6 (>= 4.4.0) [i386],
+ libx11-6,
+ libx11-xcb1,
+ libxcb1 (>= 1.8),
+ libxext6,
+ libxi6 (>= 2:1.2.99.4),
+ libxrender1,
+ zlib1g (>= 1:1.1.4)
 Description: batch image processor
  XnConvert is a powerful and free cross-platform batch image processor,
  allowing you to combine over 80 actions. Compatible with 500 formats.
