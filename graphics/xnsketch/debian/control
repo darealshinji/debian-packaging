@@ -7,7 +7,7 @@ Standards-Version: 3.9.6
 Homepage: http://www.xnview.com
 
 Package: xnsketch
-Architecture: any
+Architecture: amd64 i386
 Depends: ${misc:Depends},
  libc6 (>= 2.14) [amd64],
  libc6 (>= 2.11) [i386],
