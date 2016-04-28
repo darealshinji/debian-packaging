@@ -2,22 +2,30 @@ Source: xnsketch
 Section: graphics
 Priority: optional
 Maintainer: Pierre-e Gougelet <contact@xnview.com>
-Build-Depends: debhelper (>= 9),
-               chrpath,
-               imagemagick
+Build-Depends: debhelper (>= 9), chrpath, imagemagick
 Standards-Version: 3.9.6
 Homepage: http://www.xnview.com
 
 Package: xnsketch
-Architecture: amd64 i386
+Architecture: any
 Depends: ${misc:Depends},
-         libc6 (>= 2.11),
-         libgcc1 (>= 1:4.1.1),
-         libqt4-network (>= 4:4.5.3),
-         libqt4-xml (>= 4:4.5.3),
-         libqtcore4 (>= 4:4.8.0),
-         libqtgui4 (>= 4:4.6.1),
-         libqtwebkit4,
-         libstdc++6 (>= 4.1.1)
+ libc6 (>= 2.14) [amd64],
+ libc6 (>= 2.11) [i386],
+ libfontconfig1 (>= 2.9.0),
+ libfreetype6 (>= 2.2.1),
+ libgcc1 (>= 1:4.1.1),
+ libgl1-mesa-glx | libgl1,
+ libglib2.0-0 (>= 2.22.0),
+ libgtk2.0-0 (>= 2.24.0),
+ libice6 (>= 1:1.0.0),
+ libpango-1.0-0 (>= 1.14.0),
+ libsm6,
+ libstdc++6 (>= 4.1.1),
+ libx11-6,
+ libx11-xcb1,
+ libxcb1 (>= 1.8),
+ libxext6,
+ libxi6 (>= 2:1.2.99.4),
+ libxrender1
 Description: create cartoon or sketch images from photos
  XnSketch allows you to turn your photos into cartoon or sketch images.

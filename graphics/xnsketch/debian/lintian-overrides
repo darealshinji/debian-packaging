@@ -1,2 +1,3 @@
-# closed-source
+# closed-source or precompiled
+hardening-no-relro
 embedded-library

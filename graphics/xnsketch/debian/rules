@@ -1,27 +1,39 @@
 #!/usr/bin/make -f
 
-PKG = xnsketch
+remove_libs = libatk-1.0.so.0 libcairo.so.2 libgdk_pixbuf-2.0.so.0 \
+	libgio-2.0.so.0 libgmodule-2.0.so.0 libpangocairo-1.0.so.0 \
+	libpangoft2-1.0.so.0 libXext.so.6
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+x64 = -x64
+endif
 
 
 %:
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf converted_icons XnSketch
+	rm -rf converted_icons XnSketch XnConvert
+	rm -f patchelf
 
 override_dh_auto_build:
-	tar xvfz XnSketch-linux.tgz
-
+	tar xvfz XnSketch-linux$(x64).tgz
+	tar xvfz XnConvert-linux$(x64).tgz
 	find XnSketch -type f -exec chmod 0644 '{}' \;
 	chmod a+x XnSketch/XnSketch
-	chrpath -d XnSketch/XnSketch
-	mv XnSketch/XnSketch XnSketch/xnsketch
-
+	chrpath -d XnSketch/XnSketch `find XnSketch/ -type f -name *.so*`
 	./make-icons.sh XnSketch/xnsketch.png
+	g++ -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -o patchelf patchelf.cpp
+
+override_dh_makeshlibs:
 
 override_dh_shlibdeps:
+	#dh_shlibdeps -Lxnsketch -l/usr/lib/xnsketch/lib
 
-override_dh_gencontrol:
-	dh_gencontrol
-	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
+override_dh_strip:
+	dh_strip
+	./patchelf $(foreach LIB,$(remove_libs),--remove-needed $(LIB)) \
+		debian/xnsketch/usr/lib/xnsketch/lib/platformthemes/libqgtk2.so
+	./patchelf --add-needed libc.so.6 \
+		debian/xnsketch/usr/lib/xnsketch/lib/libicudata.so.54
 
