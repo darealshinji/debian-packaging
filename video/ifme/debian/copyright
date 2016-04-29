@@ -4,7 +4,7 @@ Source: https://github.com/Anime4000/IFME
 
 Files: *
 Copyright: 2014-2016 Anime4000 <https://github.com/Anime4000>
-License: GPL-2+ with non-commercial exception
+License: GPL-2+ with non-commercial exception, CC-BY-NC-4.0
  Take note that you are not allowed to sell either Source Code or Binary,
  for more info please refer to: <https://github.com/Anime4000/IFME#license>
  .
@@ -21,12 +21,16 @@ License: GPL-2+ with non-commercial exception
  You should have received a copy of the GNU General Public License
  along with this program. If not, see <http://www.gnu.org/licenses/>.
  .
- On Debian systems, the complete text of the GNU General
- Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+ Artwork drawn by Ray-en aka 53C <http://53c.deviantart.com/> under license
+ Attribution-NonCommercial 4.0 International:
+ http://creativecommons.org/licenses/by-nc/4.0/
 Note:
  I'm NOT a lawyer but I'm sure that the non-commercial exception is a GPL
  violation and/or has no effect at all. Please keep that in mind when you use
  this software. -- djcj <djcj@gmx.de>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
 
 Files: debian/*
 Copyright: 2016 djcj <djcj@gmx.de>

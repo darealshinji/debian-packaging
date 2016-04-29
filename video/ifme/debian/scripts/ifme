@@ -9,11 +9,12 @@ if [ ! -d "$dir" ] || [ ! -x "$dir/ifme" ]; then
   cd "$dir"
   wget -O ifme.txz $url || exit 1
   tar xf ifme.txz
-  if [ -d ifme6 ]; then
-    mv ifme6 ifme_tmp
-    mv ifme_tmp/* .
+  rm -f ifme.txz
+  if [ $(ls -1A | wc -l) -eq 1 ]; then
+    mv "$(ls -1A)" ifme_tmp_
+    mv ifme_tmp_/* .
+    rm -rf ifme_tmp_
   fi
-  rm -rf ifme_tmp ifme.txz
 fi
 
 if [ "x$1" = "x" ]; then
