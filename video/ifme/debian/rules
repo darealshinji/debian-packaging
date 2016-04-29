@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_install:
+	dh_install
+	./make-icons.sh ifme.png $(CURDIR)/debian/ifme-launcher/usr/share
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: i386/Architecture: amd64/g' debian/ifme-launcher/DEBIAN/control
+

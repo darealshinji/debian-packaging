@@ -1,0 +1,24 @@
+#!/bin/sh
+
+dir="$HOME/.ifme-bin"
+url="https://sourceforge.net/projects/ifme/files/latest/download"
+
+if [ ! -d "$dir" ] || [ ! -x "$dir/ifme" ]; then
+  rm -rf "$dir"
+  mkdir -p "$dir"
+  cd "$dir"
+  wget -O ifme.txz $url || exit 1
+  tar xf ifme.txz
+  if [ -d ifme6 ]; then
+    mv ifme6 ifme_tmp
+    mv ifme_tmp/* .
+  fi
+  rm -rf ifme_tmp ifme.txz
+fi
+
+if [ "x$1" = "x" ]; then
+  cd "$dir" && ./ifme --help
+else
+  cd "$dir" && ./ifme $*
+fi
+
