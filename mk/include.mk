@@ -135,15 +135,24 @@ endif
 ifeq ($(DEPS),0)
 	@ echo "dependency checks skipped"
 else
-	@ echo ""
 	@ echo "checking dependencies:"
-	@ $(foreach DEP, $(alldeps),                                                                 \
-	echo $(DEP);                                                                                 \
-	if [ $$(dpkg-query -W -f='$${Status}' $(DEP) 2>/dev/null | grep -c "ok installed") -eq 0 ] ; \
-	then                                                                                         \
-	    echo "You need to install the package '$(DEP)'" ;                                        \
-	    sudo -k apt-get -q install $(DEP) ;                                                      \
-	fi ;)
+	@ for dep in $(alldeps) ;                                                                     \
+	do                                                                                            \
+	  printf "  $$dep - " ;                                                                       \
+	  if [ $$(dpkg-query -W -f='$${Status}' $$dep 2>/dev/null | grep -c "ok installed") -eq 0 ] ; \
+	  then                                                                                        \
+	    missing="$$missing $$dep" ;                                                               \
+	    echo "missing" ;                                                                          \
+	  else                                                                                        \
+	    echo "ok" ;                                                                               \
+	  fi                                                                                          \
+	done ;                                                                                        \
+	if [ "x$$(echo "$$missing" | tr -d ' ')" != "x" ] ;                                           \
+	then                                                                                          \
+	  echo "You need to install the following package(s):" ;                                      \
+	  echo "$$missing" ;                                                                          \
+	  sudo -k apt-get -q install $$missing ;                                                      \
+	fi
 	@ echo ""
 endif
 
