@@ -4,7 +4,10 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
   debhelper (>= 9),
-  dh-autoreconf,
+  autoconf,
+  automake,
+  autopoint,
+  libtool,
   imagemagick,
   libasound2,
   libcups2,

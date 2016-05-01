@@ -3,7 +3,7 @@ Upstream-Name: itch
 Source: https://github.com/itchio/itch
 
 Files: *
-Copyright: 2015-2016 Leaf Corcoran, https://itch.io
+Copyright: 2015-2016 Itch Corp
 License: MIT
 
 Files: debian/*
