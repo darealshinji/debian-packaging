@@ -1,2 +1,61 @@
 Use precompiled binaries since building is a little cumbersome, especially on
 systems without a C++14 compiler.
+
+
+-------------------------------
+some commands used for building
+-------------------------------
+
+sudo apt-get install \
+ cmake libx11-dev libgl1-mesa-dev libxcb1-dev libx11-xcb-dev libxcb-image0-dev \
+ libxcb-randr0-dev libudev-dev libjpeg-dev libopenal-dev libflac-dev libfreetype6-dev \
+ libvorbis-dev libxrandr-dev libglew-dev libsndfile1-dev liblua5.2-dev zlib1g-dev \
+ libboost-thread-dev libboost-system-dev libogg-dev
+
+git clone --depth 1 https://github.com/SuperV1234/SSVOpenHexagon.git
+cd SSVOpenHexagon
+./init-repository.sh
+git clone --branch 2.3.x --depth 1 https://github.com/SFML/SFML.git
+
+curdir="$PWD"
+mkdir -p SFML/build
+cd SFML/build
+
+# note: using gcc5 custom build
+# -> https://github.com/darealshinji/debian-packaging/tree/master/devel/gcc-5
+cmake .. -DCMAKE_BUILD_TYPE=Release \
+ -DCMAKE_INSTALL_PREFIX="$curdir/extlibs/SFML" \
+ -DCMAKE_CXX_COMPILER=gcc5opt-g++ \
+ -DCMAKE_C_COMPILER=gcc5opt-gcc \
+ -DCMAKE_CXX_FLAGS="-std=c++14" \
+ -DBUILD_SHARED_LIBS=OFF \
+ -DSFML_BUILD_DOC=OFF \
+ -DSFML_BUILD_EXAMPLES=OFF \
+ -DCMAKE_VERBOSE_MAKEFILE=ON
+make -j4
+make install
+
+cd "$curdir"
+sed -i '/find_package(boost)/d' CMakeLists.txt
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release \
+ -DCMAKE_CXX_COMPILER=gcc5opt-g++-static-libstdc++ \
+ -DCMAKE_C_COMPILER=gcc5opt-gcc \
+ -DLUA_INCLUDE_DIR=/usr/include/lua5.2 \
+ -DLUA_LIBRARY=-llua5.2 \
+ -DSFML_STATIC_LIBRARIES=ON \
+ -DCMAKE_VERBOSE_MAKEFILE=ON
+make -j4
+
+# extra libs used for manual (mostly-)static linking:
+-Wl,-Bstatic -llua5.2 -lz -lboost_system -lboost_thread -ljpeg -lfreetype -lpng -lvorbisfile -lvorbisenc -lvorbis -logg -lFLAC
+-Wl,-Bdynamic -lGL -lopenal -ludev -lxcb -lX11 -lX11-xcb -lxcb-image -lxcb-randr -ldl -lpthread -static-libgcc
+
+# copy OpenAL
+cp /usr/lib/x86_64-linux-gnu/libopenal.so.1 .
+
+# build a minimum-dependencies version of libudev.so.1 from source:
+apt-get source libudev-dev
+[...]
+
