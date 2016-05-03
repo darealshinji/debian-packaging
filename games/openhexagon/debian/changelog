@@ -1,3 +1,9 @@
+openhexagon (2.0~git20160502) unstable; urgency=low
+
+  * New upstream snapshot
+
+ -- Marshall Banana <djcj@gmx.de>  Tue, 03 May 2016 12:00:00 +0200
+
 openhexagon (2.0~git20160318) unstable; urgency=low
 
   * Initial release

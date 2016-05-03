@@ -2,7 +2,6 @@
 
 data="/usr/share/games/SSVOpenHexagon"
 conf="$HOME/.config/OpenHexagon"
-ohdir="/usr/lib/SSVOpenHexagon"
 
 if [ ! -d "$conf" ]; then
   mkdir -p "$conf"
@@ -12,9 +11,7 @@ if [ ! -d "$conf" ]; then
   cp -r $data/Profiles "$conf"
   cp -r $data/config.json "$conf"
 fi
-
 test -e "$HOME/OpenHexagon" || ln -s "$conf" "$HOME/OpenHexagon"
 
-systemlibs="/lib/x86_64-linux-gnu:/lib:/usr/lib/x86_64-linux-gnu:/usr/lib:/usr/local/lib"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$ohdir/libs1:$systemlibs:$ohdir/libs2"
-cd "$conf" && "$ohdir/SSVOpenHexagon" $*
+cd "$conf" && "/usr/lib/SSVOpenHexagon/SSVOpenHexagon" $*
+
