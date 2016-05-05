@@ -1,0 +1,50 @@
+#!/usr/bin/make -f
+
+CXXFLAGS = $(filter-out -g,$(shell dpkg-buildflags --get CXXFLAGS))
+CXXFLAGS += $(std) -Wno-suggest-override $(CPPFLAGS)
+LDFLAGS += -Wl,--as-needed -Wl,-z,defs $(xldflags)
+
+include debian/config.mak
+
+cmake_flags = -DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_CXX_COMPILER="$(cxx_)" \
+	-DCMAKE_CXX_FLAGS="$(CXXFLAGS)" \
+	-DCMAKE_EXE_LINKER_FLAGS="$(LDFLAGS)" \
+	-DCMAKE_SHARED_LINKER_FLAGS="$(LDFLAGS) -Wl,-rpath,XORIGIN" \
+	-DCMAKE_SKIP_INSTALL_RPATH=OFF \
+	-DCMAKE_SKIP_RPATH=OFF \
+	-DCMAKE_VERBOSE_MAKEFILE=ON
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	rm -rf build SFML/build converted_icons
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	mkdir -p SFML/build
+	cd SFML/build && cmake .. \
+		$(cmake_flags) \
+		-DCMAKE_INSTALL_PREFIX="$(CURDIR)/extlibs/SFML" \
+		-DBUILD_SHARED_LIBS=ON \
+		-DSFML_BUILD_DOC=OFF \
+		-DSFML_BUILD_EXAMPLES=OFF
+	dh_auto_build -DSFML/build
+	$(MAKE) -C SFML/build install
+
+	mkdir -p build
+	cd build && cmake .. \
+		$(cmake_flags) \
+		-DLUA_INCLUDE_DIR="/usr/include/lua5.2" \
+		-DLUA_LIBRARY="-llua5.2"
+	dh_auto_build -Dbuild
+
+	chrpath -r '$$ORIGIN' build/SSVOpenHexagon extlibs/SFML/lib/lib*.so.*
+	mkdir -p _RELEASE/Profiles
+	./make-icons.sh debian/openhexagon.png
+
+override_dh_makeshlibs:
+

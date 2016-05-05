@@ -1,0 +1,10 @@
+build/SSVOpenHexagon          /usr/lib/SSVOpenHexagon
+extlibs/SFML/lib/lib*.so.*    /usr/lib/SSVOpenHexagon
+_RELEASE/Assets               /usr/share/games/SSVOpenHexagon
+_RELEASE/ConfigOverrides      /usr/share/games/SSVOpenHexagon
+_RELEASE/Packs                /usr/share/games/SSVOpenHexagon
+_RELEASE/Profiles             /usr/share/games/SSVOpenHexagon
+_RELEASE/config.json          /usr/share/games/SSVOpenHexagon
+converted_icons/icons         /usr/share
+debian/openhexagon.desktop    /usr/share/applications
+debian/launcher/openhexagon   /usr/games

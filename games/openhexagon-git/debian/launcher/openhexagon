@@ -1,0 +1,17 @@
+#!/bin/sh
+
+data="/usr/share/games/SSVOpenHexagon"
+conf="$HOME/.config/OpenHexagon"
+
+if [ ! -d "$conf" ]; then
+  mkdir -p "$conf"
+  cp -r $data/Assets "$conf"
+  cp -r $data/ConfigOverrides "$conf"
+  cp -r $data/Packs "$conf"
+  cp -r $data/Profiles "$conf"
+  cp -r $data/config.json "$conf"
+fi
+test -e "$HOME/OpenHexagon" || ln -s "$conf" "$HOME/OpenHexagon"
+
+cd "$conf" && "/usr/lib/SSVOpenHexagon/SSVOpenHexagon" $*
+
