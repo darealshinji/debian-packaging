@@ -2,13 +2,13 @@ include ../../mk/include.mk
 
 deps       = wget
 bin        = transmission.txz
-VERSION    = 2.84
+VERSION    = 2.92
 builddir   = transmission-$(VERSION)
 distcleanfiles = $(bin)
 
 
 download:
-	@ $(call download,$(bin),http://download.transmissionbt.com/files/transmission-$(VERSION).tar.xz)
-	@ $(call verifysha256,$(bin),a9fc1936b4ee414acc732ada04e84339d6755cd0d097bcbd11ba2cfc540db9eb)
+	@ $(call download,$(bin),https://download.transmissionbt.com/files/transmission-$(VERSION).tar.xz)
+	@ $(call verifysha256,$(bin),3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f)
 	tar xvf $(bin)
 

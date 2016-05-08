@@ -1,6 +1,6 @@
 --- a/cli/cli.c
 +++ b/cli/cli.c
-@@ -38,25 +38,7 @@
+@@ -40,25 +40,7 @@
  ****
  ***/
  
@@ -27,9 +27,44 @@
  
  /***
  ****
+--- a/configure.ac
++++ b/configure.ac
+@@ -565,6 +565,24 @@
+ 
+ dnl ----------------------------------------------------------------------------
+ dnl
++dnl  use IEC size units (1024 b = 1 kiB)
++
++use_iec_units="no"
++AC_ARG_ENABLE([iec-units],
++              AS_HELP_STRING([--enable-iec-units],[Use IEC size units (1024 b = 1 kiB)]),
++              [want_iec_units=${enableval}],
++              [want_iec_units=no])
++if test "x$want_iec_units" != "xno" ; then
++     CXXFLAGS="$CXXFLAGS -DUSE_IEC_UNITS"
++     CPPFLAGS="$CPPFLAGS -DUSE_IEC_UNITS"
++     IEC_UNITS_QT="USE_IEC_UNITS"
++     use_iec_units="yes"
++fi
++AC_SUBST(IEC_UNITS_QT)
++
++
++dnl ----------------------------------------------------------------------------
++dnl
+ dnl  platform-specific stuff.
+ 
+ AC_CANONICAL_HOST
+@@ -679,6 +697,7 @@
+ 
+    Source code location:                              ${srcdir}
+    Compiler:                                          ${CXX}
++   Use IEC size units:                                ${use_iec_units}
+ 
+    Build libtransmission:                             yes
+       * optimized for low-resource systems:           ${enable_lightweight}
 --- a/daemon/daemon.c
 +++ b/daemon/daemon.c
-@@ -39,25 +39,7 @@
+@@ -44,25 +44,7 @@
  
  #define MY_NAME "transmission-daemon"
  
@@ -54,11 +89,11 @@
 -#define SPEED_T_STR "TB/s"
 +#include "../utils/units.h"
  
- #define LOGFILE_MODE_STR "a+"
- 
+ static bool seenHUP = false;
+ static const char *logfileName = NULL;
 --- a/daemon/remote.c
 +++ b/daemon/remote.c
-@@ -41,26 +41,7 @@
+@@ -37,26 +37,7 @@
  
  #define ARGUMENTS TR_KEY_arguments
  
@@ -88,7 +123,7 @@
  ****
 --- a/gtk/util.c
 +++ b/gtk/util.c
-@@ -32,23 +32,25 @@
+@@ -33,23 +33,25 @@
  ****  UNITS
  ***/
  
@@ -131,9 +166,9 @@
  ****
 --- a/libtransmission/libtransmission-test.c
 +++ b/libtransmission/libtransmission-test.c
-@@ -179,26 +179,7 @@
-     }
- }
+@@ -193,26 +193,7 @@
+ ****
+ ***/
  
 -#define MEM_K 1024
 -#define MEM_B_STR   "B"
@@ -159,110 +194,19 @@
  
  tr_session *
  libttest_session_init (tr_variant * settings)
---- a/configure.ac
-+++ b/configure.ac
-@@ -438,6 +438,24 @@
+--- a/qt/Formatter.cc
++++ b/qt/Formatter.cc
+@@ -12,6 +12,7 @@
  
- dnl ----------------------------------------------------------------------------
- dnl
-+dnl  use IEC size units (1024 b = 1 kiB)
-+
-+use_iec_units="no"
-+AC_ARG_ENABLE([iec-units],
-+              AS_HELP_STRING([--enable-iec-units],[Use IEC size units (1024 b = 1 kiB)]),
-+              [want_iec_units=${enableval}],
-+              [want_iec_units=no])
-+if test "x$want_iec_units" != "xno" ; then
-+     CXXFLAGS="$CXXFLAGS -DUSE_IEC_UNITS"
-+     CPPFLAGS="$CPPFLAGS -DUSE_IEC_UNITS"
-+     IEC_UNITS_QT="USE_IEC_UNITS"
-+     use_iec_units="yes"
-+fi
-+AC_SUBST(IEC_UNITS_QT)
-+
-+
-+dnl ----------------------------------------------------------------------------
-+dnl
- dnl  platform-specific stuff.
- 
- AC_CANONICAL_HOST
-@@ -558,6 +576,7 @@
- 
-    Source code location:                              ${srcdir}
-    Compiler:                                          ${CXX}
-+   Use IEC size units:                                ${use_iec_units}
- 
-    Build libtransmission:                             yes
-       * optimized for low-resource systems:           ${enable_lightweight}
---- /dev/null
-+++ b/utils/units.h
-@@ -0,0 +1,53 @@
-+/*
-+ * This file Copyright (C) 2012-2014 Mnemosyne LLC
-+ *
-+ * It may be used under the GNU GPL versions 2 or 3
-+ * or any future license endorsed by Mnemosyne LLC.
-+ *
-+ * $Id:$
-+ */
-+
-+#ifndef UNITS_H
-+#define UNITS_H
-+
-+#define MEM_K     1024
-+#define MEM_K_STR "KiB"
-+#define MEM_M_STR "MiB"
-+#define MEM_G_STR "GiB"
-+#define MEM_T_STR "TiB"
-+
-+#define DISK_B_STR  "B"
-+#define MEM_B_STR   "B"
-+#define SPEED_B_STR "B/s"
-+
-+#ifdef USE_IEC_UNITS
-+
-+#define DISK_K     1024
-+#define DISK_K_STR "kiB"
-+#define DISK_M_STR "MiB"
-+#define DISK_G_STR "GiB"
-+#define DISK_T_STR "TiB"
-+
-+#define SPEED_K     1024
-+#define SPEED_K_STR "kiB/s"
-+#define SPEED_M_STR "MiB/s"
-+#define SPEED_G_STR "GiB/s"
-+#define SPEED_T_STR "TiB/s"
-+
-+#else
-+
-+#define DISK_K     1000
-+#define DISK_K_STR "kB"
-+#define DISK_M_STR "MB"
-+#define DISK_G_STR "GB"
-+#define DISK_T_STR "TB"
-+
-+#define SPEED_K     1000
-+#define SPEED_K_STR "kB/s"
-+#define SPEED_M_STR "MB/s"
-+#define SPEED_G_STR "GB/s"
-+#define SPEED_T_STR "TB/s"
-+
-+#endif
-+
-+#endif
---- a/qt/formatter.cc
-+++ b/qt/formatter.cc
-@@ -14,6 +14,7 @@
- 
- #include "formatter.h"
- #include "speed.h"
+ #include "Formatter.h"
+ #include "Speed.h"
 +#include "../utils/units.h"
  
  /***
  ****  Constants
-@@ -31,36 +32,36 @@
+@@ -29,36 +30,36 @@
  void
- Formatter :: initUnits ()
+ Formatter::initUnits ()
  {
 - speed_K = 1000;
 - unitStrings[SPEED][B]  = tr ( "B/s");
@@ -317,8 +261,51 @@
                           unitStrings[MEM][MB].toUtf8().constData(),
 --- a/qt/config.pri.in
 +++ b/qt/config.pri.in
-@@ -1,3 +1,4 @@
- LIBUTP_LIBS = @LIBUTP_LIBS_QT@ 
+@@ -3,3 +3,4 @@
+ LIBUTP_LIBS = @LIBUTP_LIBS_QT@
  LIBUPNP_LIBS = @LIBUPNP_LIBS_QT@
  LIBNATPMP_LIBS = @LIBNATPMP_LIBS_QT@
 +DEFINES += @IEC_UNITS_QT@
+--- a/utils/units.h
++++ b/utils/units.h
+@@ -16,18 +16,38 @@
+ #define MEM_G_STR "GiB"
+ #define MEM_T_STR "TiB"
+ 
+-#define DISK_K 1000
+ #define DISK_B_STR  "B"
++#define MEM_B_STR   "B"
++#define SPEED_B_STR "B/s"
++
++#ifdef USE_IEC_UNITS
++
++#define DISK_K 1024
++#define DISK_K_STR "kiB"
++#define DISK_M_STR "MiB"
++#define DISK_G_STR "GiB"
++#define DISK_T_STR "TiB"
++
++#define SPEED_K 1024
++#define SPEED_K_STR "kiB/s"
++#define SPEED_M_STR "MiB/s"
++#define SPEED_G_STR "GiB/s"
++#define SPEED_T_STR "TiB/s"
++
++#else
++
++#define DISK_K 1000
+ #define DISK_K_STR "kB"
+ #define DISK_M_STR "MB"
+ #define DISK_G_STR "GB"
+ #define DISK_T_STR "TB"
+ 
+ #define SPEED_K 1000
+-#define SPEED_B_STR  "B/s"
+ #define SPEED_K_STR "kB/s"
+ #define SPEED_M_STR "MB/s"
+ #define SPEED_G_STR "GB/s"
+ #define SPEED_T_STR "TB/s"
+ 
+ #endif
++
++#endif
