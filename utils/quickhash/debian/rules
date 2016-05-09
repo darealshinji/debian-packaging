@@ -1,8 +1,9 @@
 #!/usr/bin/make -f
 
-arch = x86
-ifeq ($(shell dpkg-buildarch -qDEB_HOST_ARCH),amd64)
+ifeq ($(shell dpkg-architecture -qDEB_HOST_ARCH),amd64)
 arch = x64
+else
+arch = x86
 endif
 bin = QuickHash-Linux.2.6.7-$(arch)
 
