@@ -25,14 +25,15 @@ export LANG=C
 export LANGUAGE=C
 export LC_ALL=C
 
-ARCH      = $(shell dpkg-architecture -qDEB_HOST_ARCH)
-ARCHREAL  = $(shell dpkg-architecture -qDEB_HOST_ARCH)
-builddir  = pbuilder-source
-LOG       = $(shell basename $$PWD)-build.log
-resultdir = "$$HOME/buildresult"
-basetgz   = "/var/cache/pbuilder/debian-packages-$(ARCH).tgz"
-
-default_compat_level = 9
+def_compat  = 9
+ARCH        = $(shell dpkg-architecture -qDEB_HOST_ARCH)
+ARCHREAL    = $(shell dpkg-architecture -qDEB_HOST_ARCH)
+builddir    = pbuilder-source
+LOG         = $(shell basename $$PWD)-build.log
+TIME        = TIME="\nTime elapsed: %E\n" time
+pbuildercmd = pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc
+resultdir   = "$$HOME/buildresult"
+basetgz     = "/var/cache/pbuilder/debian-packages-$(ARCH).tgz"
 
 
 
@@ -57,24 +58,12 @@ define download
 endef
 
 
-# $(call buildpackage,COMMAND,LOGFILE)
-define buildpackage
-	@ echo '$(1)' ;                                                 \
-	start=$$(date +%s) ;                                            \
-	$(1) 2>&1 | tee $(2) ;                                          \
-	seconds=$$(( $$(date +%s) - $$start )) ;                        \
-	printf "\nthe building process took $$(( $$seconds / 60 )) minute(s) " | tee -a $(2) ; \
-	printf "and $$(( $$seconds % 60 )) second(s)\n\n" | tee -a $(2)
-endef
 
 
-
-
-MAINTAINER     = Marshall Banana <djcj@gmx.de>
-changelog-msg  = Current git snapshot
-changelog-file = $(builddir)/debian/changelog
-srcpkg         = `grep 'Source: ' debian/control | cut -d' ' -f2`
-
+MAINTAINER      = Marshall Banana <djcj@gmx.de>
+changelog-msg   = Current git snapshot
+changelog-file  = $(builddir)/debian/changelog
+srcpkg          = `grep 'Source: ' debian/control | cut -d' ' -f2`
 changelog-entry =                                                              \
     mkdir -p $(shell dirname $(changelog-file)) ;                              \
     echo "$(srcpkg) ($${VERSION}) unstable; urgency=low" > $(changelog-file) ; \
@@ -172,7 +161,7 @@ build: source
 	rm -rf $(builddir)/.pc
 	mkdir -p $(builddir)/debian/source
 	echo '3.0 (native)' > $(builddir)/debian/source/format
-	test -f $(builddir)/debian/compat || echo '$(default_compat_level)' > $(builddir)/debian/compat
+	test -f $(builddir)/debian/compat || echo '$(def_compat)' > $(builddir)/debian/compat
 
 ifneq ($(PBUILDER),1)
 ifneq ($(DEPS),0)
@@ -187,7 +176,7 @@ ifneq ($(DEPS),0)
 	    sudo -k $(CURDIR)/../../mk/pbuilder-satisfydepends.sh ;                                             \
 	fi
 endif
-	$(call buildpackage, cd $(builddir) && dpkg-buildpackage -rfakeroot -b -us -uc, ../$(LOG))
+	cd $(builddir) && $(TIME) dpkg-buildpackage -rfakeroot -b -us -uc 2>&1 | tee ../$(LOG)
 	rm -f *.changes
 	mkdir -p $(resultdir)
 	mv *.deb $(resultdir)
@@ -206,10 +195,12 @@ else
 	         --extrapackages "debhelper fakeroot" ;                   \
 	fi
 
-	mkdir -p $(resultdir)  # required for correct R/W rights
+	@# required for correct R/W rights
+	mkdir -p $(resultdir)
 	@ echo ""
 	@ echo "sudo password required to run pbuilder:"
-	$(call buildpackage, sudo -k pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc, $(LOG))
+	@ echo "  $(pbuildercmd)"
+	@ sudo -k $(TIME) $(pbuildercmd) *.dsc 2>&1 | tee $(LOG)
 endif
 
 
