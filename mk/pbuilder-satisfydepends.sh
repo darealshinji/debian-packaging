@@ -1,6 +1,7 @@
-#!/bin/bash
+#! /bin/bash
 
-set -e
+# pbuilder -- personal Debian package builder
+# version 0.224
 
 # This file is a concatenation of the following three scripts from
 # the pbuilder package:
@@ -21,11 +22,12 @@ set -e
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+###############################################################################
 
-
+set -e
 
 #   pbuilder -- personal Debian package builder
-#   Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
+#   Copyright (C) 2001-2007 Junichi Uekawa
 #   Copyright (C) 2007 Loïc Minier
 #   Copyright (C) 2015 Mattia Rizzolo <mattia@debian.org>
 #
@@ -292,7 +294,7 @@ function checkbuilddep_restrictiondeps() {
 
 
 #   pbuilder -- personal Debian package builder
-#   Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
+#   Copyright (C) 2001-2007 Junichi Uekawa
 #   Copyright (C) 2007 Loïc Minier
 #
 # module to satisfy build dependencies; aptitude flavor
@@ -376,9 +378,7 @@ EOF
 
 
 #   pbuilder -- personal Debian package builder
-#   Copyright (C) 2001,2002,2003,2005-2007 Junichi Uekawa
-#
-
+#   Copyright (C) 2001-2007 Junichi Uekawa
 #
 # module to satisfy build dependencies; parse command line parameters
 
@@ -427,6 +427,10 @@ while [ -n "$1" ]; do
 	    ;;
 	--binary-arch)
 	    BINARY_ARCH="binary"
+	    shift
+	    ;;
+	--binary-indep)
+	    BINARY_ARCH="all"
 	    shift
 	    ;;
 	--continue-fail)
