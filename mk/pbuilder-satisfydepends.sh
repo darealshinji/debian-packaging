@@ -27,8 +27,8 @@
 set -e
 
 #   pbuilder -- personal Debian package builder
-#   Copyright (C) 2001-2007 Junichi Uekawa
-#   Copyright (C) 2007 Loïc Minier
+#   Copyright (C) 2001-2007 Junichi Uekawa <dancer@debian.org>
+#   Copyright (C) 2007 Loïc Minier <lool@dooz.org>
 #   Copyright (C) 2015 Mattia Rizzolo <mattia@debian.org>
 #
 # module to satisfy build dependencies; common functions
@@ -294,8 +294,8 @@ function checkbuilddep_restrictiondeps() {
 
 
 #   pbuilder -- personal Debian package builder
-#   Copyright (C) 2001-2007 Junichi Uekawa
-#   Copyright (C) 2007 Loïc Minier
+#   Copyright (C) 2001-2007 Junichi Uekawa <dancer@debian.org>
+#   Copyright (C) 2007 Loïc Minier <lool@dooz.org>
 #
 # module to satisfy build dependencies; aptitude flavor
 
@@ -378,7 +378,7 @@ EOF
 
 
 #   pbuilder -- personal Debian package builder
-#   Copyright (C) 2001-2007 Junichi Uekawa
+#   Copyright (C) 2001-2007 Junichi Uekawa <dancer@debian.org>
 #
 # module to satisfy build dependencies; parse command line parameters
 
