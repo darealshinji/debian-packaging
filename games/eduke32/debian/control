@@ -1,0 +1,25 @@
+Source: eduke32
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ imagemagick,
+ libgtk2.0-dev,
+ libflac-dev,
+ libpng-dev,
+ libsdl2-dev,
+ libsdl2-mixer-dev,
+ libvorbis-dev,
+ libvpx-dev
+Standards-Version: 3.9.6
+Homepage: http://www.eduke32.com/
+Vcs-SVN: http://svn.eduke32.com/eduke32/polymer/eduke32
+Vcs-Browser: http://svn.eduke32.com/eduke32/polymer/eduke32
+
+Package: eduke32
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Duke Nukem 3D game engine
+ EDuke32 is a source port of the Duke Nukem 3D game engine.
+

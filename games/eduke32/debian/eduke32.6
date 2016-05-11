@@ -1,0 +1,144 @@
+.TH "EDUKE32" "6" "MAY 2016"
+
+.SH NAME
+EDuke32 \- Duke Nukem 3D game engine
+
+.SH SYNOPSIS
+.B eduke32 \fR[\fIfiles\fR] [\fIoptions\fR]
+.PP
+Example: \fBeduke32 \fR-q4 -a -m -tx -map nukeland.map
+.PP
+Files can be *.grp/zip/con/def/rts
+.PP
+Option parameters can be given with 1 or 2 dashes.
+
+.SH OPTIONS
+.TP
+\fB\-help\fR, \fB\-?
+open window with available command line options
+.TP
+\fB\-debughelp
+open window with available debug command line options
+.TP
+\fB\-cfg \fR[file.cfg]
+Use an alternate configuration file
+.TP
+\fB\-clipmap \fR[file.map]
+Load an additional clipping map for use with clipshape
+.TP
+\fB\-connect \fR[host]
+Connect to a multiplayer game
+.TP
+\fB\-c#
+Use MP mode #, 1 = Dukematch, 2 = Coop, 3 = Dukematch(no spawn)
+.TP
+\fB\-d \fR[file.edm or demonum]
+Play a demo
+.TP
+\fB\-g \fR[file.grp]
+Load additional game data
+.TP
+\fB\-h \fR[file.def]
+Load an alternate definitions file
+.TP
+\fB\-j \fR[dir]
+Adds a directory to EDuke32's search list
+.TP
+\fB\-l#
+Warp to level #, see -v
+.TP
+\fB\-map \fR[file.map]
+Loads a map
+.TP
+\fB\-mh \fR[file.def]
+Include an additional definitions module
+.TP
+\fB\-mx \fR[file.con]
+Include an additional CON script module
+.TP
+\fB\-m
+Disable monsters
+.TP
+\fB\-nam
+Run in NAM compatibility mode
+.TP
+\fB\-napalm
+Run in NAPALM compatibility mode
+.TP
+\fB\-rts \fR[file.rts]
+Load a custom Remote Ridicule sound bank
+.TP
+\fB\-r
+Record demo
+.TP
+\fB\-s#
+Set skill level (1-4)
+.TP
+\fB\-server
+Start a multiplayer game for other players to join
+.TP
+\fB\-setup\fR, \fB\-nosetup
+Enables/disables startup window
+.TP
+\fB\-t#
+Set respawn mode: 1 = Monsters, 2 = Items, 3 = Inventory, x = All
+.TP
+\fB\-usecwd
+Read game data and configuration file from working directory
+.TP
+\fB\-u#########
+User's favorite weapon order (default: 3425689071)
+.TP
+\fB\-v#
+Warp to volume #, see -l
+.TP
+\fB\-ww2gi
+Run in WWII GI compatibility mode
+.TP
+\fB\-x \fR[game.con]
+Load custom CON script
+.TP
+\fB\-#
+Load and run a game from slot # (0-9)
+.TP
+\fB\-a
+Use fake player AI (fake multiplayer only)
+.TP
+\fB\-cachesize #
+Sets cache size, in Kb
+.TP
+\fB\-game_dir \fR[dir]
+Duke3d_w32 compatibility option, see -j
+.TP
+\fB\-gamegrp
+Selects which file to use as main grp
+.TP
+\fB\-name \fR[name]
+Player name in multiplay
+.TP
+\fB\-noautoload
+Disable loading content from autoload dir
+.TP
+\fB\-nologo
+Skip the logo anim
+.TP
+\fB\-ns
+Disable sound
+.TP
+\fB\-nm
+Disable music
+.TP
+\fB\-rotatesprite\-no\-widescreen
+pass bit 1024 to all CON rotatesprite calls
+.TP
+\fB\-q#
+Fake multiplayer with # (2-8) players
+.TP
+\fB\-z#\fR, \fB\-condebug
+Enable line-by-line CON compile debugging at level #
+.TP
+\fB\-conversion \fRYYYYMMDD
+Selects CON script version for compatibility with older mods
+
+.SH "SEE ALSO"
+.BR mapster32 (6)

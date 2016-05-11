@@ -1,0 +1,60 @@
+.TH "MAPSTER32" "6" "MAY 2016"
+
+.SH NAME
+Mapster32 \- Duke Nukem 3D mapping tool
+
+.SH SYNOPSIS
+.B mapster32 \fR[\fIfiles\fR] [\fIoptions\fR]
+.PP
+Option parameters can be given with 1 or 2 dashes.
+
+.SH DESCRIPTION
+Mapster32 is a tool provided to create maps (.MAP files) for Duke Nukem 3D.
+It's a highly advanced upgrade of the original BUILD Editor shipped with the game.
+
+.SH OPTIONS
+.TP
+\fB\-help\fR, \fB\-?
+open window with available command line options
+.TP
+\fB\-g \fR[file.grp], \fB\-grp \fR[file.grp]
+Load extra group file
+.TP
+\fB\-h \fR[file.def]
+Load an alternate definitions file
+.TP
+\fB\-x \fR[game.con]
+Load a custom CON script for getting sound definitions
+.TP
+\fB\-mh \fR[file.def]
+Include additional definitions module
+.TP
+\fB\-mx \fR[file.con]
+Include additional CON module for getting sound definitions
+.TP
+\fB\-j \fR[dir], \fB\-game_dir \fR[dir]
+Adds a directory to the file path stack
+.TP
+\fB\-cachesize #
+Sets cache size, in Kb
+.TP
+\fB\-check
+Enables map pointer checking when saving
+.TP
+\fB\-clipmap \fR[file.map]
+Load an additional clipping map for use with clipshape
+.TP
+\fB\-namesfile \fR[file.h]
+Load a custom NAMES.H for tile names
+.TP
+\fB\-nocheck
+Disables map pointer checking when saving (default)
+.TP
+\fB\-setup
+Displays the configuration dialog
+.TP
+\fB\-usecwd
+Read game data and configuration file from working directory
+
+.SH "SEE ALSO"
+.BR eduke32 (6)

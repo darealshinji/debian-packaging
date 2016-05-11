@@ -1,0 +1,185 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: EDuke32
+Source: http://wiki.eduke32.com/wiki/Acquiring_the_EDuke32_Source_Code
+
+Files: *
+Copyright: 2010-2016 EDuke32 developers and contributors
+           1994-1995 Apogee Software, Ltd.
+License: GPL-2+
+
+Files: build/*
+Copyright: 1993-1997 Ken Silverman
+License: BUILD-SOURCE-CODE-LICENSE-TERMS
+
+Files: jit/bcsave.lua
+Copyright: 2005-2014 Mike Pall
+License: MIT
+
+Files: source/android/in_android.*
+Copyright: 2015 EDuke32 developers and contributors
+           2015 Voidpoint, LLC
+License: GPL-2+
+
+Files: source/android/etcpak/*
+Copyright: 2013, Bartosz Taudul <wolf.pld@gmail.com>
+License: BSD-3-Clause
+
+Files: source/enet/*
+Copyright: 2002-2011 Lee Salzman
+License: MIT
+
+Files: source/jaudiolib
+Copyright: 2009 Jonathon Fowler <jf@jonof.id.au>
+           1994-1995 Apogee Software, Ltd.
+License: GPL-2+
+
+Files: source/jmact/*
+Copyright: 1996, 2003 3D Realms Entertainment
+License: GPL-2+
+
+Files: source/testgame/*
+Copyright: 1993-1997 Ken Silverman
+License: BUILD-SOURCE-CODE-LICENSE-TERMS
+
+Files: source/sw/*
+Copyright: 1997, 2005 3D Realms Entertainment
+License: GPL-2+
+
+Files: debian/*
+Copyright: 2016 djcj <djcj@gmx.de>
+License: MIT
+
+License: GPL-2+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 2 of the License, or (at
+ your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+License: BUILD-SOURCE-CODE-LICENSE-TERMS
+ "Build Engine & Tools" Copyright (c) 1993-1997 Ken Silverman
+ .
+ BUILD SOURCE CODE LICENSE TERMS:                             06/20/2000
+ .
+ [1] I give you permission to make modifications to my Build source and
+        distribute it, BUT:
+ .
+ [2] Any derivative works based on my Build source may be distributed ONLY
+        through the INTERNET.
+ .
+ [3] Distribution of any derivative works MUST be done completely FREE of
+        charge - no commercial exploitation whatsoever.
+ .
+ [4] Anything you distribute which uses a part of my Build Engine source
+        code MUST include:
+ .
+    [A] The following message somewhere in the archive:
+ .
+        // "Build Engine & Tools" Copyright (c) 1993-1997 Ken Silverman
+        // Ken Silverman's official web site: "http://www.advsys.net/ken"
+        // See the included license file "BUILDLIC.TXT" for license info.
+ .
+    [B] This text file "BUILDLIC.TXT" along with it.
+ .
+    [C] Any source files that you modify must include this message as well:
+ .
+        // This file has been modified from Ken Silverman's original release
+ .
+ [5] The use of the Build Engine for commercial purposes will require an
+        appropriate license arrangement with me. Contact information is
+        on my web site.
+ .
+ [6] I take no responsibility for damage to your system.
+ .
+ [7] Technical support: Before contacting me with questions, please read
+        and do ALL of the following!
+ .
+    [A] Look through ALL of my text files. There are 7 of them (including this
+           one). I like to think that I wrote them for a reason. You will find
+           many of your answers in the history section of BUILD.TXT and
+           BUILD2.TXT (they're located inside SRC.ZIP).
+ .
+    [B] If that doesn't satisfy you, then try going to:
+ .
+              "http://www.advsys.net/ken/buildsrc"
+ .
+           where I will maintain a Build Source Code FAQ (or perhaps I might
+           just provide a link to a good FAQ).
+ .
+    [C] I am willing to respond to questions, but ONLY if they come at a rate
+           that I can handle.
+ .
+              PLEASE TRY TO AVOID ASKING DUPLICATE QUESTIONS!
+ .
+           As my line of defense, I will post my current policy about
+           answering Build source questions (right below the E-mail address
+           on my web site.) You can check there to see if I'm getting
+           overloaded with questions or not.
+ .
+           If I'm too busy, it might say something like this:
+ .
+                I'm too busy to answer Build source questions right now.
+                Sorry, but don't expect a reply from me any time soon.
+ .
+           If I'm open for Build source questions, please state your question
+              clearly and don't include any unsolicited attachments unless
+              they're really small (like less than 50k). Assume that I have
+              a 28.8k modem. Also, don't leave out important details just
+              to make your question appear shorter - making me guess what
+              you're asking doesn't save me time!
+ .
+ ----------------------------------------------------------------------------
+ -Ken S. (official web site: http://www.advsys.net/ken)
+
+License: MIT
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights to
+ use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ of the Software, and to permit persons to whom the Software is furnished to do
+ so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+License: BSD-3-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+     * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+     * Neither the name of the <organization> nor the
+       names of its contributors may be used to endorse or promote products
+       derived from this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
