@@ -3,7 +3,7 @@ Upstream-Name: Chocolate Duke3D
 Source: https://github.com/darealshinji/chocolate_duke3D
 
 Files: debian/*
-Copyright: 2015 djcj <djcj@gmx.de>
+Copyright: 2015-2016 djcj <djcj@gmx.de>
 License: MIT
 
 Files: *
