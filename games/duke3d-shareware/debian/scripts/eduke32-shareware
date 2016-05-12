@@ -1,0 +1,2 @@
+#!/bin/sh
+eduke32 -g /usr/share/games/duke3d-shareware/DUKE3D.GRP $*

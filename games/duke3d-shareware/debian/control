@@ -8,9 +8,23 @@ Homepage: http://www.moddb.com/games/duke-nukem-3d
 
 Package: duke3d-shareware
 Architecture: all
-Multi-Arch: foreign
-Depends: chocolate-duke3d, ${misc:Depends}
-Description: Duke Nukem 3D shareware version
+Depends: ${misc:Depends}
+Description: Duke Nukem 3D shareware GRP file
  The complete first episode of the game, which was released as shareware.
- Fully patched.
+
+Package: chocolate-duke3d-shareware-launcher
+Architecture: all
+Depends: chocolate-duke3d, ${misc:Depends}
+Description: Duke Nukem 3D shareware - Chocolate Duke3D
+ The complete first episode of the game, which was released as shareware.
+ .
+ Chocolate Duke3D launcher.
+
+Package: eduke32-shareware-launcher
+Architecture: all
+Depends: eduke32, ${misc:Depends}
+Description: Duke Nukem 3D shareware - EDuke32
+ The complete first episode of the game, which was released as shareware.
+ .
+ EDuke32 launcher.
 

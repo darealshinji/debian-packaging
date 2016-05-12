@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=Duke Nukem 3D (shareware)
+Name=Duke Nukem 3D shareware (EDuke3D)
 GenericName=First Person Shooter Game
 Comment=The complete first episode of the game, which was released as shareware
 Keywords=first;person;shooter;shareware;
-Exec=/usr/games/duke3d-shareware
+Exec=/usr/games/eduke32-shareware
 Icon=duke_icon
 Terminal=false
 Type=Application
