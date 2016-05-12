@@ -4,3 +4,4 @@ compiled/dist/chrome             /usr/share/nightingale
 addons/*.xpi                     /usr/lib/nightingale/addons
 minimizetotray.xpi               /usr/lib/nightingale/addons
 compiled/xpi-stage/shoutcast-radio/shoutcast-radio*.xpi   /usr/lib/nightingale/addons
+linux-*_jpeg-png/libjpeg.so.8*   /usr/lib/nightingale/xulrunner

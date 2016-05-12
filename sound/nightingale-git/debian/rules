@@ -28,23 +28,17 @@ ac_add_options = \
 
 override_dh_auto_clean:
 	dh_auto_clean -- clobber
-	dh_auto_clean -Dnightingale-deps
 	rm -f addons/*.xpi *.xpi
-
-override_dh_auto_configure:
+	rm -rf linux-*_jpeg-png
 
 override_dh_auto_build:
-	cd nightingale-deps && ./lint-build.sh --disable-debug --arch=$(DEPS_ARCH)
-	ln -s $(CURDIR)/nightingale-deps/linux-$(DEPS_ARCH) $(CURDIR)/dependencies/linux-$(DEPS_ARCH)
-
+	tar xf linux-$(DEPS_ARCH)_jpeg-png.txz
+	cd dependencies && tar xf $(CURDIR)/linux-$(DEPS_ARCH)-release.txz
 	$(foreach OPTION,$(ac_add_options),echo 'ac_add_options $(OPTION)' >> nightingale.config ;)
 	dh_auto_build
-
 	cp compiled/xpi-stage/minimizetotray/*.xpi minimizetotray.xpi
 	addons/make.py addons/equalizerpane
 	addons/make.py addons/newtab
-
-override_dh_auto_test:
 
 override_dh_auto_install:
 	dh_auto_install
@@ -77,4 +71,8 @@ override_dh_shlibdeps:
 
 override_dh_clean:
 	dh_clean debian/nightingale.links nightingale.config config.log
+
+override_dh_auto_configure:
+override_dh_auto_test:
+override_dh_makeshlibs:
 

@@ -1,8 +1,5 @@
 #!/bin/sh -e
 
-git clone --depth 1 "https://github.com/darealshinji/nightingale-deps"
-rm -rf nightingale-deps/.git
-
 git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-hacking"
 git clone --depth 1 "https://github.com/darealshinji/minimizetotrayplus"
 
@@ -32,9 +29,4 @@ rm -rf ../minimizetotrayplus
 git clone --depth 1 "https://github.com/nightingale-media-player/nightingale-addons" addons
 rm -rf addons/.git
 chmod a+x addons/make.py
-cd ..
-
-# move NG deps to sources
-mv nightingale-deps nightingale-hacking
-
 
