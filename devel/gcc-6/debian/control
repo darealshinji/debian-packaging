@@ -1,0 +1,47 @@
+Source: gcc6opt
+Section: devel
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 5), quilt,
+ g++-multilib [amd64],
+ chrpath,
+ bison, fastjar, flex, gawk, gettext, libtool, m4, patch,
+ perl, texinfo,
+ zlib1g-dev, zlib1g-dev:i386 [amd64]
+Standards-Version: 3.9.6
+Homepage: https://gcc.gnu.org/
+
+Package: gcc6opt
+Architecture: any
+Depends:
+ binutils,
+ ${shlibs:Depends},
+ zlib1g:i386 [amd64],
+ ${misc:Depends},
+ ${python:Depends}
+Recommends:
+ build-essential,
+ fastjar,
+ java-common,
+ libantlr-java
+Description: GNU Compiler Collection
+ This build of the GNU Compiler Collection includes front ends for C, C++,
+ Objective-C, Objective-C++ and Java, as well as libraries for these languages
+ (libstdc++, libgcj,...). GCC was originally written as the compiler for the
+ GNU operating system. The GNU system was developed to be 100% free software,
+ free in the sense that it respects the user's freedom.
+ .
+ The commands are prefixed with 'gcc6opt' and all files are installed into
+ directories that won't conflict with you default installation of GCC.
+ .
+ Additionally to gcc6opt-g++ there's an alternative command
+ 'gcc6opt-g++-static-libstdc++', configured to link libstdc++ statically.
+ .
+ GCC is patched to enable the following behaviour:
+  * link with '--as-needed' and '-z relro' by default
+  * enable Fortify Source ('-D_FORTIFY_SOURCE=2') for optimization levels > 0
+  * turn on '-fstack-protector-strong -Wformat -Wformat-security' by default
+    for C, C++, ObjC, ObjC++ and set 'ssp-buffer-size' to 4
+  * remove '-fstrict-aliasing' from '-O2' to use '-fno-strict-aliasing' by
+    default

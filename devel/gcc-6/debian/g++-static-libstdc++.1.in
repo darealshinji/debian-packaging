@@ -1,0 +1,18 @@
+.TH @PKG@\-G++\-STATIC\-LIBSTDC++ 1 "November 2015" @PKG@\-g++\-static\-libstdc++ ""
+.SH NAME
+@pkg@\-g++\-static\-libstdc++ \- g++ command configured to link libstdc++ statically
+
+.SH DESCRIPTION
+
+\fB@pkg@\-g++\-static\-libstdc++\fR is a regular @pkg@\-g++(1) command, but it's
+configured to link libstdc++ statically.
+The stdc++ library used by @pkg@\-g++ is very likely incompatible to the version
+installed on your system.
+This command is useful if you need to link libstdc++ statically but cannot or
+don't want to add \-static\-libstdc++ to LDFLAGs.
+
+.SH OPTIONS
+See @pkg@\-g++(1) for a full list of options.
+
+.SH "SEE ALSO"
+.BR @pkg@\-g++(1)
