@@ -12,7 +12,7 @@ download: $(codir)/VERSION
 ifeq ($(PBUILDER),1)
 	cxx=$$(grep 'CXX_ =' debian/config.mak | awk '{print $$3}'); \
 	if [ "$$cxx" = "gcc6opt-g++" -o "gcc5opt-g++" ]; then \
-	  echo "error: cannot use $cxx with pbuilder!"; \
+	  echo "error: cannot use $$cxx with pbuilder!"; \
 	  exit 1; \
 	fi
 endif

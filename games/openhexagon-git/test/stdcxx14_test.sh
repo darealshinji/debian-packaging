@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")"
 
-compiler="g++ g++-5 gcc5opt-g++ g++-6 gcc6opt-g++ clang++ c++"
+compiler="g++ g++-6 g++-5 gcc6opt-g++ gcc5opt-g++ clang++ c++"
 
 echo ""
 for cxx in $compiler ; do
