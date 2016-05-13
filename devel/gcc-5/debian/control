@@ -6,7 +6,7 @@ Build-Depends:
  debhelper (>= 5), quilt,
  g++-multilib [amd64],
  chrpath,
- bison, fastjar, flex, gawk, gettext, m4, patch,
+ bison, fastjar, flex, gawk, gettext, libtool, m4, patch,
  perl, texinfo,
  zlib1g-dev, zlib1g-dev:i386 [amd64]
 Standards-Version: 3.9.6
@@ -19,7 +19,7 @@ Depends:
  ${shlibs:Depends},
  zlib1g:i386 [amd64],
  ${misc:Depends},
- python:any
+ ${python:Depends}
 Recommends:
  build-essential,
  fastjar,

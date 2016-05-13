@@ -30,16 +30,16 @@ mpfr_pkg=${mpfr_dir}.txz
 mpc_pkg=${mpc_dir}.tgz
 gmp_pkg=${gmp_dir}.txz
 mpfr_url="http://www.mpfr.org/${mpfr_dir}/${mpfr_dir}.tar.xz"
-mpc_url="http://ftp.gnu.org/gnu/mpc/${mpc_dir}.tar.gz"
+mpc_url="https://ftp.gnu.org/gnu/mpc/${mpc_dir}.tar.gz"
 gmp_url="https://gmplib.org/download/gmp/${gmp_dir}.tar.xz"
 mpfr_sum=761413b16d749c53e2bfd2b1dfaa3b027b0e793e404b90b5fbaeef60af6517f5
 mpc_sum=617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3
 gmp_sum=68dadacce515b0f8a54f510edf07c1b636492bcdb8e8d54c56eb216225d16989
 
-isl_dir=isl-0.16.1
+isl_dir=isl-0.17.1
 isl_pkg=${isl_dir}.txz
 isl_url="http://isl.gforge.inria.fr/${isl_dir}.tar.xz"
-isl_sum=45292f30b3cb8b9c03009804024df72a79e9b5ab89e41c94752d6ea58a1e4b02
+isl_sum=be152e5c816b477594f4c6194b5666d8129f3a27702756ae9ff60346a8731647
 
 test -f $gcc_pkg || wget -O $gcc_pkg $gcc_url
 test -f $mpfr_pkg || wget -O $mpfr_pkg $mpfr_url

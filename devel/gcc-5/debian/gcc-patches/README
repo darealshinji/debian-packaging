@@ -1,0 +1,3 @@
+00-*: based on patches used in Ubuntu
+01-*: custom patches
+02-*: not used by quilt but patched manually
