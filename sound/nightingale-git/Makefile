@@ -8,17 +8,17 @@ distcleanfiles = $(ngdir) *.txz
 changelog-file = $(ngdir)/changelog.new
 
 ngdeps = linux-$(ngarch)-release
-jpeg = linux-$(ngarch)_jpeg-png
+jpeg = libjpeg8-$(ngarch)
 URL = https://github.com/darealshinji/nightingale-deps/releases/download/20151012
 
 ifeq ($(ARCH),amd64)
 ngarch = x86_64
-sha256sum = 55ed73700c88b5c8293820242bc28780707d83ac40a42873b6d5a9a2e739ddbd
-sha256sum_jpeg = 62a3217e0051669efc0c6c89dda2a2ef15fb705efe29b3d95f7bf1f016b58b3b
+sha256sum = 13a8f64d9acac07d28463d2411ac34cb1ce66d1fdf85ea9e47d1d2b21277a561
+sha256sum_jpeg = fd89d3266ea85a70515532ee88f42152ba397e91f8e333d5e5582a2d8a2b3c25
 else
 ngarch = i686
-sha256sum = fc39676a38a6cdbb2b2c5b7add7d921a0085b1df38dc518f984dc20e59e815d0
-sha256sum_jpeg = edc63299d1daab81f9e9435be20791338a5ae69b2af43e8da1a4cf5759dda8a9
+sha256sum = 4bf111fd16ac505763b98fc58268af1555037ba657f0bd0c5d81b7ee6f03fca9
+sha256sum_jpeg = 6aa5ccc46c08841bab052f400ea71033d923516fc568ab6ca186aee0cdc38ea0
 endif
 
 download:

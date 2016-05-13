@@ -6,14 +6,16 @@ else
 DEPS_ARCH = i686
 endif
 
+export CXX=g++-4.8
 export V=1
-export CXXFLAGS = \
-	$(filter-out -g,$(shell dpkg-buildflags --get CXXFLAGS)) \
+export CXXFLAGS = -O2 \
+	-fstack-protector --param=ssp-buffer-size=4 \
 	-fomit-frame-pointer \
+	-Wformat -Werror=format-security \
 	-Wno-delete-non-virtual-dtor \
 	-Wno-unused-but-set-variable \
-	$(shell dpkg-buildflags --get CPPFLAGS)
-export LDFLAGS = $(shell dpkg-buildflags --get LDFLAGS) -Wl,--as-needed
+	-D_FORTIFY_SOURCE=2
+export LDFLAGS = -Wl,-z,relro -Wl,--as-needed
 
 ac_add_options = \
 	--with-taglib-source=packaged \
@@ -28,11 +30,10 @@ ac_add_options = \
 
 override_dh_auto_clean:
 	dh_auto_clean -- clobber
-	rm -f addons/*.xpi *.xpi
-	rm -rf linux-*_jpeg-png
+	rm -f addons/*.xpi *.xpi libjpeg.so.8
 
 override_dh_auto_build:
-	tar xf linux-$(DEPS_ARCH)_jpeg-png.txz
+	tar xf libjpeg8-$(DEPS_ARCH).txz
 	cd dependencies && tar xf $(CURDIR)/linux-$(DEPS_ARCH)-release.txz
 	$(foreach OPTION,$(ac_add_options),echo 'ac_add_options $(OPTION)' >> nightingale.config ;)
 	dh_auto_build
@@ -65,6 +66,12 @@ override_dh_auto_install:
 		mv -v $$f $$(dirname $$out) ;\
 		echo $$target'      '$$in >> debian/nightingale.links ;\
 	done
+
+override_dh_install:
+	dh_install
+	if [ -e /usr/lib/$(DEB_HOST_MULTIARCH)/libjpeg.so.8 ]; then \
+		rm -f debian/nightingale/usr/lib/nightingale/xulrunner/libjpeg.so.8 ;\
+	fi
 
 override_dh_shlibdeps:
 	dh_shlibdeps -Lnightingale -l/usr/lib/nightingale/xulrunner
