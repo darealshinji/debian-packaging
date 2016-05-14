@@ -1,11 +1,11 @@
 include ../../mk/include.mk
 
-deps           = wget
-bin            = poweriso.tgz
-srcfiles       = $(bin)
-cleanfiles     = $(bin) debian/changelog
-changelog-msg  = Initial release
-version        = 1.3
+deps          = wget
+bin           = poweriso.tgz
+srcfiles      = $(bin)
+cleanfiles    = $(bin) debian/changelog
+changelog-msg = Initial release
+version       = 1.3
 
 
 download:
