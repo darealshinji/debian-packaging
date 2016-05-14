@@ -10,5 +10,5 @@ Package: poweriso
 Architecture: i386 amd64
 Depends: ${misc:Depends}
 Description: extract, list, and convert image files
- PowerISO is a utility for linux which can extract, list, and convert
- image files (including ISO, BIN, DAA, and other formats).
+ PowerISO can extract, list, and convert image files, including ISO, BIN, DAA,
+ and other formats.
