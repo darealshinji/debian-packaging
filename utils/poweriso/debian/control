@@ -1,0 +1,14 @@
+Source: poweriso
+Section: non-free/utils
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: http://www.poweriso.com/
+
+Package: poweriso
+Architecture: i386 amd64
+Depends: ${misc:Depends}
+Description: extract, list, and convert image files
+ PowerISO is a utility for linux which can extract, list, and convert
+ image files (including ISO, BIN, DAA, and other formats).

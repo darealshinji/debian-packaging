@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+PKG = poweriso
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -f poweriso
+
+override_dh_auto_build:
+	tar xf poweriso.tgz
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
+

@@ -1,0 +1,69 @@
+.TH "POWERISO" "1" "MAY 2016" "v1.3"
+
+.SH NAME
+PowerISO \- extract, list, and convert image files
+
+.SH SYNOPSIS
+.B poweriso \fR<\fIcommand\fR> [\fIparameters\fR] [\fIswitches\fR]
+.PP
+.B poweriso \fR[ \fI\-h\fR | \fI\-help\fR | \fI\-?\fR ]
+
+.SH DESCRIPTION
+PowerISO is a utility for linux which can extract, list, and convert image files (including ISO, BIN, DAA, and other formats).
+
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-help\fR, \fB\-?
+print available command line options
+
+.SS Commands
+.TP
+\fBlist \fR<\fIimage\fR> <\fIdirectory\fR>
+List files and directories in image file.
+
+Example: List all files and directories in root direcory of ~/test.iso .
+.br
+Command: \fBpoweriso list ~/test.iso / \-r\fR
+.TP
+\fBextract \fR<\fIimage\fR> <\fIdir/file\fR>
+Extract files/directories from image file.
+
+Example: Extract all files and directories in root direcory of ~/test.iso to ~/test recursively.
+.br
+Command: \fBpoweriso extract ~/test.iso / -od ~/test\fR
+.TP
+\fBconvert \fR<\fIimage\fR>
+Convert image file to other format.
+
+Example: Convert ~/test.daa to standard iso file.
+.br
+Command: \fBpoweriso convert ~/test.daa -o ~/test.iso -ot iso\fR
+
+.SS Switches
+.TP
+\fB\-r
+List or extract recursively.
+.TP
+\fB\-o
+Specify output image file name.
+.TP
+\fB\-od
+Specify output folder.
+.TP
+\fB\-ot \fR<\fIiso\fR|\fIdaa\fR|\fIbin\fR>
+Specify output image file type.
+If not specified, the image type will be determined by file name suffix.
+.TP
+\fB\-volsize \fR<\fIn\fR>
+Split output image file to multiple volumes, and set volume size to <n>.
+.br
+Example: \-volsize 100M
+.TP
+\fB\-setpassword \fR<\fIpassword\fR>
+Set password for output image file.
+.br
+Example: \-setpassword 12345678
+
+.SH COPYRIGHT
+Copyright \(co 2004-2008 PowerISO Computing, Inc
+
