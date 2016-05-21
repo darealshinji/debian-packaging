@@ -1,0 +1,45 @@
+# DP: Fix PR c++/70218 (illegal access to private field succeeds)
+ * parser.c (cp_parser_lambda_expression): Move call to	pop_deferring_access_checks
+   ahead of the call to cp_parser_end_tentative_firewall.
+ * g++.dg/cpp0x/lambda/lambda-70218.C: New test.
+
+--- a/gcc/cp/parser.c
++++ b/gcc/cp/parser.c
+@@ -9112,8 +9112,6 @@
+ 	= auto_is_implicit_function_template_parm_p;
+   }
+ 
+-  pop_deferring_access_checks ();
+-
+   /* This field is only used during parsing of the lambda.  */
+   LAMBDA_EXPR_THIS_CAPTURE (lambda_expr) = NULL_TREE;
+ 
+@@ -9129,6 +9127,8 @@
+ 
+   cp_parser_end_tentative_firewall (parser, start, lambda_expr);
+ 
++  pop_deferring_access_checks ();
++
+   return lambda_expr;
+ }
+ 
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/lambda/lambda-70218.C
+@@ -0,0 +1,17 @@
++// PR c++/70218
++// { dg-do compile { target c++11 } }
++
++struct X {
++private:
++   int i;
++};
++
++struct Y {
++  Y (int) { }
++};
++
++void
++foo ()
++{
++  Y ([] { X x; x.i = 3; return 0; } ()); // { dg-error "private" }
++}

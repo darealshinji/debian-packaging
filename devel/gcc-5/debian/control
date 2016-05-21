@@ -3,9 +3,16 @@ Section: devel
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
- debhelper (>= 5), quilt,
+ debhelper (>= 5),
+# patches
+ quilt,
+# 32 bit stuff on amd64
  g++-multilib [amd64],
+# removing rpaths
  chrpath,
+# run tests
+#autogen, dejagnu, expect, tcl,
+# default gcc build-dependencies
  bison, fastjar, flex, gawk, gettext, libtool, m4, patch,
  perl, texinfo,
  zlib1g-dev, zlib1g-dev:i386 [amd64]
