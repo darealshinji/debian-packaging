@@ -59,6 +59,10 @@ override_dh_auto_configure:
 override_dh_auto_build:
 	dh_auto_build -D$(SRCDIR)
 
+# uncomment to enable tests (may take a while to complete)
+#override_dh_auto_test:
+#	$(MAKE) -C $(SRCDIR) -j4 -k check
+
 override_dh_install:
 	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(pkg)
 
