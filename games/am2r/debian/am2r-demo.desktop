@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=AM2R Demo
+Comment=Another Metroid 2 Remake
+Exec=am2r-demo
+Type=Application
+Categories=Game;
+StartupNotify=true
+Icon=am2r-demo

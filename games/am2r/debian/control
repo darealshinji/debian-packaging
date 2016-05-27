@@ -1,0 +1,45 @@
+Source: am2r-demo
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: https://metroid2remake.blogspot.de
+
+Package: am2r-demo
+Architecture: amd64 i386
+Depends:
+ libc6 (>= 2.15),
+ libgcc1 (>= 1:4.1.1),
+ libgl1-mesa-glx | libgl1,
+ libglu1-mesa | libglu1,
+ libopenal1 (>= 1:1.13),
+ libssl1.0.0 (>= 1.0.0),
+ libstdc++6 (>= 4.1.1),
+ libx11-6,
+ libxext6,
+ libxrandr2 (>= 2:1.2.0),
+ libxxf86vm1,
+ zlib1g (>= 1:1.1.4)
+Description: Another Metroid 2 Remake (demo)
+ Project AM2R aims to recreate Metroid 2 with updated graphics and gameplay.
+ Taking elements from newer Metroid titles: the fast paced gameplay of
+ Metroid: Zero Mission, the atmosphere and solitude of Super Metroid, and
+ adding new game mechanics, AM2R is one of the most ambitious Metroid fan
+ games.
+ .
+ Features:
+  * Metroid Zero Mission style gameplay
+  * Map system
+  * Updated enemy AI
+  * Minibosses
+  * New areas
+  * Challenging Metroid fights
+  * Stackable beam system
+  * Completely redrawn enemy and Metroid sprites
+  * Log system with non-intrusive narrative
+  * High quality soundtrack
+ .
+ The game is not finished. The end of the demo will be triggered upon reaching
+ a specific part of the map.
+

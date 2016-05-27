@@ -1,0 +1,103 @@
+NEW IN 1.41
+- Added new song for Zeta fights
+- Made some adjustments to Alpha, Gamma, Area4A, Area4B songs
+- Fixed the Tester exploit
+- Changed the layout of one of the Zeta rooms, harder to exploit now
+- Fixed Motos getting stuck in the jumping state
+
+NEW IN 1.4
+- Acess to a new area
+- Redone the Logbook screen to make it more intuitive
+- New mechanic: Shinespark with variable height. Tap/Hold Jump while charged
+- New control option: Analog walking with joypads is now optional
+- New save format, it can be copied to other computers without issues
+- Plenty of bug fixes and other improvements
+
+NEW IN 1.34
+- Music files are now available in the package for customization
+- Updated health pickup sprites
+- Fixed music crossfades playing part of the wrong track
+- Fixed collisions of spiked plants in Area 3
+- Fixed missing keycodes on the keyboard settings screen
+- Fixed music not being played if you enter the sound options with volume 0
+- Fixed very low music values resulting in glitchy playback
+
+NEW IN 1.33:
+- Ported the entire project to Game Maker Studio
+- Many features rewritten from scratch
+- Plenty of small bug fixes
+- Faster loading times
+- New graphic options include fixed screen scaling and window size presets
+- Some tweaks in the level design
+- Torizo fight was balanced
+- Spiderball can now be activated with any of the aiming buttons
+
+NEW IN 1.32:
+- Fixed some minor bugs
+- Redone transitions from scratch using a more efficient method
+- Tweaked the speedbooster visual FX
+- Improved level design and added some speedrun shortcuts
+- Added variations to Alpha Metroid sprites
+- Samus can't Space Jump in water/lava anymore
+- Custom Morphball Bombs sprite
+- Various improvements to the soundtrack
+- And many other small tweaks
+
+NEW IN 1.31:
+- Fixed a Gamma fight game crashing bug in Area 3
+- Revamped Speed Booster mechanics
+- Small tweaks to Area 3 miniboss
+- Knockdown recovery (press jump before touching the ground)
+- Added Speed Booster Mockball
+- Tiles and backgrounds in Area 3 were improved
+- Added enemy freeze sound
+- Missiles and Super Missiles use custom designed sprites
+- Tweaks to item sprites
+- Small changes in level design
+- Reduced RAM consumption
+- Many small fixes and overall improvements
+
+NEW IN 1.3:
+- Acess to a new area
+- XInput support for XBox 360 controllers (Includding triggers)
+- Improved button hints in-game
+- Centralized menu control with dedicated buttons
+- Redone lighting engine
+- Aim Lock
+- Analog walking
+- Morph Button
+- Many engine improvements and optimizations
+
+NEW IN 1.21:
+- Redone SpiderBall code, now it works properly
+- Fixed all the sloped ceilings
+- Fixed Samus getting into spinjump if she falls a ledge holding Jump
+- Fixed room transition bug that happened on some videocards
+- Fixed a doorway tile in Area 2
+
+NEW IN 1.2:
+- 3 Save slots system
+- 3 Difficulty settings
+- Revamped options screen
+- Added Game Over screen
+- Added idle standing animation to Samus
+- Changes in Area 2 Breeding Grounds to make it closer to the original area
+- Small tweaks to some logs
+- New resource loading system compatible with Windows 8
+- Many small cosmetic changes
+- Many bugfixes
+
+NEW IN 1.1:
+- Ported the project to Game Maker 8.1
+- Expanded Metroid AI, and balanced the fights
+- New subscreen selection system
+- Added in-game options screen, you can change your controls in mid-game now
+- New suit sprites
+- Added in-game hints for the novice player
+- Added more scans, and expanded the notification system
+- New map system, with more details and a customizable marker
+- New music engine
+- Added reverb sound effects
+- Added different footstep sounds
+- New display and control options
+- Many small bug fixes and optimizations
