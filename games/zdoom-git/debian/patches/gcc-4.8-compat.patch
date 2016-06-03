@@ -2,7 +2,7 @@ https://github.com/rheit/zdoom/commit/6d68f69674966b7e48941488448d7edb930abcdd#c
 
 --- a/src/zscript/zcc_expr.cpp
 +++ b/src/zscript/zcc_expr.cpp
-@@ -202,11 +202,142 @@
+@@ -203,11 +203,142 @@
  	return best_proto;
  }
  
@@ -145,7 +145,7 @@ https://github.com/rheit/zdoom/commit/6d68f69674966b7e48941488448d7edb930abcdd#c
  
  static ZCC_ExprConstant *EvalConcat(ZCC_ExprConstant *l, ZCC_ExprConstant *r, FSharedStringArena &strings)
  {
-@@ -215,6 +346,117 @@
+@@ -216,6 +347,117 @@
  	return l;
  }
  
@@ -263,7 +263,7 @@ https://github.com/rheit/zdoom/commit/6d68f69674966b7e48941488448d7edb930abcdd#c
  static ZCC_ExprConstant *EvalLTGTEQSInt32(ZCC_ExprConstant *l, ZCC_ExprConstant *r, FSharedStringArena &)
  {
  	l->IntVal = l->IntVal < r->IntVal ? -1 : l->IntVal == r->IntVal ? 0 : 1;
-@@ -250,25 +492,25 @@
+@@ -251,25 +493,25 @@
  		{ PEX_PostDec	 , (PType **)&TypeUInt32,  EvalIdentity },
  		{ PEX_PostDec	 , (PType **)&TypeFloat64, EvalIdentity },
  
@@ -301,7 +301,7 @@ https://github.com/rheit/zdoom/commit/6d68f69674966b7e48941488448d7edb930abcdd#c
  	};
  	for (size_t i = 0; i < countof(UnaryOpInit); ++i)
  	{
-@@ -278,62 +520,62 @@
+@@ -279,62 +521,62 @@
  	// Binary operators
  	static const OpProto2 BinaryOpInit[] =
  	{

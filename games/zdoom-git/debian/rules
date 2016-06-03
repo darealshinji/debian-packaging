@@ -1,8 +1,8 @@
 #!/usr/bin/make -f
 
-CFLAGS    = $(filter-out -g -Werror=%, $(shell dpkg-buildflags --get CFLAGS)) -Wno-unused-result -Wno-unused-but-set-variable
-CXXFLAGS  = $(filter-out -g -Werror=%, $(shell dpkg-buildflags --get CXXFLAGS)) -Wno-unused-result
-LDFLAGS  += -Wl,--as-needed
+CFLAGS   = -O3 -fno-strict-aliasing $(filter-out -g -O2 -Werror=%, $(shell dpkg-buildflags --get CFLAGS)) -Wno-unused-result -Wno-unused-but-set-variable
+CXXFLAGS = -O3 -fno-strict-aliasing -fpermissive $(filter-out -g -O2 -Werror=%, $(shell dpkg-buildflags --get CXXFLAGS)) -Wno-unused-result
+LDFLAGS  = $(filter-out %-Bsymbolic%, $(shell dpkg-buildflags --get LDFLAGS)) -Wl,--as-needed
 
 
 %:

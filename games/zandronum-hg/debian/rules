@@ -1,10 +1,10 @@
 #!/usr/bin/make -f
 
 CC       ?= gcc
-CFLAGS    = $(filter-out -g -Werror=%, $(shell dpkg-buildflags --get CFLAGS))
-CXXFLAGS  = $(filter-out -g -Werror=%, $(shell dpkg-buildflags --get CXXFLAGS))
+CFLAGS    = $(filter-out -g -O2 -Werror=%, $(shell dpkg-buildflags --get CFLAGS))
+CXXFLAGS  = $(filter-out -g -O2 -Werror=%, $(shell dpkg-buildflags --get CXXFLAGS))
 
-common_flags = \
+common_flags = -O3 \
 	-Wall \
 	-Wno-maybe-uninitialized \
 	-Wno-unused-but-set-variable \
@@ -16,7 +16,7 @@ common_flags = \
 	$(CPPFLAGS)
 
 CFLAGS   += $(common_flags) -Wno-pointer-sign
-CXXFLAGS += $(common_flags)
+CXXFLAGS += $(common_flags) -fpermissive
 
 # link the executable against the system's sqlite3 library
 LDFLAGS += -Wl,--as-needed $(shell pkg-config --libs sqlite3)
