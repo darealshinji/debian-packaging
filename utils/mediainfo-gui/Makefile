@@ -6,7 +6,7 @@ srcfiles      = ../../mk/make-icons.sh
 changelog-msg = New upstream release
 
 URL = $(shell wget -q -O - "http://mediaarea.net/MediaInfo/Download/Source" | \
-	grep -e 'mediaarea.net/download/binary/mediainfo-gui/' | cut -d '"' -f2)
+	grep -e 'mediaarea\.net/download/binary/mediainfo-gui/' | cut -d '"' -f2 | sed 's|.*mediaarea\.net|http://mediaarea.net|')
 VER = $(shell echo $(URL) | cut -d '/' -f7)
 
 
