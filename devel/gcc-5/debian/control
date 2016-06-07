@@ -25,8 +25,8 @@ Depends:
  binutils,
  ${shlibs:Depends},
  zlib1g:i386 [amd64],
- ${misc:Depends},
- ${python:Depends}
+ python:any,
+ ${misc:Depends}
 Recommends:
  build-essential,
  fastjar,
