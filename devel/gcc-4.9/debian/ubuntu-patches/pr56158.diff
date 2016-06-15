@@ -1,0 +1,93 @@
+# DP: Fix PR libstdc++/56158, taken from the trunk
+
+libstdc++-v3/
+2015-11-12  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/56158
+	* include/bits/ios_base.h (_Ios_Fmtflags, _Ios_Openmode, _Ios_Iostate):
+	Define enumerators to ensure all values of type int are valid values
+	of the enumeration type.
+	* testsuite/27_io/ios_base/types/fmtflags/case_label.cc: Add new cases.
+	* testsuite/27_io/ios_base/types/iostate/case_label.cc: Likewise.
+	* testsuite/27_io/ios_base/types/openmode/case_label.cc: Likewise.
+
+ 
+Index: b/src/libstdc++-v3/include/bits/ios_base.h
+===================================================================
+--- a/libstdc++-v3/include/bits/ios_base.h
++++ b/libstdc++-v3/include/bits/ios_base.h
+@@ -68,7 +68,9 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+       _S_adjustfield 	= _S_left | _S_right | _S_internal,
+       _S_basefield 	= _S_dec | _S_oct | _S_hex,
+       _S_floatfield 	= _S_scientific | _S_fixed,
+-      _S_ios_fmtflags_end = 1L << 16 
++      _S_ios_fmtflags_end = 1L << 16,
++      _S_ios_fmtflags_max = __INT_MAX__,
++      _S_ios_fmtflags_min = ~__INT_MAX__
+     };
+ 
+   inline _GLIBCXX_CONSTEXPR _Ios_Fmtflags
+@@ -108,7 +110,9 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+       _S_in 		= 1L << 3,
+       _S_out 		= 1L << 4,
+       _S_trunc 		= 1L << 5,
+-      _S_ios_openmode_end = 1L << 16 
++      _S_ios_openmode_end = 1L << 16,
++      _S_ios_openmode_max = __INT_MAX__,
++      _S_ios_openmode_min = ~__INT_MAX__
+     };
+ 
+   inline _GLIBCXX_CONSTEXPR _Ios_Openmode
+@@ -146,7 +150,9 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+       _S_badbit 		= 1L << 0,
+       _S_eofbit 		= 1L << 1,
+       _S_failbit		= 1L << 2,
+-      _S_ios_iostate_end = 1L << 16 
++      _S_ios_iostate_end = 1L << 16,
++      _S_ios_iostate_max = __INT_MAX__,
++      _S_ios_iostate_min = ~__INT_MAX__
+     };
+ 
+   inline _GLIBCXX_CONSTEXPR _Ios_Iostate
+Index: b/src/libstdc++-v3/testsuite/27_io/ios_base/types/fmtflags/case_label.cc
+===================================================================
+--- a/libstdc++-v3/testsuite/27_io/ios_base/types/fmtflags/case_label.cc
++++ b/libstdc++-v3/testsuite/27_io/ios_base/types/fmtflags/case_label.cc
+@@ -70,5 +70,9 @@ case_labels(bitmask_type b)
+       break;
+     case std::_S_ios_fmtflags_end:
+       break;
++    case std::_S_ios_fmtflags_min:
++      break;
++    case std::_S_ios_fmtflags_max:
++      break;
+     }
+ }
+Index: b/src/libstdc++-v3/testsuite/27_io/ios_base/types/openmode/case_label.cc
+===================================================================
+--- a/libstdc++-v3/testsuite/27_io/ios_base/types/openmode/case_label.cc
++++ b/libstdc++-v3/testsuite/27_io/ios_base/types/openmode/case_label.cc
+@@ -46,5 +46,9 @@ case_labels(bitmask_type b)
+       break;
+     case std::_S_ios_openmode_end:
+       break;
++    case std::_S_ios_openmode_min:
++      break;
++    case std::_S_ios_openmode_max:
++      break;
+     }
+ }
+Index: b/src/libstdc++-v3/testsuite/27_io/ios_base/types/iostate/case_label.cc
+===================================================================
+--- a/libstdc++-v3/testsuite/27_io/ios_base/types/iostate/case_label.cc
++++ b/libstdc++-v3/testsuite/27_io/ios_base/types/iostate/case_label.cc
+@@ -42,5 +42,9 @@ case_labels(bitmask_type b)
+       break;
+     case std::_S_ios_iostate_end:
+       break;
++    case std::_S_ios_iostate_min:
++      break;
++    case std::_S_ios_iostate_max:
++      break;
+     }
+ }

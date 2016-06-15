@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# I, djcj <djcj@gmx.de>, hereby release this code to the Public Domain.
+# No license required for any purpose; the work is not subject to copyright in any jurisdiction.
+
+set -e
+
+verifysha256 () {
+	sha256_2=$(sha256sum ${1} | head -c64)
+	if [ $sha256_2 != ${2} ] ; then
+		echo "${1}:"
+		echo "SHA256 checksum is $sha256_2 but should be ${2}."
+		echo "Delete '${1}' and try it again."
+		exit 1
+	else
+		echo "${1}: checksum ok."
+	fi
+}
+
+gcc_ver=4.9.3
+gcc_dir=gcc-$gcc_ver
+gcc_pkg=${gcc_dir}.tbz
+gcc_url="http://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.bz2"
+gcc_sum=2332b2a5a321b57508b9031354a8503af6fdfb868b8c1748d33028d100a8b67e
+
+mpfr_dir=mpfr-3.1.4
+mpc_dir=mpc-1.0.3
+gmp_dir=gmp-6.1.0
+mpfr_pkg=${mpfr_dir}.txz
+mpc_pkg=${mpc_dir}.tgz
+gmp_pkg=${gmp_dir}.txz
+mpfr_url="http://www.mpfr.org/${mpfr_dir}/${mpfr_dir}.tar.xz"
+mpc_url="https://ftp.gnu.org/gnu/mpc/${mpc_dir}.tar.gz"
+gmp_url="https://gmplib.org/download/gmp/${gmp_dir}.tar.xz"
+mpfr_sum=761413b16d749c53e2bfd2b1dfaa3b027b0e793e404b90b5fbaeef60af6517f5
+mpc_sum=617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3
+gmp_sum=68dadacce515b0f8a54f510edf07c1b636492bcdb8e8d54c56eb216225d16989
+
+isl_dir=isl-0.17.1
+isl_pkg=${isl_dir}.txz
+isl_url="http://isl.gforge.inria.fr/${isl_dir}.tar.xz"
+isl_sum=be152e5c816b477594f4c6194b5666d8129f3a27702756ae9ff60346a8731647
+
+test -f $gcc_pkg || wget -O $gcc_pkg $gcc_url
+test -f $mpfr_pkg || wget -O $mpfr_pkg $mpfr_url
+test -f $mpc_pkg || wget -O $mpc_pkg $mpc_url
+test -f $gmp_pkg || wget -O $gmp_pkg $gmp_url
+test -f $isl_pkg || wget -O $isl_pkg $isl_url
+
+if [ "x$1" = "x--extract" ]; then
+	tar xf $gcc_pkg
+	mv $gcc_dir gcc-src
+	cd gcc-src
+
+	tar xf ../$mpfr_pkg
+	mv $mpfr_dir mpfr
+
+	tar xf ../$mpc_pkg
+	mv $mpc_dir mpc
+
+	tar xf ../$gmp_pkg
+	mv $gmp_dir gmp
+
+	tar xf ../$isl_pkg
+	mv $isl_dir isl
+else
+	echo ""
+	verifysha256 $gcc_pkg $gcc_sum
+	verifysha256 $mpfr_pkg $mpfr_sum
+	verifysha256 $mpc_pkg $mpc_sum
+	verifysha256 $gmp_pkg $gmp_sum
+	verifysha256 $isl_pkg $isl_sum
+	echo ""
+fi
+

@@ -1,0 +1,2 @@
+# keep patched ltdl copy
+@pkg@: embedded-library *: ltdl

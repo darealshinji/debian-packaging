@@ -1,0 +1,14 @@
+Fortify Source enabled by default for optimization levels > 0.
+
+--- a/gcc/c-family/c-cppbuiltin.c
++++ b/gcc/c-family/c-cppbuiltin.c
+@@ -999,6 +999,9 @@
+   builtin_define_with_value ("__REGISTER_PREFIX__", REGISTER_PREFIX, 0);
+   builtin_define_with_value ("__USER_LABEL_PREFIX__", user_label_prefix, 0);
+ 
++  if (optimize)
++    builtin_define_with_int_value ("_FORTIFY_SOURCE", 2);
++
+   /* Misc.  */
+   if (flag_gnu89_inline)
+     cpp_define (pfile, "__GNUC_GNU_INLINE__");

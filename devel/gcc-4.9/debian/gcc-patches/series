@@ -1,0 +1,7 @@
+00-as-needed.patch
+00-fortify-source.patch
+00-hash-style-both.patch
+00-relro.patch
+00-stack-protector+format-security.patch
+01-no-strict-aliasing.patch
+#02-link-static-libstdc++.patch
