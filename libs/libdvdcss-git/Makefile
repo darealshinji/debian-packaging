@@ -6,7 +6,7 @@ cleanfiles = debian/changelog
 
 
 download:
-	git clone --depth 1 "git://git.videolan.org/libdvdcss"
+	git clone --depth 1 "http://code.videolan.org/videolan/libdvdcss.git"
 
 	@ $(foreach VER,major minor micro,\
 	  $(VER)="$$(grep '^m4_define(\[dvdcss_$(VER)\],' $(builddir)/configure.ac | cut -d, -f2 | sed 's|)||g; s| ||g')";) \
