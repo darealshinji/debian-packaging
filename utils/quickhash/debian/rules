@@ -2,30 +2,33 @@
 
 ifeq ($(shell dpkg-architecture -qDEB_HOST_ARCH),amd64)
 arch = x64
+bits = 64
 else
 arch = x86
+bits = 32
 endif
-bin = QuickHash-Linux.2.6.7-$(arch)
+d    = unzipped
+bin  = $(d)/Linux-$(bits)Bit/QuickHash-Linux-$(arch)
 
 
 %:
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf converted_icons
-	rm -f QuickHash-Linux.2.6.7-* README.txt *.pdf
+	rm -rf converted_icons $(d)
 
 override_dh_auto_build:
-	tar xf quickhash.tgz
+	unzip -d $(d) quickhash.zip
 	mv $(bin) quickhash
 	chmod a+x quickhash
 	./make-icons.sh quickhash.ico
 
 override_dh_installdocs:
-	dh_installdocs -A UserManual.pdf
+	dh_installdocs -A $(d)/UserManual.pdf
 
 override_dh_installchangelogs:
-	dh_installchangelogs README.txt
+	dos2unix $(d)/README.txt
+	dh_installchangelogs $(d)/README.txt
 
 override_dh_compress:
 	dh_compress -X.pdf
