@@ -90,7 +90,14 @@ allcleanfiles = .pc                  \
                 $(builddir)          \
                 $(cleanfiles)
 
-alldeps  = build-essential debhelper fakeroot quilt aptitude lintian $(deps)
+alldeps  = build-essential      \
+           time                 \
+           debhelper            \
+           fakeroot             \
+           quilt                \
+           aptitude             \
+           lintian              \
+           $(deps)
 ifeq ($(PBUILDER),1)
 alldeps += pbuilder
 endif
