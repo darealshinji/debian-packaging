@@ -40,5 +40,5 @@ override_dh_strip:
 	./patchelf $(foreach LIB,$(remove_libs),--remove-needed $(LIB)) \
 		debian/xnviewmp/usr/lib/xnviewmp/lib/platformthemes/libqgtk2.so
 	./patchelf --add-needed libc.so.6 \
-		debian/xnviewmp/usr/lib/xnviewmp/lib/libicudata.so.54
+		debian/xnviewmp/usr/lib/xnviewmp/lib/libicudata.so.54.1
 

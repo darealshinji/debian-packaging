@@ -6,14 +6,14 @@ cleanfiles     = patchelf.cpp
 distcleanfiles = *.tgz
 changelog-msg  = New release version
 
-VERSION = 0.79
-ver = 079
+VERSION = 0.80
+ver = 080
 
 ifeq ($(ARCH), amd64)
 x64 = -x64
-sha256sum = 9e736b3b9ad674f0add9191c614b15902c8cb18e1cb27af7d3e9a5756b47dd55
+sha256sum = 70dfd611559acafb491a4af96d5a4c64129c96fc71a4a0441af1a9f36294bd94
 else
-sha256sum = e54b9f40016eeeb4335c4a13511560a19a95b5fd6a7870d1900bb4ccb08164fe
+sha256sum = bb9128a4bd12246ccc864b68694915fcf9872ac8522272cbe426b3a0884b8dcd
 endif
 bin = XnViewMP-linux$(x64).tgz
 
