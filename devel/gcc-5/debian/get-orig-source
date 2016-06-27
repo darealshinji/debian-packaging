@@ -25,20 +25,22 @@ gcc_sum=608df76dec2d34de6558249d8af4cbee21eceddbcb580d666f7a5a583ca3303a
 
 mpfr_dir=mpfr-3.1.4
 mpc_dir=mpc-1.0.3
-gmp_dir=gmp-6.1.0
+gmp_dir=gmp-6.1.1
+isl_dir=isl-0.17.1
+
 mpfr_pkg=${mpfr_dir}.txz
 mpc_pkg=${mpc_dir}.tgz
 gmp_pkg=${gmp_dir}.txz
+isl_pkg=${isl_dir}.txz
+
 mpfr_url="http://www.mpfr.org/${mpfr_dir}/${mpfr_dir}.tar.xz"
 mpc_url="https://ftp.gnu.org/gnu/mpc/${mpc_dir}.tar.gz"
 gmp_url="https://gmplib.org/download/gmp/${gmp_dir}.tar.xz"
+isl_url="http://isl.gforge.inria.fr/${isl_dir}.tar.xz"
+
 mpfr_sum=761413b16d749c53e2bfd2b1dfaa3b027b0e793e404b90b5fbaeef60af6517f5
 mpc_sum=617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3
-gmp_sum=68dadacce515b0f8a54f510edf07c1b636492bcdb8e8d54c56eb216225d16989
-
-isl_dir=isl-0.17.1
-isl_pkg=${isl_dir}.txz
-isl_url="http://isl.gforge.inria.fr/${isl_dir}.tar.xz"
+gmp_sum=d36e9c05df488ad630fff17edb50051d6432357f9ce04e34a09b3d818825e831
 isl_sum=be152e5c816b477594f4c6194b5666d8129f3a27702756ae9ff60346a8731647
 
 test -f $gcc_pkg || wget -O $gcc_pkg $gcc_url
