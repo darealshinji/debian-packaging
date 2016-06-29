@@ -1,8 +1,9 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: XnView MP
 Source: http://www.xnview.com/
 
 Files: XnViewMP
-Copyright: 1997-2016 Pierre-e Gougelet
+Copyright: 1997-2016 Pierre-e Gougelet <contact@xnview.com>
 License: EULA
  Please read the following terms and conditions before using this
  software. Use of this software indicates you accept the terms of
