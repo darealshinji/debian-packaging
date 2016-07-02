@@ -8,7 +8,7 @@ arch = x86
 bits = 32
 endif
 d    = unzipped
-bin  = $(d)/Linux-$(bits)Bit/QuickHash-Linux-$(arch)
+bin  = $(d)/QuickHash-Linux-v*-$(arch)
 
 
 %:
