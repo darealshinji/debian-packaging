@@ -2,11 +2,29 @@
 
 export V=1
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
-export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed,--no-undefined,--no-add-needed
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed -Wl,-z,defs -Wl,--no-copy-dt-needed-entries
 
 
 %:
 	dh $@ --with autoreconf,systemd
+
+# check if libsystemd.so.0 exists
+libsystemd0_check:
+	echo "void func(){}" | $(CC) -shared -x c - -Wl,-soname,libsystemd.so.0 -o libsystemd.so
+	echo "int main(){return 0;}" | $(CC) -x c - -Wl,--no-as-needed -L. -lsystemd
+	if ./a.out 2>/dev/null; then \
+	  patch -p1 < debian/patches/libsystemd.patch; \
+	fi
+	rm -f a.out libsystemd.so
+
+override_dh_autoreconf: libsystemd0_check
+	rm -f m4/glib-gettext.m4
+	dh_autoreconf
+
+override_dh_auto_clean:
+	dh_auto_clean
+	dh_auto_clean -Dqt
+	rm -f qt/translations/*.qm a.out libsystemd.so
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
@@ -14,13 +32,7 @@ override_dh_auto_configure:
 		--enable-daemon \
 		--enable-iec-units \
 		--with-gtk
-	# qt client has a separate build-system
 	dh_auto_configure -Dqt -Sqmake
-
-override_dh_auto_clean:
-	dh_auto_clean
-	dh_auto_clean -Dqt
-	rm -f qt/translations/*.qm
 
 override_dh_auto_build:
 	dh_auto_build

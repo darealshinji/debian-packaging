@@ -1,0 +1,211 @@
+From: https://trac.transmissionbt.com/changeset/14717/
+
+Changeset: 14717
+Timestamp: 03/13/16 10:41:52
+Author: mikedld
+Message: Handle potential dirname/basename errors where needed
+
+--- a/libtransmission/fdlimit.c
++++ b/libtransmission/fdlimit.c
+@@ -165,7 +165,12 @@
+   /* create subfolders, if any */
+   if (writable)
+     {
+-      char * dir = tr_sys_path_dirname (filename, NULL);
++      char * dir = tr_sys_path_dirname (filename, &error);
++      if (dir == NULL)
++        {
++          tr_logAddError (_("Couldn't get directory for \"%1$s\": %2$s"), filename, error->message);
++          goto fail;
++        }
+       if (!tr_sys_dir_create (dir, TR_SYS_DIR_CREATE_PARENTS, 0777, &error))
+         {
+           tr_logAddError (_("Couldn't create \"%1$s\": %2$s"), dir, error->message);
+--- a/libtransmission/file-test.c
++++ b/libtransmission/file-test.c
+@@ -669,6 +669,47 @@
+ static int
+ test_path_basename_dirname (void)
+ {
++  const struct xname_test_data common_xname_tests[] =
++  {
++    { "/", "/" },
++    { "", "." },
++#ifdef _WIN32
++    { "\\", "/" },
++    /* Invalid paths */
++    { "\\\\\\", NULL },
++    { "123:" , NULL },
++    /* Reserved characters */
++    { "<", NULL },
++    { ">", NULL },
++    { ":", NULL },
++    { "\"", NULL },
++    {"|", NULL },
++    { "?", NULL },
++    { "*", NULL },
++    { "a\\<", NULL },
++    { "a\\>", NULL },
++    { "a\\:", NULL },
++    { "a\\\"", NULL },
++    { "a\\|", NULL },
++    { "a\\?", NULL },
++    { "a\\*", NULL },
++    { "c:\\a\\b<c\\d", NULL },
++    { "c:\\a\\b>c\\d", NULL },
++    { "c:\\a\\b:c\\d", NULL },
++    { "c:\\a\\b\"c\\d", NULL },
++    { "c:\\a\\b|c\\d", NULL },
++    { "c:\\a\\b?c\\d", NULL },
++    { "c:\\a\\b*c\\d", NULL }
++#else
++    { "////", "/" }
++#endif
++  };
++
++  if (test_path_xname (common_xname_tests, sizeof (common_xname_tests) / sizeof (*common_xname_tests), tr_sys_path_basename) != 0)
++    return 1;
++  if (test_path_xname (common_xname_tests, sizeof (common_xname_tests) / sizeof (*common_xname_tests), tr_sys_path_dirname) != 0)
++    return 1;
++
+   const struct xname_test_data basename_tests[] =
+   {
+     { "a", "a" },
+@@ -676,8 +717,6 @@
+     { "/aa", "aa" },
+     { "/a/b/c", "c" },
+     { "/a/b/c/", "c" },
+-    { "/", "/" },
+-    { "", "." },
+ #ifdef _WIN32
+     { "c:\\a\\b\\c", "c" },
+     { "c:", "/" },
+@@ -690,13 +729,8 @@
+     { "//1.2.3.4/b", "b" },
+     { "\\\\a", "a" },
+     { "\\\\1.2.3.4", "1.2.3.4" },
+-    { "\\\\", "/" },
+     { "\\", "/" },
+     { "\\a", "a" },
+-    { "\\\\\\", NULL },
+-    { "123:" , NULL }
+-#else
+-    { "////", "/" }
+ #endif
+   };
+ 
+@@ -710,8 +744,6 @@
+     { "a/b/c/", "a/b" },
+     { "a", "." },
+     { "a/", "." },
+-    { "/", "/" },
+-    { "", "." },
+ #ifdef _WIN32
+     { "C:\\a/b\\c", "C:\\a/b" },
+     { "C:\\a/b\\c\\", "C:\\a/b" },
+@@ -730,12 +762,7 @@
+     { "\\\\a", "\\\\" },
+     { "\\\\1.2.3.4", "\\\\" },
+     { "\\\\", "\\\\" },
+-    { "\\", "/" },
+     { "a/b\\c", "a/b" },
+-    { "\\\\\\" , NULL },
+-    { "123:" , NULL }
+-#else
+-    { "////", "/" }
+ #endif
+   };
+ 
+--- a/libtransmission/makemeta.c
++++ b/libtransmission/makemeta.c
+@@ -42,6 +42,8 @@
+           const char      * base,
+           struct FileList * list)
+ {
++  if (dir == NULL || base == NULL)
++    return NULL;
+   tr_sys_dir_t odir;
+   char * buf;
+   tr_sys_path_info info;
+@@ -373,8 +375,11 @@
+     }
+ 
+   base = tr_sys_path_basename (builder->top, NULL);
+-  tr_variantDictAddStr (dict, TR_KEY_name, base);
+-  tr_free (base);
++  if (base != NULL)
++    {
++      tr_variantDictAddStr (dict, TR_KEY_name, base);
++      tr_free (base);
++ 	  }
+ 
+   tr_variantDictAddInt (dict, TR_KEY_piece_length, builder->pieceSize);
+ 
+--- a/libtransmission/torrent-ctor.c
++++ b/libtransmission/torrent-ctor.c
+@@ -159,8 +159,11 @@
+             if (!name || !*name)
+             {
+                 char * base = tr_sys_path_basename (filename, NULL);
+-                tr_variantDictAddStr (info, TR_KEY_name, base);
+-                tr_free (base);
++                if (base != NULL)
++                  {
++                    tr_variantDictAddStr (info, TR_KEY_name, base);
++                    tr_free (base);
++                  }
+             }
+         }
+     }
+--- a/libtransmission/torrent.c
++++ b/libtransmission/torrent.c
+@@ -3048,6 +3048,9 @@
+       dir = tr_sys_path_dirname (filename, NULL);
+       tr_free (filename);
+ 
++      if (dir == NULL)
++        continue;
++
+       /* walk up the directory tree until we reach 'top' */
+       if (!tr_sys_path_is_same (top, dir, NULL) && strcmp (top, dir) != 0)
+         {
+@@ -3754,6 +3757,9 @@
+     {
+       char * tmp = tr_sys_path_dirname (oldpath, NULL);
+ 
++      if (tmp == NULL)
++        return;
++
+       if (oldpath_len >= strlen(file->name))
+         name = tr_buildPath (tmp, newname, NULL);
+       else
+--- a/libtransmission/utils.c
++++ b/libtransmission/utils.c
+@@ -1478,8 +1478,8 @@
+ 
+   /* make sure the target directory exists */
+   {
+-    char * newdir = tr_sys_path_dirname (newpath, NULL);
+-    const bool i = tr_sys_dir_create (newdir, TR_SYS_DIR_CREATE_PARENTS, 0777, error);
++    char * newdir = tr_sys_path_dirname (newpath, error);
++    const bool i = newdir != NULL && tr_sys_dir_create (newdir, TR_SYS_DIR_CREATE_PARENTS, 0777, error);
+     tr_free (newdir);
+     if (!i)
+       {
+--- a/utils/create.c
++++ b/utils/create.c
+@@ -156,7 +156,13 @@
+ 
+   if (outfile == NULL)
+     {
+-      char * base = tr_sys_path_basename (infile, NULL);
++      tr_error * error = NULL;
++      char * base = tr_sys_path_basename (infile, &error);
++      if (base == NULL)
++        {
++          fprintf (stderr, "ERROR: Cannot deduce output path from input path: %s\n", error->message);
++          return EXIT_FAILURE;
++        }
+       char * end = tr_strdup_printf ("%s.torrent", base);
+       char * cwd = tr_getcwd ();
+       outfile = out2 = tr_buildPath (cwd, end, NULL);

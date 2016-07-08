@@ -1,3 +1,0 @@
-?package(transmission-gtk):needs="X11" section="Applications/Network/File Transfer" \
-  title="Transmission BitTorrent Client (GTK)" command="/usr/bin/transmission-gtk" \
-  icon="/usr/share/pixmaps/transmission.xpm"
