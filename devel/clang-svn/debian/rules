@@ -25,10 +25,6 @@ override_dh_auto_configure:
 		-DLLVM_ENABLE_DOXYGEN=OFF \
 		-DLLVM_ENABLE_SPHINX=OFF
 
-# --parallel doesn't do it
-override_dh_auto_build:
-	$(MAKE) -C build -j $(JOBS)
-
 override_dh_auto_test:
 
 

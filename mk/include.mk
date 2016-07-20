@@ -31,9 +31,11 @@ ARCHREAL    = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 builddir    = pbuilder-source
 LOG         = $(shell basename $$PWD)-build.log
 TIME        = TIME="\nTime elapsed: %E\n" time
-pbuildercmd = pbuilder --build --basetgz $(basetgz) --buildresult $(resultdir) *.dsc
 resultdir   = "$$HOME/buildresult"
 basetgz     = "/var/cache/pbuilder/debian-packages-$(ARCH).tgz"
+JOBS        = $(shell nproc)
+pbuildercmd = pbuilder --build --debbuildopts "-j$(JOBS)" \
+			--basetgz $(basetgz) --buildresult $(resultdir) *.dsc
 
 
 
@@ -183,7 +185,7 @@ ifneq ($(DEPS),0)
 	    sudo -k $(CURDIR)/../../mk/pbuilder-satisfydepends.sh ;                                             \
 	fi
 endif
-	cd $(builddir) && $(TIME) dpkg-buildpackage -rfakeroot -b -us -uc 2>&1 | tee ../$(LOG)
+	cd $(builddir) && $(TIME) dpkg-buildpackage -j$(JOBS) -rfakeroot -b -us -uc 2>&1 | tee ../$(LOG)
 	rm -f *.changes
 	mkdir -p $(resultdir)
 	mv *.deb $(resultdir)
