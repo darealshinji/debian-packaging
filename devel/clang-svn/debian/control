@@ -1,0 +1,38 @@
+Source: clang-svn
+Section: devel
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ chrpath,
+ cmake,
+ help2man,
+ libffi-dev,
+ libncurses5-dev,
+ libtinfo-dev,
+ zlib1g-dev
+Standards-Version: 3.9.6
+Vcs-Svn: http://llvm.org/svn/llvm-project/llvm/trunk/
+Vcs-Browser: http://llvm.org/svn/llvm-project/llvm/trunk/
+Homepage: http://clang.llvm.org/
+
+Package: clang-svn
+Architecture: any
+Depends:
+ binutils,
+ ${shlibs:Depends},
+ ${misc:Depends},
+ libc6-dev,
+ ${perl:Depends},
+ python:any
+Recommends:
+ build-essential
+Description: C, C++ and Objective-C compiler (LLVM based)
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
+ Collection (GCC).
+ .
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+

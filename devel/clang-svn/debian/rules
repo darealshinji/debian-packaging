@@ -1,0 +1,63 @@
+#!/usr/bin/make -f
+
+export CFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+export CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
+
+JOBS = $(shell test `nproc` -gt 2 && nproc || echo 2)
+
+
+%:
+	dh ${@} --parallel \
+		--builddirectory=build \
+		--buildsystem=cmake
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf build test.c a.out
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DCMAKE_BUILD_TYPE="Release" \
+		-DCMAKE_INSTALL_PREFIX="/usr/lib/clang-svn" \
+		-DBUILD_SHARED_LIBS=OFF \
+		-DLLVM_OPTIMIZED_TABLEGEN=ON \
+		-DLLVM_ENABLE_FFI=ON \
+		-DLLVM_ENABLE_DOXYGEN=OFF \
+		-DLLVM_ENABLE_SPHINX=OFF
+
+# --parallel doesn't do it
+override_dh_auto_build:
+	$(MAKE) -C build -j $(JOBS)
+
+override_dh_auto_test:
+
+
+usr = $(CURDIR)/debian/clang-svn/usr
+clang = $(usr)/lib/clang-svn
+
+override_dh_install:
+	dh_install
+
+	# remove rpaths
+	chrpath -d -k $(clang)/bin/* $(clang)/lib/*.so 2>/dev/null || true
+
+	# delete unwanted files
+	rm -f $(clang)/bin/c-index-test
+	rm -f $(clang)/lib/libclang.so*
+	rm -f $(clang)/lib/*.a
+	rm -rf $(clang)/share
+	find $(usr)/* -name LICENSE.TXT -delete
+
+	# install symbolic links
+	mkdir -p $(usr)/bin
+	for f in $(clang)/bin/*; do \
+	  ln -rs $$f $(usr)/bin/clang-svn-$$(basename $$f); \
+	done
+
+	# generate manpages
+	mkdir -p $(usr)/share/man/man1
+	for f in $(usr)/bin/*; do \
+	  help2man -N -s1 -n "part of the LLVM/Clang toolchain" \
+	    --no-discard-stderr $$f > $(usr)/share/man/man1/$$(basename $$f).1; \
+	done
+

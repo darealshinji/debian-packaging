@@ -1,0 +1,6 @@
+CODE_OWNERS.TXT                           /usr/share/doc/clang-svn/llvm
+CREDITS.TXT                               /usr/share/doc/clang-svn/llvm
+tools/clang/CODE_OWNERS.TXT               /usr/share/doc/clang-svn/clang
+tools/clang/NOTES.txt                     /usr/share/doc/clang-svn/clang
+tools/clang/README.txt                    /usr/share/doc/clang-svn/clang
+tools/clang/tools/extra/CODE_OWNERS.TXT   /usr/share/doc/clang-svn/clang-tools-extra
