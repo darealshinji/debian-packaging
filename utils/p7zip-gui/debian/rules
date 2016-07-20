@@ -1,8 +1,9 @@
 #!/usr/bin/make -f
 
 7ztargets = 7za sfx 7z 7zr Client7z LzmaCon 7zG 7zFM
-OPTFLAGS = -Wall -fno-strict-aliasing -ffunction-sections -fdata-sections \
-	$(CXXFLAGS) -Wno-switch -Wno-parentheses $(CPPFLAGS)
+OPTFLAGS = -Wall -Wno-switch -Wno-parentheses \
+	-fno-strict-aliasing -ffunction-sections -fdata-sections \
+	$(CPPFLAGS)
 LDFLAGS += -Wl,--gc-sections -Wl,--as-needed
 
 
@@ -10,7 +11,10 @@ LDFLAGS += -Wl,--gc-sections -Wl,--as-needed
 	dh ${@} --parallel
 
 override_dh_auto_build:
-	dh_auto_build -- $(7ztargets) OPTFLAGS="$(OPTFLAGS)" CXX="$(CXX) -Wno-reorder"
+	dh_auto_build -- $(7ztargets) \
+		OPTFLAGS="$(OPTFLAGS)" \
+		CC="$(CC) $(CFLAGS)" \
+		CXX="$(CXX) $(CXXFLAGS) -Wno-reorder"
 
 override_dh_auto_install:
 
@@ -19,7 +23,6 @@ override_dh_install:
 	mv bin/7zFM_do_not_use bin/7zFM
 	dh_install
 	install -m 0644 GUI/p7zip_32.png $(CURDIR)/debian/p7zip-gui/usr/share/icons/hicolor/32x32/apps/p7zip-gui.png
-	install -m 0644 GUI/p7zip_32.xpm $(CURDIR)/debian/p7zip-gui/usr/share/pixmaps/p7zip-gui.xpm
 
 override_dh_installchangelogs:
 	dh_installchangelogs ChangeLog
