@@ -1,0 +1,16 @@
+Source: virtualbox-extensionpack
+Section: misc
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: https://www.virtualbox.org/
+
+Package: virtualbox-extensionpack
+Architecture: all
+Depends:
+ ${misc:Depends},
+ virtualbox-@MAJ_MIN@ (>= @VERSION@~) | virtualbox (>= @VERSION@~),
+ virtualbox-@MAJ_MIN@ (<< @NEXT@~) | virtualbox (<< @NEXT@~)
+Description: Oracle VM VirtualBox Extension Pack
+ Support for USB 2.0 devices, VirtualBox RDP and PXE boot for Intel cards.
