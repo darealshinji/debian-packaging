@@ -1,9 +1,8 @@
 #!/usr/bin/make -f
 
+# CMAKE_BUILD_TYPE="Release" will add -O3
 export CFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
 export CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
-
-JOBS = $(shell test `nproc` -gt 2 && nproc || echo 2)
 
 
 %:
