@@ -1,11 +1,23 @@
 #!/bin/sh
 set -e
 
-if [ "$1" = "configure" ]; then
-	if ! /usr/lib/vlc/vlc-cache-gen -f /usr/lib/vlc/plugins ; then
-		echo "WARNING: Regenerating VLC plugin cache failed."
-		echo "Please run '/usr/lib/vlc/vlc-cache-gen -f /usr/lib/vlc/plugins' manually."
-	fi
-fi
+run_vlc_cache_gen() {
+    if ! /usr/lib/vlc/vlc-cache-gen -f /usr/lib/vlc/plugins ; then
+        echo "WARNING: Regenerating VLC plugin cache failed."
+        echo "Please run 'vlc-cache-gen -f /usr/lib/vlc/plugins' manually."
+    fi
+}
+
+case "$1" in
+    triggered)
+        run_vlc_cache_gen
+        exit 0
+        ;;
+
+    configure)
+        # Make sure that the plugins cache is generated.
+        dpkg-trigger /usr/lib/vlc/plugins
+        ;;
+esac
 
 #DEBHELPER#

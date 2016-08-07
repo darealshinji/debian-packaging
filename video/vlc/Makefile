@@ -1,10 +1,10 @@
 include ../../mk/include.mk
 
 deps           = wget git
-srcfiles       = libdvd* vlc ffmpeg
-cleanfiles     = $(srcfiles) vlc-$(VER)
+srcfiles       = ffmpeg libdvd* vlc
+cleanfiles     = libdvd* vlc vlc-$(VER)
 tarball        = vlc-$(VER).txz
-distcleanfiles = $(tarball)
+distcleanfiles = ffmpeg $(tarball)
 
 VER = 2.2.4
 SHA256 = 1632e91d2a0087e0ef4c3fb4c95c3c2890f7715a9d1d43ffd46329f428cf53be
