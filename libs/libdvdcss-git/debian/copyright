@@ -3,7 +3,7 @@ Upstream-Name: libdvdcss
 Source: http://www.videolan.org/developers/libdvdcss.html
 
 Files: *
-Copyright: 1998-2008 VideoLAN
+Copyright: 1998-2016 VideoLAN
 License: GPL-2+
 
 Files: debian/*
