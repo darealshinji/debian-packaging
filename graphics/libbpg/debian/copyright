@@ -4,11 +4,15 @@ Upstream-Contact: Fabrice Bellard <fabrice@bellard.org>
 Source: http://bellard.org/bpg/
 
 Files: *
-Copyright: 2014-2015, Fabrice Bellard <fabrice@bellard.org>
+Copyright: 2014-2016, Fabrice Bellard <fabrice@bellard.org>
 License: MIT
+Comment:
+ The website and the readme file from the source tree mention the libbpg
+ specific code as released under the "BSD" license, but the disclaimers
+ from the actual source files are _obviously_ MIT license texts.
 
 Files: debian/*
-Copyright: 2014-2015, djcj <djcj@gmx.de>
+Copyright: 2014-2016, djcj <djcj@gmx.de>
 License: MIT
 
 License: MIT

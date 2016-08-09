@@ -18,7 +18,7 @@ override_dh_auto_build:
 	dh_auto_build
 
 override_dh_installdocs:
-	dh_installdocs -A doc/bpg_spec.txt README
+	dh_installdocs -A doc/bpg_spec.txt emscripten.diff README
 
 override_dh_auto_install:
 	$(MAKE) -C libpng16 install DESTDIR=$(CURDIR)/debian/tmp
