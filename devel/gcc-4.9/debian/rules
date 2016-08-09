@@ -118,16 +118,21 @@ lib = /usr/lib/$(pkg)/lib
 override_dh_shlibdeps:
 	dh_shlibdeps -L$(pkg) -l$(lib):$(lib)32:$(lib)64
 
-patchlibs = lib32/gcj-4.9.3-15/libjvm.so \
+patchlibs = lib32/gcj-$(VER)-15/libjvm.so \
 	lib32/libgcj-tools.so.15.0.0 \
 	lib32/libgcj_bc.so.1.0.0 \
-	lib64/gcj-4.9.3-15/libjvm.so \
+	lib64/gcj-$(VER)-15/libjvm.so \
 	lib64/libgcj-tools.so.15.0.0 \
 	lib64/libgcj_bc.so.1.0.0
+
+define NL
+
+
+endef
 
 override_dh_strip:
 	dh_strip
 	# dunno why libc is missing; let's fix it the lazy way
 	$(foreach LIB,$(patchlibs),[ ! -f $(usr)/lib/$(pkg)/$(LIB) ] || \
-	  ./patchelf --add-needed libc.so.6 $(usr)/lib/$(pkg)/$(LIB) ;)
+	  ./patchelf --add-needed libc.so.6 $(usr)/lib/$(pkg)/$(LIB) ; $(NL))
 

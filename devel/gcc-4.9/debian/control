@@ -28,6 +28,7 @@ Depends:
  ${shlibs:Depends},
  zlib1g:i386 [amd64],
  python:any,
+ python-support (>= 0.90),
  ${misc:Depends}
 Recommends:
  build-essential,

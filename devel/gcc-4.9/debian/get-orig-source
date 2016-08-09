@@ -17,11 +17,11 @@ verifysha256 () {
 	fi
 }
 
-gcc_ver=4.9.3
+gcc_ver=4.9.4
 gcc_dir=gcc-$gcc_ver
 gcc_pkg=${gcc_dir}.tbz
 gcc_url="http://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.bz2"
-gcc_sum=2332b2a5a321b57508b9031354a8503af6fdfb868b8c1748d33028d100a8b67e
+gcc_sum=6c11d292cd01b294f9f84c9a59c230d80e9e4a47e5c6355f046bb36d4f358092
 
 mpfr_dir=mpfr-3.1.4
 mpc_dir=mpc-1.0.3
