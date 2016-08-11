@@ -23,6 +23,12 @@ gcc_pkg=${gcc_dir}.tbz
 gcc_url="https://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.bz2"
 gcc_sum=09c4c85cabebb971b1de732a0219609f93fc0af5f86f6e437fd8d7f832f1a351
 
+binutils_ver=2.27
+binutils_dir=binutils-$binutils_ver
+binutils_pkg=${binutils_dir}.tbz
+binutils_url="https://ftp.gnu.org/gnu/binutils/${binutils_dir}.tar.bz2"
+binutils_sum=369737ce51587f92466041a97ab7d2358c6d9e1b6490b3940eb09fb0a9a6ac88
+
 mpfr_dir=mpfr-3.1.4
 mpc_dir=mpc-1.0.3
 gmp_dir=gmp-6.1.1
@@ -44,30 +50,32 @@ gmp_sum=d36e9c05df488ad630fff17edb50051d6432357f9ce04e34a09b3d818825e831
 isl_sum=be152e5c816b477594f4c6194b5666d8129f3a27702756ae9ff60346a8731647
 
 test -f $gcc_pkg || wget -O $gcc_pkg $gcc_url
+test -f $binutils_pkg || wget -O $binutils_pkg $binutils_url
 test -f $mpfr_pkg || wget -O $mpfr_pkg $mpfr_url
 test -f $mpc_pkg || wget -O $mpc_pkg $mpc_url
 test -f $gmp_pkg || wget -O $gmp_pkg $gmp_url
 test -f $isl_pkg || wget -O $isl_pkg $isl_url
 
 if [ "x$1" = "x--extract" ]; then
-	tar xf $gcc_pkg
-	mv $gcc_dir gcc-src
-	cd gcc-src
-
-	tar xf ../$mpfr_pkg
-	mv $mpfr_dir mpfr
-
-	tar xf ../$mpc_pkg
-	mv $mpc_dir mpc
-
-	tar xf ../$gmp_pkg
-	mv $gmp_dir gmp
-
-	tar xf ../$isl_pkg
-	mv $isl_dir isl
+	set -v
+	tar xf $binutils_pkg && mv $binutils_dir binutils-src
+	tar xf $gcc_pkg && mv $gcc_dir gcc-src
+	tar xf $mpfr_pkg && mv $mpfr_dir mpfr
+	tar xf $mpc_pkg && mv $mpc_dir mpc
+	tar xf $gmp_pkg && mv $gmp_dir gmp
+	tar xf $isl_pkg && mv $isl_dir isl
+	cp -f config.* gcc-src
+	cp -f config.guess gmp
+	cp -f config.sub gmp/configfsf.sub
+	for d in isl mpc mpfr; do cp -f config.* $d; done
+	for d in gmp isl mpc mpfr; do autoreconf -if $d; done
+	cp -r gmp isl mpc mpfr binutils-src
+	mv gmp isl mpc mpfr gcc-src
+	set +v
 else
 	echo ""
 	verifysha256 $gcc_pkg $gcc_sum
+	verifysha256 $binutils_pkg $binutils_sum
 	verifysha256 $mpfr_pkg $mpfr_sum
 	verifysha256 $mpc_pkg $mpc_sum
 	verifysha256 $gmp_pkg $gmp_sum

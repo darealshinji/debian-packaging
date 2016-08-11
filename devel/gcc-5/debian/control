@@ -22,10 +22,10 @@ Homepage: https://gcc.gnu.org/
 Package: gcc5opt
 Architecture: any
 Depends:
- binutils,
  ${shlibs:Depends},
  zlib1g:i386 [amd64],
  python:any,
+ python-support (>= 0.90),
  ${misc:Depends}
 Recommends:
  build-essential,
@@ -52,3 +52,7 @@ Description: GNU Compiler Collection
     for C, C++, ObjC, ObjC++ and set 'ssp-buffer-size' to 4
   * remove '-fstrict-aliasing' from '-O2' to use '-fno-strict-aliasing' by
     default
+ .
+ A copy of a recent version of the GNU Binutils will be included too.
+ This copy will not conflict with your distributions default binutils
+

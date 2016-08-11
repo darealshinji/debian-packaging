@@ -23,4 +23,7 @@ GCC is patched to enable the following behaviour:
  * remove `-fstrict-aliasing` from `-O2` to use `-fno-strict-aliasing` by
    default
 
+A copy of a recent version of the [GNU Binutils](https://www.gnu.org/software/binutils/) will be included too.
+This copy will not conflict with your distributions default binutils.
+
 Homepage: https://gcc.gnu.org/

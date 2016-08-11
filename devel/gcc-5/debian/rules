@@ -7,6 +7,7 @@ VER = $(shell dpkg-parsechangelog -SVersion | cut -d+ -f1 | cut -d- -f1)
 usr = $(CURDIR)/debian/$(pkg)/usr
 cplusinc = $(usr)/share/$(pkg)/include/c++/$(VER)
 SRCDIR = gcc-src
+BINUTILS = binutils-src
 
 TRIPLET = $(DEB_HOST_GNU_CPU)-pc-linux-gnu
 
@@ -21,16 +22,11 @@ export LDFLAGS=$(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get 
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	rm -rf gcc-*/ gmp-*/ mpc-*/ mpfr-*/ isl-*/
+	rm -rf binutils-src gcc-src
 	rm -f debian/links debian/lintian-overrides
 
 override_dh_auto_configure:
 	debian/get-orig-source --extract
-
-	cp -f config.* $(SRCDIR)
-	cp -f config.guess $(SRCDIR)/gmp
-	cp -f config.sub $(SRCDIR)/gmp/configfsf.sub
-	$(foreach DIR,mpc mpfr isl,cp -f config.* $(SRCDIR)/$(DIR);)
 
 	sed "s|@pkg@|$(pkg)|g; s|@host@|$(TRIPLET)|g" debian/links.in > debian/links
 	sed "s|@pkg@|$(pkg)|g" debian/lintian-overrides.in > debian/lintian-overrides
@@ -38,6 +34,18 @@ override_dh_auto_configure:
 	cp -rf debian/gcc-patches $(SRCDIR)
 	cd $(SRCDIR) && QUILT_PATCHES=gcc-patches \
 		quilt --quiltrc - push -a
+
+	cd $(BINUTILS) && ./configure \
+		--build=$(TRIPLET) \
+		--host=$(TRIPLET) \
+		--target=$(TRIPLET) \
+		--prefix=/usr/lib/$(pkg)/binutils \
+		--bindir=/usr/lib/$(pkg)/libexec/gcc/$(TRIPLET)/$(VER) \
+		--sbindir=/usr/lib/$(pkg)/libexec/gcc/$(TRIPLET)/$(VER) \
+		--libexecdir=/usr/lib/$(pkg)/libexec/gcc/$(TRIPLET)/$(VER) \
+		--disable-bootstrap \
+		--enable-gold \
+		--with-system-zlib
 
 	cd $(SRCDIR) && ./configure \
 		--build=$(TRIPLET) \
@@ -57,6 +65,7 @@ override_dh_auto_configure:
 		--with-pic=yes
 
 override_dh_auto_build:
+	dh_auto_build -D$(BINUTILS)
 	dh_auto_build -D$(SRCDIR)
 
 # uncomment to enable tests (may take a while to complete)
@@ -65,6 +74,7 @@ override_dh_auto_build:
 
 override_dh_install:
 	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(pkg)
+	$(MAKE) -C $(BINUTILS) install DESTDIR=$(CURDIR)/debian/$(pkg)
 
 	# build g++ binary that links libstdc++ statically by default
 	cd $(SRCDIR) && patch -p1 < gcc-patches/02-link-static-libstdc++.patch
@@ -81,6 +91,9 @@ override_dh_install:
 	rm -f $(usr)/bin/$(TRIPLET)-gcc-$(VER)
 	rm -rf $(usr)/share/man/man7 $(usr)/share/$(pkg)/info
 	find $(usr)/lib/* -name \*.la -delete
+	cd $(usr)/lib/$(pkg)/binutils && rm -rf include lib share $(TRIPLET)/bin
+	cd $(usr)/lib/$(pkg)/libexec/gcc/$(TRIPLET)/$(VER) && \
+	  rm -f ld && ln -s ld.bfd ld
 
 	# always link these libraries statically
 	$(foreach LIB,asan lsan tsan ubsan cilkrts itm quadmath ssp vtv,\
