@@ -23,10 +23,11 @@ VERSIONS = \
 	1.10.0 \
 	1.11.0 \
 	1.12.0 \
-	1.13.0
+	1.13.0 \
+	2.0.0
 
-glew_release  = glew-1.0.7-1.13.0
-glew_checksum = 31c691539d576523d3e8af26612fe2778260d20d48c5cbef693c532f235b5909
+glew_release  = glew-1.0.7-2.0.0
+glew_checksum = 7d3a9153e0a91275b540b4d552407694c2621c98c710d575c1544edbdf869a2f
 
 
 debian/control:

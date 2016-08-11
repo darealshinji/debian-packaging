@@ -1,12 +1,11 @@
 #!/usr/bin/make -f
 
-DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 libdir = /usr/lib/$(DEB_HOST_MULTIARCH)
 
 CC = gcc
 LD = gcc
 CFLAGS  += -fPIC -DPIC
-LDFLAGS += -Wl,--as-needed
+LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 
 VERSIONS = \
 	1.0.7 \
@@ -24,7 +23,8 @@ MXVERSIONS = \
 	1.10.0 \
 	1.11.0 \
 	1.12.0 \
-	1.13.0
+	1.13.0 \
+	2.0.0
 
 
 %:

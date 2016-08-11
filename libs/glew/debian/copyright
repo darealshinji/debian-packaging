@@ -2,30 +2,30 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: glew
 Upstream-Contact: Milan Ikits <milan.ikits@ieee.org>
                   Marcelo E. Magallon <mmagallo@debian.org>
-Source: http://glew.sf.net
+Source: https://github.com/nigels-com/glew
 
 Files: debian/*
 Copyright: Copyright 2003 Marcelo E. Magallon <mmagallo@debian.org>
            Copyright 2011-2012 Fabrizio Regalli <fabreg@fabreg.it>
            Copyright 2011-2012 Matteo F. Vescovi <mfv.debian@gmail.com>
-           Copyright 2015 djcj <djcj@gmx.de>
+           Copyright 2015-2016 djcj <djcj@gmx.de>
 License: GPL-2+
 
 Files: glew-*/include/*
-Copyright: Copyright 2002-2015 Milan Ikits <milan.ikits@ieee.org>
-           Copyright 2002-2015 Marcelo E. Magallon <mmagallo@debian.org>
+Copyright: Copyright 2002-2016 Milan Ikits <milan.ikits@ieee.org>
+           Copyright 2002-2016 Marcelo E. Magallon <mmagallo@debian.org>
            Copyright 2002 Lev Povalahev
 License: BSD-3-clause
 
 Files: glew-*/src/*
-Copyright: Copyright 2002-2015 Milan Ikits <milan.ikits@ieee.org>
-           Copyright 2002-2015 Marcelo E. Magallon <mmagallo@debian.org>
+Copyright: Copyright 2002-2016 Milan Ikits <milan.ikits@ieee.org>
+           Copyright 2002-2016 Marcelo E. Magallon <mmagallo@debian.org>
            Copyright 2002 Lev Povalahev
 License: BSD-3-clause
 
 Files: glew-*/auto/bin/*
-Copyright: Copyright 2002-2015 Milan Ikits <milan.ikits@ieee.org>
-           Copyright 2002-2015 Marcelo E. Magallon <mmagallo@debian.org>
+Copyright: Copyright 2002-2016 Milan Ikits <milan.ikits@ieee.org>
+           Copyright 2002-2016 Marcelo E. Magallon <mmagallo@debian.org>
 License: GPL-2+
 
 Files: glew-*/auto/src/mesa_licence.h
@@ -34,20 +34,20 @@ Copyright: Copyright 1999-2007 Brian Paul
 License: Expat
 
 Files: glew-*/auto/src/glew_license.h
-Copyright: Copyright 2002-2015 Milan Ikits <milan.ikits@ieee.org>
-           Copyright 2002-2015 Marcelo E. Magallon <mmagallo@debian.org>
+Copyright: Copyright 2002-2016 Milan Ikits <milan.ikits@ieee.org>
+           Copyright 2002-2016 Marcelo E. Magallon <mmagallo@debian.org>
            Copyright 2002 Lev Povalahev
 License: BSD-3-clause
 
 Files: glew-*/auto/src/glew_utils.*
-Copyright: Copyright 2002-2015 Milan Ikits <milan.ikits@ieee.org>
-           Copyright 2002-2015 Marcelo E. Magallon <mmagallo@debian.org>
+Copyright: Copyright 2002-2016 Milan Ikits <milan.ikits@ieee.org>
+           Copyright 2002-2016 Marcelo E. Magallon <mmagallo@debian.org>
            Copyright 2002 Lev Povalahev
 License: BSD-3-clause
 
 Files: glew-*/auto/src/*
-Copyright: Copyright 2002-2015 Milan Ikits <milan.ikits@ieee.org>
-           Copyright 2002-2015 Marcelo E. Magallon <mmagallo@debian.org>
+Copyright: Copyright 2002-2016 Milan Ikits <milan.ikits@ieee.org>
+           Copyright 2002-2016 Marcelo E. Magallon <mmagallo@debian.org>
            Copyright 2002 Lev Povalahev
 License: Mesa
 

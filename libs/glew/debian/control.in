@@ -10,6 +10,6 @@ Build-Depends: debhelper (>= 9),
                libxmu-dev
 Standards-Version: 3.9.6
 Homepage: http://glew.sourceforge.net
-Vcs-Git: git://git.code.sf.net/p/glew/code
-Vcs-Browser: https://sourceforge.net/p/glew/code/ci/master/tree/
+Vcs-Git: https://github.com/nigels-com/glew
+Vcs-Browser: https://github.com/nigels-com/glew
 
