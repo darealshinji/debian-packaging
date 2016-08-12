@@ -13,6 +13,8 @@ $(builddir):
 	mv notepadqq-packaging/Debian/debian $(builddir)
 	git -C $(builddir) submodule init
 	git -C $(builddir) submodule update
+	find $(builddir)/src/editor/libs/codemirror -name \*.js -exec chmod a-x '{}' \;
+	find $(builddir)/src/editor/libs/codemirror -name \*.css -exec chmod a-x '{}' \;
 
 	@ # debian/changelog
 	@ latestcommit=$$(git -C $(builddir) log -1 --format=%ci | head -c10 | sed -e 's/-//g'); \
