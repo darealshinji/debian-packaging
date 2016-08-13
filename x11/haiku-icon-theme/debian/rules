@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf Haiku-Icons
+
+override_dh_auto_build:
+	tar xf Haiku-Icons.tar.gz
+
+	mkdir -p Haiku-Icons/128x128
+	mv Haiku-Icons/scalable/apps2 Haiku-Icons/128x128
+	sed -i 's|scalable/apps2|128x128/apps2|g' Haiku-Icons/index.theme
+
+	ln -fs folder.svg Haiku-Icons/scalable/places/folder
+	find Haiku-Icons/scalable/ -name *.png -delete
+	rm -f Haiku-Icons/*.cache
+

@@ -1,0 +1,13 @@
+Source: haiku-icon-theme
+Section: x11
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: http://www.zevenos.com/download/themes
+
+Package: haiku-icon-theme
+Architecture: all
+Depends: ${misc:Depends}
+Description: Haiku icon theme
+ The Haiku icon theme from ZevenOS, providing the icons used on Haiku OS.
