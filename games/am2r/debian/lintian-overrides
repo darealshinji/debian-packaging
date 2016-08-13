@@ -1,4 +1,0 @@
-# closed-source
-am2r-demo: embedded-library usr/lib/games/am2r-demo/runner: libjpeg
-am2r-demo: embedded-library usr/lib/games/am2r-demo/runner: libpng
-am2r-demo: embedded-library usr/lib/games/am2r-demo/runner: curl

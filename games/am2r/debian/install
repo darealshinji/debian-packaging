@@ -1,3 +1,0 @@
-AM2R_Demo/runner   /usr/lib/games/am2r-demo
-AM2R_Demo/assets   /usr/share/games/am2r-demo
-debian/*.desktop   /usr/share/applications
