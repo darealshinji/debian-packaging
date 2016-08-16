@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # pbuilder -- personal Debian package builder
-# version 0.224
+# version 0.225.2
 
 # This file is a concatenation of the following three scripts from
 # the pbuilder package:
@@ -36,7 +36,7 @@ set -e
 
 function package_versions() {
     local PACKAGE="$1"
-    LC_ALL=C $CHROOTEXEC /usr/bin/apt-cache show "$PACKAGE" | sed -n 's/^Version: //p'
+    LC_ALL=C $CHROOTEXEC apt-cache show "$PACKAGE" | sed -n 's/^Version: //p'
 }
 
 function candidate_version() {
@@ -362,14 +362,19 @@ function print_help () {
 pbuilder-satisfydepends -- satisfy dependencies
 Copyright 2002-2007  Junichi Uekawa <dancer@debian.org>
 
---help:        give help
---control:     specify control file (debian/control, *.dsc)
---chroot:      operate inside chroot
---binary-all:  include binary-all
---binary-arch: include binary-arch only
---echo:        echo mode, do nothing. (--force-version required for most operation)
---force-version: skip version check.
---continue-fail: continue even when failed.
+--help              give help
+--control           specify control file (debian/control, *.dsc)
+--chroot            operate inside chroot
+--binary-all        include binary-all
+--binary-arch       include binary-arch only
+--binary-indep      include binary-indep only
+--eatmydata         wrap the chroots commands with eatmydata
+
+Debugging options:
+--force-version     skip version check.
+--continue-fail     continue even when failed.
+--internal-chrootexec specify the command to execute instead of \`chroot\`
+--echo              echo mode, do nothing. (--force-version required for most operation)
 
 EOF
 }
@@ -391,6 +396,7 @@ FORCEVERSION=""
 CONTINUE_FAIL="no"
 CHROOTEXEC_AFTER_INTERNAL_CHROOTEXEC=no
 ALLOWUNTRUSTED=no
+EATMYDATA=no
 
 while [ -n "$1" ]; do
     case "$1" in
@@ -449,6 +455,10 @@ while [ -n "$1" ]; do
 	    ALLOWUNTRUSTED=yes
 	    shift;
 	    ;;
+	--eatmydata)
+	    EATMYDATA=yes
+	    shift
+	    ;;
 	--help|-h|*)
 	    print_help
 	    exit 1
@@ -463,6 +473,10 @@ if [ $ALLOWUNTRUSTED = yes ]; then
 	# aptitude flag to accept untrusted packages
 	APTITUDEOPT[${#APTITUDEOPT[@]}]='-o'
 	APTITUDEOPT[${#APTITUDEOPT[@]}]='Aptitude::CmdLine::Ignore-Trust-Violations=true'
+fi
+
+if [ "$EATMYDATA" = "yes" ]; then
+	CHROOTEXEC="$CHROOTEXEC eatmydata"
 fi
 
 checkbuilddep_internal

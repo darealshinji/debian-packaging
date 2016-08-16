@@ -28,6 +28,7 @@ FORCEVERSION=""
 CONTINUE_FAIL="no"
 CHROOTEXEC_AFTER_INTERNAL_CHROOTEXEC=no
 ALLOWUNTRUSTED=no
+EATMYDATA=no
 
 while [ -n "$1" ]; do
     case "$1" in
@@ -86,6 +87,10 @@ while [ -n "$1" ]; do
 	    ALLOWUNTRUSTED=yes
 	    shift;
 	    ;;
+    --eatmydata)
+        EATMYDATA=yes
+        shift
+        ;;
 	--help|-h|*)
 	    print_help
 	    exit 1
@@ -100,6 +105,10 @@ if [ $ALLOWUNTRUSTED = yes ]; then
 	# aptitude flag to accept untrusted packages
 	APTITUDEOPT[${#APTITUDEOPT[@]}]='-o'
 	APTITUDEOPT[${#APTITUDEOPT[@]}]='Aptitude::CmdLine::Ignore-Trust-Violations=true'
+fi
+
+if [ "$EATMYDATA" = "yes" ]; then
+    CHROOTEXEC="$CHROOTEXEC eatmydata"
 fi
 
 checkbuilddep_internal
