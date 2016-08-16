@@ -73,8 +73,6 @@ CONFIG = --prefix=/usr \
 	--enable-libopencore-amrnb \
 	--enable-libopencore-amrwb \
 	--enable-libopencv \
-	--enable-libopenh264 \
-	--enable-libopenjpeg \
 	--enable-libopus \
 	--enable-libpulse \
 	--enable-librtmp \
@@ -88,7 +86,6 @@ CONFIG = --prefix=/usr \
 	--enable-libtesseract \
 	--enable-libtheora \
 	--enable-libtwolame \
-	--enable-libv4l2 \
 	--enable-libvo-amrwbenc \
 	--enable-libvorbis \
 	--enable-libvpx \
@@ -103,8 +100,10 @@ CONFIG = --prefix=/usr \
 	--enable-libxvid \
 	--enable-libzvbi \
 	--enable-openal \
-	--enable-opencl \
 	--enable-opengl
+
+#	--enable-opencl
+#	--enable-libopenjpeg
 
 
 %:
@@ -214,13 +213,12 @@ override_dh_auto_build:
 	$(MAKE) -C kvazaar install
 
 	# ffmpeg
-	# set all relevant hardening flags with --toolchain=hardened
+	# set hardening flags with --toolchain=hardened
 	CFLAGS="-I$(CURDIR)/libs/include" CPPFLAGS="" \
 	LDFLAGS="-Wl,-z,defs -Wl,--allow-multiple-definition -Wl,-rpath,XORIGIN/../lib/ffmpeg -L$(CURDIR)/libs/lib" \
 	PKG_CONFIG_PATH="$(CURDIR)/libs/lib/pkgconfig:$(CURDIR)/debian/pkgconfig" \
 		./configure $(CONFIG) || (cat config.log && exit 1)
 	dh_auto_build
-	dh_auto_build -- apidoc
 	dh_auto_build -- tools/qt-faststart
 	chrpath -d tools/qt-faststart
 	mv tools/qt-faststart ffmpeg-qt-faststart
