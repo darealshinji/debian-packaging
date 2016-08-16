@@ -1,0 +1,25 @@
+Source: go-ipfs
+Section: web
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends: debhelper (>= 9), help2man
+Standards-Version: 3.9.6
+Homepage: https://ipfs.io/
+Vcs-Git: https://github.com/ipfs/go-ipfs.git
+Vcs-Browser: https://github.com/ipfs/go-ipfs
+
+Package: go-ipfs
+Architecture: amd64 i386
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Provides: ipfs
+Description: main implementation of IPFS
+ IPFS is a peer-to-peer hypermedia protocol to make the web faster, safer,
+ and more open.
+ .
+ go-ipfs is the main implementation of IPFS.
+ It includes:
+  * an IPFS core implementation
+  * an IPFS daemon server
+  * extensive command line tooling
+  * an HTTP API for controlling the node
+  * an HTTP Gateway for serving content to HTTP browsers

@@ -1,0 +1,2 @@
+# pre-built binary
+go-ipfs: hardening-no-relro usr/bin/ipfs
