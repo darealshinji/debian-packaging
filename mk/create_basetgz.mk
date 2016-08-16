@@ -20,14 +20,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-basetgz = "/var/cache/pbuilder/debian-packages-$(ARCH).tgz"
+basetgz_path = /var/cache/pbuilder
+basetgz = "$(basetgz_path)/debian-packages-$(ARCH).tgz"
 
 create_basetgz = \
 	test -n "$$basetgz" || basetgz=$(basetgz) ;                            \
 	if [ ! -f $$basetgz ] ;                                                \
 	then                                                                   \
 	    echo "" ;                                                          \
-	    echo "sudo password required to create $(basetgz):" ;              \
+	    echo "sudo password required to create $$basetgz:" ;               \
 	    sudo -k pbuilder                                                   \
 	         --create                                                      \
 	         --components "main restricted universe multiverse"            \
