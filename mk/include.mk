@@ -25,14 +25,16 @@ export LANG=C
 export LANGUAGE=C
 export LC_ALL=C
 
+ARCH     = $(shell dpkg-architecture -qDEB_HOST_ARCH)
+ARCHREAL = $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+include ../../mk/create_basetgz.mk
+
 def_compat  = 9
-ARCH        = $(shell dpkg-architecture -qDEB_HOST_ARCH)
-ARCHREAL    = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 builddir    = pbuilder-source
 LOG         = $(shell basename $$PWD)-build.log
 TIME        = TIME="\nTime elapsed: %E\n" time
 resultdir   = "$$HOME/buildresult"
-basetgz     = "/var/cache/pbuilder/debian-packages-$(ARCH).tgz"
 JOBS        = $(shell nproc)
 pbuildercmd = pbuilder --build --debbuildopts "-j$(JOBS)" \
 			--basetgz $(basetgz) --buildresult $(resultdir) *.dsc
@@ -43,7 +45,8 @@ pbuildercmd = pbuilder --build --debbuildopts "-j$(JOBS)" \
 # $(call verifysha256,FILE,SHA256_CHECKSUM)
 define verifysha256
 	sha256_2=$$(sha256sum $(1) | head -c64) ;                      \
-	if [ $$sha256_2 != $(2) ] ; then                               \
+	if [ $$sha256_2 != $(2) ] ;                                    \
+	then                                                           \
 	    echo "$(1):" ;                                             \
 	    echo "SHA256 checksum is $$sha256_2 but should be $(2)." ; \
 	    echo "Delete '$(1)' and try it again." ;                   \
@@ -92,17 +95,13 @@ allcleanfiles = .pc                  \
                 $(builddir)          \
                 $(cleanfiles)
 
-alldeps  = build-essential      \
-           time                 \
-           debhelper            \
-           fakeroot             \
-           quilt                \
-           aptitude             \
-           lintian              \
-           $(deps)
+alldeps = build-essential lintian time quilt
 ifeq ($(PBUILDER),1)
 alldeps += pbuilder
+else
+alldeps += aptitude debhelper fakeroot libfile-fcntllock-perl
 endif
+alldeps += $(deps)
 
 
 
@@ -121,18 +120,17 @@ distclean: clean
 predepends:
 ifneq ($(PBUILDER),1)
 	@ echo ""
-	@ # why does 'ifneq ($(ARCH),$(ARCHREAL))' not work?
-	@ if [ $(ARCH) != $(ARCHREAL) ];                                              \
+	@ if [ $(ARCH) != $(ARCHREAL) ] ;                                             \
 	then                                                                          \
 		echo "Cannot build packages for $(ARCH) architecture without pbuilder." ; \
 		echo "Try again with \`PBUILDER=1'" ;                                     \
 		echo "" ;                                                                 \
 		exit 1 ;                                                                  \
 	fi
-endif
+endif #PBUILDER
 ifeq ($(DEPS),0)
 	@ echo "dependency checks skipped"
-else
+else #DEPS
 	@ echo "checking dependencies:"
 	@ for dep in $(alldeps) ;                                                                     \
 	do                                                                                            \
@@ -152,7 +150,7 @@ else
 	  sudo -k apt-get -q install $$missing ;                                                      \
 	fi
 	@ echo ""
-endif
+endif #DEPS
 
 
 source: download
@@ -172,7 +170,16 @@ build: source
 	echo '3.0 (native)' > $(builddir)/debian/source/format
 	test -f $(builddir)/debian/compat || echo '$(def_compat)' > $(builddir)/debian/compat
 
-ifneq ($(PBUILDER),1)
+ifeq ($(PBUILDER),1)
+	dpkg-source -b $(builddir)
+	@ $(create_basetgz)
+	@# required for correct R/W rights
+	mkdir -p $(resultdir)
+	@ echo ""
+	@ echo "sudo password required to run pbuilder:"
+	@ echo "  $(pbuildercmd)"
+	@ sudo -k $(TIME) $(pbuildercmd) *.dsc 2>&1 | tee $(LOG)
+else #PBUILDER
 ifneq ($(DEPS),0)
 	@ cd $(builddir) ;                                                                                      \
 	builddeps="`dpkg-checkbuilddeps 2>&1 | sed -e 's/dpkg-checkbuilddeps: Unmet build dependencies: //;'`"; \
@@ -184,33 +191,12 @@ ifneq ($(DEPS),0)
 	    echo "" ;                                                                                           \
 	    sudo -k $(CURDIR)/../../mk/pbuilder-satisfydepends.sh ;                                             \
 	fi
-endif
+endif #DEPS
 	cd $(builddir) && $(TIME) dpkg-buildpackage -j$(JOBS) -rfakeroot -b -us -uc 2>&1 | tee ../$(LOG)
 	rm -f *.changes
 	mkdir -p $(resultdir)
 	mv *.deb $(resultdir)
-else
-	dpkg-source -b $(builddir)
-	@ if [ ! -f $(basetgz) ] ;                                        \
-	then                                                              \
-	    echo "" ;                                                     \
-	    echo "sudo password required to create $(basetgz):" ;         \
-	    sudo -k pbuilder                                              \
-	         --create                                                 \
-	         --components "main restricted universe multiverse"       \
-	         --debootstrapopts --arch --debootstrapopts $(ARCH)       \
-	         --debootstrapopts --variant=buildd                       \
-	         --basetgz $(basetgz)                                     \
-	         --extrapackages "debhelper fakeroot" ;                   \
-	fi
-
-	@# required for correct R/W rights
-	mkdir -p $(resultdir)
-	@ echo ""
-	@ echo "sudo password required to run pbuilder:"
-	@ echo "  $(pbuildercmd)"
-	@ sudo -k $(TIME) $(pbuildercmd) *.dsc 2>&1 | tee $(LOG)
-endif
+endif #PBUILDER
 
 
 	rm -f $(resultdir)/*.dsc
