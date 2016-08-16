@@ -75,7 +75,6 @@ vlcfeatures = \
 	--enable-linsys \
 	--enable-omxil \
 	--enable-udev \
-	--enable-v4l2 \
 	\
 	--enable-libva \
 	--enable-vcd \
