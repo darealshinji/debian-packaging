@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf behand
+
+override_dh_auto_build:
+	tar xf behand.tar.gz
+

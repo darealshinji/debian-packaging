@@ -1,0 +1,3 @@
+behand/cursors/*      /usr/share/icons/behand/cursors
+debian/index.theme    /usr/share/icons/behand
+debian/behand.theme   /etc/X11
