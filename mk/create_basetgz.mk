@@ -24,6 +24,7 @@ basetgz_path = /var/cache/pbuilder
 basetgz = "$(basetgz_path)/debian-packages-$(ARCH).tgz"
 
 create_basetgz = \
+	test -n "$$arch" || arch="$(ARCH)" ;                                   \
 	test -n "$$basetgz" || basetgz=$(basetgz) ;                            \
 	if [ ! -f $$basetgz ] ;                                                \
 	then                                                                   \
@@ -32,7 +33,7 @@ create_basetgz = \
 	    sudo -k pbuilder                                                   \
 	         --create                                                      \
 	         --components "main restricted universe multiverse"            \
-	         --debootstrapopts --arch --debootstrapopts $(ARCH)            \
+	         --debootstrapopts --arch --debootstrapopts $$arch             \
 	         --debootstrapopts --variant=buildd                            \
 	         --basetgz $$basetgz                                           \
 	         --extrapackages "debhelper fakeroot libfile-fcntllock-perl" ; \

@@ -81,11 +81,11 @@ basetgz-all: $(basetgz_i386) $(basetgz_amd64)
 
 basetgz-i386: $(basetgz_i386)
 $(basetgz_i386):
-	@ basetgz=$@; $(create_basetgz)
+	@ arch="i386"; basetgz=$@; $(create_basetgz)
 
 basetgz-amd64: $(basetgz_amd64)
 $(basetgz_amd64):
-	@ basetgz=$@; $(create_basetgz)
+	@ arch="amd64"; basetgz=$@; $(create_basetgz)
 
 remove-basetgz:
 	sudo -k rm -vf $(basetgz)
