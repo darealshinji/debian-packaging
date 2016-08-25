@@ -42,7 +42,13 @@ Depends:
  ${shlibs:Depends},
  ${misc:Depends},
  ksh,
- mksh
+ mksh,
+ rpcbind,
+ xbitmaps
+Recommends:
+ x11-xserver-utils,
+ xfonts-100dpi,
+ xfonts-100dpi-transcoded
 Description: Common Desktop Environment
  The Common Desktop Environment was created by a collaboration of Sun, HP,
  IBM, DEC, SCO, Fujitsu and Hitachi. Used on a selection of commercial
