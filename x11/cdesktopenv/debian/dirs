@@ -4,6 +4,3 @@
 /etc/dt/appconfig/types/C
 /etc/dt/config/Xsession.d
 /etc/dt/config/xfonts/C
-/var/dt/appconfig/appmanager
-/var/dt/tmp
-/usr/dt/spool

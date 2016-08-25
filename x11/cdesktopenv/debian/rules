@@ -1,11 +1,38 @@
 #!/usr/bin/make -f
 
+cleanfiles = \
+	xmakefile \
+	admin/IntegTools/dbTools/installCDE.*.log \
+	config/imake/Makefile.proto \
+	programs/dtappbuilder/src/ab/*.res \
+	programs/dtappbuilder/src/libABil/bil_parse.h \
+	programs/dtappbuilder/src/libABil/bil_parse.c \
+	programs/dtappbuilder/src/abmf/dtcodegen.cat \
+	programs/dtcm/server/parser.h \
+	programs/dtudcfonted/libfal/fonts.list \
+	programs/ttsnoop/ttsnoop.h \
+	programs/tttypes/*.deps
+
+cleandirs = \
+	admin/IntegTools/dbTools/appconfig \
+	exports \
+	doc/C/m-guides \
+	programs/dtksh/ksh93/src/cmd/ksh93/FEATURE \
+	programs/dtksh/ksh93/include
+
+
 %:
 	dh ${@}
 
 override_dh_auto_clean:
-	[ ! -f xmakefile ] || $(MAKE) -j1 clean
-	rm -f lib/relink.mak lib/*.so lib/*.so.*
+	rm -f lib/relink.mak
+	[ ! -f xmakefile ] || $(MAKE) -j1 clean clean.doc
+	find */* -name Makefile -delete
+	find */* -name .depend -delete
+	find */* -name lib*.so -delete
+	find */* -name lib*.so.* -delete
+	rm -f $(cleanfiles)
+	rm -rf $(cleandirs)
 
 override_dh_auto_build:
 	export LANG=C; \
@@ -41,16 +68,10 @@ override_dh_install:
 override_dh_makeshlibs:
 
 override_dh_fixperms:
+	chmod 0755 $(CURDIR)/debian/cdesktopenv/usr/bin/start-cde-xsession
 	chmod 0755 $(CURDIR)/debian/cdesktopenv/usr/dt/config/Xsession.d/*
 	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/infolib/etc/dtsr/dtsearch.dbd
 	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/dthelp/dtdocbook/docbook.tcl
 	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/config/sys.dtprofile
-
 	dh_fixperms
-
-	chown bin $(CURDIR)/debian/cdesktopenv/var/dt
-	chgrp bin $(CURDIR)/debian/cdesktopenv/var/dt
-	chown -R bin $(CURDIR)/debian/cdesktopenv/var/dt/*
-	chgrp -R bin $(CURDIR)/debian/cdesktopenv/var/dt/*
-
 

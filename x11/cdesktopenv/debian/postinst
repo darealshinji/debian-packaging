@@ -1,0 +1,42 @@
+#! /bin/sh
+
+set -e
+
+spl="/usr/spool"
+var="/var/dt"
+
+case "$1" in
+  configure)
+    if [ -d $var ]; then
+      rm -rf $var
+    elif [ -e $var ] && [ ! -d $var ]; then
+      echo "warning: \`$var' already exists and is not a directory!"
+    fi
+
+    if [ ! -e $dir ]; then
+      mkdir -p $var/appconfig/appmanager
+      mkdir -p $var/tmp
+      mkdir -p $var/spool
+      chmod 0755 $var
+      chown bin $var
+      chgrp bin $var
+      chmod -R 0755 $var/*
+      chown -R bin $var/*
+      chgrp -R bin $var/*
+    fi
+
+    if [ -L $spl ]; then
+      rm -f $spl
+    elif [ -e $spl ] && [ ! -L $spl ]; then
+      echo "warning: \`$spl' already exists and is not a symbolic link!"
+    fi
+
+    if [ ! -e $spl ]; then
+      ln -s $var/spool /usr/spool
+    fi
+  ;;
+esac
+
+#DEBHELPER#
+
+exit 0
