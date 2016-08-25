@@ -68,7 +68,7 @@ override_dh_install:
 override_dh_makeshlibs:
 
 override_dh_fixperms:
-	chmod 0755 $(CURDIR)/debian/cdesktopenv/usr/bin/start-cde-xsession
+	chmod 0755 $(CURDIR)/debian/cdesktopenv/usr/dt/bin/start-cde-xsession
 	chmod 0755 $(CURDIR)/debian/cdesktopenv/usr/dt/config/Xsession.d/*
 	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/infolib/etc/dtsr/dtsearch.dbd
 	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/dthelp/dtdocbook/docbook.tcl
