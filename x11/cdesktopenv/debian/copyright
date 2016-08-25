@@ -41,3 +41,7 @@ License: MIT
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
+Comment:
+ The files in `debian/extra-files/', with the exception of `relink.mak', were all
+ taken from the ArchLinux User Repository: https://aur.archlinux.org/cgit/aur.git/tree/?h=cdesktopenv
+
