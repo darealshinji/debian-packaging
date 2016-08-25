@@ -31,6 +31,8 @@ Build-Depends:
  xfonts-100dpi,
  xfonts-100dpi-transcoded,
  zlib1g-dev
+Build-Conflicts:
+ xutils-dev
 Standards-Version: 3.9.6
 Homepage: https://sourceforge.net/projects/cdesktopenv/
 Vcs-Git: git://git.code.sf.net/p/cdesktopenv/code
