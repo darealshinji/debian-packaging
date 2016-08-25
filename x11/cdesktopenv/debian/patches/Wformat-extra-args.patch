@@ -1,0 +1,64 @@
+--- a/programs/dthelp/dthelpprint/PrintUtil.c
++++ b/programs/dthelp/dthelpprint/PrintUtil.c
+@@ -99,7 +99,6 @@ void PutOpt(
+       Boolean optionHasValue)
+ {       /*$CODE$*/
+    char * start;
+-   char * fmt;
+    
+    /* check params */
+    if (    option == NULL 
+@@ -109,9 +108,10 @@ void PutOpt(
+        return;						/* RETURN */
+    
+    start = &cmdStr[strlen(cmdStr)];
+-   if ( value == NULL ) fmt = " %s";
+-   else fmt = " %s '%s'";
+-   sprintf(start,fmt,option,value);
++   if ( value == NULL )
++      sprintf(start," %s",option);
++   else
++      sprintf(start," %s '%s'",option,value);
+ } /*$END$*/
+ 
+ 
+@@ -204,7 +204,7 @@ int _DtHPrGenFileOrPrint(
+    }
+ 
+    /* put the shell print script in there */
+-   sprintf(printCommand,"%s", options->shCommand,True);
++   sprintf(printCommand,"%s '%s'",options->shCommand,True);
+ 
+    /* set all the options that are IPC to the print script */
+    PutOpt(printCommand,OPT_LPDEST,options->printer,True);
+--- a/programs/dtmail/dtmail/WMSaveSession.C
++++ b/programs/dtmail/dtmail/WMSaveSession.C
+@@ -372,7 +372,7 @@ RoamMenuWindow::restoreSession(char *buf)
+ 		fp, "%s%s%d%d%d%d%d",
+ 		buf,workspaces,&iconic,&x,&y,&width,&height) != 7)
+ 	{
+-	    fscanf(fp,"[\n]",buf);
++	    fscanf(fp,"[%s\n]",buf);
+     	    LOG_CLOSEFILEPTR(log);
+ 	    return NULL;
+ 	}
+@@ -593,7 +593,7 @@ SendMsgDialog::restoreSession(char *buf)
+ 		fp, "%s%s%d%d%d%d%d",
+ 		buf,workspaces,&iconic,&x,&y,&width,&height) != 7)
+ 	{
+-	    fscanf(fp,"[\n]",buf);
++	    fscanf(fp,"[%s\n]",buf);
+     	    LOG_CLOSEFILEPTR(log);
+ 	    return;
+ 	}
+--- a/programs/localized/util/mkcatdefs.c
++++ b/programs/localized/util/mkcatdefs.c
+@@ -317,7 +317,7 @@ mkcatdefs(char *fname)
+ 	
+ 	sscanf (cp+3+len, "%s", setname);
+ 	if (inclfile) 
+-	  fprintf (outfp, "\n/* definitions for set %s */\n", setname, "");
++	  fprintf (outfp, "\n/* definitions for set %s */\n", setname);
+ 	if (isdigit(setname[0])) {
+ 	  cpt = setname;
+ 	  do  {

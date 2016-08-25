@@ -1,0 +1,20 @@
+--- a/programs/dtappbuilder/src/ab/cgen_env_stubs.c
++++ b/programs/dtappbuilder/src/ab/cgen_env_stubs.c
+@@ -240,7 +240,7 @@ cgenP_cancel_envCB(
+     DtbCgenEnvDialogInfo        env_dlg = (DtbCgenEnvDialogInfo)clientData;
+     char buf[10];
+ 
+-    sprintf(buf, "");
++    sprintf(buf, "%s", "");
+     XmTextFieldSetString(env_dlg->name_textf, buf);
+     XmTextSetString(env_dlg->textpane, buf);
+     
+--- a/programs/dtappbuilder/src/libABil/bil_lexer.c
++++ b/programs/dtappbuilder/src/libABil/bil_lexer.c
+@@ -465,5 +465,5 @@ sprint(char *s)
+ void
+ bilP_reset_token_text(void)
+ {
+-    sprintf(tokenText, "");
++    sprintf(tokenText, "%s", "");
+ }

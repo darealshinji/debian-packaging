@@ -1,0 +1,39 @@
+--- a/config/cf/linux.cf
++++ b/config/cf/linux.cf
+@@ -111,8 +111,8 @@
+ #define NeedWidePrototypes	NO
+ #define SetTtyGroup		YES
+ 
+-#define CcCmd			gcc -g -pipe
+-#define CplusplusCmd		g++ -g -pipe -fpermissive
++#define CcCmd			gcc -pipe  -O2 -fno-strict-aliasing -fstack-protector --param=ssp-buffer-size=4 -Wno-write-strings -Wno-unused-result -Wformat -D_FORTIFY_SOURCE=2
++#define CplusplusCmd		g++ -pipe -fpermissive  -O2 -fno-strict-aliasing -fstack-protector --param=ssp-buffer-size=4 -Wno-write-strings -Wno-unused-result -Wformat -D_FORTIFY_SOURCE=2
+ #define AsCmd			as
+ #define LdCmd			ld
+ 
+--- a/config/cf/site.def
++++ b/config/cf/site.def
+@@ -166,3 +166,10 @@
+ #endif
+ 
+ #endif /* AfterVendorCF */
++
++#define KornShell /bin/mksh
++#define CppCmd cpp
++#define YaccCmd bison -y
++#define HasTIRPCLib YES
++#define HasZlib YES
++#define DtLocalesToBuild
+--- a/programs/dtfile/Utils.c
++++ b/programs/dtfile/Utils.c
+@@ -41,6 +41,10 @@
+  ****************************************************************************
+  ************************************<+>*************************************/
+ 
++#ifndef FILE_MAP_OPTIMIZE
++# define FILE_MAP_OPTIMIZE
++#endif
++
+ #include <Dt/Connect.h>
+ #include <Tt/tttk.h>
+ 

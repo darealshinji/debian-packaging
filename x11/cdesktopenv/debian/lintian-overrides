@@ -1,0 +1,10 @@
+cdesktopenv: file-in-unusual-dir usr/dt/*
+cdesktopenv: file-in-unusual-dir usr/spool
+cdesktopenv: non-standard-dir-in-usr usr/dt/
+cdesktopenv: non-standard-dir-in-var var/dt/
+cdesktopenv: unusual-interpreter usr/dt/* #!/usr/dt/bin/dtksh
+cdesktopenv: executable-not-elf-or-script usr/dt/app-defaults/C/Ttsnoop
+cdesktopenv: executable-not-elf-or-script usr/dt/appconfig/appmanager/C/Desktop_Apps/*
+cdesktopenv: executable-not-elf-or-script usr/dt/appconfig/appmanager/C/Desktop_Tools/*
+cdesktopenv: executable-not-elf-or-script usr/dt/appconfig/appmanager/C/Information/OpenDtIntro
+cdesktopenv: executable-not-elf-or-script usr/dt/config/Xsession.d/*

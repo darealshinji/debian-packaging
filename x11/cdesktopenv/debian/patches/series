@@ -1,0 +1,5 @@
+cde-config.patch
+Wformat-contains-nul.patch
+Wformat-extra-args.patch
+Wformat-security.patch
+Wformat-zero-length.patch

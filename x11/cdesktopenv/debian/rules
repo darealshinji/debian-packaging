@@ -1,0 +1,56 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	[ ! -f xmakefile ] || $(MAKE) -j1 clean
+	rm -f lib/relink.mak lib/*.so lib/*.so.*
+
+override_dh_auto_build:
+	export LANG=C; \
+	export LC_ALL=C; \
+	export IMAKECPP=cpp; \
+	  $(MAKE) -j1 World
+
+	sed -e 's|mkProd -D |&$(CURDIR)/debian/tmp|g' -i \
+	  admin/IntegTools/dbTools/installCDE
+
+	cp -f debian/extra-files/relink.mak lib/
+	$(MAKE) -C lib -f relink.mak
+
+override_dh_auto_install:
+	export LANG=C; \
+	export LC_ALL=C; \
+	export INSTALL_LOCATION="$(CURDIR)/debian/tmp/usr/dt"; \
+	export LOGFILES_LOCATION="$(CURDIR)/debian/tmp/var/dt"; \
+	export CONFIGURE_LOCATION="$(CURDIR)/debian/tmp/etc/dt"; \
+	  cd admin/IntegTools/dbTools/ && ./installCDE -s $(CURDIR)
+
+	rm -f debian/tmp/usr/dt/lib/*.so debian/tmp/usr/dt/lib.so.*
+	rm -rf debian/tmp/etc/rc.d
+
+	chrpath -r '$$ORIGIN/../lib' -k debian/tmp/usr/dt/bin/* \
+	  debian/tmp/usr/dt/lib/dtudcfonted/* || true
+	chrpath -r '$$ORIGIN/../../lib' -k debian/tmp/usr/dt/infolib/etc/* \
+	  debian/tmp/usr/dt/dthelp/dtdocbook/* || true
+
+override_dh_install:
+	dh_install -XCONTRIBUTORS -XCOPYING
+
+override_dh_makeshlibs:
+
+override_dh_fixperms:
+	chmod 0755 $(CURDIR)/debian/cdesktopenv/usr/dt/config/Xsession.d/*
+	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/infolib/etc/dtsr/dtsearch.dbd
+	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/dthelp/dtdocbook/docbook.tcl
+	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/config/sys.dtprofile
+
+	dh_fixperms
+
+	chown bin $(CURDIR)/debian/cdesktopenv/var/dt
+	chgrp bin $(CURDIR)/debian/cdesktopenv/var/dt
+	chown -R bin $(CURDIR)/debian/cdesktopenv/var/dt/*
+	chgrp -R bin $(CURDIR)/debian/cdesktopenv/var/dt/*
+
+

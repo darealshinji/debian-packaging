@@ -1,0 +1,402 @@
+--- a/doc/util/dbtoman/instant/browse.c
++++ b/doc/util/dbtoman/instant/browse.c
+@@ -186,8 +186,7 @@ Browse()
+ 	    if (av[1] && isdigit(*av[1])) {
+ 		n = atoi(av[1]);
+ 		if (n < ce->ndcont) {
+-		    printf(ce->dcont[n]);
+-		    fputs("\n", stdout);
++		    printf("%s\n", ce->dcont[n]);
+ 		}
+ 		else if (ce->ndcont == 0)
+ 		    printf("No data at this node.\n");
+--- a/programs/dtappbuilder/src/abmf/instances.c
++++ b/programs/dtappbuilder/src/abmf/instances.c
+@@ -190,7 +190,7 @@ write_assign_local_vars_for_icon(GenCodeInfo genCodeInfo, ABObj obj)
+         else
+ 	*/
+         {
+-	    sprintf(parentName, abmfP_get_widget_parent_name(genCodeInfo, obj));
++	    sprintf(parentName, "%s", abmfP_get_widget_parent_name(genCodeInfo, obj));
+ 	}
+     }
+ 
+--- a/programs/dtappbuilder/src/libABil/bil_loadfile.c
++++ b/programs/dtappbuilder/src/libABil/bil_loadfile.c
+@@ -210,7 +210,7 @@ bil_load_file(
+     {
+ 	LoadErr = TRUE;
+ 	sprintf(Buf, catgets(ABIL_MESSAGE_CATD, ABIL_MESSAGE_SET, 39,
+-		"Unable to load project."));
++		"%s: Unable to load project."));
+ 	errmsg = Buf;
+ 	goto epilogue;
+     }
+--- a/programs/dtappbuilder/src/libABobjXm/objxm_config.c
++++ b/programs/dtappbuilder/src/libABobjXm/objxm_config.c
+@@ -310,7 +310,7 @@ xm_configure_tree(
+     {
+ 	fprintf(stderr, 
+ 	    catgets(OBJXM_MESSAGE_CATD, OBJXM_MESSAGE_SET, 8,
+-	       "INTERNAL ERROR: salient counts don't match.\n") );
++	       "%s: salient counts don't match.\n") );
+ 	iRetVal= -1;
+ 	goto epilogue;
+     }
+--- a/programs/dtappbuilder/src/libAButil/istr.c
++++ b/programs/dtappbuilder/src/libAButil/istr.c
+@@ -168,7 +168,7 @@ istr_create (
+                     {
+                         fprintf(stderr,
+ 			    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                            "ISTR: error in allocating to int array\n") );
++                            "%s: error in allocating to int array\n") );
+                         return NULL;
+                     }
+                     num_count++;
+@@ -181,7 +181,7 @@ istr_create (
+                     {
+                         fprintf(stderr,
+ 			    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 2,
+-                            "ISTR: error in allocating space for string\n") );
++                            "%s: error in allocating space for string\n") );
+                         return NULL;
+                     }
+                     entry->values[i] = freelist[freecount-1];
+@@ -189,7 +189,7 @@ istr_create (
+                     {
+                         fprintf(stderr,
+ 			    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                            "ISTR: error in allocating to int array\n") );
++                            "%s: error in allocating to int array\n") );
+                         return NULL; 
+                     }
+                     freecount--;
+@@ -211,7 +211,7 @@ istr_create (
+                         {
+                             fprintf(stderr,
+ 			        catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                                "ISTR: error in allocating to int array\n") );
++                                "%s: error in allocating to int array\n") );
+                             return NULL;
+                         }
+                         num_count++;
+@@ -224,7 +224,7 @@ istr_create (
+                         {
+                             fprintf(stderr,
+ 			        catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 2,
+-                                "ISTR: error in allocating space for string\n") );
++                                "%s: error in allocating space for string\n") );
+                             return NULL;
+                         }
+                         entry->values[i] = freelist[freecount-1];
+@@ -233,7 +233,7 @@ istr_create (
+                         {
+                             fprintf(stderr,
+ 			        catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                                "ISTR: error in allocating to int array\n") );
++                                "%s: error in allocating to int array\n") );
+                             return NULL;
+                         }
+                         freecount--;
+@@ -249,7 +249,7 @@ istr_create (
+         {
+             fprintf(stderr,
+ 		catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 3,
+-		"ISTR: error in allocating memory\n") );
++		"%s: error in allocating memory\n") );
+             return NULL ;
+         }  
+         for(i=1;i<BUCKETSIZE; i++)
+@@ -263,7 +263,7 @@ istr_create (
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-		    "ISTR: error in allocating to int array\n") );
++		    "%s: error in allocating to int array\n") );
+                 return NULL;
+             }
+             num_count++;
+@@ -276,7 +276,7 @@ istr_create (
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 2,
+-		    "ISTR: error in allocating space for string\n") );
++		    "%s: error in allocating space for string\n") );
+                 return NULL;
+             }
+             new_bucket->values[0] = freelist[freecount-1];
+@@ -285,7 +285,7 @@ istr_create (
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-		    "ISTR: error in allocating to int array\n") );
++		    "%s: error in allocating to int array\n") );
+                 return NULL;
+             }
+             freecount--;
+@@ -337,7 +337,7 @@ istrP_create_alloced_impl(
+                     {
+                         fprintf(stderr,
+ 			    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                            "ISTR: error in allocating to int array\n") );
++                            "%s: error in allocating to int array\n") );
+                         return NULL;
+                     }
+                     num_count++;
+@@ -350,7 +350,7 @@ istrP_create_alloced_impl(
+                     {
+                         fprintf(stderr,
+ 			    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 2,
+-                            "ISTR: error in allocating space for string\n") );
++                            "%s: error in allocating space for string\n") );
+                         return NULL;
+                     }
+                     entry->values[i] = freelist[freecount-1];
+@@ -358,7 +358,7 @@ istrP_create_alloced_impl(
+                     {
+                         fprintf(stderr,
+ 			    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                            "ISTR: error in allocating to int array\n") );
++                            "%s: error in allocating to int array\n") );
+                         return NULL;
+                     }
+                     freecount--;
+@@ -380,7 +380,7 @@ istrP_create_alloced_impl(
+                         {
+                             fprintf(stderr,
+ 			        catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                                "ISTR: error in allocating to int array\n") );
++                                "%s: error in allocating to int array\n") );
+                             return NULL;
+                         }
+                         num_count++;
+@@ -393,7 +393,7 @@ istrP_create_alloced_impl(
+                         {
+                             fprintf(stderr,
+ 			        catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 2,
+-                                "ISTR: error in allocating space for string\n") );
++                                "%s: error in allocating space for string\n") );
+                             return NULL;
+                         }
+                         entry->values[i] = freelist[freecount-1];
+@@ -402,7 +402,7 @@ istrP_create_alloced_impl(
+                         {
+                             fprintf(stderr,
+ 			        catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                                "ISTR: error in allocating to int array\n") );
++                                "%s: error in allocating to int array\n") );
+                             return NULL;
+                         }
+                         freecount--;
+@@ -418,7 +418,7 @@ istrP_create_alloced_impl(
+         {
+             fprintf(stderr,
+ 		catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 3,
+-	        "ISTR: error in allocating memory\n") );
++	        "%s: error in allocating memory\n") );
+             return NULL ;
+         }  
+         for(i=1;i<BUCKETSIZE; i++)
+@@ -432,7 +432,7 @@ istrP_create_alloced_impl(
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-		    "ISTR: error in allocating to int array\n") );
++		    "%s: error in allocating to int array\n") );
+                 return NULL;
+             }
+             num_count++;
+@@ -445,7 +445,7 @@ istrP_create_alloced_impl(
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 2,
+-		    "ISTR: error in allocating space for string\n") );
++		    "%s: error in allocating space for string\n") );
+                 return NULL;
+             }
+             new_bucket->values[0] = freelist[freecount-1];
+@@ -454,7 +454,7 @@ istrP_create_alloced_impl(
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-		    "ISTR: error in allocating to int array\n") );
++		    "%s: error in allocating to int array\n") );
+                 return NULL;
+             }
+             freecount--;
+@@ -514,7 +514,7 @@ istr_create_const(
+                     {
+                         fprintf(stderr,
+ 			    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                            "ISTR: error in allocating to int array\n") );
++                            "%s: error in allocating to int array\n") );
+                         return NULL;
+                     }
+                     num_count++;
+@@ -527,7 +527,7 @@ istr_create_const(
+                     {
+                         fprintf(stderr,
+ 			    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 2,
+-                            "ISTR: error in allocating space for string\n") );
++                            "%s: error in allocating space for string\n") );
+                         return NULL;
+                     }
+                     entry->values[i] = freelist[freecount-1];
+@@ -535,7 +535,7 @@ istr_create_const(
+                     {
+                         fprintf(stderr,
+ 			    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                            "ISTR: error in allocating to int array\n") );
++                            "%s: error in allocating to int array\n") );
+                         return NULL;
+                     }
+                     freecount--;
+@@ -557,7 +557,7 @@ istr_create_const(
+                         {
+                             fprintf(stderr,
+ 			        catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                                "ISTR: error in allocating to int array\n") );
++                                "%s: error in allocating to int array\n") );
+                             return NULL;
+                         }
+                         num_count++;
+@@ -570,7 +570,7 @@ istr_create_const(
+                         {
+                             fprintf(stderr,
+ 			        catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 2,
+-                                "ISTR: error in allocating space for string\n") );
++                                "%s: error in allocating space for string\n") );
+                             return NULL;
+                         }
+                         entry->values[i] = freelist[freecount-1];
+@@ -579,7 +579,7 @@ istr_create_const(
+                         {
+                             fprintf(stderr,
+ 			        catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-                                "ISTR: error in allocating to int array\n") );
++                                "%s: error in allocating to int array\n") );
+                             return NULL;
+                         }
+                         freecount--;
+@@ -595,7 +595,7 @@ istr_create_const(
+         {
+             fprintf(stderr,
+ 		catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 3,
+-		"ISTR: error in allocating memory\n") );
++		"%s: error in allocating memory\n") );
+             return NULL ;
+         }  
+ 	for(i=1;i<BUCKETSIZE; i++)
+@@ -611,7 +611,7 @@ istr_create_const(
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-		    "ISTR: error in allocating to int array\n") );
++		    "%s: error in allocating to int array\n") );
+                 return NULL;
+             }
+             num_count++;
+@@ -624,7 +624,7 @@ istr_create_const(
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 2,
+-		    "ISTR: error in allocating space for string\n") );
++		    "%s: error in allocating space for string\n") );
+                 return NULL;
+             }
+             new_bucket->values[0] = freelist[freecount-1];
+@@ -633,7 +633,7 @@ istr_create_const(
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 1,
+-		    "ISTR: error in allocating to int array\n") );
++		    "%s: error in allocating to int array\n") );
+                 return NULL;
+             }
+             freecount--;
+@@ -757,7 +757,7 @@ istrP_destroy_impl(
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 3,
+-		    "ISTR: error in allocating memory\n") );
++		    "%s: error in allocating memory\n") );
+                 return 0 ;
+             }  
+             free_num = 1;
+@@ -778,7 +778,7 @@ istrP_destroy_impl(
+             {
+                 fprintf(stderr,
+ 		    catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 3,
+-		    "ISTR: error in allocating memory\n") );
++		    "%s: error in allocating memory\n") );
+                 return 0 ;
+             }  
+             freelist[freecount] = istring;
+@@ -937,7 +937,7 @@ insert_array(
+         {
+             fprintf(stderr,
+ 		catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 3,
+-		"ISTR: error in allocating memory\n") );
++		"%s: error in allocating memory\n") );
+             return 0 ;
+         }  
+         array_num = 1;
+@@ -972,7 +972,7 @@ insert_array(
+         {
+             fprintf(stderr,
+ 		catgets(UTIL_MESSAGE_CATD, UTIL_MESSAGE_SET, 3,
+-		"ISTR: error in allocating memory\n") );
++		"%s: error in allocating memory\n") );
+             return 0 ;
+         }  
+         int_array[val].refcount =1;
+--- a/programs/dthelp/dthelpgen/helpgen.c
++++ b/programs/dthelp/dthelpgen/helpgen.c
+@@ -341,7 +341,7 @@ CreateVolumeLink (
+ 	 * put the abstract information about this
+ 	 * family in the header file
+ 	 */
+-	fprintf (outTopic, GetMessage (3, 3, "<P before 1 first 1 left 1>\n"));
++	fprintf (outTopic, "%s", GetMessage (3, 3, "<P before 1 first 1 left 1>\n"));
+ 
+ 	if (abstract != NULL)
+ 	  {
+@@ -489,7 +489,7 @@ CreateFamily (
+ 	     */
+ 	    fprintf (out_topic, (GetMessage (3, 2, (char*)defaultTitle14)),
+ 								title);
+-	    fprintf (out_topic, (GetMessage (3, 3, "<P before 1 first 1 left 1>\n")));
++	    fprintf (out_topic, "%s", (GetMessage (3, 3, "<P before 1 first 1 left 1>\n")));
+ 	    fprintf (out_topic, "%s\n", abstract);
+ 	    fprintf (out_topic, "</P>\n");
+ 
+@@ -549,7 +549,7 @@ CreateFamily (
+ 			bitmap, familyName);
+ 		  }
+ 		else
+-		    fprintf (out_header, GetMessage (3, 3, "<P before 1 first 1 left 1>\n"));
++		    fprintf (out_header, "%s", (GetMessage (3, 3, "<P before 1 first 1 left 1>\n")));
+ 		fprintf (out_header, "%s\n", abstract);
+ 		fprintf (out_header, "</P></CHARACTERSET>\n");
+ 
+--- a/programs/dthelp/dthelpprint/Initialize.c
++++ b/programs/dthelp/dthelpprint/Initialize.c
+@@ -702,7 +702,7 @@ void Usage(void)
+    };
+     int i;
+     for (i=0; usage[i]; i++)
+-       printf(_DTGETMESSAGE(INSET,i,usage[i]));
++       printf("%s", _DTGETMESSAGE(INSET,i,usage[i]));
+ }       /*$END$*/
+ 
+ 
+@@ -1530,7 +1530,7 @@ char * _DtHPrCreateTmpFile(
+    newtmpfile=malloc((strlen(dirname) + FILENAMELEN + 2) * sizeof(char));
+    if (NULL == newtmpfile)
+    {
+-      fprintf(stderr, _DTGETMESSAGE(INSET,45,
++      fprintf(stderr, "%s", _DTGETMESSAGE(INSET,45,
+                      "Error: Unable to allocate memory for temporary file\n"));
+    }
+    else

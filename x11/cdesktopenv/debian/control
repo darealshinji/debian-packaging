@@ -1,0 +1,49 @@
+Source: cdesktopenv
+Section: x11
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ bison,
+ chrpath,
+ libcups2-dev,
+ libfreetype6-dev,
+ libjpeg62-dev,
+ libmotif-dev,
+ libncurses5-dev,
+ libssl-dev,
+ libtirpc-dev,
+ libx11-dev,
+ libxaw7-dev,
+ libxft-dev,
+ libxinerama-dev,
+ libxmu-dev,
+ libxpm-dev,
+ libxss-dev,
+ libxt-dev,
+ m4,
+ mksh,
+ ncompress,
+ rpcbind,
+ tcl-dev,
+ x11-xserver-utils,
+ xbitmaps,
+ xfonts-100dpi,
+ xfonts-100dpi-transcoded,
+ zlib1g-dev
+Standards-Version: 3.9.6
+Homepage: https://sourceforge.net/projects/cdesktopenv/
+Vcs-Git: git://git.code.sf.net/p/cdesktopenv/code
+Vcs-Browser: https://sourceforge.net/p/cdesktopenv/code/ci/master/tree/cde/
+
+Package: cdesktopenv
+Architecture: i386
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ ksh,
+ mksh
+Description: Common Desktop Environment
+ The Common Desktop Environment was created by a collaboration of Sun, HP,
+ IBM, DEC, SCO, Fujitsu and Hitachi. Used on a selection of commercial
+ UNIXs, it is now available as open-source software.
