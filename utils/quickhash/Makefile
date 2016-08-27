@@ -7,9 +7,10 @@ cleanfiles     = *.ico
 distcleanfiles = $(bin)
 
 VER = 2.6.9
-URL = https://sourceforge.net/projects/quickhash/files/v$(VER)/Linux/QuickHash-Linux-v$(VER).zip/download
+REL = .2
+URL = https://sourceforge.net/projects/quickhash/files/v$(VER)/Linux/QuickHash-v$(VER)$(REL)-Linux.zip/download
 
-sha256sum = 9d047ec03d53fb078beb97eff3e57276e0b3c57e2d34d621abc4755ebb5b2285
+sha256sum = 7c63e7707fc889481b17ebf96f2f65e926f5e5a3b86f96d5dbd48a99aff94609
 
 
 download:

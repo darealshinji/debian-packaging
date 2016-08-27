@@ -8,7 +8,7 @@ arch = x86
 bits = 32
 endif
 d    = unzipped
-bin  = $(d)/QuickHash-Linux-v*-$(arch)
+bin  = $(d)/QuickHash-Linux-$(arch)-v*
 
 
 %:
@@ -19,7 +19,7 @@ override_dh_auto_clean:
 
 override_dh_auto_build:
 	unzip -d $(d) quickhash.zip
-	mv $(bin) quickhash
+	cp $(bin) quickhash
 	chmod a+x quickhash
 	./make-icons.sh quickhash.ico
 
