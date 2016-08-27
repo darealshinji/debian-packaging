@@ -1,6 +1,6 @@
 --- a/doc/util/dbtoman/instant/browse.c
 +++ b/doc/util/dbtoman/instant/browse.c
-@@ -186,8 +186,7 @@ Browse()
+@@ -186,8 +186,7 @@
  	    if (av[1] && isdigit(*av[1])) {
  		n = atoi(av[1]);
  		if (n < ce->ndcont) {
@@ -12,7 +12,7 @@
  		    printf("No data at this node.\n");
 --- a/programs/dtappbuilder/src/abmf/instances.c
 +++ b/programs/dtappbuilder/src/abmf/instances.c
-@@ -190,7 +190,7 @@ write_assign_local_vars_for_icon(GenCodeInfo genCodeInfo, ABObj obj)
+@@ -190,7 +190,7 @@
          else
  	*/
          {
@@ -23,29 +23,29 @@
  
 --- a/programs/dtappbuilder/src/libABil/bil_loadfile.c
 +++ b/programs/dtappbuilder/src/libABil/bil_loadfile.c
-@@ -210,7 +210,7 @@ bil_load_file(
+@@ -209,7 +209,7 @@
+     if (bilP_load.project == NULL)
      {
  	LoadErr = TRUE;
- 	sprintf(Buf, catgets(ABIL_MESSAGE_CATD, ABIL_MESSAGE_SET, 39,
--		"Unable to load project."));
-+		"%s: Unable to load project."));
+-	sprintf(Buf, catgets(ABIL_MESSAGE_CATD, ABIL_MESSAGE_SET, 39,
++	sprintf(Buf, "%s", catgets(ABIL_MESSAGE_CATD, ABIL_MESSAGE_SET, 39,
+ 		"Unable to load project."));
  	errmsg = Buf;
  	goto epilogue;
-     }
 --- a/programs/dtappbuilder/src/libABobjXm/objxm_config.c
 +++ b/programs/dtappbuilder/src/libABobjXm/objxm_config.c
-@@ -310,7 +310,7 @@ xm_configure_tree(
+@@ -308,7 +308,7 @@
+ 
+     if (configCount!= numSalientObjs)
      {
- 	fprintf(stderr, 
+-	fprintf(stderr, 
++	fprintf(stderr, "%s",
  	    catgets(OBJXM_MESSAGE_CATD, OBJXM_MESSAGE_SET, 8,
--	       "INTERNAL ERROR: salient counts don't match.\n") );
-+	       "%s: salient counts don't match.\n") );
+ 	       "INTERNAL ERROR: salient counts don't match.\n") );
  	iRetVal= -1;
- 	goto epilogue;
-     }
 --- a/programs/dthelp/dthelpgen/helpgen.c
 +++ b/programs/dthelp/dthelpgen/helpgen.c
-@@ -341,7 +341,7 @@ CreateVolumeLink (
+@@ -341,7 +341,7 @@
  	 * put the abstract information about this
  	 * family in the header file
  	 */
@@ -54,7 +54,7 @@
  
  	if (abstract != NULL)
  	  {
-@@ -489,7 +489,7 @@ CreateFamily (
+@@ -489,7 +489,7 @@
  	     */
  	    fprintf (out_topic, (GetMessage (3, 2, (char*)defaultTitle14)),
  								title);
@@ -63,7 +63,7 @@
  	    fprintf (out_topic, "%s\n", abstract);
  	    fprintf (out_topic, "</P>\n");
  
-@@ -549,7 +549,7 @@ CreateFamily (
+@@ -549,7 +549,7 @@
  			bitmap, familyName);
  		  }
  		else
@@ -74,7 +74,7 @@
  
 --- a/programs/dthelp/dthelpprint/Initialize.c
 +++ b/programs/dthelp/dthelpprint/Initialize.c
-@@ -702,7 +702,7 @@ void Usage(void)
+@@ -702,7 +702,7 @@
     };
      int i;
      for (i=0; usage[i]; i++)
@@ -83,7 +83,7 @@
  }       /*$END$*/
  
  
-@@ -1530,7 +1530,7 @@ char * _DtHPrCreateTmpFile(
+@@ -1530,7 +1530,7 @@
     newtmpfile=malloc((strlen(dirname) + FILENAMELEN + 2) * sizeof(char));
     if (NULL == newtmpfile)
     {

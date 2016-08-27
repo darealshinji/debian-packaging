@@ -1,0 +1,10 @@
+debian/tmp/etc
+debian/tmp/usr/dt/*                     /usr/lib/dt
+debian/extra-files/fonts.*              /etc/dt/config/xfonts/C/
+debian/extra-files/dtlogin.service      /lib/systemd/system/
+debian/extra-files/start-cde-xsession   /usr/lib/dt/bin
+debian/extra-files/cdesktopenv.pc       /usr/lib/pkgconfig
+contrib/xinetd/cmsd                     /etc/xinetd.d/
+contrib/xinetd/ttdbserver               /etc/xinetd.d/
+lib/*.so                                /usr/lib/dt
+lib/*.so.*                              /usr/lib/dt

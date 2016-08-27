@@ -3,13 +3,13 @@
 set -e
 
 case "$1" in
-  remove|purge|disappear)
+  purge)
     if [ -d /var/dt ]; then
       rm -rf /var/dt
     fi
-    if [ -L /usr/spool ]; then
-      rm -f /usr/spool
-    fi
+#    if [ -L /usr/spool ]; then
+#      rm -f /usr/spool
+#    fi
   ;;
 esac
 

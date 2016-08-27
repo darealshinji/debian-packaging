@@ -4,3 +4,5 @@
 /etc/dt/appconfig/types/C
 /etc/dt/config/Xsession.d
 /etc/dt/config/xfonts/C
+/usr/lib
+/usr/share

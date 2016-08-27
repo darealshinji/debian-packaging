@@ -20,6 +20,19 @@ cleandirs = \
 	programs/dtksh/ksh93/src/cmd/ksh93/FEATURE \
 	programs/dtksh/ksh93/include
 
+define \n
+
+
+endef
+
+tmp = $(CURDIR)/debian/tmp
+cde = $(CURDIR)/debian/cdesktopenv
+cde_common = $(CURDIR)/debian/cdesktopenv-common
+
+export LANG=C
+export LC_ALL=C
+export IMAKECPP=cpp
+
 
 %:
 	dh ${@}
@@ -35,43 +48,61 @@ override_dh_auto_clean:
 	rm -rf $(cleandirs)
 
 override_dh_auto_build:
-	export LANG=C; \
-	export LC_ALL=C; \
-	export IMAKECPP=cpp; \
-	  $(MAKE) -j1 World
-
-	sed -e 's|mkProd -D |&$(CURDIR)/debian/tmp|g' -i \
-	  admin/IntegTools/dbTools/installCDE
-
+	$(MAKE) -j1 World
+	sed -e 's|mkProd -D |&$(tmp)|g' -i admin/IntegTools/dbTools/installCDE
 	cp -f debian/extra-files/relink.mak lib/
 	$(MAKE) -C lib -f relink.mak
 
 override_dh_auto_install:
-	export LANG=C; \
-	export LC_ALL=C; \
-	export INSTALL_LOCATION="$(CURDIR)/debian/tmp/usr/dt"; \
-	export LOGFILES_LOCATION="$(CURDIR)/debian/tmp/var/dt"; \
-	export CONFIGURE_LOCATION="$(CURDIR)/debian/tmp/etc/dt"; \
-	  cd admin/IntegTools/dbTools/ && ./installCDE -s $(CURDIR)
-
-	rm -f debian/tmp/usr/dt/lib/*.so debian/tmp/usr/dt/lib.so.*
-	rm -rf debian/tmp/etc/rc.d
-
-	chrpath -r '$$ORIGIN/../lib' -k debian/tmp/usr/dt/bin/* \
-	  debian/tmp/usr/dt/lib/dtudcfonted/* || true
-	chrpath -r '$$ORIGIN/../../lib' -k debian/tmp/usr/dt/infolib/etc/* \
-	  debian/tmp/usr/dt/dthelp/dtdocbook/* || true
+	cd admin/IntegTools/dbTools/ && \
+	INSTALL_LOCATION="$(tmp)/usr/dt" \
+	LOGFILES_LOCATION="$(tmp)/var/dt" \
+	CONFIGURE_LOCATION="$(tmp)/etc/dt" \
+	  ./installCDE -s $(CURDIR)
+	rm -rf $(tmp)/etc/rc.d
+	cd $(tmp)/usr/dt && rm -f lib/*.so lib/*.so.* include examples \
+	  CONTRIBUTORS COPYING copyright
+	chrpath -r '$$ORIGIN/..' -k $(tmp)/usr/dt/bin/* || true
+	chrpath -r '$$ORIGIN/..' -k $(tmp)/usr/dt/lib/dtudcfonted/* || true
+	chrpath -r '$$ORIGIN/../..' -k $(tmp)/usr/dt/infolib/etc/* || true
+	chrpath -r '$$ORIGIN/../..' -k $(tmp)/usr/dt/dthelp/dtdocbook/* || true
+	sed -e '1 s|/usr/dt/bin/dtksh|/usr/lib/dt/bin/dtksh|' \
+	  -i $(tmp)/usr/dt/bin/dterror.ds
 
 override_dh_install:
-	dh_install -XCONTRIBUTORS -XCOPYING
+	dh_install
+
+	mv $(cde)/usr/lib/dt/share $(cde)/usr/share/dt
+	mv $(cde)/usr/lib/dt/appconfig $(cde)/usr/share/dt
+	mv $(cde)/usr/lib/dt/dthelp/help4help/C/graphics \
+	  $(cde)/usr/share/dt/dthelp_help4help_C_graphics
+
+	ln -fs ttrm $(cde)/usr/lib/dt/bin/ttrmdir
+	ln -rs $(cde)/usr/share/dt $(cde)/usr/lib/dt/share
+	ln -rs $(cde)/usr/share/dt/appconfig $(cde)/usr/lib/dt/appconfig
+	ln -rs $(cde)/usr/share/dt/dthelp_help4help_C_graphics \
+	  $(cde)/usr/lib/dt/dthelp/help4help/C/graphics
+
+	find $(cde)/usr/share/dt/man/ -type f -exec gzip -f9 '{}' \;
+
+	mv $(cde)/usr/share/dt $(cde_common)/usr/share
+	rm -rf $(cde_common)/usr/share/dt/include
+	cd $(cde_common)/usr/share && mv dt/examples doc/cdesktopenv-common
+
+	chmod 0755 $(cde)/usr/lib/dt/bin/start-cde-xsession \
+	 $(cde)/usr/lib/dt/config/Xsession.d/*
+	chmod 0644 $(cde)/usr/lib/dt/app-defaults/C/Ttsnoop \
+	 $(cde)/usr/lib/dt/config/sys.dtprofile \
+	 $(cde)/usr/lib/dt/dthelp/dtdocbook/docbook.tcl \
+	 $(cde)/usr/lib/dt/infolib/etc/dtsr/dtsearch.dbd
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=cdesktopenv-common
+
+override_dh_installexamples:
+	dh_installexamples
+	gzip -f9 $(cde_common)/usr/share/doc/cdesktopenv-common/examples/dtksh/*
+	chmod 0644 $(cde_common)/usr/share/doc/cdesktopenv-common/examples/dtksh/*
 
 override_dh_makeshlibs:
-
-override_dh_fixperms:
-	chmod 0755 $(CURDIR)/debian/cdesktopenv/usr/dt/bin/start-cde-xsession
-	chmod 0755 $(CURDIR)/debian/cdesktopenv/usr/dt/config/Xsession.d/*
-	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/infolib/etc/dtsr/dtsearch.dbd
-	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/dthelp/dtdocbook/docbook.tcl
-	chmod 0644 $(CURDIR)/debian/cdesktopenv/usr/dt/config/sys.dtprofile
-	dh_fixperms
 

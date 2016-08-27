@@ -1,38 +1,96 @@
+--- a/config/cf/cde.tmpl
++++ b/config/cf/cde.tmpl
+@@ -297,9 +297,9 @@
+ #ifdef CDEProjectRoot
+    CDEPROJECTROOT = CDEProjectRoot
+ #endif
+- CDE_INSTALLATION_TOP = CdeInstallationTop
++ CDE_INSTALLATION_TOP = /usr/lib/dt
+ CDE_CONFIGURATION_TOP = CdeConfigurationTop
+-     CDE_LOGFILES_TOP = CdeLogFilesTop
++     CDE_LOGFILES_TOP = /var/dt
+          CDE_USER_TOP = CdeUserTop
+ 
+         DTCODEGEN = DtCodeGen
 --- a/config/cf/linux.cf
 +++ b/config/cf/linux.cf
-@@ -111,8 +111,8 @@
+@@ -96,9 +96,7 @@
+ 
+ #define IncludeMakefile(file)   -include file
+ 
+-#if (LinuxDistribution == LinuxRedHat)
+ # define HasZlib		YES
+-#endif
+ 
+ #define AvoidNullMakeCommand	YES
+ #define StripInstalledPrograms	YES
+@@ -111,21 +109,18 @@
  #define NeedWidePrototypes	NO
  #define SetTtyGroup		YES
  
 -#define CcCmd			gcc -g -pipe
 -#define CplusplusCmd		g++ -g -pipe -fpermissive
-+#define CcCmd			gcc -pipe  -O2 -fno-strict-aliasing -fstack-protector --param=ssp-buffer-size=4 -Wno-write-strings -Wno-unused-result -Wformat -D_FORTIFY_SOURCE=2
-+#define CplusplusCmd		g++ -pipe -fpermissive  -O2 -fno-strict-aliasing -fstack-protector --param=ssp-buffer-size=4 -Wno-write-strings -Wno-unused-result -Wformat -D_FORTIFY_SOURCE=2
++#define CcCmd			gcc -pipe -O2  -fno-strict-aliasing -fstack-protector --param=ssp-buffer-size=4  -Wno-write-strings -Wno-unused-result -Wformat  -D_FORTIFY_SOURCE=2
++#define CplusplusCmd		g++ -pipe -O2  -fpermissive  -fno-strict-aliasing -fstack-protector --param=ssp-buffer-size=4  -Wno-write-strings -Wno-unused-result -Wformat  -D_FORTIFY_SOURCE=2
  #define AsCmd			as
  #define LdCmd			ld
  
+ #define CplusplusLibC           -lstdc++
+ #define AsmDefines		-D__ELF__
+ 
++#define KornShell     /bin/mksh
+ #define MkdirHierCmd		mkdir -p
+-#define CppCmd			/lib/cpp
+-#if OSMajorVersion >= 2
+-# define YaccCmd                yacc
+-#else
++#define CppCmd			cpp
+ # define YaccCmd                bison -y
+-#endif
+ #define LexCmd			flex -l
+ #define LexLib			-lfl
+ #define PreProcessCmd		CcCmd -E
+@@ -149,6 +144,7 @@
+ XCOMM allow running rpcbind in secure mode (ie: without the -i option).
+ XCOMM The default is NO.
+ 
++#define HasTIRPCLib YES
+ #ifndef HasTIRPCLib
+ # define HasTIRPCLib NO
+ #endif
 --- a/config/cf/site.def
 +++ b/config/cf/site.def
-@@ -166,3 +166,10 @@
+@@ -112,7 +112,7 @@
  #endif
  
- #endif /* AfterVendorCF */
-+
-+#define KornShell /bin/mksh
-+#define CppCmd cpp
-+#define YaccCmd bison -y
-+#define HasTIRPCLib YES
-+#define HasZlib YES
+ #ifndef ProjectRoot
+-# define ProjectRoot	/usr/dt
++# define ProjectRoot	/usr/lib/dt
+ #endif
+ 
+ XCOMM build the DtXinerama support
+@@ -160,6 +160,14 @@
+ #endif
+ #endif
+ 
++#ifdef DtLocalesToBuild
++# undef DtLocalesToBuild
++#endif
++#ifdef DtDocLocalesToBuild
++# undef DtDocLocalesToBuild
++#endif
 +#define DtLocalesToBuild
++
+ XCOMM define DtDocLocalesToBuild to be the same as DtLocalesToBuild if undefined
+ #ifndef DtDocLocalesToBuild
+ # define DtDocLocalesToBuild DtLocalesToBuild
 --- a/programs/dtfile/Utils.c
 +++ b/programs/dtfile/Utils.c
-@@ -41,6 +41,10 @@
+@@ -41,6 +41,8 @@
   ****************************************************************************
   ************************************<+>*************************************/
  
-+#ifndef FILE_MAP_OPTIMIZE
-+# define FILE_MAP_OPTIMIZE
-+#endif
++#define FILE_MAP_OPTIMIZE
 +
  #include <Dt/Connect.h>
  #include <Tt/tttk.h>

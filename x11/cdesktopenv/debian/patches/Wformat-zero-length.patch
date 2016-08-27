@@ -1,6 +1,6 @@
 --- a/programs/dtappbuilder/src/ab/cgen_env_stubs.c
 +++ b/programs/dtappbuilder/src/ab/cgen_env_stubs.c
-@@ -240,7 +240,7 @@ cgenP_cancel_envCB(
+@@ -240,7 +240,7 @@
      DtbCgenEnvDialogInfo        env_dlg = (DtbCgenEnvDialogInfo)clientData;
      char buf[10];
  
@@ -11,7 +11,7 @@
      
 --- a/programs/dtappbuilder/src/libABil/bil_lexer.c
 +++ b/programs/dtappbuilder/src/libABil/bil_lexer.c
-@@ -465,5 +465,5 @@ sprint(char *s)
+@@ -465,5 +465,5 @@
  void
  bilP_reset_token_text(void)
  {

@@ -6,6 +6,7 @@ Build-Depends:
  debhelper (>= 9),
  bison,
  chrpath,
+# some of these _may_ not be required
  libcups2-dev,
  libfreetype6-dev,
  libjpeg62-dev,
@@ -32,6 +33,7 @@ Build-Depends:
  xfonts-100dpi-transcoded,
  zlib1g-dev
 Build-Conflicts:
+# contains imake, but we're using our own version
  xutils-dev
 Standards-Version: 3.9.6
 Homepage: https://sourceforge.net/projects/cdesktopenv/
@@ -41,7 +43,17 @@ Vcs-Browser: https://sourceforge.net/p/cdesktopenv/code/ci/master/tree/cde/
 Package: cdesktopenv
 Architecture: i386
 Depends:
+ cdesktopenv-common,
  ${shlibs:Depends},
+ ${misc:Depends}
+Description: Common Desktop Environment
+ The Common Desktop Environment was created by a collaboration of Sun, HP,
+ IBM, DEC, SCO, Fujitsu and Hitachi. Used on a selection of commercial
+ UNIXs, it is now available as open-source software.
+
+Package: cdesktopenv-common
+Architecture: all
+Depends:
  ${misc:Depends},
  ksh,
  mksh,
@@ -51,7 +63,8 @@ Recommends:
  x11-xserver-utils,
  xfonts-100dpi,
  xfonts-100dpi-transcoded
-Description: Common Desktop Environment
+Description: Common Desktop Environment - common files
  The Common Desktop Environment was created by a collaboration of Sun, HP,
  IBM, DEC, SCO, Fujitsu and Hitachi. Used on a selection of commercial
  UNIXs, it is now available as open-source software.
+

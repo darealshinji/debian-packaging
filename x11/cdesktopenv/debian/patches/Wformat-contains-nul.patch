@@ -1,6 +1,6 @@
 --- a/lib/DtSvc/DtUtil1/DtsMM.c
 +++ b/lib/DtSvc/DtUtil1/DtsMM.c
-@@ -549,7 +549,7 @@ _DtDtsMMCacheName(int override)
+@@ -549,7 +549,7 @@
  		results = malloc(strlen(_DTDTSMMTEMPDIR)+
  				 strlen(_DTDTSMMTEMPFILE)+
  				strlen(dsp)+3);
@@ -11,7 +11,7 @@
  				dsp);
 --- a/programs/dtmail/libDtMail/RFC/RFCMailBox.C
 +++ b/programs/dtmail/libDtMail/RFC/RFCMailBox.C
-@@ -3703,7 +3703,7 @@ RFCMailBox::generateUniqueLockId(void)
+@@ -3703,7 +3703,7 @@
    if (sysinfo(SI_HW_SERIAL, (char *)hwserialbuf, sizeof(hwserialbuf)-1) == -1)
  #endif
      strcpy(hwserialbuf, "dtmail");
@@ -22,7 +22,7 @@
  }
 --- a/programs/dtudcfonted/libfal/_faludcInf.c
 +++ b/programs/dtudcfonted/libfal/_faludcInf.c
-@@ -441,7 +441,7 @@ unsigned long 	*codepoint;
+@@ -441,7 +441,7 @@
      } else if(charset->ct_sequence){
          sprintf((char *)from,"%s%s",charset->ct_sequence,src);
      } else {
@@ -31,7 +31,7 @@
      }
      /* compound text -> multi byte */
      conv = _fallcOpenConverter(lcd, XlcNCompoundText, lcd, XlcNMultiByte);
-@@ -650,7 +650,7 @@ int 		*num_gi;
+@@ -650,7 +650,7 @@
  	}
      }
      src[j] = 0;

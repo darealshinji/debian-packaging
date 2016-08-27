@@ -1,0 +1,90 @@
+--- a/lib/DtWidget/Control.c
++++ b/lib/DtWidget/Control.c
+@@ -165,6 +165,9 @@
+ #define UNSPECIFIED_DIMENSION	9999
+ #define UNSPECIFIED_CHAR	255
+ 
++#ifdef __linux__
++static const char _DtMsgIndicator_0000[] = "/var/dt/mail/";
++#else
+ #ifdef _SUN_OS
+ static const char _DtMsgIndicator_0000[] = "/var/mail/";
+ #elif defined(__osf__)
+@@ -172,6 +175,7 @@
+ #else
+ static const char _DtMsgIndicator_0000[] = "/usr/mail/";
+ #endif
++#endif  /* __linux__ */
+ 
+ #define	MAIL_DIR	_DtMsgIndicator_0000
+ #define Min(x, y)    (((x) < (y)) ? (x) : (y))
+--- a/lib/DtWidget/DtMsgs.c
++++ b/lib/DtWidget/DtMsgs.c
+@@ -234,7 +234,7 @@
+    "/usr/spool/mail/";
+ #else
+ CONST char _DtMsgIndicator_0000[] =
+-   "/usr/mail/";
++   "/var/dt/mail/";
+ #endif
+ 
+ /*** MenuButton.c ***/
+--- a/programs/dtcm/server/log.h
++++ b/programs/dtcm/server/log.h
+@@ -42,7 +42,7 @@
+ #define _DtCMS_DEFAULT_TMP	".caltmp"
+ #define _DtCMS_DEFAULT_DEL	".caldel"
+ #if defined(CSRG_BASED) || defined (linux)
+-#define	_DtCMS_DEFAULT_DIR	"/var/spool/calendar"
++#define	_DtCMS_DEFAULT_DIR	"/var/dt/spool/calendar"
+ #else
+ #define	_DtCMS_DEFAULT_DIR	"/usr/spool/calendar"
+ #endif
+--- a/programs/dtksh/ksh93/ship/shipin
++++ b/programs/dtksh/ksh93/ship/shipin
+@@ -216,7 +216,7 @@
+ export RECIPIENT
+ case $_uuspool_ in
+ "")	case $SHIPSPOOL in
+-	"")	SHIPSPOOL="/usr/spool/uucppublic/$RECIPIENT/* /usr/spool/uucppublic/receive/$RECIPIENT/*" ;;
++	"")	SHIPSPOOL="/var/dt/mail/uucppublic/$RECIPIENT/* /var/dt/mail/uucppublic/receive/$RECIPIENT/*" ;;
+ 	esac
+ 	;;
+ *)	SHIPSPOOL=$_uuspool_ ;;
+--- a/programs/dtksh/ksh93/ship/shipout
++++ b/programs/dtksh/ksh93/ship/shipout
+@@ -56,7 +56,7 @@
+ SHIPAUX="shipiffe.sh shipop.c shipproto.c"
+ SHIPMENT=*[0-9][0-9][0-9][0-9][0-9][0-9]
+ SHIPPER=${SHIPPER:-${USER:-${LOGNAME:-${HOME##*/}}}}
+-SHIPSPOOL=${SHIPSPOOL:-/usr/spool/uucppublic}
++SHIPSPOOL=${SHIPSPOOL:-/var/dt/mail/uucppublic}
+ SHIPORG=${SHIPORG:-"Software and Systems Research"}
+ SHIPLOGO=${SHIPLOGO:-"http://www1126.research.att.com/logos/attbllogo.gif align=middle"}
+ SHIPMM2HTML=${SHIPMM2HTML:-mm2html}
+--- a/programs/dtksh/ksh93/src/cmd/ksh93/data/msg.c
++++ b/programs/dtksh/ksh93/src/cmd/ksh93/data/msg.c
+@@ -238,7 +238,7 @@
+ const char e_profile[]		= "${HOME:-.}/.profile";
+ const char e_sysprofile[]	= PROFILEPATH;
+ const char e_suidprofile[]	= SUIDPROFILEPATH;
+-const char e_crondir[]		= "/usr/spool/cron/atjobs";
++const char e_crondir[]		= "/var/dt/spool/cron/atjobs";
+ const char e_prohibited[]	= "login setuid/setgid shells prohibited";
+ #ifdef SHOPT_SUID_EXEC
+    const char e_suidexec[]	= SUIDEXECPATH;
+--- a/programs/dtprintinfo/objects/PrintObj/ParseJobs.C
++++ b/programs/dtprintinfo/objects/PrintObj/ParseJobs.C
+@@ -351,9 +351,9 @@
+    char *line;
+ } StatusLineStruct, *StatusLine, **StatusLineList;
+ 
+-#define TMP_DIR "/usr/spool/lp/tmp"
+-#define REQ_DIR "/usr/spool/lp/requests/%s/"
+-#define SPOOL_DIR "/var/spool/lp/tmp/%s/"
++#define TMP_DIR "/var/dt/spool/lp/tmp"
++#define REQ_DIR "/var/dt/spool/lp/requests/%s/"
++#define SPOOL_DIR "/var/dt/spool/lp/%s/"
+ 
+ static void check_dir(char *printer, char *tmp_dir, StatusLineList *job_list,
+                       int *n_jobs, int prev_n_jobs);
