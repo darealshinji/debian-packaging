@@ -83,7 +83,7 @@ override_dh_install:
 	ln -rs $(cde)/usr/share/dt/dthelp_help4help_C_graphics \
 	  $(cde)/usr/lib/dt/dthelp/help4help/C/graphics
 
-	find $(cde)/usr/share/dt/man/ -type f -exec gzip -f9 '{}' \;
+	find $(cde)/usr/share/dt/man/ -type f -exec gzip -n -f9 '{}' \;
 
 	mv $(cde)/usr/share/dt $(cde_common)/usr/share
 	rm -rf $(cde_common)/usr/share/dt/include
@@ -101,8 +101,8 @@ override_dh_installdocs:
 
 override_dh_installexamples:
 	dh_installexamples
-	gzip -f9 $(cde_common)/usr/share/doc/cdesktopenv-common/examples/dtksh/*
 	chmod 0644 $(cde_common)/usr/share/doc/cdesktopenv-common/examples/dtksh/*
+	gzip -n -f9 $(cde_common)/usr/share/doc/cdesktopenv-common/examples/dtksh/*
 
 override_dh_makeshlibs:
 
