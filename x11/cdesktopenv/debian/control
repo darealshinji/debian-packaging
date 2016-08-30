@@ -53,6 +53,7 @@ Description: Common Desktop Environment
 
 Package: cdesktopenv-common
 Architecture: all
+Multi-Arch: foreign
 Depends:
  ${misc:Depends},
  ksh,
