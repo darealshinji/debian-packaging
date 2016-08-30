@@ -1,17 +1,3 @@
---- a/config/cf/cde.tmpl
-+++ b/config/cf/cde.tmpl
-@@ -297,9 +297,9 @@
- #ifdef CDEProjectRoot
-    CDEPROJECTROOT = CDEProjectRoot
- #endif
-- CDE_INSTALLATION_TOP = CdeInstallationTop
-+ CDE_INSTALLATION_TOP = /usr/lib/dt
- CDE_CONFIGURATION_TOP = CdeConfigurationTop
--     CDE_LOGFILES_TOP = CdeLogFilesTop
-+     CDE_LOGFILES_TOP = /var/dt
-          CDE_USER_TOP = CdeUserTop
- 
-         DTCODEGEN = DtCodeGen
 --- a/config/cf/linux.cf
 +++ b/config/cf/linux.cf
 @@ -96,9 +96,7 @@
@@ -60,15 +46,6 @@
  #endif
 --- a/config/cf/site.def
 +++ b/config/cf/site.def
-@@ -112,7 +112,7 @@
- #endif
- 
- #ifndef ProjectRoot
--# define ProjectRoot	/usr/dt
-+# define ProjectRoot	/usr/lib/dt
- #endif
- 
- XCOMM build the DtXinerama support
 @@ -160,6 +160,14 @@
  #endif
  #endif

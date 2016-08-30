@@ -7,9 +7,12 @@ case "$1" in
     if [ -d /var/dt ]; then
       rm -rf /var/dt
     fi
-#    if [ -L /usr/spool ]; then
-#      rm -f /usr/spool
-#    fi
+    if [ -L /usr/dt ]; then
+      rm -f /usr/dt
+    fi
+    if [ -L /usr/spool ]; then
+      rm -f /usr/spool
+    fi
   ;;
 esac
 

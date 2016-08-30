@@ -1,6 +1,4 @@
 cde-config.patch
-scripts.patch
-var-directory.patch
 Wformat-contains-nul.patch
 Wformat-extra-args.patch
 Wformat-security.patch

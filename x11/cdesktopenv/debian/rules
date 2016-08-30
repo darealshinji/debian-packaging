@@ -66,8 +66,6 @@ override_dh_auto_install:
 	chrpath -r '$$ORIGIN/..' -k $(tmp)/usr/dt/lib/dtudcfonted/* || true
 	chrpath -r '$$ORIGIN/../..' -k $(tmp)/usr/dt/infolib/etc/* || true
 	chrpath -r '$$ORIGIN/../..' -k $(tmp)/usr/dt/dthelp/dtdocbook/* || true
-	sed -e '1 s|/usr/dt/bin/dtksh|/usr/lib/dt/bin/dtksh|' \
-	  -i $(tmp)/usr/dt/bin/dterror.ds
 
 override_dh_install:
 	dh_install

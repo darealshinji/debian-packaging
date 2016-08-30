@@ -1,5 +1,5 @@
 #!/bin/sh
-export PATH="$PATH:/usr/lib/dt/bin"
-export MANPATH="$MANPATH:/usr/local/share/man:/usr/share/man:/usr/share/dt/man"
+export PATH="$PATH:/usr/dt/bin"
+export MANPATH="$MANPATH:/usr/local/share/man:/usr/share/man:/usr/dt/share/man"
 export LANG=C
-/usr/lib/dt/bin/Xsession $*
+/usr/dt/bin/Xsession $*

@@ -4,25 +4,25 @@ set -e
 
 case "$1" in
   configure)
-#    dt="/usr/dt"
-#    if [ -L $dt ]; then
-#      rm -f $dt
-#    elif [ -e $dt ] && [ ! -L $td ]; then
-#      echo "warning: \`$dt' already exists and is not a symbolic link!"
-#    fi
-#    if [ ! -e $dt ]; then
-#      ln -s /usr/lib/dt $dt
-#    fi
+    dt="/usr/dt"
+    if [ -L $dt ]; then
+      rm -f $dt
+    elif [ -e $dt ] && [ ! -L $td ]; then
+      echo "warning: \`$dt' already exists and is not a symbolic link!"
+    fi
+    if [ ! -e $dt ]; then
+      ln -s /usr/lib/dt $dt
+    fi
 
-#    spl="/usr/spool"
-#    if [ -L $spl ]; then
-#      rm -f $spl
-#    elif [ -e $spl ] && [ ! -L $spl ]; then
-#      echo "warning: \`$spl' already exists and is not a symbolic link!"
-#    fi
-#    if [ ! -e $spl ]; then
-#      ln -s $var/spool $spl
-#    fi
+    spl="/usr/spool"
+    if [ -L $spl ]; then
+      rm -f $spl
+    elif [ -e $spl ] && [ ! -L $spl ]; then
+      echo "warning: \`$spl' already exists and is not a symbolic link!"
+    fi
+    if [ ! -e $spl ]; then
+      ln -s $var/spool $spl
+    fi
 
     var="/var/dt"
     if [ -e $var ] && [ ! -d $var ]; then

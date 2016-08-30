@@ -4,7 +4,7 @@ cdesktopenv: missing-dep-for-interpreter mksh => *
 cdesktopenv: missing-dep-for-interpreter ksh => *
 
 # unusual but not an error
-cdesktopenv: unusual-interpreter usr/lib/dt/bin/* #!/usr/lib/dt/bin/dtksh
+cdesktopenv: unusual-interpreter usr/lib/dt/bin/* #!/usr/dt/bin/dtksh
 
 # Lintian doesn't recognize scripts with the shebang `#!/bin/mksh'
 cdesktopenv: executable-not-elf-or-script usr/lib/dt/config/Xsession.d/*
