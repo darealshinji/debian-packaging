@@ -6,6 +6,5 @@ includedir=${prefix}/include/dt
 Name: cdesktopenv
 Description: Common Desktop Environment runtime
 Version: 2.2.4
-Ldflags: -Wl,--as-needed
-Libs: -L${libdir} -lDtHelp -lDtMmdb -lDtMrm -lDtPrint -lDtSearch -lDtSvc -lDtTerm -lDtWidget -lcsa -ltt
+Libs: -L${libdir} -Wl,--as-needed -lDtHelp -lDtMmdb -lDtMrm -lDtPrint -lDtSearch -lDtSvc -lDtTerm -lDtWidget -lcsa -ltt
 Cflags: -I${includedir}
