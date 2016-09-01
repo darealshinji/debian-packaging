@@ -39,6 +39,8 @@ JOBS        = $(shell nproc)
 pbuildercmd = pbuilder --build --debbuildopts "-j$(JOBS)" \
 			--basetgz $(basetgz) --buildresult $(resultdir) *.dsc
 
+MAKE ?= make
+
 
 
 
@@ -108,13 +110,21 @@ alldeps += $(deps)
 
 all: predepends download source build
 
-
 clean:
 	rm -rf $(allcleanfiles)
 
-
 distclean: clean
 	rm -rf $(distcleanfiles)
+
+
+pbuilder:
+	$(MAKE) -f Makefile all PBUILDER=1
+
+pbuilder-amd64:
+	$(MAKE) -f Makefile all PBUILDER=1 ARCH=amd64
+
+pbuilder-i386:
+	$(MAKE) -f Makefile all PBUILDER=1 ARCH=i386
 
 
 predepends:
