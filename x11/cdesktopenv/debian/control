@@ -68,4 +68,8 @@ Description: Common Desktop Environment - common files
  The Common Desktop Environment was created by a collaboration of Sun, HP,
  IBM, DEC, SCO, Fujitsu and Hitachi. Used on a selection of commercial
  UNIXs, it is now available as open-source software.
+ .
+ This package will install architecture-independend files but it will also
+ install some of CDE's dependencies as native versions on foreign
+ architectures (amd64).
 
