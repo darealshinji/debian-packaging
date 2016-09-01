@@ -2,4 +2,5 @@
 export PATH="$PATH:/usr/dt/bin"
 export MANPATH="$MANPATH:/usr/local/share/man:/usr/share/man:/usr/dt/share/man"
 export LANG=C
+/usr/dt/bin/rpc.cmsd &
 /usr/dt/bin/Xsession $*

@@ -35,7 +35,7 @@ Build-Depends:
 Build-Conflicts:
 # contains imake, but we're using our own version
  xutils-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://sourceforge.net/projects/cdesktopenv/
 Vcs-Git: git://git.code.sf.net/p/cdesktopenv/code
 Vcs-Browser: https://sourceforge.net/p/cdesktopenv/code/ci/master/tree/cde/

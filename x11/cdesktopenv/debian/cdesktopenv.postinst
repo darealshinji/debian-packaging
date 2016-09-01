@@ -2,9 +2,13 @@
 
 set -e
 
+dt="/usr/dt"
+var="/var/dt"
+spl="/usr/spool"
+
 case "$1" in
   configure)
-    dt="/usr/dt"
+
     if [ -L $dt ]; then
       rm -f $dt
     elif [ -e $dt ] && [ ! -L $td ]; then
@@ -14,7 +18,6 @@ case "$1" in
       ln -s /usr/lib/dt $dt
     fi
 
-    spl="/usr/spool"
     if [ -L $spl ]; then
       rm -f $spl
     elif [ -e $spl ] && [ ! -L $spl ]; then
@@ -24,7 +27,6 @@ case "$1" in
       ln -s $var/spool $spl
     fi
 
-    var="/var/dt"
     if [ -e $var ] && [ ! -d $var ]; then
       rm -f $var
     fi
