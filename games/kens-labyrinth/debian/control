@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 9),
                libgl1-mesa-dev,
                libglu1-mesa-dev,
                zlib1g-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.advsys.net/ken/klab.htm
 Vcs-Git: https://github.com/jspenguin/lab3d-sdl.git
 Vcs-Browser: https://github.com/jspenguin/lab3d-sdl

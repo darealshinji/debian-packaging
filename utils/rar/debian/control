@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 XSBC-Original-Maintainer: Martin Meredith <mez@debian.org>
 Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.rarlabs.com/
 
 Package: rar

@@ -7,7 +7,7 @@ Build-Depends:
  debhelper (>= 9),
  mono-devel,
  cli-common-dev (>= 0.5.7)
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.nuget.org
 
 Package: nuget

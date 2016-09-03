@@ -24,7 +24,7 @@ Build-Depends: debhelper (>= 9),
                libzzip-dev,
                zlib1g-dev,
                pkg-config
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://alephone.lhowon.org/
 Vcs-Git: https://github.com/Aleph-One-Marathon/alephone
 Vcs-Browser: https://github.com/Aleph-One-Marathon/alephone

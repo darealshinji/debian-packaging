@@ -8,7 +8,7 @@ Build-Depends:
  libgl1-mesa-glx | libgl1,
  libx11-6,
  unzip
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.boson-x.com
 
 Package: bosonx

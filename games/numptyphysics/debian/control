@@ -10,7 +10,7 @@ Build-Depends:
  libsdl2-image-dev,
  libsdl2-ttf-dev,
  pkg-config
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://thp.io/2015/numptyphysics/
 Vcs-Git: https://github.com/thp/numptyphysics
 Vcs-Browser: https://github.com/thp/numptyphysics

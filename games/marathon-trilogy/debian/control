@@ -3,7 +3,7 @@ Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), imagemagick
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://aleph-one-marathon.github.io/
 #Vcs-Git: https://github.com/Aleph-One-Marathon/data-marathon
 #Vcs-Git: https://github.com/Aleph-One-Marathon/data-marathon-2

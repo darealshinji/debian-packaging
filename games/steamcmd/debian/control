@@ -3,7 +3,7 @@ Section: non-free/games
 Priority: extra
 Maintainer: djcj <djcj@gmx.de>
 Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://developer.valvesoftware.com/wiki/SteamCMD
 
 Package: steamcmd

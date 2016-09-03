@@ -6,7 +6,7 @@ XSBC-Original-Maintainer: Debian multimedia packages maintainers <pkg-multimedia
 Uploaders:
  A Mennucc1 <mennucc1@debian.org>,
  Reinhard Tartler <siretart@tauware.de>
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Vcs-Git: git://git.debian.org/git/pkg-multimedia/mplayer.git
 Vcs-Browser: http://git.debian.org/?p=pkg-multimedia/mplayer.git;a=summary
 Homepage: http://www.mplayerhq.hu/

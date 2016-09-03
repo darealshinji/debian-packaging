@@ -5,7 +5,7 @@ Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
   debhelper (>= 9),
   imagemagick
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://store.steampowered.com/app/272060/
 
 Package: serena

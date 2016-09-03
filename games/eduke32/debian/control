@@ -12,7 +12,7 @@ Build-Depends:
  libsdl2-mixer-dev,
  libvorbis-dev,
  libvpx-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.eduke32.com/
 Vcs-SVN: http://svn.eduke32.com/eduke32/polymer/eduke32
 Vcs-Browser: http://svn.eduke32.com/eduke32/polymer/eduke32

@@ -3,7 +3,7 @@ Section: non-free/utils
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.poweriso.com/
 
 Package: poweriso

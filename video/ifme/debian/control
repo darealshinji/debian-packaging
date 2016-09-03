@@ -3,7 +3,7 @@ Section: video
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), imagemagick
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://x265.github.io/
 Vcs-Git: https://github.com/Anime4000/IFME
 Vcs-Browser: https://github.com/Anime4000/IFME

@@ -16,7 +16,7 @@ Build-Depends: debhelper (>= 9),
                libsqlite3-dev,
                pkg-config,
                zlib1g-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Vcs-Hg: https://bitbucket.org/Torr_Samaho/zandronum
 Vcs-Browser: https://bitbucket.org/Torr_Samaho/zandronum/src
 Homepage: http://www.zandronum.com/

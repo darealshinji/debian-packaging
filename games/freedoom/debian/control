@@ -7,7 +7,7 @@ Uploaders:
  Jon Dowland <jmtd@debian.org>,
  Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), unzip
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Vcs-Git: https://github.com/freedoom/freedoom.git
 #Vcs-Git: git://anonscm.debian.org/pkg-games/freedoom
 Vcs-Browser: https://github.com/freedoom/freedoom

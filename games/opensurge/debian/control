@@ -13,7 +13,7 @@ Build-Depends:
   liblogg4-dev,
   libopenal-dev,
   libpng12-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://opensnc.sourceforge.net/home/
 
 Package: opensurge

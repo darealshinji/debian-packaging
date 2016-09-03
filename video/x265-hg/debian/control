@@ -8,7 +8,7 @@ Build-Depends:
  libnuma-dev,
  python-sphinx,
  yasm (>= 1.2) [amd64]
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://bitbucket.org/multicoreware/x265/wiki/Home
 Vcs-Hg: https://bitbucket.org/multicoreware/x265
 Vcs-Browser: https://bitbucket.org/multicoreware/x265/src

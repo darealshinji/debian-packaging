@@ -3,7 +3,7 @@ Section: non-free/sound
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 XSBC-Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Build-Depends: debhelper (>= 9), dh-autoreconf
 Homepage: https://sourceforge.net/projects/opencore-amr/
 Vcs-Git: git://git.code.sf.net/p/opencore-amr/fdk-aac

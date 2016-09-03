@@ -18,7 +18,7 @@ Build-Depends:
  bison, fastjar, flex, gawk, gettext, libtool, m4, patch,
  perl, texinfo,
  zlib1g-dev, zlib1g-dev:i386 [amd64]
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://gcc.gnu.org/
 
 Package: gcc4.9opt

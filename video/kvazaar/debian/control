@@ -6,7 +6,7 @@ Build-Depends:
  debhelper (>= 9),
  dh-autoreconf,
  yasm
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://github.com/ultravideo/kvazaar
 Vcs-Git: https://github.com/ultravideo/kvazaar.git
 Vcs-Browser: https://github.com/ultravideo/kvazaar

@@ -3,7 +3,7 @@ Section: games
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.moddb.com/games/duke-nukem-3d
 
 Package: duke3d-shareware

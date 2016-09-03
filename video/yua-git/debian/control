@@ -9,7 +9,7 @@ Build-Depends:
    libqt4-opengl-dev,
    yasm (>= 1.2.0),
    zlib1g-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://forum.speeddemosarchive.com/post/yua3.html
 Vcs-Git: https://github.com/darealshinji/yua.git
 Vcs-Browser: https://github.com/darealshinji/yua

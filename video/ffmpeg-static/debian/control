@@ -3,7 +3,7 @@ Section: video
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), help2man
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Vcs-Git: git://source.ffmpeg.org/ffmpeg.git
 Vcs-Browser: http://git.videolan.org/?p=ffmpeg.git;a=tree
 Homepage: http://johnvansickle.com/ffmpeg/

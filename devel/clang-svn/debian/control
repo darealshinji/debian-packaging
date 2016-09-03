@@ -11,7 +11,7 @@ Build-Depends:
  libncurses5-dev,
  libtinfo-dev,
  zlib1g-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Vcs-Svn: http://llvm.org/svn/llvm-project/llvm/trunk/
 Vcs-Browser: http://llvm.org/svn/llvm-project/llvm/trunk/
 Homepage: http://clang.llvm.org/

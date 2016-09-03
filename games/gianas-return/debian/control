@@ -6,7 +6,7 @@ Build-Depends:
  debhelper (>= 9),
  upx-ucl,
  dos2unix
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.gianas-return.de
 
 Package: gianas-return

@@ -3,7 +3,7 @@ Section: sound
 Priority: optional
 Maintainer: djcj <djcj@gmx.de>
 XSBC-Original-Maintainer: Alessio Treglia <quadrispro@ubuntu.com>
-Standards-Version: 3.8.3
+Standards-Version: 3.9.5
 Build-Depends: debhelper (>= 9), cmake, help2man
 Homepage: http://aften.sourceforge.net/
 Vcs-Git: git://git.code.sf.net/p/aften/code

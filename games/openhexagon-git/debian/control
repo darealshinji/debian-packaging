@@ -25,7 +25,7 @@ Build-Depends:
  libxcb-randr0-dev,
  libxrandr-dev,
  zlib1g-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://vittorioromeo.info/projects.html
 Vcs-Git: https://github.com/SuperV1234/SSVOpenHexagon
 Vcs-Browser: https://github.com/SuperV1234/SSVOpenHexagon

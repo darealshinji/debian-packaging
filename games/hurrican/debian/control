@@ -9,7 +9,7 @@ Build-Depends:
  libsdl1.2-dev,
  libsdl-image1.2-dev,
  libsdl-mixer1.2-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://hurrican.sourceforge.net/
 Vcs-Svn: svn://svn.code.sf.net/p/hurrican/code/trunk/Hurrican
 Vcs-Browser: https://sourceforge.net/p/hurrican/code/HEAD/tree/trunk/Hurrican/

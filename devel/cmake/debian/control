@@ -17,7 +17,7 @@ Build-Depends: bash-completion,
                libx11-6,
                libxext6,
                libxi6
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Vcs-Git: git://anonscm.debian.org/collab-maint/cmake.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/cmake.git;a=summary
 Homepage: http://cmake.org/

@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), dh-autoreconf, autotools-dev,
                bison, gettext, xmlto
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Vcs-Git: https://github.com/yasm/yasm-nextgen.git
 Vcs-Browser: https://github.com/yasm/yasm-nextgen
 Homepage: http://yasm.tortall.net/

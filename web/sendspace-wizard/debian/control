@@ -10,7 +10,7 @@ Build-Depends:
  libpango-1.0-0,
  libx11-6,
  zlib1g
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.sendspace.com
 
 Package: sswizard

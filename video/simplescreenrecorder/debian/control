@@ -20,7 +20,7 @@ Build-Depends:
  libxext-dev,
  libxfixes-dev,
  libxi-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://www.maartenbaert.be/simplescreenrecorder/
 Vcs-Git: git://github.com/MaartenBaert/ssr.git
 Vcs-Browser: https://github.com/MaartenBaert/ssr

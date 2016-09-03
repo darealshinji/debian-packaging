@@ -11,7 +11,7 @@ Build-Depends: debhelper (>= 9),
                libxxf86vm1 [amd64],
                unzip,
                zip
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://7dfps.com/?action=games&id=228
 
 Package: boarding-party

@@ -3,7 +3,7 @@ Priority: optional
 Section: games
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), unzip, xz-utils
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://openarena.wikia.com/wiki/OpenArena_Community_Mappack
 
 Package: oacmp-volume1

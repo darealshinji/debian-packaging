@@ -6,7 +6,7 @@ Build-Depends:
  debhelper (>= 9),
  libwxgtk3.0-dev,
  wx3.0-headers
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://p7zip.sourceforge.net/
 
 Package: p7zip-gui

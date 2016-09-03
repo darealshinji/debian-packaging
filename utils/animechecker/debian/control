@@ -8,7 +8,7 @@ Build-Depends:
  imagemagick,
  librsvg2-bin,
  upx-ucl
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://animechecker.sourceforge.net/
 
 Package: animechecker

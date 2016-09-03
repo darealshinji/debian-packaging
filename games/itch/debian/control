@@ -30,7 +30,7 @@ Build-Depends:
   libxrandr2,
   libxrender1,
   libxtst6
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://itch.io
 Vcs-Git: https://github.com/itchio/itch
 Vcs-Browser: https://github.com/itchio/itch

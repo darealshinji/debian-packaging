@@ -11,7 +11,7 @@ Build-Depends:
   libloadpng4-dev,
   liblogg4-dev,
   libpng12-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://opensnc.sourceforge.net/home/
 
 Package: opensonic

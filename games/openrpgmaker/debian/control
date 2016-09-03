@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 9),
                imagemagick,
                libqtwebkit4,
                libqtgui4
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://openrpgmaker.sourceforge.net/
 
 Package: openrpgmaker

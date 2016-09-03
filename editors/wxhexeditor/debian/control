@@ -10,7 +10,7 @@ Build-Depends:
  libgomp1,
  libxxf86vm1,
  upx-ucl
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://sourceforge.net/projects/wxhexeditor
 
 Package: wxhexeditor

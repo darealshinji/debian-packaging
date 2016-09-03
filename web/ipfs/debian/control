@@ -3,7 +3,7 @@ Section: web
 Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends: debhelper (>= 9), help2man
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: https://ipfs.io/
 Vcs-Git: https://github.com/ipfs/go-ipfs.git
 Vcs-Browser: https://github.com/ipfs/go-ipfs

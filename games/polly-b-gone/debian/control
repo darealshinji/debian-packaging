@@ -14,7 +14,7 @@ Build-Depends:
  libsdl-mixer1.2-dev,
  libtinyxml-dev,
  pkg-config
-Standards-Version: 3.9.6
+Standards-Version: 3.9.5
 Homepage: http://cs.stanford.edu/people/mbostock/polly/
 Vcs-Git: https://github.com/darealshinji/polly-b-gone.git
 Vcs-Browser: https://github.com/darealshinji/polly-b-gone
