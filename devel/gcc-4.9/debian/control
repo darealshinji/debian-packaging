@@ -4,8 +4,9 @@ Priority: optional
 Maintainer: Marshall Banana <djcj@gmx.de>
 Build-Depends:
  debhelper (>= 5),
- autoconf,
- automake,
+# install autotools in case the Makefiles are automatically
+# regenerated because of automake version mismatch
+ dh-autoreconf,
 # patches
  quilt,
 # 32 bit stuff on amd64

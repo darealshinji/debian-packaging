@@ -17,11 +17,11 @@ verifysha256 () {
 	fi
 }
 
-gcc_ver=6.1.0
+gcc_ver=6.2.0
 gcc_dir=gcc-$gcc_ver
 gcc_pkg=${gcc_dir}.tbz
 gcc_url="https://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.bz2"
-gcc_sum=09c4c85cabebb971b1de732a0219609f93fc0af5f86f6e437fd8d7f832f1a351
+gcc_sum=9944589fc722d3e66308c0ce5257788ebd7872982a718aa2516123940671b7c5
 
 binutils_ver=2.27
 binutils_dir=binutils-$binutils_ver
