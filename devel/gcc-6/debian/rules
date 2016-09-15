@@ -14,14 +14,15 @@ TRIPLET = $(DEB_HOST_GNU_CPU)-pc-linux-gnu
 export CFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CFLAGS)) -ffunction-sections -fdata-sections
 export CXXFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CXXFLAGS)) -ffunction-sections -fdata-sections
 export CPPFLAGS=$(shell dpkg-buildflags --get CPPFLAGS)
-export GCJFLAGS=$(shell dpkg-buildflags --get GCJFLAGS)
-export LDFLAGS=$(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS)) -Wl,--gc-sections
+export LDFLAGS=$(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS))
+#-Wl,--gc-sections
 
 
 %:
 	dh ${@} --parallel
 
 override_dh_auto_clean:
+	$(MAKE) -f gcc-wrapper.mk clean
 	rm -rf binutils-src gcc-src
 	rm -f debian/links debian/lintian-overrides
 
@@ -57,7 +58,7 @@ override_dh_auto_configure:
 		--datarootdir=/usr/share/$(pkg) \
 		--mandir=/usr/share/man \
 		--program-prefix=$(pkg)- \
-		--enable-languages=c,c++,java,objc,obj-c++ \
+		--enable-languages=c,c++,objc \
 		--enable-lto \
 		--enable-vtable-verify \
 		--disable-bootstrap \
@@ -67,6 +68,7 @@ override_dh_auto_configure:
 override_dh_auto_build:
 	dh_auto_build -D$(BINUTILS)
 	dh_auto_build -D$(SRCDIR)
+	$(MAKE) -f gcc-wrapper.mk GCCPREFIX="$(pkg)-"
 
 # uncomment to enable tests (may take a while to complete)
 #override_dh_auto_test:
@@ -75,13 +77,8 @@ override_dh_auto_build:
 override_dh_install:
 	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(pkg)
 	$(MAKE) -C $(BINUTILS) install DESTDIR=$(CURDIR)/debian/$(pkg)
-
-	# build g++ binary that links libstdc++ statically by default
-	cd $(SRCDIR) && patch -p1 < gcc-patches/02-link-static-libstdc++.patch
-	cd $(SRCDIR)/host-$(TRIPLET)/gcc && rm -f xg++ cp/g++spec.o
-	$(MAKE) -C $(SRCDIR)/host-$(TRIPLET)/gcc xg++
-	install -m755 -D $(SRCDIR)/host-$(TRIPLET)/gcc/xg++ \
-	  $(usr)/bin/$(pkg)-g++-static-libstdc++
+	$(foreach WRAPPER,gcc-static1 g++-static1 g++-static2 g++-static3,\
+	  install -m755 -D $(WRAPPER) $(usr)/bin/$(pkg)-$(WRAPPER) ;)
 
 	# delete RPATH in libstdc++
 	$(foreach DIR,lib lib32 lib64,\
@@ -101,9 +98,10 @@ override_dh_install:
 	  find $(usr)/lib/* -name lib$(LIB).so* -delete ;)
 
 	# create extra manpages
-	$(foreach CMD,gcc-ar gcc-nm gcc-ranlib g++-static-libstdc++,\
+	$(foreach CMD,gcc-ar gcc-nm gcc-ranlib,\
 	  sed "s|@PKG@|$(PKG)|g; s|@pkg@|$(pkg)|g" \
 	  debian/$(CMD).1.in > $(usr)/share/man/man1/$(pkg)-$(CMD).1 ;)
+	install -m644 -D gcc-wrapper.1 $(usr)/share/man/man1/$(pkg)-gcc-static1.1
 
 	# fix including headers
 	for f in $(cplusinc)/$(TRIPLET)/bits/* ; do \

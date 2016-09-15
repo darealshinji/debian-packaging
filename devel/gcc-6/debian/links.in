@@ -1,14 +1,23 @@
-/usr/share/man/man1/@pkg@-g++.1.gz        /usr/share/man/man1/@pkg@-c++.1.gz
-/usr/share/man/man1/@pkg@-gcov.1.gz       /usr/share/man/man1/@pkg@-gcov-tool.1.gz
-/usr/share/man/man1/@pkg@-g++.1.gz        /usr/share/man/man1/@host@-@pkg@-c++.1.gz
-/usr/share/man/man1/@pkg@-g++.1.gz        /usr/share/man/man1/@host@-@pkg@-g++.1.gz
-/usr/share/man/man1/@pkg@-gcj.1.gz        /usr/share/man/man1/@host@-@pkg@-gcj.1.gz
-/usr/share/man/man1/@pkg@-gcc.1.gz        /usr/share/man/man1/@host@-@pkg@-gcc.1.gz
-/usr/share/man/man1/@pkg@-gcc-ar.1.gz     /usr/share/man/man1/@host@-@pkg@-gcc-ar.1.gz
-/usr/share/man/man1/@pkg@-gcc-nm.1.gz     /usr/share/man/man1/@host@-@pkg@-gcc-nm.1.gz
-/usr/share/man/man1/@pkg@-gcc-ranlib.1.gz /usr/share/man/man1/@host@-@pkg@-gcc-ranlib.1.gz
+/usr/share/man/man1/@pkg@-g++.1.gz           /usr/share/man/man1/@pkg@-c++.1.gz
+/usr/share/man/man1/@pkg@-gcov.1.gz          /usr/share/man/man1/@pkg@-gcov-tool.1.gz
+/usr/share/man/man1/@pkg@-g++.1.gz           /usr/share/man/man1/@host@-@pkg@-c++.1.gz
+/usr/share/man/man1/@pkg@-g++.1.gz           /usr/share/man/man1/@host@-@pkg@-g++.1.gz
+/usr/share/man/man1/@pkg@-gcc.1.gz           /usr/share/man/man1/@host@-@pkg@-gcc.1.gz
+/usr/share/man/man1/@pkg@-gcc-ar.1.gz        /usr/share/man/man1/@host@-@pkg@-gcc-ar.1.gz
+/usr/share/man/man1/@pkg@-gcc-nm.1.gz        /usr/share/man/man1/@host@-@pkg@-gcc-nm.1.gz
+/usr/share/man/man1/@pkg@-gcc-ranlib.1.gz    /usr/share/man/man1/@host@-@pkg@-gcc-ranlib.1.gz
 
-/usr/share/@pkg@/include                  /usr/include/@pkg@
+/usr/share/@pkg@/include                     /usr/include/@pkg@
 
-/usr/bin/@pkg@-g++-static-libstdc++                   /usr/bin/@host@-@pkg@-g++-static-libstdc++
-/usr/share/man/man1/@pkg@-g++-static-libstdc++.1.gz   /usr/share/man/man1/@host@-@pkg@-g++-static-libstdc++.1.gz
+/usr/bin/@pkg@-g++-static1                   /usr/bin/@host@-@pkg@-g++-static1
+/usr/bin/@pkg@-g++-static2                   /usr/bin/@host@-@pkg@-g++-static2
+/usr/bin/@pkg@-g++-static3                   /usr/bin/@host@-@pkg@-g++-static3
+/usr/bin/@pkg@-gcc-static1                   /usr/bin/@host@-@pkg@-gcc-static1
+/usr/share/man/man1/@pkg@-gcc-static1.1.gz   /usr/share/man/man1/@pkg@-g++-static1.1.gz
+/usr/share/man/man1/@pkg@-gcc-static1.1.gz   /usr/share/man/man1/@pkg@-g++-static2.1.gz
+/usr/share/man/man1/@pkg@-gcc-static1.1.gz   /usr/share/man/man1/@pkg@-g++-static3.1.gz
+/usr/share/man/man1/@pkg@-gcc-static1.1.gz   /usr/share/man/man1/@host@-@pkg@-gcc-static1.1.gz
+/usr/share/man/man1/@pkg@-gcc-static1.1.gz   /usr/share/man/man1/@host@-@pkg@-g++-static1.1.gz
+/usr/share/man/man1/@pkg@-gcc-static1.1.gz   /usr/share/man/man1/@host@-@pkg@-g++-static2.1.gz
+/usr/share/man/man1/@pkg@-gcc-static1.1.gz   /usr/share/man/man1/@host@-@pkg@-g++-static3.1.gz
+

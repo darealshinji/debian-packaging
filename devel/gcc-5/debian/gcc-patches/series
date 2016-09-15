@@ -6,4 +6,3 @@
 00-stack-protector+format-security.patch
 00-hash-style-both.patch
 00-pr70218.patch
-#02-link-static-libstdc++.patch

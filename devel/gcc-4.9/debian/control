@@ -16,7 +16,7 @@ Build-Depends:
 # run tests
 #autogen, dejagnu, expect, tcl,
 # default gcc build-dependencies
- bison, fastjar, flex, gawk, gettext, libtool, m4, patch,
+ bison, flex, gawk, gettext, libtool, m4, patch,
  perl, texinfo,
  zlib1g-dev, zlib1g-dev:i386 [amd64]
 Standards-Version: 3.9.5
@@ -31,10 +31,7 @@ Depends:
  python-support (>= 0.90),
  ${misc:Depends}
 Recommends:
- build-essential,
- fastjar,
- java-common,
- libantlr-java
+ build-essential
 Description: GNU Compiler Collection
  This build of the GNU Compiler Collection includes front ends for C, C++,
  Objective-C, Objective-C++ and Java, as well as libraries for these languages
