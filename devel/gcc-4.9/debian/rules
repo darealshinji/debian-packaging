@@ -24,7 +24,7 @@ export LDFLAGS=$(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get 
 override_dh_auto_clean:
 	$(MAKE) -f gcc-wrapper.mk clean
 	rm -rf binutils-src gcc-src
-	rm -f debian/links debian/lintian-overrides patchelf
+	rm -f debian/links debian/lintian-overrides
 
 override_dh_auto_configure:
 	debian/get-orig-source --extract

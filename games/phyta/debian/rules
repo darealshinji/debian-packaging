@@ -22,7 +22,7 @@ override_dh_auto_build:
 	rm -f Phyta/data/Thumbs.db
 	chmod a-x Phyta/White.bmx Phyta/data/*
 
-	g++ -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -o patchelf patchelf.cpp
+	g++ -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -std=c++11 -o patchelf patchelf.cpp
 	$(foreach RES, Fullscreen Windowed800x600 Windowed1024x768,\
 	./patchelf --replace-needed libGL.so.1.2 libGL.so.1 Phyta/Phyta$(RES);${\n} \
 	./patchelf --remove-needed libGLU.so.1 Phyta/Phyta$(RES);${\n} )

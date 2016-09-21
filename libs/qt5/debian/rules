@@ -35,7 +35,7 @@ libicudata = $(CURDIR)/debian/libqt$(VERSION)$(libdir)/libicudata.so.56.1
 override_dh_strip:
 	dh_strip
 	if [ "x$$(readelf -d $(libicudata) | grep 'NEEDED')" = "x" ]; then \
-  $(CXX) -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -o patchelf patchelf.cpp && \
+  $(CXX) -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -std=c++11 -o patchelf patchelf.cpp && \
   ./patchelf --add-needed libc.so.6 $(libicudata) ;\
 fi
 

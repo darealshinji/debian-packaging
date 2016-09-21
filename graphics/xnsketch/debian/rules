@@ -23,7 +23,7 @@ override_dh_auto_build:
 	chmod a+x XnSketch/XnSketch
 	chrpath -d XnSketch/XnSketch `find XnSketch/ -type f -name *.so*`
 	./make-icons.sh XnSketch/xnsketch.png
-	g++ -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -o patchelf patchelf.cpp
+	g++ -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -std=c++11 -o patchelf patchelf.cpp
 
 override_dh_makeshlibs:
 

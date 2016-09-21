@@ -10,7 +10,7 @@ endif
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf build converted_icons patchelfmod-master
+	rm -rf build converted_icons
 
 override_dh_auto_build:
 	mkdir build
