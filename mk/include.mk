@@ -157,7 +157,7 @@ else #DEPS
 	then                                                                                          \
 	  echo "You need to install the following package(s):" ;                                      \
 	  echo "$$missing" ;                                                                          \
-	  sudo -k apt-get -q install $$missing ;                                                      \
+	  sudo -k apt-get -q install --no-install-recommends --no-install-suggests $$missing ;                                                      \
 	fi
 	@ echo ""
 endif #DEPS
