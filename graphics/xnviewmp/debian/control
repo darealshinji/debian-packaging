@@ -24,7 +24,6 @@ Depends:
  libgstreamer0.10-0 (>= 0.10.31) [amd64],
  libgtk2.0-0 (>= 2.24.0),
  libice6 (>= 1:1.0.0),
- libilmbase6 (>= 1.0.1),
  libpango-1.0-0 (>= 1.14.0),
  libpulse0 (>= 1:0.99.1) [amd64],
  libsm6,

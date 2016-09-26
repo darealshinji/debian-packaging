@@ -15,11 +15,12 @@ endif
 	dh ${@}
 
 override_dh_auto_clean:
-	rm -rf converted_icons XnView
+	rm -rf converted_icons usr XnView
 	rm -f patchelf xnviewmp.1
 
 override_dh_auto_build:
-	tar xvfz XnViewMP-linux$(x64).tgz
+	tar xvf XnViewMP-linux$(x64).tgz
+	tar xvf data.txz
 	find XnView -type f -name *.gif -exec chmod 0644 '{}' \;
 	find XnView -type f -name *.png -exec chmod 0644 '{}' \;
 	dos2unix XnView/*.txt
