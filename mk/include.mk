@@ -181,7 +181,7 @@ build: source
 	test -f $(builddir)/debian/compat || echo '$(def_compat)' > $(builddir)/debian/compat
 
 ifeq ($(PBUILDER),1)
-	dpkg-source -b $(builddir)
+	dpkg-source -Zgzip -z6 -b $(builddir)
 	@ $(create_basetgz)
 	@# required for correct R/W rights
 	mkdir -p $(resultdir)
