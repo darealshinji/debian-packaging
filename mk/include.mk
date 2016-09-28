@@ -108,7 +108,12 @@ alldeps += $(deps)
 
 
 
+ifeq ($(PBUIDLER),1)
+all:
+	@echo "Did you mean \`PBUILDER=1'?"
+else
 all: predepends download source build
+endif
 
 clean:
 	rm -rf $(allcleanfiles)
