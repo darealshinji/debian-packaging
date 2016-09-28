@@ -30,7 +30,10 @@ ARCHREAL = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 include ../../mk/create_basetgz.mk
 
-def_compat  = 9
+default_compat    = 9
+compression       = gzip
+compression_level = 6
+
 builddir    = pbuilder-source
 LOG         = $(shell basename $$PWD)-build.log
 TIME        = TIME="\nTime elapsed: %E\n" time
@@ -183,10 +186,13 @@ build: source
 	rm -rf $(builddir)/.pc
 	mkdir -p $(builddir)/debian/source
 	echo '3.0 (native)' > $(builddir)/debian/source/format
-	test -f $(builddir)/debian/compat || echo '$(def_compat)' > $(builddir)/debian/compat
+	test -f $(builddir)/debian/compat || echo '$(default_compat)' > $(builddir)/debian/compat
+	test -f $(builddir)/debian/options || \
+	  (echo 'compression = "$(compression)"' > $(builddir)/debian/options && \
+	   echo 'compression-level = "$(compression_level)"' >> $(builddir)/debian/options)
 
 ifeq ($(PBUILDER),1)
-	dpkg-source -Zgzip -z6 -b $(builddir)
+	dpkg-source -Z$(compression) -z$(compression_level) -b $(builddir)
 	@ $(create_basetgz)
 	@# required for correct R/W rights
 	mkdir -p $(resultdir)
