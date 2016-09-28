@@ -197,7 +197,7 @@ ifeq ($(PBUILDER),1)
 else #PBUILDER
 ifneq ($(DEPS),0)
 	@ cd $(builddir) ;                                                                                      \
-	builddeps="`dpkg-checkbuilddeps 2>&1 | sed -e 's/dpkg-checkbuilddeps: Unmet build dependencies: //;'`"; \
+	builddeps="`dpkg-checkbuilddeps 2>&1 | sed -e 's/dpkg-checkbuilddeps:.* Unmet build dependencies: //;'`"; \
 	if [ $$(echo -n $$builddeps | wc -m) -gt 0 ] ;                                                          \
 	then                                                                                                    \
 	    echo "" ;                                                                                           \
