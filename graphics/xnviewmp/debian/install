@@ -11,4 +11,3 @@ XnView/WhatsNew.txt        usr/lib/xnviewmp
 XnView/qt.conf             usr/lib/xnviewmp
 XnView/XnView              usr/lib/xnviewmp
 XnView/*.png               usr/share/pixmaps
-usr/lib/*/*.so.*           usr/lib/xnviewmp/lib
