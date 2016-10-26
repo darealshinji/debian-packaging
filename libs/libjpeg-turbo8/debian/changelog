@@ -1,6 +1,14 @@
+libjpeg-turbo (1.5.0-0ubuntu1) yakkety; urgency=medium
+
+  * New upstream version.
+  * Keep the Ubuntu packaging.
+  * Update symbols file.
+
+ -- Matthias Klose <doko@ubuntu.com>  Tue, 02 Aug 2016 13:36:10 +0200
+
 libjpeg-turbo (1.4.2-0ubuntu3) xenial; urgency=medium
 
-  * libjpeg8-turbo-dev: Install a libjpeg pkgconfig file.
+  * libjpeg8-turbo-dev: Install an libjpeg pkgconfig file.
 
  -- Matthias Klose <doko@ubuntu.com>  Mon, 22 Feb 2016 15:52:51 +0100
 

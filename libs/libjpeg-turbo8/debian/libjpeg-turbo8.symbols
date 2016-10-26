@@ -48,6 +48,7 @@ libjpeg.so.8 libjpeg8 #MINVER#
  jpeg_consume_input@LIBJPEG_8.0 8c
  jpeg_copy_critical_parameters@LIBJPEG_8.0 8c
  jpeg_core_output_dimensions@LIBJPEG_8.0 8c
+ jpeg_crop_scanline@LIBJPEG_8.0 8c
  jpeg_default_colorspace@LIBJPEG_8.0 8c
  jpeg_default_qtables@LIBJPEG_8.0 8c
  jpeg_destroy@LIBJPEG_8.0 8c
@@ -163,6 +164,7 @@ libjpeg.so.8 libjpeg8 #MINVER#
  jpeg_set_quality@LIBJPEG_8.0 8c
  (arch=i386)jpeg_simd_cpu_support@LIBJPEG_8.0 8c-2ubuntu5~
  jpeg_simple_progression@LIBJPEG_8.0 8c
+ jpeg_skip_scanlines@LIBJPEG_8.0 8c
  jpeg_start_compress@LIBJPEG_8.0 8c
  jpeg_start_decompress@LIBJPEG_8.0 8c
  jpeg_start_output@LIBJPEG_8.0 8c

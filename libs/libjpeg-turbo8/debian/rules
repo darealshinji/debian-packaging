@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
 # for architecture dependent variables and changelog vars
 vafilt = $(subst $(2)=,,$(filter $(2)=%,$(1)))
 
@@ -28,7 +31,7 @@ override_dh_auto_configure:
 	dh_auto_configure -v -- --with-jpeg8 CFLAGS="$(CFLAGS)"
 
 override_dh_auto_build:
-	dh_auto_build -v -- V=1
+	dh_auto_build -v
 	$(MAKE) -C debian/extra CC=$(CC) CFLAGS="$(CFLAGS) -Wall"
 
 override_dh_install:
@@ -64,4 +67,19 @@ override_dh_auto_clean:
 	dh_auto_clean
 	$(MAKE) -C debian/extra clean
 	rm -f simd/jsimdcfg.inc
+
+deb_source := $(shell dpkg-parsechangelog | sed -n 's/^Source: //p')
+svn_rev := $(shell dpkg-parsechangelog | sed -rne 's,^Version: .*[+~]svn([0-9]+).*,\1,p')
+upstream_version := $(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
+
+.PHONY: get-orig-source
+get-orig-source:
+	rm -rf $(deb_source)-$(upstream_version).orig
+	rm -f $(deb_source)-$(upstream_version).orig.tar.gz
+	svn -q export -r $(svn_rev) https://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo/trunk \
+		$(deb_source)-$(upstream_version).orig
+	GZIP=--best tar -cz --owner root --group root --mode a+rX \
+	     -f $(deb_source)_$(upstream_version).orig.tar.gz \
+	     $(deb_source)-$(upstream_version).orig
+	rm -r $(deb_source)-$(upstream_version).orig
 

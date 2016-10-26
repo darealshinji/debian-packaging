@@ -8,7 +8,7 @@ Index: b/Makefile.am
 ===================================================================
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -90,9 +90,7 @@ noinst_PROGRAMS = jcstest
+@@ -92,9 +92,7 @@ noinst_PROGRAMS = jcstest
  
  if WITH_TURBOJPEG
  

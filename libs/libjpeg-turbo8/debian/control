@@ -4,11 +4,8 @@ Section: graphics
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Uploaders: Tom Gall <tom.gall@linaro.org>,
            Fathi Boudra <fathi.boudra@linaro.org>
-Build-Depends:
- debhelper (>= 9),
- dh-autoreconf,
- nasm [amd64 i386]
-Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 9), dh-autoreconf, nasm [amd64 i386], quilt
+Standards-Version: 3.9.8
 Vcs-Bzr: lp:libjpeg-turbo
 Homepage: http://libjpeg-turbo.virtualgl.org/
 
@@ -16,18 +13,10 @@ Package: libjpeg-turbo8-dev
 Architecture: any
 Section: libdevel
 Multi-Arch: same
-Depends:
- libjpeg-turbo8 (= ${binary:Version}),
- ${misc:Depends}
-Conflicts:
- libjpeg62-dev,
- libjpeg7-dev
-Replaces:
- libjpeg62-dev,
- libjpeg7-dev,
- libjpeg8-dev (<< 8c-2ubuntu5)
-Provides:
- libjpeg-dev
+Depends: libc-dev, libjpeg-turbo8 (= ${binary:Version}), ${misc:Depends}
+Conflicts: libjpeg62-dev, libjpeg7-dev
+Replaces: libjpeg62-dev, libjpeg7-dev, libjpeg8-dev (<< 8c-2ubuntu5)
+Provides: libjpeg-dev
 Description: Development files for the IJG JPEG library
  The Independent JPEG Group's JPEG library is a library for handling
  JPEG files.
@@ -38,15 +27,10 @@ Package: libjpeg-turbo8
 Architecture: any
 Multi-Arch: same
 Section: libs
-Pre-Depends:
- ${misc:Pre-Depends}
-Depends:
- ${misc:Depends},
- ${shlibs:Depends}
-Breaks:
- libjpeg8 (<< 8c-2ubuntu5)
-Replaces:
- libjpeg8 (<< 8c-2ubuntu5)
+Pre-Depends: multiarch-support
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Breaks: libjpeg8 (<< 8c-2ubuntu5)
+Replaces: libjpeg8 (<< 8c-2ubuntu5)
 Description: IJG JPEG compliant runtime library.
  Runtime library supporting the Independent JPEG Group's standard
  for JPEG files.
@@ -59,16 +43,9 @@ Package: libturbojpeg
 Architecture: any
 Multi-Arch: same
 Section: libs
-Pre-Depends: 
- ${misc:Pre-Depends}
-Depends:
- ${misc:Depends},
- ${shlibs:Depends}
-Replaces:
- libjpeg-turbo8 (<< 1.1.90+svn722-1ubuntu6),
- libturbojpeg0
-Provides:
- libturbojpeg0
+Pre-Depends: multiarch-support
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Replaces: libjpeg-turbo8 (<< 1.1.90+svn722-1ubuntu6)
 Description: IJG JPEG compliant runtime library.
  Runtime library supporting the Independent JPEG Group's standard
  for JPEG files.
@@ -78,15 +55,10 @@ Description: IJG JPEG compliant runtime library.
 
 Package: libjpeg-turbo-progs
 Architecture: any
-Depends:
- ${misc:Depends},
- ${shlibs:Depends}
-Conflicts:
- libjpeg-progs
-Replaces:
- libjpeg-progs (<< 8c-2ubuntu5)
-Provides:
- libjpeg-progs
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Conflicts: libjpeg-progs
+Replaces: libjpeg-progs (<< 8c-2ubuntu5)
+Provides: libjpeg-progs
 Description: Programs for manipulating JPEG files
  This package contains programs for manipulating JPEG files:
   cjpeg/djpeg: convert to/from the JPEG file format
@@ -98,13 +70,10 @@ Package: libjpeg-turbo8-dbg
 Architecture: any
 Section: debug
 Priority: extra
-Depends:
- libjpeg-turbo8 (= ${binary:Version}),
- ${misc:Depends}
-Replaces:
- libjpeg-turbo-dbg (<< 1.1.90+svn722-1ubuntu6),
- libjpeg62-dbg,
- libjpeg7-dbg
+Depends: libjpeg-turbo8 (= ${binary:Version}), ${misc:Depends}
+Replaces: libjpeg-turbo-dbg (<< 1.1.90+svn722-1ubuntu6),
+          libjpeg62-dbg,
+          libjpeg7-dbg
 Description: Debugging symbols for the libjpeg-turbo library
  An optimized implementation of the Independent JPEG Group's
  JPEG library is a library for handling JPEG files.
@@ -115,12 +84,8 @@ Package: libjpeg-turbo-test
 Architecture: any
 Priority: extra
 Section: debug
-Depends:
- libturbojpeg (= ${binary:Version}),
- ${misc:Depends},
- ${shlibs:Depends}
-Replaces:
- libjpeg-test (<< 1.1.90+svn722-1ubuntu6)
+Depends: libturbojpeg (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Replaces: libjpeg-test (<< 1.1.90+svn722-1ubuntu6)
 Description: Program for benchmarking and testing libjpeg-turbo
  This package contains tjunittest and tjbench.  tjunittest tests the basic
  functionality of the library and data files for performing those tests.
