@@ -6,6 +6,7 @@ cleanfiles     = patchelf.cpp $(deb)
 distcleanfiles = *.tgz
 changelog-msg  = New release version
 
+# http://www.xnview.com/xnviewmp_update.txt
 VERSION = 0.83
 ver = 083
 
