@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+
+define \n
+
+
+endef
+
+export DEB_BUILD_MAINT_OPTIONS   := hardening=+all,-pie
+export DEB_CFLAGS_MAINT_APPEND   := $(shell dpkg-buildflags --get CPPFLAGS)
+export DEB_CXXFLAGS_MAINT_APPEND := $(shell dpkg-buildflags --get CPPFLAGS)
+export DEB_LDFLAGS_MAINT_APPEND  := -Wl,--as-needed
+
+VERS = 16 15 14 12
+
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean
+	$(foreach SO,$(VERS),rm -rf libpng$(SO);${\n})
+
+override_dh_auto_configure:
+	$(foreach SO,$(VERS),\
+	  ver=$$(sed -n 's/^libpng$(SO) //p' versions.txt); \
+	  tar xf libpng-$${ver}.tar.xz && \
+	  mv libpng-$${ver} libpng$(SO); \
+	  dh_auto_configure -Dlibpng$(SO) -- \
+	    --disable-silent-rules --disable-static;${\n})
+
+override_dh_auto_build:
+	$(foreach SO,$(VERS),dh_auto_build -Dlibpng$(SO);${\n})
+
+override_dh_auto_install:
+	$(foreach SO,$(VERS),dh_auto_install -Dlibpng$(SO);${\n})
+
+override_dh_installchangelogs:
+	$(foreach SO,16 15 14,dh_installchangelogs -plibpng$(SO)-$(SO) libpng$(SO)/CHANGES;${\n})
+	dh_installchangelogs -plibpng12-0 libpng12/CHANGES
+
+

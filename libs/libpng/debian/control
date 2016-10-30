@@ -1,0 +1,51 @@
+Source: libpng
+Section: libs
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+XSBC-Original-Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Build-Depends: debhelper (>= 9), zlib1g-dev, mawk
+Standards-Version: 3.9.5
+VCS-Git: clone git://git.code.sf.net/p/libpng/code
+VCS-Browser: https://sourceforge.net/p/libpng/code/ci/master/tree/
+Homepage: http://libpng.org/pub/png/libpng.html
+
+Package: libpng16-16
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PNG library - runtime (version 1.6)
+ libpng is a library implementing an interface for reading and writing
+ PNG (Portable Network Graphics) format files.
+ .
+ This package contains the runtime library files needed to run software
+ using libpng16.
+
+Package: libpng15-15
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PNG library - runtime (version 1.5)
+ libpng is a library implementing an interface for reading and writing
+ PNG (Portable Network Graphics) format files.
+ .
+ This package contains the runtime library files needed to run software
+ using libpng15.
+
+Package: libpng14-14
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PNG library - runtime (version 1.4)
+ libpng is a library implementing an interface for reading and writing
+ PNG (Portable Network Graphics) format files.
+ .
+ This package contains the runtime library files needed to run software
+ using libpng14.
+
+Package: libpng12-0
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PNG library - runtime (version 1.2)
+ libpng is a library implementing an interface for reading and writing
+ PNG (Portable Network Graphics) format files.
+ .
+ This package contains the runtime library files needed to run software
+ using libpng12.
+
