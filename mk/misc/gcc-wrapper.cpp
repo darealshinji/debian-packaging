@@ -4,6 +4,7 @@
 ** copyright in any jurisdiction.
 */
 
+#include <iostream>
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,23 +31,27 @@
 
 int main(int argc, char **argv)
 {
-  const char *command = GCCDRIVER;
+  std::string command = GCCDRIVER;
 
   if (argc == 1)
   {
-    printf("gcc/g++ wrapper\n"
-           "Used driver: " GCCDRIVER "\n"
-           "Appends arguments:" XARGS "\n"
-           "Usage: %s args\n", argv[0]);
+    std::cerr << "gcc/g++ wrapper\n"
+      << "Used driver: " GCCDRIVER "\n"
+      << "Appends arguments:" XARGS "\n"
+      << "Usage: " << argv[0] << " args"
+      << std::endl;
     return 1;
   }
   else if (argc > 1)
   {
-    std::string args = std::string(argv[argc-1]);
-    std::string str = GCCDRIVER " " + args + XARGS;
-    command = str.c_str();
+    std::string args;
+    for (int i = 1; i < argc; ++i)
+    {
+      args = args + " " + std::string(argv[i]);
+    }
+    command = GCCDRIVER " " + args + XARGS;
   }
 
-  return system(command);
+  return system(command.c_str());
 }
 
