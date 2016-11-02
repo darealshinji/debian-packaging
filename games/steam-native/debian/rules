@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+PKG = steam-native
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf libudev0 libpng12-0
+
+override_dh_auto_build:
+	chmod a+x steam-native/steam-native
+	dpkg-deb -x libudev0_deb libudev0
+	dpkg-deb -x libpng12-0_deb libpng12-0
+
+override_dh_makeshlibs:
+override_dh_shlibdeps:
+override_dh_strip:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
+

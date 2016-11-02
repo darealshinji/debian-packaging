@@ -1,0 +1,4 @@
+steam-native/steam-native           /usr/games
+steam-native/steam-native.desktop   /usr/share/applications
+libudev0/lib/i386-linux-gnu/*       /usr/lib/steam/udev
+libpng12-0/lib/i386-linux-gnu/*     /usr/lib/steam/png
