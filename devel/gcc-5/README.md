@@ -10,9 +10,6 @@ free in the sense that it respects the user's freedom.
 The commands are prefixed with `gcc5opt` and all files are installed into
 directories that won't conflict with your default installation of GCC.
 
-Additionally to gcc5opt-g++ there's an alternative command `gcc5opt-g++-static-libstdc++`,
-configured to link libstdc++ statically.
-
 GCC is patched to enable the following behaviour:
  * link with `-z relro --hash-style=both --as-needed` by default
  * enable Fortify Source (`-D_FORTIFY_SOURCE=2`) for optimization levels > 0

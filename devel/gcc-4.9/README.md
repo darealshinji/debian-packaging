@@ -12,9 +12,6 @@ This package is primarily intended to be used on Ubuntu 14.04 where GCC 4.9 is m
 The commands are prefixed with `gcc4.9opt` and all files are installed into
 directories that won't conflict with your default installation of GCC.
 
-Additionally to gcc4.9opt-g++ there's an alternative command `gcc4.9opt-g++-static-libstdc++`,
-configured to link libstdc++ statically.
-
 GCC is patched to enable the following behaviour:
  * link with `-z relro --hash-style=both --as-needed` by default
  * enable Fortify Source (`-D_FORTIFY_SOURCE=2`) for optimization levels > 0

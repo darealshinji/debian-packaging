@@ -28,7 +28,6 @@ Depends:
  ${shlibs:Depends},
  zlib1g:i386 [amd64],
  python:any,
- python-support (>= 0.90),
  ${misc:Depends}
 Recommends:
  build-essential
@@ -41,9 +40,6 @@ Description: GNU Compiler Collection
  .
  The commands are prefixed with 'gcc5opt' and all files are installed into
  directories that won't conflict with you default installation of GCC.
- .
- Additionally to gcc5opt-g++ there's an alternative command
- 'gcc5opt-g++-static-libstdc++', configured to link libstdc++ statically.
  .
  GCC is patched to enable the following behaviour:
   * link with '--as-needed' and '-z relro' by default
