@@ -20,8 +20,6 @@ Depends:
  libgcc1 (>= 1:4.1.1),
  libgl1-mesa-glx | libgl1,
  libglib2.0-0 (>= 2.22.0),
- libgstreamer-plugins-base0.10-0 (>= 0.10.31) [amd64],
- libgstreamer0.10-0 (>= 0.10.31) [amd64],
  libgtk2.0-0 (>= 2.24.0),
  libice6 (>= 1:1.0.0),
  libpango-1.0-0 (>= 1.14.0),
@@ -39,6 +37,9 @@ Depends:
  libxrender1,
  libxslt1.1 (>= 1.1.25) [amd64],
  zlib1g (>= 1:1.2.0)
+Recommends:
+ libgstreamer-plugins-base0.10-0 (>= 0.10.31) [amd64],
+ libgstreamer0.10-0 (>= 0.10.31) [amd64]
 Description: Graphic viewer, browser, converter.
  XnView MP is the enhanced version to XnView. It is a powerful
  cross-platform media browser, viewer and converter.
