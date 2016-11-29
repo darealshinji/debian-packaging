@@ -15,7 +15,7 @@ case "$1" in
 
     mkdir -p $cache
     cd $cache
-    wget "http://download.divx.com/hevc/$bin" \
+    wget --no-check-certificate "http://download.divx.com/hevc/$bin" \
         || ( echo "Couldn't download $bin"; exit 1 )
 
     sha256_2=$(sha256sum $bin | head -c64)
