@@ -1,4 +1,10 @@
-divx265 (1.5.0.8~ppa1~vivid) vivid; urgency=low
+divx265 (1.5.0.8~ppa2~trusty) trusty; urgency=low
+
+  * postinst: skip wget certificate checks
+
+ -- Marshall Banana <djcj@gmx.de>  Tue, 29 Nov 2016 11:37:04 +0100
+
+divx265 (1.5.0.8~ppa1~trusty) trusty; urgency=low
 
   * New upstream release
 
