@@ -1,4 +1,4 @@
-tsmuxer (2.6.11~3~trusty) trusty; urgency=low
+tsmuxer (2.6.11~6~trusty) trusty; urgency=low
 
   * Update maintainer scripts:
     * don't use upx-ucl and strip on binaries
@@ -6,6 +6,27 @@ tsmuxer (2.6.11~3~trusty) trusty; urgency=low
   * Remove upx-ucl from dependencies
 
  -- Marshall Banana <djcj@gmx.de>  Tue, 29 Nov 2016 11:45:46 +0100
+ 
+tsmuxer (2.6.11~5~trusty) trusty; urgency=medium
+
+  * make package depend on binutils because maintainer scripts require
+    `strip' to be installed
+
+ -- Marshall Banana <djcj@gmx.de>  Wed, 16 Mar 2016 23:56:15 +0100
+
+tsmuxer (2.6.11~4~trusty) trusty; urgency=low
+
+  * add missing dependencies on wget
+
+ -- Marshall Banana <djcj@gmx.de>  Wed, 14 Oct 2015 12:55:02 +0200
+
+tsmuxer (2.6.11~3~trusty) trusty; urgency=medium
+
+  * Decompress and strip upx-compressed binaries
+  * Update runtime dependencies
+  * Use less verbosity in maintainer scripts
+
+ -- Marshall Banana <djcj@gmx.de>  Tue, 23 Dec 2014 12:22:23 +0100
 
 tsmuxer (2.6.11~2~trusty) trusty; urgency=low
 
