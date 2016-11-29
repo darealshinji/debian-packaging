@@ -14,7 +14,8 @@ case "$1" in
 
     mkdir -p $cache
     cd $cache
-    wget -nv -O $archive 'https://docs.google.com/uc?authuser=0&id=0B0VmPcEZTp8NekJxLUVJRWMwejQ&export=download' \
+    wget --no-check-certificate -nv -O $archive \
+        'https://docs.google.com/uc?authuser=0&id=0B0VmPcEZTp8NekJxLUVJRWMwejQ&export=download' \
         || ( echo "Couldn't download $bin"; exit 1 )
 
     sha256_2=$(sha256sum $archive | head -c64)
@@ -26,8 +27,8 @@ case "$1" in
 
     tar zxvf $archive >/dev/null
 
-    upx-ucl -qqq -d $bin
-    strip -s $bin
+    #upx-ucl -qqq -d $bin
+    #strip -s $bin
 
     install -m755 -D $bin /usr/bin/$bin
     rm -rf $cache

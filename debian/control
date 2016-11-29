@@ -17,8 +17,7 @@ Depends: ${misc:Depends},
          lib32gcc1 (>= 1:4.1.1) [amd64],
          lib32stdc++6 (>= 4.2.1) [amd64],
          libfreetype6:i386 (>= 2.2.1) [amd64],
-         zlib1g:i386 (>= 1:1.1.4) [amd64],
-         upx-ucl
+         zlib1g:i386 (>= 1:1.1.4) [amd64]
 Provides: tsmuxer, tsmuxer-bin
 Replaces: tsmuxer, tsmuxer-bin
 Description: mux video to TS/M2TS files or create BD disks
@@ -44,8 +43,7 @@ Depends: ${misc:Depends},
          lib32stdc++6 (>= 4.1.1) [amd64],
          libqtcore4:i386 (>= 4:4.7.0~beta1) [amd64],
          libqtgui4:i386 (>= 4:4.5.3) [amd64],
-         tsmuxer (>= 2.6),
-         upx-ucl
+         tsmuxer (>= 2.6)
 Provides: tsmuxergui, tsmuxergui-bin
 Replaces: tsmuxer, tsmuxer-bin
 Description: mux video to TS/M2TS files or create BD disks - GUI

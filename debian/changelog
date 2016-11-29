@@ -1,3 +1,12 @@
+tsmuxer (2.6.11~3~trusty) trusty; urgency=low
+
+  * Update maintainer scripts:
+    * don't use upx-ucl and strip on binaries
+    * skip wget certificate checks
+  * Remove upx-ucl from dependencies
+
+ -- Marshall Banana <djcj@gmx.de>  Tue, 29 Nov 2016 11:45:46 +0100
+
 tsmuxer (2.6.11~2~trusty) trusty; urgency=low
 
   * Don't save files in /usr/lib/tsmuxer
