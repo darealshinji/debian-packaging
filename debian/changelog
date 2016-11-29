@@ -1,8 +1,14 @@
-divx265 (1.5.0.8~ppa2~trusty) trusty; urgency=low
+divx265 (1.5.0.8~ppa3~trusty) trusty; urgency=low
 
   * postinst: skip wget certificate checks
 
  -- Marshall Banana <djcj@gmx.de>  Tue, 29 Nov 2016 11:37:04 +0100
+
+divx265 (1.5.0.8~ppa2~trusty) trusty; urgency=low
+
+  * Add missing dependency on wget
+
+ -- Marshall Banana <djcj@gmx.de>  Wed, 14 Oct 2015 12:55:02 +0200
 
 divx265 (1.5.0.8~ppa1~trusty) trusty; urgency=low
 
