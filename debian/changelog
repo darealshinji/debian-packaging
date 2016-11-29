@@ -1,3 +1,9 @@
+neroaac (1.5.4.0~ppa3~trusty) trusty; urgency=medium
+
+  * postinst: update download URL, skip wget certificate checks
+ 
+ -- Marshall Banana <djcj@gmx.de>  Tue, 29 Nov 2016 11:34:20 +0100
+
 neroaac (1.5.4.0~ppa2~trusty) trusty; urgency=low
 
   * Re-release
