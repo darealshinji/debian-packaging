@@ -15,7 +15,7 @@ case "$1" in
 
     mkdir -p $cache
     cd $cache
-    wget --no-check-certificate "http://www.nero.com/tools/$archive" \
+    wget --no-check-certificate "http://ftp6.nero.com/tools/$archive" \
         || ( echo "Couldn't download NeroAAC"; exit 1 )
 
     sha256_2=$(sha256sum $archive | head -c64)
