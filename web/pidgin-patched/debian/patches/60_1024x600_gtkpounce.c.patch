@@ -1,5 +1,7 @@
---- a/pidgin/gtkpounce.c
-+++ b/pidgin/gtkpounce.c
+Index: pidgin-2.10.2/pidgin/gtkpounce.c
+===================================================================
+--- pidgin-2.10.2.orig/pidgin/gtkpounce.c	2012-03-14 06:28:02.000000000 +0100
++++ pidgin-2.10.2/pidgin/gtkpounce.c	2012-03-16 12:33:59.276065914 +0100
 @@ -495,6 +495,7 @@
  	GPtrArray *sound_widgets;
  	GPtrArray *exec_widgets;

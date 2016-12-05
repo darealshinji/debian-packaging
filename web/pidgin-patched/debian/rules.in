@@ -1,25 +1,31 @@
 #!/usr/bin/make -f
 
-export DEB_BUILD_HARDENING=1
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
-include /usr/share/cdbs/1/rules/autoreconf.mk
 include /usr/share/cdbs/1/class/autotools.mk
+include /usr/share/cdbs/1/rules/autoreconf.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/gnome.mk
 include /usr/share/cdbs/1/rules/utils.mk
 
 # Build into a separate directory
 DEB_BUILDDIR = $(DEB_SRCDIR)/build
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
-CFLAGS  += $(CPPFLAGS)
 LDFLAGS += -Wl,--as-needed
 DEB_CONFIGURE_EXTRA_FLAGS = --disable-gevolution \
 	    --enable-cap --with-system-ssl-certs=/etc/ssl/certs \
 	    --enable-perl --with-zephyr=/usr --enable-dbus --enable-gnutls=no \
-	    --enable-nss=yes --enable-cyrus-sasl --enable-vv --enable-farsight \
-	    --enable-tcl --enable-tk \
-	    --enable-nm @ENABLE_UNITY@ \
+	    --enable-nss=yes --enable-cyrus-sasl --enable-vv \
+	    --enable-tcl --enable-tk @ENABLE_UNITY@ \
+	    --with-tclconfig=/usr/lib/$(DEB_HOST_MULTIARCH) \
 	    --with-dynamic-prpls=bonjour,gg,irc,jabber,msn,myspace,mxit,novell,oscar,sametime,simple,yahoo,zephyr # disable silc
+ifeq ($(DEB_BUILD_ARCH_OS),linux)
+  DEB_CONFIGURE_EXTRA_FLAGS += --enable-nm
+else
+  DEB_CONFIGURE_EXTRA_FLAGS += --disable-nm
+endif
+
 
 DEB_INSTALL_DOCS_ALL := -XAUTHORS -XNEWS -XREADME
 
@@ -42,8 +48,11 @@ DEB_INSTALL_MANPAGES_pidgin-dev := debian/dh_pidgin.1
 clean::
 	rm -f debian/copyright
 
-makebuilddir/pidgin::
-	touch configure # We don't want to regenerate autotools files
+configure/libpurple0::
+	# Fix build failure with full hardening flags:
+	sed -i -e 's/-fPIE//g' -e 's/-pie//g' \
+		build/libpurple/plugins/perl/common/Makefile.PL \
+		build/pidgin/plugins/perl/common/Makefile.PL \
 
 common-install-impl::
 	rm -f debian/tmp/usr/lib/pidgin/relnot.so # release notification plugin
@@ -60,6 +69,13 @@ common-install-impl::
 	echo 'X-Ubuntu-Gettext-Domain=pidgin' >> debian/tmp/usr/share/applications/pidgin.desktop
 	# Call intltool-update to build the .pot
 	cd $(DEB_SRCDIR)/po; intltool-update -p
+
+	# see LP: #1508632
+	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig
+	mv debian/tmp/usr/lib/libpurple*.so* \
+		debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/.
+	mv debian/tmp/usr/lib/pkgconfig/purple.pc \
+		debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/.
 
 cleanbuilddir/pidgin::
 	rm -rf $(DEB_SRCDIR)/build
@@ -78,4 +94,3 @@ binary-install/pidgin-dev::
 
 cleanbuilddir/pidgin-dev::
 	rm -f debian/dh_pidgin.1
-

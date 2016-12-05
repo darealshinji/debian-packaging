@@ -1,19 +1,21 @@
 Source: pidgin
 Section: net
 Priority: optional
-Maintainer: Ari Pollak <ari@debian.org>
-Build-Depends: cdbs (>= 0.4.53), debhelper (>= 9), dh-autoreconf, intltool, gconf2,
- hardening-wrapper,
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Ari Pollak <ari@debian.org>
+Build-Depends: cdbs (>= 0.4.53), debhelper (>= 7), intltool,
+ libtool, dpkg-dev (>= 1.16.0),
  libgtk2.0-dev (>= 2.10.0), libxss-dev, libmeanwhile-dev,
- libnss3-dev, tcl-dev, tk-dev, libgstreamer1.0-dev,
+ libnss3-dev (>= 3.11.7), tcl-dev, tk-dev, libgstreamer1.0-dev,
  libgtkspell-dev, libltdl3-dev, libperl-dev,
  libstartup-notification0-dev, libzephyr-dev, libxml2-dev,
  libdbus-glib-1-dev, dbus, python3, libavahi-client-dev,
  libavahi-glib-dev, libxml-parser-perl, libncursesw5-dev, libsasl2-dev,
- xsltproc, doxygen, libfarstream-0.2-dev | libfarstream-0.1-dev,
+ xsltproc, doxygen, libfarstream-0.2-dev,
  libgstreamer-plugins-base1.0-dev,
- network-manager-dev (>= 0.9.0),
- libsqlite3-dev, libidn11-dev, ca-certificates@UBUNTU_DEPS@
+ network-manager-dev (>= 0.9.0) [linux-any],
+ libsqlite3-dev (>= 3.3), libidn11-dev, ca-certificates,
+ dh-autoreconf, @UBUNTU_DEPS@
 Standards-Version: 3.9.5
 Homepage: http://www.pidgin.im
 Vcs-Git: git://git.debian.org/git/collab-maint/pidgin.git
@@ -64,7 +66,7 @@ Description: multi-protocol instant messaging client - data files
 
 Package: pidgin-dev
 Section: devel
-Architecture: all
+Architecture: any
 Depends: ${misc:Depends}, pidgin (>= ${source:Upstream-Version}), pidgin (<< ${source:Upstream-Version}+1~), pkg-config, libpurple-dev, libgtk2.0-dev
 Suggests: doc-base
 Description: multi-protocol instant messaging client - development files
@@ -109,7 +111,7 @@ Description: text-based multi-protocol instant messaging client - development
 
 Package: libpurple-dev
 Section: libdevel
-Architecture: all
+Architecture: any
 Depends: libpurple0 (>= ${source:Upstream-Version}), libpurple0 (<< ${source:Upstream-Version}+1~), pkg-config, libglib2.0-dev, libdbus-glib-1-dev, ${misc:Depends}
 Description: multi-protocol instant messaging library - development files
  This package contains the headers and other development files not included in
@@ -120,7 +122,7 @@ Description: multi-protocol instant messaging library - development files
 Package: libpurple-bin
 Section: net
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, python3, python3-dbus, dbus
+Depends: ${shlibs:Depends}, ${misc:Depends}, libpurple0, python, python3, python3-dbus, dbus
 Description: multi-protocol instant messaging library - extra utilities
  This package contains the utilities not included in the main libpurple0
  package. Currently included are: purple-remote, purple-send,

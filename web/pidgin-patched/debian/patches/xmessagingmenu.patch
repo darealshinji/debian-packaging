@@ -2,16 +2,20 @@
  pidgin.desktop.in |    1 +
  1 file changed, 1 insertion(+)
 
---- a/pidgin/data/pidgin.desktop.in
-+++ b/pidgin/data/pidgin.desktop.in
+Index: pidgin-2.10.9/pidgin/data/pidgin.desktop.in
+===================================================================
+--- pidgin-2.10.9.orig/pidgin/data/pidgin.desktop.in	2014-02-02 22:30:51.000000000 +0100
++++ pidgin-2.10.9/pidgin/data/pidgin.desktop.in	2014-04-09 18:55:02.000000000 +0200
 @@ -8,4 +8,5 @@
  Terminal=false
  Type=Application
  Categories=Network;InstantMessaging;
 +X-MessagingMenu-UsesChatSection=true
  
---- a/pidgin/data/pidgin.desktop.in.in
-+++ b/pidgin/data/pidgin.desktop.in.in
+Index: pidgin-2.10.9/pidgin/data/pidgin.desktop.in.in
+===================================================================
+--- pidgin-2.10.9.orig/pidgin/data/pidgin.desktop.in.in	2014-02-02 22:29:20.000000000 +0100
++++ pidgin-2.10.9/pidgin/data/pidgin.desktop.in.in	2014-04-09 19:00:33.447381461 +0200
 @@ -9,3 +9,5 @@
  Type=Application
  Categories=Network;InstantMessaging;

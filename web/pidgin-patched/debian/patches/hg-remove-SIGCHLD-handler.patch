@@ -14,32 +14,11 @@ from forking, and maybe fix a D-Bus bug, or something.
 Fixes #5553.
 Fixes #7902.
 
---- a/configure.ac
-+++ b/configure.ac
-@@ -741,9 +741,6 @@
- dnl #######################################################################
- dnl # Check for GStreamer
- dnl #######################################################################
--dnl
--dnl TODO: Depend on gstreamer >= 0.10.10, and remove the conditional use of
--dnl       gst_registry_fork_set_enabled.
- AC_ARG_ENABLE(gstreamer,
- 	[AC_HELP_STRING([--disable-gstreamer], [compile without GStreamer audio support])],
- 	enable_gst="$enableval", enable_gst="yes")
-@@ -752,10 +749,6 @@
- 		AC_DEFINE(USE_GSTREAMER, 1, [Use GStreamer for playing sounds])
- 		AC_SUBST(GSTREAMER_CFLAGS)
- 		AC_SUBST(GSTREAMER_LIBS)
--		AC_CHECK_LIB(gstreamer-0.10, gst_registry_fork_set_enabled,
--			[ AC_DEFINE(GST_CAN_DISABLE_FORKING, [],
--			  [Define if gst_registry_fork_set_enabled exists])],
--			[], [$GSTREAMER_LIBS])
- 	], [
- 		AC_MSG_RESULT(no)
- 		enable_gst="no"
---- a/pidgin/gtkmain.c
-+++ b/pidgin/gtkmain.c
-@@ -87,10 +87,6 @@
+Index: pidgin-2.10.11/pidgin/gtkmain.c
+===================================================================
+--- pidgin-2.10.11.orig/pidgin/gtkmain.c
++++ pidgin-2.10.11/pidgin/gtkmain.c
+@@ -87,10 +87,6 @@ static const int catch_sig_list[] = {
  	SIGINT,
  	SIGTERM,
  	SIGQUIT,
@@ -50,7 +29,7 @@ Fixes #7902.
  	-1
  };
  
-@@ -135,29 +131,6 @@
+@@ -135,29 +131,6 @@ static int signal_sockets[2];
  
  static void sighandler(int sig);
  
@@ -80,7 +59,7 @@ Fixes #7902.
  static void sighandler(int sig)
  {
  	ssize_t written;
-@@ -208,33 +181,8 @@
+@@ -208,33 +181,8 @@ mainloop_sighandler(GIOChannel *source,
  		return FALSE;
  	}
  
@@ -116,9 +95,11 @@ Fixes #7902.
  
  	return TRUE;
  }
---- a/pidgin/gtksound.c
-+++ b/pidgin/gtksound.c
-@@ -319,9 +319,6 @@
+Index: pidgin-2.10.11/pidgin/gtksound.c
+===================================================================
+--- pidgin-2.10.11.orig/pidgin/gtksound.c
++++ pidgin-2.10.11/pidgin/gtksound.c
+@@ -319,9 +319,6 @@ pidgin_sound_init(void)
  
  #ifdef USE_GSTREAMER
  	purple_debug_info("sound", "Initializing sound output drivers.\n");

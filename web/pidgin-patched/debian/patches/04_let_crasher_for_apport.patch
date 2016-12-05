@@ -1,5 +1,7 @@
---- a/pidgin/gtkmain.c
-+++ b/pidgin/gtkmain.c
+Index: pidgin-2.10.2/pidgin/gtkmain.c
+===================================================================
+--- pidgin-2.10.2.orig/pidgin/gtkmain.c	2012-03-14 06:28:02.000000000 +0100
++++ pidgin-2.10.2/pidgin/gtkmain.c	2012-03-16 12:33:48.964065522 +0100
 @@ -84,7 +84,6 @@
   * Each list terminated with -1
   */

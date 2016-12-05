@@ -2,6 +2,8 @@ Description: Send message (webview) in buddy pounce is unusable
 Author: Ritesh Khadgaray <ritesh@canonical.com>
 Forwarded: https://developer.pidgin.im/ticket/15400
 
+Index: b/pidgin/gtkpounce.c
+===================================================================
 --- a/pidgin/gtkpounce.c
 +++ b/pidgin/gtkpounce.c
 @@ -687,6 +687,7 @@

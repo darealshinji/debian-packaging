@@ -1,6 +1,8 @@
 === modified file 'pidgin/gtksound.c'
---- a/pidgin/gtksound.c
-+++ b/pidgin/gtksound.c
+Index: pidgin-2.10.2/pidgin/gtksound.c
+===================================================================
+--- pidgin-2.10.2.orig/pidgin/gtksound.c	2012-03-14 06:28:02.000000000 +0100
++++ pidgin-2.10.2/pidgin/gtksound.c	2012-03-16 12:33:57.148065833 +0100
 @@ -228,7 +228,7 @@
  }
  

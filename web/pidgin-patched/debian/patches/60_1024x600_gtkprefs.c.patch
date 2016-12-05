@@ -1,6 +1,8 @@
---- a/pidgin/gtkprefs.c
-+++ b/pidgin/gtkprefs.c
-@@ -1339,6 +1339,7 @@
+Index: pidgin-2.10.11/pidgin/gtkprefs.c
+===================================================================
+--- pidgin-2.10.11.orig/pidgin/gtkprefs.c
++++ pidgin-2.10.11/pidgin/gtkprefs.c
+@@ -1339,6 +1339,7 @@ interface_page(void)
  	GtkWidget *label;
  	GtkSizeGroup *sg;
  	GList *names = NULL;
@@ -8,7 +10,7 @@
  
  	ret = gtk_vbox_new(FALSE, PIDGIN_HIG_CAT_SPACE);
  	gtk_container_set_border_width(GTK_CONTAINER(ret), PIDGIN_HIG_BORDER);
-@@ -1414,6 +1415,15 @@
+@@ -1414,6 +1415,15 @@ interface_page(void)
  	keyboard_shortcuts(ret);
  
  	gtk_widget_show_all(ret);
@@ -24,7 +26,7 @@
  	g_object_unref(sg);
  	return ret;
  }
-@@ -1457,6 +1467,7 @@
+@@ -1457,6 +1467,7 @@ conv_page(void)
  	GtkWidget *hbox;
  	GtkWidget *checkbox;
  	GtkWidget *spin_button;
@@ -32,7 +34,7 @@
  
  	ret = gtk_vbox_new(FALSE, PIDGIN_HIG_CAT_SPACE);
  	gtk_container_set_border_width(GTK_CONTAINER(ret), PIDGIN_HIG_BORDER);
-@@ -1570,6 +1581,14 @@
+@@ -1570,6 +1581,14 @@ conv_page(void)
  					 G_CALLBACK(formatting_clear_cb), NULL);
  	sample_imhtml = imhtml;
  
@@ -47,7 +49,7 @@
  	gtk_widget_show(ret);
  
  	return ret;
-@@ -1935,6 +1954,7 @@
+@@ -1935,6 +1954,7 @@ browser_page(void)
  	GtkWidget *ret, *vbox, *hbox, *label, *entry, *browser_button;
  	GtkSizeGroup *sg;
  	GList *browsers = NULL;
@@ -55,7 +57,7 @@
  
  	ret = gtk_vbox_new(FALSE, PIDGIN_HIG_CAT_SPACE);
  	gtk_container_set_border_width (GTK_CONTAINER (ret), PIDGIN_HIG_BORDER);
-@@ -2020,6 +2040,14 @@
+@@ -2020,6 +2040,14 @@ browser_page(void)
  		g_object_unref(sg);
  	}
  
@@ -70,7 +72,7 @@
  	return ret;
  }
  #endif /*_WIN32*/
-@@ -2466,6 +2494,7 @@
+@@ -2466,6 +2494,7 @@ sound_page(void)
  	int j;
  	const char *file;
  	char *pref;
@@ -78,7 +80,7 @@
  #ifndef _WIN32
  	GtkWidget *dd;
  	GtkWidget *entry;
-@@ -2637,6 +2666,15 @@
+@@ -2637,6 +2666,15 @@ sound_page(void)
  	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 1);
  
  	gtk_widget_show_all(ret);

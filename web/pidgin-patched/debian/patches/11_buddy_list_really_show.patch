@@ -1,7 +1,9 @@
 === modified file 'pidgin/gtkblist.c'
---- a/pidgin/gtkblist.c
-+++ b/pidgin/gtkblist.c
-@@ -6910,6 +6910,12 @@
+Index: pidgin-2.10.11/pidgin/gtkblist.c
+===================================================================
+--- pidgin-2.10.11.orig/pidgin/gtkblist.c
++++ pidgin-2.10.11/pidgin/gtkblist.c
+@@ -6910,6 +6910,12 @@ static void pidgin_blist_destroy(PurpleB
  	purple_prefs_disconnect_by_handle(pidgin_blist_get_handle());
  }
  
@@ -14,7 +16,7 @@
  static void pidgin_blist_set_visible(PurpleBuddyList *list, gboolean show)
  {
  	if (!(gtkblist && gtkblist->window))
-@@ -6919,7 +6925,11 @@
+@@ -6919,7 +6925,11 @@ static void pidgin_blist_set_visible(Pur
  		if(!PIDGIN_WINDOW_ICONIFIED(gtkblist->window) && !GTK_WIDGET_VISIBLE(gtkblist->window))
  			purple_signal_emit(pidgin_blist_get_handle(), "gtkblist-unhiding", gtkblist);
  		pidgin_blist_restore_position();

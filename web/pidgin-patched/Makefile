@@ -1,6 +1,6 @@
 include ../../mk/include.mk
 
-VERSION = 2.10.11
+VERSION = 2.10.12
 
 deps           = wget
 bin            = pidgin.tbz
@@ -23,14 +23,14 @@ ifeq ($(UBUNTU),1)
 EPOCH=1:
 # libmessaging-menu-dev is not available on Debian
 # libunity-dev is only available in Debian Experimental
-UBUNTU_DEPS=, libmessaging-menu-dev, libunity-dev
+UBUNTU_DEPS=libmessaging-menu-dev, libunity-dev
 ENABLE_UNITY=--enable-unity
 endif
 
 
 download: debian/changelog debian/control debian/rules
-	@ $(call download,$(bin),http://http.debian.net/debian/pool/main/p/pidgin/pidgin_$(VERSION).orig.tar.bz2)
-	@ $(call verifysha256,$(bin),f2ae211341fc77efb9945d40e9932aa535cdf3a6c8993fe7919fca8cc1c04007)
+	@ $(call download,$(bin),http://archive.ubuntu.com/ubuntu/pool/universe/p/pidgin/pidgin_$(VERSION).orig.tar.bz2)
+	@ $(call verifysha256,$(bin),2c7523f0fefe89749c03b2b738ab9f7bd186da435be4762f1487eee31e77ffdd)
 	tar xvf $(bin)
 	sed -i 's|dist-bzip2|dist-bzip2 subdir-objects|' $(builddir)/configure.ac
 

@@ -1,7 +1,9 @@
 === modified file 'pidgin/gtkdocklet.c'
---- a/pidgin/gtkdocklet.c
-+++ b/pidgin/gtkdocklet.c
-@@ -839,7 +839,7 @@
+Index: pidgin-2.10.11/pidgin/gtkdocklet.c
+===================================================================
+--- pidgin-2.10.11.orig/pidgin/gtkdocklet.c
++++ pidgin-2.10.11/pidgin/gtkdocklet.c
+@@ -839,7 +839,7 @@ pidgin_docklet_init()
  
  	purple_prefs_add_none(PIDGIN_PREFS_ROOT "/docklet");
  	purple_prefs_add_bool(PIDGIN_PREFS_ROOT "/docklet/blink", FALSE);

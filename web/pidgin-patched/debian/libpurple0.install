@@ -1,4 +1,4 @@
-debian/tmp/usr/lib/libpurple*.so.*
+debian/tmp/usr/lib/*/libpurple*.so.*
 debian/tmp/usr/lib/purple-2
 debian/tmp/usr/share/man/*/Purple.*
 debian/tmp/usr/share/purple
