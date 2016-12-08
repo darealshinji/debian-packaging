@@ -64,7 +64,7 @@ endef
 
 # $(call download,TARGET_FILENAME,URL)
 define download
-    test -f $(1) || wget -O $(1) '$(2)'
+	test -f $(1) || wget -O $(1) '$(2)'
 endef
 
 
