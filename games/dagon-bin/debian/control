@@ -1,0 +1,29 @@
+Source: dagon
+Section: games
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ imagemagick
+Standards-Version: 3.9.5
+Homepage: http://www.senscape.net/dagon/
+Vcs-Git: https://github.com/Senscape/Dagon.git
+Vcs-Browser: https://github.com/Senscape/Dagon
+
+Package: dagon
+Architecture: any
+Depends:
+ ${misc:Depends},
+ libc6 (>= 2.15),
+ libfreetype6 (>= 2.2.1),
+ libgcc1 (>= 1:4.2),
+ libgl1-mesa-glx | libgl1,
+ libglu1-mesa | libglu1,
+ libopenal1 (>= 1.14),
+ libsdl2-2.0-0 (>= 2.0.4)
+Description: Adventure Game Engine
+ Dagon is a game engine especially tailored for adventure games and based
+ on open technologies. Featuring a deceptively simple scripting language,
+ blazing fast performance and high portability supporting Windows, Linux,
+ Mac OS X and iOS devices, the project aims to become a reference of the genre.
+

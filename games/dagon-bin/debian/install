@@ -1,0 +1,4 @@
+Dagon-0.6.8a-portable/dagon             /usr/lib/dagon/
+Dagon-0.6.8a-portable/libGLEW.so.1.10   /usr/lib/dagon/
+debian/scripts/dagon                    /usr/games
+converted_icons/*                       /usr/share

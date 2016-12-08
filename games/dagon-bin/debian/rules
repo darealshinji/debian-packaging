@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+BITS = 64
+else
+BITS = 32
+endif
+
+d = Dagon-0.6.8a-portable
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf converted_icons $(d)
+
+override_dh_auto_build:
+	tar xf $(d)-linux.tar.xz
+	cp $(d)/dagon$(BITS) $(d)/dagon
+	cp $(d)/lib$(BITS)/libGLEW.so.1.10 $(d)
+	./make-icons.sh dagon.png
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+	#dh_shlibdeps -l/usr/lib/dagon/
+
