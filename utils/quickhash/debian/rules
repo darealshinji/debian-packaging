@@ -1,14 +1,12 @@
 #!/usr/bin/make -f
 
 ifeq ($(shell dpkg-architecture -qDEB_HOST_ARCH),amd64)
-arch = x64
 bits = 64
 else
-arch = x86
 bits = 32
 endif
-d    = unzipped
-bin  = $(d)/QuickHash-Linux-$(arch)-v*
+d   = unzipped
+bin = $(d)/$(bits)-Bit/QuickHash-*
 
 
 %:
@@ -18,7 +16,8 @@ override_dh_auto_clean:
 	rm -rf converted_icons $(d)
 
 override_dh_auto_build:
-	unzip -d $(d) quickhash.zip
+	mkdir $(d)
+	cd $(d) && tar xf ../quickhash.tgz
 	cp $(bin) quickhash
 	chmod a+x quickhash
 	./make-icons.sh quickhash.ico

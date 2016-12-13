@@ -6,8 +6,7 @@ Build-Depends:
  debhelper (>= 9),
  dos2unix,
  imagemagick,
- libgtk2.0-0,
- unzip
+ libgtk2.0-0
 Standards-Version: 3.9.5
 Homepage: http://quickhash.sourceforge.net/
 Vcs-Git: https://github.com/tedsmith/quickhash.git
