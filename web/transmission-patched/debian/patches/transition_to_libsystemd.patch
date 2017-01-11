@@ -1,0 +1,33 @@
+Description: Transition to libsystemd
+ In systemd v209, released over a year ago, the various libsystemd-* libraries
+ (libsystemd-journal.so, libsystemd-login.so, libsystem-daemon.so,
+ libsystemd-id128.so) were merged into a single libsystemd.so library to reduce
+ code duplication and avoid cyclic dependencies
+Author: Sandro Tosi <morph@debian.org>
+Origin: vendor
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=779760
+Forwarded: no
+Last-Update: 2015-04-04
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/configure.ac
++++ b/configure.ac
+@@ -173,15 +173,15 @@ dnl
+ dnl file monitoring for the daemon
+ 
+ # Check whether to enable systemd startup notification.
+-# This requires libsystemd-daemon.
++# This requires libsystemd.
+ AC_ARG_WITH([systemd-daemon], AS_HELP_STRING([--with-systemd-daemon],
+             [Add support for systemd startup notification (default is autodetected)]),
+             [USE_SYSTEMD_DAEMON=$withval], [USE_SYSTEMD_DAEMON=auto])
+ AS_IF([test "x$USE_SYSTEMD_DAEMON" != "xno"], [
+-    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd-daemon],
++    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd],
+         [AC_DEFINE(USE_SYSTEMD_DAEMON,1,[Use systemd startup notification])],
+         [AS_IF([test "x$USE_SYSTEMD_DAEMON" = "xyes"],
+-            [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd-daemon not found.])]
++            [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd not found.])]
+         )]
+     )
+ ])

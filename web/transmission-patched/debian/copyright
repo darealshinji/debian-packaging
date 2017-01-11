@@ -2,11 +2,13 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Transmission
 Source: http://transmissionbt.com
 
-
 Files: *
 Copyright: 2005-2016 Transmission authors and contributors
 License: Expat
 
+Files: debian/*
+Copyright: 2015-2016 Sandro Tosi <morph@debian.org>
+License: Expat
 
 Files: libtransmission/ConvertUTF.*
 Copyright: 2001-2004 Unicode, Inc
@@ -29,17 +31,16 @@ License: other
  for internal or external distribution as long as this notice
  remains attached.
 
-
 Files: libtransmission/JSON_parser.*
 Copyright: 2006-2010 JSON.org
 License: Expat
 
-
 Files: libtransmission/bencode.* libtransmission/blocklist.*
-       libtransmission/clients.* libtransmission/crypto.*
+       libtransmission/clients.* libtransmission/crypto*
+       libtransmission/error* libtransmission/file*
        libtransmission/handshake.* libtransmission/inout.*
        libtransmission/json.* libtransmission/list.*
-       libtransmission/makemeta.* libtransmission/natpmp.*
+       libtransmission/makemeta* libtransmission/natpmp.*
        libtransmission/peer-* libtransmission/platform.*
        libtransmission/port-forwarding.* libtransmission/ptrarray.*
        libtransmission/publish.* libtransmission/resume.*
@@ -47,28 +48,22 @@ Files: libtransmission/bencode.* libtransmission/blocklist.*
        libtransmission/stats.* libtransmission/torrent-ctor.*
        libtransmission/tr-getopt.* libtransmission/tracker.*
        libtransmission/trevent.* libtransmission/upnp.*
+       libtransmission/watchdir*
        gtk/actions.* gtk/add-dialog.* gtk/details.* gtk/hig.*
        gtk/makemeta-ui.* gtk/msgwin.* gtk/notify.* gtk/stats.*
        gtk/torrent-cell-renderer.* gtk/tr-icon.* gtk/tr-prefs.*
-       gtk/tracker-list.*
-       daemon/daemon.c daemon/remote.c
-       wx/*
+       gtk/tracker-list.* daemon/* wx/* qt/* utils/*
 Copyright: 2007-2016 Mnemosyne LLC
 License: GPL-2
- This file is licensed by the GPL version 2.  Works owned by the
- Transmission project are granted a special exemption to clause 2(b)
- so that the bulk of its code can remain under the MIT license.
- This exemption does not extend to derived works not owned by
- the Transmission project.
+ It may be used under the GNU GPL versions 2 or 3
+ or any future license endorsed by Mnemosyne LLC.
  .
  On Debian systems, the complete text of the GNU General Public License
  can be found in /usr/share/common-licenses/GPL-2
 
-
 Files: third-party/dht/*
 Copyright: 2009-2011 Juliusz Chroboczek
 License: Expat
-
 
 Files: third-party/libnatpmp/* third-party/miniupnp/*
 Copyright: 2005-2011, Thomas BERNARD <miniupnp@free.fr>
@@ -96,11 +91,52 @@ License: BSD-3-clause
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
 
-
 Files: third-party/libutp/*
 Copyright: 2010 BitTorrent, Inc.
 License: Expat
 
+Files: third-party/libb64/*
+Copyright: Chris Venter	chris.venter@gmail.com
+License: public-domain
+ Copyright-Only Dedication (based on United States law)
+ or Public Domain Certification
+ .
+ The person or persons who have associated work with this document (the
+ "Dedicator" or "Certifier") hereby either (a) certifies that, to the best of
+ his knowledge, the work of authorship identified is in the public domain of the
+ country from which the work is published, or (b) hereby dedicates whatever
+ copyright the dedicators holds in the work of authorship identified below (the
+ "Work") to the public domain. A certifier, moreover, dedicates any copyright
+ interest he may have in the associated work, and for these purposes, is
+ described as a "dedicator" below.
+ .
+ A certifier has taken reasonable steps to verify the copyright status of this
+ work. Certifier recognizes that his good faith efforts may not shield him from
+ liability if in fact the work certified is not in the public domain.
+ .
+ Dedicator makes this dedication for the benefit of the public at large and to
+ the detriment of the Dedicator's heirs and successors. Dedicator intends this
+ dedication to be an overt act of relinquishment in perpetuity of all present
+ and future rights under copyright law, whether vested or contingent, in the
+ Work. Dedicator understands that such relinquishment of all rights includes
+ the relinquishment of all rights to enforce (by lawsuit or otherwise) those
+ copyrights in the Work.
+ .
+ Dedicator recognizes that, once placed in the public domain, the Work may be
+ freely reproduced, distributed, transmitted, used, modified, built upon, or
+ otherwise exploited by anyone for any purpose, commercial or non-commercial,
+ and in any way, including by methods that have not yet been invented or
+ conceived.
+
+Files: qt/SqueezeLabel.*
+Copyright: Copyright (C) 2009 Nokia Corporation and/or its subsidiary(-ies)
+License: LGPL-2.1
+ On Debian systems, the complete text of the GNU Lesser Public License version
+ 2.1 can be found in /usr/share/common-licenses/LGPL-2.1
+
+Files: qt/icons/Faenza/*
+Copyright: Matthieu James <matthieu.james@gmail.com>
+License: GPL
 
 License: Expat
  Permission is hereby granted, free of charge, to any person obtaining a copy

@@ -15,7 +15,7 @@ libsystemd_daemon_check:
 	@if ! ./a.out 2>/dev/null; then \
 	  echo "==> libsystemd-daemon.so.0 found"; \
 	  echo "==> applying patch"; \
-	  patch -p1 < debian/patches/libsystemd.patch; \
+	  patch -p1 < debian/patches/transition_to_libsystemd.patch; \
 	fi
 
 override_dh_autoreconf: libsystemd_daemon_check
