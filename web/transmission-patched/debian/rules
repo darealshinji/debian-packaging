@@ -6,7 +6,7 @@ export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed -Wl,-z,defs -Wl,--no-copy-dt-n
 
 
 %:
-	dh $@ --with autoreconf,systemd
+	dh $@ --parallel --with autoreconf,systemd
 
 # check if libsystemd-daemon.so.0 exists
 libsystemd_daemon_check:
