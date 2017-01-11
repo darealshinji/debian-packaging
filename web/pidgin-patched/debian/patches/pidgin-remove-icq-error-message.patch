@@ -1,6 +1,6 @@
 --- a/libpurple/protocols/oscar/oscar.c
 +++ b/libpurple/protocols/oscar/oscar.c
-@@ -4172,13 +4172,7 @@
+@@ -4211,13 +4211,7 @@
  			} break;
  
  			default: { /* La la la */

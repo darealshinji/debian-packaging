@@ -1,6 +1,0 @@
-pidgin (@EPOCH@2.10.12-0ubuntu10icq1) unstable; urgency=low
-
-  * Disable annoying ICQ error message
-  * Apply patches from the Ubuntu package
-
- -- Marshall Banana <djcj@gmx.de>  Mon, 05 Dec 2016 13:05:41 +0100

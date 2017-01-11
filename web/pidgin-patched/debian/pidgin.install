@@ -1,6 +1,16 @@
-debian/tmp/usr/bin/pidgin
-debian/tmp/usr/lib/pidgin
-debian/tmp/usr/share/applications
-debian/tmp/usr/share/man/*/pidgin.*
-debian/tmp/usr/share/man/*/Pidgin.*
-debian/lintian-override/pidgin usr/share/lintian/overrides
+usr/bin/pidgin
+usr/lib/*.so.*
+usr/lib/pidgin/*.so
+usr/lib/pidgin/perl/Pidgin.pm
+usr/lib/pidgin/perl/auto/Pidgin/Pidgin.so
+usr/lib/purple-2/perl/Purple.pm
+usr/lib/purple-2/perl/auto/Purple/Purple.so
+usr/lib/purple-2/*.so
+usr/lib/purple-2/*.so.*
+usr/share/appdata
+usr/share/applications
+usr/share/icons
+usr/share/locale
+usr/share/man/man1
+usr/share/pixmaps
+usr/share/sounds

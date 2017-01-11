@@ -1,0 +1,2 @@
+pidgin: package-name-doesnt-match-sonames libpurple-client0 libpurple0
+pidgin: embedded-library usr/lib/purple-2/libgg.so: libgadu

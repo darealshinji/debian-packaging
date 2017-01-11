@@ -1,12 +1,13 @@
 include ../../mk/include.mk
 
-VERSION = 2.10.12
+VERSION = 2.11.0
 
 deps           = wget
 bin            = pidgin.tbz
 builddir       = pidgin-$(VERSION)
-cleanfiles     = debian/changelog debian/control debian/rules
+cleanfiles     = debian/control debian/rules
 distcleanfiles = $(bin)
+changelog-msg  = Disable annoying ICQ error message
 
 ifneq ($(shell grep 'buntu' /etc/lsb-release),)
 UBUNTU=1
@@ -27,15 +28,11 @@ UBUNTU_DEPS=libmessaging-menu-dev, libunity-dev
 ENABLE_UNITY=--enable-unity
 endif
 
-
-download: debian/changelog debian/control debian/rules
-	@ $(call download,$(bin),http://archive.ubuntu.com/ubuntu/pool/universe/p/pidgin/pidgin_$(VERSION).orig.tar.bz2)
-	@ $(call verifysha256,$(bin),2c7523f0fefe89749c03b2b738ab9f7bd186da435be4762f1487eee31e77ffdd)
+download: debian/control debian/rules
+	@ $(call download,$(bin),http://downloads.sourceforge.net/project/pidgin/Pidgin/$(VERSION)/pidgin-$(VERSION).tar.bz2)
+	@ $(call verifysha256,$(bin),f72613440586da3bdba6d58e718dce1b2c310adf8946de66d8077823e57b3333)
 	tar xvf $(bin)
-	sed -i 's|dist-bzip2|dist-bzip2 subdir-objects|' $(builddir)/configure.ac
-
-debian/changelog:
-	sed 's|@EPOCH@|$(EPOCH)|' $@.in > $@
+	@ VERSION="2:$(VERSION)"; $(changelog-entry)
 
 debian/control:
 	sed 's|@UBUNTU_DEPS@|$(UBUNTU_DEPS)|' $@.in > $@
