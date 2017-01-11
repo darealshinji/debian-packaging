@@ -6,8 +6,6 @@ This version of Pidgin will be patched so that the message won't appear anymore.
 
 After building the packages you have to manually install them in this order: `pidgin-data libpurple0 pidgin`
 
-I recommend using gdebi for manual installations.
-
 Homepage: http://www.pidgin.im/
 
 PS: If you're running Ubuntu and Unity integration is not enabled or the package's version does not
