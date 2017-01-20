@@ -1,9 +1,18 @@
 #!/bin/sh
+
+# disable steam-runtime
 export STEAM_RUNTIME=0
+
 # Workaround for dbus fatal termination related coredumps (SIGABRT)
 # https://github.com/ValveSoftware/steam-for-linux/issues/4464
 export DBUS_FATAL_WARNINGS=0
+
+# force minimizing on close; temporary workaround for trayicon issues
+# https://github.com/ValveSoftware/steam-for-linux/issues/4812
+export STEAM_FRAME_FORCE_CLOSE=0
+
 # libudev0 was replaced by libudev1 on newer systems
 # libpng12-0 was replaced by libpng16-16 on latest systems
 export LD_LIBRARY_PATH="/usr/lib/steam/udev:$LD_LIBRARY_PATH:/usr/lib/steam/png"
-steam "$@"
+
+steam $*
