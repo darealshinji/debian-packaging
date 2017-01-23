@@ -1,27 +1,26 @@
 include ../../mk/include.mk
 
 deps           = wget
-srcfiles       = $(bin) patchelf.cpp
-cleanfiles     = patchelf.cpp $(deb)
+srcfiles       = $(bin)
+cleanfiles     = $(deb)
 distcleanfiles = *.tgz
 changelog-msg  = New release version
 
 # http://www.xnview.com/xnviewmp_update.txt
-VERSION = 0.83
-ver = 083
+VERSION = 0.84
+ver = 084
 
 ifeq ($(ARCH), amd64)
 x64 = -x64
-sha256sum = d4bbc01ca8248e28b36f051aa427f9c9257367284a1130e473c280b66d466d0c
+sha256sum = 586b189b8fe6fd791dae918d010422f7463aeebd52f11507b710eaad8695a73b
 else
-sha256sum = 95eac6b118d49e6baaa61e82516004b84ca90adda186e18a5cbd8c2bf2e88235
+sha256sum = c6d62f40e272698ecd41bc642fb6c7220f6e444f2f0f734885f430396ce5ba5c
 endif
 bin = XnViewMP-linux$(x64).tgz
 
 
 download:
 	@ $(call download,$(bin),http://download.xnview.com/old_versions/XnViewMP-$(ver)-linux$(x64).tgz)
-	@ $(call download,patchelf.cpp,https://raw.githubusercontent.com/NixOS/patchelf/master/src/patchelf.cc)
 	@ $(call verifysha256,$(bin),$(sha256sum))
 	@ VERSION=$(VERSION); $(changelog-entry)
 

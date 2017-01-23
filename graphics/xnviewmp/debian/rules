@@ -2,10 +2,6 @@
 
 VERSION = $(shell dpkg-parsechangelog -SVersion)
 
-remove_libs = libatk-1.0.so.0 libcairo.so.2 libgdk_pixbuf-2.0.so.0 \
-	libgio-2.0.so.0 libgmodule-2.0.so.0 libpangocairo-1.0.so.0 \
-	libpangoft2-1.0.so.0 libXext.so.6
-
 ifeq ($(DEB_HOST_ARCH),amd64)
 x64 = -x64
 endif
@@ -16,7 +12,7 @@ endif
 
 override_dh_auto_clean:
 	rm -rf converted_icons XnView
-	rm -f patchelf xnviewmp.1
+	rm -f xnviewmp.1
 
 override_dh_auto_build:
 	tar xvf XnViewMP-linux$(x64).tgz
@@ -25,7 +21,6 @@ override_dh_auto_build:
 	dos2unix XnView/*.txt
 	sed -e 's/@VERSION@/$(VERSION)/;' debian/xnviewmp.1.in > xnviewmp.1
 	chrpath -d XnView/XnView `find XnView/ -type f -name *.so*`
-	g++ -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -std=c++11 -o patchelf patchelf.cpp
 
 override_dh_installchangelogs:
 	dh_installchangelogs XnView/WhatsNew.txt
@@ -34,11 +29,4 @@ override_dh_makeshlibs:
 
 override_dh_shlibdeps:
 	#dh_shlibdeps -Lxnviewmp -l/usr/lib/xnviewmp/lib:/usr/lib/xnviewmp/Plugins
-
-override_dh_strip:
-	dh_strip
-	./patchelf $(foreach LIB,$(remove_libs),--remove-needed $(LIB)) \
-		debian/xnviewmp/usr/lib/xnviewmp/lib/platformthemes/libqgtk2.so
-	./patchelf --add-needed libc.so.6 \
-		debian/xnviewmp/usr/lib/xnviewmp/lib/libicudata.so.54.1
 
