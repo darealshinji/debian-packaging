@@ -1,0 +1,21 @@
+Source: quickhash
+Section: utils
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Build-Depends:
+ debhelper (>= 9),
+ dos2unix,
+ imagemagick,
+ libgtk2.0-0
+Standards-Version: 3.9.5
+Homepage: http://quickhash.sourceforge.net/
+Vcs-Git: https://github.com/tedsmith/quickhash.git
+Vcs-Browser: https://github.com/tedsmith/quickhash
+
+Package: quickhash
+Architecture: i386 amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Graphical data hashing tool
+ A GUI that enables rapid selection and hashing of files (individually or
+ recursively), text and physical disks.
+ MD5, SHA1, SHA256, SHA512 available. CSV\HTML\Clipboard output. 
