@@ -1,3 +1,0 @@
-# pre-built binary; furthermore the upstream author doesn't
-# know how to change this
-quickhash: hardening-no-relro usr/bin/quickhash
