@@ -20,7 +20,7 @@ Depends:
  ${shlibs:Depends}
 Suggests: libx265-doc
 Description: H.265/HEVC video stream encoder
- x265 is a commandline encoder for creating H.265/High Efficency Video Coding
+ x265 is a commandline encoder for creating H.265/High Efficiency Video Coding
  (HEVC) video streams.
  .
  x265 supports the following features:
@@ -30,7 +30,7 @@ Description: H.265/HEVC video stream encoder
   * CABAC (context-based adaptive binary arithmetic coding) entropy coding
   * supports all Intra block types
   * supports all Inter P partitions
-  * suports all Inter B partitions from 64x64 down to 8x4
+  * supports all Inter B partitions from 64x64 down to 8x4
   * weighted prediction for P slices
   * multiple reference frames
   * scenecut detection
@@ -43,7 +43,7 @@ Section: libdevel
 Depends: ${misc:Depends}
 Suggests: libx265-doc
 Description: H.265/HEVC video stream encoder (development files)
- libx265 is an encoding library for creating H.265/High Efficency Video Coding
+ libx265 is an encoding library for creating H.265/High Efficiency Video Coding
  (HEVC) video streams.
  .
  This is the development package which contains headers and static libraries
@@ -58,7 +58,7 @@ Depends:
 Provides: x265-doc
 Replaces: x265-doc
 Description: H.265/HEVC video stream encoder (documentation)
- libx265 is an encoding library for creating H.265/High Efficency Video Coding
+ libx265 is an encoding library for creating H.265/High Efficiency Video Coding
  (HEVC) video streams.
  .
  This package contains documentation for the command line encoder and the
