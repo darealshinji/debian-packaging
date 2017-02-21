@@ -21,6 +21,7 @@
 
 # module to satisfy build dependencies; common functions
 
+. "${BASH_SOURCE%/*}/pbuilder-modules"
 
 package_versions() {
     local PACKAGE="$1"
@@ -53,35 +54,22 @@ checkbuilddep_versiondeps() {
 }
 
 get_source_control_field() {
-    local field="$1"
+    get822field "$1" "$DEBIAN_CONTROL"
+}
 
-    sed -n -e "s/^$field://i" -e '
-t store
-/^-----BEGIN PGP SIGNED MESSAGE-----$/ {
-    : pgploop
-    n
-    /^$/ d
-    b pgploop
-}
-: leadloop
-/^[ \t]*$/ {
-    n
-    /^$/ d
-    b leadloop
-}
-/^#/ {
-    n
-    /^$/ d
-    b leadloop
-}
-/^$/q
-d
+get_build_depends_field() {
+    get_source_control_field "$1" | sed -n '
+# Note the h; b loop; here so that there is no leading
+# newline in the hold space
+h
+b loop
 : store
 H
 : loop
+$ b done
 n
-/^#/ b loop
-/^[ \t]/ b store
+b store
+: done
 x
 # output on single line
 s/\n//g
@@ -104,28 +92,27 @@ s/(\(>>\|>=\|>\|==\|=\|<=\|<<\|<\|!=\) *\([^)]*\))/(\1 \2)/g
 # normalize space at beginning and end of line
 s/^ *//
 s/ *$//
-p' \
-        "$DEBIAN_CONTROL"
+p'
 }
 
 get_build_deps() {
     local output
 
-    output="$(get_source_control_field "Build-Depends")"
+    output="$(get_build_depends_field "Build-Depends")"
     output="${output%, }"
     case "$BINARY_ARCH" in
         any)
-            output="${output:+$output, }$(get_source_control_field "Build-Depends-Indep")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Depends-Indep")"
             output="${output%, }"
-            output="${output:+$output, }$(get_source_control_field "Build-Depends-Arch")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Depends-Arch")"
             output="${output%, }"
             ;;
         binary)
-            output="${output:+$output, }$(get_source_control_field "Build-Depends-Arch")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Depends-Arch")"
             output="${output%, }"
             ;;
         all)
-            output="${output:+$output, }$(get_source_control_field "Build-Depends-Indep")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Depends-Indep")"
             output="${output%, }"
             ;;
     esac
@@ -135,21 +122,21 @@ get_build_deps() {
 get_build_conflicts() {
     local output
 
-    output="$(get_source_control_field "Build-Conflicts")"
+    output="$(get_build_depends_field "Build-Conflicts")"
     output="${output%, }"
      case "$BINARY_ARCH" in
         any)
-            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Indep")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Conflicts-Indep")"
             output="${output%, }"
-            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Arch")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Conflicts-Arch")"
             output="${output%, }"
             ;;
         binary)
-            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Arch")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Conflicts-Arch")"
             output="${output%, }"
             ;;
         all)
-            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Indep")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Conflicts-Indep")"
             output="${output%, }"
             ;;
     esac

@@ -1,0 +1,1079 @@
+#! /bin/bash
+#   pbuilder -- personal Debian package builder
+#   Copyright © 2001-2009 Junichi Uekawa <dancer@debian.org>
+#               2015-2016 Mattia Rizzolo <mattia@debian.org>
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+###############################################################################
+
+# common modules for pbuilder.
+
+hooks=tmp/hooks
+DEB_BUILD_ARCH_OS=$(dpkg-architecture -qDEB_BUILD_ARCH_OS)
+SELINUX="$(grep -m 1 ^selinuxfs /proc/mounts | cut -d ' ' -f 2 || : )"
+
+function showhelp () {
+    cat <<EOF
+pbuilder - a personal builder
+Copyright 2001-2007 Junichi Uekawa
+Distributed under GNU Public License version 2 or later
+
+pbuilder [operation] [pbuilder-options]
+pdebuild [pdebuild-options] -- [pbuilder-options]
+
+command lines operations:
+pbuilder create [--basetgz base.tgz-path] [--distribution sid|experimental|...]
+  Creates a base.tgz
+
+pbuilder update [--basetgz base.tgz-path] [--distribution sid|experimental|...]
+  Updates a base.tgz
+
+pbuilder build [--basetgz base.tgz-path] pbuilder_2.2.0-1.dsc
+  Builds using the base.tgz. Requires a .dsc filename
+
+pbuilder clean
+  Cleans the temporal build directory.
+
+pbuilder login
+  Opens a shell into a throw-away chroot.
+
+pbuilder execute -- [script] [script options]
+  Logs into the build environment and executes "script".  The script is copied
+  into the chroot and invoked.
+
+pbuilder dumpconfig
+  Dumps configuration information to stdout for debugging.
+
+pbuilder main options:
+ --basetgz [base.tgz location]
+ --buildplace [location of build]
+ --mirror [mirror location]
+ --othermirror [other mirrors location in apt deb-line format, delimited with | signs]
+ --http-proxy [proxy]
+ --distribution [distribution (sid|experimental|...)]
+ --architecture [architecture]
+ --components [components]
+ --buildresult [location-to-copy-build-result]
+ --aptcache [location of retrieved package files]
+ --extrapackages [packages-to-add on pbuilder create]
+ --configfile [configuration file to load]
+ --hookdir [hook directory]
+ --debbuildopts [dpkg-buildpackage options]
+ --logfile [filename to output log]
+ --aptconfdir [overriding apt config dir]
+ --timeout [timeout time]
+ --override-config
+ --binary-arch
+ --preserve-buildplace
+ --bindmounts [bind-mount-point]
+ --debug
+ --debootstrapopts [debootstrap options]
+ --save-after-login/--save-after-exec
+
+pdebuild-specific pbuilder options:
+ --auto-debsign
+ --debsign-k [keyid]
+ --pbuilder [builder]
+
+For the full documentation see the manual pages pbuilder(8) and pbuilderrc(5).
+EOF
+}
+
+# Log a message
+# message is of a format
+#  E: error message
+#  W: warning message
+#  I: informational message
+_log() {
+    set -u
+    term_supports_colors  # defines USECOLORS if not already set
+    local color="$1" ; shift
+    local red=$'\033[0;31m'
+    local yellow=$'\033[1;33m'
+    local blue=$'\033[0;34m'
+    local reset=$'\033[0m'
+    case "$USECOLORS" in
+        yes)
+            printf "%s%s%s\n" "${!color}" "${*}" "${reset}"
+            ;;
+        no)
+            printf "%s\n" "${*}"
+            ;;
+        *)
+            printf "malformed value of USECOLORS: [%s]\n" "$USECOLORS" >&2
+            exit 1
+            ;;
+    esac
+    set +u
+}
+function log() {
+    case "$*" in
+        "E: "*)
+            _log 'red' "$*" >&2
+            ;;
+        "W: "*)
+            _log 'yellow' "$*" >&2
+            ;;
+        "I: "*)
+            _log 'reset' "$*"
+            ;;
+        "D: "*)
+            _log 'blue' "$*"
+            ;;
+        *)
+            echo "malformed log message: $*" >&2
+            exit 1
+            ;;
+    esac
+}
+
+log.e() {
+    case "${LOGLEVEL-I}" in
+        D|I|W|E) log "E: $*" ;;
+    esac
+}
+log.w() {
+    case "${LOGLEVEL-I}" in
+        D|I|W) log "W: $*" ;;
+    esac
+}
+log.i() {
+    case "${LOGLEVEL-I}" in
+        D|I) log "I: $*" ;;
+    esac
+}
+log.d() {
+    case "${LOGLEVEL-I}" in
+        D) log "D: $*" ;;
+    esac
+}
+
+# call like `_contains $list $value`, returns 0 if $value is in $list, 1 otherwise
+_contains() {
+    local n=$#
+    local value=${!n}
+    for ((i=1; i < $#; i++)) {
+        if [ "${!i}" == "${value}" ]; then
+            return 0
+        fi
+    }
+    return 1
+}
+
+term_supports_colors() {
+    if [ -z ${USECOLORS:-} ] || [ "$USECOLORS" = "auto" ]; then
+        local tputout="$(tput colors 2> /dev/null)"
+        [ ${tputout:-0} -ge 8 ] && USECOLORS=yes || USECOLORS=no
+    fi
+}
+
+# test whether a directory is empty
+# fails if "$*" exists but isn't a directory
+# fails and outputs garbage if "$*" doesn't actually exist
+is_empty_dir() {
+  return "$(find "$*" -maxdepth 0 -type d -empty -printf 0 -o -printf 1)"
+}
+
+# sanity checks to ensure mountpoint $1 is truly unmounted in $BUILDPLACE
+# (fails relatively often to ensure we don't "rm -rf" a bind mount)
+function seems_truly_unmounted() {
+    local mountpoint
+    mountpoint="$1"
+    if ! [ -e "$BUILDPLACE/$mountpoint" ]; then
+        log.w "$mountpoint doesn't exist"
+        return 1
+    fi
+    if ! [ -d "$BUILDPLACE/$mountpoint" ]; then
+        log.w "$mountpoint isn't a directory"
+        return 1
+    fi
+    if [ -r "$BUILDPLACE/proc/mounts" ] && \
+        grep -q "^[^ ]* $mountpoint " "$BUILDPLACE/proc/mounts"; then
+        log.w "$mountpoint is mounted according to build place's /proc/mounts"
+        return 1
+    fi
+    if [ -r "/proc/mounts" ] && \
+        grep -q "^[^ ]* $BUILDPLACE/$mountpoint " "/proc/mounts"; then
+        log.w "$mountpoint is mounted according to system's /proc/mounts"
+        return 1
+    fi
+    if ! is_empty_dir "$BUILDPLACE/$mountpoint"; then
+        log.w "$mountpoint not empty"
+        return 1
+    fi
+    return 0
+}
+
+function umount_one () {
+    if [ "${IGNORE_UMOUNT}" = "yes" ]; then
+        # support ignore umount option.
+        log.i "ignoring umount of $1 filesystem"
+        return
+    fi
+    log.i "unmounting $1 filesystem"
+    local UMOUNT_OUTPUT
+    if ! UMOUNT_OUTPUT="$(LC_ALL=C umount "$BUILDPLACE/$1" 2>&1)"; then
+        log.w "Could not unmount $1: $UMOUNT_OUTPUT"
+        local ignore_umount_error="no"
+        case $UMOUNT_OUTPUT in
+          "umount: "*": not found"|"umount:"*": not mounted")
+            # run an additional set of sanity checks
+            if seems_truly_unmounted "$1"; then
+                ignore_umount_error="yes"
+            else
+                log.w "Tried ignoring error in unmount, but sanity check failed: $1 might still be mounted"
+            fi
+            ;;
+          *)
+            :
+            ;;
+        esac
+        if [ "$ignore_umount_error" != "yes" ]; then
+            log.w "Retrying to unmount $1 in 5s"
+            sleep 5s
+            while ! umount "$BUILDPLACE/$1"; do
+                sleep 5s
+                cat <<EOF
+
+  Could not unmount $1, some programs might
+  still be using files in /proc (klogd?).
+  Please check and kill these processes manually
+  so that I can unmount $1.  Last umount error was:
+$UMOUNT_OUTPUT
+
+EOF
+                chroot "$BUILDPLACE" bin/sh
+            done
+        else
+            log.w "Ignored error in unmount"
+        fi
+    fi
+}
+
+function umountproc () {
+    # push arguments on a stack to reverse direction.
+    local reversed
+    reversed=
+    for mnt in $BINDMOUNTS; do
+        reversed="$mnt $reversed"
+    done
+    for mnt in $reversed; do
+        umount_one "${mnt#*:}"
+    done
+    if [ -n "$SELINUX" ]; then
+        umount_one "$SELINUX"
+    fi
+    if [ "$DEB_BUILD_ARCH_OS" = "linux" ] && [ "$USEDEVPTS" = "yes" ]; then
+        umount_one "dev/pts"
+    fi
+    if [ "$DEB_BUILD_ARCH_OS" = "kfreebsd" ] || [ "$USEDEVFS" = "yes" ]; then
+        umount_one "dev"
+    fi
+    if [ "$DEB_BUILD_ARCH_OS" != "hurd" ] && [ "$USESHM" = "yes" ]; then
+        umount_one "dev/shm"
+    fi
+    if [ "$USEPROC" = "yes" ]; then
+        if [ "$DEB_BUILD_ARCH_OS" = "linux" ] && [ -e "$BUILDPLACE/proc/sys/fs/binfmt_misc/status" ]; then
+            umount_one "proc/sys/fs/binfmt_misc"
+        fi
+        umount_one "proc"
+    fi
+    if [ "$DEB_BUILD_ARCH_OS" != "hurd" ] && [ "$USESYSFS" = "yes" ]; then
+        umount_one "sys"
+    fi
+    if [ "$DEB_BUILD_ARCH_OS" = "hurd" ]; then
+        umount_one "servers"
+        umount_one "dev"
+
+        # Workaround to remove chroot on Hurd: once /dev firmlink is
+        # removed, chroot removal either gets stuck or fails by removing
+        # some devices.
+        for dev in "$BUILDPLACE"/dev/* "$BUILDPLACE"/servers/socket/*; do
+            settrans -fg "$dev"
+        done
+
+        # When running with --no-targz, leave a valid translator for
+        # /servers/socket/1 so pipes can be used within the chroot.
+        if [ "${INTERNAL_BUILD_UML}" = "yes" ]; then
+            settrans -ck "$BUILDPLACE"/servers/socket/1 /hurd/pflocal
+        fi
+    fi
+}
+
+
+# Mount /proc /dev/pts /dev and bind-mount points
+# Also create a policy-rc.d script if it doesn't already exist.
+function mountproc () {
+    local -a mounted
+    local mnt mntpoint
+    if [ "$USEPROC" = "yes" ]; then
+        log.i "mounting /proc filesystem"
+        mkdir -p "$BUILDPLACE/proc"
+        case "$DEB_BUILD_ARCH_OS" in
+            kfreebsd)
+                PROCFS="linprocfs"
+                ;;
+            hurd)
+                settrans -fg "$BUILDPLACE/proc"
+                PROCFS="firmlink"
+                ;;
+            *)
+                PROCFS="proc"
+                ;;
+        esac
+        mount -t "$PROCFS" /proc "$BUILDPLACE/proc"
+        ln -s ../proc/mounts "$BUILDPLACE/etc/mtab" 2> /dev/null || true
+        mounted[${#mounted[@]}]="$BUILDPLACE/proc"
+    fi
+    if [ "$DEB_BUILD_ARCH_OS" = "kfreebsd" ] || [ "$USEDEVFS" = "yes" ]; then
+        log.i "mounting /dev filesystem"
+        mkdir -p "$BUILDPLACE/dev" || true
+        mount -t devfs /dev "$BUILDPLACE/dev"
+        mounted[${#mounted[@]}]="$BUILDPLACE/dev"
+    fi
+    if [ "$DEB_BUILD_ARCH_OS" != "hurd" ] && [ "$USESYSFS" = "yes" ]; then
+        log.i "mounting /sys filesystem"
+        mkdir -p "$BUILDPLACE/sys" || true
+        case "$DEB_BUILD_ARCH_OS" in
+            kfreebsd)
+                mount -t linsysfs linsysfs "$BUILDPLACE/sys"
+                ;;
+            linux)
+                mount -t sysfs -o nosuid,nodev,noexec sysfs "$BUILDPLACE/sys"
+                ;;
+            *)
+                log.e "Unknown DEB_BUILD_ARCH_OS, can't mount /sys"
+                exit 1
+                ;;
+        esac
+        mounted[${#mounted[@]}]="$BUILDPLACE/sys"
+    fi
+    if [ "$USESHM" = "yes" ]; then
+        log.i "creating /{dev,run}/shm"
+        rm -df "$BUILDPLACE/dev/shm" "$BUILDPLACE/run/shm"
+        mkdir -p "$BUILDPLACE/dev/shm"
+        chmod 1777 "$BUILDPLACE/dev/shm"
+        # old releases might not have /run.  We create it nonetheless, can't harm
+        mkdir -p "$BUILDPLACE/run"
+        ln -s /dev/shm "$BUILDPLACE/run/shm"
+        # /dev gets bind-mounted on hurd. In theory this is before that, but
+        # debootstrap will already have mounted it during chroot creation.
+        # This seems to cause /hurd/tmpfs to crash, but we can just use the
+        # host's /dev/shm.
+        if [ "$DEB_BUILD_ARCH_OS" != "hurd" ]; then
+            mount -t tmpfs tmpfs "$BUILDPLACE/dev/shm"
+            mounted[${#mounted[@]}]="$BUILDPLACE/dev/shm"
+        fi
+    fi
+    if [ "$DEB_BUILD_ARCH_OS" = "linux" ] && [ "$USEDEVPTS" = "yes" ]; then
+        log.i "mounting /dev/pts filesystem"
+        mkdir -p "$BUILDPLACE/dev/pts" || true
+        TTYGRP=5
+        TTYMODE=620
+        [ -f /etc/default/devpts ] && . /etc/default/devpts
+        mount -t devpts none "$BUILDPLACE/dev/pts" -onoexec,nosuid,gid=$TTYGRP,mode=$TTYMODE
+        mounted[${#mounted[@]}]="$BUILDPLACE/dev/pts"
+    fi
+    if [ -n "$SELINUX" ]; then
+        log.i "mounting selinux filesystem"
+        mkdir -p "$BUILDPLACE/$SELINUX"
+        mount --bind "$SELINUX" "$BUILDPLACE/$SELINUX"
+        mount -o remount,ro,bind "$BUILDPLACE/$SELINUX"
+        mounted[${#mounted[@]}]="$BUILDPLACE/$SELINUX"
+    fi
+    if [ "$DEB_BUILD_ARCH_OS" = "hurd" ]; then
+        # /dev and /servers might have already been mounted at
+        # debootstrap chroot creation
+        mount -t firmlink /dev "$BUILDPLACE/dev" || true
+        mounted[${#mounted[@]}]="$BUILDPLACE/dev"
+        mount -t firmlink /servers "$BUILDPLACE/servers" || true
+        mounted[${#mounted[@]}]="$BUILDPLACE/servers"
+    fi
+    MOUNTPARAMS="-obind"
+    [ "$DEB_BUILD_ARCH_OS" = "kfreebsd" ] && MOUNTPARAMS="-t nullfs"
+    for mnt in $BINDMOUNTS; do
+        mntpoint=${mnt#*:}
+        mnt=${mnt%%:*}
+        if [ "$mnt" = "$mntpoint" ]; then
+            log.i "Mounting $mnt"
+        else
+            log.i "Mounting $mnt to $mntpoint"
+        fi
+        if mkdir -p "$BUILDPLACE/$mntpoint" &&
+            mount $MOUNTPARAMS "$mnt" "$BUILDPLACE/$mntpoint"; then
+            # successful.
+            mounted[${#mounted[@]}]="$BUILDPLACE/$mnt"
+        else
+            # this part of code is the only part which is supposed to fail.
+            # When unsuccessful, backtrack / umount and abort.
+            if [ -n "${mounted[*]}" ]; then
+                log.i "error recovery: umount successfully mounted mount-points: ${mounted[@]}"
+                for umnt in "${mounted[@]}"; do
+                    log.i "umounting $umnt"
+                    umount "$umnt"
+                done
+            fi
+            exit 1
+        fi
+    done
+    if [ -f "$BUILDPLACE/usr/sbin/policy-rc.d" ]; then
+        log.i "policy-rc.d already exists"
+    else
+        log.i "installing dummy policy-rc.d"
+        echo "\
+#!/bin/sh
+
+while true; do
+case \"\$1\" in
+  -*) shift ;;
+  makedev) exit 0;;
+  x11-common) exit 0;;
+  *)  exit 101;;
+esac
+done
+
+" >  "$BUILDPLACE/usr/sbin/policy-rc.d"
+        chmod a+x "$BUILDPLACE/usr/sbin/policy-rc.d"
+    fi
+}
+
+## function to clean subdirs, use instead of rm -r
+function clean_subdirectories () {
+  if [ -z "$1" ]; then
+      log.e "Fatal internal error in clean_subdirectories"
+      exit 1;
+  fi
+  if [ ! -d "$1" ]; then
+      log.w "directory $1 does not exist in clean_subdirectories"
+      return;
+  fi
+  log.i "removing directory $1 and its subdirectories"
+  find "$1" -xdev \( \! -type d \) -print0 |xargs -0 rm -f
+  find "$1" -xdev -depth -type d -print0 | \
+      (xargs -0 rmdir || true)
+}
+
+function cleanbuildplace () {
+    if [ "$?" -ne 0 ]; then
+        log.w "Aborting with an error";
+    fi
+    unloadhooks
+    if [ "${INTERNAL_BUILD_UML}" != "yes" ]; then
+        if [ -d "$BUILDPLACE" ]; then
+            # A directory on the same partition as $BUILDPLACE, bind-mounted
+            # into $BUILDPLACE, will be cleaned out by clean_subdirectories
+            # (because -xdev doesn't know about bind mounts).  To avoid that
+            # potential disaster (and also to avoid ugly error messages from
+            # rmdir otherwise), we want to make sure that there is *nothing*
+            # mounted under the chroot before we do our bulldozer routine.
+            #
+            # The readlink -f is a simple way to canonicalize the path for
+            # $BUILDPLACE (no dirty double slashes for *us*), so it matches
+            # what will be in the output of mount.
+            if mount |grep -q -F " $(readlink -f "$BUILDPLACE")/"; then
+                log.e "Something is still mounted under ${BUILDPLACE}; unmount and remove ${BUILDPLACE} manually"
+            else
+                log.i "cleaning the build env "
+                clean_subdirectories "$BUILDPLACE"
+            fi
+        fi;
+    fi
+}
+
+function umountproc_cleanbuildplace () {
+    # rolling back to abort.
+    if [ "$?" -ne 0 ]; then
+        log.w "Aborting with an error";
+    fi
+    umountproc
+    cleanbuildplace
+}
+
+function saveaptcache_umountproc_cleanbuildplace () {
+    # save the apt cache, and call umountproc_cleanbuildplace
+    save_aptcache
+    umountproc_cleanbuildplace
+}
+
+function installaptlines (){
+    log.i "Installing apt-lines"
+    rm -f "$BUILDPLACE"/etc/apt/sources.list
+    if [ -z "$DISTRIBUTION" ]; then
+        log.e "Distribution not specified, please specify"
+        exit 1
+    fi
+    if [ -n "$OTHERMIRROR" ]; then
+        echo "$OTHERMIRROR" | tr "|" "\n" >> "$BUILDPLACE"/etc/apt/sources.list
+    fi
+    if [ -n "$MIRRORSITE" ] ; then
+        cat >> "$BUILDPLACE"/etc/apt/sources.list << EOF
+deb $MIRRORSITE $DISTRIBUTION $COMPONENTS
+#deb-src $MIRRORSITE $DISTRIBUTION $COMPONENTS
+EOF
+    fi
+    if [ -n "$APTCONFDIR" ]; then
+        log.i "Copy " "$APTCONFDIR"/* " to chroot"
+        cp -a "$APTCONFDIR/"* "$BUILDPLACE"/etc/apt
+    fi
+
+    if [ ! -d "$BUILDPLACE"/etc/apt/apt.conf.d ]; then
+        log.i "Create /etc/apt/apt.conf.d/ inside chroot"
+        mkdir "$BUILDPLACE"/etc/apt/apt.conf.d
+    fi
+
+    # configure /etc/apt.conf.d/15pbuilder
+    cat > "$BUILDPLACE"/etc/apt/apt.conf.d/15pbuilder <<EOF
+APT::Install-Recommends "false";
+APT::AutoRemove::SuggestsImportant false;
+APT::AutoRemove::RecommendsImportant false;
+Acquire::Languages none;
+EOF
+    if [ -n "$EXPERIMENTAL" ]; then
+        log.i "Installing apt-lines and pinning for experimental"
+        if [ -n "$MIRRORSITE" ] ; then
+            echo "deb $MIRRORSITE experimental main" >> "$BUILDPLACE"/etc/apt/sources.list
+            echo "#deb-src $MIRRORSITE experimental main" >> "$BUILDPLACE"/etc/apt/sources.list
+        fi
+    fi
+}
+
+function remove_packages () {
+    # remove the packages in $@ from the chroot, with apt, so r-deps are
+    # removed too, and do it if and only if they are already installed.
+    local pkg
+    local toremove=()
+    for pkg in "$@"; do
+        if ($CHROOTEXEC dpkg -s "$pkg" 2>&1)>/dev/null ; then
+            if (_contains ${EXTRAPACKAGES[@]} "$pkg" || _contains ${EXTRAPACKAGES[@]} "${pkg}-"); then
+                log.d "not removing $pkg as it's also explicitely listed in EXTRAPACKAGES"
+            else
+                toremove+=("$pkg")
+            fi
+        else
+            log.d "not removing $pkg as not installed"
+        fi
+    done
+    if [ "${#toremove[@]}" -gt 0 ]; then
+        log.i "Removing [${toremove[@]}] from the chroot..."
+        $CHROOTEXEC apt-get -q -y "${APTGETOPT[@]}" --purge remove "${toremove[@]}"
+    fi
+}
+
+function copy_local_configuration () {
+    log.i "copying local configuration"
+    if [ -n "$CONFDIR" ] && [ -d "$CONFDIR" ]; then
+        log.i "copying files from $CONFDIR (if possible) instead of using the system ones"
+    fi
+    if [ "$#" -eq 0 ]; then
+        local tocopy=(hosts hostname mailname resolv.conf)
+    else local tocopy=("$@") ; fi
+    if [ "$USENETWORK" = "yes" ]; then
+        local tocopy[${#tocopy[@]}]=resolv.conf
+    fi
+    for a in "${tocopy[@]}"; do
+        if [ -n "$CONFDIR" ] && [ -f "$CONFDIR/$a" ]; then
+            rm -f "$BUILDPLACE/etc/$a"
+            cp "$( readlink -f "$CONFDIR/$a" )" "$BUILDPLACE/etc/$a"
+        elif [ -f "/etc/$a" ]; then
+            rm -f "$BUILDPLACE/etc/$a"
+            cp "$( readlink -f "/etc/$a" )" "$BUILDPLACE/etc/$a"
+        else
+            log.w "No local /etc/$a to copy, relying on $BUILDPLACE/etc/$a to be correct"
+        fi
+    done
+}
+
+function extractbuildplace () {
+    # after calling this function, umountproc, and cleanbuildplace
+    # needs to be called. Please trap it after calling this function.
+    local TAR=tar
+    if [ "${INTERNAL_BUILD_UML}" != "yes" -a ! \( "${PRESERVE_BUILDPLACE}" = "yes" -a -d "$BUILDPLACE" \) ]; then
+        cleanbuildplace
+        log.i "Building the build Environment"
+        if ! mkdir -p "$BUILDPLACE"; then
+            log.e "failed to build the directory to chroot"
+            exit 1
+        fi
+        log.i "extracting base tarball [${BASETGZ}]"
+        if [ ! -f "$BASETGZ" ]; then
+            log.e "failed to find $BASETGZ, have you done <pbuilder create> to create your base tarball yet?"
+            exit 1
+        fi
+        if [ "$EATMYDATA" = "yes" ]; then
+            TAR="eatmydata tar"
+        fi
+        if ! (cd "$BUILDPLACE" && $TAR -x -p -f "$BASETGZ"); then
+            log.e "failed to extract $BASETGZ to $BUILDPLACE"
+            exit 1
+        fi
+    fi
+    copy_local_configuration
+    loadhooks
+
+    # installaptlines may fail with exit 1, do it earlier than mountproc.
+    if [ "$OVERRIDE_APTLINES" = "yes" ]; then
+        installaptlines
+    else # Warn if override config is not set
+        if [ "$OVERRIDE_APTLINES_WARN" = "yes" ]; then
+            log.w "--override-config is not set; not updating apt.conf Read the manpage for details."
+        fi
+    fi
+
+    mountproc
+    # FIXME maybe add more checks here? - actually it's not even really needed,
+    # since it's created at chroot creation time too.
+    mkdir -p "${BUILDPLACE}${BUILDDIR}"
+    # XXX added in 0.216, to be deprecated in the future
+    # Add a compatibility symlink from the old BUILDDIR (/tmp/buildd) to the new
+    # one, if different.  (Yes, people should just fix their scripts to use
+    # BUILDDIR, please file a bug if you need that variable to also be available
+    # elsewhere other than hook script; given that, I won't do too fancy checks)
+    if [ "$BUILDDIR" != '/tmp/buildd' ]; then
+        if [ -h "$BUILDPLACE/tmp/buildd" ] && [ "$(readlink -f "$BUILDPLACE/tmp/buildd")" = "${BUILDPLACE}$BUILDDIR" ]; then
+            rm "$BUILDPLACE/tmp/buildd"
+        fi
+        if [ -d "$BUILDPLACE/tmp/buildd" ] && [ ! -h "$BUILDPLACE/tmp/buildd" ]; then
+            if [ ! "$(ls -A "$BUILDPLACE/tmp/buildd" 2>&1)" ]; then
+                # empty /tmp/buildd, let's change it to a symlink to BUILDDIR
+                rmdir "$BUILDPLACE/tmp/buildd"
+                ln -rs "${BUILDPLACE}$BUILDDIR" "$BUILDPLACE/tmp/buildd"
+            else
+                log.w "Could not create compatibility symlink because /tmp/buildd is not empty"
+            fi
+        elif [ ! -e "$BUILDPLACE/tmp/buildd" ]; then
+            ln -rs "${BUILDPLACE}$BUILDDIR" "$BUILDPLACE/tmp/buildd"
+        else
+            log.w "Could not create compatibility symlink because /tmp/buildd exists and it is not a directory"
+        fi
+    fi
+
+    if [ "$EATMYDATA" = "yes" ]; then
+        if $CHROOTEXEC /sbin/ldconfig -p | grep -q libeatmydata && $CHROOTEXEC which eatmydata > /dev/null 2>&1 ; then
+            log.i "using eatmydata during job"
+            CHROOTEXEC="$CHROOTEXEC eatmydata"
+        else
+            log.w "eatmydata is not (yet) installed inside the chroot, not using it."
+        fi
+    fi
+
+    # finalize ARCHITECTURE and HOST_ARCH if those aren't set
+    ARCHITECTURE="${ARCHITECTURE:-"$($CHROOTEXEC dpkg-architecture -qDEB_BUILD_ARCH)"}"
+    HOST_ARCH="${HOST_ARCH:-"${ARCHITECTURE}"}"
+
+    executehooks "H"
+}
+
+function echobacktime () {
+    log.i "Current time: $(date)"
+    log.i "pbuilder-time-stamp: $(date +%s)"
+}
+
+function recover_aptcache() {
+    local doit
+    # recover the aptcache archive
+    if [ -n "$APTCACHE" ]; then
+        if [ "$APTCACHEHARDLINK" = "yes" ]; then
+            doit=ln
+        else
+            doit=cp
+        fi
+        log.i "Obtaining the cached apt archive contents"
+        find "$APTCACHE" -maxdepth 1 -name \*.deb | \
+            while read A ; do
+            $doit "$A" "$BUILDPLACE/var/cache/apt/archives/" || true
+        done
+    fi
+}
+
+function save_aptcache() {
+    # save the current aptcache archive
+    # it is safe to call this function several times.
+    local doit
+    if [ -n "$APTCACHE" ]; then
+        log.i "Copying back the cached apt archive contents"
+        mkdir -p "$APTCACHE" ;
+        if [ "$APTCACHEHARDLINK" = "yes" ]; then
+            doit=ln
+        else
+            doit=cp
+        fi
+        find "$BUILDPLACE/var/cache/apt/archives/" -maxdepth 1 -name \*.deb | \
+            while read A ;do
+            if [ ! -f "$APTCACHE/$(basename "$A")" -a -f "$A" ]; then
+                log.i "new cache content '$(basename "$A")' added"
+                $doit "$A" "$APTCACHE/" || true
+            fi
+        done
+    fi
+}
+
+function create_basetgz() {
+    # don't pack the hooks in
+    unloadhooks
+    # create base.tgz
+    (
+        if ! cd "$BUILDPLACE"; then
+            log.e "unexpected error in chdir to $BUILDPLACE"
+            exit 1;
+        fi
+        while test -f "${BASETGZ}.tmp"; do
+            log.i "Someone else has lock over ${BASETGZ}.tmp, waiting"
+            sleep 10s
+        done
+        log.i "creating base tarball [${BASETGZ}]"
+    if [ -h "$BUILDPLACE/tmp/buildd" ] && [ "$(readlink -f "$BUILDPLACE/tmp/buildd")" = "${BUILDPLACE}$BUILDDIR" ]; then
+        rm "$BUILDPLACE/tmp/buildd"
+    fi
+        if ! tar -c --use-compress-program "$COMPRESSPROG" -f "${BASETGZ}.tmp" --exclude ./sys/* --exclude ./proc/* ./* ; then
+            log.e "failed building base tarball"
+            rm -f "${BASETGZ}.tmp"
+            exit 1;
+        fi
+        mv "${BASETGZ}.tmp" "${BASETGZ}"
+    )
+}
+
+function copyinputfile() {
+    # copy files to inside chroot, copy all files specified by INPUTFILE[] parameter.
+    TARGETDIR="$1"
+    if [ -z "$TARGETDIR" ]; then
+        log.e "Unexpected error in copyinputfile"
+        exit 1x
+    fi
+    if [ -n "$INPUTFILE" ]; then
+        log.i "copy ${INPUTFILE[*]} to target directory"
+        cp "${INPUTFILE[@]}" "${TARGETDIR}"
+    fi
+}
+
+# all trap hooks that should lead to 'exit'; and error exit.
+function cleanbuildplace_trap () {
+    trap "" sigpipe sighup
+    set +e
+    cleanbuildplace
+    trap - exit sighup sigpipe
+    exit 1
+}
+function saveaptcache_umountproc_cleanbuildplace_trap () {
+    trap "" sigpipe sighup
+    set +e
+    saveaptcache_umountproc_cleanbuildplace
+    trap - exit sighup sigpipe
+    exit 1
+}
+function umountproc_cleanbuildplace_trap () {
+    trap "" sigpipe sighup
+    set +e
+    umountproc_cleanbuildplace
+    trap - exit sighup sigpipe
+    exit 1
+}
+function umountproc_trap () {
+    trap "" sigpipe sighup
+    set +e
+    umountproc
+    trap - exit sighup sigpipe
+    exit 1
+}
+
+# copy to .. if target directory is not ..
+function conditional_cp_a() {
+    local source_file="$1"
+    # NOTE: target_dir must not end with /, which is usually the case
+    # with 'readlink -f' result, which BUILDRESULT usually is.
+    local target_dir="$2"
+    # For testability, make cp overridable.
+    local cp="${3:-cp}"
+
+    # $PWD should end with non-'/', so dirname should give us the parent dir.
+    local parent_dir=$(dirname "$PWD")
+
+    if [ "${parent_dir}" != "${target_dir}" ]; then
+        "$cp" -a "$source_file" "$target_dir"
+    else
+        log.i "file ${source_file} is already in target, not copying."
+    fi
+}
+
+function add_additional_aptkeyrings() {
+    # To support package verification inside the repository we may have to
+    # import additional keys.
+    local filename
+    local dest
+    local KEY
+    for KEY in "${APTKEYRINGS[@]}"; do
+        filename="$(basename "${KEY}")"
+        if [ "${filename:(-4):4}" != ".gpg" ]; then
+            log.e "apt key file does not end in .gpg"
+            exit 1
+        fi
+        dest="${BUILDPLACE}/etc/apt/trusted.gpg.d/${filename}"
+        mkdir -p "${BUILDPLACE}/etc/apt/trusted.gpg.d"
+        log.i "copying apt key file ${KEY} to ${dest}"
+        if [ -f "${dest}" ]; then
+            if ! cmp -s "${KEY}" "${dest}" ; then
+                log.w "overwriting existing and different keyring"
+            fi
+        fi
+        cp "${KEY}" "${dest}"
+    done
+}
+
+function install_packages_for_optional_features() {
+    # automatically add packages needed for optional features to the chroot
+    # and remove them when that feature is disabled
+    case "$(readlink -e "$PBUILDERSATISFYDEPENDSCMD")" in
+        *-aptitude)
+            EXTRAPACKAGES="$EXTRAPACKAGES aptitude"
+        ;;
+        *)
+            REMOVEPACKAGES="$REMOVEPACKAGES aptitude"
+        ;;
+    esac
+    if [ -n "$CCACHEDIR" ]; then
+        EXTRAPACKAGES="$EXTRAPACKAGES ccache"
+    else
+        REMOVEPACKAGES="$REMOVEPACKAGES ccache"
+    fi
+
+    if [ "$EATMYDATA" = "yes" ]; then
+        # the eatmydata binary is going nowhere anytime soon, whilst the libeatmydata1
+        # binary is shaped like a shared library, so the name might change, etc.
+        # Install this package instead, it's cheap enough.
+        EXTRAPACKAGES="$EXTRAPACKAGES eatmydata"
+    elif [ "$EATMYDATA" != "not-available" ]; then
+        REMOVEPACKAGES="$REMOVEPACKAGES eatmydata"
+    fi
+
+    if [ "$DEBDELTA" = "yes" ]; then
+        EXTRAPACKAGES="$EXTRAPACKAGES debdelta python-apt xdelta3"
+    else
+        REMOVEPACKAGES="$REMOVEPACKAGES debdelta"
+    fi
+}
+
+function get822field() {
+    local field="$1"
+    local file="$2"
+
+    sed -n '
+# Skip PGP header
+/^-----BEGIN PGP SIGNED MESSAGE-----$/ {
+    : pgploop
+    n
+    /^$/ b leadloop
+    b pgploop
+}
+
+# Skip empty lines/comments
+: leadloop
+/^[ \t]*$/ {
+    n
+    b leadloop
+}
+/^#/ {
+    n
+    b leadloop
+}
+
+# First line of paragraph
+: paraloop
+# Strip field name from line if present
+s/^'"$field"': *//i
+# If field present, print contents
+# Note the h; t loop; here rather than t store; so that there is no leading
+# newline in the hold space. This will store unmatched lines in the hold space,
+# but that does not matter as the first matched line will overwrite it.
+h
+t loop
+# Otherwise, check for end of paragraph or ignore
+/^[ \t]*$/q
+n
+b paraloop
+
+: store
+H
+: loop
+$ b done
+n
+/^#/ b loop
+/^[ \t]/ b store
+: done
+x
+p
+n
+b paraloop' \
+    "$file"
+}
+
+function get_changes_options() {
+    local changes_options
+    local arg
+    for arg in $DEBBUILDOPTS; do
+        # De-escape arg. $(echo $arg) on its own doesn't perform quote
+        # expansion, since quote expansion operates on the *original* word.
+        eval arg="$arg"
+        case $arg in
+            -s[iad]|-v*|-m*|-e*|-C*)
+                changes_options="${changes_options:+$changes_options }'$arg'"
+                ;;
+            --changes-option=*)
+                changes_options="${changes_options:+$changes_options }'${arg#--changes-option=}'"
+                ;;
+            # dpkg-genchanges doesn't support the long form of some options
+            --release-by=*)
+                changes_options="${changes_options:+$changes_options }-m'${arg#--release-by=}'"
+                ;;
+            --build-by=*)
+                changes_options="${changes_options:+$changes_options }-e'${arg#--build-by=}'"
+                ;;
+        esac
+    done
+    echo "${changes_options:-}"
+}
+
+function should_clean_source() {
+    local noclean=0
+    local arg
+    for arg in $DEBBUILDOPTS; do
+        # De-escape arg. $(echo $arg) on its own doesn't perform quote
+        # expansion, since quote expansion operates on the *original* word.
+        eval arg="$arg"
+        case $arg in
+            --pre-clean)
+                noclean=0
+                ;;
+            -nc|--no-pre-clean)
+                noclean=1
+                ;;
+        esac
+    done
+    # Exit code, not boolean, so inverted meaning
+    return $noclean
+}
+
+function get_source_options() {
+    local source_options
+    local arg
+    for arg in $DEBBUILDOPTS; do
+        # De-escape arg. $(echo $arg) on its own doesn't perform quote
+        # expansion, since quote expansion operates on the *original* word.
+        eval arg="$arg"
+        case $arg in
+            -s[nsAkurKUR]|-z*|-Z*|-i*|-I*)
+                source_options="${source_options:+$source_options }'$arg'"
+                ;;
+            --source-option=*)
+                source_options="${source_options:+$source_options }'${arg#--source-option=}'"
+                ;;
+            # Pre-squeeze dpkg-source doesn't support the long forms.
+            # Since this is only used by pdebuild outside the chroot, it should
+            # be safe to keep the long forms, but it does no harm to keep
+            # backwards compatibility.
+            --compression-level=*)
+                source_options="${source_options:+$source_options }-z'${arg#--compression-level=}'"
+                ;;
+            --compression=*)
+                source_options="${source_options:+$source_options }-Z'${arg#--compression=}'"
+                ;;
+            --diff-ignore=*)
+                source_options="${source_options:+$source_options }-i'${arg#--diff-ignore=}'"
+                ;;
+            --tar-ignore=*)
+                source_options="${source_options:+$source_options }-I'${arg#--tar-ignore=}'"
+                ;;
+        esac
+    done
+    echo "${source_options:-}"
+}
+
+#==========================================================================
+# hooks stuff
+
+function loadhooks () {
+    if [ -z "$HOOKDIR" ]; then
+        return ;
+    fi
+    if [ -d "$BUILDPLACE/$hooks" ]; then
+        rm -rf "$BUILDPLACE/$hooks"
+    fi
+    if [ -d "$HOOKDIR" ]; then
+        mkdir -p "$BUILDPLACE/$hooks"
+        if ! cp -aL "$HOOKDIR/"* "$BUILDPLACE/$hooks"; then
+            log.w "no hooks found in the hookdir '$HOOKDIR'"
+        fi
+    else
+        log.w "hookdir $HOOKDIR does not exist, skipping"
+    fi
+}
+
+function unloadhooks () {
+    if [ -z "$HOOKDIR" ]; then
+        return ;
+    fi
+    rm -rf "$BUILDPLACE/$hooks"
+}
+
+function executehooks () {
+    # Execute every script found in the chroot'd target directory.
+    # We only test whether a file is executable since we have no idea what
+    # the user had put in their chroots.  If they want PL/1 and ADA on the
+    # chroot or they have decided to use emacslisp for everything, it's their
+    # problem.
+    local prefix="$1"
+    if [ -z "$HOOKDIR" ]; then
+        return
+    fi
+    for fn in "$BUILDPLACE/$hooks/$prefix"[0-9][0-9]* ; do
+       case "$fn" in
+           "$BUILDPLACE/$hooks/$prefix"'[0-9][0-9]*')
+               log.d "no hooks of type ${prefix} found -- ignoring"
+               ;;
+           *~)
+               log.w "skipping an editor backup file $fn"
+               ;;
+           *.bak)
+               log.w "skipping a backup file $fn"
+               ;;
+           *)
+               if [ -x "$fn" ]; then
+                   log.i "user script $fn starting"
+                   BUILDDIR="$BUILDDIR" \
+                   DISTRIBUTION="$DISTRIBUTION" \
+                   BUILD_ARCH="$ARCHITECTURE" \
+                   HOST_ARCH="$HOST_ARCH" \
+                       $CHROOTEXEC "/$hooks/$(basename "$fn")"
+                   log.i "user script $fn finished"
+               else
+                   if [ -f "$fn" ]; then
+                       filetype=$(basename "$fn" )
+                       log.w "execute priv not set on file $filetype, not executing."
+                   else
+                       # Should it reach here ? This case should be caught in the above case.
+                       log.w "no hooks of type ${prefix} found -- internal error in logic"
+                   fi
+               fi
+               ;;
+       esac
+    done
+}
+
+#==========================================================================
+
+
+#Setting environmental variables that are really required:
+#required for some packages to install...
+export LANG=C
+export LC_ALL=C

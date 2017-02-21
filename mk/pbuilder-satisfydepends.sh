@@ -1,10 +1,11 @@
 #! /bin/bash
 
 # pbuilder -- personal Debian package builder
-# version 0.225.2
+# version 0.228.4
 
-# This file is a concatenation of the following three scripts from
+# This file is a concatenation of the following scripts from
 # the pbuilder package:
+#   /usr/lib/pbuilder/pbuilder-modules
 #   /usr/lib/pbuilder/pbuilder-satisfydepends-funcs
 #   /usr/lib/pbuilder/pbuilder-satisfydepends-aptitude
 #   /usr/lib/pbuilder/pbuilder-satisfydepends-checkparams
@@ -26,6 +27,73 @@
 
 set -e
 
+
+
+
+#   pbuilder -- personal Debian package builder
+#   Copyright (C) 2001-2009 Junichi Uekawa <dancer@debian.org>
+#   Copyright (C) 2015-2016 Mattia Rizzolo <mattia@debian.org>
+#
+# common modules for pbuilder
+
+
+function get822field() {
+    local field="$1"
+    local file="$2"
+
+    sed -n '
+# Skip PGP header
+/^-----BEGIN PGP SIGNED MESSAGE-----$/ {
+    : pgploop
+    n
+    /^$/ b leadloop
+    b pgploop
+}
+
+# Skip empty lines/comments
+: leadloop
+/^[ \t]*$/ {
+    n
+    b leadloop
+}
+/^#/ {
+    n
+    b leadloop
+}
+
+# First line of paragraph
+: paraloop
+# Strip field name from line if present
+s/^'"$field"': *//i
+# If field present, print contents
+# Note the h; t loop; here rather than t store; so that there is no leading
+# newline in the hold space. This will store unmatched lines in the hold space,
+# but that does not matter as the first matched line will overwrite it.
+h
+t loop
+# Otherwise, check for end of paragraph or ignore
+/^[ \t]*$/q
+n
+b paraloop
+
+: store
+H
+: loop
+$ b done
+n
+/^#/ b loop
+/^[ \t]/ b store
+: done
+x
+p
+n
+b paraloop' \
+    "$file"
+}
+
+
+
+
 #   pbuilder -- personal Debian package builder
 #   Copyright (C) 2001-2007 Junichi Uekawa <dancer@debian.org>
 #   Copyright (C) 2007 Loïc Minier <lool@dooz.org>
@@ -45,35 +113,22 @@ function candidate_version() {
 }
 
 function get_source_control_field() {
-    local field="$1"
+    get822field "$1" "$DEBIAN_CONTROL"
+}
 
-    sed -n -e "s/^$field://i" -e '
-t store
-/^-----BEGIN PGP SIGNED MESSAGE-----$/ {
-    : pgploop
-    n
-    /^$/ d
-    b pgploop
-}
-: leadloop
-/^[ \t]*$/ {
-    n
-    /^$/ d
-    b leadloop
-}
-/^#/ {
-    n
-    /^$/ d
-    b leadloop
-}
-/^$/q
-d
+function get_build_depends_field() {
+    get_source_control_field "$1" | sed -n '
+# Note the h; b loop; here so that there is no leading
+# newline in the hold space
+h
+b loop
 : store
 H
 : loop
+$ b done
 n
-/^#/ b loop
-/^[ \t]/ b store
+b store
+: done
 x
 # output on single line
 s/\n//g
@@ -96,28 +151,27 @@ s/(\(>>\|>=\|>\|==\|=\|<=\|<<\|<\|!=\) *\([^)]*\))/(\1 \2)/g
 # normalize space at beginning and end of line
 s/^ *//
 s/ *$//
-p' \
-        "$DEBIAN_CONTROL"
+p'
 }
 
 function get_build_deps() {
     local output
 
-    output="$(get_source_control_field "Build-Depends")"
+    output="$(get_build_depends_field "Build-Depends")"
     output="${output%, }"
     case "$BINARY_ARCH" in
         any)
-            output="${output:+$output, }$(get_source_control_field "Build-Depends-Indep")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Depends-Indep")"
             output="${output%, }"
-            output="${output:+$output, }$(get_source_control_field "Build-Depends-Arch")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Depends-Arch")"
             output="${output%, }"
             ;;
         binary)
-            output="${output:+$output, }$(get_source_control_field "Build-Depends-Arch")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Depends-Arch")"
             output="${output%, }"
             ;;
         all)
-            output="${output:+$output, }$(get_source_control_field "Build-Depends-Indep")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Depends-Indep")"
             output="${output%, }"
             ;;
     esac
@@ -127,21 +181,21 @@ function get_build_deps() {
 function get_build_conflicts() {
     local output
 
-    output="$(get_source_control_field "Build-Conflicts")"
+    output="$(get_build_depends_field "Build-Conflicts")"
     output="${output%, }"
      case "$BINARY_ARCH" in
         any)
-            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Indep")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Conflicts-Indep")"
             output="${output%, }"
-            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Arch")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Conflicts-Arch")"
             output="${output%, }"
             ;;
         binary)
-            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Arch")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Conflicts-Arch")"
             output="${output%, }"
             ;;
         all)
-            output="${output:+$output, }$(get_source_control_field "Build-Conflicts-Indep")"
+            output="${output:+$output, }$(get_build_depends_field "Build-Conflicts-Indep")"
             output="${output%, }"
             ;;
     esac
@@ -355,26 +409,20 @@ EOF
     echo " -> Finished parsing the build-deps"
 }
 
-
 function print_help () {
     # print out help message
     cat <<EOF
 pbuilder-satisfydepends -- satisfy dependencies
 Copyright 2002-2007  Junichi Uekawa <dancer@debian.org>
 
---help              give help
---control           specify control file (debian/control, *.dsc)
---chroot            operate inside chroot
---binary-all        include binary-all
---binary-arch       include binary-arch only
---binary-indep      include binary-indep only
---eatmydata         wrap the chroots commands with eatmydata
-
-Debugging options:
---force-version     skip version check.
---continue-fail     continue even when failed.
---internal-chrootexec specify the command to execute instead of \`chroot\`
---echo              echo mode, do nothing. (--force-version required for most operation)
+--help:        give help
+--control:     specify control file (debian/control, *.dsc)
+--chroot:      operate inside chroot
+--binary-all:  include binary-all
+--binary-arch: include binary-arch only
+--echo:        echo mode, do nothing. (--force-version required for most operation)
+--force-version: skip version check.
+--continue-fail: continue even when failed.
 
 EOF
 }
@@ -388,6 +436,8 @@ EOF
 # module to satisfy build dependencies; parse command line parameters
 
 
+BUILD_ARCH="$(dpkg --print-architecture)"
+HOST_ARCH="$BUILD_ARCH"
 DEBIAN_CONTROL=debian/control
 CHROOT=""
 CHROOTEXEC=""
@@ -435,10 +485,10 @@ while [ -n "$1" ]; do
 	    BINARY_ARCH="binary"
 	    shift
 	    ;;
-	--binary-indep)
-	    BINARY_ARCH="all"
-	    shift
-	    ;;
+    --binary-indep)
+        BINARY_ARCH="all"
+        shift
+        ;;
 	--continue-fail)
 	    CONTINUE_FAIL="yes"
 	    shift
@@ -455,10 +505,18 @@ while [ -n "$1" ]; do
 	    ALLOWUNTRUSTED=yes
 	    shift;
 	    ;;
-	--eatmydata)
-	    EATMYDATA=yes
-	    shift
-	    ;;
+    --eatmydata)
+        EATMYDATA=yes
+        shift
+        ;;
+    --build-arch)
+        BUILD_ARCH=$2
+        shift 2
+        ;;
+    --host-arch)
+        HOST_ARCH=$2
+        shift 2
+        ;;
 	--help|-h|*)
 	    print_help
 	    exit 1
@@ -476,7 +534,7 @@ if [ $ALLOWUNTRUSTED = yes ]; then
 fi
 
 if [ "$EATMYDATA" = "yes" ]; then
-	CHROOTEXEC="$CHROOTEXEC eatmydata"
+    CHROOTEXEC="$CHROOTEXEC eatmydata"
 fi
 
 checkbuilddep_internal

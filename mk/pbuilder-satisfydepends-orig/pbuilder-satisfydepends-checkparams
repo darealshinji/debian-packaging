@@ -20,6 +20,8 @@
 # module to satisfy build dependencies; parse command line parameters
 
 
+BUILD_ARCH="$(dpkg --print-architecture)"
+HOST_ARCH="$BUILD_ARCH"
 DEBIAN_CONTROL=debian/control
 CHROOT=""
 CHROOTEXEC=""
@@ -90,6 +92,14 @@ while [ -n "$1" ]; do
     --eatmydata)
         EATMYDATA=yes
         shift
+        ;;
+    --build-arch)
+        BUILD_ARCH=$2
+        shift 2
+        ;;
+    --host-arch)
+        HOST_ARCH=$2
+        shift 2
         ;;
 	--help|-h|*)
 	    print_help
