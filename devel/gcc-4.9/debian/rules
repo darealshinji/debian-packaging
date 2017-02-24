@@ -22,7 +22,7 @@ export LDFLAGS=$(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get 
 	dh ${@} --parallel
 
 override_dh_auto_clean:
-	$(MAKE) -f gcc-wrapper.mk clean
+	#$(MAKE) -f gcc-wrapper.mk clean
 	rm -rf binutils-src gcc-src
 	rm -f debian/links debian/lintian-overrides
 
@@ -73,7 +73,7 @@ override_dh_auto_configure:
 override_dh_auto_build:
 	dh_auto_build -D$(BINUTILS)
 	dh_auto_build -D$(SRCDIR)
-	$(MAKE) -f gcc-wrapper.mk GCCPREFIX="$(pkg)-"
+	#$(MAKE) -f gcc-wrapper.mk GCCPREFIX="$(pkg)-"
 
 # uncomment to enable tests (may take a while to complete)
 #override_dh_auto_test:
@@ -82,8 +82,8 @@ override_dh_auto_build:
 override_dh_install:
 	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(pkg)
 	$(MAKE) -C $(BINUTILS) install DESTDIR=$(CURDIR)/debian/$(pkg)
-	$(foreach WRAPPER,gcc-static1 g++-static1 g++-static2 g++-static3,\
-	  install -m755 -D $(WRAPPER) $(usr)/bin/$(pkg)-$(WRAPPER) ;)
+	#$(foreach WRAPPER,gcc-static1 g++-static1 g++-static2 g++-static3,\
+	#  install -m755 -D $(WRAPPER) $(usr)/bin/$(pkg)-$(WRAPPER) ;)
 
 	# delete RPATH in libstdc++
 	$(foreach DIR,lib lib32 lib64,\
@@ -105,7 +105,7 @@ override_dh_install:
 	$(foreach CMD,gcc-ar gcc-nm gcc-ranlib,\
 	  sed "s|@PKG@|$(PKG)|g; s|@pkg@|$(pkg)|g" \
 	  debian/$(CMD).1.in > $(usr)/share/man/man1/$(pkg)-$(CMD).1 ;)
-	install -m644 -D gcc-wrapper.1 $(usr)/share/man/man1/$(pkg)-gcc-static1.1
+	#install -m644 -D gcc-wrapper.1 $(usr)/share/man/man1/$(pkg)-gcc-static1.1
 
 	# fix including headers
 	for f in $(cplusinc)/$(TRIPLET)/bits/* ; do \
