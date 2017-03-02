@@ -17,6 +17,6 @@ endif
 
 download:
 	@ $(call download,$(bin),http://www.cmake.org/files/v$(SHORTVER)/cmake-$(VERSION)-Linux-$(BINARCH).tar.gz)
-	@ $(call download,ReleaseNotes,http://www.cmake.org/cmake/help/v$(SHORTVER)/_sources/release/$(SHORTVER).txt)
+	@ $(call download,ReleaseNotes,http://www.cmake.org/cmake/help/v$(SHORTVER)/_sources/release/$(SHORTVER).rst.txt)
 	@ VERSION=$(VERSION); $(changelog-entry)
 

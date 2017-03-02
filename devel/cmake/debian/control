@@ -15,6 +15,7 @@ Build-Depends: bash-completion,
                libidn11,
                libsm6,
                libx11-6,
+               libx11-xcb1,
                libxext6,
                libxi6
 Standards-Version: 3.9.5
