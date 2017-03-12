@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (C) 2014-2016, djcj <djcj@gmx.de>
+Copyright (C) 2014-2017, djcj <djcj@gmx.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ SOFTWARE.
 
 mk/config.{guess|sub}:
 
-Copyright (C) 1992-2016 Free Software Foundation, Inc.
+Copyright (C) 1992-2017 Free Software Foundation, Inc.
 
 This file is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by
@@ -50,9 +50,9 @@ of the GNU General Public License, version 3 ("GPLv3").
 
 mk/pbuilder-satisfydepends.sh, mk/pbuilder-satisfydepends-orig/*:
 
-Copyright (C) 2001-2007 Junichi Uekawa
+Copyright (C) 2001-2009 Junichi Uekawa
 Copyright (C) 2007 Loïc Minier
-Copyright (C) 2015 Mattia Rizzolo <mattia@debian.org>
+Copyright (C) 2015-2016 Mattia Rizzolo <mattia@debian.org>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
