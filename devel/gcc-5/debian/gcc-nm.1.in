@@ -1,4 +1,4 @@
-.TH @PKG@\-GCC\-NM 1 "November 2015" @PKG@\-gcc\-nm ""
+.TH @PKG@\-GCC\-NM 1 "November 2015" @pkg@\-gcc\-nm ""
 .SH NAME
 @pkg@\-gcc\-nm \- a wrapper around nm adding the \-\-plugin option
 

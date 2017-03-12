@@ -1,2 +1,0 @@
-#!/bin/sh
-eval $(printf "@GCCDRIVER@ $* @APPEND@" | sed -e 's|="|=<!|g; s|" |!> |g' -e 's|<!|"\\"|g; s|!>|"\\"|g')

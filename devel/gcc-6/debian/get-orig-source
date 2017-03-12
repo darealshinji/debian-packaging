@@ -23,11 +23,11 @@ gcc_pkg=${gcc_dir}.tbz
 gcc_url="https://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.bz2"
 gcc_sum=f06ae7f3f790fbf0f018f6d40e844451e6bc3b7bc96e128e63b09825c1f8b29f
 
-binutils_ver=2.27
+binutils_ver=2.28
 binutils_dir=binutils-$binutils_ver
 binutils_pkg=${binutils_dir}.tbz
 binutils_url="https://ftp.gnu.org/gnu/binutils/${binutils_dir}.tar.bz2"
-binutils_sum=369737ce51587f92466041a97ab7d2358c6d9e1b6490b3940eb09fb0a9a6ac88
+binutils_sum=6297433ee120b11b4b0a1c8f3512d7d73501753142ab9e2daa13c5a3edd32a72
 
 mpfr_dir=mpfr-3.1.5
 mpc_dir=mpc-1.0.3

@@ -1,2 +1,3 @@
 gcc-src/MAINTAINERS
 gcc-src/NEWS
+binutils-src/ChangeLog.binutils

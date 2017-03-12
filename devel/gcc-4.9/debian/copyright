@@ -803,7 +803,7 @@ GNU binutils source code
 The GNU binutils package was downloaded from <ftp://ftp.gnu.org/pub/gnu/binutils/>
 
 
-GNU Binutils is Copyright (C) 1990-2016 Free Software Foundation, Inc.
+GNU Binutils is Copyright (C) 1990-2017 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -836,7 +836,7 @@ in `/usr/share/common-licenses/GFDL'.
 
 
 
-Debian packaging is copyright (c) 2015-2016 djcj <djcj@gmx.de> and
+Debian packaging is copyright (c) 2015-2017 djcj <djcj@gmx.de> and
 release under the MIT license:
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

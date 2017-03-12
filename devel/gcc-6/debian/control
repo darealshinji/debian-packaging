@@ -18,7 +18,7 @@ Build-Depends:
 # default gcc build-dependencies
  bison, flex, gawk, gettext, libtool, m4, patch,
  perl, texinfo,
- zlib1g-dev, zlib1g-dev:i386 [amd64]
+ zlib1g-dev
 Standards-Version: 3.9.5
 Homepage: https://gcc.gnu.org/
 
@@ -26,7 +26,6 @@ Package: gcc6opt
 Architecture: any
 Depends:
  ${shlibs:Depends},
- zlib1g:i386 [amd64],
  python:any,
  ${misc:Depends}
 Recommends:

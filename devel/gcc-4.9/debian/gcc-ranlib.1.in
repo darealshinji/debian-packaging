@@ -1,4 +1,4 @@
-.TH @PKG@\-GCC\-RANLIB 1 "November 2015" @PKG@\-gcc\-ranlib ""
+.TH @PKG@\-GCC\-RANLIB 1 "November 2015" @pkg@\-gcc\-ranlib ""
 .SH NAME
 @pkg@\-gcc\-ranlib \- a wrapper around ranlib adding the \-\-plugin option
 

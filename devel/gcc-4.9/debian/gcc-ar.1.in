@@ -1,4 +1,4 @@
-.TH @PKG@\-GCC\-AR 1 "November 2015" @PKG@\-gcc\-ar ""
+.TH @PKG@\-GCC\-AR 1 "November 2015" @pkg@\-gcc\-ar ""
 .SH NAME
 @pkg@\-gcc\-ar \- a wrapper around ar adding the \-\-plugin option
 
