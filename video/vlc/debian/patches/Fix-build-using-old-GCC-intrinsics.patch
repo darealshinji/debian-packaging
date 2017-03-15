@@ -30,6 +30,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  modules/visualization/projectm.cpp                 |  4 +++
  15 files changed, 56 insertions(+), 21 deletions(-)
 
+diff --git a/modules/gui/qt4/actions_manager.cpp b/modules/gui/qt4/actions_manager.cpp
+index eff40d9..b7ca967 100644
 --- a/vlc/modules/gui/qt4/actions_manager.cpp
 +++ b/vlc/modules/gui/qt4/actions_manager.cpp
 @@ -25,6 +25,8 @@
@@ -41,6 +43,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include <vlc_vout.h>
  #include <vlc_keys.h>
  
+diff --git a/modules/gui/qt4/adapters/seekpoints.cpp b/modules/gui/qt4/adapters/seekpoints.cpp
+index fbf2957..a3564bb 100644
 --- a/vlc/modules/gui/qt4/adapters/seekpoints.cpp
 +++ b/vlc/modules/gui/qt4/adapters/seekpoints.cpp
 @@ -19,14 +19,12 @@
@@ -59,6 +63,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include "input_manager.hpp"
  
  SeekPoints::SeekPoints( QObject *parent, intf_thread_t *p_intf_ ) :
+diff --git a/modules/gui/qt4/adapters/seekpoints.hpp b/modules/gui/qt4/adapters/seekpoints.hpp
+index 0083989..bbb9214 100644
 --- a/vlc/modules/gui/qt4/adapters/seekpoints.hpp
 +++ b/vlc/modules/gui/qt4/adapters/seekpoints.hpp
 @@ -22,9 +22,7 @@
@@ -72,6 +78,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  
  #include <vlc_common.h>
  #include <vlc_interface.h>
+diff --git a/modules/gui/qt4/components/controller.cpp b/modules/gui/qt4/components/controller.cpp
+index d93e0db..c43d929 100644
 --- a/vlc/modules/gui/qt4/components/controller.cpp
 +++ b/vlc/modules/gui/qt4/components/controller.cpp
 @@ -26,6 +26,8 @@
@@ -83,6 +91,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include <vlc_vout.h>                       /* vout_thread_t for FSC */
  
  /* Widgets */
+diff --git a/modules/gui/qt4/components/playlist/playlist_model.hpp b/modules/gui/qt4/components/playlist/playlist_model.hpp
+index f9d1d0c..1f71ac9 100644
 --- a/vlc/modules/gui/qt4/components/playlist/playlist_model.hpp
 +++ b/vlc/modules/gui/qt4/components/playlist/playlist_model.hpp
 @@ -25,9 +25,7 @@
@@ -96,6 +106,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  
  #include <vlc_input.h>
  #include <vlc_playlist.h>
+diff --git a/modules/gui/qt4/components/playlist/views.cpp b/modules/gui/qt4/components/playlist/views.cpp
+index 59f6535..0066205 100644
 --- a/vlc/modules/gui/qt4/components/playlist/views.cpp
 +++ b/vlc/modules/gui/qt4/components/playlist/views.cpp
 @@ -21,6 +21,12 @@
@@ -111,6 +123,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include "components/playlist/views.hpp"
  #include "components/playlist/vlc_model.hpp"      /* VLCModel */
  #include "components/playlist/sorting.h"          /* Columns List */
+diff --git a/modules/gui/qt4/dialogs/messages.cpp b/modules/gui/qt4/dialogs/messages.cpp
+index 30793a2..9c79c99 100644
 --- a/vlc/modules/gui/qt4/dialogs/messages.cpp
 +++ b/vlc/modules/gui/qt4/dialogs/messages.cpp
 @@ -24,6 +24,8 @@
@@ -122,6 +136,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include "dialogs/messages.hpp"
  
  #include <QPlainTextEdit>
+diff --git a/modules/gui/qt4/dialogs/vlm.cpp b/modules/gui/qt4/dialogs/vlm.cpp
+index 0da88cc..595f015 100644
 --- a/vlc/modules/gui/qt4/dialogs/vlm.cpp
 +++ b/vlc/modules/gui/qt4/dialogs/vlm.cpp
 @@ -23,10 +23,6 @@
@@ -135,6 +151,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include "dialogs/vlm.hpp"
  
  #ifdef ENABLE_VLM
+diff --git a/modules/gui/qt4/dialogs/vlm.hpp b/modules/gui/qt4/dialogs/vlm.hpp
+index a3c6e5d..dcf7110 100644
 --- a/vlc/modules/gui/qt4/dialogs/vlm.hpp
 +++ b/vlc/modules/gui/qt4/dialogs/vlm.hpp
 @@ -25,8 +25,10 @@
@@ -149,6 +167,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #endif
  
  #ifdef ENABLE_VLM
+diff --git a/modules/gui/qt4/input_manager.cpp b/modules/gui/qt4/input_manager.cpp
+index fd45f4a..c50cb6c 100644
 --- a/vlc/modules/gui/qt4/input_manager.cpp
 +++ b/vlc/modules/gui/qt4/input_manager.cpp
 @@ -30,6 +30,8 @@
@@ -160,6 +180,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include "input_manager.hpp"
  #include "recents.hpp"
  
+diff --git a/modules/gui/qt4/input_manager.hpp b/modules/gui/qt4/input_manager.hpp
+index 7d3b76a..4fbecbb 100644
 --- a/vlc/modules/gui/qt4/input_manager.hpp
 +++ b/vlc/modules/gui/qt4/input_manager.hpp
 @@ -29,9 +29,10 @@
@@ -174,6 +196,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include "util/singleton.hpp"
  #include "adapters/variables.hpp"
  
+diff --git a/modules/gui/qt4/menus.cpp b/modules/gui/qt4/menus.cpp
+index 116e98c..46240b0 100644
 --- a/vlc/modules/gui/qt4/menus.cpp
 +++ b/vlc/modules/gui/qt4/menus.cpp
 @@ -34,6 +34,8 @@
@@ -185,6 +209,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include <vlc_common.h>
  #include <vlc_intf_strings.h>
  #include <vlc_vout.h>                             /* vout_thread_t */
+diff --git a/modules/gui/qt4/qt4.hpp b/modules/gui/qt4/qt4.hpp
+index 44d7db6..5aec957 100644
 --- a/vlc/modules/gui/qt4/qt4.hpp
 +++ b/vlc/modules/gui/qt4/qt4.hpp
 @@ -29,12 +29,7 @@
@@ -233,6 +259,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  enum {
      DialogEventTypeOffset = 0,
      IMEventTypeOffset     = 100,
+diff --git a/modules/gui/qt4/util/pictureflow.cpp b/modules/gui/qt4/util/pictureflow.cpp
+index 9318953..a7e6a01 100644
 --- a/vlc/modules/gui/qt4/util/pictureflow.cpp
 +++ b/vlc/modules/gui/qt4/util/pictureflow.cpp
 @@ -29,6 +29,8 @@
@@ -244,6 +272,8 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  #include "pictureflow.hpp"
  
  #include <QApplication>
+diff --git a/modules/visualization/projectm.cpp b/modules/visualization/projectm.cpp
+index e80fbf4..96d532d 100644
 --- a/vlc/modules/visualization/projectm.cpp
 +++ b/vlc/modules/visualization/projectm.cpp
 @@ -30,6 +30,10 @@
@@ -257,3 +287,6 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  
  #include <vlc_common.h>
  #include <vlc_plugin.h>
+-- 
+2.8.1
+

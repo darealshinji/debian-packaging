@@ -1,5 +1,4 @@
-Description: Drop check for qt version.
-Author: Mateusz Łukasik <mati75@linuxmint.pl>
+https://bugs.launchpad.net/ubuntu/+source/qtbase-opensource-src/+bug/1536843
 
 --- a/vlc/configure.ac
 +++ b/vlc/configure.ac

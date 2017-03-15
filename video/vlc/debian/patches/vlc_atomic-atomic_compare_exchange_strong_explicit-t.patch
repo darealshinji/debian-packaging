@@ -9,9 +9,11 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
  include/vlc_atomic.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/include/vlc_atomic.h b/include/vlc_atomic.h
+index 01e0f85..15ccf8c 100644
 --- a/vlc/include/vlc_atomic.h
 +++ b/vlc/include/vlc_atomic.h
-@@ -152,7 +152,7 @@
+@@ -152,7 +152,7 @@ typedef         uintmax_t atomic_uintmax_t;
  #  define atomic_compare_exchange_strong(object,expected,desired) \
      atomic_compare_exchange(object, expected, desired)
  
@@ -20,3 +22,6 @@ Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
      atomic_compare_exchange_strong(object, expected, desired)
  
  #  define atomic_compare_exchange_weak(object,expected,desired) \
+-- 
+2.8.1
+

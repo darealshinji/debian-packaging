@@ -13,9 +13,7 @@ case "$1" in
         run_vlc_cache_gen
         exit 0
         ;;
-
     configure)
-        # Make sure that the plugins cache is generated.
         dpkg-trigger /usr/lib/vlc/plugins
         ;;
 esac

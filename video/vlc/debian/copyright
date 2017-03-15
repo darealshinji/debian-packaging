@@ -1,5 +1,5 @@
 Files: debian/*
-Copyright: 2015-2016 djcj <djcj@gmx.de>
+Copyright: 2015-2017 djcj <djcj@gmx.de>
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@ License: MIT
  SOFTWARE.
 
 Files: libdvdcss/*
-Copyright: 1998-2016 VideoLAN
+Copyright: 1998-2017 VideoLAN
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ Authors:
  Gildas Bazin <gbazin@netcourrier.com>
 
 Files: libdvdnav/*
-Copyright: 2000-2016 the dvdnav authors
+Copyright: 2000-2017 the dvdnav authors
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -87,7 +87,7 @@ Authors:
  Diego Elio Pettenò <flameeyes@flameeyes.eu>
 
 Files: libdvdread/*
-Copyright: 2000-2016 the dvdread authors
+Copyright: 2000-2017 the dvdread authors
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -138,7 +138,7 @@ Authors:
 
 
 -----------------------------------------------------------
-| VLC+FFmpeg copyright taken from Debian Unstable 2.2.4-3 |
+| VLC+FFmpeg copyright taken from Debian Unstable 2.2.4-14 |
 -----------------------------------------------------------
 
 
