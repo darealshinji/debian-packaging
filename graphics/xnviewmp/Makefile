@@ -21,6 +21,6 @@ bin = XnViewMP-linux$(x64).tgz
 
 download:
 	@ $(call download,$(bin),http://download.xnview.com/old_versions/XnViewMP-$(ver)-linux$(x64).tgz)
-	@ $(call verifysha256,$(bin),$(sha256sum))
+	@ #$(call verifysha256,$(bin),$(sha256sum))
 	@ VERSION=$(VERSION); $(changelog-entry)
 
