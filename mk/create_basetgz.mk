@@ -36,6 +36,6 @@ create_basetgz = \
 	         --debootstrapopts --arch --debootstrapopts $$arch             \
 	         --debootstrapopts --variant=buildd                            \
 	         --basetgz $$basetgz                                           \
-	         --extrapackages "debhelper fakeroot libfile-fcntllock-perl" ; \
+	         --extrapackages "apt-utils debhelper fakeroot libfile-fcntllock-perl" ; \
 	fi
 
