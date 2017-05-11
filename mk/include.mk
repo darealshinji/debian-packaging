@@ -165,7 +165,7 @@ else #DEPS
 	then                                                                                          \
 	  echo "You need to install the following package(s):" ;                                      \
 	  echo "$$missing" ;                                                                          \
-	  sudo -k apt-get -q install --no-install-recommends --no-install-suggests $$missing ;                                                      \
+	  sudo -k apt-get -q install --no-install-recommends --no-install-suggests $$missing ;        \
 	fi
 	@ echo ""
 endif #DEPS
@@ -175,9 +175,6 @@ source: download
 	mkdir -p $(builddir)
 	test -z "$(srcfiles)" || cp -r $(srcfiles) $(builddir)
 	test ! -d debian || cp -rf debian $(builddir)
-
-
-build: source
 	@ if [ -f $(builddir)/debian/patches/series ] ;                               \
 	then                                                                          \
 	   rm -rf $(builddir)/.pc ;                                                   \
@@ -187,10 +184,12 @@ build: source
 	mkdir -p $(builddir)/debian/source
 	echo '3.0 (native)' > $(builddir)/debian/source/format
 	test -f $(builddir)/debian/compat || echo '$(default_compat)' > $(builddir)/debian/compat
-	test -f $(builddir)/debian/options || \
-	  (echo 'compression = "$(compression)"' > $(builddir)/debian/options && \
-	   echo 'compression-level = "$(compression_level)"' >> $(builddir)/debian/options)
+	test -f $(builddir)/debian/source/options || \
+	  (echo 'compression = "$(compression)"' > $(builddir)/debian/source/options && \
+	   echo 'compression-level = "$(compression_level)"' >> $(builddir)/debian/source/options)
 
+
+build: source
 ifeq ($(PBUILDER),1)
 	dpkg-source -Z$(compression) -z$(compression_level) -b $(builddir)
 	@ $(create_basetgz)
