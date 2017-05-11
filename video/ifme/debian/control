@@ -1,0 +1,19 @@
+Source: ifme-launcher
+Section: video
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends: debhelper (>= 9), imagemagick
+Standards-Version: 3.9.5
+Homepage: https://x265.github.io/
+Vcs-Git: https://github.com/Anime4000/IFME
+Vcs-Browser: https://github.com/Anime4000/IFME
+
+Package: ifme-launcher
+Architecture: amd64 i386
+Depends: ${misc:Depends},
+         libc6 (>= 2.17), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 4.8.1), zlib1g (>= 1:1.2.3.3),
+         wget, xterm, zenity
+Suggests: gnome-terminal
+Provides: ifme, ifme6
+Description: Internet Friendly Media Encoder
+ Simple, Flexible & Powerful H.265/HEVC video encoder.
