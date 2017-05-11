@@ -1,2 +1,0 @@
-debian/scripts/*      /usr/bin
-debian/ifme.desktop   /usr/share/applications
