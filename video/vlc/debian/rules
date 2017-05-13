@@ -2,7 +2,8 @@
 
 VERSION = $(shell dpkg-parsechangelog -SVersion)
 
-export CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)) -Wno-deprecated-declarations -Wno-unused-but-set-variable
+export CFLAGS   := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS)) \
+                   -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-unknown-pragmas
 export CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
 export LDFLAGS  := -Wl,-O1 -Wl,-Bsymbolic -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
 export V=1

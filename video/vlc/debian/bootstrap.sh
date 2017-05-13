@@ -1,6 +1,6 @@
 #!/bin/sh
-set -v
 set -e
+set -v
 autoreconf -if libdvdcss
 autoreconf -if libdvdnav
 autoreconf -if libdvdread

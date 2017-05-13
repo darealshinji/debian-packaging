@@ -6,8 +6,8 @@ cleanfiles     = libdvd* vlc vlc-$(VER)
 tarball        = vlc-$(VER).txz
 distcleanfiles = ffmpeg $(tarball)
 
-VER = 2.2.4
-SHA256 = 1632e91d2a0087e0ef4c3fb4c95c3c2890f7715a9d1d43ffd46329f428cf53be
+VER = 2.2.5.1
+SHA256 = b28b8a28f578c0c6cb1ebed293aca2a3cd368906cf777d1ab599e2784ddda1cc
 
 download:
 	test -d ffmpeg || git clone --depth 1 -b release/2.8 "https://github.com/FFmpeg/FFmpeg.git" ffmpeg

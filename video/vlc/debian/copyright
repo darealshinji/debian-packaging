@@ -138,7 +138,7 @@ Authors:
 
 
 -----------------------------------------------------------
-| VLC+FFmpeg copyright taken from Debian Unstable 2.2.4-14 |
+| VLC+FFmpeg copyright taken from Debian Unstable 2.2.5-1 |
 -----------------------------------------------------------
 
 
@@ -2392,3 +2392,4 @@ License: Sundry
  any purpose.  This copyright notice must be maintained.
  Juergen Mueller And Sundry Contributors are not responsible for
  the consequences of using this software.
+
