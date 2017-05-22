@@ -1,0 +1,20 @@
+Description: add ExecStop to -daemon service file
+Author: Ritesh Raj Sarraf <rrs@debian.org>
+Origin: vendor
+Bug: https://github.com/transmission/transmission/issues/138
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=831467
+Forwarded: yes
+Reviewed-by: Sandro Tosi <morph@debian.org>
+Last-Update: 2017-01-07
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/daemon/transmission-daemon.service
++++ b/daemon/transmission-daemon.service
+@@ -6,6 +6,7 @@ After=network.target
+ User=debian-transmission
+ Type=notify
+ ExecStart=/usr/bin/transmission-daemon -f --log-error
++ExecStop=/bin/kill -s STOP $MAINPID
+ ExecReload=/bin/kill -s HUP $MAINPID
+ 
+ [Install]

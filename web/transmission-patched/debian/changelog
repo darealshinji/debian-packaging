@@ -1,5 +1,5 @@
-transmission (2.92-1ubuntu1+iec) unstable; urgency=medium
+transmission (2.92-2ubuntu1+iec) unstable; urgency=medium
  
   * Display IEC filesizes
  
- -- Marshall Banana <djcj@gmx.de>  Wed, 11 Jan 2017 10:25:01 +0100
+ -- Marshall Banana <djcj@gmx.de>  Mon, 22 May 2017 15:49:33 +0200
