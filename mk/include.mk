@@ -111,9 +111,9 @@ alldeps += $(deps)
 
 
 
-ifeq ($(PBUIDLER),1)
+ifdef PBUIDLER
 all:
-	@echo "Did you mean \`PBUILDER=1'?"
+	@ echo "Did you mean \`PBUILDER'?"
 else
 all: predepends download source build
 endif
@@ -195,6 +195,8 @@ ifeq ($(PBUILDER),1)
 	@ $(create_basetgz)
 	@# required for correct R/W rights
 	mkdir -p $(resultdir)
+	@# disable ".pbuilderrc does not exist" warning
+	@ test -e "$$HOME/.pbuilderrc" || touch "$$HOME/.pbuilderrc"
 	@ echo ""
 	@ echo "sudo password required to run pbuilder:"
 	@ echo "  $(pbuildercmd)"
