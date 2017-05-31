@@ -2,7 +2,7 @@ https://bugs.launchpad.net/ubuntu/+source/qtbase-opensource-src/+bug/1536843
 
 --- a/vlc/configure.ac
 +++ b/vlc/configure.ac
-@@ -3754,10 +3754,6 @@
+@@ -3748,10 +3748,6 @@
            AC_MSG_WARN([Not building Qt Interface with X11 helpers.])
        ])
  
