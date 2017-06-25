@@ -1,11 +1,10 @@
 GNU Compiler Collection
 =======================
 
-This build of the GNU Compiler Collection includes front ends for C, C++,
-Objective-C, Objective-C++ and Java, as well as libraries for these languages
-(libstdc++, libgcj,...). GCC was originally written as the compiler for the
-GNU operating system. The GNU system was developed to be 100% free software,
-free in the sense that it respects the user's freedom.
+This build of the GNU Compiler Collection includes front ends for C, C++
+and Objective-C as well as libraries for these languages. GCC was originally
+written as the compiler for the GNU operating system. The GNU system was developed
+to be 100% free software, free in the sense that it respects the user's freedom.
 
 This package is primarily intended to be used on Ubuntu 14.04 where GCC 4.9 is missing.
 
