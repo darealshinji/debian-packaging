@@ -12,7 +12,7 @@ export CXXFLAGS = $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAGS))
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -rf build test.c a.out
+	rm -rf build
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
@@ -25,6 +25,7 @@ override_dh_auto_configure:
 		-DLLVM_ENABLE_SPHINX=OFF
 
 override_dh_auto_test:
+override_dh_makeshlibs:
 
 
 usr = $(CURDIR)/debian/clang-svn/usr
@@ -55,4 +56,3 @@ override_dh_install:
 	  help2man -N -s1 -n "part of the LLVM/Clang toolchain" \
 	    --no-discard-stderr $$f > $(usr)/share/man/man1/$$(basename $$f).1; \
 	done
-
