@@ -1,10 +1,4 @@
 #!/bin/sh
-
-# save configurations in ~/.config/animechecker
-
-confdir="$HOME/.config/animechecker"
-test -d "$confdir" || mkdir -p "$confdir"
-test -L "$confdir/animechecker" || ln -fs /usr/bin/animechecker.real "$confdir/animechecker"
-
-"$confdir/animechecker" "$@"
-
+# save configuration in "$HOME"
+cd "$HOME" && /usr/bin/animechecker.real "$@"
+exit $?

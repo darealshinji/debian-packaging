@@ -10,9 +10,10 @@ override_dh_auto_clean:
 	rm -f *.txt acc animechecker animechecker.real
 	rm -rf converted_icons
 
-# the xdelta patch will
-#  - remove internal libgtk-x11-2.0.so checks (done via hex editor)
-#  - remove unneeded DT_NEEDED entries from ELF header (done with PatchELF)
+# xdelta patch changes:
+#  - remove internal libgtk-x11-2.0.so checks (made with hex-editor)
+#  - remove unneeded DT_NEEDED entries from ELF header (made with PatchELF)
+#  - change config filename from animechecker.ini to .animechecker (made with hex-editor)
 override_dh_auto_build:
 	tar xf animechecker-0.9.6.1-linux-i386-bin.tar.bz2
 	dos2unix changelog.txt
