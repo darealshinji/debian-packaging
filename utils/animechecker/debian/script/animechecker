@@ -4,8 +4,7 @@
 
 confdir="$HOME/.config/animechecker"
 test -d "$confdir" || mkdir -p "$confdir"
-test -L "$confdir/animechecker" || ln -fs /usr/lib/animechecker/animechecker "$confdir/animechecker"
+test -L "$confdir/animechecker" || ln -fs /usr/bin/animechecker.real "$confdir/animechecker"
 
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/animechecker"
 "$confdir/animechecker" "$@"
 
