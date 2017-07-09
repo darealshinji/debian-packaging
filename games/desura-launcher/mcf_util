@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+config="$HOME/.local/share/desura"
+test ! -d "$config"          && desura --reset || true
+test ! -x "$config/mcf_util" && desura --reset || true
+cd "$config" && ./mcf_util "$@"
+

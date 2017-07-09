@@ -1,0 +1,39 @@
+#!/bin/sh -e
+
+local="$HOME/.local/share"
+config="$local/desura"
+
+
+help () {
+cat << EOF
+usage: $0 [--help|--reset]
+
+   --help   show this message
+   --reset  delete and re-download the local client files
+
+EOF
+exit 0
+}
+
+
+download_desura () {
+    rm -rf "$config" && cd "$local" &&
+	wget -O desura.tar.gz "http://www.desura.com/desura-x86_64.tar.gz" && tar xvf desura.tar.gz && rm -f desura.tar.gz
+}
+
+
+download_desura_xterm () {
+    rm -rf "$config" && cd "$local" &&
+    xterm -title "Downloading Desura Client" -e wget -O desura.tar.gz "http://www.desura.com/desura-x86_64.tar.gz" && tar xvf desura.tar.gz && rm -f desura.tar.gz
+}
+
+
+test -f "$local/desura.tar.gz" && rm -f "$local/desura.tar.gz" || true
+test x"$1" = x"--help"         && help || true
+test x"$1" = x"--reset"        && download_desura && echo "Re-download and installation completed." && exit 0 || true
+test ! -d "$config"            && download_desura_xterm || true
+test ! -x "$config/desura"     && download_desura_xterm || true
+
+
+cd "$config" && ./desura "$@" 2> error.log
+

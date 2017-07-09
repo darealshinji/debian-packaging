@@ -1,0 +1,2 @@
+# required by the launcher binary which is not included in the package
+desura-launcher source: package-depends-on-hardcoded-libc desura-launcher depends

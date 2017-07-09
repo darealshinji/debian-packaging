@@ -1,0 +1,11 @@
+desura-launcher (0.8.0+ppa2~trusty) trusty; urgency=medium
+
+  * Update runtime dependencies
+ 
+ -- Marshall Banana <djcj@gmx.de>  Wed, 04 Mar 2015 17:33:42 +0100
+
+desura-launcher (0.8.0+ppa1~trusty) trusty; urgency=medium
+
+  * Initial release
+ 
+ -- Marshall Banana <djcj@gmx.de>  Sun, 01 Feb 2015 15:58:51 +0100

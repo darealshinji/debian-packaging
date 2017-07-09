@@ -1,0 +1,104 @@
+.TH MCF_UTIL "6" "February 2015"
+.SH NAME
+mcf_util \- MCF Utility
+
+.SH USAGE
+.TP
+\fB\-a\fR, \fB\-\-httptest\fR
+[Url of mcf]  [Verify Folder]  [Dest Mcf]
+.IP
+Test http download of a mcf
+.TP
+\fB\-b\fR, \fB\-\-backpatch\fR
+[New Full Mcf]  [Old Full Mcf]  [Dest Mcf]
+.IP
+Creates a back patch from a full and old mcf
+.TP
+\fB\-c\fR, \fB\-\-create\fR
+[Src Folder]  [Dest Mcf]
+.IP
+Creates a new mcf from a folder
+.TP
+\fB\-d\fR, \fB\-\-creatediff\fR
+[vA Mcf]  [vB Mcf]  [Out Mcf]
+.IP
+Creates a new mcf from a folder and the diffs as well
+.TP
+\fB\-f\fR, \fB\-\-fixmd5\fR
+[Src Mcf]
+.IP
+Fixes compressed md5 checksums and lack of crc's in the mcf.
+Saves over existing mcf!
+.TP
+\fB\-k\fR, \fB\-\-testdiffupdate\fR
+[Download Url]  [Install Folder]  [Dest Mcf]
+.IP
+Tests downloading an update using diffs
+.TP
+\fB\-l\fR, \fB\-\-upload\fR
+[Username]  [Password]  [Folder]  [Id]  [Area (mods|games)]
+.IP
+Uploads a MCF to desura
+.TP
+\fB\-m\fR, \fB\-\-mergepatch\fR
+[Src Mcf]  [Patch Mcf]  [Dest Mcf]
+.IP
+Merges a patch and a old full mcf to make a new full mcf
+.TP
+\fB\-n\fR, \fB\-\-createnc\fR
+[Src Folder]  [Dest Mcf]
+.IP
+Creates a new mcf that is not compressed from a folder
+.TP
+\fB\-o\fR, \fB\-\-optimise\fR
+[Last Build Src Mcf]  [Current Build Src Mcf]  [Dest Mcf]
+.IP
+Moves all changed and new files to the start of the mcf
+.TP
+\fB\-p\fR, \fB\-\-patch\fR
+[Src Folder]  [Dest Mcf]  [Prev Mcf]
+.IP
+Makes a patch from a folder and previouse mcf
+.TP
+\fB\-q\fR, \fB\-\-uploadapp\fR
+[Token]  [McfFile]  [GitCommit]  [Branch]  [LogFile]  [Production]
+.IP
+Uploads an app MCF to desura
+.TP
+\fB\-r\fR, \fB\-\-crccheck\fR
+[Src Mcf]
+.IP
+Checks to see if all the crc's in the mcf are correct
+.TP
+\fB\-s\fR, \fB\-\-savexml\fR
+[Src Mcf]  [Dest Xml]
+.IP
+Saves mcf xml to a file
+.TP
+\fB\-t\fR, \fB\-\-testupdate\fR
+[Src Folder]  [Dest Mcf]
+.IP
+Tests a update mcf to make sure its correct and will work
+.TP
+\fB\-u\fR, \fB\-\-update\fR
+[Src Mcf]  [Dest Mcf]
+.IP
+Updates a mcf to newest mcf format
+.HP
+\fB\-v\fR, \fB\-\-version\fR
+.IP
+Shows mcf_util version.
+.TP
+\fB\-x\fR, \fB\-\-extract\fR
+[Src Mcf]  [Dest Mcf]
+.IP
+Extracts a mcf into a folder
+.TP
+\fB\-z\fR, \fB\-\-validate\fR
+[Src Mcf]  [Temp Folder]
+.IP
+Validate the mcf to make sure the contents are correct
+
+.SH COPYRIGHT
+Copyright Linden Labs 2013 (http://github.com/desura/Desurium)
+
