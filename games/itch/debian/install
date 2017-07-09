@@ -1,0 +1,3 @@
+build/v*/itch-linux-*/*   /usr/lib/itch
+release/itch.desktop      /usr/share/applications
+converted_icons/icons/*   /usr/share/icons

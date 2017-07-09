@@ -1,0 +1,68 @@
+#!/usr/bin/make -f
+
+JOBS := $(shell nproc || echo 2)
+
+_PATH="$(CURDIR)/`cat NODE-RELEASE`/bin:$(CURDIR)/node_modules/.bin:$$PATH"
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+ELECTRON_ARCH=x64
+else
+ELECTRON_ARCH=ia32
+endif
+
+# no hardening and debug flags required for sassc,
+# it's only used for building
+export CFLAGS=-O2
+export CXXFLAGS=-O2
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -f itch.png
+	rm -rf build converted_icons node_modules node-v*-linux-*
+
+override_dh_auto_build:
+	cd sassc/libsass/ && \
+	autoreconf -if && \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
+		--prefix=$(CURDIR)/sassc/libsass/tmp \
+		--enable-static \
+		--disable-shared && \
+	$(MAKE) clean && \
+	$(MAKE) -j$(JOBS) && \
+	$(MAKE) install
+
+	cd sassc && \
+	autoreconf -if && \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
+		--enable-static \
+		--disable-shared \
+		--with-libsass=$(CURDIR)/sassc/libsass/tmp && \
+	$(MAKE) clean && \
+	$(MAKE)
+
+	tar xf node_modules.tar.gz
+	tar xf node.tar.xz
+	install -m755 -D -s sassc/sassc "$(CURDIR)/`cat NODE-RELEASE`/bin/sassc"
+
+	PATH=$(_PATH) release/prepare.sh
+	PATH=$(_PATH) CI_APPNAME=itch release/generate-itch-desktop.sh
+	sed -i 's|^Icon=.*|Icon=itch|' release/itch.desktop
+	PATH=$(_PATH) grunt -v "electron:linux-$(ELECTRON_ARCH)"
+
+	chmod a-x build/v*/itch-linux-*/*.so
+	cp release/itch-icons/icon1024.png itch.png
+	./make-icons.sh itch.png
+
+override_dh_auto_test:
+ifeq ($(DEB_HOST_ARCH),amd64)
+	PATH=$(_PATH) npm test
+endif
+
+override_dh_install:
+	dh_install -XLICENSE -XLICENSES.chromium.html
+
+override_dh_makeshlibs:
+

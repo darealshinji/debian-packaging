@@ -1,0 +1,65 @@
+#!/usr/bin/make -f
+
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+ifeq ($(DEB_HOST_ARCH), amd64)
+X64    = _64
+FMOD64 = 64
+endif
+
+libdir = $(CURDIR)/debian/skulltag/usr/lib/games/skulltag
+
+unwanted_libs = \
+	libgdk_pixbuf-2.0.so.0 libpng12.so.0 libgmodule-2.0.so.0 libXext.so.6 \
+	libgthread-2.0.so.0 libfreetype.so.6 libgio-2.0.so.0 libfontconfig.so.1 \
+	libpango-1.0.so.0 libpangocairo-1.0.so.0 libatk-1.0.so.0 libSM.so.6 \
+	libpangoft2-1.0.so.0 libICE.so.6 libX11.so.6 libgdk-x11-2.0.so.0 \
+	libcairo.so.2 libXfixes.so.3 libXrandr.so.2 libXinerama.so.1 libXi.so.6 \
+	libXcomposite.so.1 libXcursor.so.1 libXrender.so.1 libXdamage.so.1
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	dh_auto_clean
+	dh_auto_clean -Dlibjpeg6b-patched
+	$(MAKE) -C libjpeg6b-patched -f makefile.simple clean
+	rm -rf skulltag fmodapi42416linux fmodapi42416linux64 patchelf
+
+override_dh_auto_build:
+	# libjpeg
+	$(MAKE) -C libjpeg6b-patched -f makefile.simple
+
+	# patchelf
+	g++ -w -DPACKAGE_STRING=\"\" -DPAGESIZE=4096 -std=c++11 -o patchelf patchelf.cpp
+
+	# skulltag
+	mkdir skulltag
+	cd skulltag && tar xvf ../st-v098d_linux-x86$(X64).tbz
+	cd skulltag && tar xvf ../st-v098d_linux-base.tbz
+	chmod a-x skulltag/*.so skulltag/*.pk3
+	cd skulltag && chrpath -d skulltag skulltag-server
+ifeq ($(DEB_HOST_ARCH), amd64)
+	# broken symlink
+	rm skulltag/liboutput_sdl.so
+endif
+
+	# fmod
+	tar xvf fmodapi42416linux$(FMOD64).tgz
+	cp fmodapi42416linux$(FMOD64)/api/lib/libfmodex$(FMOD64)-4.24.16.so skulltag
+
+override_dh_installchangelogs:
+	dh_installchangelogs changelog.txt
+
+override_dh_makeshlibs:
+
+override_dh_shlibdeps:
+	cd $(libdir) && strip --strip-all skulltag skulltag-server *.so libjpeg.so.62
+ifneq ($(DEB_HOST_ARCH), amd64)
+	./patchelf --add-needed libSDL-1.2.so.0 $(libdir)/liboutput_sdl.so
+endif
+	./patchelf $(foreach LIB,$(unwanted_libs),--remove-needed $(LIB)) $(libdir)/skulltag
+	dh_shlibdeps -l$(libdir)
+
+override_dh_strip:
+
