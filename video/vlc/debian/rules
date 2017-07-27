@@ -8,7 +8,7 @@ export CXXFLAGS := -O3 $(filter-out -g -O2,$(shell dpkg-buildflags --get CXXFLAG
 export LDFLAGS  := -Wl,-O1 -Wl,-Bsymbolic -Wl,-z,relro -Wl,-z,defs -Wl,--as-needed
 export V=1
 
-# tested on Ubuntu 14.04
+# tested on Ubuntu 14.04/16.04
 vlcfeatures = \
 	--enable-a52 \
 	--enable-aa \
@@ -27,7 +27,6 @@ vlcfeatures = \
 	--enable-freerdp \
 	--enable-freetype \
 	--enable-fribidi \
-	--enable-gles1 \
 	--enable-gles2 \
 	--enable-kate \
 	--enable-libass \
@@ -99,6 +98,7 @@ vlcfeatures += --enable-fdkaac
 # vpx -> not needed when having libavcodec
 # vsxu -> not in Debian
 # wasapi -> Windows only
+# gles1 -> issues with enablement stack
 vlcfeatures += \
 	--disable-decklink \
 	--disable-dxva2 \
