@@ -1,0 +1,19 @@
+#!/bin/sh -e
+# Copyright (C) 2013-2014 Michael Gilbert <mgilbert@debian.org>
+#                    2015 djcj <djcj@gmx.de>
+# License: MIT
+
+config=$HOME/.local/share/SteamCMD
+runtime=$config/linux32
+steam=$runtime/steamcmd
+
+real=/usr/lib/steamcmd
+
+# do an initial update when expected pieces are missing
+test ! -d $config && rm -rf $config && mkdir -p $config || true
+test ! -x $config/steamcmd.sh && rm -rf $config/package $steam || true
+test ! -d $runtime && rm -rf $runtime && mkdir -p $runtime || true
+test ! -x $steam && rm -rf $steam && cp $real $steam && $steam || true
+
+# launch the Valve run script
+test -x $config/steamcmd.sh && $config/steamcmd.sh "$@" 2>$config/error.log

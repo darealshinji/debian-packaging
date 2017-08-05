@@ -1,0 +1,20 @@
+#!/usr/bin/make -f
+
+PKG = steamcmd
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -rf linux32 steam.sh steamcmd.sh
+
+override_dh_auto_build:
+	tar xvf steamcmd_linux.tar.gz
+
+override_dh_shlibdeps:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: amd64/Architecture: i386/g' debian/$(PKG)/DEBIAN/control
+
