@@ -38,6 +38,7 @@ Depends:
  libpulse0 (>= 0.99.4),
  libsm6,
  libstdc++6 (>= 4.8.1),
+ libtcmalloc-minimal4,
  libtxc-dxtn-s2tc0,
  libusb-1.0-0 (>= 2:1.0.8),
  libx11-6 (>= 2:1.4.99.1),
