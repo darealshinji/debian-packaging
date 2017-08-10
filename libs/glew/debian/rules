@@ -23,8 +23,11 @@ MXVERSIONS = \
 	1.10.0 \
 	1.11.0 \
 	1.12.0 \
-	1.13.0 \
-	2.0.0
+	1.13.0
+
+VERSIONS_2 = \
+	2.0.0 \
+	2.1.0
 
 
 %:
@@ -37,14 +40,20 @@ override_dh_auto_build:
 	  $(MAKE) lib/libGLEW.so.$(VER) CC=$(CC) LD=$(LD) \
 	  OPT='$(CFLAGS) $(CPPFLAGS)' LDFLAGS.EXTRA='$(LDFLAGS)'; \
 	  cd .. ;)
-	# 1.6-x
+	# 1.6-1.13
 	$(foreach VER,$(MXVERSIONS),\
 	  cd glew-$(VER) && mkdir -p lib && \
 	  $(MAKE) lib/libGLEW.so.$(VER) lib/libGLEWmx.so.$(VER) CC=$(CC) LD=$(LD) \
 	  OPT='$(CFLAGS) $(CPPFLAGS)' LDFLAGS.EXTRA='$(LDFLAGS)'; \
 	  cd .. ;)
+	# 2.0-x
+	$(foreach VER,$(VERSIONS_2),\
+	  cd glew-$(VER) && mkdir -p lib && \
+	  $(MAKE) lib/libGLEW.so.$(VER) CC=$(CC) LD=$(LD) \
+	  OPT='$(CFLAGS) $(CPPFLAGS)' LDFLAGS.EXTRA='$(LDFLAGS)'; \
+	  cd .. ;)
 	mkdir -p lib
-	cp -f -d glew-*/lib/libGLEW*.so.1.* lib
+	cp -f -d glew-*/lib/libGLEW*.so.2.* glew-*/lib/libGLEW*.so.1.* lib
 	find lib -type f -exec chmod 0644 '{}' \;
 	ln -fs libGLEW.so.1.0.7 lib/libGLEW.so.1.0
 	ln -fs libGLEW.so.1.1.4 lib/libGLEW.so.1.1
@@ -66,6 +75,10 @@ override_dh_install:
 	for n in $(shell seq 0 13); do \
   mkdir -p debian/libglew1.$$n$(libdir) ;\
   cp -d lib/libGLEW.so.1.$$n lib/libGLEW.so.1.$$n.* debian/libglew1.$$n$(libdir) ;\
+done
+	for n in 0 1; do \
+  mkdir -p debian/libglew2.$$n$(libdir) ;\
+  cp -d lib/libGLEW.so.2.$$n lib/libGLEW.so.2.$$n.* debian/libglew2.$$n$(libdir) ;\
 done
 	# GLEWmx
 	for n in $(shell seq 6 13); do \
