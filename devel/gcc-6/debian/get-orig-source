@@ -17,17 +17,17 @@ verifysha256 () {
 	fi
 }
 
-gcc_ver=6.3.0
+gcc_ver=6.4.0
 gcc_dir=gcc-$gcc_ver
-gcc_pkg=${gcc_dir}.tbz
-gcc_url="https://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.bz2"
-gcc_sum=f06ae7f3f790fbf0f018f6d40e844451e6bc3b7bc96e128e63b09825c1f8b29f
+gcc_pkg=${gcc_dir}.txz
+gcc_url="https://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.xz"
+gcc_sum=850bf21eafdfe5cd5f6827148184c08c4a0852a37ccf36ce69855334d2c914d4
 
-binutils_ver=2.28
+binutils_ver=2.29
 binutils_dir=binutils-$binutils_ver
-binutils_pkg=${binutils_dir}.tbz
-binutils_url="https://ftp.gnu.org/gnu/binutils/${binutils_dir}.tar.bz2"
-binutils_sum=6297433ee120b11b4b0a1c8f3512d7d73501753142ab9e2daa13c5a3edd32a72
+binutils_pkg=${binutils_dir}.txz
+binutils_url="https://ftp.gnu.org/gnu/binutils/${binutils_dir}.tar.xz"
+binutils_sum=0b871e271c4c620444f8264f72143b4d224aa305306d85dd77ab8dce785b1e85
 
 mpfr_dir=mpfr-3.1.5
 mpc_dir=mpc-1.0.3
