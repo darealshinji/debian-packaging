@@ -17,22 +17,22 @@ verifysha256 () {
 	fi
 }
 
-gcc_ver=5.4.0
+gcc_ver=5.5.0
 gcc_dir=gcc-$gcc_ver
-gcc_pkg=${gcc_dir}.tbz
-gcc_url="http://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.bz2"
-gcc_sum=608df76dec2d34de6558249d8af4cbee21eceddbcb580d666f7a5a583ca3303a
+gcc_pkg=${gcc_dir}.txz
+gcc_url="http://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.xz"
+gcc_sum=530cea139d82fe542b358961130c69cfde8b3d14556370b65823d2f91f0ced87
 
-binutils_ver=2.29
+binutils_ver=2.29.1
 binutils_dir=binutils-$binutils_ver
 binutils_pkg=${binutils_dir}.txz
 binutils_url="https://ftp.gnu.org/gnu/binutils/${binutils_dir}.tar.xz"
-binutils_sum=0b871e271c4c620444f8264f72143b4d224aa305306d85dd77ab8dce785b1e85
+binutils_sum=e7010a46969f9d3e53b650a518663f98a5dde3c3ae21b7d71e5e6803bc36b577
 
-mpfr_dir=mpfr-3.1.5
+mpfr_dir=mpfr-3.1.6
 mpc_dir=mpc-1.0.3
 gmp_dir=gmp-6.1.2
-isl_dir=isl-0.17.1
+isl_dir=isl-0.18
 
 mpfr_pkg=${mpfr_dir}.txz
 mpc_pkg=${mpc_dir}.tgz
@@ -44,10 +44,10 @@ mpc_url="https://ftp.gnu.org/gnu/mpc/${mpc_dir}.tar.gz"
 gmp_url="https://gmplib.org/download/gmp/${gmp_dir}.tar.xz"
 isl_url="http://isl.gforge.inria.fr/${isl_dir}.tar.xz"
 
-mpfr_sum=015fde82b3979fbe5f83501986d328331ba8ddf008c1ff3da3c238f49ca062bc
+mpfr_sum=7a62ac1a04408614fccdc506e4844b10cf0ad2c2b1677097f8f35d3a1344a950
 mpc_sum=617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3
 gmp_sum=87b565e89a9a684fe4ebeeddb8399dce2599f9c9049854ca8c0dfbdea0e21912
-isl_sum=be152e5c816b477594f4c6194b5666d8129f3a27702756ae9ff60346a8731647
+isl_sum=0f35051cc030b87c673ac1f187de40e386a1482a0cfdf2c552dd6031b307ddc4
 
 test -f $gcc_pkg || wget -O $gcc_pkg $gcc_url
 test -f $binutils_pkg || wget -O $binutils_pkg $binutils_url

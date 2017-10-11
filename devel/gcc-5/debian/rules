@@ -11,11 +11,12 @@ BINUTILS = binutils-src
 
 TRIPLET = $(DEB_HOST_GNU_CPU)-pc-linux-gnu
 
+GCC_CFLAGS_common = -Wall -O2 -fno-stack-protector -U_FORTIFY_SOURCE
+
 export CFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CFLAGS)) -ffunction-sections -fdata-sections
 export CXXFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CXXFLAGS)) -ffunction-sections -fdata-sections
 export CPPFLAGS=$(shell dpkg-buildflags --get CPPFLAGS)
-export LDFLAGS=$(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS))
-#-Wl,--gc-sections
+export LDFLAGS=$(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS)) -Wl,--gc-sections
 
 
 %:
@@ -48,7 +49,11 @@ override_dh_auto_configure:
 		--enable-gold \
 		--with-system-zlib
 
-	cd $(SRCDIR) && ./configure \
+	cd $(SRCDIR) && \
+	CFLAGS="$(GCC_CFLAGS_common)" \
+	CXXFLAGS="$(GCC_CFLAGS_common)" \
+	LDFLAGS="-Wl,-z,relro" \
+		./configure \
 		--build=$(TRIPLET) \
 		--host=$(TRIPLET) \
 		--target=$(TRIPLET) \

@@ -2,7 +2,7 @@ Fortify Source enabled by default for optimization levels > 0.
 
 --- a/gcc/c-family/c-cppbuiltin.c
 +++ b/gcc/c-family/c-cppbuiltin.c
-@@ -1171,6 +1171,9 @@
+@@ -1174,6 +1174,9 @@
    builtin_define_with_value ("__REGISTER_PREFIX__", REGISTER_PREFIX, 0);
    builtin_define_with_value ("__USER_LABEL_PREFIX__", user_label_prefix, 0);
  
