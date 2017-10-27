@@ -3,7 +3,7 @@ include ../../mk/include.mk
 deps       = git
 srcpkg     = notepadqq
 builddir   = $(srcpkg)
-cleanfiles = notepadqq* CodeMirror*
+cleanfiles = notepadqq*
 
 download: $(builddir)
 
@@ -11,6 +11,7 @@ $(builddir):
 	git clone --depth 1 "https://github.com/notepadqq/notepadqq-packaging.git"
 	git clone "https://github.com/notepadqq/notepadqq.git"
 	mv notepadqq-packaging/Debian/debian $(builddir)
+	sed -i 's|^override_dh_auto_install:$$|override_dh_auto_install:\n\tmkdir -p $$(CURDIR)/debian/tmp/usr/bin $$(CURDIR)/debian/tmp/usr/lib/notepadqq $$(CURDIR)/debian/tmp/usr/share|' $(builddir)/debian/rules
 	git -C $(builddir) submodule init
 	git -C $(builddir) submodule update
 	find $(builddir)/src/editor/libs/codemirror -name \*.js -exec chmod a-x '{}' \;
