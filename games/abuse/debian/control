@@ -5,7 +5,6 @@ Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
 Uploaders: Sam Hocevar <sho@debian.org>
 Build-Depends:
  debhelper (>= 9),
- dh-autoreconf,
  libsdl1.2-dev,
  libsdl-mixer1.2-dev
 Standards-Version: 3.9.5

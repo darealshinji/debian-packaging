@@ -4,6 +4,9 @@ deps          = subversion dh-autoreconf
 builddir      = abuse-trunk
 changelog-msg = Current development snapshot
 
+# last known SVN revision (checked in Oct 2017): 737
+# Github mirror: https://github.com/darealshinji/abuse-game
+
 download:
 	rm -rf $(builddir)
 	svn co svn://svn.zoy.org/abuse/abuse/trunk $(builddir)

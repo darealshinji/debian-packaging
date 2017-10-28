@@ -1,11 +1,11 @@
 #!/usr/bin/make -f
 
-CXXFLAGS += -fno-strict-aliasing -Wno-unused-result -Wno-unused-but-set-variable -Wno-unused-function
-LDFLAGS  += -Wl,--as-needed
+CXXFLAGS += -fno-strict-aliasing -ffunction-sections -fdata-sections -Wno-unused-result -Wno-unused-but-set-variable
+LDFLAGS  += -Wl,--gc-sections -Wl,--as-needed
 
 
 %:
-	dh $@ --parallel --with autoreconf
+	dh $@ --parallel
 
 override_dh_auto_configure:
 	dh_auto_configure -- --bindir=/usr/games
