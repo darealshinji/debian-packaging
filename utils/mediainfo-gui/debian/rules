@@ -25,10 +25,6 @@ override_dh_install:
 		-name \*.desktop \
 		-exec prename 's/\.kde[34]\.desktop$$/.desktop/' '{}' '+'
 
-override_dh_installdocs:
-	dh_installdocs
-	prename 's/ReadMe_.*\.txt$$/README/' debian/*/usr/share/doc/*/ReadMe*
-
 override_dh_installchangelogs:
 	dh_installchangelogs MediaInfo/History_GUI.txt
 
