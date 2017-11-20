@@ -1,7 +1,7 @@
 AUTHORS
 README
 TODO
-doc/html
-doc/nasmdoc.txt
-doc/nasmdoc.ps
-doc/nasmdoc.pdf
+#doc/html
+#doc/nasmdoc.txt
+#doc/nasmdoc.ps
+#doc/nasmdoc.pdf

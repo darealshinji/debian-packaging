@@ -10,13 +10,13 @@ export CFLAGS
 	dh $@ --parallel --with autoreconf
 
 override_dh_auto_build:
-	dh_auto_build -- all doc manpages
+	dh_auto_build -- all manpages #doc
 
 override_dh_auto_test:
 
 override_dh_auto_install:
 	dh_auto_install -- INSTALLROOT=$(CURDIR)/debian/nasm install install_rdf
 
-override_dh_compress:
-	dh_compress -X.pdf
+#override_dh_compress:
+#	dh_compress -X.pdf
 
