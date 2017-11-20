@@ -3,11 +3,12 @@ Upstream-Name: simplescreenrecorder
 Source: <http://www.maartenbaert.be/simplescreenrecorder>
 
 Files: *
-Copyright: 2012-2015 Maarten Baert <maarten-baert@hotmail.com>
+Copyright: 2012-2017 Maarten Baert <maarten-baert@hotmail.com>
 License: GPL-3.0+
 
 Files: debian/*
 Copyright: 2012-2015 Maarten Baert <maarten-baert@hotmail.com>
+                2017 djcj <djcj@gmx.de>
 License: GPL-3.0+
 
 License: GPL-3.0+

@@ -4,50 +4,52 @@ Priority: optional
 Maintainer: Maarten Baert (v2) <maarten-baert@hotmail.com>
 Build-Depends:
  debhelper (>= 9),
+ cmake,
  pkg-config,
  libgl1-mesa-dev,
+ libgl1-mesa-dev:i386 [amd64],
  libglu1-mesa-dev,
- qt4-qmake,
- libqt4-dev,
+ libglu1-mesa-dev:i386 [amd64],
+ libasound2-dev,
+ libjack-dev,
+ libpulse-dev,
  libavformat-dev,
  libavcodec-dev,
  libavutil-dev,
  libswscale-dev,
- libasound2-dev,
- libpulse-dev,
- libjack-dev,
  libx11-dev,
+ libx11-dev:i386 [amd64],
  libxext-dev,
  libxfixes-dev,
- libxi-dev
-Standards-Version: 3.9.5
+ libxfixes-dev:i386 [amd64],
+ libxi-dev,
+ libqt5x11extras5-dev,
+ qt5-qmake,
+ qtbase5-dev
+Standards-Version: 3.9.7
 Homepage: http://www.maartenbaert.be/simplescreenrecorder/
 Vcs-Git: git://github.com/MaartenBaert/ssr.git
 Vcs-Browser: https://github.com/MaartenBaert/ssr
 
 Package: simplescreenrecorder
-Architecture: i386 amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: simplescreenrecorder-lib
+Architecture: amd64 i386
+Depends:
+ ${shlibs:Depends},
+ libgl1-mesa-glx:i386 [amd64],
+ libglu1-mesa:i386 [amd64],
+ libx11-6:i386 [amd64],
+ libxfixes3:i386 [amd64],
+ ${misc:Depends}
+Provides:
+ simplescreenrecorder-lib,
+ simplescreenrecorder-lib:i386 [amd64]
+Conflicts:
+ simplescreenrecorder-lib,
+ simplescreenrecorder-lib:i386 [amd64]
 Description: feature-rich screen recorder that supports X11 and OpenGL
  SimpleScreenRecorder is a feature-rich screen recorder that supports X11 and
  OpenGL. It has a Qt-based graphical user interface. It can record the entire
  screen or part of it, or record OpenGL applications directly. The recording
  can be paused and resumed at any time. Many different file formats and codecs
  are supported.
- .
- This package contains the main program.
 
-Package: simplescreenrecorder-lib
-Architecture: i386 amd64
-Multi-Arch: same
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: feature-rich screen recorder that supports X11 and OpenGL - GLInject library
- SimpleScreenRecorder is a feature-rich screen recorder that supports X11 and
- OpenGL. It has a Qt-based graphical user interface. It can record the entire
- screen or part of it, or record OpenGL applications directly. The recording
- can be paused and resumed at any time. Many different file formats and codecs
- are supported.
- .
- This package contains the GLInject library.

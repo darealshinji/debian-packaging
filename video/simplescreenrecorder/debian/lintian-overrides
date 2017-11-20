@@ -1,0 +1,7 @@
+# build a single package for convenience
+package-name-doesnt-match-sonames libssr-glinject
+triplet-dir-and-architecture-mismatch usr/lib/i386-linux-gnu/ is for i386
+
+# no real shared library; it'll be preloaded and it's better to keep it in LD_LIBRARY_PATH
+shlib-without-versioned-soname usr/lib/*/libssr-glinject.so libssr-glinject.so
+
