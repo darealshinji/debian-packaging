@@ -23,14 +23,14 @@ gcc_pkg=${gcc_dir}.txz
 gcc_url="https://ftp.gnu.org/gnu/gcc/gcc-$gcc_ver/${gcc_dir}.tar.xz"
 gcc_sum=850bf21eafdfe5cd5f6827148184c08c4a0852a37ccf36ce69855334d2c914d4
 
-binutils_ver=2.29
+binutils_ver=2.29.1
 binutils_dir=binutils-$binutils_ver
 binutils_pkg=${binutils_dir}.txz
 binutils_url="https://ftp.gnu.org/gnu/binutils/${binutils_dir}.tar.xz"
-binutils_sum=0b871e271c4c620444f8264f72143b4d224aa305306d85dd77ab8dce785b1e85
+binutils_sum=e7010a46969f9d3e53b650a518663f98a5dde3c3ae21b7d71e5e6803bc36b577
 
-mpfr_dir=mpfr-3.1.5
-mpc_dir=mpc-1.0.3
+mpfr_dir=mpfr-4.0.0
+mpc_dir=mpc-1.1.0
 gmp_dir=gmp-6.1.2
 isl_dir=isl-0.18
 
@@ -44,8 +44,8 @@ mpc_url="https://ftp.gnu.org/gnu/mpc/${mpc_dir}.tar.gz"
 gmp_url="https://gmplib.org/download/gmp/${gmp_dir}.tar.xz"
 isl_url="http://isl.gforge.inria.fr/${isl_dir}.tar.xz"
 
-mpfr_sum=015fde82b3979fbe5f83501986d328331ba8ddf008c1ff3da3c238f49ca062bc
-mpc_sum=617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3
+mpfr_sum=fbe2cd1418b321f5c899ce4f0f0f4e73f5ecc7d02145b0e1fd096f5c3afb8a1d
+mpc_sum=6985c538143c1208dcb1ac42cedad6ff52e267b47e5f970183a3e75125b43c2e
 gmp_sum=87b565e89a9a684fe4ebeeddb8399dce2599f9c9049854ca8c0dfbdea0e21912
 isl_sum=0f35051cc030b87c673ac1f187de40e386a1482a0cfdf2c552dd6031b307ddc4
 
