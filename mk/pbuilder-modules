@@ -1,7 +1,7 @@
 #! /bin/bash
 #   pbuilder -- personal Debian package builder
 #   Copyright © 2001-2009 Junichi Uekawa <dancer@debian.org>
-#               2015-2016 Mattia Rizzolo <mattia@debian.org>
+#               2015-2017 Mattia Rizzolo <mattia@debian.org>
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -119,6 +119,7 @@ _log() {
     set +u
 }
 function log() {
+    set +x
     case "$*" in
         "E: "*)
             _log 'red' "$*" >&2
@@ -137,6 +138,9 @@ function log() {
             exit 1
             ;;
     esac
+    if [ "$PBUILDER_DEBUGMODE" = "yes" ]; then
+        set -x
+    fi
 }
 
 log.e() {
@@ -276,13 +280,23 @@ function umountproc () {
         umount_one "$SELINUX"
     fi
     if [ "$DEB_BUILD_ARCH_OS" = "linux" ] && [ "$USEDEVPTS" = "yes" ]; then
+        if mount | grep -q -F " $(readlink -f "$BUILDPLACE")/dev/console"; then
+            umount_one "dev/console"
+        fi
+        if mount | grep -q -F " $(readlink -f "$BUILDPLACE")/dev/ptmx"; then
+            umount_one "dev/ptmx"
+        fi
         umount_one "dev/pts"
     fi
     if [ "$DEB_BUILD_ARCH_OS" = "kfreebsd" ] || [ "$USEDEVFS" = "yes" ]; then
         umount_one "dev"
     fi
-    if [ "$DEB_BUILD_ARCH_OS" != "hurd" ] && [ "$USESHM" = "yes" ]; then
-        umount_one "dev/shm"
+    if [ "$USESHM" = "yes" ]; then
+        if [ "$DEB_BUILD_ARCH_OS" = "kfreebsd" ]; then
+            umount_one "run/shm"
+        elif [ "$DEB_BUILD_ARCH_OS" != "hurd" ]; then
+            umount_one "dev/shm"
+        fi
     fi
     if [ "$USEPROC" = "yes" ]; then
         if [ "$DEB_BUILD_ARCH_OS" = "linux" ] && [ -e "$BUILDPLACE/proc/sys/fs/binfmt_misc/status" ]; then
@@ -318,6 +332,7 @@ function umountproc () {
 function mountproc () {
     local -a mounted
     local mnt mntpoint
+    local primary_shm secondary_shm
     if [ "$USEPROC" = "yes" ]; then
         log.i "mounting /proc filesystem"
         mkdir -p "$BUILDPLACE/proc"
@@ -362,19 +377,26 @@ function mountproc () {
     fi
     if [ "$USESHM" = "yes" ]; then
         log.i "creating /{dev,run}/shm"
-        rm -df "$BUILDPLACE/dev/shm" "$BUILDPLACE/run/shm"
-        mkdir -p "$BUILDPLACE/dev/shm"
-        chmod 1777 "$BUILDPLACE/dev/shm"
-        # old releases might not have /run.  We create it nonetheless, can't harm
-        mkdir -p "$BUILDPLACE/run"
-        ln -s /dev/shm "$BUILDPLACE/run/shm"
+        if [ "$DEB_BUILD_ARCH_OS" = "kfreebsd" ]; then
+            primary_shm="run/shm"
+            secondary_shm="dev/shm"
+        else
+            primary_shm="dev/shm"
+            secondary_shm="run/shm"
+            # old releases might not have /run.  We create it nonetheless, can't harm
+            mkdir -p "$BUILDPLACE/run"
+        fi
+        rm -df "$BUILDPLACE/$primary_shm" "$BUILDPLACE/$secondary_shm"
+        mkdir -p "$BUILDPLACE/$primary_shm"
+        chmod 1777 "$BUILDPLACE/$primary_shm"
+        ln -s "/$primary_shm" "$BUILDPLACE/$secondary_shm"
         # /dev gets bind-mounted on hurd. In theory this is before that, but
         # debootstrap will already have mounted it during chroot creation.
         # This seems to cause /hurd/tmpfs to crash, but we can just use the
         # host's /dev/shm.
         if [ "$DEB_BUILD_ARCH_OS" != "hurd" ]; then
-            mount -t tmpfs tmpfs "$BUILDPLACE/dev/shm"
-            mounted[${#mounted[@]}]="$BUILDPLACE/dev/shm"
+            mount -t tmpfs tmpfs "$BUILDPLACE/$primary_shm"
+            mounted[${#mounted[@]}]="$BUILDPLACE/$primary_shm"
         fi
     fi
     if [ "$DEB_BUILD_ARCH_OS" = "linux" ] && [ "$USEDEVPTS" = "yes" ]; then
@@ -383,8 +405,38 @@ function mountproc () {
         TTYGRP=5
         TTYMODE=620
         [ -f /etc/default/devpts ] && . /etc/default/devpts
-        mount -t devpts none "$BUILDPLACE/dev/pts" -onoexec,nosuid,gid=$TTYGRP,mode=$TTYMODE
+        # Even wheezy has CONFIG_DEVPTS_MULTIPLE_INSTANCES=y, so no need to
+        # fall back to the old method with just /dev/ptmx.
+        mount -t devpts devpts "$BUILDPLACE/dev/pts" -o newinstance,noexec,nosuid,gid=$TTYGRP,mode=$TTYMODE,ptmxmode=0666
         mounted[${#mounted[@]}]="$BUILDPLACE/dev/pts"
+
+        # If /dev/ptmx is a symlink, it should be /dev/ptmx -> pts/ptmx
+        # and since ptmxmode is 0666, /dev/pts/ptmx will have mode 0666.
+        # However, if it is not a symlink, then any PTYs created inside the
+        # chroot will not be visible. We could delete /dev/ptmx and replace
+        # it with a symlink, but it's safer just to bind-mount it.
+        # This is based on the recommendations in
+        # Documentation/filesystems/devpts.txt
+        # (linux.git commit 784c4d8b1b1e66f8c45e8b889613f4982f525b2b)
+        if [ ! -L "$BUILDPLACE/dev/ptmx" ]; then
+            log.i "redirecting /dev/ptmx to /dev/pts/ptmx"
+            mount --bind "$BUILDPLACE/dev/pts/ptmx" "$BUILDPLACE/dev/ptmx"
+            mounted[${#mounted[@]}]="$BUILDPLACE/dev/ptmx"
+        fi
+
+        # If there is a controlling TTY, it must be available to the chroot.
+        # The standard practice (at least by lxc and systemd-nspawn) is to
+        # bind-mount it onto /dev/console.
+        if CURRENT_TTY="$(tty)"; then
+            # We need /dev/console to exist to be able to bind-mount onto it.
+            # Might as well make the proper device node rather than a file.
+            if [ ! -e "$BUILDPLACE/dev/console" ]; then
+                log.i "creating /dev/console"
+                mknod -m 600 "$BUILDPLACE/dev/console" c 5 1
+            fi
+            log.i "mounting $CURRENT_TTY over /dev/console"
+            mount --bind "$CURRENT_TTY" "$BUILDPLACE/dev/console"
+        fi
     fi
     if [ -n "$SELINUX" ]; then
         log.i "mounting selinux filesystem"
@@ -921,10 +973,12 @@ b paraloop' \
 function get_changes_options() {
     local changes_options
     local arg
-    for arg in $DEBBUILDOPTS; do
-        # De-escape arg. $(echo $arg) on its own doesn't perform quote
-        # expansion, since quote expansion operates on the *original* word.
-        eval arg="$arg"
+    # Split and de-escape DEBBUILDOPTS. Can't iterate over it before
+    # de-escaping, as word splitting does not take quotes in the variable into
+    # account. Need eval as $(echo $DEBBUILDOPTS) on its own doesn't perform
+    # quote expansion, since quote expansion operates on the *original* word.
+    eval local args=($DEBBUILDOPTS)
+    for arg in "${args[@]}"; do
         case $arg in
             -s[iad]|-v*|-m*|-e*|-C*)
                 changes_options="${changes_options:+$changes_options }'$arg'"
@@ -947,10 +1001,12 @@ function get_changes_options() {
 function should_clean_source() {
     local noclean=0
     local arg
-    for arg in $DEBBUILDOPTS; do
-        # De-escape arg. $(echo $arg) on its own doesn't perform quote
-        # expansion, since quote expansion operates on the *original* word.
-        eval arg="$arg"
+    # Split and de-escape DEBBUILDOPTS. Can't iterate over it before
+    # de-escaping, as word splitting does not take quotes in the variable into
+    # account. Need eval as $(echo $DEBBUILDOPTS) on its own doesn't perform
+    # quote expansion, since quote expansion operates on the *original* word.
+    eval local args=($DEBBUILDOPTS)
+    for arg in "${args[@]}"; do
         case $arg in
             --pre-clean)
                 noclean=0
@@ -967,10 +1023,12 @@ function should_clean_source() {
 function get_source_options() {
     local source_options
     local arg
-    for arg in $DEBBUILDOPTS; do
-        # De-escape arg. $(echo $arg) on its own doesn't perform quote
-        # expansion, since quote expansion operates on the *original* word.
-        eval arg="$arg"
+    # Split and de-escape DEBBUILDOPTS. Can't iterate over it before
+    # de-escaping, as word splitting does not take quotes in the variable into
+    # account. Need eval as $(echo $DEBBUILDOPTS) on its own doesn't perform
+    # quote expansion, since quote expansion operates on the *original* word.
+    eval local args=($DEBBUILDOPTS)
+    for arg in "${args[@]}"; do
         case $arg in
             -s[nsAkurKUR]|-z*|-Z*|-i*|-I*)
                 source_options="${source_options:+$source_options }'$arg'"
