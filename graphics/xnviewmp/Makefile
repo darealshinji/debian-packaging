@@ -16,6 +16,6 @@ bin = XnViewMP-linux$(x64).tgz
 
 
 download:
-	@ $(call download,$(bin),http://download.xnview.com/old_versions/XnViewMP-$(ver)-linux$(x64).tgz)
+	@ $(call download,$(bin),http://download.xnview.com/$(bin))
 	@ VERSION=$(VERSION); $(changelog-entry)
 

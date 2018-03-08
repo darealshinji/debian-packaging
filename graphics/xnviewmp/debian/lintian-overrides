@@ -1,6 +1,7 @@
 # closed-source and/or pre-built binaries
 hardening-no-relro
 embedded-library
+xnviewmp: shared-lib-without-dependency-information usr/lib/xnviewmp/lib/libicudata.so.*
 
 # i386 only
 xnviewmp: shlib-with-non-pic-code usr/lib/xnviewmp/lib/lib*.so.*

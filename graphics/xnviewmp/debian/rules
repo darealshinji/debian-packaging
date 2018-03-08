@@ -23,14 +23,14 @@ do \
 done
 	dos2unix XnView/*.txt
 	sed -e 's/@VERSION@/$(VERSION)/;' debian/xnviewmp.1.in > xnviewmp.1
-	chrpath -d XnView/XnView `find XnView/ -type f -name *.so*`
+	chrpath -d XnView/XnView || true
 
 override_dh_installchangelogs:
 	dh_installchangelogs XnView/WhatsNew.txt
 
 override_dh_makeshlibs:
-
-# if dh_shlibdeps fails use debian/getdeps.sh
 override_dh_shlibdeps:
-	#dh_shlibdeps -Lxnviewmp -l/usr/lib/xnviewmp/lib:/usr/lib/xnviewmp/Plugins
+
+override_dh_builddeb:
+	dh_builddeb -- -Zgzip -z8
 
