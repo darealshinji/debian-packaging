@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -rf data/bin "Electron API Demos-linux-x64" freerunning2.png converted_icons
+
+override_dh_auto_build:
+	unzip electron-api-demos-linux.zip
+	mv "Electron API Demos-linux-x64" data/bin
+	cd data/bin && \
+	  mv "Electron API Demos" electron && \
+	  cd resources && \
+	  mv app/node_modules . && \
+	  rm -rf app && \
+	  cp -r ../../app . && \
+	  mv node_modules app
+	$(foreach FILE,.DS_Store .gitkeep LICENSE.md LICENSE license bin.js cmd.js,find data -name $(FILE) -delete; )
+	cp data/app/icon.png freerunning2.png
+	./make-icons.sh freerunning2.png
+
+override_dh_shlibdeps:
+override_dh_strip:
+
+override_dh_gencontrol:
+	dh_gencontrol
+	sed -i 's/Architecture: i386/Architecture: amd64/g' debian/freerunning2/DEBIAN/control
+
+override_dh_builddeb:
+	dh_builddeb -- -Zgzip
+

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Free Running 2 - Winter Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="js/UnityProgress.js" type="text/javascript"></script>
+    <script src="js/mc_api.js" type="text/javascript"></script>
+    <script src="js/api_manager.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      function InitLanguage() { SendMessage('MiniclipApiManager', 'MAPI_InitLanguage', 'en'); }
+    </script>
+  </head>
+  <body class="template">
+    <div class="template-wrap clear">
+      <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" width="680" height="510"></canvas>
+      <div align="right">
+        <a href="../normal/game.html">
+          <img src="freerunning.jpg" width="38" height="38" alt="Normal Edition" title="Normal Edition" />
+        </a>
+        <img src="fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1)" />
+      </div>
+    </div>
+    <script src="js/connect_to_canvas.js" type="text/javascript"></script>
+    <script src="js/UnityConfig.js" type="text/javascript"></script>
+    <script src="js/fileloader.js" type="text/javascript"></script>
+    <script src="js/opt_out_Math.fround.js" type="text/javascript"></script>
+  </body>
+</html>
