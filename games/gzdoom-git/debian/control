@@ -6,18 +6,18 @@ Build-Depends: debhelper (>= 9),
                cmake,
                libbz2-dev,
                libfluidsynth-dev,
-               libglew-dev,
                libgme-dev,
-               libgtk2.0-dev,
+               libgtk-3-dev,
                libjpeg-dev,
                libmpg123-dev,
                libopenal-dev,
                libsdl2-dev,
+               libsndfile-dev,
                zlib1g-dev
 Standards-Version: 3.9.5
 Vcs-Git: https://github.com/coelckers/gzdoom.git
 Vcs-Browser: https://github.com/coelckers/gzdoom
-Homepage: http://www.osnanet.de/c.oelckers/gzdoom/
+Homepage: http://gzdoom.drdteam.org/
 
 Package: gzdoom
 Architecture: any
@@ -25,13 +25,7 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
          zenity
 Description: OpenGL Doom engine
- This is a Doom source port based on ZDoom. It features an
- OpenGL renderer and lots of new features, among them:
-   - 3D floors
-   - Dynamic lights
-   - Quake2/Unreal style skyboxes
-   - True color texture support
-   - Model support (limited at the moment)
+ GZDoom is a modder-friendly OpenGL source port based on the DOOM engine.
 
 Package: gzdoom-freedoom
 Architecture: all
@@ -40,12 +34,6 @@ Depends: ${misc:Depends},
          freedoom-iwads,
          gzdoom
 Description: Play Freedoom with OpenGL engine
- This is a Doom source port based on ZDoom. It features an
- OpenGL renderer and lots of new features, among them:
-   - 3D floors
-   - Dynamic lights
-   - Quake2/Unreal style skyboxes
-   - True color texture support
-   - Model support (limited at the moment)
+ GZDoom is a modder-friendly OpenGL source port based on the DOOM engine.
  .
  This package will install a launcher to play Freedoom.

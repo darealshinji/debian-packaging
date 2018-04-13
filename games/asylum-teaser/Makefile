@@ -1,7 +1,6 @@
 include ../../mk/include.mk
 
 deps           = git wget unzip
-cleanfiles     = *.png
 dir            = Asylum-Teaser
 bin            = Asylum_Teaser_Unix.zip
 cleanfiles     = $(dir) *.png

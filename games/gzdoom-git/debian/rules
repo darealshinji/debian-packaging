@@ -1,8 +1,10 @@
 #!/usr/bin/make -f
 
-CFLAGS   = -O3 -fno-strict-aliasing $(filter-out -g -O2 -Werror=%, $(shell dpkg-buildflags --get CFLAGS)) -Wno-unused-result -Wno-unused-but-set-variable
-CXXFLAGS = -O3 -fno-strict-aliasing -fpermissive $(filter-out -g -O2 -Werror=%, $(shell dpkg-buildflags --get CXXFLAGS)) -Wno-unused-result
-LDFLAGS  = $(filter-out %-Bsymbolic%, $(shell dpkg-buildflags --get LDFLAGS)) -Wl,--as-needed
+CFLAGS   =
+CXXFLAGS =
+LDFLAGS  =
+
+common_flags = -O3 -fno-strict-aliasing -fstack-protector-strong -Wno-maybe-uninitialized
 
 
 %:
@@ -10,8 +12,18 @@ LDFLAGS  = $(filter-out %-Bsymbolic%, $(shell dpkg-buildflags --get LDFLAGS)) -W
 
 override_dh_auto_configure:
 	dh_auto_configure -Scmake -- \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_C_FLAGS="$(common_flags)" \
+		-DCMAKE_CXX_FLAGS="$(common_flags)" \
 		-DCMAKE_SKIP_RPATH=ON \
 		-DFORCE_INTERNAL_BZIP2=OFF \
 		-DFORCE_INTERNAL_GME=OFF \
 		-DFORCE_INTERNAL_JPEG=OFF \
-		-DFORCE_INTERNAL_ZLIB=OFF
+		-DFORCE_INTERNAL_ZLIB=OFF \
+		-DDYN_FLUIDSYNTH=OFF \
+		-DDYN_GTK=OFF \
+		-DDYN_MPG123=OFF \
+		-DDYN_OPENAL=OFF \
+		-DDYN_SNDFILE=OFF \
+		-DSEND_ANON_STATS=OFF
+
