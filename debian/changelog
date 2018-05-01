@@ -1,0 +1,24 @@
+curl (7.59.0-1~xenial1) xenial; urgency=medium
+
+  * Upgrade to cURL 7.59.0 and mbedTLS 2.8.0
+  * Use multiarch directory
+
+ -- Marshall Banana <djcj@gmx.de>  Sat, 04 Nov 2017 13:28:27 +0100
+
+curl (7.56.1-1~xenial) xenial; urgency=medium
+
+  * Use SSL search path patch + mbedTLS
+
+ -- Marshall Banana <djcj@gmx.de>  Tue, 01 May 2018 15:36:37 +0200
+
+curl (7.54.1-1~xenial) xenial; urgency=medium
+
+  * slim package
+
+ -- Marshall Banana <djcj@gmx.de>  Fri, 16 Jun 2017 12:00:00 +0000
+
+curl (7.54.1) unstable; urgency=low
+
+  * slim package
+
+ -- Marshall Banana <djcj@gmx.de>  Fri, 16 Jun 2017 00:00:00 +0000

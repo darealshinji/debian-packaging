@@ -1,0 +1,47 @@
+--- a/lib/url.c
++++ b/lib/url.c
+@@ -488,6 +488,44 @@
+   set->socks5_gssapi_nec = FALSE;
+ #endif
+ 
++#define SET_CA_BUNDLE(path) \
++{ \
++  Curl_setstropt(&set->str[STRING_SSL_CAFILE_ORIG], path); \
++  if(result) \
++    return result; \
++  result = Curl_setstropt(&set->str[STRING_SSL_CAFILE_PROXY], path); \
++  if(result) \
++    return result; \
++}
++
++#define CURL_CA_BUNDLE_SEARCHPATHS "/etc/ssl/ca-bundle.pem:/etc/ssl/certs/ca-certificates.crt:/etc/ssl/cert.pem:/etc/pki/tls/certs/ca-bundle.crt:/etc/pki/tls/cert.pem:/etc/pki/tls/cacert.pem:/usr/local/share/certs/ca-root-nss.crt"
++#if defined(CURL_CA_BUNDLE_SEARCHPATHS)
++#if defined(CURL_CA_BUNDLE)
++#undef CURL_CA_BUNDLE
++#endif
++  {
++    char delim[2];
++    char *searchpaths;
++    char *path;
++    strcpy(delim, ":");
++    searchpaths = strdup(CURL_CA_BUNDLE_SEARCHPATHS);
++    if (getenv("CURLOPT_VERBOSE")) fprintf(stderr, "*** testing CA certificate search paths: %s ***\n", searchpaths);
++    path = strtok(searchpaths, delim);
++    while (path != NULL) {
++      if (getenv("CURLOPT_VERBOSE")) fprintf(stderr, "*** checking path: %s ***\n", path);
++      if (access(path, F_OK) != -1) {
++        FILE *f = fopen(path, "r");
++        fseek(f, 0, SEEK_END);
++        if (ftell(f) > 0) {
++          if (getenv("CURLOPT_VERBOSE")) fprintf(stderr, "*** using path: %s ***\n", path);
++          SET_CA_BUNDLE(path);
++          break;
++        }
++      }
++      path = strtok(NULL, delim);
++    }
++  }
++#endif
+   /* This is our preferred CA cert bundle/path since install time */
+ #if defined(CURL_CA_BUNDLE)
+   result = Curl_setstropt(&set->str[STRING_SSL_CAFILE_ORIG], CURL_CA_BUNDLE);

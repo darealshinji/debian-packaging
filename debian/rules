@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+
+libcurl = libcurl.so.4.5.0
+ifeq ($(DEB_HOST_ARCH),amd64)
+curl_arch = x86_64
+else
+curl_arch = i686
+endif
+
+LIBDIR = debian/libcurl3/usr/lib/$(DEB_HOST_MULTIARCH)
+
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+override_dh_auto_build:
+override_dh_auto_install:
+override_dh_auto_test:
+
+override_dh_install:
+	mkdir -p debian/curl/usr/bin
+	mkdir -p $(LIBDIR)
+	cp debian/curl.$(curl_arch) debian/curl/usr/bin/curl
+	cp debian/$(libcurl).$(curl_arch) $(LIBDIR)/$(libcurl)
+	chmod a+x debian/curl/usr/bin/curl
+	ln -s $(libcurl) $(LIBDIR)/libcurl.so.4
+	ln -s libcurl.so.4 $(LIBDIR)/libcurl.so.3
+	ln -s libcurl.so.4 $(LIBDIR)/libcurl-gnutls.so.4
+	ln -s libcurl.so.4 $(LIBDIR)/libcurl-gnutls.so.3
+	ln -s libcurl.so.4 $(LIBDIR)/libcurl-nss.so.4
+	ln -s libcurl.so.4 $(LIBDIR)/libcurl-nss.so.3
+

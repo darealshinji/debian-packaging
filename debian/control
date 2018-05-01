@@ -1,0 +1,33 @@
+Source: curl
+Section: libs
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.7
+
+Package: curl
+Architecture: amd64 i386
+Depends: ${shlibs:Depends}, ${misc:Depends}, libcurl3
+Description: Multi-protocol file transfer library
+ slim package
+
+Package: libcurl3
+Architecture: amd64 i386
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Multi-protocol file transfer library
+ slim package
+
+Package: libcurl-nss3
+Section: metapackages
+Architecture: amd64 i386
+Depends: libcurl3, ${misc:Depends}
+Description: Multi-protocol file transfer library
+ slim package
+
+Package: libcurl-gnutls3
+Section: metapackages
+Architecture: amd64 i386
+Depends: libcurl3, ${misc:Depends}
+Description: Multi-protocol file transfer library
+ slim package
+

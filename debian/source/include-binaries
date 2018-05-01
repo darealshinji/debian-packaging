@@ -1,0 +1,4 @@
+debian/curl.i686
+debian/libcurl.so.4.5.0.i686
+debian/libcurl.so.4.5.0.x86_64
+debian/curl.x86_64
