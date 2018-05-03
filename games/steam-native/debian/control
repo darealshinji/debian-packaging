@@ -91,9 +91,10 @@ Depends:
  python:any (>= 2.7.5-5~),
  ${misc:Depends}
 Suggests:
- libpng12-0 (>= 1.2.13-4),
+ libpng12-0,
  python-apt:any,
- python-simplejson:any
+ python-simplejson:any,
+ steam
 Description: Steam with native runtime
  Start Steam with steam-runtime disabled.
 

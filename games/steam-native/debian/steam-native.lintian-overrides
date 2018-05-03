@@ -1,1 +1,1 @@
-steam-native: embedded-library usr/lib/steam/png/libpng12.so.0*: libpng 
+steam-native: embedded-library *: libpng

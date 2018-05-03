@@ -1,5 +1,5 @@
 steam-native/steam-native           /usr/games
 steam-native/steam-native.desktop   /usr/share/applications
 steam-native/icons                  /usr/share
-libudev0/lib/i386-linux-gnu/*       /usr/lib/steam/udev
-libpng12-0/lib/i386-linux-gnu/*     /usr/lib/steam/png
+libudev0/lib/i386-linux-gnu/*       /usr/lib/steam/libs
+libpng12-0/lib/i386-linux-gnu/*     /usr/lib/steam/libs

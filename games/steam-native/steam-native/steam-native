@@ -13,6 +13,6 @@ export STEAM_FRAME_FORCE_CLOSE=0
 
 # libudev0 was replaced by libudev1 on newer systems
 # libpng12-0 was replaced by libpng16-16 on latest systems
-export LD_LIBRARY_PATH="/usr/lib/steam/udev:$LD_LIBRARY_PATH:/usr/lib/steam/png"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/steam/libs"
 
 steam $*
