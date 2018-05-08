@@ -1,0 +1,133 @@
+#!/usr/bin/make -f
+
+pkg = gcc5opt
+
+PKG = $(shell echo $(pkg) | tr '[a-z]' '[A-Z]')
+VER = $(shell dpkg-parsechangelog -SVersion | cut -d+ -f1 | cut -d- -f1)
+usr = $(CURDIR)/debian/$(pkg)/usr
+cplusinc = $(usr)/share/$(pkg)/include/c++/$(VER)
+SRCDIR = gcc-src
+BINUTILS = binutils-src
+
+TRIPLET = $(DEB_HOST_GNU_CPU)-pc-linux-gnu
+
+GCC_CFLAGS_common = -Wall -O2 -fno-stack-protector -U_FORTIFY_SOURCE
+
+export CFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CFLAGS)) -ffunction-sections -fdata-sections
+export CXXFLAGS=-Wall $(filter-out -Werror=%,$(shell dpkg-buildflags --get CXXFLAGS)) -ffunction-sections -fdata-sections
+export CPPFLAGS=$(shell dpkg-buildflags --get CPPFLAGS)
+export LDFLAGS=$(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS)) -Wl,--gc-sections
+
+
+%:
+	dh ${@} --parallel
+
+override_dh_auto_clean:
+	rm -rf binutils-src gcc-src
+	rm -f debian/links debian/lintian-overrides
+
+override_dh_auto_configure:
+	debian/get-orig-source --extract
+	cp $(BINUTILS)/ChangeLog $(BINUTILS)/ChangeLog.binutils
+
+	sed "s|@pkg@|$(pkg)|g; s|@host@|$(TRIPLET)|g" debian/links.in > debian/links
+	sed "s|@pkg@|$(pkg)|g" debian/lintian-overrides.in > debian/lintian-overrides
+
+	cp -rf debian/gcc-patches $(SRCDIR)
+	cd $(SRCDIR) && QUILT_PATCHES=gcc-patches \
+		quilt --quiltrc - push -a
+
+	cd $(BINUTILS) && ./configure \
+		--build=$(TRIPLET) \
+		--host=$(TRIPLET) \
+		--target=$(TRIPLET) \
+		--prefix=/usr/lib/$(pkg)/binutils \
+		--bindir=/usr/lib/$(pkg)/libexec/gcc/$(TRIPLET)/$(VER) \
+		--sbindir=/usr/lib/$(pkg)/libexec/gcc/$(TRIPLET)/$(VER) \
+		--libexecdir=/usr/lib/$(pkg)/libexec/gcc/$(TRIPLET)/$(VER) \
+		--disable-bootstrap \
+		--enable-gold \
+		--with-system-zlib
+
+	cd $(SRCDIR) && \
+	CFLAGS="$(GCC_CFLAGS_common)" \
+	CXXFLAGS="$(GCC_CFLAGS_common)" \
+	LDFLAGS="-Wl,-z,relro" \
+		./configure \
+		--build=$(TRIPLET) \
+		--host=$(TRIPLET) \
+		--target=$(TRIPLET) \
+		--prefix=/usr/share/$(pkg) \
+		--exec-prefix=/usr/lib/$(pkg) \
+		--bindir=/usr/bin \
+		--datarootdir=/usr/share/$(pkg) \
+		--mandir=/usr/share/man \
+		--program-prefix=$(pkg)- \
+		--enable-languages=c,c++,objc \
+		--enable-lto \
+		--enable-vtable-verify \
+		--disable-bootstrap \
+		--with-system-zlib \
+		--with-pic=yes
+
+override_dh_auto_build:
+	dh_auto_build -D$(BINUTILS)
+	dh_auto_build -D$(SRCDIR)
+
+# uncomment to enable tests (may take a while to complete)
+#override_dh_auto_test:
+#	$(MAKE) -C $(SRCDIR) -j4 -k check
+
+override_dh_install:
+	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/$(pkg)
+	$(MAKE) -C $(BINUTILS) install DESTDIR=$(CURDIR)/debian/$(pkg)
+
+	# build and install static wrappers
+	cd $(SRCDIR)/host-$(TRIPLET)/gcc && rm -f xg++ xgcc c/gccspec.o cp/g++spec.o
+	cd $(SRCDIR) && patch -p1 < gcc-patches/02-static-wrappers.patch
+	$(MAKE) -C $(SRCDIR)/host-$(TRIPLET)/gcc xg++ xgcc
+	install -m755 $(SRCDIR)/host-$(TRIPLET)/gcc/xg++ $(usr)/bin/$(pkg)-g++-static
+	install -m755 $(SRCDIR)/host-$(TRIPLET)/gcc/xgcc $(usr)/bin/$(pkg)-gcc-static
+
+	# delete RPATH in libstdc++
+	$(foreach DIR,lib lib32 lib64,\
+	  chrpath -d $(usr)/lib/$(pkg)/$(DIR)/libstdc++.so.6 2>/dev/null || true ;)
+
+	# delete unwated stuff
+	rm -f $(usr)/bin/$(TRIPLET)-gcc-$(VER)
+	rm -rf $(usr)/share/man/man7 $(usr)/share/$(pkg)/info
+	find $(usr)/lib/* -name \*.la -delete
+	cd $(usr)/lib/$(pkg)/binutils && rm -rf include lib share $(TRIPLET)/bin
+	cd $(usr)/lib/$(pkg)/libexec/gcc/$(TRIPLET)/$(VER) && \
+	  rm -f ld && ln -s ld.bfd ld
+
+	# always link these libraries statically
+	$(foreach LIB,asan lsan tsan ubsan cilkrts itm quadmath ssp vtv,\
+	  find $(usr)/lib/* -name lib$(LIB).so* -delete ;)
+
+	# create extra manpages
+	$(foreach CMD,gcc-ar gcc-nm gcc-ranlib gcc-static,\
+	  sed "s|@PKG@|$(PKG)|g; s|@pkg@|$(pkg)|g" \
+	  debian/$(CMD).1.in > $(usr)/share/man/man1/$(pkg)-$(CMD).1 ;)
+
+	# fix including headers
+	for f in $(cplusinc)/$(TRIPLET)/bits/* ; do \
+  ln -rs $$f $(cplusinc)/bits/$$(basename $$f); \
+done
+	for f in $(cplusinc)/$(TRIPLET)/ext/* ; do \
+  ln -rs $$f $(cplusinc)/ext/$$(basename $$f); \
+done
+	for f in $(cplusinc)/* ; do \
+  ln -rs $$f $(usr)/share/$(pkg)/include/$$(basename $$f); \
+done
+
+override_dh_installchangelogs:
+	dh_installchangelogs $(SRCDIR)/ChangeLog
+
+override_dh_makeshlibs:
+
+lib = /usr/lib/$(pkg)/lib
+
+override_dh_shlibdeps:
+	dh_shlibdeps -L$(pkg) -l$(lib):$(lib)32:$(lib)64
+

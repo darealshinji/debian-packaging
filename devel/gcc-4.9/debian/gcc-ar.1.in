@@ -1,0 +1,17 @@
+.TH @PKG@\-GCC\-AR 1 "November 2015" @pkg@\-gcc\-ar ""
+.SH NAME
+@pkg@\-gcc\-ar \- a wrapper around ar adding the \-\-plugin option
+
+.SH SYNOPSIS
+@pkg@\-gcc\-ar [\fB\s-1OPTION\s0\fR] ... [\fI\s-1ARGS\s0\fR...]
+
+.SH DESCRIPTION
+
+\fB@pkg@\-gcc\-ar\fR is a wrapper around ar(1) adding the appropriate
+\fB\-\-plugin\fR option for the GCC compiler.
+
+.SH OPTIONS
+See ar(1) for a list of options that ar understands.
+
+.SH "SEE ALSO"
+.BR ar(1)

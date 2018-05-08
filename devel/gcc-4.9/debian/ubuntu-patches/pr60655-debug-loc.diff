@@ -1,0 +1,154 @@
+
+On Thu, Oct 16, 2014 at 09:07:58AM +0200, Jakub Jelinek wrote:
+> So, please find the spot where we forget to simplify stuff, and put the
+> simplification there.
+
+You were correct to be suspicious that we weren't simplifying as we
+should.  After more time in the debugger than I care to admit, I found
+the underlying cause.
+
+One of the var loc expressions is
+(plus:SI (plus:SI (not:SI (debug_expr:SI D#9))
+        (value/u:SI 58:4373 @0x18d3968/0x18ef230))
+    (debug_expr:SI D#5))
+
+which after substitution (in bb7) becomes
+(plus:SI (plus:SI (not:SI (plus:SI (reg:SI 5 5 [orig:212 D.2333 ] [212])
+                (const:SI (plus:SI (symbol_ref:SI ("*.LANCHOR0") [flags 0x182])
+                        (const_int -1 [0xffffffffffffffff])))))
+        (reg:SI 10 10 [orig:223 ivtmp.33 ] [223]))
+    (plus:SI (reg:SI 5 5 [orig:212 D.2333 ] [212])
+        (const:SI (plus:SI (symbol_ref:SI ("*.LANCHOR0") [flags 0x182])
+                (const_int 323 [0x143])))))
+
+The above has 8 ops by the time you turn ~x into -x - 1, and exceeds
+the allowed number of elements in the simplify_plus_minus ops array.
+Note that the ops array has 8 elements but the code only allows 7 to
+be entered, a bug since the "spare" element isn't a sentinal or used
+in any other way.
+
+This resulted in a partial simplification of the expression to
+(plus:SI (plus:SI (reg:SI 10 10 [orig:223 ivtmp.33 ] [223])
+        (symbol_ref:SI ("*.LANCHOR0") [flags 0x182]))
+    (const:SI (minus:SI (const_int 323 [0x143])
+            (symbol_ref:SI ("*.LANCHOR0") [flags 0x182]))))
+
+I also noticed another small bug in simplify_plus_minus.  n_constants
+ought to be the number of constants in ops, not the number of times
+we look at a constant.
+
+The "Handle CONST wrapped NOT, NEG and MINUS" in the previous patch
+seems to no longer be necessary, so I took that out (didn't hit the
+code in powerpc64-linux, powerpc-linux and x86_64-linux bootstrap and
+regression tests).
+
+Bootstrapped and regression tested powerpc64-linux and x86_64-linux.
+OK to apply?
+
+	PR debug/60655
+	* simplify-rtx.c (simplify_plus_minus): Delete unused "input_ops".
+	Increase "ops" array size.  Correct array size tests.  Init
+	n_constants in loop.  Break out of innermost loop when finding
+	a trivial CONST expression.
+
+Index: b/src/gcc/simplify-rtx.c
+===================================================================
+--- a/gcc/simplify-rtx.c
++++ b/gcc/simplify-rtx.c
+@@ -4313,10 +4313,10 @@ static rtx
+ simplify_plus_minus (enum rtx_code code, enum machine_mode mode, rtx op0,
+ 		     rtx op1)
+ {
+-  struct simplify_plus_minus_op_data ops[8];
++  struct simplify_plus_minus_op_data ops[16];
+   rtx result, tem;
+-  int n_ops = 2, input_ops = 2;
+-  int changed, n_constants = 0, canonicalized = 0;
++  int n_ops = 2;
++  int changed, n_constants, canonicalized = 0;
+   int i, j;
+ 
+   memset (ops, 0, sizeof ops);
+@@ -4333,6 +4333,7 @@ simplify_plus_minus (enum rtx_code code,
+   do
+     {
+       changed = 0;
++      n_constants = 0;
+ 
+       for (i = 0; i < n_ops; i++)
+ 	{
+@@ -4344,7 +4345,7 @@ simplify_plus_minus (enum rtx_code code,
+ 	    {
+ 	    case PLUS:
+ 	    case MINUS:
+-	      if (n_ops == 7)
++	      if (n_ops == ARRAY_SIZE (ops))
+ 		return NULL_RTX;
+ 
+ 	      ops[n_ops].op = XEXP (this_op, 1);
+@@ -4352,7 +4353,6 @@ simplify_plus_minus (enum rtx_code code,
+ 	      n_ops++;
+ 
+ 	      ops[i].op = XEXP (this_op, 0);
+-	      input_ops++;
+ 	      changed = 1;
+ 	      canonicalized |= this_neg;
+ 	      break;
+@@ -4365,7 +4365,7 @@ simplify_plus_minus (enum rtx_code code,
+ 	      break;
+ 
+ 	    case CONST:
+-	      if (n_ops < 7
++	      if (n_ops != ARRAY_SIZE (ops)
+ 		  && GET_CODE (XEXP (this_op, 0)) == PLUS
+ 		  && CONSTANT_P (XEXP (XEXP (this_op, 0), 0))
+ 		  && CONSTANT_P (XEXP (XEXP (this_op, 0), 1)))
+@@ -4381,7 +4381,7 @@ simplify_plus_minus (enum rtx_code code,
+ 
+ 	    case NOT:
+ 	      /* ~a -> (-a - 1) */
+-	      if (n_ops != 7)
++	      if (n_ops != ARRAY_SIZE (ops))
+ 		{
+ 		  ops[n_ops].op = CONSTM1_RTX (mode);
+ 		  ops[n_ops++].neg = this_neg;
+@@ -4445,7 +4445,7 @@ simplify_plus_minus (enum rtx_code code,
+   /* Now simplify each pair of operands until nothing changes.  */
+   do
+     {
+-      /* Insertion sort is good enough for an eight-element array.  */
++      /* Insertion sort is good enough for a small array.  */
+       for (i = 1; i < n_ops; i++)
+         {
+           struct simplify_plus_minus_op_data save;
+@@ -4496,16 +4496,21 @@ simplify_plus_minus (enum rtx_code code,
+ 		else
+ 		  tem = simplify_binary_operation (ncode, mode, lhs, rhs);
+ 
+-		/* Reject "simplifications" that just wrap the two
+-		   arguments in a CONST.  Failure to do so can result
+-		   in infinite recursion with simplify_binary_operation
+-		   when it calls us to simplify CONST operations.  */
+-		if (tem
+-		    && ! (GET_CODE (tem) == CONST
+-			  && GET_CODE (XEXP (tem, 0)) == ncode
+-			  && XEXP (XEXP (tem, 0), 0) == lhs
+-			  && XEXP (XEXP (tem, 0), 1) == rhs))
++		if (tem)
+ 		  {
++		    /* Reject "simplifications" that just wrap the two
++		       arguments in a CONST.  Failure to do so can result
++		       in infinite recursion with simplify_binary_operation
++		       when it calls us to simplify CONST operations.
++		       Also, if we find such a simplification, don't try
++		       any more combinations with this rhs:  We must have
++		       something like symbol+offset, ie. one of the
++		       trivial CONST expressions we handle later.  */
++		    if (GET_CODE (tem) == CONST
++			&& GET_CODE (XEXP (tem, 0)) == ncode
++			&& XEXP (XEXP (tem, 0), 0) == lhs
++			&& XEXP (XEXP (tem, 0), 1) == rhs)
++		      break;
+ 		    lneg &= rneg;
+ 		    if (GET_CODE (tem) == NEG)
+ 		      tem = XEXP (tem, 0), lneg = !lneg;
