@@ -1,5 +1,0 @@
-# keep patched ltdl copy
-@pkg@: embedded-library *: ltdl
-
-@pkg@: embedded-library *: mpfr
-@pkg@: embedded-library *: gmp

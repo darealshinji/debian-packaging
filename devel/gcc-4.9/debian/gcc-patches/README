@@ -1,3 +1,0 @@
-00-*: based on patches used in Ubuntu
-01-*: custom patches
-02-*: apply manually (don't add to series file)
