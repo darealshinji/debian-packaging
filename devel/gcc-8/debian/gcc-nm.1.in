@@ -1,0 +1,17 @@
+.TH @PKG@\-GCC\-NM 1 "November 2015" @PKG@\-gcc\-nm ""
+.SH NAME
+@pkg@\-gcc\-nm \- a wrapper around nm adding the \-\-plugin option
+
+.SH SYNOPSIS
+@pkg@\-gcc\-nm [\fB\s-1OPTION\s0\fR] ... [\fI\s-1ARGS\s0\fR...]
+
+.SH DESCRIPTION
+
+\fB@pkg@\-gcc\-nm\fR is a wrapper around nm(1) adding the appropriate
+\fB\-\-plugin\fR option for the GCC compiler.
+
+.SH OPTIONS
+See nm(1) for a list of options that nm understands.
+
+.SH "SEE ALSO"
+.BR nm(1)

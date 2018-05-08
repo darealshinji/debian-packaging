@@ -1,0 +1,12 @@
+Remove "-fstrict-aliasing" from "-O2" to use "-fno-strict-aliasing" by default.
+
+--- a/gcc/opts.c
++++ b/gcc/opts.c
+@@ -496,7 +496,6 @@
+     { OPT_LEVELS_2_PLUS_SPEED_ONLY, OPT_fschedule_insns, NULL, 1 },
+     { OPT_LEVELS_2_PLUS, OPT_fschedule_insns2, NULL, 1 },
+ #endif
+-    { OPT_LEVELS_2_PLUS, OPT_fstrict_aliasing, NULL, 1 },
+     { OPT_LEVELS_2_PLUS_SPEED_ONLY, OPT_freorder_blocks_algorithm_, NULL,
+       REORDER_BLOCKS_ALGORITHM_STC },
+     { OPT_LEVELS_2_PLUS, OPT_freorder_functions, NULL, 1 },

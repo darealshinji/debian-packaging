@@ -1,0 +1,23 @@
+Link with "--as-needed" by default.
+
+--- a/gcc/config/i386/gnu-user.h
++++ b/gcc/config/i386/gnu-user.h
+@@ -74,7 +74,7 @@
+   { "link_emulation", GNU_USER_LINK_EMULATION },\
+   { "dynamic_linker", GNU_USER_DYNAMIC_LINKER }
+ 
+-#define GNU_USER_TARGET_LINK_SPEC "-m %(link_emulation) --hash-style=both %{shared:-shared} \
++#define GNU_USER_TARGET_LINK_SPEC "-m %(link_emulation) --hash-style=both --as-needed %{shared:-shared} \
+   %{!shared: \
+     %{!static: \
+       %{!static-pie: \
+--- a/gcc/config/i386/gnu-user64.h
++++ b/gcc/config/i386/gnu-user64.h
+@@ -57,6 +57,7 @@
+                    %{" SPEC_32 ":-m " GNU_USER_LINK_EMULATION32 "} \
+                    %{" SPEC_X32 ":-m " GNU_USER_LINK_EMULATIONX32 "} \
+   --hash-style=both \
++  --as-needed \
+   %{shared:-shared} \
+   %{!shared: \
+     %{!static: \
