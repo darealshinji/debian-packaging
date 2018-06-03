@@ -5,6 +5,7 @@ Maintainer: Marshall Banana <djcj@gmx.de>
 Homepage: http://www.mediaarea.net
 Build-Depends: debhelper (>= 9),
                imagemagick,
+               rename,
                libwxgtk3.0-dev | libwxgtk2.8-dev,
                zlib1g-dev
 Standards-Version: 3.9.5
