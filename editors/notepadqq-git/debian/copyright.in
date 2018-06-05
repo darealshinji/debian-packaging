@@ -4,11 +4,11 @@ Upstream-Contact: Daniele Di Sarli <danieleds0@gmail.com>
 Source: http://notepadqq.altervista.org/
 
 Files: *
-Copyright: 2010-2015, Daniele Di Sarli <danieleds0@gmail.com>
+Copyright: 2010-2018, Daniele Di Sarli <danieleds0@gmail.com>
 License: GPL-3+
 
 Files: src/editor/libs/codemirror/*
-Copyright: 2011-2015 Marijn Haverbeke <marijnh@gmail.com>
+Copyright: 2011-2018 Marijn Haverbeke <marijnh@gmail.com>
 License: MIT
 
 Files: doc/api/theme/js/jquery-2.1.1.min.js
@@ -26,8 +26,8 @@ Copyright: Faruk Ates, Paul Irish, Alex Sexton, Ryan Seddon,
 License: MIT
 
 Files: debian/*
-Copyright: 2011-2015, Daniele Di Sarli <danieleds0@gmail.com>
-           2014-2015, djcj <djcj@gmx.de>
+Copyright: 2011-2018, Daniele Di Sarli <danieleds0@gmail.com>
+           2014-2018, djcj <djcj@gmx.de>
 License: GPL-3+
 
 License: GPL-3+
