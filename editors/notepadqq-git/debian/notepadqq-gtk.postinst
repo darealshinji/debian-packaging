@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+configure)
+
+    update-alternatives \
+    --install \
+        /usr/bin/notepadqq notepadqq \
+        /usr/lib/notepadqq/notepadqq-gtk.sh 100
+
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

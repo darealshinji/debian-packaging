@@ -1,17 +1,11 @@
 include ../../mk/include.mk
 
 deps       = git
-srcpkg     = notepadqq
-builddir   = $(srcpkg)
-cleanfiles = notepadqq*
+builddir   = notepadqq
+cleanfiles = debian/changelog debian/copyright
 
-download: $(builddir)
-
-$(builddir):
-	git clone --depth 1 "https://github.com/notepadqq/notepadqq-packaging.git"
+download:
 	git clone "https://github.com/notepadqq/notepadqq.git"
-	mv notepadqq-packaging/Debian/debian $(builddir)
-	sed -i 's|^override_dh_auto_install:$$|override_dh_auto_install:\n\tmkdir -p $$(CURDIR)/debian/tmp/usr/bin $$(CURDIR)/debian/tmp/usr/lib/notepadqq $$(CURDIR)/debian/tmp/usr/share|' $(builddir)/debian/rules
 	git -C $(builddir) submodule init
 	git -C $(builddir) submodule update
 	find $(builddir)/src/editor/libs/codemirror -name \*.js -exec chmod a-x '{}' \;
@@ -26,12 +20,13 @@ $(builddir):
 	$(changelog-entry)
 
 	@ # debian/copyright
-	@ cat $(builddir)/debian/copyright.in > $(builddir)/debian/copyright
+	@ cat debian/copyright.in > debian/copyright
 	for f in `find $(builddir)/src/extension_tools -name LICEN?E`; \
 do \
-  printf "\n\n\n" >> $(builddir)/debian/copyright; \
-  printf "Files: `dirname $$f`/*\n\n" >> $(builddir)/debian/copyright; \
-  cat $$f >> $(builddir)/debian/copyright; \
+  printf "\n\n\n" >> debian/copyright; \
+  printf "Files: `dirname $$f`/*\n\n" >> debian/copyright; \
+  cat $$f >> debian/copyright; \
 done
 
-	rm -rf $(builddir)/.git notepadqq-packaging
+	rm -rf $(builddir)/.git
+

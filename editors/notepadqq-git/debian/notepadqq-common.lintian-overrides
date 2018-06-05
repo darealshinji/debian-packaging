@@ -1,0 +1,5 @@
+embedded-javascript-library usr/share/notepadqq/editor/libs/jquery/jquery.min.js*
+embedded-javascript-library usr/share/notepadqq/extension_tools/node_modules/archiver/node_modules/async/lib/async.js*
+unusual-interpreter usr/share/notepadqq/extension_tools/node_modules/shelljs/bin/shjs #!node
+duplicate-font-file usr/share/notepadqq/editor/libs/MathJax/fonts/HTML-CSS/TeX/otf/*
+
