@@ -4,7 +4,9 @@ deps       = git
 builddir   = notepadqq
 cleanfiles = debian/changelog debian/copyright
 
-download:
+download: $(builddir)
+
+$(builddir):
 	git clone "https://github.com/notepadqq/notepadqq.git"
 	git -C $(builddir) submodule init
 	git -C $(builddir) submodule update
