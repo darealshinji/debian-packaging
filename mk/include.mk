@@ -93,8 +93,10 @@ allcleanfiles = .pc                  \
                 tmp                  \
                 temp                 \
                 *.build              \
+                *.buildinfo          \
                 *.changes            \
                 *.deb                \
+                *.ddeb               \
                 *.dsc                \
                 *.tar.?z*            \
                 $(builddir)          \
