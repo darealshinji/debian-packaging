@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh ${@} --parallel --with autoreconf
+
+override_dh_auto_clean:
+	[ ! -e Makefile.inc ] || dh_auto_clean
+
+override_dh_auto_configure:
+	dh_auto_configure -- --disable-update-checker --disable-rpath --without-portaudio
+	# OpenAL check may fail using debuild, so force using it
+	sed -i 's@^HAVE_OPENAL.*@HAVE_OPENAL = yes@' Makefile.inc
+	sed -i 's@.*WITH_OPENAL.*@#define WITH_OPENAL 1@' acconf.h
+	# fix path to minilua
+	sed -i 's@= \./vendor/luajit/src/host/minilua@= $$(TOP)vendor/luajit/src/host/minilua@' Makefile.inc
+
+override_dh_auto_build:
+	# build minilua first
+	dh_auto_build -- vendor/luajit/src/host/minilua
+	dh_auto_build
+
+override_dh_auto_test:
+

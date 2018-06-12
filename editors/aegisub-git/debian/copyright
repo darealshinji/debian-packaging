@@ -1,0 +1,349 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: https://github.com/Aegisub/Aegisub
+
+Files: *
+Copyright: 2004-2010 Rodrigo Braz Monteiro
+           2004-2009 Mike Matsnev
+           2005-2011 Niels Martin Hansen
+           2005-2008 Fredrik Mellbin
+           2005-2009 Dan Donovan (Dansolo)
+           2006-2007 Patryk Pomykalski
+           2006-2007 Evgeniy Stepanov
+           2007      Alysson Souza e Silva (demi_alucard)
+           2007      David Lamparter
+           2008-2009 Karl Blomster
+           2008      Simone Cociancich
+           2009      Grigori Goronzy
+           2009-2018 Thomas Goyne
+License: BSD-3-clause
+
+Files: libaegisub/*
+Copyright: 2010 Amar Takhar <verm@aegisub.org>
+           2010-2018 Thomas Goyne <plorkyeran@aegisub.org>
+License: ISC
+
+Files: libaegisub/include/libaegisub/exception.h
+Copyright: 2009 Niels Martin Hansen
+License: BSD-3-clause
+
+Files: libaegisub/lua/modules/lpeg.*
+Copyright: 2014 Lua.org, PUC-Rio
+License: MIT
+
+Files: libaegisub/common/cajun/elements.cpp
+       libaegisub/common/cajun/reader.cpp
+       libaegisub/include/libaegisub/cajun/elements.h
+       libaegisub/include/libaegisub/cajun/reader.h
+       libaegisub/include/libaegisub/cajun/visitor.h
+Copyright: 2009-2010 Terry Caton
+License: BSD-3-clause
+
+Files: src/avisynth.h
+Copyright: 2002 Ben Rudiak-Gould et al.
+License: GPL-2+ with special linking exception
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License along
+ with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA, or visit
+ http:www.gnu.org/copyleft/gpl.html .
+ .
+ Linking Avisynth statically or dynamically with other modules is making a
+ combined work based on Avisynth.  Thus, the terms and conditions of the GNU
+ General Public License cover the whole combination.
+ .
+ As a special exception, the copyright holders of Avisynth give you
+ permission to link Avisynth with independent modules that communicate with
+ Avisynth solely through the interfaces defined in avisynth.h, regardless
+ of the license terms of these independent modules, and to copy and distribute
+ the resulting combined work under terms of your choice, provided that
+ every copy of the combined work is accompanied by a complete copy of
+ the source code of Avisynth (the version of Avisynth used to produce the
+ combined work), being distributed under the terms of the GNU General
+ Public License plus this exception. An independent module is a module
+ which is not derived from or based on Avisynth, such as 3rd-party filters,
+ import and export plugins, or graphical user interfaces.
+ .
+ On Debian GNU/Linux systems, the complete text of the GNU General Public
+ License in version 2.0 can be found in the /usr/share/common-licenses/GPL-2
+ file.
+
+Files: src/ass_attachment.cpp
+       src/ass_attachment.h
+       src/ass_entry.cpp
+       src/ass_file.cpp
+       src/ass_info.h
+       src/ass_karaoke.cpp
+       src/ass_karaoke.h
+       src/audio_karaoke.cpp
+       src/audio_karaoke.h
+       src/audio_marker.cpp
+       src/audio_marker.h
+       src/ass_parser.cpp
+       src/async_video_provider.h
+       src/dialog_shift_times.cpp
+       src/project.cpp
+       src/project.h
+       src/subtitle_format_ssa.h
+       src/retina_helper.h
+       src/resolution_resampler.cpp
+       src/subs_controller.cpp
+       src/audio_provider_factory.h
+       src/subtitle_format_ass.cpp
+       src/crash_writer.h
+       src/subtitle_format_ass.h
+       src/audio_timing_karaoke.cpp
+       src/ass_parser.h
+       src/colour_button.cpp
+       src/colour_button.h
+       src/command/vis_tool.cpp
+       src/command/command.cpp
+       src/command/command.h
+       src/dialog_dummy_video.cpp
+       src/dialog_export_ebu3264.cpp
+       src/dialog_export_ebu3264.h
+       src/dialog_fonts_collector.cpp
+       src/dialog_manager.h
+       src/dialog_progress.cpp
+       src/dialog_progress.h
+       src/dialog_resample.cpp
+       src/dialog_search_replace.cpp
+       src/dialog_search_replace.h
+       src/dialog_selected_choices.cpp
+       src/dialog_selection.cpp
+       src/dialog_spellchecker.cpp
+       src/dialog_styling_assistant.cpp
+       src/dialog_styling_assistant.h
+       src/dialog_translation.cpp
+       src/dialog_translation.h
+       src/factory_manager.h
+       src/font_file_lister.cpp
+       src/font_file_lister.h
+       src/font_file_lister_fontconfig.cpp
+       src/format.h
+       src/async_video_provider.cpp
+       src/gl_wrap.cpp
+       src/gl_wrap.h
+       src/hotkey.cpp
+       src/hotkey_data_view_model.cpp
+       src/hotkey_data_view_model.h
+       src/include/aegisub/menu.h
+       src/include/aegisub/spellchecker.h
+       src/include/aegisub/toolbar.h
+       src/include/aegisub/hotkey.h
+       src/include/aegisub/context.h
+       src/audio_provider_factory.cpp
+       src/libresrc/libresrc.cpp
+       src/libresrc/libresrc.h
+       src/menu.cpp
+       src/mkv_wrap.h
+       src/pen.cpp
+       src/pen.h
+       src/persist_location.cpp
+       src/persist_location.h
+       src/placeholder_ctrl.h
+       src/preferences.cpp
+       src/preferences.h
+       src/preferences_base.cpp
+       src/preferences_base.h
+       src/spellchecker.cpp
+       src/spellchecker_hunspell.cpp
+       src/spellchecker_hunspell.h
+       src/context.cpp
+       src/crash_writer.cpp
+       src/dialogs.h
+       src/subtitle_format_ebu3264.cpp
+       src/subtitle_format_ebu3264.h
+       src/subtitles_provider.cpp
+       src/subtitles_provider_csri.h
+       src/subtitles_provider_libass.h
+       src/text_file_reader.cpp
+       src/text_file_reader.h
+       src/text_file_writer.cpp
+       src/text_file_writer.h
+       src/thesaurus.cpp
+       src/thesaurus.h
+       src/toolbar.cpp
+       src/validators.cpp
+       src/validators.h
+       src/crash_writer_minidump.cpp
+       src/vector2d.cpp
+       src/vector2d.h
+       src/video_frame.cpp
+       src/video_frame.h
+       src/video_out_gl.cpp
+       src/video_out_gl.h
+       src/video_provider_cache.cpp
+       src/video_provider_manager.cpp
+       src/video_provider_manager.h
+       src/visual_tool.cpp
+       src/visual_tool.h
+       src/visual_tool_clip.cpp
+       src/visual_tool_clip.h
+       src/visual_tool_cross.cpp
+       src/visual_tool_cross.h
+       src/visual_tool_drag.cpp
+       src/visual_tool_drag.h
+       src/visual_tool_rotatexy.cpp
+       src/visual_tool_rotatexy.h
+       src/visual_tool_rotatez.cpp
+       src/visual_tool_rotatez.h
+       src/visual_tool_scale.cpp
+       src/visual_tool_scale.h
+       src/visual_tool_vector_clip.cpp
+       src/visual_tool_vector_clip.h
+       src/dialog_autosave.cpp
+       src/dialog_video_properties.cpp
+       src/grid_column.cpp
+       src/initial_line_state.cpp
+       src/initial_line_state.h
+       src/options.h
+       src/resolution_resampler.h
+       src/search_replace_engine.cpp
+       src/search_replace_engine.h
+       src/subs_controller.h
+       src/text_selection_controller.h
+       src/grid_column.h
+       src/selection_controller.cpp
+       src/subtitle_format_ssa.cpp
+       src/text_selection_controller.cpp
+Copyright: 2011-2014 Thomas Goyne <plorkyeran@aegisub.org>
+           2009-2010 Amar Takhar <verm@aegisub.org>
+           2011 Niels Martin Hansen <nielsm@aegisub.org>
+License: ISC
+
+Files: src/gl/*.h
+Copyright: 1991-2004 Silicon Graphics, Inc.
+License: SGI-FreeB
+ License Applicability. Except to the extent portions of this file are
+ made subject to an alternative license as permitted in the SGI Free
+ Software License B, Version 1.1 (the "License"), the contents of this
+ file are subject only to the provisions of the License. You may not use
+ this file except in compliance with the License. You may obtain a copy
+ of the License at Silicon Graphics, Inc., attn: Legal Services, 1600
+ Amphitheatre Parkway, Mountain View, CA 94043-1351, or at:
+ .
+ http://oss.sgi.com/projects/FreeB
+ .
+ Note that, as provided in the License, the Software is distributed on an
+ "AS IS" basis, with ALL EXPRESS AND IMPLIED WARRANTIES AND CONDITIONS
+ DISCLAIMED, INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTIES AND
+ CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A
+ PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+ .
+ Original Code. The Original Code is: OpenGL Sample Implementation,
+ Version 1.2.1, released January 26, 2000, developed by Silicon Graphics,
+ Inc. The Original Code is Copyright (c) 1991-2004 Silicon Graphics, Inc.
+ Copyright in any portions created by third parties is as indicated
+ elsewhere herein. All Rights Reserved.
+ .
+ Additional Notice Provisions: This software was created using the
+ OpenGL(R) version 1.2.1 Sample Implementation published by SGI, but has
+ not been independently verified as being compliant with the OpenGL(R)
+ version 1.2.1 Specification.
+
+Files: vendor/luabins/*
+Copyright: 2009-2010 Alexander Gladysh <agladysh@gmail.com>
+License: MIT
+
+Files: vendor/uchardet/*
+Copyright: 1998-2016 Netscape Communications Corporation
+License: MPL-1.1 or GPL-2.0 or LGPL-2.1
+ The contents of those files are subject to the Mozilla Public
+ License Version 1.1 (the "License"); you may not use those files
+ except in compliance with the License. You may obtain a copy of
+ the License at http://www.mozilla.org/MPL/.
+ .
+ Software distributed under the License is distributed on an "AS
+ IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ implied. See the License for the specific language governing
+ rights and limitations under the License.
+ .
+ Alternatively, the contents of those files may be used under the terms of
+ either the GNU General Public License Version 2 or later (the "GPL"), or
+ the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ in which case the provisions of the GPL or the LGPL are applicable instead
+ of those above. If you wish to allow use of your version of those files only
+ under the terms of either the GPL or the LGPL, and not to allow others to
+ use your version of those files under the terms of the MPL, indicate your
+ decision by deleting the provisions above and replace them with the notice
+ and other provisions required by the GPL or the LGPL. If you do not delete
+ the provisions above, a recipient may use your version of those files under
+ the terms of any one of the MPL, the GPL or the LGPL.
+
+Files: automation/autoload/cleantags-autoload.lua automation/include/cleantags.lua
+Copyright: 2007-2009 Muhammad Lukman Nasaruddin
+License: MIT
+
+Files: automation/demos/*.lua
+Copyright: public domain
+License: public-domain
+ These scripts are given to the public domain.
+ .
+ You can use and modify them freely, also without credit, although the authors
+ would appreciate some.
+
+License: BSD-3-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ .
+ Redistributions of source code must retain the above copyright notice,
+ this list of conditions and the following disclaimer.
+ Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution.
+ Neither the name of the Aegisub Project nor the names of its contributors
+ may be used to endorse or promote products derived from this software
+ without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: ISC
+ Permission to use, copy, modify, and/or distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+License: MIT
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights to
+ use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ of the Software, and to permit persons to whom the Software is furnished to do
+ so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.

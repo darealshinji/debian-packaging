@@ -1,0 +1,51 @@
+Source: aegisub
+Section: editors
+Priority: optional
+Maintainer: djcj <djcj@gmx.de>
+Build-Depends:
+  debhelper (>= 9),
+  dh-autoreconf,
+  pkg-config,
+  gettext,
+  intltool,
+  libwxgtk3.0-dev,
+  libx11-dev,
+  libice-dev,
+  libgl1-mesa-dev,
+  libfreetype6-dev,
+  libfontconfig1-dev,
+  zlib1g-dev,
+  libass-dev,
+  libboost-dev,
+  libboost-chrono-dev,
+  libboost-filesystem-dev,
+  libboost-locale-dev,
+  libboost-regex-dev,
+  libboost-system-dev,
+  libboost-thread-dev,
+  libicu-dev,
+  libuchardet-dev,
+  libasound2-dev,
+  libopenal-dev,
+  libpulse-dev,
+# portaudio19-dev,
+  libffms2-dev,
+  libfftw3-dev,
+  libhunspell-dev
+Standards-Version: 3.9.6
+Homepage: http://www.aegisub.org/
+Vcs-Git: https://github.com/Aegisub/Aegisub.git
+Vcs-Browser: https://github.com/Aegisub/Aegisub
+
+Package: aegisub
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: aegisub-l10n
+Conflicts: aegisub-l10n
+Replaces: aegisub-l10n
+Description: advanced subtitle editor
+ Aegisub is a free, cross-platform open source tool for creating and
+ modifying subtitles. Aegisub makes it quick and easy to time subtitles to
+ audio, and features many powerful tools for styling them, including a
+ built-in real-time video preview.
+

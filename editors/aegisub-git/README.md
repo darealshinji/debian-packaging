@@ -1,0 +1,11 @@
+Aegisub
+=======
+
+Advanced subtitle editor
+
+Aegisub is a free, cross-platform open source tool for creating and
+modifying subtitles. Aegisub makes it quick and easy to time subtitles to
+audio, and features many powerful tools for styling them, including a
+built-in real-time video preview.
+
+http://www.aegisub.org
