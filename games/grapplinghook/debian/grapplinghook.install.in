@@ -1,0 +1,5 @@
+debian/grapplinghook.desktop                  /usr/share/applications
+GrapplingHook/grapplinghook                   /etc
+grapplinghook                                 /usr/games
+converted_icons/pixmaps                       /usr/share
+lwjgl-2.9.1/native/linux/liblwjgl@LIB64@.so   /usr/lib/grapplinghook
