@@ -1,3 +1,0 @@
-/etc/grapplinghook                             /usr/share/games/grapplinghook/keys.cfg
-/usr/lib/grapplinghook/liblwjgl@LIB64@.so      /usr/share/games/grapplinghook/lib/liblwjgl@LIB64@.so
-/usr/lib/@DEB_HOST_MULTIARCH@/libopenal.so.1   /usr/share/games/grapplinghook/lib/libopenal@LIB64@.so
