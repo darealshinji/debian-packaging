@@ -1,7 +1,4 @@
 # closed-source and/or pre-built binaries
-hardening-no-relro
-hardening-no-pie
 embedded-library
-shared-lib-without-dependency-information
-shlib-with-non-pic-code
+hardening-no-pie
 

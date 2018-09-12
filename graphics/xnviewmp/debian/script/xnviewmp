@@ -9,3 +9,4 @@ if [ $# -lt 1 ]; then
 else
   LD_LIBRARY_PATH="$path1" QT_PLUGIN_PATH="$path2" "$dirname/XnView" "$@"
 fi
+
