@@ -1,4 +1,5 @@
 # closed-source and/or pre-built binaries
 embedded-library
 hardening-no-pie
+shared-lib-without-dependency-information
 

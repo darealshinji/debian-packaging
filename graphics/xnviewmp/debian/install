@@ -2,6 +2,7 @@ debian/script/xnviewmp     usr/bin
 debian/xnviewmp.desktop    usr/share/applications
 XnView/AddOn               usr/share/xnviewmp
 XnView/language            usr/lib/xnviewmp
+XnView/lib                 usr/lib/xnviewmp
 XnView/Plugins             usr/lib/xnviewmp
 XnView/UI                  usr/share/xnviewmp
 XnView/country.txt         usr/lib/xnviewmp

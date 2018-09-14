@@ -1,7 +1,7 @@
 include ../../mk/include.mk
 
 deps           = wget
-srcfiles       = $(bin) xnviewmp_update.txt
+srcfiles       = $(bin)
 cleanfiles     = $(deb)
 bin            = XnViewMP.tgz
 distcleanfiles = *.tgz xnviewmp_update.txt

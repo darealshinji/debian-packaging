@@ -1,12 +1,5 @@
 #!/bin/sh
-
 dirname="/usr/lib/xnviewmp"
-path1="$dirname/lib:$dirname/Plugins:$LD_LIBRARY_PATH"
-path2="$dirname/lib:$QT_PLUGIN_PATH"
-
-if [ $# -lt 1 ]; then
-  LD_LIBRARY_PATH="$path1" QT_PLUGIN_PATH="$path2" "$dirname/XnView"
-else
-  LD_LIBRARY_PATH="$path1" QT_PLUGIN_PATH="$path2" "$dirname/XnView" "$@"
-fi
-
+export LD_LIBRARY_PATH="$dirname/lib:$dirname/Plugins:$LD_LIBRARY_PATH"
+export QT_PLUGIN_PATH="$dirname/lib:$QT_PLUGIN_PATH"
+exec "$dirname/XnView" "$@"
