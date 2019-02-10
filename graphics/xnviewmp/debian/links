@@ -1,2 +1,3 @@
 /usr/share/xnviewmp/AddOn   /usr/lib/xnviewmp/AddOn
 /usr/share/xnviewmp/UI      /usr/lib/xnviewmp/UI
+/usr/lib/xnviewmp/Plugins/libwebp.so.7  /usr/lib/xnviewmp/Plugins/libwebp.so

@@ -8,8 +8,8 @@ distcleanfiles = *.tgz xnviewmp_update.txt
 changelog-msg  = New release version
 
 #VERSION = $(shell wget -c -q http://www.xnview.com/xnviewmp_update.txt && head -n1 xnviewmp_update.txt | cut -d'=' -f2)
-VERSION = 0.92
-ver = 092
+VERSION = 0.93
+ver = 093
 
 
 download:

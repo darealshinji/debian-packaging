@@ -14,7 +14,8 @@ override_dh_auto_build:
 	tar xvf XnViewMP.tgz
 	dos2unix XnView/*.txt
 	sed -e 's/@VERSION@/$(VERSION)/;' debian/xnviewmp.1.in > xnviewmp.1
-	cd XnView && chrpath -d XnView lib/libQtAV.so.1 lib/libQtAVWidgets.so.1 lib/libqgsttools_p.so.1.0.0
+	cd XnView && chrpath -d Plugins/libwebpdemux.so XnView lib/libQtAV.so.1.12.0 lib/libQtAVWidgets.so.1.12.0 lib/libqgsttools_p.so.1.0.0
+	cd XnView/Plugins && mv libwebp.so libwebp.so.7
 	chmod a-x XnView/*.txt XnView/AddOn/clut/* XnView/AddOn/lib/Image/ExifTool/Lang/*
 
 override_dh_installchangelogs:
