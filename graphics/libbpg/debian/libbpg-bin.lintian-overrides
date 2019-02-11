@@ -1,4 +1,0 @@
-# it's libpng16 which is not available in the repositories
-# and we don't need to build a shared library for this purpose here
-libbpg-bin: embedded-library usr/bin/bpgdec: libpng
-libbpg-bin: embedded-library usr/bin/bpgenc: libpng

@@ -1,2 +1,0 @@
-bpgdec bpgenc bpgview   /usr/bin
-html/*                  /usr/share/doc/libbpg-bin/libjs-bpgdec

@@ -1,4 +1,0 @@
-libpng16.patch
-Makefile.patch
-missing-include.patch
-no-yasm-on-i386.patch
