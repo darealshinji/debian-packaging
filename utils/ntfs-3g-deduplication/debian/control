@@ -1,0 +1,17 @@
+Source: ntfs-3g-deduplication
+Section: utils
+Priority: optional
+Maintainer: Marshall Banana <djcj@gmx.de>
+Homepage: http://jp-andre.pagesperso-orange.fr
+Build-Depends: debhelper (>= 9), unzip
+Standards-Version: 3.9.5
+
+Package: ntfs-3g-deduplication
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: ntfs-3g (>= 1:2016.2.22)
+Description: NTFS-3G deduplication plugin
+ Data deduplication is a feature which has been made available on Windows
+ Server 2012. This splits the files into chunks and identical chunks from
+ different files are only stored once, thus avoiding storage redundancy.
+

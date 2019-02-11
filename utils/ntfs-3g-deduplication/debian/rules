@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -rf dedup
+
+override_dh_auto_build:
+	unzip dedup.zip
+
+override_dh_install:
+	mkdir -p debian/ntfs-3g-deduplication/usr/lib/$(DEB_HOST_MULTIARCH)/ntfs-3g
+	cp dedup/linux-$(DEB_HOST_ARCH_BITS)/ntfs-plugin-80000013.so debian/ntfs-3g-deduplication/usr/lib/$(DEB_HOST_MULTIARCH)/ntfs-3g
+

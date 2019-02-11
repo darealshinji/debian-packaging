@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -rf systcomp
+
+override_dh_auto_build:
+	unzip systcomp.zip
+
+override_dh_install:
+	mkdir -p debian/ntfs-3g-system-compression/usr/lib/$(DEB_HOST_MULTIARCH)/ntfs-3g
+	cp systcomp/linux-$(DEB_HOST_ARCH_BITS)/ntfs-plugin-80000017.so debian/ntfs-3g-system-compression/usr/lib/$(DEB_HOST_MULTIARCH)/ntfs-3g
+

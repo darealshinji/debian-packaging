@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -rf onedrive
+
+override_dh_auto_build:
+	unzip onedrive.zip
+
+override_dh_install:
+	mkdir -p debian/ntfs-3g-windows-onedrive/usr/lib/$(DEB_HOST_MULTIARCH)/ntfs-3g
+	cp onedrive/linux-$(DEB_HOST_ARCH_BITS)/ntfs-plugin-9000001a.so debian/ntfs-3g-windows-onedrive/usr/lib/$(DEB_HOST_MULTIARCH)/ntfs-3g
+
